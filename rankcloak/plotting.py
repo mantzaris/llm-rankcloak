@@ -83,7 +83,11 @@ def plot_cover_length_vs_rank_alphabet(recovery_frame: Any, output_path: Path) -
     import matplotlib.pyplot as plt
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    frame = recovery_frame[recovery_frame["encoding"] == "fixed_radix_bits"].copy()
+    frame = recovery_frame.copy()
+    if "encoding_name" in frame:
+        frame = frame[frame["encoding_name"] == "fixed_radix_bits"].copy()
+    elif "encoding" in frame:
+        frame = frame[frame["encoding"] == "fixed_radix_bits"].copy()
     if frame.empty:
         return _save_placeholder(
             output_path,
@@ -101,6 +105,89 @@ def plot_cover_length_vs_rank_alphabet(recovery_frame: Any, output_path: Path) -
     ax.set_ylabel("Mean rank count")
     ax.set_title("Mean Cover Length Proxy Vs Rank Alphabet")
     ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_recovery_by_cover_prompt_and_alphabet(recovery_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if recovery_frame.empty or "exact_recovery" not in recovery_frame:
+        return _save_placeholder(
+            output_path,
+            "Recovery By Cover Prompt And Alphabet",
+            "No stegotext recovery rows were available.",
+        )
+    frame = recovery_frame.copy()
+    frame = frame.dropna(subset=["exact_recovery"])
+    if frame.empty:
+        return _save_placeholder(
+            output_path,
+            "Recovery By Cover Prompt And Alphabet",
+            "Stegotext recovery was skipped because the model was unavailable.",
+        )
+    grouped = (
+        frame.groupby(["cover_prompt_name", "alphabet_size"], as_index=False)["exact_recovery"]
+        .mean()
+        .sort_values(["cover_prompt_name", "alphabet_size"])
+    )
+    labels = [
+        "{} / B={}".format(row["cover_prompt_name"], int(row["alphabet_size"]))
+        for _, row in grouped.iterrows()
+    ]
+    fig, ax = plt.subplots(figsize=(11, 5))
+    ax.bar(range(len(grouped)), grouped["exact_recovery"], color="#52796f")
+    ax.set_xticks(range(len(grouped)))
+    ax.set_xticklabels(labels, rotation=45, ha="right")
+    ax.set_ylim(0, 1.05)
+    ax.set_ylabel("Exact recovery rate")
+    ax.set_title("Exact Recovery By Cover Prompt And Rank Alphabet")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_cover_text_feature_comparison(feature_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if feature_frame.empty or "source_type" not in feature_frame:
+        return _save_placeholder(
+            output_path,
+            "Cover Text Feature Comparison",
+            "No cover text feature rows were available.",
+        )
+    metrics = [
+        "whitespace_fraction",
+        "punctuation_fraction",
+        "digit_fraction",
+        "alphabetic_fraction",
+        "unique_token_fraction",
+    ]
+    available_metrics = [metric for metric in metrics if metric in feature_frame]
+    if not available_metrics:
+        return _save_placeholder(
+            output_path,
+            "Cover Text Feature Comparison",
+            "No comparable feature columns were available.",
+        )
+    grouped = feature_frame[["source_type"] + available_metrics].groupby("source_type").mean()
+    fig, ax = plt.subplots(figsize=(10, 5))
+    grouped.T.plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean feature value")
+    ax.set_title("RankCloak Vs Baseline Cover Text Features")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha="right")
+    ax.legend(title="Source")
     fig.tight_layout()
     fig.savefig(output_path, dpi=150)
     plt.close(fig)

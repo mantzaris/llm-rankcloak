@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, Iterable, List, Optional, Sequence
+from typing import Any, Dict, Iterable, List, Sequence
 
 import numpy as np
 
@@ -57,6 +57,16 @@ def token_id_at_rank(logits: Sequence[float], rank: int) -> int:
     return int(sorted_ids[rank - 1])
 
 
+def token_log_probability(logits: Sequence[float], token_id: int) -> float:
+    """Return the selected token log probability with a stable log-softmax."""
+
+    scores = np.asarray(logits, dtype=np.float64)
+    token_id = int(token_id)
+    maximum_score = float(np.max(scores))
+    log_normalizer = maximum_score + float(np.log(np.sum(np.exp(scores - maximum_score))))
+    return float(scores[token_id] - log_normalizer)
+
+
 def test_stable_rank_ordering() -> Dict[str, object]:
     """Small deterministic tie-breaking test for the required rank order."""
 
@@ -83,14 +93,17 @@ def rank_trace_from_token_ids(
     targets = list(map(int, target_token_ids))
     evaluate_context(model, context)
     ranks: List[int] = []
+    token_log_probabilities: List[float] = []
     for token_id in targets:
         logits = get_last_logits(model)
         ranks.append(rank_of_token(logits, token_id))
+        token_log_probabilities.append(token_log_probability(logits, token_id))
         model.eval([token_id])
     return {
         "context_token_ids": context,
         "target_token_ids": targets,
         "ranks": ranks,
+        "token_log_probabilities": token_log_probabilities,
         "success": True,
     }
 
@@ -115,16 +128,19 @@ def generate_token_ids_from_ranks(
     context = list(map(int, context_token_ids))
     evaluate_context(model, context)
     generated_ids: List[int] = []
+    selected_log_probabilities: List[float] = []
     for rank in ranks:
         logits = get_last_logits(model)
         token_id = token_id_at_rank(logits, int(rank))
         generated_ids.append(token_id)
+        selected_log_probabilities.append(token_log_probability(logits, token_id))
         model.eval([token_id])
     return {
         "context_token_ids": context,
         "ranks": list(map(int, ranks)),
         "generated_token_ids": generated_ids,
         "generated_text": safe_detokenize(model, generated_ids),
+        "token_log_probabilities": selected_log_probabilities,
         "success": True,
     }
 
@@ -220,7 +236,7 @@ def decode_hex_character_ranks_to_bytes(ranks: Sequence[int], metadata: Dict[str
 
 
 def bounded_roundtrip_rows(payloads: Iterable[Any], alphabet_sizes: Sequence[int]) -> List[dict]:
-    """Create recovery rows for hex-character and fixed-radix encodings."""
+    """Create legacy recovery rows for hex-character and fixed-radix encodings."""
 
     rows: List[dict] = []
     for payload in payloads:
@@ -255,3 +271,41 @@ def bounded_roundtrip_rows(payloads: Iterable[Any], alphabet_sizes: Sequence[int
             )
     return rows
 
+
+def codec_roundtrip_rows(payloads: Iterable[Any], alphabet_sizes: Sequence[int]) -> List[dict]:
+    """Create explicit codec-level byte/rank roundtrip result rows."""
+
+    rows: List[dict] = []
+    for payload in payloads:
+        hex_encoded = encode_bytes_as_hex_character_ranks(payload.bytes_value)
+        hex_decoded = decode_hex_character_ranks_to_bytes(
+            hex_encoded["ranks"], hex_encoded["metadata"]
+        )
+        rows.append(
+            {
+                "payload_name": payload.name,
+                "payload_kind": payload.kind,
+                "payload_byte_length": len(payload.bytes_value),
+                "encoding_name": "hex_character",
+                "alphabet_size": 16,
+                "rank_count": len(hex_encoded["ranks"]),
+                "exact_roundtrip": hex_decoded == payload.bytes_value,
+                "notes": "lowercase hex characters map directly to ranks 1..16",
+            }
+        )
+        for alphabet_size in alphabet_sizes:
+            encoded = encode_bytes_to_bounded_ranks(payload.bytes_value, alphabet_size)
+            decoded = decode_bounded_ranks_to_bytes(encoded["ranks"], encoded["metadata"])
+            rows.append(
+                {
+                    "payload_name": payload.name,
+                    "payload_kind": payload.kind,
+                    "payload_byte_length": len(payload.bytes_value),
+                    "encoding_name": "fixed_radix_bits",
+                    "alphabet_size": int(alphabet_size),
+                    "rank_count": len(encoded["ranks"]),
+                    "exact_roundtrip": decoded == payload.bytes_value,
+                    "notes": "metadata stores original byte length and padding bits",
+                }
+            )
+    return rows

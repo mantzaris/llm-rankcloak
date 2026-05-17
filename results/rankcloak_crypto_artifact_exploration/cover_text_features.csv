@@ -1,0 +1,7 @@
+source_type,source_id,payload_name,cover_prompt_name,alphabet_size,baseline_mode,character_count,token_count,line_count,whitespace_fraction,punctuation_fraction,digit_fraction,alphabetic_fraction,unique_token_fraction,repeated_token_fraction,mean_token_log_probability,median_token_log_probability,mean_generated_rank,p95_generated_rank,fraction_rank_le_16,fraction_rank_le_64
+rankcloak,rankcloak_0,sha256_public_test_string,play_dialogue,16.0,,64,16,3,0.1875,0.125,0.0,0.6875,0.875,0.125,-4.5156190205200435,-3.4061783640031305,4.375,7.25,1.0,1.0
+rankcloak,rankcloak_1,sha256_public_test_string,recipe_blog,16.0,,72,16,1,0.20833333333333334,0.013888888888888888,0.0,0.7777777777777778,0.9375,0.0625,-4.71481705534271,-3.6827930103269324,4.375,7.25,1.0,1.0
+rankcloak,rankcloak_2,sha256_public_test_string,play_dialogue,32.0,,50,13,2,0.18,0.04,0.0,0.78,1.0,0.0,-5.297228771501955,-5.337976778157348,13.538461538461538,25.4,0.6153846153846154,1.0
+rankcloak,rankcloak_3,sha256_public_test_string,recipe_blog,32.0,,50,13,1,0.2,0.1,0.0,0.68,1.0,0.0,-6.342097219508972,-4.9085810334517745,13.538461538461538,25.4,0.6153846153846154,1.0
+baseline,baseline_0,,play_dialogue,,greedy,58,14,2,0.1206896551724138,0.08620689655172414,0.0,0.7931034482758621,0.9285714285714286,0.0714285714285714,-0.7417643517766963,-0.6467090648018061,1.0,1.0,1.0,1.0
+baseline,baseline_1,,recipe_blog,,greedy,60,14,1,0.15,0.06666666666666667,0.0,0.7833333333333333,0.9285714285714286,0.0714285714285714,-0.5675232204604429,-0.5630351968358962,1.0,1.0,1.0,1.0

@@ -1,4 +1,4 @@
-"""Compatibility wrapper for the smoke RankCloak experiment profile."""
+"""Command-line wrapper for RankCloak experiment profiles."""
 
 from __future__ import annotations
 
@@ -10,9 +10,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from rankcloak.experiments import main as experiment_main
+from rankcloak.experiments import main
 
 
 if __name__ == "__main__":
-    experiment_main(["--profile", "smoke", "--overwrite"])
+    main()
 

@@ -21,6 +21,7 @@ class SyntheticPayload:
     text: str
     bytes_value: bytes
     description: str
+    is_synthetic: bool = True
 
 
 def deterministic_random_bytes(length: int, seed: int) -> bytes:
@@ -71,11 +72,31 @@ def generate_synthetic_payloads(seed: int = DEFAULT_SEED) -> List[SyntheticPaylo
         ("random_128_bit_hex", "random_hex", random_128_hex, "Fixed-seed 128-bit hex string"),
         ("random_256_bit_hex", "random_hex", random_256_hex, "Fixed-seed 256-bit hex string"),
         ("nonce_96_bit_hex", "nonce_hex", nonce_hex, "Fixed-seed 96-bit nonce-like hex string"),
-        ("uuidv4_like", "uuid", uuid_text, "Fixed-seed UUIDv4-like value"),
-        ("fake_bearer_token_like", "bearer_like", bearer, "Clearly fake bearer-token-like string"),
-        ("fake_hmac_tag_like", "hmac_like", hmac_like, "Clearly fake HMAC-tag-like hex string"),
-        ("invalid_jwt_like", "jwt_like", jwt_like, "Invalid synthetic JWT-like string"),
-        ("ciphertext_like_base64", "ciphertext_like", ciphertext_like, "Fixed-seed base64 ciphertext-like block"),
+        ("synthetic_uuid_v4_like", "uuid", uuid_text, "Fixed-seed synthetic UUIDv4-like value"),
+        (
+            "synthetic_bearer_token_like",
+            "bearer_like",
+            bearer,
+            "Clearly fake synthetic bearer-token-like string",
+        ),
+        (
+            "synthetic_hmac_like_tag",
+            "hmac_like",
+            hmac_like,
+            "Clearly fake synthetic HMAC-tag-like hex string",
+        ),
+        (
+            "synthetic_jwt_like_invalid_signature",
+            "jwt_like",
+            jwt_like,
+            "Invalid synthetic JWT-like string with fake signature material",
+        ),
+        (
+            "synthetic_ciphertext_like_base64",
+            "ciphertext_like",
+            ciphertext_like,
+            "Fixed-seed synthetic base64 ciphertext-like block",
+        ),
     ]
 
     return [
@@ -88,4 +109,3 @@ def generate_synthetic_payloads(seed: int = DEFAULT_SEED) -> List[SyntheticPaylo
         )
         for name, kind, text, description in rows
     ]
-
