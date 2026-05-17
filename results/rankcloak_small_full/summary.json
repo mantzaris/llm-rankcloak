@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-05-17T23:23:53.075593+00:00",
+  "profile": "small",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_loaded": true,
+  "number_of_payloads": 4,
+  "number_of_cover_prompts": 4,
+  "alphabet_sizes": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "codec_roundtrip_pass_count": 63,
+  "codec_roundtrip_fail_count": 0,
+  "stegotext_recovery_pass_count": 64,
+  "stegotext_recovery_fail_count": 0,
+  "baseline_count": 4,
+  "feature_row_count": 68,
+  "generated_result_files": [
+    "results/rankcloak_small_full/tokenization_audit.csv",
+    "results/rankcloak_small_full/rank_statistics.csv",
+    "results/rankcloak_small_full/codec_roundtrip_trials.csv",
+    "results/rankcloak_small_full/stegotext_recovery_trials.csv",
+    "results/rankcloak_small_full/cover_examples.jsonl",
+    "results/rankcloak_small_full/baseline_cover_examples.jsonl",
+    "results/rankcloak_small_full/cover_text_features.csv",
+    "results/rankcloak_small_full/MANIFEST.json",
+    "results/rankcloak_small_full/figures/token_count_by_payload.png",
+    "results/rankcloak_small_full/figures/rank_summary_direct_subword.png",
+    "results/rankcloak_small_full/figures/cover_length_vs_rank_alphabet.png",
+    "results/rankcloak_small_full/figures/recovery_by_cover_prompt_and_alphabet.png",
+    "results/rankcloak_small_full/figures/cover_text_feature_comparison.png",
+    "results/rankcloak_small_full/summary.json",
+    "results/rankcloak_small_full/SUMMARY.md"
+  ],
+  "important_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Model status: loaded; load seconds: 3.267",
+    "Model loaded or was not required.",
+    "Detector AUC is not implemented; cover_text_features.csv is feature extraction only."
+  ]
+}
