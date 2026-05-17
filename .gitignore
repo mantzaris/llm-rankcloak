@@ -1,0 +1,49 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Local model files and heavyweight binaries
+models/**/*.gguf
+models/**/*.bin
+models/**/*.safetensors
+models/**/*.pt
+models/**/*.pth
+models/**/*.onnx
+models/**/*.tflite
+models/**/.cache/
+
+# Hugging Face local cache metadata that should not be committed
+.cache/
+huggingface/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.swp
+*~
+
+# Keep small research outputs committable, but ignore heavyweight result binaries.
+results/**/*.npy
+results/**/*.npz
+results/**/*.parquet
+results/**/*.pkl
+results/**/*.pickle
+results/**/*.sqlite
+results/**/*.db
+results/**/*.zip
+results/**/*.tar
+results/**/*.tar.gz
+

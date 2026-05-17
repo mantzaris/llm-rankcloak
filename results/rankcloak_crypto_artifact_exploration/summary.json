@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-05-17T04:02:08.340058+00:00",
+  "model_path": "/home/resort/Documents/repos/llm-rankcloak/models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_status": "loaded",
+  "model_load_seconds": 3.4942689599993173,
+  "number_of_payloads": 9,
+  "number_of_cover_prompts": 7,
+  "smoke_test_status": "generated",
+  "smoke_seconds": 56.32995550000487,
+  "rank_seconds": 136.16059604100155,
+  "exact_recovery_pass_count": 4,
+  "exact_recovery_fail_count": 0,
+  "paths_of_generated_result_files": [
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/tokenization_audit.csv",
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/rank_statistics.csv",
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/recovery_trials.csv",
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/cover_examples.jsonl",
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/figures/token_count_by_payload.png",
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/figures/rank_summary_direct_subword.png",
+    "/home/resort/Documents/repos/llm-rankcloak/results/rankcloak_crypto_artifact_exploration/figures/cover_length_vs_rank_alphabet.png"
+  ],
+  "short_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Direct subword rank statistics require the local GGUF model and llama-cpp-python.",
+    "Bounded-rank codec round trips are tested without a model.",
+    "Smoke stegotext generation is truncated for CPU safety."
+  ]
+}

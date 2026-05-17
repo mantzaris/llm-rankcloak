@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rankcloak"
+version = "0.1.0"
+description = "Research utilities for LLM rank-transcoding steganography over synthetic cryptographic artifacts."
+requires-python = ">=3.8"
+dependencies = [
+    "huggingface_hub>=0.26",
+    "numpy>=1.24",
+    "pandas>=1.5",
+    "matplotlib>=3.7",
+    "tqdm>=4.66",
+    "jupyterlab>=4.0",
+    "ipykernel>=6.29",
+    "nbformat>=5.9",
+]
+
+[project.optional-dependencies]
+llama = ["llama-cpp-python>=0.3.5"]
+
+[tool.setuptools.packages.find]
+include = ["rankcloak*"]
+
