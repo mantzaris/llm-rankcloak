@@ -15,13 +15,17 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser = subparsers.add_parser("run", help="Run an experiment profile")
     run_parser.add_argument(
         "--profile",
-        choices=["audit-only", "codec-only", "small", "smoke"],
+        choices=[
+            "audit-only",
+            "codec-only",
+            "small",
+            "smoke",
+            "strong-prompts",
+            "strong-prompts-pilot",
+        ],
         default="smoke",
     )
-    run_parser.add_argument(
-        "--output-dir",
-        default="results/rankcloak_crypto_artifact_exploration",
-    )
+    run_parser.add_argument("--output-dir", default=None)
     run_parser.add_argument("--model-path", default=None)
     run_parser.add_argument("--max-payload-bytes", type=int, default=None)
     run_parser.add_argument("--skip-model-download", action="store_true")
@@ -36,9 +40,9 @@ def main(argv: Optional[Sequence[str]] = None) -> dict:
         experiment_args = [
             "--profile",
             args.profile,
-            "--output-dir",
-            args.output_dir,
         ]
+        if args.output_dir:
+            experiment_args.extend(["--output-dir", args.output_dir])
         if args.model_path:
             experiment_args.extend(["--model-path", args.model_path])
         if args.max_payload_bytes is not None:
@@ -53,4 +57,3 @@ def main(argv: Optional[Sequence[str]] = None) -> dict:
 
 if __name__ == "__main__":
     main()
-

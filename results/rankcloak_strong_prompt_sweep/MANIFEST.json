@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-05-18T01:36:16.123021+00:00",
+  "git_commit_hash": "58b6ca8d3de459faf98e9e1cc98b94d8b586e422",
+  "dirty_worktree": true,
+  "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55)  [GCC 9.4.0]",
+  "platform": "Linux-5.4.0-216-generic-x86_64-with-glibc2.29",
+  "processor": "x86_64",
+  "os_cpu_count": 12,
+  "selected_thread_count": 11,
+  "installed_package_versions": {
+    "numpy": "1.22.1",
+    "pandas": "1.3.4",
+    "matplotlib": "3.1.2",
+    "llama_cpp": "0.3.23",
+    "huggingface_hub": "0.22.2"
+  },
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_sha256": null,
+  "model_sha256_note": "skipped because the model file exceeds the local hash limit",
+  "model_file_size_bytes": 4920734272,
+  "profile": "strong-prompts",
+  "output_dir": "results/rankcloak_strong_prompt_sweep",
+  "command_line_args": [
+    "--profile",
+    "strong-prompts",
+    "--output-dir",
+    "results/rankcloak_strong_prompt_sweep",
+    "--overwrite"
+  ]
+}

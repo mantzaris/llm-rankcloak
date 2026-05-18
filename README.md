@@ -57,6 +57,8 @@ If Hugging Face requires authentication or license acceptance, run `huggingface-
 python3 scripts/run_experiment.py --profile codec-only --overwrite
 python3 scripts/run_experiment.py --profile smoke --overwrite
 python3 scripts/run_experiment.py --profile small --overwrite
+python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
+python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
 
 If installed with the project entry point:
@@ -65,6 +67,8 @@ If installed with the project entry point:
 rankcloak run --profile codec-only --overwrite
 rankcloak run --profile smoke --overwrite
 rankcloak run --profile small --overwrite
+rankcloak run --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
+rankcloak run --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
 
 Profiles:
@@ -72,7 +76,27 @@ Profiles:
 - `codec-only`: all payloads and all bounded alphabets; no model required.
 - `smoke`: first 8 bytes of the SHA-256 payload, two cover prompts, alphabets 16 and 32.
 - `small`: full selected payloads, four cover prompts, alphabets 8, 16, 32, and 64. This can be CPU-expensive.
+- `strong-prompts-pilot`: a faster comparison between short and long specific prompts.
+- `strong-prompts`: a stronger prompt sweep over recipe, biology, car-buying, and comparison prompts.
 - `audit-only`: tokenization audit and direct subword rank statistics when the model is available.
+
+## Strong Prompt Sweep
+
+The strong prompt sweep tests whether longer and more specific key prompts improve cover quality relative to shorter prompts. It compares exact recovery, mean token log probability, rank pressure, generated length, formatting artifacts, and manually inspectable text examples.
+
+Run the pilot first:
+
+```bash
+python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
+```
+
+Run the full sweep when CPU time is available:
+
+```bash
+python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
+```
+
+The full sweep writes `PROMPT_COMPARISON.md` with sampled generated examples and neutral quality notes. The long prompt families are recipe writing, safe biology explanation/field-note style, and casual car-buying discussion.
 
 ## Notebook
 
@@ -96,6 +120,7 @@ Outputs are written under `results/rankcloak_crypto_artifact_exploration/`.
 - `MANIFEST.json`: reproducibility metadata with package versions, git state, profile, and model metadata.
 - `summary.json`: machine-readable run summary.
 - `SUMMARY.md`: human-readable run summary.
+- `PROMPT_COMPARISON.md`: prompt-oriented manual inspection report for strong prompt runs.
 
 Small CSV, JSON, JSONL, Markdown, and PNG results are intentionally committable. Large local model files and heavyweight binary artifacts are ignored.
 
@@ -111,4 +136,3 @@ Small CSV, JSON, JSONL, Markdown, and PNG results are intentionally committable.
 ## Sources
 
 The notebook and code use the Calgacus paper at `https://arxiv.org/pdf/2510.20075` and implementation ideas inspected from `https://github.com/mantzaris/LlmStenoExplore`. The prior repository is not vendored here.
-

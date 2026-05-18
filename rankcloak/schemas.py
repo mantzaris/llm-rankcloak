@@ -57,6 +57,9 @@ COVER_TEXT_FEATURE_COLUMNS = [
     "source_id",
     "payload_name",
     "cover_prompt_name",
+    "prompt_family",
+    "prompt_length_characters",
+    "prompt_length_tokens",
     "alphabet_size",
     "baseline_mode",
     "character_count",
@@ -75,4 +78,3 @@ COVER_TEXT_FEATURE_COLUMNS = [
     "fraction_rank_le_16",
     "fraction_rank_le_64",
 ]
-

@@ -31,9 +31,13 @@ from .plotting import (
     plot_cover_text_feature_comparison,
     plot_rank_summary_direct_subword,
     plot_recovery_by_cover_prompt_and_alphabet,
+    plot_strong_prompt_length,
+    plot_strong_prompt_mean_logprob,
+    plot_strong_prompt_rank_pressure,
+    plot_strong_prompt_recovery,
     plot_token_count_by_payload,
 )
-from .prompts import cover_prompt_dictionary
+from .prompts import cover_prompt_dictionary, prompt_family
 from .rank_codec import (
     SUPPORTED_ALPHABET_SIZES,
     codec_roundtrip_rows,
@@ -61,6 +65,7 @@ DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "results" / "rankcloak_crypto_artifact_explo
 
 PROFILE_CONFIGS = {
     "smoke": {
+        "default_output_dir": DEFAULT_OUTPUT_DIR,
         "payload_names": ["sha256_public_test_string"],
         "cover_prompt_names": ["play_dialogue", "recipe_blog"],
         "alphabet_sizes": [16, 32],
@@ -69,6 +74,7 @@ PROFILE_CONFIGS = {
         "baseline_token_cap": 32,
     },
     "small": {
+        "default_output_dir": DEFAULT_OUTPUT_DIR,
         "payload_names": [
             "sha256_public_test_string",
             "random_128_bit_hex",
@@ -87,6 +93,7 @@ PROFILE_CONFIGS = {
         "baseline_token_cap": 96,
     },
     "codec-only": {
+        "default_output_dir": DEFAULT_OUTPUT_DIR,
         "payload_names": None,
         "cover_prompt_names": [],
         "alphabet_sizes": SUPPORTED_ALPHABET_SIZES,
@@ -95,12 +102,51 @@ PROFILE_CONFIGS = {
         "baseline_token_cap": 0,
     },
     "audit-only": {
+        "default_output_dir": DEFAULT_OUTPUT_DIR,
         "payload_names": None,
         "cover_prompt_names": [],
         "alphabet_sizes": SUPPORTED_ALPHABET_SIZES,
         "default_max_payload_bytes": None,
         "requires_stegotext": False,
         "baseline_token_cap": 0,
+    },
+    "strong-prompts-pilot": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_strong_prompt_pilot",
+        "payload_names": [
+            "sha256_public_test_string",
+            "random_128_bit_hex",
+        ],
+        "cover_prompt_names": [
+            "recipe_blog",
+            "recipe_long_specific",
+            "biology_long_specific",
+            "car_buying_long_specific",
+        ],
+        "alphabet_sizes": [16, 32],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": True,
+        "baseline_token_cap": 96,
+        "write_prompt_comparison": True,
+    },
+    "strong-prompts": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_strong_prompt_sweep",
+        "payload_names": [
+            "sha256_public_test_string",
+            "random_128_bit_hex",
+            "synthetic_uuid_v4_like",
+        ],
+        "cover_prompt_names": [
+            "recipe_blog",
+            "recipe_long_specific",
+            "biology_long_specific",
+            "car_buying_long_specific",
+            "forum_reply",
+        ],
+        "alphabet_sizes": [8, 16, 32, 64],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": True,
+        "baseline_token_cap": 96,
+        "write_prompt_comparison": True,
     },
 }
 
@@ -149,6 +195,28 @@ def payload_bytes_for_profile(payload: SyntheticPayload, byte_limit: Optional[in
     if byte_limit is None or byte_limit >= len(payload.bytes_value):
         return payload.bytes_value, "full payload"
     return payload.bytes_value[:byte_limit], "first {} bytes".format(byte_limit)
+
+
+def build_prompt_metadata(
+    cover_prompts: Dict[str, str],
+    cover_prompt_names: Sequence[str],
+    model: Any,
+) -> Dict[str, dict]:
+    metadata = {}
+    for prompt_name in cover_prompt_names:
+        prompt_text = cover_prompts[prompt_name]
+        prompt_length_tokens = None
+        if model is not None:
+            try:
+                prompt_length_tokens = len(make_context_token_ids(model, prompt_text))
+            except Exception:
+                prompt_length_tokens = None
+        metadata[prompt_name] = {
+            "prompt_family": prompt_family(prompt_name),
+            "prompt_length_characters": len(prompt_text),
+            "prompt_length_tokens": prompt_length_tokens,
+        }
+    return metadata
 
 
 def load_model_for_profile(
@@ -233,6 +301,7 @@ def run_stegotext_trials(
     model_filename: str,
     model_path_relative: Optional[str],
     payload_byte_limit: Optional[int],
+    prompt_metadata: Dict[str, dict],
     output_dir: Path,
 ) -> tuple:
     trial_rows = []
@@ -271,6 +340,9 @@ def run_stegotext_trials(
                     "encoding_name": "fixed_radix_bits",
                     "alphabet_size": int(alphabet_size),
                     "cover_prompt_name": prompt_name,
+                    "prompt_family": prompt_metadata[prompt_name]["prompt_family"],
+                    "prompt_length_characters": prompt_metadata[prompt_name]["prompt_length_characters"],
+                    "prompt_length_tokens": prompt_metadata[prompt_name]["prompt_length_tokens"],
                     "rank_count": len(encoded["ranks"]),
                     "generated_token_count": len(generated["generated_token_ids"]),
                     "generated_character_count": len(generated_text),
@@ -299,6 +371,9 @@ def run_stegotext_trials(
                         "encoding_name": "fixed_radix_bits",
                         "alphabet_size": int(alphabet_size),
                         "cover_prompt_name": prompt_name,
+                        "prompt_family": prompt_metadata[prompt_name]["prompt_family"],
+                        "prompt_length_characters": prompt_metadata[prompt_name]["prompt_length_characters"],
+                        "prompt_length_tokens": prompt_metadata[prompt_name]["prompt_length_tokens"],
                         "rank_count": len(encoded["ranks"]),
                         "generated_text": generated_text,
                         "generated_token_ids": generated["generated_token_ids"],
@@ -338,6 +413,7 @@ def run_baselines(
     model_repo_id: str,
     model_filename: str,
     target_token_count: int,
+    prompt_metadata: Dict[str, dict],
     output_dir: Path,
 ) -> tuple:
     baseline_rows = []
@@ -352,6 +428,9 @@ def run_baselines(
         generated = generate_greedy_baseline(model, context_ids, target_token_count)
         row = {
             "cover_prompt_name": prompt_name,
+            "prompt_family": prompt_metadata[prompt_name]["prompt_family"],
+            "prompt_length_characters": prompt_metadata[prompt_name]["prompt_length_characters"],
+            "prompt_length_tokens": prompt_metadata[prompt_name]["prompt_length_tokens"],
             "baseline_mode": "greedy",
             "generated_text": generated["generated_text"],
             "generated_token_count": generated["generated_token_count"],
@@ -392,6 +471,9 @@ def build_feature_rows(cover_examples: Sequence[dict], baseline_examples: Sequen
                 "source_id": "rankcloak_{}".format(index),
                 "payload_name": example.get("payload_name"),
                 "cover_prompt_name": example.get("cover_prompt_name"),
+                "prompt_family": example.get("prompt_family"),
+                "prompt_length_characters": example.get("prompt_length_characters"),
+                "prompt_length_tokens": example.get("prompt_length_tokens"),
                 "alphabet_size": example.get("alphabet_size"),
                 "baseline_mode": None,
             }
@@ -411,6 +493,9 @@ def build_feature_rows(cover_examples: Sequence[dict], baseline_examples: Sequen
                 "source_id": "baseline_{}".format(index),
                 "payload_name": None,
                 "cover_prompt_name": example.get("cover_prompt_name"),
+                "prompt_family": example.get("prompt_family"),
+                "prompt_length_characters": example.get("prompt_length_characters"),
+                "prompt_length_tokens": example.get("prompt_length_tokens"),
                 "alphabet_size": None,
                 "baseline_mode": example.get("baseline_mode"),
             }
@@ -428,6 +513,120 @@ def write_cover_text_features(
     frame = ordered_frame(rows, COVER_TEXT_FEATURE_COLUMNS)
     frame.to_csv(output_dir / "cover_text_features.csv", index=False)
     return frame
+
+
+def neutral_quality_notes(example: dict, feature_row: Optional[dict]) -> str:
+    text = example.get("generated_text") or ""
+    alphabetic_characters = [character for character in text if character.isalpha()]
+    uppercase_fraction = (
+        sum(1 for character in alphabetic_characters if character.isupper())
+        / float(len(alphabetic_characters))
+        if alphabetic_characters
+        else 0.0
+    )
+    notes = []
+    if not text.strip():
+        notes.append("empty output")
+    if "```" in text or "http" in text or text.count("...") >= 2:
+        notes.append("contains formatting, link-like, or ellipsis artifacts")
+    if "\\" in text or "{" in text or "}" in text or "[" in text or "]" in text:
+        notes.append("contains markup-like or placeholder characters")
+    if uppercase_fraction > 0.18:
+        notes.append("unusually high uppercase-letter fraction")
+    if feature_row:
+        punctuation_fraction = feature_row.get("punctuation_fraction")
+        repeated_token_fraction = feature_row.get("repeated_token_fraction")
+        alphabetic_fraction = feature_row.get("alphabetic_fraction")
+        line_count = feature_row.get("line_count")
+        if punctuation_fraction is not None and punctuation_fraction > 0.16:
+            notes.append("high punctuation or formatting fraction")
+        if repeated_token_fraction is not None and repeated_token_fraction > 0.35:
+            notes.append("higher repeated-token fraction")
+        if (
+            alphabetic_fraction is not None
+            and alphabetic_fraction > 0.68
+            and line_count is not None
+            and line_count <= 8
+        ):
+            notes.append("mostly prose-like by lightweight heuristics")
+    if not notes:
+        notes.append("mixed or neutral by lightweight heuristics; inspect manually")
+    return "; ".join(notes)
+
+
+def markdown_safe_text_block(text: str, limit: int = 1200) -> str:
+    """Return generated text clipped and neutralized for fenced Markdown display."""
+
+    clipped = (text or "").strip()[:limit]
+    return clipped.replace("```", "` ` `")
+
+
+def write_prompt_comparison(
+    cover_examples: Sequence[dict],
+    feature_frame: pd.DataFrame,
+    cover_prompt_names: Sequence[str],
+    output_dir: Path,
+    examples_per_prompt: int = 3,
+) -> Path:
+    """Write a compact manual-inspection report for prompt quality comparison."""
+
+    path = output_dir / "PROMPT_COMPARISON.md"
+    feature_by_source_id = {}
+    if not feature_frame.empty and "source_id" in feature_frame:
+        for _, row in feature_frame.iterrows():
+            feature_by_source_id[row["source_id"]] = row.to_dict()
+
+    lines = [
+        "# RankCloak Strong Prompt Comparison",
+        "",
+        "This file samples generated RankCloak cover text for manual inspection. "
+        "The notes are lightweight heuristics, not human quality judgments.",
+        "",
+        "## Prompt Names Tested",
+        "",
+    ]
+    for prompt_name in cover_prompt_names:
+        lines.append("- `{}`".format(prompt_name))
+    lines.append("")
+
+    by_prompt: Dict[str, List[dict]] = {prompt_name: [] for prompt_name in cover_prompt_names}
+    for example in cover_examples:
+        prompt_name = example.get("cover_prompt_name")
+        if prompt_name in by_prompt and len(by_prompt[prompt_name]) < examples_per_prompt:
+            by_prompt[prompt_name].append(example)
+
+    for prompt_name in cover_prompt_names:
+        lines.extend(["## `{}`".format(prompt_name), ""])
+        examples = by_prompt.get(prompt_name, [])
+        if not examples:
+            lines.extend(["No examples were generated for this prompt.", ""])
+            continue
+        for index, example in enumerate(examples, start=1):
+            source_id = "rankcloak_{}".format(cover_examples.index(example))
+            feature_row = feature_by_source_id.get(source_id)
+            mean_log_probability = (
+                feature_row.get("mean_token_log_probability") if feature_row else None
+            )
+            lines.extend(
+                [
+                    "### Example {}".format(index),
+                    "",
+                    "- payload_name: `{}`".format(example.get("payload_name")),
+                    "- alphabet_size: `{}`".format(example.get("alphabet_size")),
+                    "- exact_recovery: `{}`".format(example.get("exact_recovery")),
+                    "- generated_token_count: `{}`".format(example.get("generated_token_count")),
+                    "- mean_token_log_probability: `{}`".format(mean_log_probability),
+                    "- notes: {}".format(neutral_quality_notes(example, feature_row)),
+                    "",
+                    "```text",
+                    markdown_safe_text_block(example.get("generated_text") or ""),
+                    "```",
+                    "",
+                ]
+            )
+
+    path.write_text("\n".join(lines), encoding="utf-8")
+    return path
 
 
 def write_summary(
@@ -526,7 +725,7 @@ Run `python3 scripts/run_experiment.py --profile small --overwrite` when CPU tim
 def run_experiment(args: argparse.Namespace) -> dict:
     profile = args.profile
     config = PROFILE_CONFIGS[profile]
-    output_dir = Path(args.output_dir)
+    output_dir = Path(args.output_dir) if args.output_dir else Path(config["default_output_dir"])
     output_dir.mkdir(parents=True, exist_ok=True)
     figures_dir = output_dir / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
@@ -554,6 +753,7 @@ def run_experiment(args: argparse.Namespace) -> dict:
     model_repo_id, model_filename = resolve_model_identity(model_path)
     model_path_relative = repo_relative_path(model_path, PROJECT_ROOT)
     model_loaded = model is not None
+    prompt_metadata = build_prompt_metadata(cover_prompts, cover_prompt_names, model)
 
     audit_payloads = all_payloads
     rank_payloads = all_payloads if profile == "audit-only" else experiment_payloads
@@ -572,6 +772,7 @@ def run_experiment(args: argparse.Namespace) -> dict:
             model_filename=model_filename,
             model_path_relative=model_path_relative,
             payload_byte_limit=payload_byte_limit,
+            prompt_metadata=prompt_metadata,
             output_dir=output_dir,
         )
     else:
@@ -588,6 +789,7 @@ def run_experiment(args: argparse.Namespace) -> dict:
         model_repo_id=model_repo_id,
         model_filename=model_filename,
         target_token_count=target_token_count,
+        prompt_metadata=prompt_metadata,
         output_dir=output_dir,
     )
     feature_frame = write_cover_text_features(cover_examples, baseline_examples, output_dir)
@@ -607,6 +809,35 @@ def run_experiment(args: argparse.Namespace) -> dict:
     feature_figure = plot_cover_text_feature_comparison(
         feature_frame, figures_dir / "cover_text_feature_comparison.png"
     )
+    extra_generated_files = []
+    if config.get("write_prompt_comparison"):
+        prompt_logprob_figure = plot_strong_prompt_mean_logprob(
+            feature_frame, figures_dir / "strong_prompt_mean_logprob_by_prompt.png"
+        )
+        prompt_recovery_figure = plot_strong_prompt_recovery(
+            stegotext_frame, figures_dir / "strong_prompt_recovery_by_prompt.png"
+        )
+        prompt_length_figure = plot_strong_prompt_length(
+            stegotext_frame, figures_dir / "strong_prompt_length_by_prompt.png"
+        )
+        prompt_rank_figure = plot_strong_prompt_rank_pressure(
+            stegotext_frame, figures_dir / "strong_prompt_rank_pressure.png"
+        )
+        prompt_comparison_path = write_prompt_comparison(
+            cover_examples=cover_examples,
+            feature_frame=feature_frame,
+            cover_prompt_names=cover_prompt_names,
+            output_dir=output_dir,
+        )
+        extra_generated_files.extend(
+            [
+                prompt_logprob_figure,
+                prompt_recovery_figure,
+                prompt_length_figure,
+                prompt_rank_figure,
+                prompt_comparison_path,
+            ]
+        )
 
     manifest_path = output_dir / "MANIFEST.json"
     write_manifest(
@@ -634,6 +865,7 @@ def run_experiment(args: argparse.Namespace) -> dict:
         cover_length_figure,
         recovery_figure,
         feature_figure,
+        *extra_generated_files,
         output_dir / "summary.json",
         output_dir / "SUMMARY.md",
     ]
@@ -675,7 +907,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(DEFAULT_OUTPUT_DIR),
+        default=None,
         help="Directory for result outputs.",
     )
     parser.add_argument("--model-path", default=None, help="Optional explicit GGUF model path.")

@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-05-18T00:33:40.468371+00:00",
+  "profile": "strong-prompts-pilot",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_loaded": true,
+  "number_of_payloads": 2,
+  "number_of_cover_prompts": 4,
+  "alphabet_sizes": [
+    16,
+    32
+  ],
+  "codec_roundtrip_pass_count": 63,
+  "codec_roundtrip_fail_count": 0,
+  "stegotext_recovery_pass_count": 16,
+  "stegotext_recovery_fail_count": 0,
+  "baseline_count": 4,
+  "feature_row_count": 20,
+  "generated_result_files": [
+    "results/rankcloak_strong_prompt_pilot/tokenization_audit.csv",
+    "results/rankcloak_strong_prompt_pilot/rank_statistics.csv",
+    "results/rankcloak_strong_prompt_pilot/codec_roundtrip_trials.csv",
+    "results/rankcloak_strong_prompt_pilot/stegotext_recovery_trials.csv",
+    "results/rankcloak_strong_prompt_pilot/cover_examples.jsonl",
+    "results/rankcloak_strong_prompt_pilot/baseline_cover_examples.jsonl",
+    "results/rankcloak_strong_prompt_pilot/cover_text_features.csv",
+    "results/rankcloak_strong_prompt_pilot/MANIFEST.json",
+    "results/rankcloak_strong_prompt_pilot/figures/token_count_by_payload.png",
+    "results/rankcloak_strong_prompt_pilot/figures/rank_summary_direct_subword.png",
+    "results/rankcloak_strong_prompt_pilot/figures/cover_length_vs_rank_alphabet.png",
+    "results/rankcloak_strong_prompt_pilot/figures/recovery_by_cover_prompt_and_alphabet.png",
+    "results/rankcloak_strong_prompt_pilot/figures/cover_text_feature_comparison.png",
+    "results/rankcloak_strong_prompt_pilot/figures/strong_prompt_mean_logprob_by_prompt.png",
+    "results/rankcloak_strong_prompt_pilot/figures/strong_prompt_recovery_by_prompt.png",
+    "results/rankcloak_strong_prompt_pilot/figures/strong_prompt_length_by_prompt.png",
+    "results/rankcloak_strong_prompt_pilot/figures/strong_prompt_rank_pressure.png",
+    "results/rankcloak_strong_prompt_pilot/PROMPT_COMPARISON.md",
+    "results/rankcloak_strong_prompt_pilot/summary.json",
+    "results/rankcloak_strong_prompt_pilot/SUMMARY.md"
+  ],
+  "important_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Model status: loaded; load seconds: 3.555",
+    "Model loaded or was not required.",
+    "Detector AUC is not implemented; cover_text_features.csv is feature extraction only."
+  ]
+}

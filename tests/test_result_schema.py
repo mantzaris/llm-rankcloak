@@ -50,7 +50,15 @@ def test_schema_constants_include_required_stegotext_columns():
 
 
 def test_feature_schema_has_rankcloak_and_baseline_context_columns():
-    for column in ["source_type", "source_id", "cover_prompt_name", "character_count"]:
+    for column in [
+        "source_type",
+        "source_id",
+        "cover_prompt_name",
+        "prompt_family",
+        "prompt_length_characters",
+        "prompt_length_tokens",
+        "character_count",
+    ]:
         assert column in COVER_TEXT_FEATURE_COLUMNS
 
 
@@ -61,4 +69,3 @@ def test_codec_roundtrip_rows_match_schema_and_pass():
     for row in rows:
         assert set(CODEC_ROUNDTRIP_COLUMNS).issubset(row.keys())
         assert row["exact_roundtrip"] is True
-
