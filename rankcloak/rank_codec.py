@@ -235,6 +235,41 @@ def decode_hex_character_ranks_to_bytes(ranks: Sequence[int], metadata: Dict[str
     return data[: int(metadata["original_byte_length"])]
 
 
+def is_hex_text(text: str) -> bool:
+    """Return True when text is non-empty and contains only hex characters."""
+
+    normalized = text.strip().lower()
+    return bool(normalized) and all(character in HEX_ALPHABET for character in normalized)
+
+
+def encode_hex_nibbles_to_ranks(hex_text: str) -> Dict[str, object]:
+    """Encode hex characters directly as ranks 1..16 without byte regrouping."""
+
+    normalized = hex_text.strip().lower()
+    if not is_hex_text(normalized):
+        raise ValueError("hex_text must contain only 0-9 and a-f characters")
+    ranks = [HEX_ALPHABET.index(character) + 1 for character in normalized]
+    return {
+        "ranks": ranks,
+        "metadata": {
+            "encoding": "raw_hex_nibbles",
+            "hex_character_length": len(normalized),
+        },
+    }
+
+
+def decode_hex_nibble_ranks_to_text(ranks: Sequence[int], metadata: Dict[str, int]) -> str:
+    """Decode ranks 1..16 back to the original hex text."""
+
+    characters = []
+    for rank in ranks:
+        rank = int(rank)
+        if rank < 1 or rank > 16:
+            raise ValueError("hex nibble rank {} is outside 1..16".format(rank))
+        characters.append(HEX_ALPHABET[rank - 1])
+    return "".join(characters)[: int(metadata["hex_character_length"])]
+
+
 def bounded_roundtrip_rows(payloads: Iterable[Any], alphabet_sizes: Sequence[int]) -> List[dict]:
     """Create legacy recovery rows for hex-character and fixed-radix encodings."""
 

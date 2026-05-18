@@ -20,6 +20,8 @@ def build_parser() -> argparse.ArgumentParser:
             "codec-only",
             "small",
             "smoke",
+            "dialogue-key-pilot",
+            "payload-granularity-pilot",
             "strong-prompts",
             "strong-prompts-pilot",
         ],

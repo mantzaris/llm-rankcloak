@@ -33,6 +33,23 @@ def cover_prompt_dictionary() -> Dict[str, str]:
             "and cooking observations. Keep the tone plain, useful, and natural, as though the writer "
             "is calmly guiding a friend through dinner on a rainy evening.\n"
         ),
+        "recipe_dialogue_specific": (
+            "Continue a two-person kitchen conversation between Mara and Jon while they make lentil "
+            "stew on a rainy evening. The tone is mundane, practical, and calm. Mara and Jon should "
+            "use short natural speaker turns, with their names repeated naturally at the start of each "
+            "turn. They are talking about whether the onions are soft enough, how the garlic smells, "
+            "when the tomato paste darkens, how to judge lentil tenderness, what substitutions are fine, "
+            "and when to add salt. After this opening, avoid stage directions and continue only with "
+            "ordinary dialogue. Do not use lists, links, markup, formulas, or dramatic narration.\n"
+        ),
+        "recipe_forum_exchange_specific": (
+            "Continue a casual cooking forum exchange about making lentil stew with ordinary ingredients "
+            "already at home. One person is asking whether their pantry ingredients will work, and another "
+            "person replies warmly with practical reassurance. Use short paragraphs in a normal forum style, "
+            "not bullet lists. Mention simple substitutions, cooking observations, onion softness, garlic "
+            "smell, tomato paste color, lentil tenderness, and adjusting salt near the end. Avoid links, "
+            "hashtags, code blocks, markdown lists, and exaggerated internet slang.\n"
+        ),
         "biology_long_specific": (
             "Continue a safe educational biology explanation for undergraduate students in a natural "
             "science course. The topic is careful observation of pond water under a classroom microscope "
@@ -52,6 +69,20 @@ def cover_prompt_dictionary() -> Dict[str, str]:
             "tradeoffs between comfort and long-term cost. Keep the tone conversational and grounded. The "
             "writer should sound like a real person sorting through priorities rather than making a polished "
             "advertisement. Continue naturally with specific considerations and ordinary transitions.\n"
+        ),
+        "car_buying_dialogue_specific": (
+            "Continue a casual conversation between two friends about buying a new car. They should speak "
+            "in short grounded turns, without placeholders and without brand names. The friends discuss "
+            "budget, insurance, maintenance history, used versus new, fuel economy, test drives, parking, "
+            "family space, and reliability. Keep the tone ordinary and conversational, like two practical "
+            "people sorting out tradeoffs after work. Avoid lists, links, markup, slogans, and sales language.\n"
+        ),
+        "biology_tutor_dialogue_specific": (
+            "Continue a safe educational conversation between a biology tutor and a student observing pond "
+            "water under a classroom microscope. The exchange should be conceptual and observational, not a "
+            "wet-lab protocol. Use short natural speaker turns. They discuss what can be seen, uncertainty, "
+            "algal cells, drifting particles, tiny swimming organisms, focus, light, and careful interpretation. "
+            "Avoid formulas, LaTeX, markdown, links, and procedural lab instructions.\n"
         ),
         "forum_reply": (
             "Write a helpful forum reply to someone asking how to organize a small community "
@@ -80,8 +111,12 @@ def prompt_family_dictionary() -> Dict[str, str]:
         "original_fantasy_fiction": "fiction",
         "recipe_blog": "recipe",
         "recipe_long_specific": "recipe",
+        "recipe_dialogue_specific": "recipe_dialogue",
+        "recipe_forum_exchange_specific": "recipe_forum_exchange",
         "biology_long_specific": "biology",
         "car_buying_long_specific": "car_buying",
+        "car_buying_dialogue_specific": "car_buying_dialogue",
+        "biology_tutor_dialogue_specific": "biology_dialogue",
         "forum_reply": "forum",
         "technical_documentation": "technical",
         "code_review_comment": "code_review",

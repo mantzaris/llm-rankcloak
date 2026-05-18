@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-05-18T03:15:53.841088+00:00",
+  "profile": "dialogue-key-pilot",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_loaded": true,
+  "number_of_payloads": 2,
+  "number_of_cover_prompts": 6,
+  "alphabet_sizes": [
+    8,
+    16
+  ],
+  "codec_roundtrip_pass_count": 63,
+  "codec_roundtrip_fail_count": 0,
+  "stegotext_recovery_pass_count": 24,
+  "stegotext_recovery_fail_count": 0,
+  "baseline_count": 6,
+  "feature_row_count": 30,
+  "generated_result_files": [
+    "results/rankcloak_dialogue_key_pilot/tokenization_audit.csv",
+    "results/rankcloak_dialogue_key_pilot/rank_statistics.csv",
+    "results/rankcloak_dialogue_key_pilot/codec_roundtrip_trials.csv",
+    "results/rankcloak_dialogue_key_pilot/stegotext_recovery_trials.csv",
+    "results/rankcloak_dialogue_key_pilot/cover_examples.jsonl",
+    "results/rankcloak_dialogue_key_pilot/baseline_cover_examples.jsonl",
+    "results/rankcloak_dialogue_key_pilot/cover_text_features.csv",
+    "results/rankcloak_dialogue_key_pilot/MANIFEST.json",
+    "results/rankcloak_dialogue_key_pilot/figures/token_count_by_payload.png",
+    "results/rankcloak_dialogue_key_pilot/figures/rank_summary_direct_subword.png",
+    "results/rankcloak_dialogue_key_pilot/figures/cover_length_vs_rank_alphabet.png",
+    "results/rankcloak_dialogue_key_pilot/figures/recovery_by_cover_prompt_and_alphabet.png",
+    "results/rankcloak_dialogue_key_pilot/figures/cover_text_feature_comparison.png",
+    "results/rankcloak_dialogue_key_pilot/figures/dialogue_prompt_mean_logprob.png",
+    "results/rankcloak_dialogue_key_pilot/figures/dialogue_prompt_repetition.png",
+    "results/rankcloak_dialogue_key_pilot/figures/dialogue_prompt_length.png",
+    "results/rankcloak_dialogue_key_pilot/figures/dialogue_prompt_quality_scatter.png",
+    "results/rankcloak_dialogue_key_pilot/DIALOGUE_PROMPT_COMPARISON.md",
+    "results/rankcloak_dialogue_key_pilot/summary.json",
+    "results/rankcloak_dialogue_key_pilot/SUMMARY.md"
+  ],
+  "important_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Model status: loaded; load seconds: 3.409",
+    "Model loaded or was not required.",
+    "Detector AUC is not implemented; cover_text_features.csv is feature extraction only."
+  ]
+}

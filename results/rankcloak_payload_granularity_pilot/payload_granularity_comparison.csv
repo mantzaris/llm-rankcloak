@@ -1,0 +1,9 @@
+payload_name,representation_name,alphabet_size,artifact_text_character_length,artifact_text_byte_length,artifact_bit_length_if_known,rank_count,max_possible_rank,bits_per_rank_estimate,notes
+sha256_public_test_string,ascii_bytes_fixed_radix,8.0,64,64,256,171,8,3.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks
+sha256_public_test_string,ascii_bytes_fixed_radix,16.0,64,64,256,128,16,4.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks
+sha256_public_test_string,raw_hex_nibbles,16.0,64,64,256,64,16,4.0,one hex character per rank; exact roundtrip True
+sha256_public_test_string,raw_subword_direct,,64,64,256,37,1986,,direct model-token payload baseline; not bounded-rank cover generation
+random_128_bit_hex,ascii_bytes_fixed_radix,8.0,32,32,128,86,8,3.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks
+random_128_bit_hex,ascii_bytes_fixed_radix,16.0,32,32,128,64,16,4.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks
+random_128_bit_hex,raw_hex_nibbles,16.0,32,32,128,32,16,4.0,one hex character per rank; exact roundtrip True
+random_128_bit_hex,raw_subword_direct,,32,32,128,18,5216,,direct model-token payload baseline; not bounded-rank cover generation

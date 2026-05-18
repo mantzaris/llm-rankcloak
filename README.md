@@ -57,6 +57,8 @@ If Hugging Face requires authentication or license acceptance, run `huggingface-
 python3 scripts/run_experiment.py --profile codec-only --overwrite
 python3 scripts/run_experiment.py --profile smoke --overwrite
 python3 scripts/run_experiment.py --profile small --overwrite
+python3 scripts/run_experiment.py --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
+python3 scripts/run_experiment.py --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -67,6 +69,8 @@ If installed with the project entry point:
 rankcloak run --profile codec-only --overwrite
 rankcloak run --profile smoke --overwrite
 rankcloak run --profile small --overwrite
+rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
+rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 rankcloak run --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 rankcloak run --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -76,6 +80,8 @@ Profiles:
 - `codec-only`: all payloads and all bounded alphabets; no model required.
 - `smoke`: first 8 bytes of the SHA-256 payload, two cover prompts, alphabets 16 and 32.
 - `small`: full selected payloads, four cover prompts, alphabets 8, 16, 32, and 64. This can be CPU-expensive.
+- `dialogue-key-pilot`: a narrow comparison of monologue, dialogue, and forum-exchange key prompts at B=8 and B=16.
+- `payload-granularity-pilot`: compares payload-side representations without changing the cover model/tokenizer.
 - `strong-prompts-pilot`: a faster comparison between short and long specific prompts.
 - `strong-prompts`: a stronger prompt sweep over recipe, biology, car-buying, and comparison prompts.
 - `audit-only`: tokenization audit and direct subword rank statistics when the model is available.
@@ -97,6 +103,39 @@ python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/
 ```
 
 The full sweep writes `PROMPT_COMPARISON.md` with sampled generated examples and neutral quality notes. The long prompt families are recipe writing, safe biology explanation/field-note style, and casual car-buying discussion.
+
+## Dialogue Key Prompt Pilot
+
+The strong prompt sweep showed that longer prompts help topic anchoring but do not solve forced-rank damage. The dialogue key prompt pilot tests whether dialogue and forum-exchange formats absorb forced-rank damage better than monologue prose. It intentionally uses only low alphabet sizes, `B=8` and `B=16`, because larger alphabets were visibly harsher on cover quality.
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile dialogue-key-pilot \
+  --output-dir results/rankcloak_dialogue_key_pilot \
+  --overwrite
+```
+
+Equivalent CLI form:
+
+```bash
+rankcloak run \
+  --profile dialogue-key-pilot \
+  --output-dir results/rankcloak_dialogue_key_pilot \
+  --overwrite
+```
+
+The run writes `DIALOGUE_PROMPT_COMPARISON.md` with sampled generated examples and neutral quality notes.
+
+## Payload Granularity Pilot
+
+Do not change the cover-side tokenizer without changing the model; cover-side ranks are defined over the loaded model vocabulary. This pilot compares payload-side representations only: ASCII bytes through fixed-radix ranks, direct hex-nibble character ranks, and raw subword direct rank pressure.
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile payload-granularity-pilot \
+  --output-dir results/rankcloak_payload_granularity_pilot \
+  --overwrite
+```
 
 ## Notebook
 
@@ -121,6 +160,8 @@ Outputs are written under `results/rankcloak_crypto_artifact_exploration/`.
 - `summary.json`: machine-readable run summary.
 - `SUMMARY.md`: human-readable run summary.
 - `PROMPT_COMPARISON.md`: prompt-oriented manual inspection report for strong prompt runs.
+- `DIALOGUE_PROMPT_COMPARISON.md`: prompt-oriented manual inspection report for dialogue pilot runs.
+- `payload_granularity_comparison.csv`: payload-side representation comparison for the payload granularity pilot.
 
 Small CSV, JSON, JSONL, Markdown, and PNG results are intentionally committable. Large local model files and heavyweight binary artifacts are ignored.
 

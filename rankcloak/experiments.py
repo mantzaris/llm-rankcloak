@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 import time
 from datetime import datetime, timezone
@@ -27,8 +28,11 @@ from .model_io import (
     make_context_token_ids,
 )
 from .plotting import (
+    plot_dialogue_prompt_quality_scatter,
+    plot_dialogue_prompt_repetition,
     plot_cover_length_vs_rank_alphabet,
     plot_cover_text_feature_comparison,
+    plot_payload_representation_rank_count,
     plot_rank_summary_direct_subword,
     plot_recovery_by_cover_prompt_and_alphabet,
     plot_strong_prompt_length,
@@ -42,9 +46,12 @@ from .rank_codec import (
     SUPPORTED_ALPHABET_SIZES,
     codec_roundtrip_rows,
     decode_bounded_ranks_to_bytes,
+    decode_hex_nibble_ranks_to_text,
     direct_subword_ranks_for_text,
     encode_bytes_to_bounded_ranks,
+    encode_hex_nibbles_to_ranks,
     generate_token_ids_from_ranks,
+    is_hex_text,
     recover_ranks_from_generated_ids,
     test_stable_rank_ordering,
 )
@@ -147,6 +154,39 @@ PROFILE_CONFIGS = {
         "requires_stegotext": True,
         "baseline_token_cap": 96,
         "write_prompt_comparison": True,
+    },
+    "dialogue-key-pilot": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_dialogue_key_pilot",
+        "payload_names": [
+            "sha256_public_test_string",
+            "random_128_bit_hex",
+        ],
+        "cover_prompt_names": [
+            "recipe_blog",
+            "recipe_long_specific",
+            "recipe_dialogue_specific",
+            "recipe_forum_exchange_specific",
+            "car_buying_dialogue_specific",
+            "biology_tutor_dialogue_specific",
+        ],
+        "alphabet_sizes": [8, 16],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": True,
+        "baseline_token_cap": 96,
+        "write_dialogue_comparison": True,
+    },
+    "payload-granularity-pilot": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_payload_granularity_pilot",
+        "payload_names": [
+            "sha256_public_test_string",
+            "random_128_bit_hex",
+        ],
+        "cover_prompt_names": [],
+        "alphabet_sizes": [8, 16],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": False,
+        "baseline_token_cap": 0,
+        "write_payload_granularity": True,
     },
 }
 
@@ -567,17 +607,19 @@ def write_prompt_comparison(
     cover_prompt_names: Sequence[str],
     output_dir: Path,
     examples_per_prompt: int = 3,
+    filename: str = "PROMPT_COMPARISON.md",
+    title: str = "RankCloak Strong Prompt Comparison",
 ) -> Path:
     """Write a compact manual-inspection report for prompt quality comparison."""
 
-    path = output_dir / "PROMPT_COMPARISON.md"
+    path = output_dir / filename
     feature_by_source_id = {}
     if not feature_frame.empty and "source_id" in feature_frame:
         for _, row in feature_frame.iterrows():
             feature_by_source_id[row["source_id"]] = row.to_dict()
 
     lines = [
-        "# RankCloak Strong Prompt Comparison",
+        "# {}".format(title),
         "",
         "This file samples generated RankCloak cover text for manual inspection. "
         "The notes are lightweight heuristics, not human quality judgments.",
@@ -627,6 +669,99 @@ def write_prompt_comparison(
 
     path.write_text("\n".join(lines), encoding="utf-8")
     return path
+
+
+def artifact_bit_length_if_known(payload: SyntheticPayload) -> Optional[int]:
+    if payload.kind in {"sha256_hex", "random_hex", "nonce_hex", "hmac_like"} and is_hex_text(payload.text):
+        return len(payload.text) * 4
+    return None
+
+
+def run_payload_granularity_comparison(
+    payloads: Sequence[SyntheticPayload],
+    alphabet_sizes: Sequence[int],
+    model: Any,
+    output_dir: Path,
+) -> pd.DataFrame:
+    rows = []
+    for payload in payloads:
+        for alphabet_size in alphabet_sizes:
+            encoded = encode_bytes_to_bounded_ranks(payload.bytes_value, alphabet_size)
+            rows.append(
+                {
+                    "payload_name": payload.name,
+                    "representation_name": "ascii_bytes_fixed_radix",
+                    "alphabet_size": int(alphabet_size),
+                    "artifact_text_character_length": len(payload.text),
+                    "artifact_text_byte_length": len(payload.bytes_value),
+                    "artifact_bit_length_if_known": artifact_bit_length_if_known(payload),
+                    "rank_count": len(encoded["ranks"]),
+                    "max_possible_rank": int(alphabet_size),
+                    "bits_per_rank_estimate": float(math.log2(alphabet_size)),
+                    "notes": "ASCII artifact string bytes encoded as fixed-radix bounded ranks",
+                }
+            )
+
+        if is_hex_text(payload.text):
+            encoded_hex = encode_hex_nibbles_to_ranks(payload.text)
+            decoded_hex = decode_hex_nibble_ranks_to_text(
+                encoded_hex["ranks"], encoded_hex["metadata"]
+            )
+            rows.append(
+                {
+                    "payload_name": payload.name,
+                    "representation_name": "raw_hex_nibbles",
+                    "alphabet_size": 16,
+                    "artifact_text_character_length": len(payload.text),
+                    "artifact_text_byte_length": len(payload.bytes_value),
+                    "artifact_bit_length_if_known": len(payload.text) * 4,
+                    "rank_count": len(encoded_hex["ranks"]),
+                    "max_possible_rank": 16,
+                    "bits_per_rank_estimate": 4.0,
+                    "notes": (
+                        "one hex character per rank; exact roundtrip {}".format(
+                            decoded_hex == payload.text.lower()
+                        )
+                    ),
+                }
+            )
+
+        if model is not None:
+            trace = direct_subword_ranks_for_text(model, payload.text)
+            ranks = trace["ranks"]
+            rows.append(
+                {
+                    "payload_name": payload.name,
+                    "representation_name": "raw_subword_direct",
+                    "alphabet_size": None,
+                    "artifact_text_character_length": len(payload.text),
+                    "artifact_text_byte_length": len(payload.bytes_value),
+                    "artifact_bit_length_if_known": artifact_bit_length_if_known(payload),
+                    "rank_count": len(trace.get("payload_token_ids", [])),
+                    "max_possible_rank": max(ranks) if ranks else None,
+                    "bits_per_rank_estimate": None,
+                    "notes": "direct model-token payload baseline; not bounded-rank cover generation",
+                }
+            )
+        else:
+            rows.append(
+                {
+                    "payload_name": payload.name,
+                    "representation_name": "raw_subword_direct",
+                    "alphabet_size": None,
+                    "artifact_text_character_length": len(payload.text),
+                    "artifact_text_byte_length": len(payload.bytes_value),
+                    "artifact_bit_length_if_known": artifact_bit_length_if_known(payload),
+                    "rank_count": None,
+                    "max_possible_rank": None,
+                    "bits_per_rank_estimate": None,
+                    "notes": "model unavailable; direct subword rank pressure skipped",
+                }
+            )
+
+    frame = pd.DataFrame(rows)
+    frame.to_csv(output_dir / "payload_granularity_comparison.csv", index=False)
+    return frame
 
 
 def write_summary(
@@ -836,6 +971,54 @@ def run_experiment(args: argparse.Namespace) -> dict:
                 prompt_length_figure,
                 prompt_rank_figure,
                 prompt_comparison_path,
+            ]
+        )
+    if config.get("write_dialogue_comparison"):
+        dialogue_logprob_figure = plot_strong_prompt_mean_logprob(
+            feature_frame, figures_dir / "dialogue_prompt_mean_logprob.png"
+        )
+        dialogue_repetition_figure = plot_dialogue_prompt_repetition(
+            feature_frame, figures_dir / "dialogue_prompt_repetition.png"
+        )
+        dialogue_length_figure = plot_strong_prompt_length(
+            stegotext_frame, figures_dir / "dialogue_prompt_length.png"
+        )
+        dialogue_scatter_figure = plot_dialogue_prompt_quality_scatter(
+            feature_frame, figures_dir / "dialogue_prompt_quality_scatter.png"
+        )
+        dialogue_comparison_path = write_prompt_comparison(
+            cover_examples=cover_examples,
+            feature_frame=feature_frame,
+            cover_prompt_names=cover_prompt_names,
+            output_dir=output_dir,
+            examples_per_prompt=2,
+            filename="DIALOGUE_PROMPT_COMPARISON.md",
+            title="RankCloak Dialogue Key Prompt Comparison",
+        )
+        extra_generated_files.extend(
+            [
+                dialogue_logprob_figure,
+                dialogue_repetition_figure,
+                dialogue_length_figure,
+                dialogue_scatter_figure,
+                dialogue_comparison_path,
+            ]
+        )
+    if config.get("write_payload_granularity"):
+        payload_granularity_frame = run_payload_granularity_comparison(
+            payloads=experiment_payloads,
+            alphabet_sizes=alphabet_sizes,
+            model=model,
+            output_dir=output_dir,
+        )
+        payload_granularity_figure = plot_payload_representation_rank_count(
+            payload_granularity_frame,
+            figures_dir / "payload_representation_rank_count.png",
+        )
+        extra_generated_files.extend(
+            [
+                output_dir / "payload_granularity_comparison.csv",
+                payload_granularity_figure,
             ]
         )
 

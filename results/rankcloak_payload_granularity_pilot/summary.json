@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-05-18T02:37:02.617455+00:00",
+  "profile": "payload-granularity-pilot",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_loaded": true,
+  "number_of_payloads": 2,
+  "number_of_cover_prompts": 0,
+  "alphabet_sizes": [
+    8,
+    16
+  ],
+  "codec_roundtrip_pass_count": 63,
+  "codec_roundtrip_fail_count": 0,
+  "stegotext_recovery_pass_count": 0,
+  "stegotext_recovery_fail_count": 0,
+  "baseline_count": 0,
+  "feature_row_count": 0,
+  "generated_result_files": [
+    "results/rankcloak_payload_granularity_pilot/tokenization_audit.csv",
+    "results/rankcloak_payload_granularity_pilot/rank_statistics.csv",
+    "results/rankcloak_payload_granularity_pilot/codec_roundtrip_trials.csv",
+    "results/rankcloak_payload_granularity_pilot/stegotext_recovery_trials.csv",
+    "results/rankcloak_payload_granularity_pilot/cover_examples.jsonl",
+    "results/rankcloak_payload_granularity_pilot/baseline_cover_examples.jsonl",
+    "results/rankcloak_payload_granularity_pilot/cover_text_features.csv",
+    "results/rankcloak_payload_granularity_pilot/MANIFEST.json",
+    "results/rankcloak_payload_granularity_pilot/figures/token_count_by_payload.png",
+    "results/rankcloak_payload_granularity_pilot/figures/rank_summary_direct_subword.png",
+    "results/rankcloak_payload_granularity_pilot/figures/cover_length_vs_rank_alphabet.png",
+    "results/rankcloak_payload_granularity_pilot/figures/recovery_by_cover_prompt_and_alphabet.png",
+    "results/rankcloak_payload_granularity_pilot/figures/cover_text_feature_comparison.png",
+    "results/rankcloak_payload_granularity_pilot/payload_granularity_comparison.csv",
+    "results/rankcloak_payload_granularity_pilot/figures/payload_representation_rank_count.png",
+    "results/rankcloak_payload_granularity_pilot/summary.json",
+    "results/rankcloak_payload_granularity_pilot/SUMMARY.md"
+  ],
+  "important_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Model status: loaded; load seconds: 3.565",
+    "Model loaded or was not required.",
+    "Detector AUC is not implemented; cover_text_features.csv is feature extraction only."
+  ]
+}

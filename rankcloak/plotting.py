@@ -337,3 +337,129 @@ def plot_strong_prompt_rank_pressure(recovery_frame: Any, output_path: Path) -> 
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
     return output_path
+
+
+def plot_dialogue_prompt_repetition(feature_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if feature_frame.empty or "repeated_token_fraction" not in feature_frame:
+        return _save_placeholder(
+            output_path,
+            "Dialogue Prompt Repetition",
+            "No repeated-token feature rows were available.",
+        )
+    frame = feature_frame[feature_frame["source_type"] == "rankcloak"].dropna(
+        subset=["repeated_token_fraction"]
+    )
+    if frame.empty:
+        return _save_placeholder(
+            output_path,
+            "Dialogue Prompt Repetition",
+            "No RankCloak repeated-token feature rows were available.",
+        )
+    pivot = frame.pivot_table(
+        index="cover_prompt_name",
+        columns="alphabet_size",
+        values="repeated_token_fraction",
+        aggfunc="mean",
+    )
+    fig, ax = plt.subplots(figsize=(11, 5))
+    pivot.plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean repeated-token fraction")
+    ax.set_xlabel("Prompt")
+    ax.set_title("Dialogue Prompt Repetition By Alphabet")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=35, ha="right")
+    ax.legend(title="Alphabet")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_dialogue_prompt_quality_scatter(feature_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    required = {"mean_token_log_probability", "repeated_token_fraction", "prompt_family"}
+    if feature_frame.empty or not required.issubset(set(feature_frame.columns)):
+        return _save_placeholder(
+            output_path,
+            "Dialogue Prompt Quality Scatter",
+            "No feature rows were available for the quality scatter.",
+        )
+    frame = feature_frame[feature_frame["source_type"] == "rankcloak"].dropna(
+        subset=["mean_token_log_probability", "repeated_token_fraction"]
+    )
+    if frame.empty:
+        return _save_placeholder(
+            output_path,
+            "Dialogue Prompt Quality Scatter",
+            "No RankCloak feature rows were available for the quality scatter.",
+        )
+    fig, ax = plt.subplots(figsize=(8, 6))
+    for family, family_frame in frame.groupby("prompt_family"):
+        ax.scatter(
+            family_frame["mean_token_log_probability"],
+            family_frame["repeated_token_fraction"],
+            label=family,
+            alpha=0.8,
+        )
+    ax.set_xlabel("Mean token log probability")
+    ax.set_ylabel("Repeated-token fraction")
+    ax.set_title("Dialogue Prompt Quality Feature Scatter")
+    ax.legend(title="Prompt family", fontsize="small")
+    ax.grid(True, alpha=0.25)
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_payload_representation_rank_count(comparison_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if comparison_frame.empty or "rank_count" not in comparison_frame:
+        return _save_placeholder(
+            output_path,
+            "Payload Representation Rank Count",
+            "No payload granularity comparison rows were available.",
+        )
+    frame = comparison_frame.copy()
+    frame["label"] = frame["representation_name"].astype(str)
+    if "alphabet_size" in frame:
+        frame["label"] = frame.apply(
+            lambda row: (
+                "{} B={}".format(row["representation_name"], int(row["alphabet_size"]))
+                if row.get("alphabet_size") == row.get("alphabet_size")
+                else str(row["representation_name"])
+            ),
+            axis=1,
+        )
+    pivot = frame.pivot_table(
+        index="payload_name",
+        columns="label",
+        values="rank_count",
+        aggfunc="first",
+    )
+    fig, ax = plt.subplots(figsize=(11, 5))
+    pivot.plot(kind="bar", ax=ax)
+    ax.set_ylabel("Rank count")
+    ax.set_xlabel("Payload")
+    ax.set_title("Payload Representation Rank Count")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=20, ha="right")
+    ax.legend(title="Representation", fontsize="small")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
