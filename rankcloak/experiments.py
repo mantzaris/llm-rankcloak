@@ -62,6 +62,7 @@ from .schemas import (
     COVER_TEXT_FEATURE_COLUMNS,
     STEGOTEXT_RECOVERY_COLUMNS,
 )
+from .segmented_protocol import run_segmented_protocol_pilot
 from .synthetic_payloads import SyntheticPayload, generate_synthetic_payloads
 from .tokenization_audit import audit_payload_tokenization
 
@@ -187,6 +188,19 @@ PROFILE_CONFIGS = {
         "requires_stegotext": False,
         "baseline_token_cap": 0,
         "write_payload_granularity": True,
+    },
+    "segmented-protocol-pilot": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_segmented_protocol_pilot",
+        "payload_names": [
+            "sha256_public_test_string",
+            "random_128_bit_hex",
+        ],
+        "cover_prompt_names": [],
+        "alphabet_sizes": [16],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": False,
+        "baseline_token_cap": 0,
+        "write_segmented_protocol": True,
     },
 }
 
@@ -888,6 +902,27 @@ def run_experiment(args: argparse.Namespace) -> dict:
     model_repo_id, model_filename = resolve_model_identity(model_path)
     model_path_relative = repo_relative_path(model_path, PROJECT_ROOT)
     model_loaded = model is not None
+
+    if config.get("write_segmented_protocol"):
+        summary = run_segmented_protocol_pilot(
+            output_dir=output_dir,
+            project_root=PROJECT_ROOT,
+            model=model,
+            model_path=model_path,
+            model_repo_id=model_repo_id,
+            model_filename=model_filename,
+            model_path_relative=model_path_relative,
+            payloads=experiment_payloads,
+            cover_prompts=cover_prompts,
+            command_line_args=sys.argv[1:],
+            model_loaded=model_loaded,
+            model_status=model_status,
+            model_error=model_error,
+            payload_text_limit=payload_byte_limit,
+        )
+        print(json.dumps(summary, indent=2))
+        return summary
+
     prompt_metadata = build_prompt_metadata(cover_prompts, cover_prompt_names, model)
 
     audit_payloads = all_payloads

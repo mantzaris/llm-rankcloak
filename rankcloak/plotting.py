@@ -463,3 +463,180 @@ def plot_payload_representation_rank_count(comparison_frame: Any, output_path: P
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
     return output_path
+
+
+def plot_segmented_condition_mean_logprob(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if trial_frame.empty or "mean_token_log_probability" not in trial_frame:
+        return _save_placeholder(
+            output_path,
+            "Segmented Condition Mean Log Probability",
+            "No segmented protocol trial rows were available.",
+        )
+    frame = trial_frame.dropna(subset=["mean_token_log_probability"]).copy()
+    if frame.empty:
+        return _save_placeholder(
+            output_path,
+            "Segmented Condition Mean Log Probability",
+            "No token log probability values were available.",
+        )
+    grouped = frame.groupby("condition_name", as_index=False)["mean_token_log_probability"].mean()
+    fig, ax = plt.subplots(figsize=(11, 5))
+    ax.bar(grouped["condition_name"], grouped["mean_token_log_probability"], color="#2b6f73")
+    ax.set_ylabel("Mean token log probability")
+    ax.set_xlabel("Condition")
+    ax.set_title("Segmented Protocol Mean Token Log Probability")
+    ax.set_xticklabels(grouped["condition_name"], rotation=35, ha="right")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_segmented_condition_repetition(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if trial_frame.empty or "repeated_token_fraction_mean" not in trial_frame:
+        return _save_placeholder(
+            output_path,
+            "Segmented Condition Repetition",
+            "No repeated-token summary rows were available.",
+        )
+    frame = trial_frame.dropna(subset=["repeated_token_fraction_mean"]).copy()
+    if frame.empty:
+        return _save_placeholder(
+            output_path,
+            "Segmented Condition Repetition",
+            "No repeated-token values were available.",
+        )
+    grouped = frame.groupby("condition_name", as_index=False)["repeated_token_fraction_mean"].mean()
+    fig, ax = plt.subplots(figsize=(11, 5))
+    ax.bar(grouped["condition_name"], grouped["repeated_token_fraction_mean"], color="#8a5a28")
+    ax.set_ylabel("Mean repeated-token fraction")
+    ax.set_xlabel("Condition")
+    ax.set_title("Segmented Protocol Repetition By Condition")
+    ax.set_xticklabels(grouped["condition_name"], rotation=35, ha="right")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_segmented_condition_length(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if trial_frame.empty or "total_generated_token_count" not in trial_frame:
+        return _save_placeholder(
+            output_path,
+            "Segmented Condition Length",
+            "No generated length rows were available.",
+        )
+    grouped = trial_frame.groupby("condition_name", as_index=False)["total_generated_token_count"].mean()
+    fig, ax = plt.subplots(figsize=(11, 5))
+    ax.bar(grouped["condition_name"], grouped["total_generated_token_count"], color="#304c89")
+    ax.set_ylabel("Mean generated token count")
+    ax.set_xlabel("Condition")
+    ax.set_title("Segmented Protocol Generated Length")
+    ax.set_xticklabels(grouped["condition_name"], rotation=35, ha="right")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_segmented_recovery_by_condition(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if trial_frame.empty or "exact_recovery" not in trial_frame:
+        return _save_placeholder(
+            output_path,
+            "Segmented Recovery By Condition",
+            "No recovery rows were available.",
+        )
+    grouped = trial_frame.groupby("condition_name", as_index=False)["exact_recovery"].mean()
+    fig, ax = plt.subplots(figsize=(11, 5))
+    ax.bar(grouped["condition_name"], grouped["exact_recovery"], color="#52796f")
+    ax.set_ylim(0, 1.05)
+    ax.set_ylabel("Exact recovery rate")
+    ax.set_xlabel("Condition")
+    ax.set_title("Segmented Protocol Recovery By Condition")
+    ax.set_xticklabels(grouped["condition_name"], rotation=35, ha="right")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_segmented_single_vs_multi_topic(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    required = {"condition_name", "mean_token_log_probability", "repeated_token_fraction_mean"}
+    if trial_frame.empty or not required.issubset(set(trial_frame.columns)):
+        return _save_placeholder(
+            output_path,
+            "Segmented Single Vs Multi Topic",
+            "No comparable segmented protocol rows were available.",
+        )
+    frame = trial_frame.copy()
+    frame["condition_group"] = frame["condition_name"].map(
+        lambda name: (
+            "single_long"
+            if str(name).startswith("single_long")
+            else "segmented_multi_topic"
+            if "multi_topic" in str(name)
+            else "segmented_single_topic"
+        )
+    )
+    grouped = frame.groupby("condition_group", as_index=False)[
+        ["mean_token_log_probability", "repeated_token_fraction_mean"]
+    ].mean()
+    fig, ax_left = plt.subplots(figsize=(9, 5))
+    positions = list(range(len(grouped)))
+    ax_left.bar(
+        [position - 0.18 for position in positions],
+        grouped["mean_token_log_probability"],
+        width=0.36,
+        color="#2b6f73",
+        label="mean logprob",
+    )
+    ax_right = ax_left.twinx()
+    ax_right.bar(
+        [position + 0.18 for position in positions],
+        grouped["repeated_token_fraction_mean"],
+        width=0.36,
+        color="#8a5a28",
+        label="repetition",
+    )
+    ax_left.set_xticks(positions)
+    ax_left.set_xticklabels(grouped["condition_group"], rotation=20, ha="right")
+    ax_left.set_ylabel("Mean token log probability")
+    ax_right.set_ylabel("Mean repeated-token fraction")
+    ax_left.set_title("Single Long Vs Segmented Topic Schedules")
+    left_handles, left_labels = ax_left.get_legend_handles_labels()
+    right_handles, right_labels = ax_right.get_legend_handles_labels()
+    ax_left.legend(left_handles + right_handles, left_labels + right_labels, loc="best")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path

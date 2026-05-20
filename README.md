@@ -59,6 +59,7 @@ python3 scripts/run_experiment.py --profile smoke --overwrite
 python3 scripts/run_experiment.py --profile small --overwrite
 python3 scripts/run_experiment.py --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
 python3 scripts/run_experiment.py --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
+python3 scripts/run_experiment.py --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -71,6 +72,7 @@ rankcloak run --profile smoke --overwrite
 rankcloak run --profile small --overwrite
 rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
 rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
+rankcloak run --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 rankcloak run --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 rankcloak run --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -82,6 +84,7 @@ Profiles:
 - `small`: full selected payloads, four cover prompts, alphabets 8, 16, 32, and 64. This can be CPU-expensive.
 - `dialogue-key-pilot`: a narrow comparison of monologue, dialogue, and forum-exchange key prompts at B=8 and B=16.
 - `payload-granularity-pilot`: compares payload-side representations without changing the cover model/tokenizer.
+- `segmented-protocol-pilot`: tests a compact control code and short multi-cover response segments with forced-prefix-only decoding.
 - `strong-prompts-pilot`: a faster comparison between short and long specific prompts.
 - `strong-prompts`: a stronger prompt sweep over recipe, biology, car-buying, and comparison prompts.
 - `audit-only`: tokenization audit and direct subword rank statistics when the model is available.
@@ -134,6 +137,36 @@ Do not change the cover-side tokenizer without changing the model; cover-side ra
 python3 scripts/run_experiment.py \
   --profile payload-granularity-pilot \
   --output-dir results/rankcloak_payload_granularity_pilot \
+  --overwrite
+```
+
+## Two-Stage Segmented Multi-Cover RankCloak
+
+This pilot tests whether breaking a synthetic response payload into several short cover messages reduces cover-text drift compared with one long forced-rank message. User A and User B are assumed to already share `K_common`: the exact model file, tokenizer, quantization, deterministic rank ordering, payload codec, prompt templates, compact control prompt, segment-size rule, topic schedule rule, and forced-prefix decode rule.
+
+The simulated flow is:
+
+- User A hides a compact synthetic control code such as `C1`.
+- User B decodes `C1` and maps it to a pre-agreed local response configuration.
+- User B encodes a deterministic synthetic hex payload with `raw_hex_nibbles`.
+- User B splits the rank sequence into short chunks and sends multiple cover messages.
+- User A decodes only the known forced prefix of each message and ignores the natural greedy tail.
+
+This is not encryption, key exchange, authentication, signing, or cryptographic security. The control code is not a secret or operational command; it is a compact codebook label for the research simulation.
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile segmented-protocol-pilot \
+  --output-dir results/rankcloak_segmented_protocol_pilot \
+  --overwrite
+```
+
+Equivalent CLI form:
+
+```bash
+rankcloak run \
+  --profile segmented-protocol-pilot \
+  --output-dir results/rankcloak_segmented_protocol_pilot \
   --overwrite
 ```
 

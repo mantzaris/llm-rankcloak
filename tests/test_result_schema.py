@@ -2,6 +2,7 @@ from rankcloak.rank_codec import codec_roundtrip_rows
 from rankcloak.schemas import (
     CODEC_ROUNDTRIP_COLUMNS,
     COVER_TEXT_FEATURE_COLUMNS,
+    SEGMENTED_PROTOCOL_TRIAL_COLUMNS,
     STEGOTEXT_RECOVERY_COLUMNS,
 )
 from rankcloak.synthetic_payloads import generate_synthetic_payloads
@@ -60,6 +61,32 @@ def test_feature_schema_has_rankcloak_and_baseline_context_columns():
         "character_count",
     ]:
         assert column in COVER_TEXT_FEATURE_COLUMNS
+
+
+def test_segmented_protocol_schema_has_required_columns():
+    for column in [
+        "trial_id",
+        "payload_name",
+        "payload_kind",
+        "payload_codec_name",
+        "condition_name",
+        "segment_size",
+        "segment_count",
+        "message_count",
+        "topic_schedule_name",
+        "natural_tail_tokens_per_message",
+        "total_forced_rank_count",
+        "total_generated_token_count",
+        "exact_recovery",
+        "mean_token_log_probability",
+        "mean_generated_rank",
+        "p95_generated_rank",
+        "model_repo_id",
+        "model_filename",
+        "model_path_relative",
+        "notes",
+    ]:
+        assert column in SEGMENTED_PROTOCOL_TRIAL_COLUMNS
 
 
 def test_codec_roundtrip_rows_match_schema_and_pass():

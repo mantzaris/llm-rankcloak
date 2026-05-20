@@ -22,6 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
             "smoke",
             "dialogue-key-pilot",
             "payload-granularity-pilot",
+            "segmented-protocol-pilot",
             "strong-prompts",
             "strong-prompts-pilot",
         ],

@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-05-20T03:32:40.611551+00:00",
+  "profile": "segmented-protocol-pilot",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_loaded": true,
+  "control_request_exact_recovery": true,
+  "response_trial_count": 10,
+  "response_recovery_pass_count": 10,
+  "response_recovery_fail_count": 0,
+  "payloads": [
+    "sha256_public_test_string",
+    "random_128_bit_hex"
+  ],
+  "conditions": [
+    "single_long_recipe_no_tail",
+    "single_long_recipe_tail40",
+    "segmented_single_topic_no_tail",
+    "segmented_single_topic_tail40",
+    "segmented_multi_topic_tail40"
+  ],
+  "segment_size": 8,
+  "natural_tail_settings": [
+    0,
+    40
+  ],
+  "generated_result_files": [
+    "results/rankcloak_segmented_protocol_pilot/control_request_trial.jsonl",
+    "results/rankcloak_segmented_protocol_pilot/segmented_protocol_trials.csv",
+    "results/rankcloak_segmented_protocol_pilot/segmented_protocol_messages.jsonl",
+    "results/rankcloak_segmented_protocol_pilot/SEGMENTED_PROTOCOL_COMPARISON.md",
+    "results/rankcloak_segmented_protocol_pilot/cover_text_features.csv",
+    "results/rankcloak_segmented_protocol_pilot/MANIFEST.json",
+    "results/rankcloak_segmented_protocol_pilot/figures/segmented_condition_mean_logprob.png",
+    "results/rankcloak_segmented_protocol_pilot/figures/segmented_condition_repetition.png",
+    "results/rankcloak_segmented_protocol_pilot/figures/segmented_condition_length.png",
+    "results/rankcloak_segmented_protocol_pilot/figures/segmented_recovery_by_condition.png",
+    "results/rankcloak_segmented_protocol_pilot/figures/segmented_single_vs_multi_topic.png",
+    "results/rankcloak_segmented_protocol_pilot/summary.json",
+    "results/rankcloak_segmented_protocol_pilot/SUMMARY.md"
+  ],
+  "important_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Control code C1 is a compact synthetic codebook entry, not a key exchange.",
+    "Decoder recovers only forced prefixes and ignores natural greedy tails.",
+    "Model status: loaded",
+    "Model loaded or was not required."
+  ]
+}
