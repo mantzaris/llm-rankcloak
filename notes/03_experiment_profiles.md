@@ -259,6 +259,12 @@ Conditions:
 - `segmented_single_topic_sentence_tail_filtered`
 - `segmented_multi_topic_sentence_tail_filtered`
 
+## See Also For Paper Production
+
+- `notes/09_methodology_inventory.md` maps each profile to methodology, code locations, result directories, and paper role.
+- `notes/10_results_index.md` indexes the current output artifacts for each profile.
+- `notes/13_paper_figures_tables_plan.md` maps profiles to candidate paper figures and tables.
+
 Default output: `results/rankcloak_segmented_quality_controls/`.
 
 Command:

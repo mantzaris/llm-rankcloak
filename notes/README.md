@@ -12,6 +12,12 @@ This directory documents the current RankCloak repository state, implemented cod
 - `06_next_steps.md`: paper-readiness gaps and recommended next experiments.
 - `07_segmented_protocol_pilot.md`: two-stage segmented multi-cover protocol design and pilot results.
 - `08_segmented_quality_controls.md`: quality-control follow-up for forced-prefix metrics, sentence tails, control tails, and token filtering.
+- `09_methodology_inventory.md`: paper-oriented inventory of implemented methods, assumptions, code locations, result directories, and unsupported claims.
+- `10_results_index.md`: result-directory map with recovery summaries, key artifacts, figures, paper use, and caveats.
+- `11_paper_methods_draft.md`: reusable methods-section draft covering payloads, codecs, rank ordering, prompts, segmented protocol, metrics, and limitations.
+- `12_results_for_paper_draft.md`: result-oriented draft summarizing current pilot evidence with citations to result files.
+- `13_paper_figures_tables_plan.md`: proposed paper figures and tables with source files, needed columns, current status, and interpretation notes.
+- `14_submission_readiness_checklist.md`: practical checklist for methodology, results, reproducibility, statistics, detection, data, code, and responsible-use readiness.
 
 ## Current Status
 
@@ -26,3 +32,14 @@ The latest completed pilots are:
 - `results/rankcloak_segmented_quality_controls/`: segmented quality-controls pilot output.
 
 All payloads are deterministic synthetic examples. This project studies exact-copy concealment behavior; it is not encryption, key exchange, authentication, or credential handling.
+
+## Paper Production Notes
+
+For paper drafting, start with:
+
+- `09_methodology_inventory.md` for method inventory and code/result mapping.
+- `10_results_index.md` for artifact locations and result-directory meanings.
+- `11_paper_methods_draft.md` for manuscript Methods text.
+- `12_results_for_paper_draft.md` for current Results text and caveats.
+- `13_paper_figures_tables_plan.md` for figure and table planning.
+- `14_submission_readiness_checklist.md` for what remains before journal submission.

@@ -201,3 +201,9 @@ The current evidence supports this working conclusion:
 - Bounded-rank coding keeps cover generation within a controlled rank band.
 - B=8 and B=16 are the current practical range for plausibility.
 - Better prompts help topical coherence, but rank pressure remains the main source of visible artifacts.
+
+## See Also For Paper Production
+
+- `notes/10_results_index.md` provides a directory-by-directory artifact index for every current result directory.
+- `notes/12_results_for_paper_draft.md` rewrites the current pilot evidence in a result-section style with source-file citations.
+- `notes/13_paper_figures_tables_plan.md` identifies which current artifacts can support candidate paper figures and tables.
