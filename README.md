@@ -61,6 +61,8 @@ python3 scripts/run_experiment.py --profile dialogue-key-pilot --output-dir resu
 python3 scripts/run_experiment.py --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 python3 scripts/run_experiment.py --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 python3 scripts/run_experiment.py --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
+python3 scripts/run_experiment.py --profile paper-main-pilot --output-dir results/rankcloak_paper_main_pilot --overwrite
+python3 scripts/run_experiment.py --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -75,6 +77,8 @@ rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialog
 rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 rankcloak run --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 rankcloak run --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
+rankcloak run --profile paper-main-pilot --output-dir results/rankcloak_paper_main_pilot --overwrite
+rankcloak run --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
 rankcloak run --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 rankcloak run --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -88,6 +92,9 @@ Profiles:
 - `payload-granularity-pilot`: compares payload-side representations without changing the cover model/tokenizer.
 - `segmented-protocol-pilot`: tests a compact control code and short multi-cover response segments with forced-prefix-only decoding.
 - `segmented-quality-controls`: separates forced-prefix and full-message metrics while testing sentence tails and a deterministic safe-text token filter.
+- `paper-main-pilot`: runs the smaller paper-oriented result matrix and writes paper-ready CSV, JSONL, Markdown, and PNG artifacts.
+- `paper-main`: runs the larger frozen paper-oriented result matrix when CPU time is available.
+- `paper-analysis`: aggregates existing pilot and paper result directories without model generation.
 - `strong-prompts-pilot`: a faster comparison between short and long specific prompts.
 - `strong-prompts`: a stronger prompt sweep over recipe, biology, car-buying, and comparison prompts.
 - `audit-only`: tokenization audit and direct subword rank statistics when the model is available.
@@ -194,6 +201,56 @@ rankcloak run \
   --output-dir results/rankcloak_segmented_quality_controls \
   --overwrite
 ```
+
+## Paper Main Results Suite
+
+The paper-main suite is the locked, paper-oriented result framework. It compares the
+implemented payload representations and protocol variants without broad method search:
+direct subword rank pressure, non-segmented ASCII fixed-radix B=8 and B=16,
+non-segmented hex-nibble B=16, segmented hex-nibble variants, sentence-boundary tails,
+safe-text filtering, and an experimental lead-in segmented variant.
+
+Run the pilot first:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-main-pilot \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --overwrite
+```
+
+Run aggregation without new generation:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-analysis \
+  --output-dir results/rankcloak_paper_analysis \
+  --overwrite
+```
+
+Run the full matrix when CPU time is available:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-main \
+  --output-dir results/rankcloak_paper_main \
+  --overwrite
+```
+
+Equivalent CLI form:
+
+```bash
+rankcloak run --profile paper-main-pilot --output-dir results/rankcloak_paper_main_pilot --overwrite
+rankcloak run --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
+rankcloak run --profile paper-main --output-dir results/rankcloak_paper_main --overwrite
+```
+
+The paper profiles write `paper_payloads.csv`, `paper_rank_pressure.csv`,
+`paper_codec_comparison.csv`, `paper_stegotext_trials.csv`,
+`paper_segmented_trials.csv`, `paper_cover_text_features.csv`,
+`detector_dataset.csv`, `detector_baseline.csv`, `statistical_summary.csv`,
+`effect_size_summary.csv`, paper Markdown summaries, reproducibility manifests, and
+paper figures.
 
 ## Notebook
 

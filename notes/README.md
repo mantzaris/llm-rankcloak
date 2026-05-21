@@ -18,6 +18,10 @@ This directory documents the current RankCloak repository state, implemented cod
 - `12_results_for_paper_draft.md`: result-oriented draft summarizing current pilot evidence with citations to result files.
 - `13_paper_figures_tables_plan.md`: proposed paper figures and tables with source files, needed columns, current status, and interpretation notes.
 - `14_submission_readiness_checklist.md`: practical checklist for methodology, results, reproducibility, statistics, detection, data, code, and responsible-use readiness.
+- `15_paper_main_experiment_plan.md`: locked paper-main suite design, payload matrix, protocol variants, outputs, and commands.
+- `16_paper_main_results_summary.md`: placeholder and index for paper-main pilot, full paper-main, and paper-analysis outputs.
+- `17_detector_baseline_plan.md`: lightweight feature-only detector baseline design and caveats.
+- `18_statistical_analysis_plan.md`: deterministic bootstrap and effect-size analysis plan.
 
 ## Current Status
 
@@ -43,3 +47,4 @@ For paper drafting, start with:
 - `12_results_for_paper_draft.md` for current Results text and caveats.
 - `13_paper_figures_tables_plan.md` for figure and table planning.
 - `14_submission_readiness_checklist.md` for what remains before journal submission.
+- `15_paper_main_experiment_plan.md` through `18_statistical_analysis_plan.md` for the paper-main results suite.

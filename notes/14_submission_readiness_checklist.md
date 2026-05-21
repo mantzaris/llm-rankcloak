@@ -1,6 +1,7 @@
 # Submission Readiness Checklist
 
-This checklist is for moving RankCloak from pilot repository to journal submission package.
+This checklist is for moving RankCloak from pilot repository to journal submission
+package.
 
 ## Methodology Readiness
 
@@ -13,6 +14,8 @@ This checklist is for moving RankCloak from pilot repository to journal submissi
 - [x] Forced-prefix-only segmented decoding is implemented.
 - [x] Sentence-boundary tail policy is implemented.
 - [x] Deterministic safe-text token filter is implemented.
+- [x] Paper-main pilot and full paper-main profiles are implemented in the runner.
+- [x] Paper-analysis aggregation profile is implemented.
 - [ ] Distribution-matched rank coding is not yet implemented.
 - [ ] Cross-model method comparison is not yet implemented.
 - [ ] Edit robustness protocol is not yet implemented.
@@ -26,6 +29,8 @@ This checklist is for moving RankCloak from pilot repository to journal submissi
 - [x] Payload granularity pilot results are present.
 - [x] Segmented protocol pilot results are present.
 - [x] Segmented quality-controls results are present.
+- [x] Paper-main result schemas are defined.
+- [x] Paper-main pilot and full output directories are defined.
 - [ ] Paper-main repeated runs are not yet defined.
 - [ ] Statistical confidence intervals are not yet computed.
 - [ ] Human or LLM plausibility ratings are not yet collected.
@@ -47,6 +52,8 @@ This checklist is for moving RankCloak from pilot repository to journal submissi
 - [x] Pilot tables record exact recovery.
 - [x] Pilot tables record log probability, repetition, punctuation, and rank features.
 - [x] Segmented quality controls separate forced-prefix and full-message metrics.
+- [x] Deterministic bootstrap helpers are implemented for the paper-main suite.
+- [x] Effect-size summary output is implemented for the paper-main suite.
 - [ ] Statistical tests are not yet selected.
 - [ ] Multiple-comparison plan is not yet written.
 - [ ] Sample sizes for paper-main experiments are not yet justified.
@@ -56,8 +63,10 @@ This checklist is for moving RankCloak from pilot repository to journal submissi
 
 - [x] Lightweight feature extraction exists.
 - [x] Baseline cover generation exists for non-segmented profiles.
-- [ ] Detector AUC is not implemented.
-- [ ] Train/test split protocol is not implemented.
+- [x] Lightweight detector dataset creation is implemented.
+- [x] Dependency-free threshold detector baseline is implemented.
+- [x] Optional scikit-learn detector baselines are attempted when installed.
+- [x] Train/test split protocol is implemented for the lightweight baseline.
 - [ ] Cross-prompt and cross-payload generalization tests are not implemented.
 - [ ] Human or LLM detector comparison is not implemented.
 
@@ -102,9 +111,9 @@ This checklist is for moving RankCloak from pilot repository to journal submissi
 
 ## What Must Be Added Before Scientific Reports Submission
 
-- [ ] Paper-main experiment matrix with justified sample size.
-- [ ] Detector or steganalysis baseline, or a clear explanation that detector evaluation is out of scope.
-- [ ] Statistical analysis plan and confidence intervals.
+- [x] Paper-main experiment matrix has an implemented pilot and full profile.
+- [x] Lightweight detector baseline has been implemented.
+- [x] Statistical analysis plan and bootstrap implementation have been added.
 - [ ] Model comparison or strong rationale for single-model scope.
 - [ ] Robustness tests or explicit limitation that results only apply to exact-copy channels.
 - [ ] Final figure generation scripts or notebooks.

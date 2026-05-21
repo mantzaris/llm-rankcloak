@@ -1,0 +1,45 @@
+payload_name,representation_name,alphabet_size,artifact_text_character_length,artifact_text_byte_length,artifact_bit_length_if_known,rank_count,max_possible_rank,bits_per_rank_estimate,notes,result_directory,payload_class,applies_to_payload,exact_codec_roundtrip
+sha256_public_test_string,ascii_bytes_fixed_radix,8.0,64.0,64.0,256.0,171.0,8,3.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks,results/rankcloak_payload_granularity_pilot,,,
+sha256_public_test_string,ascii_bytes_fixed_radix,16.0,64.0,64.0,256.0,128.0,16,4.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks,results/rankcloak_payload_granularity_pilot,,,
+sha256_public_test_string,raw_hex_nibbles,16.0,64.0,64.0,256.0,64.0,16,4.0,one hex character per rank; exact roundtrip True,results/rankcloak_payload_granularity_pilot,,,
+sha256_public_test_string,raw_subword_direct,,64.0,64.0,256.0,37.0,1986,,direct model-token payload baseline; not bounded-rank cover generation,results/rankcloak_payload_granularity_pilot,,,
+random_128_bit_hex,ascii_bytes_fixed_radix,8.0,32.0,32.0,128.0,86.0,8,3.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks,results/rankcloak_payload_granularity_pilot,,,
+random_128_bit_hex,ascii_bytes_fixed_radix,16.0,32.0,32.0,128.0,64.0,16,4.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks,results/rankcloak_payload_granularity_pilot,,,
+random_128_bit_hex,raw_hex_nibbles,16.0,32.0,32.0,128.0,32.0,16,4.0,one hex character per rank; exact roundtrip True,results/rankcloak_payload_granularity_pilot,,,
+random_128_bit_hex,raw_subword_direct,,32.0,32.0,128.0,18.0,5216,,direct model-token payload baseline; not bounded-rank cover generation,results/rankcloak_payload_granularity_pilot,,,
+paper_sha256_hex_000,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,sha256_hex,True,True
+paper_sha256_hex_000,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,sha256_hex,True,True
+paper_sha256_hex_000,raw_hex_nibbles,16.0,,,,64.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,sha256_hex,True,True
+paper_sha256_hex_001,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,sha256_hex,True,True
+paper_sha256_hex_001,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,sha256_hex,True,True
+paper_sha256_hex_001,raw_hex_nibbles,16.0,,,,64.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,sha256_hex,True,True
+paper_random_128_bit_hex_000,ascii_bytes_fixed_radix,8.0,,,,86.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_128_bit_hex,True,True
+paper_random_128_bit_hex_000,ascii_bytes_fixed_radix,16.0,,,,64.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_128_bit_hex,True,True
+paper_random_128_bit_hex_000,raw_hex_nibbles,16.0,,,,32.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,random_128_bit_hex,True,True
+paper_random_128_bit_hex_001,ascii_bytes_fixed_radix,8.0,,,,86.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_128_bit_hex,True,True
+paper_random_128_bit_hex_001,ascii_bytes_fixed_radix,16.0,,,,64.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_128_bit_hex,True,True
+paper_random_128_bit_hex_001,raw_hex_nibbles,16.0,,,,32.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,random_128_bit_hex,True,True
+paper_random_256_bit_hex_000,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_256_bit_hex,True,True
+paper_random_256_bit_hex_000,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_256_bit_hex,True,True
+paper_random_256_bit_hex_000,raw_hex_nibbles,16.0,,,,64.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,random_256_bit_hex,True,True
+paper_random_256_bit_hex_001,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_256_bit_hex,True,True
+paper_random_256_bit_hex_001,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,random_256_bit_hex,True,True
+paper_random_256_bit_hex_001,raw_hex_nibbles,16.0,,,,64.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,random_256_bit_hex,True,True
+paper_nonce_96_bit_hex_000,ascii_bytes_fixed_radix,8.0,,,,64.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,nonce_96_bit_hex,True,True
+paper_nonce_96_bit_hex_000,ascii_bytes_fixed_radix,16.0,,,,48.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,nonce_96_bit_hex,True,True
+paper_nonce_96_bit_hex_000,raw_hex_nibbles,16.0,,,,24.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,nonce_96_bit_hex,True,True
+paper_nonce_96_bit_hex_001,ascii_bytes_fixed_radix,8.0,,,,64.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,nonce_96_bit_hex,True,True
+paper_nonce_96_bit_hex_001,ascii_bytes_fixed_radix,16.0,,,,48.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,nonce_96_bit_hex,True,True
+paper_nonce_96_bit_hex_001,raw_hex_nibbles,16.0,,,,24.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,nonce_96_bit_hex,True,True
+paper_uuid_v4_like_000,ascii_bytes_fixed_radix,8.0,,,,96.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,uuid_v4_like,True,True
+paper_uuid_v4_like_000,ascii_bytes_fixed_radix,16.0,,,,72.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,uuid_v4_like,True,True
+paper_uuid_v4_like_000,raw_hex_nibbles,16.0,,,,,16,4.0,not applicable because payload text is not lowercase hex,results/rankcloak_paper_main_pilot,uuid_v4_like,False,
+paper_uuid_v4_like_001,ascii_bytes_fixed_radix,8.0,,,,96.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,uuid_v4_like,True,True
+paper_uuid_v4_like_001,ascii_bytes_fixed_radix,16.0,,,,72.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,uuid_v4_like,True,True
+paper_uuid_v4_like_001,raw_hex_nibbles,16.0,,,,,16,4.0,not applicable because payload text is not lowercase hex,results/rankcloak_paper_main_pilot,uuid_v4_like,False,
+paper_ciphertext_like_base64_000,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,ciphertext_like_base64,True,True
+paper_ciphertext_like_base64_000,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,ciphertext_like_base64,True,True
+paper_ciphertext_like_base64_000,raw_hex_nibbles,16.0,,,,,16,4.0,not applicable because payload text is not lowercase hex,results/rankcloak_paper_main_pilot,ciphertext_like_base64,False,
+paper_ciphertext_like_base64_001,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,ciphertext_like_base64,True,True
+paper_ciphertext_like_base64_001,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,ciphertext_like_base64,True,True
+paper_ciphertext_like_base64_001,raw_hex_nibbles,16.0,,,,,16,4.0,not applicable because payload text is not lowercase hex,results/rankcloak_paper_main_pilot,ciphertext_like_base64,False,

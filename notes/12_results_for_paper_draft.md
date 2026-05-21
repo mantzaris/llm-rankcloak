@@ -1,10 +1,12 @@
 # Results For Paper Draft
 
-This note summarizes current evidence for later use in a Results section. The current artifacts are pilots and should not be presented as final paper-main results.
+This note summarizes current evidence for later use in a Results section. The current
+artifacts are pilots and should not be presented as final paper-main results.
 
 ## Current Recovery Evidence
 
-All completed model-backed stegotext pilots currently record exact recovery under exact-copy conditions.
+All completed model-backed stegotext pilots currently record exact recovery under
+exact-copy conditions.
 
 Source artifacts:
 
@@ -16,11 +18,13 @@ Source artifacts:
 - `results/rankcloak_segmented_protocol_pilot/summary.json`: control request exact recovery true, 10/10 response recovery.
 - `results/rankcloak_segmented_quality_controls/summary.json`: 5/5 control recovery, 10/10 response recovery.
 
-Interpretation: exact recovery is reliable in the current controlled local setting. This should be stated with the exact-copy, shared-configuration condition attached.
+Interpretation: exact recovery is reliable in the current controlled local setting. This
+should be stated with the exact-copy, shared-configuration condition attached.
 
 ## Direct Subword Rank-Pressure Evidence
 
-Direct subword encoding uses fewer ranks but can create high rank pressure for high-entropy payloads.
+Direct subword encoding uses fewer ranks but can create high rank pressure for
+high-entropy payloads.
 
 Source artifact: `results/rankcloak_small_full/rank_statistics.csv`.
 
@@ -33,11 +37,13 @@ Selected rows:
 | `random_256_bit_hex` | 38 | 234.6053 | 13.5 | 2966 | 1225.05 | 0.5526 |
 | `synthetic_uuid_v4_like` | 21 | 6098.7143 | 13.0 | 123618 | 2747.00 | 0.5238 |
 
-Interpretation: direct subword encoding can be compact in rank count but includes extreme ranks that are poorly suited to plausible cover generation.
+Interpretation: direct subword encoding can be compact in rank count but includes
+extreme ranks that are poorly suited to plausible cover generation.
 
 ## Bounded-Rank Codec Evidence
 
-Codec roundtrip succeeds for all current deterministic synthetic payloads and supported alphabet sizes.
+Codec roundtrip succeeds for all current deterministic synthetic payloads and supported
+alphabet sizes.
 
 Source artifacts:
 
@@ -45,15 +51,18 @@ Source artifacts:
 - `results/rankcloak_dialogue_key_pilot/codec_roundtrip_trials.csv`
 - `results/rankcloak_payload_granularity_pilot/codec_roundtrip_trials.csv`
 
-Each current summary records 63 codec passes and 0 codec failures. This covers 9 payloads across the fixed-radix sizes plus the hex-character codec row.
+Each current summary records 63 codec passes and 0 codec failures. This covers 9
+payloads across the fixed-radix sizes plus the hex-character codec row.
 
 Interpretation: byte/rank transformation correctness is not the current bottleneck.
 
 ## Payload Granularity Evidence
 
-The payload granularity pilot compares ASCII bytes, raw hex nibbles, and direct subword ranks.
+The payload granularity pilot compares ASCII bytes, raw hex nibbles, and direct subword
+ranks.
 
-Source artifact: `results/rankcloak_payload_granularity_pilot/payload_granularity_comparison.csv`.
+Source artifact:
+`results/rankcloak_payload_granularity_pilot/payload_granularity_comparison.csv`.
 
 Selected rows:
 
@@ -68,11 +77,14 @@ Selected rows:
 | `random_128_bit_hex` | `raw_hex_nibbles` | 16 | 32 | 16 | 4 |
 | `random_128_bit_hex` | `raw_subword_direct` | n/a | 18 | 5216 | n/a |
 
-Interpretation: raw hex-nibble coding halves the rank count versus ASCII-byte B=16 for hex payloads while keeping ranks bounded by 16. Direct subword encoding is shorter but has much larger observed ranks.
+Interpretation: raw hex-nibble coding halves the rank count versus ASCII-byte B=16 for
+hex payloads while keeping ranks bounded by 16. Direct subword encoding is shorter but
+has much larger observed ranks.
 
 ## Prompt Topic And Prompt Format Evidence
 
-The small full sweep suggests alphabet size has a stronger effect than prompt choice in current pilots.
+The small full sweep suggests alphabet size has a stronger effect than prompt choice in
+current pilots.
 
 Source artifacts:
 
@@ -88,7 +100,8 @@ Mean RankCloak feature summary by alphabet:
 | 32 | -5.0398 | 0.1649 | 0.0494 | 79.00 | 27.0125 |
 | 64 | -5.8190 | 0.0998 | 0.0618 | 65.75 | 54.1250 |
 
-Interpretation: lower alphabets create longer covers but lower rank pressure and better token log-probability metrics.
+Interpretation: lower alphabets create longer covers but lower rank pressure and better
+token log-probability metrics.
 
 ## Strong Prompt Sweep Findings
 
@@ -117,7 +130,8 @@ Prompt means by mean token log probability:
 | `biology_long_specific` | -4.7634 | 0.1352 | 0.0514 |
 | `recipe_blog` | -4.7925 | 0.1711 | 0.0420 |
 
-Interpretation: longer prompts helped topical scaffolding, but larger alphabets still degraded token log-probability metrics.
+Interpretation: longer prompts helped topical scaffolding, but larger alphabets still
+degraded token log-probability metrics.
 
 ## Dialogue Prompt Findings
 
@@ -138,7 +152,9 @@ The pilot records 24/24 exact recovery. Prompt means:
 | `recipe_blog` | -3.7439 | 0.2509 | 0.0296 |
 | `biology_tutor_dialogue_specific` | -3.9211 | 0.1745 | 0.1033 |
 
-Interpretation: dialogue style improved local log probability for the recipe dialogue prompt but increased repetition and punctuation artifacts. Dialogue format alone is not a complete solution.
+Interpretation: dialogue style improved local log probability for the recipe dialogue
+prompt but increased repetition and punctuation artifacts. Dialogue format alone is not
+a complete solution.
 
 ## Segmented Protocol Findings
 
@@ -160,7 +176,9 @@ Condition means:
 | `segmented_single_topic_tail40` | -1.3087 | 0.1966 | 0.0346 | 288.0 |
 | `segmented_multi_topic_tail40` | -1.2328 | 0.1667 | 0.0501 | 288.0 |
 
-Interpretation: segmentation and tails improve full-message metrics but increase message count and total generated tokens. No-tail segmented messages are often too short to be natural public messages.
+Interpretation: segmentation and tails improve full-message metrics but increase message
+count and total generated tokens. No-tail segmented messages are often too short to be
+natural public messages.
 
 ## Segmented Quality-Control Findings
 
@@ -183,13 +201,18 @@ Condition means:
 | `segmented_single_topic_sentence_tail_filtered` | `safe_text_filter_v1` | `sentence_tail_min20_max60` | 32.6250 | -4.6531 | -1.4824 | 0.1736 | 0.0000 |
 | `segmented_multi_topic_sentence_tail_filtered` | `safe_text_filter_v1` | `sentence_tail_min20_max60` | 36.1250 | -4.7132 | -1.2813 | 0.1693 | 0.0000 |
 
-Interpretation: metric separation confirms that full-message quality is much better than forced-prefix quality because tails dominate the public message. The safe-text filter eliminated tracked artifact flags in this pilot without breaking recovery.
+Interpretation: metric separation confirms that full-message quality is much better than
+forced-prefix quality because tails dominate the public message. The safe-text filter
+eliminated tracked artifact flags in this pilot without breaking recovery.
 
 ## Forced-Prefix Versus Full-Message Quality
 
-Source artifact: `results/rankcloak_segmented_quality_controls/segmented_quality_trials.csv`.
+Source artifact:
+`results/rankcloak_segmented_quality_controls/segmented_quality_trials.csv`.
 
-The forced-prefix mean log probabilities remain near -4.65 to -4.88 across conditions, while full-message mean log probabilities are near -1.28 to -1.48. This difference shows why tail-heavy metrics must not be interpreted as payload-bearing-token quality.
+The forced-prefix mean log probabilities remain near -4.65 to -4.88 across conditions,
+while full-message mean log probabilities are near -1.28 to -1.48. This difference shows
+why tail-heavy metrics must not be interpreted as payload-bearing-token quality.
 
 ## Safe-Text Filter Evidence
 
@@ -198,13 +221,19 @@ Source artifacts:
 - `results/rankcloak_segmented_quality_controls/segmented_quality_trials.csv`
 - `results/rankcloak_segmented_quality_controls/cover_text_features.csv`
 
-The filtered conditions recorded 0.0000 mean tracked artifact counts for forced prefixes and full messages in `segmented_quality_trials.csv`, compared with nonzero artifact counts in the unfiltered conditions.
+The filtered conditions recorded 0.0000 mean tracked artifact counts for forced prefixes
+and full messages in `segmented_quality_trials.csv`, compared with nonzero artifact
+counts in the unfiltered conditions.
 
-Interpretation: `safe_text_filter_v1` reduced tracked artifacts in this run. It also changes the effective rank space and should be treated as a protocol parameter, not as a general quality guarantee.
+Interpretation: `safe_text_filter_v1` reduced tracked artifacts in this run. It also
+changes the effective rank space and should be treated as a protocol parameter, not as a
+general quality guarantee.
 
 ## Current Best-Performing Condition
 
-By current segmented quality-control metrics, `segmented_multi_topic_sentence_tail_filtered` is the strongest candidate for further study because it combines:
+By current segmented quality-control metrics,
+`segmented_multi_topic_sentence_tail_filtered` is the strongest candidate for further
+study because it combines:
 
 - 10/10 exact response recovery across the quality-control profile when aggregated with the other condition rows;
 - full-message mean log probability of -1.2813;
@@ -212,7 +241,8 @@ By current segmented quality-control metrics, `segmented_multi_topic_sentence_ta
 - sentence-boundary tails;
 - deterministic safe-text filtering.
 
-This is not a final best method claim. It is the current best-looking pilot condition among the measured segmented quality-control variants.
+This is not a final best method claim. It is the current best-looking pilot condition
+among the measured segmented quality-control variants.
 
 ## Current Unresolved Issues
 

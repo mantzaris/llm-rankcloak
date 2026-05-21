@@ -1,0 +1,8 @@
+result_directory,profile,model_loaded,codec_roundtrip_pass_count,codec_roundtrip_fail_count,stegotext_recovery_pass_count,stegotext_recovery_fail_count,response_recovery_pass_count,response_recovery_fail_count,recovery_pass_count,recovery_fail_count
+results/rankcloak_small_full,small,True,63.0,0.0,64.0,0.0,,,,
+results/rankcloak_strong_prompt_sweep,strong-prompts,True,63.0,0.0,60.0,0.0,,,,
+results/rankcloak_dialogue_key_pilot,dialogue-key-pilot,True,63.0,0.0,24.0,0.0,,,,
+results/rankcloak_payload_granularity_pilot,payload-granularity-pilot,True,63.0,0.0,0.0,0.0,,,,
+results/rankcloak_segmented_protocol_pilot,segmented-protocol-pilot,True,,,,,10.0,0.0,,
+results/rankcloak_segmented_quality_controls,segmented-quality-controls,True,,,,,10.0,0.0,,
+results/rankcloak_paper_main_pilot,,,,,,,,,,

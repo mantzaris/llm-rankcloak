@@ -42,6 +42,7 @@ from .plotting import (
     plot_token_count_by_payload,
 )
 from .prompts import cover_prompt_dictionary, prompt_family
+from .paper_suite import run_paper_analysis, run_paper_suite
 from .rank_codec import (
     SUPPORTED_ALPHABET_SIZES,
     codec_roundtrip_rows,
@@ -215,6 +216,36 @@ PROFILE_CONFIGS = {
         "baseline_token_cap": 0,
         "write_segmented_quality_controls": True,
     },
+    "paper-main-pilot": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_paper_main_pilot",
+        "payload_names": [],
+        "cover_prompt_names": [],
+        "alphabet_sizes": [8, 16],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": False,
+        "baseline_token_cap": 0,
+        "write_paper_suite": True,
+    },
+    "paper-main": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_paper_main",
+        "payload_names": [],
+        "cover_prompt_names": [],
+        "alphabet_sizes": [8, 16],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": False,
+        "baseline_token_cap": 0,
+        "write_paper_suite": True,
+    },
+    "paper-analysis": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_paper_analysis",
+        "payload_names": [],
+        "cover_prompt_names": [],
+        "alphabet_sizes": [],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": False,
+        "baseline_token_cap": 0,
+        "write_paper_analysis": True,
+    },
 }
 
 
@@ -291,7 +322,7 @@ def load_model_for_profile(
     model_path: Optional[str],
     skip_model_download: bool,
 ) -> tuple:
-    if profile == "codec-only":
+    if profile in {"codec-only", "paper-analysis"}:
         return None, existing_llama3_model_path(), "not_requested", None, 0.0
 
     resolved_model_path = Path(model_path) if model_path else existing_llama3_model_path()
@@ -952,6 +983,36 @@ def run_experiment(args: argparse.Namespace) -> dict:
             model_status=model_status,
             model_error=model_error,
             payload_text_limit=payload_byte_limit,
+        )
+        print(json.dumps(summary, indent=2))
+        return summary
+
+    if config.get("write_paper_suite"):
+        summary = run_paper_suite(
+            profile=profile,
+            output_dir=output_dir,
+            project_root=PROJECT_ROOT,
+            model=model,
+            model_path=model_path,
+            model_repo_id=model_repo_id,
+            model_filename=model_filename,
+            model_path_relative=model_path_relative,
+            command_line_args=sys.argv[1:],
+            model_loaded=model_loaded,
+            model_status=model_status,
+            model_error=model_error,
+        )
+        print(json.dumps(summary, indent=2))
+        return summary
+
+    if config.get("write_paper_analysis"):
+        summary = run_paper_analysis(
+            output_dir=output_dir,
+            project_root=PROJECT_ROOT,
+            command_line_args=sys.argv[1:],
+            model_repo_id=model_repo_id,
+            model_filename=model_filename,
+            model_path=model_path,
         )
         print(json.dumps(summary, indent=2))
         return summary

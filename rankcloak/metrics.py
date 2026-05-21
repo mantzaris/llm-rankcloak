@@ -118,6 +118,11 @@ def artifact_flags(text: str) -> dict:
     contains_markdown_heading = any(
         line.lstrip().startswith("#") for line in text.splitlines()
     )
+    contains_markdown_emphasis = "**" in text or "__" in text or " *" in text or "* " in text
+    contains_separator_line = any(
+        line.strip() in {"---", "***", "___"} or line.strip().startswith("----")
+        for line in text.splitlines()
+    )
     flags = {
         "contains_backtick": contains_backtick,
         "contains_bracket_placeholder": contains_bracket_placeholder,
@@ -125,6 +130,8 @@ def artifact_flags(text: str) -> dict:
         "contains_latex_fragment": contains_latex_fragment,
         "contains_html_fragment": contains_html_fragment,
         "contains_markdown_heading": contains_markdown_heading,
+        "contains_markdown_emphasis": contains_markdown_emphasis,
+        "contains_separator_line": contains_separator_line,
     }
     flags["artifact_count_total"] = int(sum(1 for value in flags.values() if value))
     return flags
