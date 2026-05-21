@@ -640,3 +640,174 @@ def plot_segmented_single_vs_multi_topic(trial_frame: Any, output_path: Path) ->
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
     return output_path
+
+
+def plot_quality_forced_vs_full_logprob(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    required = {
+        "condition_name",
+        "forced_prefix_mean_log_probability_mean",
+        "full_message_mean_log_probability_mean",
+    }
+    if trial_frame.empty or not required.issubset(set(trial_frame.columns)):
+        return _save_placeholder(
+            output_path,
+            "Forced Prefix Vs Full Message Log Probability",
+            "No quality-control trial rows were available.",
+        )
+    grouped = trial_frame.groupby("condition_name", as_index=False)[
+        [
+            "forced_prefix_mean_log_probability_mean",
+            "full_message_mean_log_probability_mean",
+        ]
+    ].mean()
+    fig, ax = plt.subplots(figsize=(12, 5))
+    grouped.set_index("condition_name").plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean token log probability")
+    ax.set_xlabel("Condition")
+    ax.set_title("Forced Prefix Vs Full Message Log Probability")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=35, ha="right")
+    ax.legend(["forced prefix", "full message"])
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_quality_forced_vs_full_repetition(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    required = {
+        "condition_name",
+        "forced_prefix_repetition_mean",
+        "full_message_repetition_mean",
+    }
+    if trial_frame.empty or not required.issubset(set(trial_frame.columns)):
+        return _save_placeholder(
+            output_path,
+            "Forced Prefix Vs Full Message Repetition",
+            "No quality-control repetition rows were available.",
+        )
+    grouped = trial_frame.groupby("condition_name", as_index=False)[
+        ["forced_prefix_repetition_mean", "full_message_repetition_mean"]
+    ].mean()
+    fig, ax = plt.subplots(figsize=(12, 5))
+    grouped.set_index("condition_name").plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean repeated-token fraction")
+    ax.set_xlabel("Condition")
+    ax.set_title("Forced Prefix Vs Full Message Repetition")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=35, ha="right")
+    ax.legend(["forced prefix", "full message"])
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_quality_tail_policy_logprob(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if trial_frame.empty or "tail_policy" not in trial_frame:
+        return _save_placeholder(
+            output_path,
+            "Tail Policy Log Probability",
+            "No tail policy rows were available.",
+        )
+    grouped = trial_frame.groupby("tail_policy", as_index=False)[
+        [
+            "forced_prefix_mean_log_probability_mean",
+            "full_message_mean_log_probability_mean",
+        ]
+    ].mean()
+    fig, ax = plt.subplots(figsize=(8, 5))
+    grouped.set_index("tail_policy").plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean token log probability")
+    ax.set_xlabel("Tail policy")
+    ax.set_title("Tail Policy Mean Log Probability")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=20, ha="right")
+    ax.legend(["forced prefix", "full message"])
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_quality_filter_effect_logprob(trial_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if trial_frame.empty or "token_filter_name" not in trial_frame:
+        return _save_placeholder(
+            output_path,
+            "Token Filter Log Probability",
+            "No token filter rows were available.",
+        )
+    grouped = trial_frame.groupby("token_filter_name", as_index=False)[
+        [
+            "forced_prefix_mean_log_probability_mean",
+            "full_message_mean_log_probability_mean",
+        ]
+    ].mean()
+    fig, ax = plt.subplots(figsize=(8, 5))
+    grouped.set_index("token_filter_name").plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean token log probability")
+    ax.set_xlabel("Token filter")
+    ax.set_title("Token Filter Mean Log Probability")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=20, ha="right")
+    ax.legend(["forced prefix", "full message"])
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_quality_filter_effect_artifacts(feature_frame: Any, output_path: Path) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    required = {"token_filter_name", "artifact_count_total", "punctuation_fraction"}
+    if feature_frame.empty or not required.issubset(set(feature_frame.columns)):
+        return _save_placeholder(
+            output_path,
+            "Token Filter Artifact Features",
+            "No artifact feature rows were available.",
+        )
+    frame = feature_frame[feature_frame["source_type"].astype(str).str.contains("full_message")]
+    if frame.empty:
+        frame = feature_frame
+    grouped = frame.groupby("token_filter_name", as_index=False)[
+        ["artifact_count_total", "punctuation_fraction", "repeated_token_fraction"]
+    ].mean()
+    fig, ax = plt.subplots(figsize=(8, 5))
+    grouped.set_index("token_filter_name").plot(kind="bar", ax=ax)
+    ax.set_ylabel("Mean feature value")
+    ax.set_xlabel("Token filter")
+    ax.set_title("Token Filter Artifact And Repetition Features")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=20, ha="right")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    return output_path
+
+
+def plot_quality_recovery_by_condition(trial_frame: Any, output_path: Path) -> Path:
+    return plot_segmented_recovery_by_condition(trial_frame, output_path)

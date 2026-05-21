@@ -36,6 +36,14 @@ The segmented protocol profile writes:
 - `SEGMENTED_PROTOCOL_COMPARISON.md`
 - segmented protocol figures
 
+The segmented quality-controls profile writes:
+
+- `control_request_trials.jsonl`
+- `segmented_quality_trials.csv`
+- `segmented_quality_messages.jsonl`
+- `SEGMENTED_QUALITY_COMPARISON.md`
+- forced-prefix and full-message quality figures
+
 ## Profiles
 
 ### `codec-only`
@@ -234,6 +242,34 @@ python3 scripts/run_experiment.py \
   --overwrite
 ```
 
+### `segmented-quality-controls`
+
+Purpose: follow up the segmented protocol pilot with separate forced-prefix and full-message metrics, sentence-boundary tails, natural control tails, and deterministic safe-text token filtering.
+
+Payloads:
+
+- `sha256_public_test_string`
+- `random_128_bit_hex`
+
+Conditions:
+
+- `segmented_single_topic_fixed_tail40_unfiltered`
+- `segmented_single_topic_sentence_tail_unfiltered`
+- `segmented_multi_topic_sentence_tail_unfiltered`
+- `segmented_single_topic_sentence_tail_filtered`
+- `segmented_multi_topic_sentence_tail_filtered`
+
+Default output: `results/rankcloak_segmented_quality_controls/`.
+
+Command:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile segmented-quality-controls \
+  --output-dir results/rankcloak_segmented_quality_controls \
+  --overwrite
+```
+
 ## CLI Equivalents
 
 After installing the package:
@@ -245,4 +281,5 @@ rankcloak run --profile strong-prompts --output-dir results/rankcloak_strong_pro
 rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
 rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 rankcloak run --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
+rankcloak run --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
 ```

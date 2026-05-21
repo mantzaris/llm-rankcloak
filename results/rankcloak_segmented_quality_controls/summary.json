@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-05-21T17:32:53.860642+00:00",
+  "profile": "segmented-quality-controls",
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_loaded": true,
+  "control_trial_count": 5,
+  "control_recovery_pass_count": 5,
+  "control_recovery_fail_count": 0,
+  "response_trial_count": 10,
+  "response_recovery_pass_count": 10,
+  "response_recovery_fail_count": 0,
+  "payloads": [
+    "sha256_public_test_string",
+    "random_128_bit_hex"
+  ],
+  "conditions": [
+    "segmented_single_topic_fixed_tail40_unfiltered",
+    "segmented_single_topic_sentence_tail_unfiltered",
+    "segmented_multi_topic_sentence_tail_unfiltered",
+    "segmented_single_topic_sentence_tail_filtered",
+    "segmented_multi_topic_sentence_tail_filtered"
+  ],
+  "segment_size": 8,
+  "tail_policies": [
+    "fixed_tail40",
+    "sentence_tail_min20_max60"
+  ],
+  "token_filter_names": [
+    "none",
+    "safe_text_filter_v1"
+  ],
+  "generated_result_files": [
+    "results/rankcloak_segmented_quality_controls/control_request_trials.jsonl",
+    "results/rankcloak_segmented_quality_controls/segmented_quality_trials.csv",
+    "results/rankcloak_segmented_quality_controls/segmented_quality_messages.jsonl",
+    "results/rankcloak_segmented_quality_controls/cover_text_features.csv",
+    "results/rankcloak_segmented_quality_controls/SEGMENTED_QUALITY_COMPARISON.md",
+    "results/rankcloak_segmented_quality_controls/MANIFEST.json",
+    "results/rankcloak_segmented_quality_controls/figures/quality_forced_vs_full_logprob.png",
+    "results/rankcloak_segmented_quality_controls/figures/quality_forced_vs_full_repetition.png",
+    "results/rankcloak_segmented_quality_controls/figures/quality_tail_policy_logprob.png",
+    "results/rankcloak_segmented_quality_controls/figures/quality_filter_effect_logprob.png",
+    "results/rankcloak_segmented_quality_controls/figures/quality_filter_effect_artifacts.png",
+    "results/rankcloak_segmented_quality_controls/figures/quality_recovery_by_condition.png",
+    "results/rankcloak_segmented_quality_controls/summary.json",
+    "results/rankcloak_segmented_quality_controls/SUMMARY.md"
+  ],
+  "important_notes": [
+    "All payloads are deterministic synthetic examples.",
+    "Forced-prefix and full-message metrics are separated.",
+    "Control code C1 is a compact synthetic codebook label, not a key exchange.",
+    "Decoder recovers only forced prefixes and ignores natural tails.",
+    "safe_text_filter_v1 is deterministic and heuristic.",
+    "Model status: loaded",
+    "Model loaded or was not required."
+  ]
+}

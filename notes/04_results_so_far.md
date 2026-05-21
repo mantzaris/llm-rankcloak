@@ -13,6 +13,7 @@ This file summarizes the result directories currently present in `results/`. The
 | `results/rankcloak_dialogue_key_pilot/` | `dialogue-key-pilot` | yes | 2 | 6 | 8, 16 | 24 | 0 |
 | `results/rankcloak_payload_granularity_pilot/` | `payload-granularity-pilot` | yes | 2 | 0 | 8, 16 | 0 | 0 |
 | `results/rankcloak_segmented_protocol_pilot/` | `segmented-protocol-pilot` | yes | 2 | protocol-specific | 16 | 10 | 0 |
+| `results/rankcloak_segmented_quality_controls/` | `segmented-quality-controls` | yes | 2 | protocol-specific | 16 | 10 | 0 |
 
 Codec roundtrip has passed in all current summaries. The model-backed full channel has also recovered exactly in every recorded stegotext trial so far.
 

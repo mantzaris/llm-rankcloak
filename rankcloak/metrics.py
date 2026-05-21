@@ -88,6 +88,48 @@ def summarize_optional_log_probabilities(log_probabilities: Optional[Sequence[fl
     }
 
 
+def artifact_flags(text: str) -> dict:
+    """Return simple deterministic artifact flags for generated text."""
+
+    text = text or ""
+    lowered = text.lower()
+    contains_backtick = "`" in text
+    contains_bracket_placeholder = (
+        "[" in text
+        or "]" in text
+        or "[name" in lowered
+        or "[original" in lowered
+        or "[car" in lowered
+    )
+    contains_url_fragment = "http" in lowered or "www." in lowered or ".com" in lowered
+    contains_latex_fragment = (
+        "\\section" in lowered
+        or "\\frac" in lowered
+        or "{\\" in lowered
+        or "\\rm" in lowered
+    )
+    contains_html_fragment = (
+        "<" in text
+        or ">" in text
+        or "&lt" in lowered
+        or "&gt" in lowered
+        or "&amp" in lowered
+    )
+    contains_markdown_heading = any(
+        line.lstrip().startswith("#") for line in text.splitlines()
+    )
+    flags = {
+        "contains_backtick": contains_backtick,
+        "contains_bracket_placeholder": contains_bracket_placeholder,
+        "contains_url_fragment": contains_url_fragment,
+        "contains_latex_fragment": contains_latex_fragment,
+        "contains_html_fragment": contains_html_fragment,
+        "contains_markdown_heading": contains_markdown_heading,
+    }
+    flags["artifact_count_total"] = int(sum(1 for value in flags.values() if value))
+    return flags
+
+
 def extract_text_features(
     text: str,
     token_ids: Optional[Sequence[int]] = None,
@@ -132,4 +174,5 @@ def extract_text_features(
             "fraction_rank_le_64": rank_summary["fraction_generated_rank_le_64"],
         }
     )
+    row.update(artifact_flags(text))
     return row

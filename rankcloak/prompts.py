@@ -50,6 +50,21 @@ def cover_prompt_dictionary() -> Dict[str, str]:
             "smell, tomato paste color, lentil tenderness, and adjusting salt near the end. Avoid links, "
             "hashtags, code blocks, markdown lists, and exaggerated internet slang.\n"
         ),
+        "grocery_planning_note_specific": (
+            "Continue a mundane household note about planning groceries for the week. The voice is ordinary, "
+            "calm, and practical, as if someone is thinking through pantry items, vegetables, lentils, simple "
+            "meals, timing, budget, and substitutions before going to the store. Write in coherent prose "
+            "paragraphs, not a list, not markdown, not a transcript, not code, and not numbered recipe steps. "
+            "Keep the language plain and natural, with small observations about what is already on hand and "
+            "what can wait until later in the week.\n"
+        ),
+        "plant_care_note_specific": (
+            "Continue a calm everyday note about caring for houseplants around a home. The note should mention "
+            "checking soil moisture, light near a window, rotating pots, trimming dry leaves, and watching for "
+            "ordinary changes in color or growth. Keep it safe, non-technical, and observational, like a person "
+            "writing a gentle reminder for the week. Use normal prose paragraphs only; do not use lab procedures, "
+            "formulas, URLs, markdown, hashtags, code, or dramatic instructions.\n"
+        ),
         "biology_long_specific": (
             "Continue a safe educational biology explanation for undergraduate students in a natural "
             "science course. The topic is careful observation of pond water under a classroom microscope "
@@ -113,6 +128,8 @@ def prompt_family_dictionary() -> Dict[str, str]:
         "recipe_long_specific": "recipe",
         "recipe_dialogue_specific": "recipe_dialogue",
         "recipe_forum_exchange_specific": "recipe_forum_exchange",
+        "grocery_planning_note_specific": "grocery_planning",
+        "plant_care_note_specific": "plant_care",
         "biology_long_specific": "biology",
         "car_buying_long_specific": "car_buying",
         "car_buying_dialogue_specific": "car_buying_dialogue",

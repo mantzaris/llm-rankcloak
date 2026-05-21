@@ -60,6 +60,7 @@ python3 scripts/run_experiment.py --profile small --overwrite
 python3 scripts/run_experiment.py --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
 python3 scripts/run_experiment.py --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 python3 scripts/run_experiment.py --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
+python3 scripts/run_experiment.py --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -73,6 +74,7 @@ rankcloak run --profile small --overwrite
 rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialogue_key_pilot --overwrite
 rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 rankcloak run --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
+rankcloak run --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
 rankcloak run --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 rankcloak run --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
 ```
@@ -85,6 +87,7 @@ Profiles:
 - `dialogue-key-pilot`: a narrow comparison of monologue, dialogue, and forum-exchange key prompts at B=8 and B=16.
 - `payload-granularity-pilot`: compares payload-side representations without changing the cover model/tokenizer.
 - `segmented-protocol-pilot`: tests a compact control code and short multi-cover response segments with forced-prefix-only decoding.
+- `segmented-quality-controls`: separates forced-prefix and full-message metrics while testing sentence tails and a deterministic safe-text token filter.
 - `strong-prompts-pilot`: a faster comparison between short and long specific prompts.
 - `strong-prompts`: a stronger prompt sweep over recipe, biology, car-buying, and comparison prompts.
 - `audit-only`: tokenization audit and direct subword rank statistics when the model is available.
@@ -167,6 +170,28 @@ Equivalent CLI form:
 rankcloak run \
   --profile segmented-protocol-pilot \
   --output-dir results/rankcloak_segmented_protocol_pilot \
+  --overwrite
+```
+
+## Segmented Quality Controls Pilot
+
+The first segmented protocol pilot showed exact recovery and better full-message quality when greedy tails were added, but those tail-heavy metrics were dominated by non-payload tail tokens. This follow-up separates forced-prefix metrics from full-message metrics, adds sentence-boundary tails to reduce abrupt endings, adds natural tails to compact control requests, and tests a deterministic `safe_text_filter_v1` token filter intended to reduce markup-like artifacts.
+
+The profile still assumes User A and User B already share `K_common`, including the exact model, tokenizer, quantization, rank ordering, payload codec, prompt templates, token filter, tail policy, and forced-prefix decode rule. It is not encryption, key exchange, authentication, signing, or cryptographic security.
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile segmented-quality-controls \
+  --output-dir results/rankcloak_segmented_quality_controls \
+  --overwrite
+```
+
+Equivalent CLI form:
+
+```bash
+rankcloak run \
+  --profile segmented-quality-controls \
+  --output-dir results/rankcloak_segmented_quality_controls \
   --overwrite
 ```
 

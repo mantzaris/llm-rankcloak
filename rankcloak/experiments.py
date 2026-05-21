@@ -62,7 +62,7 @@ from .schemas import (
     COVER_TEXT_FEATURE_COLUMNS,
     STEGOTEXT_RECOVERY_COLUMNS,
 )
-from .segmented_protocol import run_segmented_protocol_pilot
+from .segmented_protocol import run_segmented_protocol_pilot, run_segmented_quality_controls
 from .synthetic_payloads import SyntheticPayload, generate_synthetic_payloads
 from .tokenization_audit import audit_payload_tokenization
 
@@ -201,6 +201,19 @@ PROFILE_CONFIGS = {
         "requires_stegotext": False,
         "baseline_token_cap": 0,
         "write_segmented_protocol": True,
+    },
+    "segmented-quality-controls": {
+        "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_segmented_quality_controls",
+        "payload_names": [
+            "sha256_public_test_string",
+            "random_128_bit_hex",
+        ],
+        "cover_prompt_names": [],
+        "alphabet_sizes": [16],
+        "default_max_payload_bytes": None,
+        "requires_stegotext": False,
+        "baseline_token_cap": 0,
+        "write_segmented_quality_controls": True,
     },
 }
 
@@ -905,6 +918,26 @@ def run_experiment(args: argparse.Namespace) -> dict:
 
     if config.get("write_segmented_protocol"):
         summary = run_segmented_protocol_pilot(
+            output_dir=output_dir,
+            project_root=PROJECT_ROOT,
+            model=model,
+            model_path=model_path,
+            model_repo_id=model_repo_id,
+            model_filename=model_filename,
+            model_path_relative=model_path_relative,
+            payloads=experiment_payloads,
+            cover_prompts=cover_prompts,
+            command_line_args=sys.argv[1:],
+            model_loaded=model_loaded,
+            model_status=model_status,
+            model_error=model_error,
+            payload_text_limit=payload_byte_limit,
+        )
+        print(json.dumps(summary, indent=2))
+        return summary
+
+    if config.get("write_segmented_quality_controls"):
+        summary = run_segmented_quality_controls(
             output_dir=output_dir,
             project_root=PROJECT_ROOT,
             model=model,

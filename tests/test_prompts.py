@@ -29,3 +29,17 @@ def test_prompt_families_are_registered():
     assert prompt_family("biology_long_specific") == "biology"
     assert prompt_family("car_buying_long_specific") == "car_buying"
 
+
+def test_quality_control_prompt_names_exist():
+    prompts = cover_prompt_dictionary()
+    for prompt_name in [
+        "grocery_planning_note_specific",
+        "plant_care_note_specific",
+    ]:
+        assert prompt_name in prompts
+        assert len(prompts[prompt_name]) > 250
+
+
+def test_quality_control_prompt_families_are_registered():
+    assert prompt_family("grocery_planning_note_specific") == "grocery_planning"
+    assert prompt_family("plant_care_note_specific") == "plant_care"
