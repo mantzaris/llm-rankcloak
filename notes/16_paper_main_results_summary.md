@@ -69,6 +69,8 @@ supplementary material.
 Current implementation status:
 
 - `paper-main-pilot` is implemented.
+- Staged paper profiles are implemented so the pilot can be resumed instead of rerun
+  as one large process.
 - A first `paper-main-pilot` run was started in `results/rankcloak_paper_main_pilot/`
   but was stopped during model-backed generation because it exceeded the interactive
   runtime window. The partial directory contains `paper_payloads.csv`,
@@ -79,3 +81,36 @@ Current implementation status:
 
 For actual numbers, use `summary.json`, `PAPER_RESULTS_SUMMARY.md`, and the generated
 CSV files when they exist. Do not fabricate missing values.
+
+## Staged Resume Workflow
+
+Continue the partial pilot with:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-nonseg-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+Then run:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-segmented-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+After enough generation rows exist, run:
+
+```bash
+python3 scripts/run_experiment.py --profile paper-baselines --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-detector --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
+```
+
+`RUN_PROGRESS.json` records planned trials, skipped existing rows, completed trials,
+failures, remaining trials, and the last completed stable `trial_id`.

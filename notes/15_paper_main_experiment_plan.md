@@ -15,6 +15,14 @@ credential handling, cryptographic security, or undetectability.
 - `paper-main-pilot`: small enough to run first; writes to `results/rankcloak_paper_main_pilot/`.
 - `paper-main`: frozen larger matrix for Alex to run when CPU time is available; writes to `results/rankcloak_paper_main/`.
 - `paper-analysis`: aggregation profile that reads existing result directories without model generation; writes to `results/rankcloak_paper_analysis/`.
+- `paper-smoke`: tiny staged end-to-end check that writes every expected paper artifact.
+- `paper-diagnostics`: deterministic payload, rank-pressure, and codec comparison stage.
+- `paper-nonseg-generation`: resumable non-segmented generation stage.
+- `paper-segmented-generation`: resumable segmented generation stage.
+- `paper-baselines`: greedy baseline generation stage.
+- `paper-detector`: analysis-only detector dataset and baseline stage.
+- `paper-statistics`: analysis-only bootstrap, effect-size, figures, and paper Markdown stage.
+- `paper-main-pilot-resume`: staged pilot sequence that can be resumed and batched.
 
 ## Payload Suite
 
@@ -60,6 +68,48 @@ effect sizes, manuscript-oriented Markdown summaries, and paper figures.
 
 ## Run Commands
 
+Fast staged smoke:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-smoke \
+  --output-dir results/rankcloak_paper_smoke \
+  --overwrite
+```
+
+Resume the pilot in CPU-practical batches:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-diagnostics \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume
+```
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-nonseg-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-segmented-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+```bash
+python3 scripts/run_experiment.py --profile paper-baselines --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-detector --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
+```
+
+Legacy all-in-one pilot:
+
 ```bash
 python3 scripts/run_experiment.py \
   --profile paper-main-pilot \
@@ -83,9 +133,14 @@ python3 scripts/run_experiment.py \
 
 ## Interpretation
 
-Use the pilot to validate schemas, runtime, detector plumbing, statistics, and figures.
+Use the staged pilot to validate schemas, runtime, detector plumbing, statistics, and figures.
 Use the full paper-main run for manuscript claims only after reviewing runtime and
 result quality.
+
+The staged runner writes `RUN_PROGRESS.json` after each stage and after each completed
+generation trial where practical. `--resume` and `--skip-existing` skip stable
+`trial_id` values already present in output CSV or JSONL files. `--limit-trials`
+lets long CPU runs be completed in batches without duplicating rows.
 
 ## Unsupported Claims
 

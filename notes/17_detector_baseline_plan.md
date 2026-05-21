@@ -44,6 +44,11 @@ If scikit-learn is installed, the suite also attempts:
 If scikit-learn is missing, detector output remains available through the threshold
 baseline and the summary should report that the sklearn baselines were not run.
 
+If there are not enough baseline and RankCloak feature rows, the staged
+`paper-detector` profile writes `detector_baseline.csv` with
+`status = insufficient_data` rather than failing. This keeps the paper artifact set
+complete during partial CPU runs.
+
 ## Splits
 
 The suite uses a deterministic stratified split. When enough rows are available, it also
@@ -53,3 +58,6 @@ attempts leave-one-prompt-family-out and leave-one-payload-class-out splits.
 
 Detector results are lightweight baselines. They should not be presented as conclusive
 steganalysis or as evidence of undetectability.
+
+The detector stage is analysis-only. It does not require loading the Llama model if
+`paper_cover_text_features.csv` already exists.

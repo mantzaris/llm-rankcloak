@@ -11,6 +11,7 @@ The implementation uses fixed-seed bootstrap resampling over recorded trial rows
 
 Default resamples:
 
+- `paper-smoke`: 500 resamples.
 - `paper-main-pilot`: 1000 resamples.
 - `paper-main`: 2000 resamples.
 
@@ -58,3 +59,9 @@ until the paper-main matrix and analysis plan are frozen.
 Some comparisons are not paired even when they share payloads. The current effect-size
 implementation is intentionally simple and should be reviewed before manuscript
 submission.
+
+The staged `paper-statistics` profile is analysis-only. If non-segmented or segmented
+trial rows are missing, it writes `statistical_summary.csv` and
+`effect_size_summary.csv` with `status = insufficient_data` rather than failing. This
+allows partial pilot directories to remain inspectable while generation continues in
+batches.

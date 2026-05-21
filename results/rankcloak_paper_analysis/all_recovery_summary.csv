@@ -5,4 +5,5 @@ results/rankcloak_dialogue_key_pilot,dialogue-key-pilot,True,63.0,0.0,24.0,0.0,,
 results/rankcloak_payload_granularity_pilot,payload-granularity-pilot,True,63.0,0.0,0.0,0.0,,,,
 results/rankcloak_segmented_protocol_pilot,segmented-protocol-pilot,True,,,,,10.0,0.0,,
 results/rankcloak_segmented_quality_controls,segmented-quality-controls,True,,,,,10.0,0.0,,
+results/rankcloak_paper_smoke,paper-smoke,True,,,,,,,6.0,0.0
 results/rankcloak_paper_main_pilot,,,,,,,,,,

@@ -61,3 +61,12 @@ def test_paper_analysis_schema_columns_exist():
         EFFECT_SIZE_SUMMARY_COLUMNS,
     ]:
         assert "notes" in columns
+
+
+def test_paper_analysis_status_columns_exist():
+    for columns in [
+        DETECTOR_BASELINE_COLUMNS,
+        STATISTICAL_SUMMARY_COLUMNS,
+        EFFECT_SIZE_SUMMARY_COLUMNS,
+    ]:
+        assert "status" in columns

@@ -366,6 +366,7 @@ DETECTOR_DATASET_COLUMNS = [
 ]
 
 DETECTOR_BASELINE_COLUMNS = [
+    "status",
     "split_name",
     "detector_name",
     "dataset_name",
@@ -381,6 +382,7 @@ DETECTOR_BASELINE_COLUMNS = [
 ]
 
 STATISTICAL_SUMMARY_COLUMNS = [
+    "status",
     "metric_name",
     "group_name",
     "protocol_variant",
@@ -395,6 +397,7 @@ STATISTICAL_SUMMARY_COLUMNS = [
 ]
 
 EFFECT_SIZE_SUMMARY_COLUMNS = [
+    "status",
     "comparison_name",
     "metric_name",
     "group_a",

@@ -61,6 +61,13 @@ python3 scripts/run_experiment.py --profile dialogue-key-pilot --output-dir resu
 python3 scripts/run_experiment.py --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 python3 scripts/run_experiment.py --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 python3 scripts/run_experiment.py --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
+python3 scripts/run_experiment.py --profile paper-smoke --output-dir results/rankcloak_paper_smoke --overwrite
+python3 scripts/run_experiment.py --profile paper-diagnostics --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-nonseg-generation --output-dir results/rankcloak_paper_main_pilot --resume --limit-trials 10
+python3 scripts/run_experiment.py --profile paper-segmented-generation --output-dir results/rankcloak_paper_main_pilot --resume --limit-trials 10
+python3 scripts/run_experiment.py --profile paper-baselines --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-detector --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
 python3 scripts/run_experiment.py --profile paper-main-pilot --output-dir results/rankcloak_paper_main_pilot --overwrite
 python3 scripts/run_experiment.py --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
 python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
@@ -77,6 +84,9 @@ rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialog
 rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 rankcloak run --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 rankcloak run --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
+rankcloak run --profile paper-smoke --output-dir results/rankcloak_paper_smoke --overwrite
+rankcloak run --profile paper-nonseg-generation --output-dir results/rankcloak_paper_main_pilot --resume --limit-trials 10
+rankcloak run --profile paper-segmented-generation --output-dir results/rankcloak_paper_main_pilot --resume --limit-trials 10
 rankcloak run --profile paper-main-pilot --output-dir results/rankcloak_paper_main_pilot --overwrite
 rankcloak run --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
 rankcloak run --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
@@ -92,6 +102,14 @@ Profiles:
 - `payload-granularity-pilot`: compares payload-side representations without changing the cover model/tokenizer.
 - `segmented-protocol-pilot`: tests a compact control code and short multi-cover response segments with forced-prefix-only decoding.
 - `segmented-quality-controls`: separates forced-prefix and full-message metrics while testing sentence tails and a deterministic safe-text token filter.
+- `paper-smoke`: runs the staged paper pipeline end-to-end on a tiny matrix and writes every expected paper artifact.
+- `paper-diagnostics`: writes deterministic paper payload, direct rank-pressure, and codec comparison diagnostics.
+- `paper-nonseg-generation`: appends resumable non-segmented paper trials.
+- `paper-segmented-generation`: appends resumable segmented paper trials.
+- `paper-baselines`: appends greedy baseline covers for feature and detector comparison.
+- `paper-detector`: builds feature-only detector datasets and lightweight detector baselines.
+- `paper-statistics`: writes bootstrap summaries, effect sizes, paper figures, and Markdown tables.
+- `paper-main-pilot-resume`: runs the staged pilot sequence with resume and batch controls.
 - `paper-main-pilot`: runs the smaller paper-oriented result matrix and writes paper-ready CSV, JSONL, Markdown, and PNG artifacts.
 - `paper-main`: runs the larger frozen paper-oriented result matrix when CPU time is available.
 - `paper-analysis`: aggregates existing pilot and paper result directories without model generation.
@@ -251,6 +269,65 @@ The paper profiles write `paper_payloads.csv`, `paper_rank_pressure.csv`,
 `detector_dataset.csv`, `detector_baseline.csv`, `statistical_summary.csv`,
 `effect_size_summary.csv`, paper Markdown summaries, reproducibility manifests, and
 paper figures.
+
+## Staged Paper Suite
+
+The original `paper-main-pilot` all-in-one profile is CPU-heavy because diagnostics, non-segmented generation, segmented generation, baselines, detector rows, statistics, and figures run in one process. The staged profiles make the paper suite resumable. Each generation trial has a stable `trial_id`; `--resume` or `--skip-existing` skips rows already present, and `--limit-trials` runs small batches without duplicating prior rows. Each stage writes `RUN_PROGRESS.json`, `summary.json`, and `SUMMARY.md`.
+
+End-to-end smoke:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-smoke \
+  --output-dir results/rankcloak_paper_smoke \
+  --overwrite
+```
+
+Diagnostics:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-diagnostics \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume
+```
+
+Nonseg generation in batches:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-nonseg-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+Segmented generation in batches:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-segmented-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+Baselines, detector, and statistics:
+
+```bash
+python3 scripts/run_experiment.py --profile paper-baselines --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-detector --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
+```
+
+Aggregate analysis across pilot directories:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-analysis \
+  --output-dir results/rankcloak_paper_analysis \
+  --overwrite
+```
 
 ## Notebook
 

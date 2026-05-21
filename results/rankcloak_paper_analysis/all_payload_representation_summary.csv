@@ -7,6 +7,12 @@ random_128_bit_hex,ascii_bytes_fixed_radix,8.0,32.0,32.0,128.0,86.0,8,3.0,ASCII 
 random_128_bit_hex,ascii_bytes_fixed_radix,16.0,32.0,32.0,128.0,64.0,16,4.0,ASCII artifact string bytes encoded as fixed-radix bounded ranks,results/rankcloak_payload_granularity_pilot,,,
 random_128_bit_hex,raw_hex_nibbles,16.0,32.0,32.0,128.0,32.0,16,4.0,one hex character per rank; exact roundtrip True,results/rankcloak_payload_granularity_pilot,,,
 random_128_bit_hex,raw_subword_direct,,32.0,32.0,128.0,18.0,5216,,direct model-token payload baseline; not bounded-rank cover generation,results/rankcloak_payload_granularity_pilot,,,
+paper_sha256_hex_000,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_smoke,sha256_hex,True,True
+paper_sha256_hex_000,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_smoke,sha256_hex,True,True
+paper_sha256_hex_000,raw_hex_nibbles,16.0,,,,64.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_smoke,sha256_hex,True,True
+paper_random_128_bit_hex_000,ascii_bytes_fixed_radix,8.0,,,,86.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_smoke,random_128_bit_hex,True,True
+paper_random_128_bit_hex_000,ascii_bytes_fixed_radix,16.0,,,,64.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_smoke,random_128_bit_hex,True,True
+paper_random_128_bit_hex_000,raw_hex_nibbles,16.0,,,,32.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_smoke,random_128_bit_hex,True,True
 paper_sha256_hex_000,ascii_bytes_fixed_radix,8.0,,,,171.0,8,3.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,sha256_hex,True,True
 paper_sha256_hex_000,ascii_bytes_fixed_radix,16.0,,,,128.0,16,4.0,ASCII artifact bytes encoded as fixed-radix bounded ranks,results/rankcloak_paper_main_pilot,sha256_hex,True,True
 paper_sha256_hex_000,raw_hex_nibbles,16.0,,,,64.0,16,4.0,one lowercase hex character per rank,results/rankcloak_paper_main_pilot,sha256_hex,True,True

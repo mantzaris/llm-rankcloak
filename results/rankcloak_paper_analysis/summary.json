@@ -1,6 +1,6 @@
 {
   "profile": "paper-analysis",
-  "timestamp": "2026-05-21T19:23:17.816891+00:00",
+  "timestamp": "2026-05-21T20:21:14.109912+00:00",
   "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
   "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
   "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
@@ -12,13 +12,14 @@
     "results/rankcloak_payload_granularity_pilot",
     "results/rankcloak_segmented_protocol_pilot",
     "results/rankcloak_segmented_quality_controls",
+    "results/rankcloak_paper_smoke",
     "results/rankcloak_paper_main_pilot"
   ],
-  "recovery_rows": 7,
-  "payload_representation_rows": 44,
-  "prompt_quality_rows": 333,
-  "segmented_rows": 20,
-  "detector_rows": 0,
+  "recovery_rows": 8,
+  "payload_representation_rows": 50,
+  "prompt_quality_rows": 388,
+  "segmented_rows": 22,
+  "detector_rows": 12,
   "generated_result_files": [
     "results/rankcloak_paper_analysis/all_recovery_summary.csv",
     "results/rankcloak_paper_analysis/all_payload_representation_summary.csv",

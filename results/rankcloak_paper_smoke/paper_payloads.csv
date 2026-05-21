@@ -1,0 +1,3 @@
+payload_name,payload_class,payload_kind,artifact_text_character_length,artifact_text_byte_length,artifact_bit_length_if_known,representation_hint,is_hex_like,is_base64_like,is_structured,seed,notes
+paper_sha256_hex_000,sha256_hex,sha256_hex,64,64,256,raw_hex_nibbles,True,False,False,2026053101,SHA-256 digest of a public deterministic string.
+paper_random_128_bit_hex_000,random_128_bit_hex,random_hex,32,32,128,raw_hex_nibbles,True,False,False,2026054101,Fixed-seed synthetic 128-bit hex string.

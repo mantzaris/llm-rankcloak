@@ -1,0 +1,7 @@
+payload_name,payload_class,representation_name,alphabet_size,rank_count,max_possible_rank,bits_per_rank_estimate,applies_to_payload,exact_codec_roundtrip,notes
+paper_sha256_hex_000,sha256_hex,ascii_bytes_fixed_radix,8,171,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_sha256_hex_000,sha256_hex,ascii_bytes_fixed_radix,16,128,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_sha256_hex_000,sha256_hex,raw_hex_nibbles,16,64,16,4.0,True,True,one lowercase hex character per rank
+paper_random_128_bit_hex_000,random_128_bit_hex,ascii_bytes_fixed_radix,8,86,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_128_bit_hex_000,random_128_bit_hex,ascii_bytes_fixed_radix,16,64,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_128_bit_hex_000,random_128_bit_hex,raw_hex_nibbles,16,32,16,4.0,True,True,one lowercase hex character per rank

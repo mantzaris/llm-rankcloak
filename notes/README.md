@@ -22,6 +22,8 @@ This directory documents the current RankCloak repository state, implemented cod
 - `16_paper_main_results_summary.md`: placeholder and index for paper-main pilot, full paper-main, and paper-analysis outputs.
 - `17_detector_baseline_plan.md`: lightweight feature-only detector baseline design and caveats.
 - `18_statistical_analysis_plan.md`: deterministic bootstrap and effect-size analysis plan.
+- Staged paper-suite resume behavior is documented in `15_paper_main_experiment_plan.md`
+  and current staged run status is tracked in `16_paper_main_results_summary.md`.
 
 ## Current Status
 
@@ -48,3 +50,6 @@ For paper drafting, start with:
 - `13_paper_figures_tables_plan.md` for figure and table planning.
 - `14_submission_readiness_checklist.md` for what remains before journal submission.
 - `15_paper_main_experiment_plan.md` through `18_statistical_analysis_plan.md` for the paper-main results suite.
+- Use `paper-smoke` to validate the staged pipeline quickly, then continue
+  `results/rankcloak_paper_main_pilot/` with the staged `paper-*` profiles and
+  `--resume --limit-trials N`.

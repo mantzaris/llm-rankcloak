@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import math
+import hashlib
+import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -87,6 +89,17 @@ PAPER_PROTOCOL_VARIANTS = [
 PAPER_SEGMENT_SIZE = 8
 PAPER_TAIL_POLICY = "sentence_tail_min20_max60"
 PAPER_BOOTSTRAP_SEED = 20260521
+PAPER_SMOKE_PROMPTS = ["recipe_long_specific"]
+PAPER_STAGED_PROFILES = {
+    "paper-smoke",
+    "paper-diagnostics",
+    "paper-nonseg-generation",
+    "paper-segmented-generation",
+    "paper-baselines",
+    "paper-detector",
+    "paper-statistics",
+    "paper-main-pilot-resume",
+}
 
 
 def write_jsonl(path: Path, rows: Iterable[dict]) -> None:
@@ -112,6 +125,8 @@ def write_frame(path: Path, rows: Sequence[dict], columns: Sequence[str]) -> pd.
 
 
 def prompt_names_for_profile(profile: str) -> List[str]:
+    if profile == "paper-smoke":
+        return list(PAPER_SMOKE_PROMPTS)
     if profile == "paper-main":
         return list(PAPER_MAIN_PROMPTS)
     return list(PAPER_PILOT_PROMPTS)
@@ -120,7 +135,91 @@ def prompt_names_for_profile(profile: str) -> List[str]:
 def payloads_for_profile(profile: str) -> List[PaperPayload]:
     if profile == "paper-main":
         return generate_full_paper_payloads()
+    if profile == "paper-smoke":
+        payloads = generate_pilot_paper_payloads()
+        selected = [
+            payload
+            for payload in payloads
+            if payload.payload_name in {"paper_sha256_hex_000", "paper_random_128_bit_hex_000"}
+        ]
+        if len(selected) == 2:
+            return selected
+        return payloads[:2]
     return generate_pilot_paper_payloads()
+
+
+def slugify_for_trial_id(value: object) -> str:
+    text = str(value)
+    text = re.sub(r"[^A-Za-z0-9]+", "_", text).strip("_").lower()
+    return text or "none"
+
+
+def stable_trial_id(*parts: object) -> str:
+    base = "__".join(slugify_for_trial_id(part) for part in parts if part is not None)
+    if len(base) <= 150:
+        return base
+    digest = hashlib.sha1(base.encode("utf-8")).hexdigest()[:10]
+    return "{}__{}".format(base[:132].rstrip("_"), digest)
+
+
+def read_frame_if_exists(path: Path, columns: Sequence[str]) -> pd.DataFrame:
+    if not path.exists():
+        return pd.DataFrame(columns=list(columns))
+    try:
+        frame = pd.read_csv(path)
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame(columns=list(columns))
+    extra_columns = [column for column in frame.columns if column not in columns]
+    return frame.reindex(columns=list(columns) + extra_columns)
+
+
+def append_frame_unique(
+    path: Path,
+    rows: Sequence[dict],
+    columns: Sequence[str],
+    id_columns: Sequence[str],
+) -> pd.DataFrame:
+    existing = read_frame_if_exists(path, columns)
+    new_frame = ordered_frame(rows, columns)
+    combined = pd.concat([existing, new_frame], ignore_index=True)
+    if not combined.empty and all(column in combined.columns for column in id_columns):
+        combined = combined.drop_duplicates(subset=list(id_columns), keep="last")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    combined.to_csv(path, index=False)
+    return combined
+
+
+def existing_id_set(path: Path, id_column: str = "trial_id") -> set:
+    frame = read_frame_if_exists(path, [id_column])
+    if frame.empty or id_column not in frame.columns:
+        return set()
+    return set(frame[id_column].dropna().astype(str))
+
+
+def append_jsonl_unique(path: Path, rows: Sequence[dict], id_fields: Sequence[str]) -> List[dict]:
+    existing_rows: Dict[Tuple[object, ...], dict] = {}
+    if path.exists():
+        with path.open("r", encoding="utf-8") as handle:
+            for line in handle:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                key = tuple(row.get(field) for field in id_fields)
+                existing_rows[key] = row
+    for row in rows:
+        key = tuple(row.get(field) for field in id_fields)
+        existing_rows[key] = row
+    ordered_rows = list(existing_rows.values())
+    write_jsonl(path, ordered_rows)
+    return ordered_rows
+
+
+def bool_sum(frame: pd.DataFrame, column: str) -> Tuple[int, int]:
+    if frame.empty or column not in frame.columns:
+        return 0, 0
+    values = frame[column].dropna().astype(bool)
+    passes = int(values.sum())
+    return passes, int(len(values) - passes)
 
 
 def paper_rank_summary(payload_name: str, ranks: Sequence[int]) -> dict:
@@ -856,6 +955,1130 @@ def run_paper_baselines(
             baseline_rows.append(row)
             feature_rows.append(features)
     return baseline_rows, feature_rows
+
+
+def paper_profile_variant(profile: str) -> str:
+    if profile == "paper-main":
+        return "paper-main"
+    if profile == "paper-smoke":
+        return "paper-smoke"
+    return "paper-main-pilot"
+
+
+def nonseg_specs_for_profile(profile: str) -> List[dict]:
+    specs = nonseg_variant_specs()
+    if profile == "paper-smoke":
+        return [spec for spec in specs if spec["protocol_variant"] in {"nonseg_ascii_b16", "nonseg_hex_nibble_b16"}]
+    return specs
+
+
+def segmented_specs_for_profile(profile: str) -> List[dict]:
+    specs = segmented_variant_specs()
+    if profile == "paper-smoke":
+        return [
+            spec
+            for spec in specs
+            if spec["protocol_variant"] == "segmented_hex_single_topic_sentence_tail_filtered"
+        ]
+    return specs
+
+
+def planned_nonseg_trials(profile: str, payloads: Sequence[PaperPayload], prompt_names: Sequence[str]) -> List[dict]:
+    plans: List[dict] = []
+    for payload in payloads:
+        for spec in nonseg_specs_for_profile(profile):
+            encoded = encode_payload_representation(
+                payload, spec["representation_name"], spec["alphabet_size"]
+            )
+            if encoded is None:
+                continue
+            for prompt_name in prompt_names:
+                trial_id = stable_trial_id(
+                    spec["protocol_variant"],
+                    payload.payload_name,
+                    spec["representation_name"],
+                    "b{}".format(spec["alphabet_size"]),
+                    prompt_name,
+                )
+                plans.append(
+                    {
+                        "trial_id": trial_id,
+                        "payload": payload,
+                        "spec": spec,
+                        "encoded": encoded,
+                        "prompt_name": prompt_name,
+                    }
+                )
+    return plans
+
+
+def planned_segmented_trials(profile: str, payloads: Sequence[PaperPayload]) -> List[dict]:
+    plans: List[dict] = []
+    for payload in payloads:
+        if not payload.is_hex_like:
+            continue
+        encoded = encode_payload_representation(payload, "raw_hex_nibbles", 16)
+        chunks = chunk_rank_sequence(encoded["ranks"], PAPER_SEGMENT_SIZE)
+        for spec in segmented_specs_for_profile(profile):
+            trial_id = stable_trial_id(
+                spec["protocol_variant"],
+                payload.payload_name,
+                "raw_hex_nibbles",
+                "seg{}".format(PAPER_SEGMENT_SIZE),
+                spec["topic_schedule_name"],
+                spec["leadin_policy"],
+                SAFE_TEXT_FILTER_V1,
+                PAPER_TAIL_POLICY,
+            )
+            plans.append(
+                {
+                    "trial_id": trial_id,
+                    "payload": payload,
+                    "spec": spec,
+                    "encoded": encoded,
+                    "chunks": chunks,
+                }
+            )
+    return plans
+
+
+def apply_stage_filters(
+    plans: Sequence[dict],
+    args: Any,
+    existing_trial_ids: set,
+) -> Tuple[List[dict], dict]:
+    start_at_trial = getattr(args, "start_at_trial", None)
+    only_protocol_variant = getattr(args, "only_protocol_variant", None)
+    only_payload_class = getattr(args, "only_payload_class", None)
+    only_prompt_name = getattr(args, "only_prompt_name", None)
+    limit_trials = getattr(args, "limit_trials", None)
+    skip_existing = bool(
+        getattr(args, "resume", False)
+        or getattr(args, "skip_existing", False)
+        or not getattr(args, "overwrite", False)
+    )
+
+    filtered: List[dict] = []
+    skipped_before_start = 0
+    for index, plan in enumerate(plans, start=1):
+        if start_at_trial is not None and index < int(start_at_trial):
+            skipped_before_start += 1
+            continue
+        spec = plan.get("spec", {})
+        payload = plan.get("payload")
+        if only_protocol_variant and spec.get("protocol_variant") != only_protocol_variant:
+            continue
+        if only_payload_class and payload is not None and payload.payload_class != only_payload_class:
+            continue
+        if only_prompt_name:
+            prompt_name = plan.get("prompt_name")
+            prompt_names = spec.get("prompt_names") or ()
+            if prompt_name != only_prompt_name and only_prompt_name not in prompt_names:
+                continue
+        filtered.append(plan)
+
+    skipped_existing = 0
+    runnable: List[dict] = []
+    for plan in filtered:
+        if skip_existing and str(plan["trial_id"]) in existing_trial_ids:
+            skipped_existing += 1
+            continue
+        runnable.append(plan)
+    if limit_trials is not None:
+        runnable = runnable[: max(0, int(limit_trials))]
+    stats = {
+        "planned_trials": len(plans),
+        "filtered_trials": len(filtered),
+        "skipped_before_start": skipped_before_start,
+        "skipped_existing_trials": skipped_existing,
+        "new_trials_to_run": len(runnable),
+        "remaining_trials": max(0, len(filtered) - skipped_existing - len(runnable)),
+    }
+    return runnable, stats
+
+
+def run_single_nonseg_trial(
+    plan: dict,
+    cover_prompts: Dict[str, str],
+    model: Any,
+    model_repo_id: str,
+    model_filename: str,
+    model_path_relative: Optional[str],
+) -> Tuple[dict, dict, dict]:
+    payload = plan["payload"]
+    spec = plan["spec"]
+    encoded = plan["encoded"]
+    prompt_name = plan["prompt_name"]
+    trial_id = plan["trial_id"]
+    context_token_ids = make_context_token_ids(model, cover_prompts[prompt_name])
+    generation_started = time.perf_counter()
+    generated = generate_token_ids_from_ranks(model, context_token_ids, encoded["ranks"])
+    generation_seconds = time.perf_counter() - generation_started
+    recovery_started = time.perf_counter()
+    recovered = recover_ranks_from_generated_ids(model, context_token_ids, generated["generated_token_ids"])
+    recovery_seconds = time.perf_counter() - recovery_started
+    decoded = decode_payload_representation(recovered["ranks"], encoded["metadata"], spec["representation_name"])
+    expected = (
+        payload.payload_text.encode("utf-8")
+        if spec["representation_name"] == "raw_hex_nibbles"
+        else payload.payload_bytes
+    )
+    exact_recovery = decoded == expected
+    features = feature_row(
+        source_type="nonseg_rankcloak",
+        trial_id=trial_id,
+        payload=payload,
+        protocol_variant=spec["protocol_variant"],
+        representation_name=spec["representation_name"],
+        prompt_name=prompt_name,
+        segment_index=None,
+        text=generated["generated_text"],
+        token_ids=generated["generated_token_ids"],
+        ranks=recovered["ranks"],
+        token_log_probabilities=generated.get("token_log_probabilities", []),
+        notes="non-segmented exact-copy RankCloak cover",
+    )
+    row = {
+        "trial_id": trial_id,
+        "protocol_variant": spec["protocol_variant"],
+        "payload_name": payload.payload_name,
+        "payload_class": payload.payload_class,
+        "payload_kind": payload.payload_kind,
+        "representation_name": spec["representation_name"],
+        "alphabet_size": spec["alphabet_size"],
+        "prompt_name": prompt_name,
+        "prompt_family": prompt_family(prompt_name),
+        "rank_count": len(encoded["ranks"]),
+        "generated_token_count": len(generated["generated_token_ids"]),
+        "generated_character_count": len(generated["generated_text"]),
+        "exact_recovery": exact_recovery,
+        "generation_seconds": generation_seconds,
+        "recovery_seconds": recovery_seconds,
+        "mean_token_log_probability": features["mean_token_log_probability"],
+        "median_token_log_probability": features["median_token_log_probability"],
+        "mean_generated_rank": features["mean_generated_rank"],
+        "p95_generated_rank": features["p95_generated_rank"],
+        "repeated_token_fraction": features["repeated_token_fraction"],
+        "punctuation_fraction": features["punctuation_fraction"],
+        "alphabetic_fraction": features["alphabetic_fraction"],
+        "artifact_count_total": features["artifact_count_total"],
+        "model_repo_id": model_repo_id,
+        "model_filename": model_filename,
+        "model_path_relative": model_path_relative,
+        "notes": "synthetic payload; not encryption or cryptographic security",
+    }
+    example = {
+        **row,
+        "generated_text": generated["generated_text"],
+        "generated_token_ids": generated["generated_token_ids"],
+        "recovered_ranks": recovered["ranks"],
+    }
+    return row, example, features
+
+
+def run_single_segmented_trial(
+    plan: dict,
+    cover_prompts: Dict[str, str],
+    model: Any,
+    allowed_token_mask: Optional[Sequence[bool]],
+    model_repo_id: str,
+    model_filename: str,
+    model_path_relative: Optional[str],
+) -> Tuple[dict, List[dict], List[dict]]:
+    payload = plan["payload"]
+    spec = plan["spec"]
+    encoded = plan["encoded"]
+    chunks = plan["chunks"]
+    trial_id = plan["trial_id"]
+    recovered_chunks: List[List[int]] = []
+    trial_message_rows: List[dict] = []
+    trial_feature_rows: List[dict] = []
+    generation_seconds_total = 0.0
+    recovery_seconds_total = 0.0
+    for segment_index_zero, chunk in enumerate(chunks):
+        prompt_name = spec["prompt_names"][segment_index_zero % len(spec["prompt_names"])]
+        context_token_ids = make_context_token_ids(model, cover_prompts[prompt_name])
+        generation_started = time.perf_counter()
+        generated = generate_segmented_message_with_leadin(
+            model=model,
+            context_token_ids=context_token_ids,
+            forced_ranks=chunk,
+            leadin_token_count=spec["leadin_token_count"],
+            tail_policy=PAPER_TAIL_POLICY,
+            allowed_token_mask=allowed_token_mask,
+        )
+        generation_seconds_total += time.perf_counter() - generation_started
+        recovery_started = time.perf_counter()
+        recovered_chunk = recover_forced_ranks_after_leadin(
+            model=model,
+            context_token_ids=context_token_ids,
+            leadin_token_ids=generated["leadin_token_ids"],
+            forced_token_ids=generated["forced_token_ids"],
+            allowed_token_mask=allowed_token_mask,
+        )
+        recovery_seconds_total += time.perf_counter() - recovery_started
+        recovered_chunks.append(recovered_chunk)
+        exact_segment_recovery = recovered_chunk == list(map(int, chunk))
+        segment_index = segment_index_zero + 1
+        leadin_features = feature_row(
+            "segmented_leadin",
+            trial_id,
+            payload,
+            spec["protocol_variant"],
+            "raw_hex_nibbles",
+            prompt_name,
+            segment_index,
+            generated["leadin_text"],
+            generated["leadin_token_ids"],
+            generated["leadin_ranks"],
+            generated["leadin_log_probabilities"],
+            "greedy lead-in ignored by decoder",
+        )
+        forced_features = feature_row(
+            "segmented_forced_prefix",
+            trial_id,
+            payload,
+            spec["protocol_variant"],
+            "raw_hex_nibbles",
+            prompt_name,
+            segment_index,
+            generated["forced_prefix_text"],
+            generated["forced_token_ids"],
+            generated["forced_ranks"],
+            generated["forced_log_probabilities"],
+            "payload-bearing forced prefix",
+        )
+        tail_features = feature_row(
+            "segmented_tail",
+            trial_id,
+            payload,
+            spec["protocol_variant"],
+            "raw_hex_nibbles",
+            prompt_name,
+            segment_index,
+            generated["tail_text"],
+            generated["tail_token_ids"],
+            generated["tail_ranks"],
+            generated["tail_log_probabilities"],
+            "greedy natural tail ignored by decoder",
+        )
+        full_features = feature_row(
+            "segmented_full_message",
+            trial_id,
+            payload,
+            spec["protocol_variant"],
+            "raw_hex_nibbles",
+            prompt_name,
+            segment_index,
+            generated["full_message_text"],
+            generated["full_token_ids"],
+            generated["full_ranks"],
+            generated["full_log_probabilities"],
+            "full public message including optional lead-in and tail",
+        )
+        trial_feature_rows.extend([leadin_features, forced_features, tail_features, full_features])
+        trial_message_rows.append(
+            {
+                "trial_id": trial_id,
+                "protocol_variant": spec["protocol_variant"],
+                "payload_name": payload.payload_name,
+                "payload_class": payload.payload_class,
+                "segment_index": segment_index,
+                "segment_count": len(chunks),
+                "prompt_name": prompt_name,
+                "prompt_family": prompt_family(prompt_name),
+                "leadin_text": generated["leadin_text"],
+                "forced_prefix_text": generated["forced_prefix_text"],
+                "tail_text": generated["tail_text"],
+                "full_message_text": generated["full_message_text"],
+                "leadin_token_count": len(generated["leadin_token_ids"]),
+                "forced_prefix_token_count": len(generated["forced_token_ids"]),
+                "actual_tail_token_count": len(generated["tail_token_ids"]),
+                "full_message_token_count": len(generated["full_token_ids"]),
+                "exact_segment_recovery": exact_segment_recovery,
+                "forced_prefix_mean_token_log_probability": forced_features["mean_token_log_probability"],
+                "full_message_mean_token_log_probability": full_features["mean_token_log_probability"],
+                "forced_prefix_repeated_token_fraction": forced_features["repeated_token_fraction"],
+                "full_message_repeated_token_fraction": full_features["repeated_token_fraction"],
+                "forced_prefix_artifact_count_total": forced_features["artifact_count_total"],
+                "full_message_artifact_count_total": full_features["artifact_count_total"],
+                "notes": "decode policy: ignore lead-in and tail, recover forced span only",
+            }
+        )
+    recovered_ranks = flatten_rank_chunks(recovered_chunks)
+    recovered_text = decode_hex_nibble_ranks_to_text(recovered_ranks, encoded["metadata"])
+    exact_recovery = recovered_text == payload.payload_text.lower()
+    forced_rows = [row for row in trial_feature_rows if row["source_type"] == "segmented_forced_prefix"]
+    full_rows = [row for row in trial_feature_rows if row["source_type"] == "segmented_full_message"]
+    trial_row = {
+        "trial_id": trial_id,
+        "protocol_variant": spec["protocol_variant"],
+        "payload_name": payload.payload_name,
+        "payload_class": payload.payload_class,
+        "payload_kind": payload.payload_kind,
+        "representation_name": "raw_hex_nibbles",
+        "segment_size": PAPER_SEGMENT_SIZE,
+        "segment_count": len(chunks),
+        "message_count": len(chunks),
+        "topic_schedule_name": spec["topic_schedule_name"],
+        "leadin_policy": spec["leadin_policy"],
+        "leadin_token_count": spec["leadin_token_count"],
+        "tail_policy": PAPER_TAIL_POLICY,
+        "actual_tail_token_count_mean": mean_of_present(
+            [row["actual_tail_token_count"] for row in trial_message_rows]
+        ),
+        "token_filter_name": SAFE_TEXT_FILTER_V1,
+        "total_forced_rank_count": len(encoded["ranks"]),
+        "total_forced_prefix_token_count": sum(row["forced_prefix_token_count"] for row in trial_message_rows),
+        "total_full_message_token_count": sum(row["full_message_token_count"] for row in trial_message_rows),
+        "total_full_message_character_count": sum(len(row["full_message_text"]) for row in trial_message_rows),
+        "exact_recovery": exact_recovery,
+        "generation_seconds": generation_seconds_total,
+        "recovery_seconds": recovery_seconds_total,
+        "forced_prefix_mean_log_probability_mean": mean_of_present(
+            [row["mean_token_log_probability"] for row in forced_rows]
+        ),
+        "forced_prefix_repetition_mean": mean_of_present(
+            [row["repeated_token_fraction"] for row in forced_rows]
+        ),
+        "forced_prefix_punctuation_fraction_mean": mean_of_present(
+            [row["punctuation_fraction"] for row in forced_rows]
+        ),
+        "forced_prefix_artifact_count_mean": mean_of_present(
+            [row["artifact_count_total"] for row in forced_rows]
+        ),
+        "full_message_mean_log_probability_mean": mean_of_present(
+            [row["mean_token_log_probability"] for row in full_rows]
+        ),
+        "full_message_repetition_mean": mean_of_present(
+            [row["repeated_token_fraction"] for row in full_rows]
+        ),
+        "full_message_punctuation_fraction_mean": mean_of_present(
+            [row["punctuation_fraction"] for row in full_rows]
+        ),
+        "full_message_artifact_count_mean": mean_of_present(
+            [row["artifact_count_total"] for row in full_rows]
+        ),
+        "model_repo_id": model_repo_id,
+        "model_filename": model_filename,
+        "model_path_relative": model_path_relative,
+        "notes": "safe-text filtered segmented raw-hex-nibble protocol; exact-copy only",
+    }
+    return trial_row, trial_message_rows, trial_feature_rows
+
+
+def stage_generated_files(output_dir: Path) -> List[Path]:
+    expected = [
+        "paper_payloads.csv",
+        "paper_rank_pressure.csv",
+        "paper_codec_comparison.csv",
+        "paper_stegotext_trials.csv",
+        "paper_nonseg_examples.jsonl",
+        "paper_segmented_trials.csv",
+        "paper_segmented_messages.jsonl",
+        "paper_baseline_examples.jsonl",
+        "paper_cover_text_features.csv",
+        "detector_dataset.csv",
+        "detector_baseline.csv",
+        "statistical_summary.csv",
+        "effect_size_summary.csv",
+        "PAPER_RESULTS_SUMMARY.md",
+        "PAPER_COMPARISON_TABLES.md",
+        "PAPER_FIGURE_INDEX.md",
+        "summary.json",
+        "SUMMARY.md",
+        "MANIFEST.json",
+        "RUN_PROGRESS.json",
+    ]
+    paths = [output_dir / name for name in expected if (output_dir / name).exists()]
+    figures_dir = output_dir / "figures"
+    if figures_dir.exists():
+        paths.extend(sorted(figures_dir.glob("*.png")))
+    return paths
+
+
+def write_run_progress(
+    output_dir: Path,
+    project_root: Path,
+    profile: str,
+    stage: str,
+    started_at: str,
+    planned_trials: int,
+    completed_trials: int,
+    skipped_existing_trials: int,
+    failed_trials: int,
+    remaining_trials: int,
+    last_completed_trial_id: Optional[str],
+    notes: Sequence[str],
+) -> dict:
+    progress = {
+        "profile": profile,
+        "stage": stage,
+        "output_dir": repo_relative_path(output_dir, project_root),
+        "started_at": started_at,
+        "finished_at": datetime.now(timezone.utc).isoformat(),
+        "planned_trials": int(planned_trials),
+        "completed_trials": int(completed_trials),
+        "skipped_existing_trials": int(skipped_existing_trials),
+        "failed_trials": int(failed_trials),
+        "remaining_trials": int(remaining_trials),
+        "last_completed_trial_id": last_completed_trial_id,
+        "generated_files": [repo_relative_path(path, project_root) for path in stage_generated_files(output_dir)],
+        "notes": list(notes),
+    }
+    (output_dir / "RUN_PROGRESS.json").write_text(json.dumps(progress, indent=2), encoding="utf-8")
+    return progress
+
+
+def write_staged_summary(
+    output_dir: Path,
+    project_root: Path,
+    profile: str,
+    stage: str,
+    model_loaded: bool,
+    model_status: str,
+    notes: Sequence[str],
+) -> dict:
+    stego_frame = read_frame_if_exists(output_dir / "paper_stegotext_trials.csv", PAPER_STEGOTEXT_TRIAL_COLUMNS)
+    segmented_frame = read_frame_if_exists(output_dir / "paper_segmented_trials.csv", PAPER_SEGMENTED_TRIAL_COLUMNS)
+    baseline_rows = []
+    baseline_path = output_dir / "paper_baseline_examples.jsonl"
+    if baseline_path.exists():
+        baseline_rows = [line for line in baseline_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    detector_frame = read_frame_if_exists(output_dir / "detector_baseline.csv", DETECTOR_BASELINE_COLUMNS)
+    detector_dataset_frame = read_frame_if_exists(output_dir / "detector_dataset.csv", DETECTOR_DATASET_COLUMNS)
+    statistics_frame = read_frame_if_exists(output_dir / "statistical_summary.csv", STATISTICAL_SUMMARY_COLUMNS)
+    effect_frame = read_frame_if_exists(output_dir / "effect_size_summary.csv", EFFECT_SIZE_SUMMARY_COLUMNS)
+    stego_passes, stego_failures = bool_sum(stego_frame, "exact_recovery")
+    segmented_passes, segmented_failures = bool_sum(segmented_frame, "exact_recovery")
+    generated_files = stage_generated_files(output_dir)
+    completed_stage_names = []
+    if (output_dir / "paper_payloads.csv").exists():
+        completed_stage_names.append("paper-diagnostics")
+    if (output_dir / "paper_stegotext_trials.csv").exists():
+        completed_stage_names.append("paper-nonseg-generation")
+    if (output_dir / "paper_segmented_trials.csv").exists():
+        completed_stage_names.append("paper-segmented-generation")
+    if baseline_path.exists():
+        completed_stage_names.append("paper-baselines")
+    if (output_dir / "detector_baseline.csv").exists():
+        completed_stage_names.append("paper-detector")
+    if (output_dir / "statistical_summary.csv").exists():
+        completed_stage_names.append("paper-statistics")
+    summary = {
+        "profile": profile,
+        "stage": stage,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "output_dir": repo_relative_path(output_dir, project_root),
+        "model_loaded": bool(model_loaded),
+        "completed_stage_names": completed_stage_names,
+        "generated_result_files": [repo_relative_path(path, project_root) for path in generated_files],
+        "nonseg_trial_count": int(len(stego_frame)),
+        "segmented_trial_count": int(len(segmented_frame)),
+        "baseline_count": int(len(baseline_rows)),
+        "detector_rows": int(len(detector_dataset_frame)),
+        "detector_results_available": bool(not detector_frame.empty and "ok" in set(detector_frame.get("status", []))),
+        "statistical_summary_rows": int(len(statistics_frame)),
+        "effect_size_rows": int(len(effect_frame)),
+        "recovery_pass_count": int(stego_passes + segmented_passes),
+        "recovery_fail_count": int(stego_failures + segmented_failures),
+        "important_notes": list(notes) + ["Model status: {}".format(model_status)],
+    }
+    (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    next_command = (
+        "python3 scripts/run_experiment.py --profile paper-main-pilot-resume "
+        "--output-dir {} --resume --limit-trials 10".format(repo_relative_path(output_dir, project_root))
+    )
+    summary_md = """# RankCloak Staged Paper Suite Summary
+
+- Profile: {profile}
+- Stage: {stage}
+- Model status: {model_status}
+- Non-segmented trials: {nonseg}
+- Segmented trials: {segmented}
+- Baseline rows: {baseline}
+- Recovery: {passes} pass, {failures} fail
+- Detector dataset rows: {detector_rows}
+- Statistical rows: {stat_rows}
+- Effect-size rows: {effect_rows}
+
+## Scope
+
+This is an empirical exact-copy measurement study over deterministic synthetic payloads. It is not encryption, key exchange, authentication, signing, digital signatures, credential handling, cryptographic security, or an undetectability claim.
+
+## Next Recommended Command
+
+`{next_command}`
+""".format(
+        profile=profile,
+        stage=stage,
+        model_status=model_status,
+        nonseg=len(stego_frame),
+        segmented=len(segmented_frame),
+        baseline=len(baseline_rows),
+        passes=summary["recovery_pass_count"],
+        failures=summary["recovery_fail_count"],
+        detector_rows=len(detector_dataset_frame),
+        stat_rows=len(statistics_frame),
+        effect_rows=len(effect_frame),
+        next_command=next_command,
+    )
+    (output_dir / "SUMMARY.md").write_text(summary_md, encoding="utf-8")
+    return summary
+
+
+def run_paper_diagnostics_stage(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model: Any,
+    model_path: Optional[Path],
+    model_repo_id: str,
+    model_filename: str,
+    model_path_relative: Optional[str],
+    command_line_args: Sequence[str],
+    model_status: str,
+    model_loaded: bool,
+    args: Any,
+) -> dict:
+    stage = "paper-diagnostics"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(timezone.utc).isoformat()
+    suite_profile = paper_profile_variant(profile)
+    payloads = payloads_for_profile(suite_profile)
+    notes = ["diagnostic stage only; no cover generation"]
+    skip_existing = bool(getattr(args, "resume", False) or getattr(args, "skip_existing", False) or not getattr(args, "overwrite", False))
+    payload_path = output_dir / "paper_payloads.csv"
+    rank_path = output_dir / "paper_rank_pressure.csv"
+    codec_path = output_dir / "paper_codec_comparison.csv"
+    if skip_existing and payload_path.exists():
+        notes.append("existing paper_payloads.csv preserved")
+    else:
+        write_frame(output_dir / "paper_payloads.csv", paper_payload_rows(payloads), PAPER_PAYLOAD_COLUMNS)
+        notes.append("paper_payloads.csv written")
+    if skip_existing and rank_path.exists():
+        notes.append("existing paper_rank_pressure.csv preserved")
+    else:
+        write_frame(
+            output_dir / "paper_rank_pressure.csv",
+            run_paper_rank_pressure(payloads, model, model_repo_id, model_filename, model_path_relative),
+            PAPER_RANK_PRESSURE_COLUMNS,
+        )
+        notes.append("paper_rank_pressure.csv written")
+    if skip_existing and codec_path.exists():
+        notes.append("existing paper_codec_comparison.csv preserved")
+    else:
+        write_frame(
+            output_dir / "paper_codec_comparison.csv",
+            build_paper_codec_comparison(payloads),
+            PAPER_CODEC_COMPARISON_COLUMNS,
+        )
+        notes.append("paper_codec_comparison.csv written")
+    write_manifest(
+        output_path=output_dir / "MANIFEST.json",
+        project_root=project_root,
+        profile=profile,
+        output_dir=output_dir,
+        command_line_args=command_line_args,
+        model_repo_id=model_repo_id,
+        model_filename=model_filename,
+        model_path=model_path,
+    )
+    write_run_progress(output_dir, project_root, profile, stage, started_at, len(payloads), len(payloads), 0, 0, 0, None, notes)
+    return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+
+
+def run_paper_nonseg_generation_stage(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model: Any,
+    model_repo_id: str,
+    model_filename: str,
+    model_path_relative: Optional[str],
+    model_loaded: bool,
+    model_status: str,
+    args: Any,
+) -> dict:
+    stage = "paper-nonseg-generation"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(timezone.utc).isoformat()
+    payloads = payloads_for_profile(paper_profile_variant(profile))
+    prompt_names = prompt_names_for_profile(paper_profile_variant(profile))
+    plans = planned_nonseg_trials(paper_profile_variant(profile), payloads, prompt_names)
+    existing = existing_id_set(output_dir / "paper_stegotext_trials.csv", "trial_id")
+    runnable, stats = apply_stage_filters(plans, args, existing)
+    notes = ["non-segmented generation stage"]
+    print(
+        "paper-nonseg-generation: planned {planned_trials}, existing {existing}, skipped {skipped}, running {running}, remaining {remaining}".format(
+            planned_trials=stats["planned_trials"],
+            existing=len(existing),
+            skipped=stats["skipped_existing_trials"],
+            running=len(runnable),
+            remaining=stats["remaining_trials"],
+        )
+    )
+    if model is None:
+        notes.append("model unavailable; no non-segmented trials run")
+        write_run_progress(output_dir, project_root, profile, stage, started_at, len(plans), 0, stats["skipped_existing_trials"], len(runnable), len(runnable), None, notes)
+        return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+    cover_prompts = cover_prompt_dictionary()
+    completed = 0
+    failed = 0
+    last_trial_id = None
+    for plan in runnable:
+        try:
+            trial_row, example_row, features = run_single_nonseg_trial(
+                plan,
+                cover_prompts,
+                model,
+                model_repo_id,
+                model_filename,
+                model_path_relative,
+            )
+            append_frame_unique(output_dir / "paper_stegotext_trials.csv", [trial_row], PAPER_STEGOTEXT_TRIAL_COLUMNS, ["trial_id"])
+            append_jsonl_unique(output_dir / "paper_nonseg_examples.jsonl", [example_row], ["trial_id"])
+            append_frame_unique(
+                output_dir / "paper_cover_text_features.csv",
+                [features],
+                PAPER_COVER_TEXT_FEATURE_COLUMNS,
+                ["source_type", "trial_id", "segment_index"],
+            )
+            completed += 1
+            last_trial_id = plan["trial_id"]
+        except Exception as exc:
+            failed += 1
+            notes.append("trial {} failed: {}".format(plan["trial_id"], exc))
+        remaining = max(0, len(runnable) - completed - failed)
+        write_run_progress(output_dir, project_root, profile, stage, started_at, len(plans), completed, stats["skipped_existing_trials"], failed, remaining, last_trial_id, notes)
+    return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+
+
+def run_paper_segmented_generation_stage(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model: Any,
+    model_repo_id: str,
+    model_filename: str,
+    model_path_relative: Optional[str],
+    model_loaded: bool,
+    model_status: str,
+    args: Any,
+) -> dict:
+    stage = "paper-segmented-generation"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(timezone.utc).isoformat()
+    payloads = payloads_for_profile(paper_profile_variant(profile))
+    plans = planned_segmented_trials(paper_profile_variant(profile), payloads)
+    existing = existing_id_set(output_dir / "paper_segmented_trials.csv", "trial_id")
+    runnable, stats = apply_stage_filters(plans, args, existing)
+    notes = ["segmented generation stage"]
+    print(
+        "paper-segmented-generation: planned {planned_trials}, existing {existing}, skipped {skipped}, running {running}, remaining {remaining}".format(
+            planned_trials=stats["planned_trials"],
+            existing=len(existing),
+            skipped=stats["skipped_existing_trials"],
+            running=len(runnable),
+            remaining=stats["remaining_trials"],
+        )
+    )
+    if model is None:
+        notes.append("model unavailable; no segmented trials run")
+        write_run_progress(output_dir, project_root, profile, stage, started_at, len(plans), 0, stats["skipped_existing_trials"], len(runnable), len(runnable), None, notes)
+        return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+    cover_prompts = cover_prompt_dictionary()
+    allowed_token_mask = build_allowed_token_mask(model, SAFE_TEXT_FILTER_V1)
+    completed = 0
+    failed = 0
+    last_trial_id = None
+    for plan in runnable:
+        try:
+            trial_row, message_rows, feature_rows = run_single_segmented_trial(
+                plan,
+                cover_prompts,
+                model,
+                allowed_token_mask,
+                model_repo_id,
+                model_filename,
+                model_path_relative,
+            )
+            append_frame_unique(output_dir / "paper_segmented_trials.csv", [trial_row], PAPER_SEGMENTED_TRIAL_COLUMNS, ["trial_id"])
+            append_jsonl_unique(output_dir / "paper_segmented_messages.jsonl", message_rows, ["trial_id", "segment_index"])
+            append_frame_unique(
+                output_dir / "paper_cover_text_features.csv",
+                feature_rows,
+                PAPER_COVER_TEXT_FEATURE_COLUMNS,
+                ["source_type", "trial_id", "segment_index"],
+            )
+            completed += 1
+            last_trial_id = plan["trial_id"]
+        except Exception as exc:
+            failed += 1
+            notes.append("trial {} failed: {}".format(plan["trial_id"], exc))
+        remaining = max(0, len(runnable) - completed - failed)
+        write_run_progress(output_dir, project_root, profile, stage, started_at, len(plans), completed, stats["skipped_existing_trials"], failed, remaining, last_trial_id, notes)
+    return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+
+
+def run_paper_baselines_stage(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model: Any,
+    model_repo_id: str,
+    model_filename: str,
+    model_loaded: bool,
+    model_status: str,
+    args: Any,
+) -> dict:
+    stage = "paper-baselines"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(timezone.utc).isoformat()
+    notes = ["baseline generation stage"]
+    feature_frame = read_frame_if_exists(output_dir / "paper_cover_text_features.csv", PAPER_COVER_TEXT_FEATURE_COLUMNS)
+    baseline_targets = build_baseline_targets(feature_frame.to_dict("records"))
+    if not baseline_targets:
+        baseline_targets = {prompt_name: [40] for prompt_name in prompt_names_for_profile(paper_profile_variant(profile))}
+        notes.append("using preliminary default baseline target length because no RankCloak rows exist")
+    planned = [
+        {"baseline_id": stable_trial_id("baseline", prompt_name, "tokens", token_count), "prompt_name": prompt_name, "target_count": token_count}
+        for prompt_name, target_counts in sorted(baseline_targets.items())
+        for token_count in sorted(target_counts)
+    ]
+    existing_rows = []
+    baseline_path = output_dir / "paper_baseline_examples.jsonl"
+    if baseline_path.exists():
+        existing_rows = [json.loads(line) for line in baseline_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    existing = {row.get("baseline_id") for row in existing_rows}
+    skip_existing = bool(getattr(args, "resume", False) or getattr(args, "skip_existing", False) or not getattr(args, "overwrite", False))
+    runnable = [plan for plan in planned if not (skip_existing and plan["baseline_id"] in existing)]
+    if getattr(args, "limit_trials", None) is not None:
+        runnable = runnable[: max(0, int(args.limit_trials))]
+    print("paper-baselines: planned {}, existing {}, running {}".format(len(planned), len(existing), len(runnable)))
+    completed = 0
+    failed = 0
+    last_id = None
+    if model is None:
+        notes.append("model unavailable; no baseline rows generated")
+        write_run_progress(output_dir, project_root, profile, stage, started_at, len(planned), 0, len(existing), len(runnable), len(runnable), None, notes)
+        return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+    cover_prompts = cover_prompt_dictionary()
+    for plan in runnable:
+        try:
+            context_ids = make_context_token_ids(model, cover_prompts[plan["prompt_name"]])
+            generated = generate_greedy_baseline(model, context_ids, int(plan["target_count"]))
+            features = feature_row(
+                source_type="baseline",
+                trial_id=plan["baseline_id"],
+                payload=None,
+                protocol_variant="baseline_greedy",
+                representation_name=None,
+                prompt_name=plan["prompt_name"],
+                segment_index=None,
+                text=generated["generated_text"],
+                token_ids=generated["generated_token_ids"],
+                ranks=generated["ranks"],
+                token_log_probabilities=generated["token_log_probabilities"],
+                notes="ordinary greedy baseline matched approximately by token count",
+            )
+            row = {
+                "baseline_id": plan["baseline_id"],
+                "prompt_name": plan["prompt_name"],
+                "prompt_family": prompt_family(plan["prompt_name"]),
+                "target_token_count": int(plan["target_count"]),
+                "generated_text": generated["generated_text"],
+                "generated_token_count": generated["generated_token_count"],
+                "generated_character_count": generated["generated_character_count"],
+                "mean_token_log_probability": features["mean_token_log_probability"],
+                "repeated_token_fraction": features["repeated_token_fraction"],
+                "punctuation_fraction": features["punctuation_fraction"],
+                "artifact_count_total": features["artifact_count_total"],
+                "baseline_mode": "greedy",
+                "model_repo_id": model_repo_id,
+                "model_filename": model_filename,
+                "notes": "baseline text contains no payload ranks",
+            }
+            append_jsonl_unique(baseline_path, [row], ["baseline_id"])
+            append_frame_unique(
+                output_dir / "paper_cover_text_features.csv",
+                [features],
+                PAPER_COVER_TEXT_FEATURE_COLUMNS,
+                ["source_type", "trial_id", "segment_index"],
+            )
+            completed += 1
+            last_id = plan["baseline_id"]
+        except Exception as exc:
+            failed += 1
+            notes.append("baseline {} failed: {}".format(plan["baseline_id"], exc))
+        remaining = max(0, len(runnable) - completed - failed)
+        write_run_progress(output_dir, project_root, profile, stage, started_at, len(planned), completed, len(existing), failed, remaining, last_id, notes)
+    return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+
+
+def insufficient_detector_row(reason: str) -> dict:
+    return {
+        "status": "insufficient_data",
+        "split_name": None,
+        "detector_name": "not_run",
+        "dataset_name": None,
+        "feature_set": None,
+        "auc": None,
+        "accuracy": None,
+        "precision": None,
+        "recall": None,
+        "f1": None,
+        "train_rows": 0,
+        "test_rows": 0,
+        "notes": reason,
+    }
+
+
+def run_paper_detector_stage(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model_loaded: bool,
+    model_status: str,
+) -> dict:
+    stage = "paper-detector"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(timezone.utc).isoformat()
+    notes = ["feature-only detector stage; no text content features"]
+    feature_frame = read_frame_if_exists(output_dir / "paper_cover_text_features.csv", PAPER_COVER_TEXT_FEATURE_COLUMNS)
+    detector_dataset = prepare_detector_dataset(feature_frame)
+    detector_dataset_frame = ordered_frame(detector_dataset.to_dict("records"), DETECTOR_DATASET_COLUMNS)
+    detector_dataset_frame.to_csv(output_dir / "detector_dataset.csv", index=False)
+    detector_results = run_detector_baselines(detector_dataset_frame)
+    if detector_dataset_frame.empty or detector_results.empty:
+        detector_frame = ordered_frame(
+            [insufficient_detector_row("need baseline and RankCloak feature rows with both labels")],
+            DETECTOR_BASELINE_COLUMNS,
+        )
+        notes.append("detector_baseline.csv written with insufficient_data status")
+    else:
+        detector_results = detector_results.copy()
+        detector_results["status"] = "ok"
+        detector_frame = ordered_frame(detector_results.to_dict("records"), DETECTOR_BASELINE_COLUMNS)
+    detector_frame.to_csv(output_dir / "detector_baseline.csv", index=False)
+    write_run_progress(output_dir, project_root, profile, stage, started_at, len(detector_dataset_frame), len(detector_frame), 0, 0, 0, None, notes)
+    return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+
+
+def insufficient_statistical_row(reason: str) -> dict:
+    return {
+        "status": "insufficient_data",
+        "metric_name": None,
+        "group_name": None,
+        "protocol_variant": None,
+        "payload_class": None,
+        "prompt_family": None,
+        "n": 0,
+        "mean": None,
+        "standard_deviation": None,
+        "bootstrap_ci_low_95": None,
+        "bootstrap_ci_high_95": None,
+        "notes": reason,
+    }
+
+
+def insufficient_effect_row(reason: str) -> dict:
+    return {
+        "status": "insufficient_data",
+        "comparison_name": None,
+        "metric_name": None,
+        "group_a": None,
+        "group_b": None,
+        "n_a": 0,
+        "n_b": 0,
+        "mean_a": None,
+        "mean_b": None,
+        "difference_b_minus_a": None,
+        "ratio_b_over_a": None,
+        "bootstrap_ci_low_95": None,
+        "bootstrap_ci_high_95": None,
+        "notes": reason,
+    }
+
+
+def run_paper_statistics_stage(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model_loaded: bool,
+    model_status: str,
+) -> dict:
+    stage = "paper-statistics"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(timezone.utc).isoformat()
+    notes = ["statistics and paper artifact stage"]
+    suite_profile = paper_profile_variant(profile)
+    n_resamples = 500 if suite_profile == "paper-smoke" else 1000
+    payload_frame = read_frame_if_exists(output_dir / "paper_payloads.csv", PAPER_PAYLOAD_COLUMNS)
+    rank_frame = read_frame_if_exists(output_dir / "paper_rank_pressure.csv", PAPER_RANK_PRESSURE_COLUMNS)
+    codec_frame = read_frame_if_exists(output_dir / "paper_codec_comparison.csv", PAPER_CODEC_COMPARISON_COLUMNS)
+    stego_frame = read_frame_if_exists(output_dir / "paper_stegotext_trials.csv", PAPER_STEGOTEXT_TRIAL_COLUMNS)
+    segmented_frame = read_frame_if_exists(output_dir / "paper_segmented_trials.csv", PAPER_SEGMENTED_TRIAL_COLUMNS)
+    feature_frame = read_frame_if_exists(output_dir / "paper_cover_text_features.csv", PAPER_COVER_TEXT_FEATURE_COLUMNS)
+    detector_frame = read_frame_if_exists(output_dir / "detector_baseline.csv", DETECTOR_BASELINE_COLUMNS)
+    if stego_frame.empty and segmented_frame.empty:
+        statistics_frame = ordered_frame(
+            [insufficient_statistical_row("need non-segmented or segmented trial rows")],
+            STATISTICAL_SUMMARY_COLUMNS,
+        )
+        effect_frame = ordered_frame(
+            [insufficient_effect_row("need non-segmented or segmented trial rows")],
+            EFFECT_SIZE_SUMMARY_COLUMNS,
+        )
+        notes.append("statistics written with insufficient_data status")
+    else:
+        statistics_frame = build_statistical_summary(stego_frame, segmented_frame, n_resamples)
+        if statistics_frame.empty:
+            statistics_frame = ordered_frame(
+                [insufficient_statistical_row("available trials did not contain summarizable metrics")],
+                STATISTICAL_SUMMARY_COLUMNS,
+            )
+        else:
+            statistics_frame["status"] = "ok"
+            statistics_frame = statistics_frame.reindex(columns=STATISTICAL_SUMMARY_COLUMNS)
+        effect_frame = build_effect_size_summary(stego_frame, segmented_frame, project_root, n_resamples)
+        if effect_frame.empty:
+            effect_frame = ordered_frame(
+                [insufficient_effect_row("available trials did not contain comparable groups")],
+                EFFECT_SIZE_SUMMARY_COLUMNS,
+            )
+        else:
+            effect_frame["status"] = "ok"
+            effect_frame = effect_frame.reindex(columns=EFFECT_SIZE_SUMMARY_COLUMNS)
+    statistics_frame.to_csv(output_dir / "statistical_summary.csv", index=False)
+    effect_frame.to_csv(output_dir / "effect_size_summary.csv", index=False)
+    figure_paths = write_paper_figures(
+        output_dir,
+        payload_frame,
+        rank_frame,
+        codec_frame,
+        stego_frame,
+        segmented_frame,
+        feature_frame,
+        detector_frame,
+        effect_frame,
+    )
+    write_paper_markdown_outputs(
+        output_dir,
+        profile,
+        {},
+        payload_frame,
+        stego_frame,
+        segmented_frame,
+        detector_frame,
+        statistics_frame,
+        effect_frame,
+        figure_paths,
+        project_root,
+    )
+    write_run_progress(output_dir, project_root, profile, stage, started_at, len(statistics_frame) + len(effect_frame), len(statistics_frame) + len(effect_frame), 0, 0, 0, None, notes)
+    return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
+
+
+def run_staged_paper_profile(
+    profile: str,
+    output_dir: Path,
+    project_root: Path,
+    model: Any,
+    model_path: Optional[Path],
+    model_repo_id: str,
+    model_filename: str,
+    model_path_relative: Optional[str],
+    command_line_args: Sequence[str],
+    model_loaded: bool,
+    model_status: str,
+    model_error: Optional[str],
+    args: Any,
+) -> dict:
+    if profile == "paper-smoke":
+        stages = [
+            "paper-diagnostics",
+            "paper-nonseg-generation",
+            "paper-segmented-generation",
+            "paper-baselines",
+            "paper-detector",
+            "paper-statistics",
+        ]
+    elif profile == "paper-main-pilot-resume":
+        stages = [
+            "paper-diagnostics",
+            "paper-nonseg-generation",
+            "paper-segmented-generation",
+            "paper-baselines",
+            "paper-detector",
+            "paper-statistics",
+        ]
+    else:
+        stages = [profile]
+    summary: dict = {}
+    for stage in stages:
+        if stage == "paper-diagnostics":
+            summary = run_paper_diagnostics_stage(
+                profile,
+                output_dir,
+                project_root,
+                model,
+                model_path,
+                model_repo_id,
+                model_filename,
+                model_path_relative,
+                command_line_args,
+                model_status,
+                model_loaded,
+                args,
+            )
+        elif stage == "paper-nonseg-generation":
+            summary = run_paper_nonseg_generation_stage(
+                profile,
+                output_dir,
+                project_root,
+                model,
+                model_repo_id,
+                model_filename,
+                model_path_relative,
+                model_loaded,
+                model_status,
+                args,
+            )
+        elif stage == "paper-segmented-generation":
+            summary = run_paper_segmented_generation_stage(
+                profile,
+                output_dir,
+                project_root,
+                model,
+                model_repo_id,
+                model_filename,
+                model_path_relative,
+                model_loaded,
+                model_status,
+                args,
+            )
+        elif stage == "paper-baselines":
+            summary = run_paper_baselines_stage(
+                profile,
+                output_dir,
+                project_root,
+                model,
+                model_repo_id,
+                model_filename,
+                model_loaded,
+                model_status,
+                args,
+            )
+        elif stage == "paper-detector":
+            summary = run_paper_detector_stage(profile, output_dir, project_root, model_loaded, model_status)
+        elif stage == "paper-statistics":
+            summary = run_paper_statistics_stage(profile, output_dir, project_root, model_loaded, model_status)
+        else:
+            raise ValueError("Unknown staged paper profile: {}".format(stage))
+    if model_error:
+        summary.setdefault("important_notes", []).append("Model error: {}".format(model_error))
+    return summary
 
 
 def build_statistical_summary(
@@ -1673,6 +2896,7 @@ def run_paper_analysis(
         project_root / "results" / "rankcloak_payload_granularity_pilot",
         project_root / "results" / "rankcloak_segmented_protocol_pilot",
         project_root / "results" / "rankcloak_segmented_quality_controls",
+        project_root / "results" / "rankcloak_paper_smoke",
         project_root / "results" / "rankcloak_paper_main_pilot",
         project_root / "results" / "rankcloak_paper_main",
     ]

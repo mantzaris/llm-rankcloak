@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-21T20:21:14.083165+00:00",
+  "timestamp": "2026-05-21T20:10:50.184841+00:00",
   "git_commit_hash": "40d87f61956752f4c7e41072679992be1e272bdc",
   "dirty_worktree": true,
   "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55)  [GCC 9.4.0]",
@@ -20,13 +20,13 @@
   "model_sha256": null,
   "model_sha256_note": "skipped because the model file exceeds the local hash limit",
   "model_file_size_bytes": 4920734272,
-  "profile": "paper-analysis",
-  "output_dir": "results/rankcloak_paper_analysis",
+  "profile": "paper-smoke",
+  "output_dir": "results/rankcloak_paper_smoke",
   "command_line_args": [
     "--profile",
-    "paper-analysis",
+    "paper-smoke",
     "--output-dir",
-    "results/rankcloak_paper_analysis",
+    "results/rankcloak_paper_smoke",
     "--overwrite"
   ]
 }

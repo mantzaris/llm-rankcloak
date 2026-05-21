@@ -1,0 +1,13 @@
+status,split_name,detector_name,dataset_name,feature_set,auc,accuracy,precision,recall,f1,train_rows,test_rows,notes
+ok,random_stratified,threshold_mean_token_log_probability,detector_forced_prefix,mean_token_log_probability,1.0,1.0,1.0,1.0,1.0,10,5,Dependency-free threshold baseline; higher score means lower token log probability.
+ok,random_stratified,logistic_regression,detector_forced_prefix,numeric_cover_features,1.0,1.0,1.0,1.0,1.0,10,5,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,random_forest,detector_forced_prefix,numeric_cover_features,1.0,1.0,1.0,1.0,1.0,10,5,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,threshold_mean_token_log_probability,detector_full_message,mean_token_log_probability,1.0,1.0,1.0,1.0,1.0,12,7,Dependency-free threshold baseline; higher score means lower token log probability.
+ok,random_stratified,logistic_regression,detector_full_message,numeric_cover_features,1.0,1.0,1.0,1.0,1.0,12,7,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,random_forest,detector_full_message,numeric_cover_features,1.0,0.8571428571428571,0.8571428571428571,1.0,0.923076923076923,12,7,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,threshold_mean_token_log_probability,detector_nonseg_only,mean_token_log_probability,1.0,1.0,1.0,1.0,1.0,5,2,Dependency-free threshold baseline; higher score means lower token log probability.
+ok,random_stratified,logistic_regression,detector_nonseg_only,numeric_cover_features,1.0,1.0,1.0,1.0,1.0,5,2,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,random_forest,detector_nonseg_only,numeric_cover_features,1.0,0.5,0.0,0.0,0.0,5,2,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,threshold_mean_token_log_probability,detector_segmented_full_only,mean_token_log_probability,1.0,1.0,1.0,1.0,1.0,10,5,Dependency-free threshold baseline; higher score means lower token log probability.
+ok,random_stratified,logistic_regression,detector_segmented_full_only,numeric_cover_features,1.0,1.0,1.0,1.0,1.0,10,5,Lightweight sklearn feature detector; no text content features.
+ok,random_stratified,random_forest,detector_segmented_full_only,numeric_cover_features,1.0,0.8,0.8,1.0,0.888888888888889,10,5,Lightweight sklearn feature detector; no text content features.
