@@ -31,8 +31,10 @@ package.
 - [x] Segmented quality-controls results are present.
 - [x] Paper-main result schemas are defined.
 - [x] Paper-main pilot and full output directories are defined.
+- [x] A partial staged paper-main-pilot manuscript package is present.
 - [ ] Paper-main repeated runs are not yet defined.
-- [ ] Statistical confidence intervals are not yet computed.
+- [ ] The staged paper-main-pilot generation matrix is not yet complete.
+- [x] Statistical confidence intervals are computed for available partial paper-main-pilot rows.
 - [ ] Human or LLM plausibility ratings are not yet collected.
 
 ## Reproducibility Readiness
@@ -115,6 +117,8 @@ package.
 - [x] Lightweight detector baseline has been implemented.
 - [x] Statistical analysis plan and bootstrap implementation have been added.
 - [ ] Model comparison or strong rationale for single-model scope.
+- [ ] Complete remaining staged paper-main-pilot rows if using it as manuscript
+  evidence: 86 non-segmented rows and 22 segmented rows remain.
 - [ ] Robustness tests or explicit limitation that results only apply to exact-copy channels.
 - [ ] Final figure generation scripts or notebooks.
 - [ ] Archived code and result artifacts with stable identifiers.

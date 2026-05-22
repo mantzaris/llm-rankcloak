@@ -17,9 +17,30 @@ Source artifacts:
 - `results/rankcloak_dialogue_key_pilot/summary.json`: 24/24 stegotext recovery, 63/63 codec roundtrip.
 - `results/rankcloak_segmented_protocol_pilot/summary.json`: control request exact recovery true, 10/10 response recovery.
 - `results/rankcloak_segmented_quality_controls/summary.json`: 5/5 control recovery, 10/10 response recovery.
+- `results/rankcloak_paper_main_pilot/summary.json`: partial staged paper-main-pilot
+  package with 10/10 non-segmented recovery and 2/2 segmented recovery.
 
 Interpretation: exact recovery is reliable in the current controlled local setting. This
 should be stated with the exact-copy, shared-configuration condition attached.
+
+## Partial Paper-Main-Pilot Package
+
+Source artifacts:
+
+- `results/rankcloak_paper_main_pilot/PAPER_RESULTS_SUMMARY.md`
+- `results/rankcloak_paper_main_pilot/PAPER_COMPARISON_TABLES.md`
+- `results/rankcloak_paper_main_pilot/PAPER_FIGURE_INDEX.md`
+- `paper_artifacts/rankcloak_paper_main_pilot/README.md`
+- `notes/19_final_paper_results_package.md`
+
+The staged paper-main-pilot package currently contains 12 payload rows, 12 direct
+rank-pressure rows, 36 codec-comparison rows, 10 non-segmented stegotext rows,
+2 segmented stegotext rows, 14 baseline rows, 124 detector dataset rows,
+57 detector result rows, 66 bootstrap summary rows, and 14 effect-size rows.
+
+Interpretation: this is a manuscript-preparation and pipeline-validation package, not
+the complete planned pilot matrix. The remaining planned generation is 86
+non-segmented rows and 22 segmented rows.
 
 ## Direct Subword Rank-Pressure Evidence
 

@@ -5,6 +5,16 @@ artifacts, required columns, current status, and interpretation notes.
 
 ## Proposed Figures
 
+Current generated paper-main-pilot figures are available under:
+
+```text
+results/rankcloak_paper_main_pilot/figures/
+paper_artifacts/rankcloak_paper_main_pilot/figures/
+```
+
+They are generated from a partial staged pilot and should be labeled as pilot or
+pipeline-validation figures unless the remaining generation matrix is completed.
+
 ### Figure 1: RankCloak Concept Diagram
 
 Purpose: show payload encoding, rank sequence, prompt-key cover generation, exact-copy

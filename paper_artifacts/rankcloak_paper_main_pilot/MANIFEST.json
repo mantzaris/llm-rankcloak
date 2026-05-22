@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-05-21T21:29:22.762475+00:00",
+  "timestamp": "2026-05-21T21:02:46.105981+00:00",
   "git_commit_hash": "2ab13a82834d0eaeb218c4db1b13c7ce9b712dce",
-  "dirty_worktree": true,
+  "dirty_worktree": false,
   "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55)  [GCC 9.4.0]",
   "platform": "Linux-5.4.0-216-generic-x86_64-with-glibc2.29",
   "processor": "x86_64",
@@ -20,13 +20,13 @@
   "model_sha256": null,
   "model_sha256_note": "skipped because the model file exceeds the local hash limit",
   "model_file_size_bytes": 4920734272,
-  "profile": "paper-analysis",
-  "output_dir": "results/rankcloak_paper_analysis",
+  "profile": "paper-diagnostics",
+  "output_dir": "results/rankcloak_paper_main_pilot",
   "command_line_args": [
     "--profile",
-    "paper-analysis",
+    "paper-diagnostics",
     "--output-dir",
-    "results/rankcloak_paper_analysis",
-    "--overwrite"
+    "results/rankcloak_paper_main_pilot",
+    "--resume"
   ]
 }

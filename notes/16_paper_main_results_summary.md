@@ -71,12 +71,15 @@ Current implementation status:
 - `paper-main-pilot` is implemented.
 - Staged paper profiles are implemented so the pilot can be resumed instead of rerun
   as one large process.
-- A first `paper-main-pilot` run was started in `results/rankcloak_paper_main_pilot/`
-  but was stopped during model-backed generation because it exceeded the interactive
-  runtime window. The partial directory contains `paper_payloads.csv`,
-  `paper_rank_pressure.csv`, and `paper_codec_comparison.csv`.
+- The staged `results/rankcloak_paper_main_pilot/` package now contains diagnostics,
+  10 non-segmented trials, 2 segmented trials, 14 baselines, detector outputs,
+  bootstrap/effect-size outputs, Markdown summaries, and figures.
+- The completed staged rows record 12/12 exact recovery: 10 non-segmented pass,
+  0 non-segmented fail, 2 segmented pass, and 0 segmented fail.
+- The planned pilot generation matrix is still incomplete: 86 non-segmented rows and
+  22 segmented rows remain.
 - `paper-analysis` completed in `results/rankcloak_paper_analysis/` and aggregated
-  existing pilot directories plus the partial paper-main-pilot diagnostic tables.
+  existing pilot directories plus the current partial paper-main-pilot package.
 - `paper-main` is implemented but has not been run.
 
 For actual numbers, use `summary.json`, `PAPER_RESULTS_SUMMARY.md`, and the generated
@@ -114,3 +117,6 @@ python3 scripts/run_experiment.py --profile paper-statistics --output-dir result
 
 `RUN_PROGRESS.json` records planned trials, skipped existing rows, completed trials,
 failures, remaining trials, and the last completed stable `trial_id`.
+
+See `notes/19_final_paper_results_package.md` for final package row counts and
+manuscript-use guidance.

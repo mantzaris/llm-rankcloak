@@ -22,6 +22,9 @@ This directory documents the current RankCloak repository state, implemented cod
 - `16_paper_main_results_summary.md`: placeholder and index for paper-main pilot, full paper-main, and paper-analysis outputs.
 - `17_detector_baseline_plan.md`: lightweight feature-only detector baseline design and caveats.
 - `18_statistical_analysis_plan.md`: deterministic bootstrap and effect-size analysis plan.
+- `19_final_paper_results_package.md`: final staged package status, row counts,
+  recovery summary, detector/statistics caveats, figures, supported claims, and
+  remaining commands.
 - Staged paper-suite resume behavior is documented in `15_paper_main_experiment_plan.md`
   and current staged run status is tracked in `16_paper_main_results_summary.md`.
 
