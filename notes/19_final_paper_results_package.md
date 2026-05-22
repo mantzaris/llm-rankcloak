@@ -4,9 +4,7 @@
 
 The staged paper-main-pilot package was advanced from diagnostics-only to a partial
 manuscript-preparation package. The full planned generation matrix was not completed
-because the first 10-trial non-segmented batch and a two-trial segmented batch showed
-that completing all remaining generation would likely take multiple additional hours
-on CPU.
+because the remaining staged generation would take multiple additional hours on CPU.
 
 Current package path:
 
@@ -33,21 +31,21 @@ results/rankcloak_paper_analysis/
 | `paper_payloads.csv` | 12 |
 | `paper_rank_pressure.csv` | 12 |
 | `paper_codec_comparison.csv` | 36 |
-| `paper_stegotext_trials.csv` | 10 |
-| `paper_segmented_trials.csv` | 2 |
-| `paper_segmented_messages.jsonl` | 16 |
-| `paper_baseline_examples.jsonl` | 14 |
-| `paper_cover_text_features.csv` | 88 |
-| `detector_dataset.csv` | 124 |
+| `paper_stegotext_trials.csv` | 20 |
+| `paper_segmented_trials.csv` | 7 |
+| `paper_segmented_messages.jsonl` | 48 |
+| `paper_baseline_examples.jsonl` | 15 |
+| `paper_cover_text_features.csv` | 227 |
+| `detector_dataset.csv` | 240 |
 | `detector_baseline.csv` | 57 |
-| `statistical_summary.csv` | 66 |
+| `statistical_summary.csv` | 97 |
 | `effect_size_summary.csv` | 14 |
 
 ## Recovery Summary
 
-- Non-segmented recovery: 10 pass, 0 fail.
-- Segmented recovery: 2 pass, 0 fail.
-- Total completed paper-main-pilot recovery: 12 pass, 0 fail.
+- Non-segmented recovery: 20 pass, 0 fail.
+- Segmented recovery: 6 pass, 1 fail.
+- Total completed paper-main-pilot recovery: 26 pass, 1 fail.
 
 These results support exact recovery only for the completed rows under exact-copy
 conditions.
@@ -56,23 +54,25 @@ conditions.
 
 Non-segmented completed rows:
 
-- `nonseg_ascii_b8`: 4 rows.
-- `nonseg_ascii_b16`: 3 rows.
-- `nonseg_hex_nibble_b16`: 3 rows.
+- `nonseg_ascii_b8`: 8 rows.
+- `nonseg_ascii_b16`: 6 rows.
+- `nonseg_hex_nibble_b16`: 6 rows.
 
 Segmented completed rows:
 
-- `segmented_hex_single_topic_sentence_tail_filtered`: 1 row.
-- `segmented_hex_multi_topic_sentence_tail_filtered`: 1 row.
+- `segmented_hex_single_topic_sentence_tail_filtered`: 3 rows.
+- `segmented_hex_multi_topic_sentence_tail_filtered`: 3 rows.
+- `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`: 1 row, with
+  exact recovery failure.
 
 Remaining planned generation:
 
-- Non-segmented: 86 rows remaining from the 96-row pilot plan.
-- Segmented: 22 rows remaining from the 24-row pilot plan.
+- Non-segmented: 76 rows remaining from the 96-row pilot plan.
+- Segmented: 17 rows remaining from the 24-row pilot plan.
 
 ## Detector Summary
 
-The detector stage wrote 124 dataset rows and 57 result rows. The detector uses only
+The detector stage wrote 240 dataset rows and 57 result rows. The detector uses only
 numeric and Boolean features and does not train on raw text content. Several detector
 rows report high AUC values on the partial pilot, but these should be treated as
 pipeline checks rather than strong steganalysis evidence because the sample is small
@@ -80,7 +80,7 @@ and incomplete.
 
 ## Statistics Summary
 
-The statistics stage wrote 66 bootstrap summary rows and 14 effect-size rows. These
+The statistics stage wrote 97 bootstrap summary rows and 14 effect-size rows. These
 rows are useful for checking the analysis pipeline and for drafting table formats.
 They should not be treated as final inferential results until the planned pilot matrix
 or a clearly declared subset is completed.
@@ -138,7 +138,7 @@ Recommended supplement candidates:
 - Completed generation rows are concentrated at the beginning of the deterministic
   planned trial order.
 - Detector and bootstrap results are based on a small incomplete matrix.
-- Segment-level evidence currently covers only `paper_sha256_hex_000`.
+- One experimental segmented lead-in row failed exact recovery.
 
 ## Exact Next Writing Tasks
 

@@ -30,15 +30,17 @@ paper-main matrix. The current staged pilot contains:
 - 12 payload rows.
 - 12 direct rank-pressure rows.
 - 36 codec-comparison rows.
-- 10 non-segmented RankCloak trials out of 96 planned.
-- 2 segmented RankCloak trials out of 24 planned.
-- 14 greedy baseline examples.
-- 124 detector dataset rows.
+- 20 non-segmented RankCloak trials out of 96 planned.
+- 7 segmented RankCloak trials out of 24 planned.
+- 15 greedy baseline examples.
+- 240 detector dataset rows.
 - 57 detector result rows.
-- 66 statistical summary rows.
+- 97 statistical summary rows.
 - 14 effect-size rows.
 
-Exact recovery in the completed staged pilot rows is 12 pass and 0 fail.
+Exact recovery in the completed staged pilot rows is 26 pass and 1 fail.
+The observed failure is in the experimental lead-in segmented variant,
+`segmented_hex_multi_topic_leadin8_sentence_tail_filtered`.
 
 ## Paper Use
 

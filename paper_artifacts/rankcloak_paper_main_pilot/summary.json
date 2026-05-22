@@ -1,7 +1,7 @@
 {
   "profile": "paper-statistics",
   "stage": "paper-statistics",
-  "timestamp": "2026-05-21T21:29:15.159213+00:00",
+  "timestamp": "2026-05-22T02:51:32.012718+00:00",
   "output_dir": "results/rankcloak_paper_main_pilot",
   "model_loaded": false,
   "completed_stage_names": [
@@ -44,23 +44,24 @@
     "results/rankcloak_paper_main_pilot/figures/paper_recovery_by_variant.png",
     "results/rankcloak_paper_main_pilot/figures/paper_segmented_protocol_variant_quality.png"
   ],
-  "nonseg_trial_count": 10,
+  "nonseg_trial_count": 20,
   "nonseg_planned_trial_count": 96,
-  "nonseg_remaining_trial_count": 86,
-  "segmented_trial_count": 2,
+  "nonseg_remaining_trial_count": 76,
+  "segmented_trial_count": 7,
   "segmented_planned_trial_count": 24,
-  "segmented_remaining_trial_count": 22,
-  "baseline_count": 14,
-  "detector_rows": 124,
+  "segmented_remaining_trial_count": 17,
+  "baseline_count": 15,
+  "detector_rows": 240,
   "detector_results_available": true,
-  "statistical_summary_rows": 66,
+  "statistical_summary_rows": 97,
   "effect_size_rows": 14,
-  "recovery_pass_count": 12,
-  "recovery_fail_count": 0,
+  "recovery_pass_count": 26,
+  "recovery_fail_count": 1,
   "important_notes": [
     "statistics and paper artifact stage",
     "Model status: not_requested",
     "Partial staged pilot package: generation matrix is not complete.",
-    "Remaining generation: 86 non-segmented rows and 22 segmented rows."
+    "Remaining generation: 76 non-segmented rows and 17 segmented rows.",
+    "One completed segmented lead-in trial failed exact recovery."
   ]
 }

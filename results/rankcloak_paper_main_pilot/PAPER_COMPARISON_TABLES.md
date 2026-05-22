@@ -27,11 +27,12 @@
 
 | Variant | Trials | Passes |
 | --- | ---: | ---: |
-| `nonseg_ascii_b16` | 3 | 3 |
-| `nonseg_ascii_b8` | 4 | 4 |
-| `nonseg_hex_nibble_b16` | 3 | 3 |
-| `segmented_hex_multi_topic_sentence_tail_filtered` | 1 | 1 |
-| `segmented_hex_single_topic_sentence_tail_filtered` | 1 | 1 |
+| `nonseg_ascii_b16` | 6 | 6 |
+| `nonseg_ascii_b8` | 8 | 8 |
+| `nonseg_hex_nibble_b16` | 6 | 6 |
+| `segmented_hex_multi_topic_leadin8_sentence_tail_filtered` | 1 | 0 |
+| `segmented_hex_multi_topic_sentence_tail_filtered` | 3 | 3 |
+| `segmented_hex_single_topic_sentence_tail_filtered` | 3 | 3 |
 
 ## Table D: Payload Representation Rank Counts
 

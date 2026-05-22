@@ -74,10 +74,12 @@ Current implementation status:
 - The staged `results/rankcloak_paper_main_pilot/` package now contains diagnostics,
   10 non-segmented trials, 2 segmented trials, 14 baselines, detector outputs,
   bootstrap/effect-size outputs, Markdown summaries, and figures.
-- The completed staged rows record 12/12 exact recovery: 10 non-segmented pass,
-  0 non-segmented fail, 2 segmented pass, and 0 segmented fail.
-- The planned pilot generation matrix is still incomplete: 86 non-segmented rows and
-  22 segmented rows remain.
+- The completed staged rows record 26/27 exact recovery: 20 non-segmented pass,
+  0 non-segmented fail, 6 segmented pass, and 1 segmented fail.
+- The observed segmented failure is in
+  `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`.
+- The planned pilot generation matrix is still incomplete: 76 non-segmented rows and
+  17 segmented rows remain.
 - `paper-analysis` completed in `results/rankcloak_paper_analysis/` and aggregated
   existing pilot directories plus the current partial paper-main-pilot package.
 - `paper-main` is implemented but has not been run.

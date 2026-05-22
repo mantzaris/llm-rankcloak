@@ -118,7 +118,7 @@ package.
 - [x] Statistical analysis plan and bootstrap implementation have been added.
 - [ ] Model comparison or strong rationale for single-model scope.
 - [ ] Complete remaining staged paper-main-pilot rows if using it as manuscript
-  evidence: 86 non-segmented rows and 22 segmented rows remain.
+  evidence: 76 non-segmented rows and 17 segmented rows remain.
 - [ ] Robustness tests or explicit limitation that results only apply to exact-copy channels.
 - [ ] Final figure generation scripts or notebooks.
 - [ ] Archived code and result artifacts with stable identifiers.

@@ -8,15 +8,18 @@ This run evaluates deterministic synthetic payloads under exact-copy conditions.
 
 ## Exact Recovery Summary
 
-- Non-segmented recovery: 10 pass, 0 fail.
-- Segmented recovery: 2 pass, 0 fail.
+- Non-segmented recovery: 20 pass, 0 fail.
+- Segmented recovery: 6 pass, 1 fail.
 
 ## Partial Pilot Coverage
 
-This staged paper-main-pilot package is partial. It currently includes 10 of 96
-planned non-segmented generation trials and 2 of 24 planned segmented generation
-trials. The remaining planned generation is 86 non-segmented rows and 22 segmented
-rows. Detector, statistics, effect-size, and figure outputs are valid for the current
+This staged paper-main-pilot package is partial. It currently includes 20 of 96
+planned non-segmented generation trials and 7 of 24 planned segmented generation
+trials. The remaining planned generation is 76 non-segmented rows and 17 segmented
+rows. The observed segmented failure is in
+`segmented_hex_multi_topic_leadin8_sentence_tail_filtered`.
+
+Detector, statistics, effect-size, and figure outputs are valid for the current
 partial rows but should not be presented as final paper-main evidence unless this
 subset is explicitly declared.
 
@@ -62,7 +65,7 @@ Detector rows: 57. These are lightweight feature baselines only and do not estab
 
 ## Statistical Uncertainty
 
-Bootstrap summary rows: 66. Effect-size rows: 14.
+Bootstrap summary rows: 97. Effect-size rows: 14.
 
 ## Recommended Main Paper Claims
 

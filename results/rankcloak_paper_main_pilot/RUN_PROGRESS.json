@@ -1,15 +1,15 @@
 {
-  "profile": "paper-statistics",
-  "stage": "paper-statistics",
+  "profile": "paper-baselines",
+  "stage": "paper-baselines",
   "output_dir": "results/rankcloak_paper_main_pilot",
-  "started_at": "2026-05-21T21:29:09.074933+00:00",
-  "finished_at": "2026-05-21T21:29:15.143197+00:00",
-  "planned_trials": 80,
-  "completed_trials": 80,
-  "skipped_existing_trials": 0,
+  "started_at": "2026-05-22T02:42:43.045014+00:00",
+  "finished_at": "2026-05-22T03:38:03.472587+00:00",
+  "planned_trials": 20,
+  "completed_trials": 6,
+  "skipped_existing_trials": 14,
   "failed_trials": 0,
-  "remaining_trials": 0,
-  "last_completed_trial_id": null,
+  "remaining_trials": 5,
+  "last_completed_trial_id": "baseline__recipe_blog__tokens__46",
   "generated_files": [
     "results/rankcloak_paper_main_pilot/paper_payloads.csv",
     "results/rankcloak_paper_main_pilot/paper_rank_pressure.csv",
@@ -43,9 +43,6 @@
     "results/rankcloak_paper_main_pilot/figures/paper_segmented_protocol_variant_quality.png"
   ],
   "notes": [
-    "statistics and paper artifact stage",
-    "Partial staged pilot package.",
-    "Non-segmented generation completed 10 of 96 planned rows; 86 remain.",
-    "Segmented generation completed 2 of 24 planned rows; 22 remain."
+    "baseline generation stage"
   ]
 }

@@ -3,12 +3,12 @@
 - Profile: paper-statistics
 - Stage: paper-statistics
 - Model status: not_requested
-- Non-segmented trials: 10
-- Segmented trials: 2
-- Baseline rows: 14
-- Recovery: 12 pass, 0 fail
-- Detector dataset rows: 124
-- Statistical rows: 66
+- Non-segmented trials: 20
+- Segmented trials: 7
+- Baseline rows: 15
+- Recovery: 26 pass, 1 fail
+- Detector dataset rows: 240
+- Statistical rows: 97
 - Effect-size rows: 14
 
 ## Scope
@@ -19,9 +19,10 @@ This is an empirical exact-copy measurement study over deterministic synthetic p
 
 This staged package is partial. Completed generation rows are:
 
-- Non-segmented: 10 completed out of 96 planned, with 86 remaining.
-- Segmented: 2 completed out of 24 planned, with 22 remaining.
-- Completed recovery rows: 12 pass, 0 fail.
+- Non-segmented: 20 completed out of 96 planned, with 76 remaining.
+- Segmented: 7 completed out of 24 planned, with 17 remaining.
+- Completed recovery rows: 26 pass, 1 fail.
+- The observed failure is in `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`.
 
 The detector and statistics files are valid for the current partial rows, but they
 should not be treated as final paper-main evidence until the remaining staged
