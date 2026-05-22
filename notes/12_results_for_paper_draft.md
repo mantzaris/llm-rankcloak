@@ -35,7 +35,7 @@ Source artifacts:
 
 The staged paper-main-pilot package currently contains 12 payload rows, 12 direct
 rank-pressure rows, 36 codec-comparison rows, 20 non-segmented stegotext rows,
-7 segmented stegotext rows, 15 baseline rows, 240 detector dataset rows,
+7 segmented stegotext rows, 22 baseline rows, 272 detector dataset rows,
 57 detector result rows, 97 bootstrap summary rows, and 14 effect-size rows.
 
 Interpretation: this is a manuscript-preparation and pipeline-validation package, not

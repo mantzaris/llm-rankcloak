@@ -2,8 +2,8 @@
   "profile": "paper-statistics",
   "stage": "paper-statistics",
   "output_dir": "results/rankcloak_paper_main_pilot",
-  "started_at": "2026-05-22T02:51:13.284000+00:00",
-  "finished_at": "2026-05-22T02:51:31.993429+00:00",
+  "started_at": "2026-05-22T04:11:43.143699+00:00",
+  "finished_at": "2026-05-22T04:12:15.337609+00:00",
   "planned_trials": 111,
   "completed_trials": 111,
   "skipped_existing_trials": 0,
@@ -43,10 +43,6 @@
     "results/rankcloak_paper_main_pilot/figures/paper_segmented_protocol_variant_quality.png"
   ],
   "notes": [
-    "statistics and paper artifact stage",
-    "Partial staged pilot package.",
-    "Non-segmented generation completed 20 of 96 planned rows; 76 remain.",
-    "Segmented generation completed 7 of 24 planned rows; 17 remain.",
-    "One completed segmented lead-in trial failed exact recovery."
+    "statistics and paper artifact stage"
   ]
 }

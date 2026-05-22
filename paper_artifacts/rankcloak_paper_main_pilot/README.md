@@ -32,8 +32,8 @@ paper-main matrix. The current staged pilot contains:
 - 36 codec-comparison rows.
 - 20 non-segmented RankCloak trials out of 96 planned.
 - 7 segmented RankCloak trials out of 24 planned.
-- 15 greedy baseline examples.
-- 240 detector dataset rows.
+- 22 greedy baseline examples.
+- 272 detector dataset rows.
 - 57 detector result rows.
 - 97 statistical summary rows.
 - 14 effect-size rows.

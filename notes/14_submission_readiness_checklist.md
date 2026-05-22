@@ -59,7 +59,10 @@ package.
 - [ ] Statistical tests are not yet selected.
 - [ ] Multiple-comparison plan is not yet written.
 - [ ] Sample sizes for paper-main experiments are not yet justified.
-- [ ] Confidence intervals or bootstrap intervals are not yet implemented.
+- [x] Confidence intervals or bootstrap intervals are implemented for available
+  paper-suite rows.
+- [ ] Full-matrix confidence intervals are not final until the remaining staged
+  paper-main-pilot rows are completed or a smaller subset is explicitly frozen.
 
 ## Detection And Steganalysis Readiness
 

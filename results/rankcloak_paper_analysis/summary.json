@@ -1,6 +1,6 @@
 {
   "profile": "paper-analysis",
-  "timestamp": "2026-05-22T02:51:52.891548+00:00",
+  "timestamp": "2026-05-22T04:12:38.870752+00:00",
   "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
   "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
   "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
@@ -17,7 +17,7 @@
   ],
   "recovery_rows": 8,
   "payload_representation_rows": 50,
-  "prompt_quality_rows": 615,
+  "prompt_quality_rows": 622,
   "segmented_rows": 29,
   "detector_rows": 69,
   "generated_result_files": [

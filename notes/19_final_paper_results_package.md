@@ -34,9 +34,9 @@ results/rankcloak_paper_analysis/
 | `paper_stegotext_trials.csv` | 20 |
 | `paper_segmented_trials.csv` | 7 |
 | `paper_segmented_messages.jsonl` | 48 |
-| `paper_baseline_examples.jsonl` | 15 |
-| `paper_cover_text_features.csv` | 227 |
-| `detector_dataset.csv` | 240 |
+| `paper_baseline_examples.jsonl` | 22 |
+| `paper_cover_text_features.csv` | 234 |
+| `detector_dataset.csv` | 272 |
 | `detector_baseline.csv` | 57 |
 | `statistical_summary.csv` | 97 |
 | `effect_size_summary.csv` | 14 |
@@ -72,7 +72,7 @@ Remaining planned generation:
 
 ## Detector Summary
 
-The detector stage wrote 240 dataset rows and 57 result rows. The detector uses only
+The detector stage wrote 272 dataset rows and 57 result rows. The detector uses only
 numeric and Boolean features and does not train on raw text content. Several detector
 rows report high AUC values on the partial pilot, but these should be treated as
 pipeline checks rather than strong steganalysis evidence because the sample is small

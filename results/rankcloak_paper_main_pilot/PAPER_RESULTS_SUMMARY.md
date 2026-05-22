@@ -11,18 +11,6 @@ This run evaluates deterministic synthetic payloads under exact-copy conditions.
 - Non-segmented recovery: 20 pass, 0 fail.
 - Segmented recovery: 6 pass, 1 fail.
 
-## Partial Pilot Coverage
-
-This staged paper-main-pilot package is partial. It currently includes 20 of 96
-planned non-segmented generation trials and 7 of 24 planned segmented generation
-trials. The remaining planned generation is 76 non-segmented rows and 17 segmented
-rows. The observed segmented failure is in
-`segmented_hex_multi_topic_leadin8_sentence_tail_filtered`.
-
-Detector, statistics, effect-size, and figure outputs are valid for the current
-partial rows but should not be presented as final paper-main evidence unless this
-subset is explicitly declared.
-
 ## Payload Representation Results
 
 See `paper_codec_comparison.csv` and `paper_payloads.csv`.
@@ -50,6 +38,9 @@ See `paper_segmented_trials.csv` and `paper_segmented_messages.jsonl`.
 ## Lead-In Segmented Variant Results
 
 The lead-in variant is implemented as `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`. The decoder ignores the greedy lead-in, decodes the forced span, and ignores the tail.
+
+The lead-in segmented variant produced one exact-recovery failure in the partial pilot and is treated as experimental.
+
 
 ## Forced-Prefix Versus Full-Message Results
 

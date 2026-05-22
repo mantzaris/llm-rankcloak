@@ -1,15 +1,15 @@
 {
-  "profile": "paper-baselines",
-  "stage": "paper-baselines",
+  "profile": "paper-statistics",
+  "stage": "paper-statistics",
   "output_dir": "results/rankcloak_paper_main_pilot",
-  "started_at": "2026-05-22T02:42:43.045014+00:00",
-  "finished_at": "2026-05-22T03:38:03.472587+00:00",
-  "planned_trials": 20,
-  "completed_trials": 6,
-  "skipped_existing_trials": 14,
+  "started_at": "2026-05-22T04:11:43.143699+00:00",
+  "finished_at": "2026-05-22T04:12:15.337609+00:00",
+  "planned_trials": 111,
+  "completed_trials": 111,
+  "skipped_existing_trials": 0,
   "failed_trials": 0,
-  "remaining_trials": 5,
-  "last_completed_trial_id": "baseline__recipe_blog__tokens__46",
+  "remaining_trials": 0,
+  "last_completed_trial_id": null,
   "generated_files": [
     "results/rankcloak_paper_main_pilot/paper_payloads.csv",
     "results/rankcloak_paper_main_pilot/paper_rank_pressure.csv",
@@ -43,6 +43,6 @@
     "results/rankcloak_paper_main_pilot/figures/paper_segmented_protocol_variant_quality.png"
   ],
   "notes": [
-    "baseline generation stage"
+    "statistics and paper artifact stage"
   ]
 }

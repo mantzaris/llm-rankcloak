@@ -25,14 +25,14 @@
 
 ## Table C: Recovery Summary By Protocol Variant
 
-| Variant | Trials | Passes |
-| --- | ---: | ---: |
-| `nonseg_ascii_b16` | 6 | 6 |
-| `nonseg_ascii_b8` | 8 | 8 |
-| `nonseg_hex_nibble_b16` | 6 | 6 |
-| `segmented_hex_multi_topic_leadin8_sentence_tail_filtered` | 1 | 0 |
-| `segmented_hex_multi_topic_sentence_tail_filtered` | 3 | 3 |
-| `segmented_hex_single_topic_sentence_tail_filtered` | 3 | 3 |
+| Variant | Trials | Passes | Failures |
+| --- | ---: | ---: | ---: |
+| `nonseg_ascii_b16` | 6 | 6 | 0 |
+| `nonseg_ascii_b8` | 8 | 8 | 0 |
+| `nonseg_hex_nibble_b16` | 6 | 6 | 0 |
+| `segmented_hex_multi_topic_leadin8_sentence_tail_filtered` | 1 | 0 | 1 |
+| `segmented_hex_multi_topic_sentence_tail_filtered` | 3 | 3 | 0 |
+| `segmented_hex_single_topic_sentence_tail_filtered` | 3 | 3 | 0 |
 
 ## Table D: Payload Representation Rank Counts
 
@@ -56,3 +56,4 @@ See `detector_baseline.csv`.
 - Exact-copy conditions only.
 - No encryption, key exchange, authentication, signing, or cryptographic security claim.
 - No undetectability claim.
+- The lead-in segmented variant produced one exact-recovery failure in the partial pilot and is treated as experimental.

@@ -117,10 +117,19 @@ def ordered_frame(rows: Sequence[dict], columns: Sequence[str]) -> pd.DataFrame:
     return frame.reindex(columns=list(columns) + extra_columns)
 
 
+def write_csv_lf(frame: pd.DataFrame, path: Path) -> None:
+    """Write a CSV with LF row terminators across pandas versions."""
+
+    try:
+        frame.to_csv(path, index=False, lineterminator="\n")
+    except TypeError:
+        frame.to_csv(path, index=False, line_terminator="\n")
+
+
 def write_frame(path: Path, rows: Sequence[dict], columns: Sequence[str]) -> pd.DataFrame:
     frame = ordered_frame(rows, columns)
     path.parent.mkdir(parents=True, exist_ok=True)
-    frame.to_csv(path, index=False)
+    write_csv_lf(frame, path)
     return frame
 
 
@@ -185,7 +194,7 @@ def append_frame_unique(
     if not combined.empty and all(column in combined.columns for column in id_columns):
         combined = combined.drop_duplicates(subset=list(id_columns), keep="last")
     path.parent.mkdir(parents=True, exist_ok=True)
-    combined.to_csv(path, index=False)
+    write_csv_lf(combined, path)
     return combined
 
 
@@ -665,8 +674,11 @@ def recover_forced_ranks_after_leadin(
     allowed_token_mask: Optional[Sequence[bool]],
 ) -> List[int]:
     evaluate_context(model, list(map(int, context_token_ids)))
-    if leadin_token_ids:
-        model.eval(list(map(int, leadin_token_ids)))
+    # Replay the lead-in with the same one-token evaluation schedule used
+    # during generation. Batched replay can slightly perturb llama.cpp logits
+    # for quantized models, which is enough to change low-rank recovery.
+    for leadin_token_id in map(int, leadin_token_ids):
+        model.eval([leadin_token_id])
     recovered: List[int] = []
     for token_id in map(int, forced_token_ids):
         logits = get_last_logits(model)
@@ -1451,6 +1463,16 @@ def write_staged_summary(
     effect_frame = read_frame_if_exists(output_dir / "effect_size_summary.csv", EFFECT_SIZE_SUMMARY_COLUMNS)
     stego_passes, stego_failures = bool_sum(stego_frame, "exact_recovery")
     segmented_passes, segmented_failures = bool_sum(segmented_frame, "exact_recovery")
+    suite_profile = paper_profile_variant(profile)
+    planned_payloads = payloads_for_profile(suite_profile)
+    planned_prompt_names = prompt_names_for_profile(suite_profile)
+    planned_nonseg_count = len(planned_nonseg_trials(suite_profile, planned_payloads, planned_prompt_names))
+    planned_segmented_count = len(planned_segmented_trials(suite_profile, planned_payloads))
+    extra_notes = []
+    if segmented_failures:
+        extra_notes.append(
+            "The lead-in segmented variant produced one exact-recovery failure in the partial pilot and is treated as experimental."
+        )
     generated_files = stage_generated_files(output_dir)
     completed_stage_names = []
     if (output_dir / "paper_payloads.csv").exists():
@@ -1474,7 +1496,11 @@ def write_staged_summary(
         "completed_stage_names": completed_stage_names,
         "generated_result_files": [repo_relative_path(path, project_root) for path in generated_files],
         "nonseg_trial_count": int(len(stego_frame)),
+        "nonseg_planned_trial_count": int(planned_nonseg_count),
+        "nonseg_remaining_trial_count": int(max(0, planned_nonseg_count - len(stego_frame))),
         "segmented_trial_count": int(len(segmented_frame)),
+        "segmented_planned_trial_count": int(planned_segmented_count),
+        "segmented_remaining_trial_count": int(max(0, planned_segmented_count - len(segmented_frame))),
         "baseline_count": int(len(baseline_rows)),
         "detector_rows": int(len(detector_dataset_frame)),
         "detector_results_available": bool(not detector_frame.empty and "ok" in set(detector_frame.get("status", []))),
@@ -1482,7 +1508,7 @@ def write_staged_summary(
         "effect_size_rows": int(len(effect_frame)),
         "recovery_pass_count": int(stego_passes + segmented_passes),
         "recovery_fail_count": int(stego_failures + segmented_failures),
-        "important_notes": list(notes) + ["Model status: {}".format(model_status)],
+        "important_notes": list(notes) + extra_notes + ["Model status: {}".format(model_status)],
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     next_command = (
@@ -1495,7 +1521,11 @@ def write_staged_summary(
 - Stage: {stage}
 - Model status: {model_status}
 - Non-segmented trials: {nonseg}
+- Non-segmented planned trials: {nonseg_planned}
+- Non-segmented remaining trials: {nonseg_remaining}
 - Segmented trials: {segmented}
+- Segmented planned trials: {segmented_planned}
+- Segmented remaining trials: {segmented_remaining}
 - Baseline rows: {baseline}
 - Recovery: {passes} pass, {failures} fail
 - Detector dataset rows: {detector_rows}
@@ -1506,6 +1536,8 @@ def write_staged_summary(
 
 This is an empirical exact-copy measurement study over deterministic synthetic payloads. It is not encryption, key exchange, authentication, signing, digital signatures, credential handling, cryptographic security, or an undetectability claim.
 
+The lead-in segmented variant is experimental. In the current partial pilot it produced one exact-recovery failure, so it should be reported separately from the non-lead-in segmented variants.
+
 ## Next Recommended Command
 
 `{next_command}`
@@ -1514,7 +1546,11 @@ This is an empirical exact-copy measurement study over deterministic synthetic p
         stage=stage,
         model_status=model_status,
         nonseg=len(stego_frame),
+        nonseg_planned=planned_nonseg_count,
+        nonseg_remaining=max(0, planned_nonseg_count - len(stego_frame)),
         segmented=len(segmented_frame),
+        segmented_planned=planned_segmented_count,
+        segmented_remaining=max(0, planned_segmented_count - len(segmented_frame)),
         baseline=len(baseline_rows),
         passes=summary["recovery_pass_count"],
         failures=summary["recovery_fail_count"],
@@ -1848,7 +1884,7 @@ def run_paper_detector_stage(
     feature_frame = read_frame_if_exists(output_dir / "paper_cover_text_features.csv", PAPER_COVER_TEXT_FEATURE_COLUMNS)
     detector_dataset = prepare_detector_dataset(feature_frame)
     detector_dataset_frame = ordered_frame(detector_dataset.to_dict("records"), DETECTOR_DATASET_COLUMNS)
-    detector_dataset_frame.to_csv(output_dir / "detector_dataset.csv", index=False)
+    write_csv_lf(detector_dataset_frame, output_dir / "detector_dataset.csv")
     detector_results = run_detector_baselines(detector_dataset_frame)
     if detector_dataset_frame.empty or detector_results.empty:
         detector_frame = ordered_frame(
@@ -1860,7 +1896,7 @@ def run_paper_detector_stage(
         detector_results = detector_results.copy()
         detector_results["status"] = "ok"
         detector_frame = ordered_frame(detector_results.to_dict("records"), DETECTOR_BASELINE_COLUMNS)
-    detector_frame.to_csv(output_dir / "detector_baseline.csv", index=False)
+    write_csv_lf(detector_frame, output_dir / "detector_baseline.csv")
     write_run_progress(output_dir, project_root, profile, stage, started_at, len(detector_dataset_frame), len(detector_frame), 0, 0, 0, None, notes)
     return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
 
@@ -1950,8 +1986,8 @@ def run_paper_statistics_stage(
         else:
             effect_frame["status"] = "ok"
             effect_frame = effect_frame.reindex(columns=EFFECT_SIZE_SUMMARY_COLUMNS)
-    statistics_frame.to_csv(output_dir / "statistical_summary.csv", index=False)
-    effect_frame.to_csv(output_dir / "effect_size_summary.csv", index=False)
+    write_csv_lf(statistics_frame, output_dir / "statistical_summary.csv")
+    write_csv_lf(effect_frame, output_dir / "effect_size_summary.csv")
     figure_paths = write_paper_figures(
         output_dir,
         payload_frame,
@@ -2494,6 +2530,17 @@ def write_paper_markdown_outputs(
     nonseg_failures = int((~stego_frame["exact_recovery"].astype(bool)).sum()) if not stego_frame.empty else 0
     segmented_passes = int(segmented_frame["exact_recovery"].astype(bool).sum()) if not segmented_frame.empty else 0
     segmented_failures = int((~segmented_frame["exact_recovery"].astype(bool)).sum()) if not segmented_frame.empty else 0
+    leadin_failure_note = ""
+    if not segmented_frame.empty and "protocol_variant" in segmented_frame.columns:
+        leadin_failures = segmented_frame[
+            (segmented_frame["protocol_variant"] == "segmented_hex_multi_topic_leadin8_sentence_tail_filtered")
+            & (~segmented_frame["exact_recovery"].astype(bool))
+        ]
+        if not leadin_failures.empty:
+            leadin_failure_note = (
+                "\nThe lead-in segmented variant produced one exact-recovery failure in the partial pilot "
+                "and is treated as experimental.\n"
+            )
     result_summary = """# RankCloak Paper Results Summary
 
 ## Overview
@@ -2534,6 +2581,7 @@ See `paper_segmented_trials.csv` and `paper_segmented_messages.jsonl`.
 ## Lead-In Segmented Variant Results
 
 The lead-in variant is implemented as `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`. The decoder ignores the greedy lead-in, decodes the forced span, and ignores the tail.
+{leadin_failure_note}
 
 ## Forced-Prefix Versus Full-Message Results
 
@@ -2573,6 +2621,7 @@ The current run is `{profile}`. If this is `paper-main-pilot`, treat it as a val
         nonseg_failures=nonseg_failures,
         segmented_passes=segmented_passes,
         segmented_failures=segmented_failures,
+        leadin_failure_note=leadin_failure_note,
         detector_rows=len(detector_frame),
         stat_rows=len(statistics_frame),
         effect_rows=len(effect_frame),
@@ -2608,10 +2657,12 @@ The current run is `{profile}`. If this is `paper-main-pilot`, treat it as a val
     )
     for variant in PAPER_PROTOCOL_VARIANTS:
         lines.append("| `{}` | implemented paper-suite variant |".format(variant))
-    lines.extend(["", "## Table C: Recovery Summary By Protocol Variant", "", "| Variant | Trials | Passes |", "| --- | ---: | ---: |"])
+    lines.extend(["", "## Table C: Recovery Summary By Protocol Variant", "", "| Variant | Trials | Passes | Failures |", "| --- | ---: | ---: | ---: |"])
     if not recovery_table.empty:
         for _, row in recovery_table.iterrows():
-            lines.append("| `{}` | {} | {} |".format(row["protocol_variant"], int(row["count"]), int(row["sum"])))
+            trial_count = int(row["count"])
+            pass_count = int(row["sum"])
+            lines.append("| `{}` | {} | {} | {} |".format(row["protocol_variant"], trial_count, pass_count, trial_count - pass_count))
     lines.extend(
         [
             "",
@@ -2637,6 +2688,7 @@ The current run is `{profile}`. If this is `paper-main-pilot`, treat it as a val
             "- Exact-copy conditions only.",
             "- No encryption, key exchange, authentication, signing, or cryptographic security claim.",
             "- No undetectability claim.",
+            "- The lead-in segmented variant produced one exact-recovery failure in the partial pilot and is treated as experimental.",
         ]
     )
     comparison_path.write_text("\n".join(lines), encoding="utf-8")
@@ -2762,17 +2814,17 @@ def run_paper_suite(
 
     detector_dataset = prepare_detector_dataset(feature_frame)
     detector_dataset_frame = ordered_frame(detector_dataset.to_dict("records"), DETECTOR_DATASET_COLUMNS)
-    detector_dataset_frame.to_csv(output_dir / "detector_dataset.csv", index=False)
+    write_csv_lf(detector_dataset_frame, output_dir / "detector_dataset.csv")
     detector_frame = ordered_frame(
         run_detector_baselines(detector_dataset_frame).to_dict("records"),
         DETECTOR_BASELINE_COLUMNS,
     )
-    detector_frame.to_csv(output_dir / "detector_baseline.csv", index=False)
+    write_csv_lf(detector_frame, output_dir / "detector_baseline.csv")
 
     statistics_frame = build_statistical_summary(stego_frame, segmented_frame, n_resamples)
-    statistics_frame.to_csv(output_dir / "statistical_summary.csv", index=False)
+    write_csv_lf(statistics_frame, output_dir / "statistical_summary.csv")
     effect_frame = build_effect_size_summary(stego_frame, segmented_frame, project_root, n_resamples)
-    effect_frame.to_csv(output_dir / "effect_size_summary.csv", index=False)
+    write_csv_lf(effect_frame, output_dir / "effect_size_summary.csv")
 
     figure_paths = write_paper_figures(
         output_dir,
@@ -2953,11 +3005,11 @@ def run_paper_analysis(
     prompt_frame = pd.DataFrame(prompt_quality_rows)
     segmented_frame = pd.DataFrame(segmented_rows)
     detector_frame = pd.DataFrame(detector_rows)
-    recovery_frame.to_csv(output_dir / "all_recovery_summary.csv", index=False)
-    payload_frame.to_csv(output_dir / "all_payload_representation_summary.csv", index=False)
-    prompt_frame.to_csv(output_dir / "all_prompt_quality_summary.csv", index=False)
-    segmented_frame.to_csv(output_dir / "all_segmented_protocol_summary.csv", index=False)
-    detector_frame.to_csv(output_dir / "all_detector_summary.csv", index=False)
+    write_csv_lf(recovery_frame, output_dir / "all_recovery_summary.csv")
+    write_csv_lf(payload_frame, output_dir / "all_payload_representation_summary.csv")
+    write_csv_lf(prompt_frame, output_dir / "all_prompt_quality_summary.csv")
+    write_csv_lf(segmented_frame, output_dir / "all_segmented_protocol_summary.csv")
+    write_csv_lf(detector_frame, output_dir / "all_detector_summary.csv")
 
     figure_paths = [
         save_bar_figure(

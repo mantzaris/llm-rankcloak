@@ -72,7 +72,7 @@ Current implementation status:
 - Staged paper profiles are implemented so the pilot can be resumed instead of rerun
   as one large process.
 - The staged `results/rankcloak_paper_main_pilot/` package now contains diagnostics,
-  10 non-segmented trials, 2 segmented trials, 14 baselines, detector outputs,
+  20 non-segmented trials, 7 segmented trials, 22 baselines, detector outputs,
   bootstrap/effect-size outputs, Markdown summaries, and figures.
 - The completed staged rows record 26/27 exact recovery: 20 non-segmented pass,
   0 non-segmented fail, 6 segmented pass, and 1 segmented fail.

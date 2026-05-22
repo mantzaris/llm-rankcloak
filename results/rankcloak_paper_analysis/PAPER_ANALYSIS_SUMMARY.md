@@ -5,7 +5,7 @@ This profile aggregates existing pilot and paper-suite result directories withou
 - Source directories inspected: 8
 - Recovery rows: 8
 - Payload representation rows: 50
-- Prompt quality rows: 615
+- Prompt quality rows: 622
 - Segmented rows: 29
 - Detector rows: 69
 
