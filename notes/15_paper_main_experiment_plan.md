@@ -142,6 +142,35 @@ generation trial where practical. `--resume` and `--skip-existing` skip stable
 `trial_id` values already present in output CSV or JSONL files. `--limit-trials`
 lets long CPU runs be completed in batches without duplicating rows.
 
+## Current Staged Pilot State
+
+Current directory:
+
+```text
+results/rankcloak_paper_main_pilot/
+```
+
+Current package:
+
+```text
+paper_artifacts/rankcloak_paper_main_pilot/
+```
+
+Current counts:
+
+- Non-segmented trials: 20 complete out of 96 planned.
+- Segmented trials: 7 complete out of 24 planned.
+- Recovery: 26 pass and 1 fail.
+- Baseline examples: 22.
+- Detector dataset rows: 272.
+- Statistical summary rows: 97.
+- Effect-size rows: 14.
+
+The failed row is in the experimental
+`segmented_hex_multi_topic_leadin8_sentence_tail_filtered` variant. Treat this variant
+as experimental until the failed row is rerun successfully or the variant is removed
+from paper-main claims.
+
 ## Unsupported Claims
 
 The suite does not support claims about secrecy, cryptographic security, robustness to

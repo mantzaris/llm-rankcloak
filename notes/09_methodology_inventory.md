@@ -468,7 +468,8 @@ Short name: greedy baseline.
 Purpose: generate ordinary model text from the same prompts without payload ranks, using
 rank-1 greedy continuation.
 
-Implemented location in code: `rankcloak/baselines.py`, `rankcloak/experiments.py`.
+Implemented location in code: `rankcloak/baselines.py`, `rankcloak/experiments.py`,
+`rankcloak/paper_suite.py`.
 
 Corresponding experiment profile names: standard non-segmented model-backed profiles.
 
@@ -479,9 +480,11 @@ Key input variables: prompt name, target token count.
 
 Key output files: `baseline_cover_examples.jsonl`, `cover_text_features.csv`.
 
-Intended paper role: provide a reference distribution for generated cover features.
+Intended paper role: provide a reference distribution for generated cover features and
+feature-only detector baselines.
 
-Limitations: current baseline is greedy only; no detector AUC is implemented.
+Limitations: current baseline is greedy only. Detector outputs are lightweight
+feature-only baselines and do not establish undetectability.
 
 ## Plausibility And Artifact Metrics
 
@@ -504,6 +507,95 @@ Intended paper role: provide measurable quality proxies for pilot comparisons.
 
 Limitations: these are feature measurements, not a trained detector and not a human
 readability score.
+
+## Paper-Main Staged Results Suite
+
+Short name: staged paper suite.
+
+Purpose: run diagnostics, generation, baselines, detector, statistics, figures, and
+paper Markdown outputs in resumable CPU-practical stages.
+
+Implemented location in code: `rankcloak/paper_suite.py`, `rankcloak/paper_payloads.py`,
+`rankcloak/detection.py`, `rankcloak/bootstrap_statistics.py`, `rankcloak/schemas.py`.
+
+Corresponding experiment profile names: `paper-smoke`, `paper-diagnostics`,
+`paper-nonseg-generation`, `paper-segmented-generation`, `paper-baselines`,
+`paper-detector`, `paper-statistics`, `paper-main-pilot-resume`, `paper-main-pilot`,
+`paper-main`, `paper-analysis`.
+
+Corresponding result directories: `results/rankcloak_paper_smoke/`,
+`results/rankcloak_paper_main_pilot/`, `results/rankcloak_paper_analysis/`.
+
+Key input variables: paper payload suite, paper prompt set, protocol variant, stable
+trial id, resume flags, limit-trials setting, model path where generation is required.
+
+Key output files: `paper_payloads.csv`, `paper_rank_pressure.csv`,
+`paper_codec_comparison.csv`, `paper_stegotext_trials.csv`,
+`paper_segmented_trials.csv`, `paper_segmented_messages.jsonl`,
+`paper_baseline_examples.jsonl`, `paper_cover_text_features.csv`,
+`detector_dataset.csv`, `detector_baseline.csv`, `statistical_summary.csv`,
+`effect_size_summary.csv`, `PAPER_RESULTS_SUMMARY.md`,
+`PAPER_COMPARISON_TABLES.md`, `PAPER_FIGURE_INDEX.md`, `RUN_PROGRESS.json`.
+
+Intended paper role: provide the main manuscript artifact structure and resumable path
+from pilot evidence to a larger frozen paper-main matrix.
+
+Limitations: current `rankcloak_paper_main_pilot` is partial. It has 20 of 96 planned
+non-segmented trials and 7 of 24 planned segmented trials. One experimental lead-in
+segmented row failed exact recovery.
+
+## Lightweight Detector Baseline
+
+Short name: feature-only detector.
+
+Purpose: test whether simple numeric and Boolean cover features can separate baseline
+text from RankCloak cover rows in the current artifact set.
+
+Implemented location in code: `rankcloak/detection.py`, `rankcloak/paper_suite.py`.
+
+Corresponding experiment profile names: `paper-detector`, `paper-smoke`,
+`paper-main-pilot-resume`, `paper-analysis`.
+
+Corresponding result directories: `results/rankcloak_paper_smoke/`,
+`results/rankcloak_paper_main_pilot/`, `results/rankcloak_paper_analysis/`.
+
+Key input variables: `paper_cover_text_features.csv`, source type, payload class,
+prompt family, numeric feature columns, Boolean artifact flags.
+
+Key output files: `detector_dataset.csv`, `detector_baseline.csv`,
+`all_detector_summary.csv`.
+
+Intended paper role: provide a modest feature-only steganalysis baseline.
+
+Limitations: no raw text content is used; sample sizes are currently partial; detector
+results should not be used to claim undetectability.
+
+## Bootstrap And Effect-Size Summaries
+
+Short name: paper statistics.
+
+Purpose: compute deterministic bootstrap summaries and simple effect-size comparisons
+for available paper-suite rows.
+
+Implemented location in code: `rankcloak/bootstrap_statistics.py`,
+`rankcloak/paper_suite.py`.
+
+Corresponding experiment profile names: `paper-statistics`, `paper-smoke`,
+`paper-main-pilot-resume`.
+
+Corresponding result directories: `results/rankcloak_paper_smoke/`,
+`results/rankcloak_paper_main_pilot/`.
+
+Key input variables: `paper_stegotext_trials.csv`, `paper_segmented_trials.csv`,
+feature columns, protocol variant labels, payload class labels.
+
+Key output files: `statistical_summary.csv`, `effect_size_summary.csv`.
+
+Intended paper role: provide uncertainty summaries and table structure for paper-main
+results.
+
+Limitations: current summaries are based on a partial matrix and should not be treated
+as final inferential evidence.
 
 ## Reproducibility Manifest System
 
@@ -530,20 +622,25 @@ across all hardware and library versions.
 
 ## Current Limitations
 
-- Current results are pilots, not final paper-main experiments.
+- Current results are pilots or partial paper-main-pilot outputs, not final full
+  paper-main experiments.
 - Exact-copy conditions are required.
 - The current main model is one local Llama 3 8B Instruct GGUF quantization.
 - Prompt comparisons are limited to selected original prompts.
-- Detector AUC is not yet implemented.
+- Detector outputs are lightweight feature-only baselines on partial data.
 - Human or LLM plausibility studies are not yet implemented.
 - Safe-text filtering is deterministic and heuristic.
 - Tails can improve full-message quality while leaving forced-prefix quality low.
+- The experimental lead-in segmented paper variant currently has one exact-recovery
+  failure.
 
 ## Claims Currently Supported By Methodology
 
 - Rank ordering is deterministic and 1-indexed with token-id tie-breaking.
 - Bounded-rank codecs roundtrip exactly in current tests.
-- Current pilot runs recover exactly under exact-copy conditions.
+- Current pre-paper pilot runs recover exactly under exact-copy conditions.
+- The partial paper-main-pilot records 26 recovery passes and 1 failure, with the
+  failure isolated to an experimental lead-in segmented variant.
 - Direct subword payload representations can have high rank pressure for high-entropy artifacts.
 - Lower bounded-rank alphabets reduce rank pressure at the cost of more ranks.
 - Hex-nibble coding is efficient for hex-like artifacts.
@@ -557,4 +654,5 @@ across all hardware and library versions.
 - Do not claim robustness to edits, paraphrase, re-tokenization, or copy-channel normalization.
 - Do not claim cross-model portability.
 - Do not claim real-secret handling.
-- Do not claim detector performance until an actual detector is implemented and evaluated.
+- Do not claim strong detector performance or undetectability from the current
+  lightweight detector baselines.

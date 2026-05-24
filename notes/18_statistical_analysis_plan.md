@@ -65,3 +65,20 @@ trial rows are missing, it writes `statistical_summary.csv` and
 `effect_size_summary.csv` with `status = insufficient_data` rather than failing. This
 allows partial pilot directories to remain inspectable while generation continues in
 batches.
+
+## Current Outputs
+
+Current partial paper-main-pilot statistical artifacts are in:
+
+```text
+results/rankcloak_paper_main_pilot/
+```
+
+Current row counts:
+
+- `statistical_summary.csv`: 97 rows.
+- `effect_size_summary.csv`: 14 rows.
+
+These rows summarize 20 completed non-segmented trials and 7 completed segmented
+trials. They are partial-pilot uncertainty summaries and should not be treated as final
+full-matrix inference.

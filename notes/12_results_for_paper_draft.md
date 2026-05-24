@@ -5,8 +5,9 @@ artifacts are pilots and should not be presented as final paper-main results.
 
 ## Current Recovery Evidence
 
-All completed model-backed stegotext pilots currently record exact recovery under
-exact-copy conditions.
+All pre-paper model-backed stegotext pilots currently record exact recovery under
+exact-copy conditions. The partial staged paper-main-pilot records one failure in the
+experimental lead-in segmented variant and should be discussed separately.
 
 Source artifacts:
 
@@ -20,8 +21,10 @@ Source artifacts:
 - `results/rankcloak_paper_main_pilot/summary.json`: partial staged paper-main-pilot
   package with 20/20 non-segmented recovery and 6/7 segmented recovery.
 
-Interpretation: exact recovery is reliable in the current controlled local setting. This
-should be stated with the exact-copy, shared-configuration condition attached.
+Interpretation: exact recovery is reliable in the current controlled local setting for
+the completed non-lead-in pilots and non-segmented paper rows. The lead-in segmented
+failure shows that experimental variants must be validated separately. All recovery
+statements require the exact-copy, shared-configuration condition.
 
 ## Partial Paper-Main-Pilot Package
 

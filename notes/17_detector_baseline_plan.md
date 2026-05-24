@@ -61,3 +61,21 @@ steganalysis or as evidence of undetectability.
 
 The detector stage is analysis-only. It does not require loading the Llama model if
 `paper_cover_text_features.csv` already exists.
+
+## Current Outputs
+
+Current partial paper-main-pilot detector artifacts are in:
+
+```text
+results/rankcloak_paper_main_pilot/
+```
+
+Current row counts:
+
+- `paper_cover_text_features.csv`: 234 rows.
+- `detector_dataset.csv`: 272 rows.
+- `detector_baseline.csv`: 57 rows.
+
+These rows are based on a partial paper-main-pilot matrix. They are useful for checking
+detector plumbing and drafting result-table structure, but they should not be presented
+as strong evidence of detectability or undetectability.

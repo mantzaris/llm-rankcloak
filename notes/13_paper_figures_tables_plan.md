@@ -156,8 +156,10 @@ Source files: `detector_dataset.csv`, `detector_baseline.csv`,
 Needed columns: `source_type`, feature columns, train/test split, classifier type, AUC,
 confidence intervals if computed.
 
-Current status: implemented in the paper-main suite; needs paper-main pilot or full
-output for final numbers.
+Current status: implemented in the paper-main suite. Current partial
+`results/rankcloak_paper_main_pilot/` outputs contain 272 detector dataset rows and 57
+detector result rows; these are pilot/pipeline-validation numbers, not final full-matrix
+numbers.
 
 Notes for manuscript interpretation: this is a lightweight detector baseline. Do not
 claim undetectability or strong steganalysis.
@@ -177,7 +179,10 @@ Needed columns: `protocol_variant`, `mean_token_log_probability`,
 `full_message_artifact_count_mean`, `generated_token_count`,
 `total_full_message_token_count`, `exact_recovery`.
 
-Current status: implemented in the paper-main suite.
+Current status: implemented in the paper-main suite. Current partial
+`results/rankcloak_paper_main_pilot/` outputs contain 20 non-segmented trials and 7
+segmented trials out of the planned 96 and 24 respectively. One experimental lead-in
+segmented row failed exact recovery.
 
 Notes for manuscript interpretation: distinguish pilot validation from full paper-main
 results.

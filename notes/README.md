@@ -25,6 +25,9 @@ This directory documents the current RankCloak repository state, implemented cod
 - `19_final_paper_results_package.md`: final staged package status, row counts,
   recovery summary, detector/statistics caveats, figures, supported claims, and
   remaining commands.
+- `20_current_experiment_artifact_inventory.md`: current consolidated inventory of
+  implemented code, experiment profiles, result directories, row counts, paper package
+  status, and remaining commands.
 - Staged paper-suite resume behavior is documented in `15_paper_main_experiment_plan.md`
   and current staged run status is tracked in `16_paper_main_results_summary.md`.
 
@@ -39,6 +42,12 @@ The latest completed pilots are:
 - `results/rankcloak_payload_granularity_pilot/`: payload-side representation comparison for ASCII fixed-radix, hex-nibble ranks, and direct subword ranks.
 - `results/rankcloak_segmented_protocol_pilot/`: two-stage control-code and segmented multi-cover response pilot.
 - `results/rankcloak_segmented_quality_controls/`: segmented quality-controls pilot output.
+- `results/rankcloak_paper_smoke/`: tiny end-to-end paper-suite validation run.
+- `results/rankcloak_paper_main_pilot/`: partial staged paper-main-pilot package with
+  20/96 non-segmented trials, 7/24 segmented trials, 26 recovery passes, and 1
+  experimental lead-in segmented failure.
+- `results/rankcloak_paper_analysis/`: aggregation across current pilot and
+  paper-suite artifacts.
 
 All payloads are deterministic synthetic examples. This project studies exact-copy concealment behavior; it is not encryption, key exchange, authentication, or credential handling.
 
@@ -53,6 +62,8 @@ For paper drafting, start with:
 - `13_paper_figures_tables_plan.md` for figure and table planning.
 - `14_submission_readiness_checklist.md` for what remains before journal submission.
 - `15_paper_main_experiment_plan.md` through `18_statistical_analysis_plan.md` for the paper-main results suite.
+- `19_final_paper_results_package.md` for the current manuscript package status.
+- `20_current_experiment_artifact_inventory.md` for the most compact current inventory.
 - Use `paper-smoke` to validate the staged pipeline quickly, then continue
   `results/rankcloak_paper_main_pilot/` with the staged `paper-*` profiles and
   `--resume --limit-trials N`.

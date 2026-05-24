@@ -57,8 +57,8 @@ python3 -m pytest
 
 Known recent status:
 
-- `compileall`: passed after dialogue and payload granularity changes.
-- `pytest`: 45 tests passed after dialogue and payload granularity changes.
+- `compileall`: passed after staged paper-main cleanup.
+- `pytest`: 81 tests passed after staged paper-main cleanup.
 
 ## Core Experiment Commands
 
@@ -110,6 +110,60 @@ python3 scripts/run_experiment.py \
   --overwrite
 ```
 
+Segmented protocol pilot:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile segmented-protocol-pilot \
+  --output-dir results/rankcloak_segmented_protocol_pilot \
+  --overwrite
+```
+
+Segmented quality-controls pilot:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile segmented-quality-controls \
+  --output-dir results/rankcloak_segmented_quality_controls \
+  --overwrite
+```
+
+Paper-suite smoke:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-smoke \
+  --output-dir results/rankcloak_paper_smoke \
+  --overwrite
+```
+
+Continue the staged paper-main-pilot:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-nonseg-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-segmented-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+Refresh paper-main-pilot analysis artifacts after generation:
+
+```bash
+python3 scripts/run_experiment.py --profile paper-baselines --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-detector --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
+```
+
 ## Reading Results
 
 Start with:
@@ -121,6 +175,9 @@ Start with:
 - `cover_examples.jsonl` for generated RankCloak cover text.
 - `baseline_cover_examples.jsonl` for ordinary greedy baseline cover text.
 - `PROMPT_COMPARISON.md` or `DIALOGUE_PROMPT_COMPARISON.md` for curated manual inspection examples.
+- `PAPER_RESULTS_SUMMARY.md`, `PAPER_COMPARISON_TABLES.md`, and
+  `PAPER_FIGURE_INDEX.md` for paper-suite outputs.
+- `RUN_PROGRESS.json` for staged paper-suite resume status.
 - `MANIFEST.json` for reproducibility metadata.
 
 ## Exact-Copy Requirements

@@ -44,6 +44,26 @@ The segmented quality-controls profile writes:
 - `SEGMENTED_QUALITY_COMPARISON.md`
 - forced-prefix and full-message quality figures
 
+The staged paper-suite profiles write:
+
+- `paper_payloads.csv`
+- `paper_rank_pressure.csv`
+- `paper_codec_comparison.csv`
+- `paper_stegotext_trials.csv`
+- `paper_segmented_trials.csv`
+- `paper_segmented_messages.jsonl`
+- `paper_baseline_examples.jsonl`
+- `paper_cover_text_features.csv`
+- `detector_dataset.csv`
+- `detector_baseline.csv`
+- `statistical_summary.csv`
+- `effect_size_summary.csv`
+- `PAPER_RESULTS_SUMMARY.md`
+- `PAPER_COMPARISON_TABLES.md`
+- `PAPER_FIGURE_INDEX.md`
+- `RUN_PROGRESS.json`
+- paper figures
+
 ## Profiles
 
 ### `codec-only`
@@ -276,6 +296,96 @@ python3 scripts/run_experiment.py \
   --overwrite
 ```
 
+### `paper-smoke`
+
+Purpose: tiny end-to-end paper-suite validation that produces every expected paper
+artifact.
+
+Payloads: one `sha256_hex` instance and one `random_128_bit_hex` instance.
+
+Prompts: `recipe_long_specific`.
+
+Variants: direct rank pressure, non-segmented B=16 variants, and one segmented
+single-topic filtered variant.
+
+Default output: `results/rankcloak_paper_smoke/`.
+
+Current result: 4 non-segmented rows, 2 segmented rows, 6/6 exact recovery.
+
+### Staged `paper-main-pilot`
+
+Purpose: CPU-practical manuscript package built in resumable stages.
+
+Default output: `results/rankcloak_paper_main_pilot/`.
+
+Current status:
+
+- 12 payload rows.
+- 20/96 non-segmented trials complete.
+- 7/24 segmented trials complete.
+- 22 greedy baseline examples.
+- 272 detector dataset rows.
+- 97 statistical summary rows.
+- 26 recovery passes and 1 recovery failure.
+
+The one failure is in the experimental
+`segmented_hex_multi_topic_leadin8_sentence_tail_filtered` variant and should be
+reported separately from the non-lead-in segmented variants.
+
+Stages:
+
+- `paper-diagnostics`: payload, direct rank-pressure, and codec diagnostics.
+- `paper-nonseg-generation`: non-segmented RankCloak generation.
+- `paper-segmented-generation`: segmented RankCloak generation.
+- `paper-baselines`: greedy baseline generation.
+- `paper-detector`: feature-only detector dataset and baseline.
+- `paper-statistics`: bootstrap summaries, effect sizes, figures, and paper Markdown.
+- `paper-main-pilot-resume`: staged sequence for batched continuation.
+
+Resume commands:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-nonseg-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile paper-segmented-generation \
+  --output-dir results/rankcloak_paper_main_pilot \
+  --resume \
+  --limit-trials 10
+```
+
+After generation batches:
+
+```bash
+python3 scripts/run_experiment.py --profile paper-baselines --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-detector --output-dir results/rankcloak_paper_main_pilot --resume
+python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
+```
+
+### `paper-main`
+
+Purpose: larger frozen paper-main matrix for later CPU time.
+
+Default output: `results/rankcloak_paper_main/`.
+
+Current status: implemented but not present as a completed result directory.
+
+### `paper-analysis`
+
+Purpose: aggregate existing pilot and paper-suite result directories without model
+generation.
+
+Default output: `results/rankcloak_paper_analysis/`.
+
+Current result: present with recovery, payload-representation, prompt-quality,
+segmented-protocol, and detector summary tables.
+
 ## CLI Equivalents
 
 After installing the package:
@@ -288,4 +398,8 @@ rankcloak run --profile dialogue-key-pilot --output-dir results/rankcloak_dialog
 rankcloak run --profile payload-granularity-pilot --output-dir results/rankcloak_payload_granularity_pilot --overwrite
 rankcloak run --profile segmented-protocol-pilot --output-dir results/rankcloak_segmented_protocol_pilot --overwrite
 rankcloak run --profile segmented-quality-controls --output-dir results/rankcloak_segmented_quality_controls --overwrite
+rankcloak run --profile paper-smoke --output-dir results/rankcloak_paper_smoke --overwrite
+rankcloak run --profile paper-nonseg-generation --output-dir results/rankcloak_paper_main_pilot --resume --limit-trials 10
+rankcloak run --profile paper-segmented-generation --output-dir results/rankcloak_paper_main_pilot --resume --limit-trials 10
+rankcloak run --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
 ```

@@ -14,8 +14,13 @@ This file summarizes the result directories currently present in `results/`. The
 | `results/rankcloak_payload_granularity_pilot/` | `payload-granularity-pilot` | yes | 2 | 0 | 8, 16 | 0 | 0 |
 | `results/rankcloak_segmented_protocol_pilot/` | `segmented-protocol-pilot` | yes | 2 | protocol-specific | 16 | 10 | 0 |
 | `results/rankcloak_segmented_quality_controls/` | `segmented-quality-controls` | yes | 2 | protocol-specific | 16 | 10 | 0 |
+| `results/rankcloak_paper_smoke/` | `paper-smoke` | yes | 2 | 1 | paper variants | 6 | 0 |
+| `results/rankcloak_paper_main_pilot/` | staged paper profiles | mixed | 12 paper payloads | 3 paper prompts | paper variants | 26 | 1 |
 
-Codec roundtrip has passed in all current summaries. The model-backed full channel has also recovered exactly in every recorded stegotext trial so far.
+Codec roundtrip has passed in all current summaries. The pre-paper model-backed pilots
+recover exactly under exact-copy conditions. The partial staged paper-main-pilot has
+one exact-recovery failure in the experimental lead-in segmented variant; it should be
+reported separately from the non-lead-in variants.
 
 ## Small Full Sweep
 
@@ -196,11 +201,68 @@ Interpretation:
 
 The current evidence supports this working conclusion:
 
-- Exact recovery is reliable under exact-copy conditions with the current local model and deterministic rank ordering.
+- Exact recovery is reliable in completed pre-paper pilots under exact-copy conditions
+  with the current local model and deterministic rank ordering.
+- The staged paper-main-pilot currently has 26 recovery passes and 1 recovery failure;
+  the failure is isolated to the experimental lead-in segmented variant.
 - High-entropy artifacts are hard because direct token ranks can be very large.
 - Bounded-rank coding keeps cover generation within a controlled rank band.
 - B=8 and B=16 are the current practical range for plausibility.
 - Better prompts help topical coherence, but rank pressure remains the main source of visible artifacts.
+
+## Paper Suite Status
+
+Directory: `results/rankcloak_paper_smoke/`
+
+Purpose: tiny staged paper-suite validation.
+
+Outcome:
+
+- Payload rows: 2.
+- Non-segmented trials: 4.
+- Segmented trials: 2.
+- Exact recovery: 6/6.
+- Detector dataset rows: 56.
+- Statistical summary rows: 60.
+
+Directory: `results/rankcloak_paper_main_pilot/`
+
+Purpose: partial staged manuscript package.
+
+Outcome:
+
+- Payload rows: 12.
+- Direct rank-pressure rows: 12.
+- Codec-comparison rows: 36.
+- Non-segmented trials: 20/96 planned.
+- Segmented trials: 7/24 planned.
+- Greedy baseline examples: 22.
+- Cover feature rows: 234.
+- Detector dataset rows: 272.
+- Detector result rows: 57.
+- Statistical summary rows: 97.
+- Effect-size rows: 14.
+- Exact recovery: 26 pass, 1 fail.
+
+Interpretation:
+
+- This is a partial manuscript-preparation package, not the complete planned matrix.
+- The failed row is in `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`, an
+  experimental lead-in segmented variant.
+- Detector and statistics outputs are useful pipeline artifacts, but they are based on
+  partial data.
+
+Directory: `results/rankcloak_paper_analysis/`
+
+Purpose: aggregation over current pilot and paper-suite directories.
+
+Outcome:
+
+- Recovery summary rows: 8.
+- Payload-representation rows: 50.
+- Prompt-quality rows: 622.
+- Segmented-protocol rows: 29.
+- Detector summary rows: 69.
 
 ## See Also For Paper Production
 

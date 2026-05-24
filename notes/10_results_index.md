@@ -1,7 +1,9 @@
 # Results Index
 
 This note maps each current `results/` directory to its scientific meaning and paper
-use. All expected result directories listed in the paper-notes task were found.
+use. The full `results/rankcloak_paper_main/` directory is not present; the current
+paper-oriented package is the partial staged `results/rankcloak_paper_main_pilot/`
+directory.
 
 ## High-Level Index
 
@@ -15,6 +17,9 @@ use. All expected result directories listed in the paper-notes task were found.
 | `results/rankcloak_payload_granularity_pilot/` | representation pilot | How many ranks do different payload representations need? | 63/63 codec; no stegotext trials | Payload representation evidence |
 | `results/rankcloak_segmented_protocol_pilot/` | segmented protocol | Does multi-cover segmentation recover and reduce drift? | control true, 10/10 responses | Protocol-variant evidence |
 | `results/rankcloak_segmented_quality_controls/` | segmented quality controls | Do sentence tails, metric separation, and token filtering help? | 5/5 controls, 10/10 responses | Clearest current quality-control evidence |
+| `results/rankcloak_paper_smoke/` | paper-suite smoke | Does the staged paper suite write every expected artifact? | 6/6 recovery | Pipeline validation |
+| `results/rankcloak_paper_main_pilot/` | staged paper-main pilot | What does the partial manuscript package show so far? | 26 pass, 1 fail | Partial paper-main evidence |
+| `results/rankcloak_paper_analysis/` | cross-run analysis | What do existing pilot directories show in aggregate? | summary-only | Supplement and planning |
 
 ## `results/rankcloak_crypto_artifact_exploration/`
 
@@ -82,7 +87,8 @@ How this result can be used in the paper: primary pilot evidence that B=8 and B=
 better cover-quality proxies than B=32 and B=64 while all current exact-copy trials
 recover.
 
-Known caveats: no detector AUC; prompt set is small; one local model and quantization.
+Known caveats: prompt set is small; one local model and quantization. Detector AUC is
+handled only in later paper-suite feature baselines, not in this small sweep.
 
 ## `results/rankcloak_strong_prompt_pilot/`
 
@@ -281,10 +287,120 @@ distinguishing payload-bearing quality from full-message quality.
 Known caveats: safe-text filtering is heuristic; full-message improvements can still be
 tail-driven.
 
+## `results/rankcloak_paper_smoke/`
+
+Profile or experiment name: `paper-smoke`.
+
+Purpose: tiny end-to-end validation for the staged paper-suite code path.
+
+Payloads used: one `sha256_hex` payload and one `random_128_bit_hex` payload from the
+paper payload suite.
+
+Prompts or conditions used: `recipe_long_specific`; paper variants include direct rank
+pressure, non-segmented B=16 variants, and one segmented single-topic filtered variant.
+
+Model status: loaded.
+
+Recovery result summary: `summary.json` records 4 non-segmented trials, 2 segmented
+trials, 6 recovery passes, and 0 recovery failures.
+
+Main metrics available: paper payload rows, rank pressure, codec comparison,
+non-segmented and segmented trials, baseline rows, cover features, detector dataset,
+detector baseline, bootstrap statistics, effect sizes.
+
+Key output files: `paper_payloads.csv`, `paper_rank_pressure.csv`,
+`paper_codec_comparison.csv`, `paper_stegotext_trials.csv`,
+`paper_segmented_trials.csv`, `paper_segmented_messages.jsonl`,
+`paper_baseline_examples.jsonl`, `paper_cover_text_features.csv`,
+`detector_dataset.csv`, `detector_baseline.csv`, `statistical_summary.csv`,
+`effect_size_summary.csv`, `PAPER_RESULTS_SUMMARY.md`,
+`PAPER_COMPARISON_TABLES.md`, `PAPER_FIGURE_INDEX.md`.
+
+Figures available: 10 paper-suite figures under `figures/`.
+
+How this result can be used in the paper: pipeline validation only; useful to show the
+artifact set is complete.
+
+Known caveats: intentionally tiny and not suitable for substantive claims.
+
+## `results/rankcloak_paper_main_pilot/`
+
+Profile or experiment name: staged paper profiles over the `paper-main-pilot` matrix.
+
+Purpose: build a manuscript-preparation package in resumable CPU-practical batches.
+
+Payloads used: 12 paper payload rows from `rankcloak/paper_payloads.py`.
+
+Prompts or conditions used: paper prompt set with non-segmented variants
+`nonseg_ascii_b8`, `nonseg_ascii_b16`, `nonseg_hex_nibble_b16`; segmented variants
+`segmented_hex_single_topic_sentence_tail_filtered`,
+`segmented_hex_multi_topic_sentence_tail_filtered`, and experimental
+`segmented_hex_multi_topic_leadin8_sentence_tail_filtered`.
+
+Model status: mixed. Generation stages used the local model; detector and statistics
+stages are analysis-only and record `model_loaded = false`.
+
+Recovery result summary: `summary.json` records 20 non-segmented trials, 7 segmented
+trials, 26 recovery passes, and 1 recovery failure. Planned counts are 96
+non-segmented trials and 24 segmented trials, leaving 76 and 17 remaining.
+
+Main metrics available: direct rank pressure, codec rank counts, non-segmented cover
+metrics, segmented forced-prefix and full-message metrics, artifact counts, detector
+features, bootstrap summaries, effect sizes.
+
+Key output files: `paper_payloads.csv`, `paper_rank_pressure.csv`,
+`paper_codec_comparison.csv`, `paper_stegotext_trials.csv`,
+`paper_segmented_trials.csv`, `paper_segmented_messages.jsonl`,
+`paper_nonseg_examples.jsonl`, `paper_baseline_examples.jsonl`,
+`paper_cover_text_features.csv`, `detector_dataset.csv`, `detector_baseline.csv`,
+`statistical_summary.csv`, `effect_size_summary.csv`, `PAPER_RESULTS_SUMMARY.md`,
+`PAPER_COMPARISON_TABLES.md`, `PAPER_FIGURE_INDEX.md`, `RUN_PROGRESS.json`,
+`summary.json`, `MANIFEST.json`.
+
+Figures available: 10 paper-suite figures under `figures/`.
+
+How this result can be used in the paper: partial paper-main-pilot evidence and
+manuscript-package scaffolding. It is appropriate for methods, pipeline, and
+preliminary results text, not final full-matrix claims.
+
+Known caveats: matrix remains partial; one failure is present in the experimental
+lead-in segmented variant; detector and bootstrap results are based on partial data.
+
+## `results/rankcloak_paper_analysis/`
+
+Profile or experiment name: `paper-analysis`.
+
+Purpose: aggregate current pilot and paper-suite directories without model generation.
+
+Payloads used: read from existing result directories.
+
+Prompts or conditions used: read from existing result directories.
+
+Model status: not loaded.
+
+Recovery result summary: analysis-only summary tables; no new stegotext generation.
+
+Main metrics available: recovery summaries, payload-representation summaries,
+prompt-quality summaries, segmented-protocol summaries, detector summaries.
+
+Key output files: `all_recovery_summary.csv`,
+`all_payload_representation_summary.csv`, `all_prompt_quality_summary.csv`,
+`all_segmented_protocol_summary.csv`, `all_detector_summary.csv`,
+`PAPER_ANALYSIS_SUMMARY.md`, `summary.json`, `MANIFEST.json`.
+
+Figures available: recovery, payload representation, prompt quality, and segmented
+summary figures under `figures/`.
+
+How this result can be used in the paper: supplement and planning artifact for deciding
+which pilot results should move into the main manuscript.
+
+Known caveats: aggregation is only as strong as the underlying pilot directories.
+
 ## Cross-Directory Caveats
 
 - All current results use deterministic synthetic payloads.
 - All current recovery results assume exact-copy text preservation.
 - All current model-backed results use one local Llama 3 8B Instruct GGUF model family.
-- No current result file records detector AUC.
+- Detector AUC outputs exist only as lightweight feature-only baselines in the paper
+  suite. They should not be treated as conclusive steganalysis.
 - Human readability judgments have not been run as a controlled study.

@@ -30,24 +30,24 @@ This can become the basis for a human or LLM plausibility study.
 
 ## Engineering Priorities
 
-1. Add a profile that uses `raw_hex_nibbles` for full stegotext generation.
+1. Continue the staged paper-main-pilot matrix.
 
-Current full stegotext profiles use ASCII bytes through fixed-radix ranks. The payload granularity pilot suggests hex-nibble coding is a better payload-side representation for hex artifacts.
+Current `results/rankcloak_paper_main_pilot/` has 20 of 96 planned non-segmented
+trials and 7 of 24 planned segmented trials. Continue in batches with `--resume` and
+`--limit-trials 10`, then refresh baselines, detector, statistics, and paper-analysis.
 
-2. Add detector baselines only after the dataset is large enough.
+2. Decide how to handle the experimental lead-in segmented variant.
 
-Do not claim AUC yet. Once there are enough RankCloak and baseline examples, add a simple reproducible detector experiment with train/test splits and clear caveats.
+The current partial paper-main-pilot has one exact-recovery failure in
+`segmented_hex_multi_topic_leadin8_sentence_tail_filtered`. Treat it as experimental
+unless the failed row is rerun successfully and the lead-in recovery behavior is
+validated across more rows.
 
-3. Add runtime controls.
+3. Use detector baselines carefully.
 
-Helpful additions:
-
-- max trials;
-- prompt subset;
-- payload subset;
-- alphabet subset;
-- resume/skip existing rows;
-- CSV append mode with manifest update.
+Feature-only detector baselines are implemented and current partial paper-main-pilot
+outputs contain 272 detector dataset rows and 57 detector result rows. Do not claim
+undetectability or strong steganalysis from these partial rows.
 
 4. Stabilize notebook output.
 
@@ -60,7 +60,7 @@ The notebook should stay explanatory and load generated results rather than runn
 - Can distribution-matched rank coding reduce obvious artifacts while preserving exact recovery?
 - How does quality change across Phi, Llama, Mistral, Qwen, and Gemma GGUF models?
 - How sensitive is recovery to whitespace normalization, smart quotes, copied Markdown, and platform text transformations?
-- Can a detector distinguish RankCloak cover text from greedy or sampled baseline cover text with reliable AUC?
+- Can a detector distinguish RankCloak cover text from greedy or sampled baseline cover text with reliable AUC after the matrix is complete?
 
 ## Current Working Hypotheses
 
@@ -70,6 +70,8 @@ The notebook should stay explanatory and load generated results rather than runn
 - H4: Prompt strength improves topic anchoring but cannot by itself fix forced-rank artifacts.
 - H5: Dialogue prompts can improve local log probability while increasing repetition and formatting artifacts.
 - H6: Payload-side hex-nibble coding is likely better than ASCII byte coding for hex-like artifacts.
+- H7: Segmented protocols and natural tails can improve full-message metrics, but
+  forced-prefix metrics remain the scientifically relevant payload-bearing measure.
 
 ## Important Limits To Preserve In The Paper
 
