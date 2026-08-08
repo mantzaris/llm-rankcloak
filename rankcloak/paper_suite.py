@@ -252,6 +252,31 @@ def recovery_failure_note(frame: pd.DataFrame, label: str) -> str:
     )
 
 
+def leadin_recovery_summary_note(frame: pd.DataFrame) -> str:
+    """Summarize the observed lead-in recovery result for generated reports."""
+
+    if frame.empty or not {"protocol_variant", "exact_recovery"}.issubset(frame.columns):
+        return "No lead-in segmented rows were available in this run."
+    leadin_rows = frame[
+        frame["protocol_variant"]
+        == "segmented_hex_multi_topic_leadin8_sentence_tail_filtered"
+    ]
+    if leadin_rows.empty:
+        return "No lead-in segmented rows were available in this run."
+    failures = int((~leadin_rows["exact_recovery"].astype(bool)).sum())
+    if failures == 0:
+        return (
+            "No lead-in segmented exact-recovery failures were observed in this run; "
+            "the variant remains experimental."
+        )
+    noun = "failure" if failures == 1 else "failures"
+    verb = "was" if failures == 1 else "were"
+    return (
+        "{} lead-in segmented exact-recovery {} {} observed in this run; "
+        "the variant remains experimental."
+    ).format(failures, noun, verb)
+
+
 def paper_rank_summary(payload_name: str, ranks: Sequence[int]) -> dict:
     if not ranks:
         return {
@@ -348,6 +373,26 @@ def decode_payload_representation(
     if representation_name == "raw_hex_nibbles":
         return decode_hex_nibble_ranks_to_text(ranks, metadata).encode("utf-8")
     raise ValueError("Unknown representation: {}".format(representation_name))
+
+
+def decode_payload_recovery(
+    ranks: Sequence[int],
+    metadata: Dict[str, Any],
+    representation_name: str,
+) -> Tuple[Optional[bytes], Optional[str]]:
+    """Decode recovered ranks without turning rank drift into a runner failure.
+
+    A generated token can replay at a rank outside the codec alphabet when logits
+    differ across generation and recovery. That is an observed recovery failure and
+    must remain in the experiment table, not abort or omit the trial.
+    """
+
+    if representation_name not in {"ascii_bytes_fixed_radix", "raw_hex_nibbles"}:
+        raise ValueError("Unknown representation: {}".format(representation_name))
+    try:
+        return decode_payload_representation(ranks, metadata, representation_name), None
+    except ValueError as exc:
+        return None, str(exc)
 
 
 def build_paper_codec_comparison(payloads: Sequence[PaperPayload]) -> List[dict]:
@@ -502,7 +547,7 @@ def run_paper_nonseg_trials(
                     model, context_token_ids, generated["generated_token_ids"]
                 )
                 recovery_seconds = time.perf_counter() - recovery_started
-                decoded = decode_payload_representation(
+                decoded, recovery_error = decode_payload_recovery(
                     recovered["ranks"], encoded["metadata"], spec["representation_name"]
                 )
                 expected = (
@@ -510,7 +555,10 @@ def run_paper_nonseg_trials(
                     if spec["representation_name"] == "raw_hex_nibbles"
                     else payload.payload_bytes
                 )
-                exact_recovery = decoded == expected
+                exact_recovery = recovery_error is None and decoded == expected
+                recovery_note = "non-segmented exact-copy RankCloak cover"
+                if recovery_error:
+                    recovery_note += "; recovery decode failed: {}".format(recovery_error)
                 features = feature_row(
                     source_type="nonseg_rankcloak",
                     trial_id=trial_id,
@@ -523,7 +571,7 @@ def run_paper_nonseg_trials(
                     token_ids=generated["generated_token_ids"],
                     ranks=recovered["ranks"],
                     token_log_probabilities=generated.get("token_log_probabilities", []),
-                    notes="non-segmented exact-copy RankCloak cover",
+                    notes=recovery_note,
                 )
                 row = {
                     "trial_id": trial_id,
@@ -552,7 +600,14 @@ def run_paper_nonseg_trials(
                     "model_repo_id": model_repo_id,
                     "model_filename": model_filename,
                     "model_path_relative": model_path_relative,
-                    "notes": "synthetic payload; not encryption or cryptographic security",
+                    "notes": (
+                        "synthetic payload; not encryption or cryptographic security"
+                        + (
+                            "; recovery decode failed: {}".format(recovery_error)
+                            if recovery_error
+                            else ""
+                        )
+                    ),
                 }
                 trial_rows.append(row)
                 feature_rows.append(features)
@@ -562,6 +617,7 @@ def run_paper_nonseg_trials(
                         "generated_text": generated["generated_text"],
                         "generated_token_ids": generated["generated_token_ids"],
                         "recovered_ranks": recovered["ranks"],
+                        "recovery_error": recovery_error,
                     }
                 )
     return trial_rows, example_rows, feature_rows
@@ -849,8 +905,13 @@ def run_paper_segmented_trials(
                     }
                 )
             recovered_ranks = flatten_rank_chunks(recovered_chunks)
-            recovered_text = decode_hex_nibble_ranks_to_text(recovered_ranks, encoded["metadata"])
-            exact_recovery = recovered_text == payload.payload_text.lower()
+            recovered_bytes, recovery_error = decode_payload_recovery(
+                recovered_ranks, encoded["metadata"], "raw_hex_nibbles"
+            )
+            exact_recovery = (
+                recovery_error is None
+                and recovered_bytes == payload.payload_text.lower().encode("utf-8")
+            )
             forced_rows = [row for row in trial_feature_rows if row["source_type"] == "segmented_forced_prefix"]
             full_rows = [row for row in trial_feature_rows if row["source_type"] == "segmented_full_message"]
             trial_row = {
@@ -911,7 +972,14 @@ def run_paper_segmented_trials(
                 "model_repo_id": model_repo_id,
                 "model_filename": model_filename,
                 "model_path_relative": model_path_relative,
-                "notes": "safe-text filtered segmented raw-hex-nibble protocol; exact-copy only",
+                "notes": (
+                    "safe-text filtered segmented raw-hex-nibble protocol; exact-copy only"
+                    + (
+                        "; recovery decode failed: {}".format(recovery_error)
+                        if recovery_error
+                        else ""
+                    )
+                ),
             }
             trial_rows.append(trial_row)
             message_rows.extend(trial_message_rows)
@@ -934,6 +1002,40 @@ def build_baseline_targets(feature_rows: Sequence[dict]) -> Dict[str, List[int]]
         if target not in targets[prompt_name]:
             targets[prompt_name].append(target)
     return {prompt: sorted(values)[:8] for prompt, values in targets.items()}
+
+
+def reconcile_baseline_artifacts(
+    existing_rows: Sequence[dict],
+    feature_frame: pd.DataFrame,
+    planned_ids: Sequence[str],
+) -> Tuple[List[dict], pd.DataFrame, List[str]]:
+    """Drop baseline artifacts whose current length-matching plan no longer uses them."""
+
+    planned = set(map(str, planned_ids))
+    existing_ids = {
+        str(row.get("baseline_id"))
+        for row in existing_rows
+        if row.get("baseline_id") is not None
+    }
+    feature_ids: set = set()
+    if not feature_frame.empty and {"source_type", "trial_id"}.issubset(feature_frame.columns):
+        baseline_mask = feature_frame["source_type"].eq("baseline")
+        feature_ids = set(
+            feature_frame.loc[baseline_mask, "trial_id"].dropna().astype(str)
+        )
+    obsolete_ids = sorted((existing_ids | feature_ids) - planned)
+    if not obsolete_ids:
+        return list(existing_rows), feature_frame, []
+
+    filtered_rows = [
+        row for row in existing_rows if str(row.get("baseline_id")) in planned
+    ]
+    filtered_features = feature_frame
+    if not feature_frame.empty and {"source_type", "trial_id"}.issubset(feature_frame.columns):
+        baseline_mask = feature_frame["source_type"].eq("baseline")
+        obsolete_mask = baseline_mask & feature_frame["trial_id"].astype(str).isin(obsolete_ids)
+        filtered_features = feature_frame.loc[~obsolete_mask].copy()
+    return filtered_rows, filtered_features, obsolete_ids
 
 
 def run_paper_baselines(
@@ -996,6 +1098,20 @@ def paper_profile_variant(profile: str) -> str:
     if profile == "paper-smoke":
         return "paper-smoke"
     return "paper-main-pilot"
+
+
+def paper_profile_scope_note(profile: str) -> str:
+    """Describe the experiment scope represented by a staged paper profile."""
+
+    suite_profile = paper_profile_variant(profile)
+    if suite_profile == "paper-main":
+        return "This is the larger frozen `paper-main` matrix."
+    if suite_profile == "paper-smoke":
+        return "This is a smoke test of the staged pipeline, not a complete experiment matrix."
+    return (
+        "This is a pilot-scale validation run before the larger frozen `paper-main` "
+        "matrix."
+    )
 
 
 def nonseg_specs_for_profile(profile: str) -> List[dict]:
@@ -1150,13 +1266,18 @@ def run_single_nonseg_trial(
     recovery_started = time.perf_counter()
     recovered = recover_ranks_from_generated_ids(model, context_token_ids, generated["generated_token_ids"])
     recovery_seconds = time.perf_counter() - recovery_started
-    decoded = decode_payload_representation(recovered["ranks"], encoded["metadata"], spec["representation_name"])
+    decoded, recovery_error = decode_payload_recovery(
+        recovered["ranks"], encoded["metadata"], spec["representation_name"]
+    )
     expected = (
         payload.payload_text.encode("utf-8")
         if spec["representation_name"] == "raw_hex_nibbles"
         else payload.payload_bytes
     )
-    exact_recovery = decoded == expected
+    exact_recovery = recovery_error is None and decoded == expected
+    recovery_note = "non-segmented exact-copy RankCloak cover"
+    if recovery_error:
+        recovery_note += "; recovery decode failed: {}".format(recovery_error)
     features = feature_row(
         source_type="nonseg_rankcloak",
         trial_id=trial_id,
@@ -1169,7 +1290,7 @@ def run_single_nonseg_trial(
         token_ids=generated["generated_token_ids"],
         ranks=recovered["ranks"],
         token_log_probabilities=generated.get("token_log_probabilities", []),
-        notes="non-segmented exact-copy RankCloak cover",
+        notes=recovery_note,
     )
     row = {
         "trial_id": trial_id,
@@ -1198,13 +1319,21 @@ def run_single_nonseg_trial(
         "model_repo_id": model_repo_id,
         "model_filename": model_filename,
         "model_path_relative": model_path_relative,
-        "notes": "synthetic payload; not encryption or cryptographic security",
+        "notes": (
+            "synthetic payload; not encryption or cryptographic security"
+            + (
+                "; recovery decode failed: {}".format(recovery_error)
+                if recovery_error
+                else ""
+            )
+        ),
     }
     example = {
         **row,
         "generated_text": generated["generated_text"],
         "generated_token_ids": generated["generated_token_ids"],
         "recovered_ranks": recovered["ranks"],
+        "recovery_error": recovery_error,
     }
     return row, example, features
 
@@ -1339,8 +1468,13 @@ def run_single_segmented_trial(
             }
         )
     recovered_ranks = flatten_rank_chunks(recovered_chunks)
-    recovered_text = decode_hex_nibble_ranks_to_text(recovered_ranks, encoded["metadata"])
-    exact_recovery = recovered_text == payload.payload_text.lower()
+    recovered_bytes, recovery_error = decode_payload_recovery(
+        recovered_ranks, encoded["metadata"], "raw_hex_nibbles"
+    )
+    exact_recovery = (
+        recovery_error is None
+        and recovered_bytes == payload.payload_text.lower().encode("utf-8")
+    )
     forced_rows = [row for row in trial_feature_rows if row["source_type"] == "segmented_forced_prefix"]
     full_rows = [row for row in trial_feature_rows if row["source_type"] == "segmented_full_message"]
     trial_row = {
@@ -1395,7 +1529,14 @@ def run_single_segmented_trial(
         "model_repo_id": model_repo_id,
         "model_filename": model_filename,
         "model_path_relative": model_path_relative,
-        "notes": "safe-text filtered segmented raw-hex-nibble protocol; exact-copy only",
+        "notes": (
+            "safe-text filtered segmented raw-hex-nibble protocol; exact-copy only"
+            + (
+                "; recovery decode failed: {}".format(recovery_error)
+                if recovery_error
+                else ""
+            )
+        ),
     }
     return trial_row, trial_message_rows, trial_feature_rows
 
@@ -1490,6 +1631,9 @@ def write_staged_summary(
     planned_nonseg_count = len(planned_nonseg_trials(suite_profile, planned_payloads, planned_prompt_names))
     planned_segmented_count = len(planned_segmented_trials(suite_profile, planned_payloads))
     extra_notes = []
+    nonseg_failure_note = recovery_failure_note(stego_frame, "Non-segmented")
+    if nonseg_failure_note:
+        extra_notes.append(nonseg_failure_note)
     segmented_failure_note = recovery_failure_note(segmented_frame, "Segmented")
     if segmented_failure_note:
         extra_notes.append(segmented_failure_note)
@@ -1809,6 +1953,19 @@ def run_paper_baselines_stage(
     baseline_path = output_dir / "paper_baseline_examples.jsonl"
     if baseline_path.exists():
         existing_rows = [json.loads(line) for line in baseline_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    existing_rows, feature_frame, obsolete_ids = reconcile_baseline_artifacts(
+        existing_rows,
+        feature_frame,
+        [plan["baseline_id"] for plan in planned],
+    )
+    if obsolete_ids:
+        write_jsonl(baseline_path, existing_rows)
+        write_csv_lf(feature_frame, output_dir / "paper_cover_text_features.csv")
+        notes.append(
+            "removed {} obsolete baseline target(s): {}".format(
+                len(obsolete_ids), ", ".join(obsolete_ids)
+            )
+        )
     existing = {row.get("baseline_id") for row in existing_rows}
     skip_existing = bool(getattr(args, "resume", False) or getattr(args, "skip_existing", False) or not getattr(args, "overwrite", False))
     runnable = [plan for plan in planned if not (skip_existing and plan["baseline_id"] in existing)]
@@ -2553,17 +2710,8 @@ def write_paper_markdown_outputs(
     nonseg_failures = int((~stego_frame["exact_recovery"].astype(bool)).sum()) if not stego_frame.empty else 0
     segmented_passes = int(segmented_frame["exact_recovery"].astype(bool).sum()) if not segmented_frame.empty else 0
     segmented_failures = int((~segmented_frame["exact_recovery"].astype(bool)).sum()) if not segmented_frame.empty else 0
-    leadin_failure_note = ""
-    if not segmented_frame.empty and "protocol_variant" in segmented_frame.columns:
-        leadin_failures = segmented_frame[
-            (segmented_frame["protocol_variant"] == "segmented_hex_multi_topic_leadin8_sentence_tail_filtered")
-            & (~segmented_frame["exact_recovery"].astype(bool))
-        ]
-        if not leadin_failures.empty:
-            leadin_failure_note = (
-                "\nThe lead-in segmented variant produced one exact-recovery failure in the partial pilot "
-                "and is treated as experimental.\n"
-            )
+    leadin_note = leadin_recovery_summary_note(segmented_frame)
+    scope_note = paper_profile_scope_note(profile)
     result_summary = """# RankCloak Paper Results Summary
 
 ## Overview
@@ -2604,7 +2752,8 @@ See `paper_segmented_trials.csv` and `paper_segmented_messages.jsonl`.
 ## Lead-In Segmented Variant Results
 
 The lead-in variant is implemented as `segmented_hex_multi_topic_leadin8_sentence_tail_filtered`. The decoder ignores the greedy lead-in, decodes the forced span, and ignores the tail.
-{leadin_failure_note}
+
+{leadin_note}
 
 ## Forced-Prefix Versus Full-Message Results
 
@@ -2637,14 +2786,15 @@ Bootstrap summary rows: {stat_rows}. Effect-size rows: {effect_rows}.
 
 ## Limitations
 
-The current run is `{profile}`. If this is `paper-main-pilot`, treat it as a validation run before the larger frozen `paper-main` matrix.
+The current run is `{profile}`. {scope_note}
 """.format(
         profile=profile,
         nonseg_passes=nonseg_passes,
         nonseg_failures=nonseg_failures,
         segmented_passes=segmented_passes,
         segmented_failures=segmented_failures,
-        leadin_failure_note=leadin_failure_note,
+        leadin_note=leadin_note,
+        scope_note=scope_note,
         detector_rows=len(detector_frame),
         stat_rows=len(statistics_frame),
         effect_rows=len(effect_frame),

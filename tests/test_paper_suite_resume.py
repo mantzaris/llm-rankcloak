@@ -1,8 +1,10 @@
 import json
+from types import SimpleNamespace
 
 import pandas as pd
 
 from rankcloak.experiments import PROFILE_CONFIGS
+from rankcloak import paper_suite
 from rankcloak.paper_suite import (
     append_frame_unique,
     existing_id_set,
@@ -112,6 +114,125 @@ def test_recovery_failure_note_uses_observed_protocol_variants():
     assert "`segmented_multi`" in note
     assert "`segmented_single`" in note
     assert "`segmented_leadin`" not in note
+
+
+def test_leadin_recovery_summary_note_uses_observed_failure_count():
+    frame = pd.DataFrame(
+        [
+            {
+                "protocol_variant": "segmented_hex_multi_topic_leadin8_sentence_tail_filtered",
+                "exact_recovery": True,
+            },
+            {
+                "protocol_variant": "segmented_hex_multi_topic_leadin8_sentence_tail_filtered",
+                "exact_recovery": False,
+            },
+            {
+                "protocol_variant": "segmented_hex_multi_topic_leadin8_sentence_tail_filtered",
+                "exact_recovery": False,
+            },
+            {"protocol_variant": "segmented_single", "exact_recovery": False},
+        ]
+    )
+
+    note = paper_suite.leadin_recovery_summary_note(frame)
+
+    assert note.startswith("2 lead-in segmented exact-recovery failures")
+    assert "this run" in note
+    assert "partial pilot" not in note
+
+    singular_note = paper_suite.leadin_recovery_summary_note(frame.iloc[:2])
+    assert singular_note.startswith(
+        "1 lead-in segmented exact-recovery failure was observed"
+    )
+
+
+def test_paper_profile_scope_note_matches_resolved_profile():
+    assert "pilot-scale" in paper_suite.paper_profile_scope_note(
+        "paper-main-pilot-resume"
+    )
+    assert "smoke test" in paper_suite.paper_profile_scope_note("paper-smoke")
+    assert "larger frozen" in paper_suite.paper_profile_scope_note("paper-main")
+
+
+def test_nonseg_rank_drift_is_recorded_as_recovery_failure(monkeypatch):
+    payload = SimpleNamespace(
+        payload_name="payload",
+        payload_class="ciphertext_like_base64",
+        payload_kind="ciphertext_like_base64",
+        payload_text="A",
+        payload_bytes=b"A",
+    )
+    plan = {
+        "trial_id": "trial_rank_drift",
+        "payload": payload,
+        "spec": {
+            "protocol_variant": "nonseg_ascii_b16",
+            "representation_name": "ascii_bytes_fixed_radix",
+            "alphabet_size": 16,
+        },
+        "encoded": {
+            "ranks": [5, 2],
+            "metadata": {
+                "alphabet_size": 16,
+                "bits_per_symbol": 4,
+                "original_byte_length": 1,
+                "padding_bits": 0,
+            },
+        },
+        "prompt_name": "recipe_long_specific",
+    }
+    monkeypatch.setattr(paper_suite, "make_context_token_ids", lambda model, prompt: [1])
+    monkeypatch.setattr(
+        paper_suite,
+        "generate_token_ids_from_ranks",
+        lambda model, context, ranks: {
+            "generated_text": "test",
+            "generated_token_ids": [2, 3],
+            "token_log_probabilities": [-1.0, -1.5],
+        },
+    )
+    monkeypatch.setattr(
+        paper_suite,
+        "recover_ranks_from_generated_ids",
+        lambda model, context, token_ids: {"ranks": [17, 2]},
+    )
+
+    row, example, features = paper_suite.run_single_nonseg_trial(
+        plan,
+        paper_suite.cover_prompt_dictionary(),
+        object(),
+        "test/repo",
+        "model.gguf",
+        "models/model.gguf",
+    )
+
+    assert row["exact_recovery"] is False
+    assert "recovery decode failed" in row["notes"]
+    assert "bounded rank 17 is outside 1..16" in example["recovery_error"]
+    assert "recovery decode failed" in features["notes"]
+
+
+def test_reconcile_baseline_artifacts_removes_obsolete_targets():
+    existing_rows = [
+        {"baseline_id": "baseline_keep"},
+        {"baseline_id": "baseline_old"},
+    ]
+    feature_frame = pd.DataFrame(
+        [
+            {"source_type": "nonseg_rankcloak", "trial_id": "trial_a"},
+            {"source_type": "baseline", "trial_id": "baseline_keep"},
+            {"source_type": "baseline", "trial_id": "baseline_old"},
+        ]
+    )
+
+    rows, features, obsolete = paper_suite.reconcile_baseline_artifacts(
+        existing_rows, feature_frame, ["baseline_keep"]
+    )
+
+    assert rows == [{"baseline_id": "baseline_keep"}]
+    assert set(features["trial_id"]) == {"trial_a", "baseline_keep"}
+    assert obsolete == ["baseline_old"]
 
 
 def test_staged_paper_profiles_are_registered():

@@ -1,0 +1,13 @@
+payload_name,payload_class,payload_kind,artifact_text_character_length,artifact_text_byte_length,artifact_bit_length_if_known,representation_hint,is_hex_like,is_base64_like,is_structured,seed,notes
+paper_sha256_hex_000,sha256_hex,sha256_hex,64,64,256,raw_hex_nibbles,True,False,False,2026053101,SHA-256 digest of a public deterministic string.
+paper_sha256_hex_001,sha256_hex,sha256_hex,64,64,256,raw_hex_nibbles,True,False,False,2026053102,SHA-256 digest of a public deterministic string.
+paper_random_128_bit_hex_000,random_128_bit_hex,random_hex,32,32,128,raw_hex_nibbles,True,False,False,2026054101,Fixed-seed synthetic 128-bit hex string.
+paper_random_128_bit_hex_001,random_128_bit_hex,random_hex,32,32,128,raw_hex_nibbles,True,False,False,2026054102,Fixed-seed synthetic 128-bit hex string.
+paper_random_256_bit_hex_000,random_256_bit_hex,random_hex,64,64,256,raw_hex_nibbles,True,False,False,2026055101,Fixed-seed synthetic 256-bit hex string.
+paper_random_256_bit_hex_001,random_256_bit_hex,random_hex,64,64,256,raw_hex_nibbles,True,False,False,2026055102,Fixed-seed synthetic 256-bit hex string.
+paper_nonce_96_bit_hex_000,nonce_96_bit_hex,nonce_hex,24,24,96,raw_hex_nibbles,True,False,False,2026056101,Fixed-seed synthetic nonce-like hex string.
+paper_nonce_96_bit_hex_001,nonce_96_bit_hex,nonce_hex,24,24,96,raw_hex_nibbles,True,False,False,2026056102,Fixed-seed synthetic nonce-like hex string.
+paper_uuid_v4_like_000,uuid_v4_like,uuid_v4_like,36,36,128,ascii_bytes_fixed_radix,False,False,True,2026057101,Fixed-seed synthetic UUIDv4-like string.
+paper_uuid_v4_like_001,uuid_v4_like,uuid_v4_like,36,36,128,ascii_bytes_fixed_radix,False,False,True,2026057102,Fixed-seed synthetic UUIDv4-like string.
+paper_ciphertext_like_base64_000,ciphertext_like_base64,ciphertext_like_base64,64,64,384,ascii_bytes_fixed_radix,False,True,False,2026059101,Fixed-seed synthetic base64 ciphertext-like text; no real encryption is used.
+paper_ciphertext_like_base64_001,ciphertext_like_base64,ciphertext_like_base64,64,64,384,ascii_bytes_fixed_radix,False,True,False,2026059102,Fixed-seed synthetic base64 ciphertext-like text; no real encryption is used.

@@ -63,6 +63,18 @@ CUDA_VISIBLE_DEVICES=0 python3 scripts/run_experiment.py \
   --overwrite
 ```
 
+Run or resume the complete pilot and all downstream stages:
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 \
+  .venv/bin/python scripts/run_experiment.py \
+  --profile paper-main-pilot-resume \
+  --output-dir results/rankcloak_paper_gpu_pilot_complete \
+  --model-path models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf \
+  --n-gpu-layers -1 \
+  --resume
+```
+
 GPU-backed ranks can differ from CPU-backed ranks, and ranks can also differ across
 model artifacts or llama.cpp builds. Preserve the generated manifest and compare
 exact trial IDs instead of overwriting historical results. See
@@ -107,8 +119,9 @@ python3 -m pytest
 
 Known recent status:
 
-- `compileall`: passed after GPU support and paper-matched validation.
-- `pytest`: 89 tests passed after GPU support and paper-matched validation.
+- `compileall`: passed after the complete GPU pilot and resume fixes.
+- `pytest`: 93 tests passed after the complete GPU pilot, resume fixes, and
+  generated-report regression checks.
 
 ## Core Experiment Commands
 

@@ -54,6 +54,9 @@ The latest completed pilots are:
 - `results/rankcloak_paper_gpu_validation/`: paper-ID-matched RTX 5000 Ada
   validation with full GPU offload, downstream detector/statistics artifacts, and a
   dedicated consistency report.
+- `results/rankcloak_paper_gpu_pilot_complete/`: complete RTX 5000 Ada pilot with
+  96/96 non-segmented and 24/24 segmented rows, canonical baselines, downstream
+  analyses, and all paper figures.
 
 All payloads are deterministic synthetic examples. This project studies exact-copy concealment behavior; it is not encryption, key exchange, authentication, or credential handling.
 

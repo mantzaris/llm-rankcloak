@@ -1,0 +1,37 @@
+payload_name,payload_class,representation_name,alphabet_size,rank_count,max_possible_rank,bits_per_rank_estimate,applies_to_payload,exact_codec_roundtrip,notes
+paper_sha256_hex_000,sha256_hex,ascii_bytes_fixed_radix,8,171.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_sha256_hex_000,sha256_hex,ascii_bytes_fixed_radix,16,128.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_sha256_hex_000,sha256_hex,raw_hex_nibbles,16,64.0,16,4.0,True,True,one lowercase hex character per rank
+paper_sha256_hex_001,sha256_hex,ascii_bytes_fixed_radix,8,171.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_sha256_hex_001,sha256_hex,ascii_bytes_fixed_radix,16,128.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_sha256_hex_001,sha256_hex,raw_hex_nibbles,16,64.0,16,4.0,True,True,one lowercase hex character per rank
+paper_random_128_bit_hex_000,random_128_bit_hex,ascii_bytes_fixed_radix,8,86.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_128_bit_hex_000,random_128_bit_hex,ascii_bytes_fixed_radix,16,64.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_128_bit_hex_000,random_128_bit_hex,raw_hex_nibbles,16,32.0,16,4.0,True,True,one lowercase hex character per rank
+paper_random_128_bit_hex_001,random_128_bit_hex,ascii_bytes_fixed_radix,8,86.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_128_bit_hex_001,random_128_bit_hex,ascii_bytes_fixed_radix,16,64.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_128_bit_hex_001,random_128_bit_hex,raw_hex_nibbles,16,32.0,16,4.0,True,True,one lowercase hex character per rank
+paper_random_256_bit_hex_000,random_256_bit_hex,ascii_bytes_fixed_radix,8,171.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_256_bit_hex_000,random_256_bit_hex,ascii_bytes_fixed_radix,16,128.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_256_bit_hex_000,random_256_bit_hex,raw_hex_nibbles,16,64.0,16,4.0,True,True,one lowercase hex character per rank
+paper_random_256_bit_hex_001,random_256_bit_hex,ascii_bytes_fixed_radix,8,171.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_256_bit_hex_001,random_256_bit_hex,ascii_bytes_fixed_radix,16,128.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_random_256_bit_hex_001,random_256_bit_hex,raw_hex_nibbles,16,64.0,16,4.0,True,True,one lowercase hex character per rank
+paper_nonce_96_bit_hex_000,nonce_96_bit_hex,ascii_bytes_fixed_radix,8,64.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_nonce_96_bit_hex_000,nonce_96_bit_hex,ascii_bytes_fixed_radix,16,48.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_nonce_96_bit_hex_000,nonce_96_bit_hex,raw_hex_nibbles,16,24.0,16,4.0,True,True,one lowercase hex character per rank
+paper_nonce_96_bit_hex_001,nonce_96_bit_hex,ascii_bytes_fixed_radix,8,64.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_nonce_96_bit_hex_001,nonce_96_bit_hex,ascii_bytes_fixed_radix,16,48.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_nonce_96_bit_hex_001,nonce_96_bit_hex,raw_hex_nibbles,16,24.0,16,4.0,True,True,one lowercase hex character per rank
+paper_uuid_v4_like_000,uuid_v4_like,ascii_bytes_fixed_radix,8,96.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_uuid_v4_like_000,uuid_v4_like,ascii_bytes_fixed_radix,16,72.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_uuid_v4_like_000,uuid_v4_like,raw_hex_nibbles,16,,16,4.0,False,,not applicable because payload text is not lowercase hex
+paper_uuid_v4_like_001,uuid_v4_like,ascii_bytes_fixed_radix,8,96.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_uuid_v4_like_001,uuid_v4_like,ascii_bytes_fixed_radix,16,72.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_uuid_v4_like_001,uuid_v4_like,raw_hex_nibbles,16,,16,4.0,False,,not applicable because payload text is not lowercase hex
+paper_ciphertext_like_base64_000,ciphertext_like_base64,ascii_bytes_fixed_radix,8,171.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_ciphertext_like_base64_000,ciphertext_like_base64,ascii_bytes_fixed_radix,16,128.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_ciphertext_like_base64_000,ciphertext_like_base64,raw_hex_nibbles,16,,16,4.0,False,,not applicable because payload text is not lowercase hex
+paper_ciphertext_like_base64_001,ciphertext_like_base64,ascii_bytes_fixed_radix,8,171.0,8,3.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_ciphertext_like_base64_001,ciphertext_like_base64,ascii_bytes_fixed_radix,16,128.0,16,4.0,True,True,ASCII artifact bytes encoded as fixed-radix bounded ranks
+paper_ciphertext_like_base64_001,ciphertext_like_base64,raw_hex_nibbles,16,,16,4.0,False,,not applicable because payload text is not lowercase hex

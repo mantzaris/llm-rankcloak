@@ -157,6 +157,55 @@ GPU, the historical lead-in segmented failure passed on the GPU, and two histori
 multi-topic segmented passes failed on the GPU. The specific artifact directions
 therefore changed even though the aggregate conclusion did not.
 
+## Complete GPU Pilot
+
+After the paper-ID-matched check, the staged `paper-main-pilot-resume` orchestrator
+was run in a fresh directory through the full planned pilot matrix. It completed every
+generation and analysis stage:
+
+| Protocol variant | Trials | Exact recoveries |
+| --- | ---: | ---: |
+| Non-segmented ASCII B=8 | 36 | 34 |
+| Non-segmented ASCII B=16 | 36 | 33 |
+| Non-segmented raw hex-nibble B=16 | 24 | 23 |
+| Segmented single-topic | 8 | 6 |
+| Segmented multi-topic | 8 | 8 |
+| Segmented multi-topic with eight-token lead-in | 8 | 7 |
+| Total | 120 | 111 |
+
+The nine recovery failures are experiment outcomes, not runner failures. Every
+planned trial ID is present, all generated rows and message artifacts remain
+available for analysis, and the result tables explicitly report the failures.
+
+The completed downstream package contains:
+
+- 20 canonical length-matched greedy baselines;
+- 668 cover-feature rows and 686 detector-dataset rows;
+- 57 detector results, all with `status=ok`;
+- 223 statistical summaries, all with `status=ok`;
+- 14 effect-size results, all with `status=ok`;
+- 10 nonempty paper figures.
+
+The expanded run exposed three resume/reporting edge cases that the smaller subset
+did not:
+
+1. One generated token transiently replayed at rank 17 for a B=16 codec. Rank-domain
+   decode errors are now retained as `exact_recovery=false` rows instead of causing
+   the runner to omit the trial.
+2. A changed median length target left an obsolete greedy baseline after resume.
+   Baseline reconciliation now removes targets that are no longer in the current
+   plan before regenerating detector and statistical artifacts.
+3. The generated paper summary contained pilot-specific lead-in wording with a
+   hard-coded failure count. Its lead-in result and run-scope text are now derived
+   from the current result tables and resolved profile, with singular/plural
+   regression coverage.
+
+A final no-op resume skipped all 96 non-segmented and all 24 segmented trials, ran no
+new baselines, and preserved the exact ID sets without duplicates. Full offload
+(`-1`), one-layer partial offload (`1`), and CPU-only execution (`0`) were all
+physically exercised. Two CPU context replays after KV-cache clearing produced
+identical logits with maximum absolute delta 0.0.
+
 ## Why Exact Rows Differ
 
 A diagnostic comparison found rank-pressure differences between the historical rows
@@ -181,6 +230,8 @@ artifacts.
 - results/rankcloak_paper_gpu_validation/: GPU-generated validation package.
 - results/rankcloak_paper_gpu_validation/GPU_VALIDATION_REPORT.md: exact
   historical/GPU comparison and caveats.
+- results/rankcloak_paper_gpu_pilot_complete/: complete 96+24 GPU pilot with
+  canonical baselines, detector/statistics/effects, summaries, and figures.
 - results/rankcloak_paper_cpu_local_validation/: current-machine CPU diagnostic
   rows used to determine whether differences were GPU-specific.
 - .paper/scientific_reports/: historical manuscript and supplemental result
@@ -190,9 +241,11 @@ artifacts.
 
 After the implementation:
 
-- python3 -m compileall rankcloak scripts passed;
-- python3 -m pytest passed all 89 tests;
+- python3 -m compileall rankcloak scripts tests passed;
+- python3 -m pytest passed all 93 tests;
 - git diff --check passed.
 
+The artifact audit also passed exact planned-ID, duplicate, critical-null, canonical
+baseline, analysis-status, model-hash, backend-manifest, and nonempty-figure checks.
 The GPU-focused unit tests use mocks, so the normal test suite remains runnable on a
 CPU-only host.

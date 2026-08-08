@@ -16,6 +16,22 @@ configuration containing the exact model file, tokenizer, quantization, rank ord
 prompt templates, payload codec, segmentation rule, tail rule, token filter, and decode
 rule where applicable.
 
+## GPU Completion Update
+
+A separate GPU-native pilot is complete at
+`results/rankcloak_paper_gpu_pilot_complete/`. It contains all 96 planned
+non-segmented and all 24 planned segmented trials, with 111 exact recoveries and 9
+recorded recovery failures. Its canonical downstream package contains 20 baselines,
+686 detector-dataset rows, 57 detector results, 223 statistical rows, 14 effect-size
+rows, and 10 figures. All detector, statistical, and effect-size status rows are
+`ok`.
+
+The historical `results/rankcloak_paper_main_pilot/` directory remains the partial
+CPU manuscript package described below. Do not merge its rows with the complete GPU
+dataset for inference; backend and model provenance are part of the decoding
+configuration. See `notes/21_gpu_support_and_validation.md` for the physical backend
+tests, result comparison, resume fixes, and interpretation.
+
 ## Code Inventory
 
 | Code area | Main files | Role |
@@ -173,4 +189,3 @@ python3 scripts/run_experiment.py --profile paper-detector --output-dir results/
 python3 scripts/run_experiment.py --profile paper-statistics --output-dir results/rankcloak_paper_main_pilot --resume
 python3 scripts/run_experiment.py --profile paper-analysis --output-dir results/rankcloak_paper_analysis --overwrite
 ```
-
