@@ -47,3 +47,5 @@ results/**/*.zip
 results/**/*.tar
 results/**/*.tar.gz
 
+
+.paper

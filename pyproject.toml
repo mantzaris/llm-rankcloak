@@ -20,6 +20,11 @@ dependencies = [
 
 [project.optional-dependencies]
 llama = ["llama-cpp-python>=0.3.5"]
+cuda = [
+    "llama-cpp-python==0.3.23",
+    "nvidia-cuda-runtime-cu12==12.4.127",
+    "nvidia-cublas-cu12==12.4.5.8",
+]
 dev = ["pytest>=8.0"]
 analysis = ["scikit-learn>=1.0"]
 

@@ -28,6 +28,9 @@ This directory documents the current RankCloak repository state, implemented cod
 - `20_current_experiment_artifact_inventory.md`: current consolidated inventory of
   implemented code, experiment profiles, result directories, row counts, paper package
   status, and remaining commands.
+- `21_gpu_support_and_validation.md`: GPU-loading implementation, CUDA runtime
+  setup, deterministic rank-replay controls, manifest changes, paper-matched
+  validation, timing, and CPU/GPU consistency limits.
 - Staged paper-suite resume behavior is documented in `15_paper_main_experiment_plan.md`
   and current staged run status is tracked in `16_paper_main_results_summary.md`.
 
@@ -48,6 +51,9 @@ The latest completed pilots are:
   experimental lead-in segmented failure.
 - `results/rankcloak_paper_analysis/`: aggregation across current pilot and
   paper-suite artifacts.
+- `results/rankcloak_paper_gpu_validation/`: paper-ID-matched RTX 5000 Ada
+  validation with full GPU offload, downstream detector/statistics artifacts, and a
+  dedicated consistency report.
 
 All payloads are deterministic synthetic examples. This project studies exact-copy concealment behavior; it is not encryption, key exchange, authentication, or credential handling.
 
@@ -64,6 +70,8 @@ For paper drafting, start with:
 - `15_paper_main_experiment_plan.md` through `18_statistical_analysis_plan.md` for the paper-main results suite.
 - `19_final_paper_results_package.md` for the current manuscript package status.
 - `20_current_experiment_artifact_inventory.md` for the most compact current inventory.
+- `21_gpu_support_and_validation.md` for GPU setup, implementation details, and
+  interpretation of the paper-matched validation.
 - Use `paper-smoke` to validate the staged pipeline quickly, then continue
   `results/rankcloak_paper_main_pilot/` with the staged `paper-*` profiles and
   `--resume --limit-trials N`.

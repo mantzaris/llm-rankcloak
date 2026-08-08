@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-08-08T00:32:08.383437+00:00",
+  "git_commit_hash": "e82648a1a3f40e9d02bbd7645b645620f72c91b4",
+  "dirty_worktree": true,
+  "python_version": "3.10.13 (main, Feb 26 2026, 22:30:03) [GCC 13.3.0]",
+  "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "os_cpu_count": 12,
+  "selected_thread_count": 11,
+  "inference_backend": {
+    "n_gpu_layers_requested": -1,
+    "llama_cpp_gpu_offload_supported": true,
+    "gpu_backend_active": true,
+    "cuda_device_order": "PCI_BUS_ID",
+    "cuda_visible_devices": "1",
+    "ggml_cuda_disable_graphs": "1",
+    "cublas_workspace_config": ":4096:8"
+  },
+  "installed_package_versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.9",
+    "llama_cpp": "0.3.23",
+    "huggingface_hub": "1.27.0",
+    "nvidia_cuda_runtime_cu12": "12.4.127",
+    "nvidia_cublas_cu12": "12.4.5.8"
+  },
+  "model_repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+  "model_filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_path_relative": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+  "model_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+  "model_sha256_note": null,
+  "model_file_size_bytes": 4920734272,
+  "profile": "paper-diagnostics",
+  "output_dir": "results/rankcloak_paper_gpu_validation",
+  "command_line_args": [
+    "--profile",
+    "paper-diagnostics",
+    "--output-dir",
+    "results/rankcloak_paper_gpu_validation",
+    "--model-path",
+    "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+    "--n-gpu-layers",
+    "-1",
+    "--resume"
+  ]
+}

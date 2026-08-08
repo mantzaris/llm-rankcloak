@@ -109,21 +109,73 @@ def download_llama3_gguf(force: bool = False) -> Path:
     raise RuntimeError(message)
 
 
+def preload_pip_cuda_libraries() -> List[str]:
+    """Preload CUDA libraries installed by NVIDIA pip packages when present.
+
+    CUDA llama.cpp wheels link against libcudart and cuBLAS. The NVIDIA pip
+    packages install those libraries below a namespace package rather than a
+    system linker path, so load them globally before importing llama_cpp.
+    """
+
+    try:
+        import ctypes
+        import nvidia
+    except Exception:
+        return []
+
+    relative_paths = (
+        Path("cuda_runtime/lib/libcudart.so.12"),
+        Path("cublas/lib/libcublasLt.so.12"),
+        Path("cublas/lib/libcublas.so.12"),
+    )
+    loaded = []
+    for namespace_path in getattr(nvidia, "__path__", []):
+        root = Path(namespace_path)
+        for relative_path in relative_paths:
+            candidate = root / relative_path
+            if not candidate.exists() or str(candidate) in loaded:
+                continue
+            try:
+                ctypes.CDLL(str(candidate), mode=ctypes.RTLD_GLOBAL)
+            except OSError:
+                continue
+            loaded.append(str(candidate))
+    return loaded
+
+
 def load_llama_cpp_model(
     model_path: Optional[Path] = None,
     n_ctx: int = 4096,
     n_threads: Optional[int] = None,
+    n_gpu_layers: int = 0,
     logits_all: bool = True,
     verbose: bool = False,
 ) -> Any:
-    """Load a local GGUF model with llama-cpp-python."""
+    """Load a local GGUF model with optional llama.cpp GPU offload.
 
+    ``n_gpu_layers=0`` preserves the CPU-only behavior used by the original
+    experiments. ``n_gpu_layers=-1`` requests full offload; a positive value
+    requests that many layers. Explicit GPU requests fail before model loading
+    when the installed llama.cpp backend has no GPU-offload support.
+    """
+
+    n_gpu_layers = int(n_gpu_layers)
+    if n_gpu_layers < -1:
+        raise ValueError(
+            "n_gpu_layers must be -1 (all), 0 (CPU), or a positive integer."
+        )
+    if n_gpu_layers != 0:
+        os.environ.setdefault("GGML_CUDA_DISABLE_GRAPHS", "1")
+        os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+
+    preload_pip_cuda_libraries()
     try:
         from llama_cpp import Llama
-    except ImportError as exc:
+    except (ImportError, RuntimeError) as exc:
         raise ImportError(
             "llama-cpp-python is required for model-backed rank experiments. "
-            "Install it with `pip install llama-cpp-python`."
+            "Install it with `pip install llama-cpp-python`. CUDA wheels also "
+            "require nvidia-cuda-runtime-cu12 and nvidia-cublas-cu12."
         ) from exc
 
     resolved_model_path = Path(model_path) if model_path else existing_llama3_model_path()
@@ -134,20 +186,44 @@ def load_llama_cpp_model(
             f"{expected}"
         )
 
+    if int(n_gpu_layers) != 0 and not llama_cpp_gpu_offload_supported():
+        raise RuntimeError(
+            "GPU layers were requested, but the installed llama-cpp-python build "
+            "does not support GPU offload. Install a CUDA-enabled build or run with "
+            "--n-gpu-layers 0."
+        )
+
     threads = n_threads or default_thread_count()
     model = Llama(
         model_path=str(resolved_model_path),
         n_ctx=n_ctx,
         n_threads=threads,
-        n_gpu_layers=0,
+        n_gpu_layers=int(n_gpu_layers),
         logits_all=logits_all,
         verbose=verbose,
     )
-    try:
-        setattr(model, "rankcloak_model_path", str(resolved_model_path))
-    except Exception:
-        pass
+    for attribute, value in (
+        ("rankcloak_model_path", str(resolved_model_path)),
+        ("rankcloak_n_gpu_layers", int(n_gpu_layers)),
+        ("rankcloak_gpu_offload_supported", llama_cpp_gpu_offload_supported()),
+    ):
+        try:
+            setattr(model, attribute, value)
+        except Exception:
+            pass
     return model
+
+
+def llama_cpp_gpu_offload_supported() -> bool:
+    """Return whether the installed llama.cpp backend supports GPU offload."""
+
+    preload_pip_cuda_libraries()
+    try:
+        from llama_cpp import llama_cpp as llama_cpp_api
+
+        return bool(llama_cpp_api.llama_supports_gpu_offload())
+    except Exception:
+        return False
 
 
 def _call_or_value(value: Any) -> Any:
@@ -245,11 +321,21 @@ def safe_detokenize(model: Any, token_ids: List[int]) -> str:
 
 
 def reset_model(model: Any) -> None:
-    """Reset llama-cpp-python state if the object exposes a reset method."""
+    """Reset tokens and fully clear llama.cpp's attention cache when available.
+
+    ``Llama.reset()`` only resets its Python-side token counter. Clearing the
+    underlying KV-cache data as well is important for rank replay on GPU: stale
+    device-buffer contents can otherwise perturb near-tied logits after a
+    context is recomputed.
+    """
 
     reset = getattr(model, "reset", None)
     if callable(reset):
         reset()
+    context = getattr(model, "_ctx", None)
+    clear_cache = getattr(context, "kv_cache_clear", None)
+    if callable(clear_cache):
+        clear_cache()
 
 
 def evaluate_context(model: Any, context_token_ids: List[int]) -> None:

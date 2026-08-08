@@ -19,6 +19,56 @@ pip install -e ".[dev]"
 python3 scripts/run_experiment.py --profile codec-only --overwrite
 ```
 
+### NVIDIA GPU Environment
+
+The validated GPU setup uses the CUDA 12.4 llama-cpp-python wheel and pinned NVIDIA
+runtime packages:
+
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install \
+  llama-cpp-python==0.3.23 \
+  nvidia-cuda-runtime-cu12==12.4.127 \
+  nvidia-cublas-cu12==12.4.5.8 \
+  --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
+python -m pip install -e ".[dev,analysis]"
+```
+Verify that the installed backend exposes GPU offload:
+
+```bash
+python - <<'PY'
+from rankcloak.model_io import llama_cpp_gpu_offload_supported
+print("GPU offload supported:", llama_cpp_gpu_offload_supported())
+PY
+```
+
+
+Request full model offload with `--n-gpu-layers -1`:
+
+```bash
+python3 scripts/run_experiment.py \
+  --profile smoke \
+  --n-gpu-layers -1 \
+  --overwrite
+```
+
+On a multi-GPU host, select the device before starting the process:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python3 scripts/run_experiment.py \
+  --profile smoke \
+  --n-gpu-layers -1 \
+  --overwrite
+```
+
+GPU-backed ranks can differ from CPU-backed ranks, and ranks can also differ across
+model artifacts or llama.cpp builds. Preserve the generated manifest and compare
+exact trial IDs instead of overwriting historical results. See
+`notes/21_gpu_support_and_validation.md` for the implementation, validated
+environment, result comparison, and limitations.
+
 ## Local Model
 
 Preferred model path:
@@ -57,8 +107,8 @@ python3 -m pytest
 
 Known recent status:
 
-- `compileall`: passed after staged paper-main cleanup.
-- `pytest`: 81 tests passed after staged paper-main cleanup.
+- `compileall`: passed after GPU support and paper-matched validation.
+- `pytest`: 89 tests passed after GPU support and paper-matched validation.
 
 ## Core Experiment Commands
 

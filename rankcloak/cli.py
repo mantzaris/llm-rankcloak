@@ -42,6 +42,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     run_parser.add_argument("--output-dir", default=None)
     run_parser.add_argument("--model-path", default=None)
+    run_parser.add_argument(
+        "--n-gpu-layers",
+        type=int,
+        default=0,
+        help="llama.cpp layers to offload: 0 for CPU, -1 for all, or a positive count.",
+    )
     run_parser.add_argument("--max-payload-bytes", type=int, default=None)
     run_parser.add_argument("--skip-model-download", action="store_true")
     run_parser.add_argument("--overwrite", action="store_true")
@@ -67,6 +73,7 @@ def main(argv: Optional[Sequence[str]] = None) -> dict:
             experiment_args.extend(["--output-dir", args.output_dir])
         if args.model_path:
             experiment_args.extend(["--model-path", args.model_path])
+        experiment_args.extend(["--n-gpu-layers", str(args.n_gpu_layers)])
         if args.max_payload_bytes is not None:
             experiment_args.extend(["--max-payload-bytes", str(args.max_payload_bytes)])
         if args.skip_model_download:

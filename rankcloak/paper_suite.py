@@ -231,6 +231,27 @@ def bool_sum(frame: pd.DataFrame, column: str) -> Tuple[int, int]:
     return passes, int(len(values) - passes)
 
 
+def recovery_failure_note(frame: pd.DataFrame, label: str) -> str:
+    """Describe exact-recovery failures without assuming a protocol."""
+
+    if frame.empty or "exact_recovery" not in frame.columns:
+        return ""
+    values = frame["exact_recovery"].dropna().astype(bool)
+    failures = frame.loc[values.index[~values]]
+    if failures.empty:
+        return ""
+    variants = (
+        sorted(failures["protocol_variant"].dropna().astype(str).unique())
+        if "protocol_variant" in failures.columns
+        else []
+    )
+    locations = ", ".join("`{}`".format(value) for value in variants) or "unknown protocol"
+    noun = "failure" if len(failures) == 1 else "failures"
+    return "{} {} exact-recovery {} observed in: {}.".format(
+        len(failures), label, noun, locations
+    )
+
+
 def paper_rank_summary(payload_name: str, ranks: Sequence[int]) -> dict:
     if not ranks:
         return {
@@ -1469,10 +1490,9 @@ def write_staged_summary(
     planned_nonseg_count = len(planned_nonseg_trials(suite_profile, planned_payloads, planned_prompt_names))
     planned_segmented_count = len(planned_segmented_trials(suite_profile, planned_payloads))
     extra_notes = []
-    if segmented_failures:
-        extra_notes.append(
-            "The lead-in segmented variant produced one exact-recovery failure in the partial pilot and is treated as experimental."
-        )
+    segmented_failure_note = recovery_failure_note(segmented_frame, "Segmented")
+    if segmented_failure_note:
+        extra_notes.append(segmented_failure_note)
     generated_files = stage_generated_files(output_dir)
     completed_stage_names = []
     if (output_dir / "paper_payloads.csv").exists():
@@ -1511,6 +1531,7 @@ def write_staged_summary(
         "important_notes": list(notes) + extra_notes + ["Model status: {}".format(model_status)],
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    segmented_scope_note = segmented_failure_note or "No segmented exact-recovery failures were observed."
     next_command = (
         "python3 scripts/run_experiment.py --profile paper-main-pilot-resume "
         "--output-dir {} --resume --limit-trials 10".format(repo_relative_path(output_dir, project_root))
@@ -1536,7 +1557,8 @@ def write_staged_summary(
 
 This is an empirical exact-copy measurement study over deterministic synthetic payloads. It is not encryption, key exchange, authentication, signing, digital signatures, credential handling, cryptographic security, or an undetectability claim.
 
-The lead-in segmented variant is experimental. In the current partial pilot it produced one exact-recovery failure, so it should be reported separately from the non-lead-in segmented variants.
+The lead-in segmented variant is experimental and should be reported separately.
+{segmented_scope_note}
 
 ## Next Recommended Command
 
@@ -1557,6 +1579,7 @@ The lead-in segmented variant is experimental. In the current partial pilot it p
         detector_rows=len(detector_dataset_frame),
         stat_rows=len(statistics_frame),
         effect_rows=len(effect_frame),
+        segmented_scope_note=segmented_scope_note,
         next_command=next_command,
     )
     (output_dir / "SUMMARY.md").write_text(summary_md, encoding="utf-8")
@@ -2636,6 +2659,9 @@ The current run is `{profile}`. If this is `paper-main-pilot`, treat it as a val
     if not segmented_frame.empty:
         recovery_summary_rows.append(segmented_frame.groupby("protocol_variant")["exact_recovery"].agg(["count", "sum"]).reset_index())
     recovery_table = pd.concat(recovery_summary_rows, ignore_index=True) if recovery_summary_rows else pd.DataFrame()
+    segmented_failure_note = recovery_failure_note(
+        segmented_frame, "Segmented"
+    ) or "No segmented exact-recovery failures were observed."
     lines = [
         "# Paper Comparison Tables",
         "",
@@ -2688,7 +2714,8 @@ The current run is `{profile}`. If this is `paper-main-pilot`, treat it as a val
             "- Exact-copy conditions only.",
             "- No encryption, key exchange, authentication, signing, or cryptographic security claim.",
             "- No undetectability claim.",
-            "- The lead-in segmented variant produced one exact-recovery failure in the partial pilot and is treated as experimental.",
+            "- The lead-in segmented variant remains experimental.",
+            "- {}".format(segmented_failure_note),
         ]
     )
     comparison_path.write_text("\n".join(lines), encoding="utf-8")

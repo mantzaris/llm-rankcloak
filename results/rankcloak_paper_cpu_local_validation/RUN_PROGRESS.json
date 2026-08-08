@@ -1,0 +1,25 @@
+{
+  "profile": "paper-diagnostics",
+  "stage": "paper-diagnostics",
+  "output_dir": "results/rankcloak_paper_cpu_local_validation",
+  "started_at": "2026-08-07T23:16:06.764325+00:00",
+  "finished_at": "2026-08-07T23:17:42.350567+00:00",
+  "planned_trials": 12,
+  "completed_trials": 12,
+  "skipped_existing_trials": 0,
+  "failed_trials": 0,
+  "remaining_trials": 0,
+  "last_completed_trial_id": null,
+  "generated_files": [
+    "results/rankcloak_paper_cpu_local_validation/paper_payloads.csv",
+    "results/rankcloak_paper_cpu_local_validation/paper_rank_pressure.csv",
+    "results/rankcloak_paper_cpu_local_validation/paper_codec_comparison.csv",
+    "results/rankcloak_paper_cpu_local_validation/MANIFEST.json"
+  ],
+  "notes": [
+    "diagnostic stage only; no cover generation",
+    "paper_payloads.csv written",
+    "paper_rank_pressure.csv written",
+    "paper_codec_comparison.csv written"
+  ]
+}

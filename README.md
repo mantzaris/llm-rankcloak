@@ -26,6 +26,52 @@ pip install -e ".[dev]"
 
 The codec-only profile and tests for deterministic codec logic do not require the model.
 
+### NVIDIA GPU Setup
+
+RankCloak exposes llama.cpp GPU offload through `--n-gpu-layers`. Install a
+CUDA-enabled build, verify it, and pass `-1` to offload every model layer. To
+match the paper environment as closely as possible, the example pins the
+recorded `llama-cpp-python` version while using its official CUDA 12.4 wheel:
+
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install \
+  "llama-cpp-python==0.3.23" \
+  "nvidia-cuda-runtime-cu12==12.4.127" \
+  "nvidia-cublas-cu12==12.4.5.8" \
+  --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
+python -m pip install -e ".[dev,analysis]"
+python - <<'PY'
+from rankcloak.model_io import llama_cpp_gpu_offload_supported
+print("GPU offload supported:", llama_cpp_gpu_offload_supported())
+PY
+```
+
+On a multi-GPU host, use `CUDA_VISIBLE_DEVICES` to expose only the intended
+compute GPU. The selected physical device is then device 0 inside llama.cpp:
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 \
+  python scripts/run_experiment.py \
+  --profile paper-smoke \
+  --output-dir results/rankcloak_paper_gpu_smoke \
+  --model-path /absolute/path/to/model.gguf \
+  --n-gpu-layers -1 \
+  --overwrite
+```
+
+The default remains `--n-gpu-layers 0` for CPU compatibility. Explicit GPU
+requests fail if the installed backend cannot offload. GPU runs default
+`GGML_CUDA_DISABLE_GRAPHS=1` and `CUBLAS_WORKSPACE_CONFIG=:4096:8`, and
+fully clear llama.cpp's KV cache before each context replay. These controls keep
+near-tied token ranks stable between encoding and decoding. Explicitly supplied
+environment values are respected.
+Reproducibility manifests record the requested layer count, backend capability,
+CUDA device ordering and visibility, deterministic CUDA settings, and the GGUF
+SHA-256 digest.
+
 ## Model
 
 Preferred local model path:

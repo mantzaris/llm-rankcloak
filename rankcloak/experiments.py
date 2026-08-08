@@ -401,6 +401,7 @@ def load_model_for_profile(
     profile: str,
     model_path: Optional[str],
     skip_model_download: bool,
+    n_gpu_layers: int = 0,
 ) -> tuple:
     if profile in {"codec-only", "paper-analysis", "paper-detector", "paper-statistics"}:
         return None, existing_llama3_model_path(), "not_requested", None, 0.0
@@ -410,16 +411,27 @@ def load_model_for_profile(
         try:
             resolved_model_path = download_llama3_gguf()
         except Exception as exc:
+            if int(n_gpu_layers) != 0:
+                raise RuntimeError("GPU model preparation failed: {}".format(exc)) from exc
             return None, None, "unavailable", str(exc), 0.0
 
     if resolved_model_path is None:
+        if int(n_gpu_layers) != 0:
+            raise FileNotFoundError("GPU execution was requested, but no local GGUF model was found.")
         return None, None, "unavailable", "No local GGUF model found.", 0.0
 
     started_at = time.perf_counter()
     try:
-        model = load_llama_cpp_model(model_path=resolved_model_path, n_ctx=2048, logits_all=True)
+        model = load_llama_cpp_model(
+            model_path=resolved_model_path,
+            n_ctx=2048,
+            n_gpu_layers=n_gpu_layers,
+            logits_all=True,
+        )
         return model, resolved_model_path, "loaded", None, time.perf_counter() - started_at
     except Exception as exc:
+        if int(n_gpu_layers) != 0:
+            raise RuntimeError("GPU-backed model loading failed: {}".format(exc)) from exc
         return None, resolved_model_path, "unavailable", str(exc), time.perf_counter() - started_at
 
 
@@ -1022,6 +1034,7 @@ def run_experiment(args: argparse.Namespace) -> dict:
         profile=profile,
         model_path=args.model_path,
         skip_model_download=args.skip_model_download,
+        n_gpu_layers=getattr(args, "n_gpu_layers", 0),
     )
     model_repo_id, model_filename = resolve_model_identity(model_path)
     model_path_relative = repo_relative_path(model_path, PROJECT_ROOT)
@@ -1322,6 +1335,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Directory for result outputs.",
     )
     parser.add_argument("--model-path", default=None, help="Optional explicit GGUF model path.")
+    parser.add_argument(
+        "--n-gpu-layers",
+        type=int,
+        default=0,
+        help="llama.cpp layers to offload: 0 for CPU, -1 for all, or a positive count.",
+    )
     parser.add_argument(
         "--max-payload-bytes",
         type=int,

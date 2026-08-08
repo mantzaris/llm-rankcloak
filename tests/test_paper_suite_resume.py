@@ -9,6 +9,7 @@ from rankcloak.paper_suite import (
     insufficient_detector_row,
     insufficient_effect_row,
     insufficient_statistical_row,
+    recovery_failure_note,
     stable_trial_id,
     write_run_progress,
 )
@@ -94,6 +95,23 @@ def test_insufficient_statistics_rows_schema():
     )
     assert stat_frame.iloc[0]["status"] == "insufficient_data"
     assert effect_frame.iloc[0]["status"] == "insufficient_data"
+
+
+def test_recovery_failure_note_uses_observed_protocol_variants():
+    frame = pd.DataFrame(
+        [
+            {"protocol_variant": "segmented_leadin", "exact_recovery": True},
+            {"protocol_variant": "segmented_single", "exact_recovery": False},
+            {"protocol_variant": "segmented_multi", "exact_recovery": False},
+        ]
+    )
+
+    note = recovery_failure_note(frame, "Segmented")
+
+    assert note.startswith("2 Segmented exact-recovery failures")
+    assert "`segmented_multi`" in note
+    assert "`segmented_single`" in note
+    assert "`segmented_leadin`" not in note
 
 
 def test_staged_paper_profiles_are_registered():
