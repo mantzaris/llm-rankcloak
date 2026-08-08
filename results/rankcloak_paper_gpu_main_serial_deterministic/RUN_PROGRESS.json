@@ -1,0 +1,28 @@
+{
+  "profile": "paper-main",
+  "stage": "paper-nonseg-generation",
+  "output_dir": "results/rankcloak_paper_gpu_main_serial_deterministic",
+  "started_at": "2026-08-08T04:46:42.380215+00:00",
+  "finished_at": "2026-08-08T04:56:34.474767+00:00",
+  "planned_trials": 475,
+  "completed_trials": 100,
+  "skipped_existing_trials": 0,
+  "failed_trials": 0,
+  "remaining_trials": 375,
+  "last_completed_trial_id": "nonseg_ascii_b16__paper_random_128_bit_hex_001__ascii_bytes_fixed_radix__b16__plant_care_note_specific",
+  "generated_files": [
+    "results/rankcloak_paper_gpu_main_serial_deterministic/paper_payloads.csv",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/paper_rank_pressure.csv",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/paper_codec_comparison.csv",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/paper_stegotext_trials.csv",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/paper_nonseg_examples.jsonl",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/paper_cover_text_features.csv",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/summary.json",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/SUMMARY.md",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/MANIFEST.json",
+    "results/rankcloak_paper_gpu_main_serial_deterministic/RUN_PROGRESS.json"
+  ],
+  "notes": [
+    "non-segmented generation stage"
+  ]
+}

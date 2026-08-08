@@ -165,7 +165,10 @@ def load_llama_cpp_model(
             "n_gpu_layers must be -1 (all), 0 (CPU), or a positive integer."
         )
     if n_gpu_layers != 0:
+        os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
         os.environ.setdefault("GGML_CUDA_DISABLE_GRAPHS", "1")
+        os.environ.setdefault("GGML_CUDA_DISABLE_FUSION", "1")
+        os.environ.setdefault("GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F", "1")
         os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
     preload_pip_cuda_libraries()
@@ -194,17 +197,27 @@ def load_llama_cpp_model(
         )
 
     threads = n_threads or default_thread_count()
+    model_kwargs = {
+        "model_path": str(resolved_model_path),
+        "n_ctx": n_ctx,
+        "n_threads": threads,
+        "n_gpu_layers": int(n_gpu_layers),
+        "logits_all": logits_all,
+        "verbose": verbose,
+    }
+    if n_gpu_layers != 0:
+        # Rank generation and recovery evaluate one payload token at a time.
+        # Matching that execution shape for prompt evaluation prevents
+        # intermittent CUDA batch/context drift after a context reset.
+        model_kwargs.update({"n_batch": 1, "n_ubatch": 1})
     model = Llama(
-        model_path=str(resolved_model_path),
-        n_ctx=n_ctx,
-        n_threads=threads,
-        n_gpu_layers=int(n_gpu_layers),
-        logits_all=logits_all,
-        verbose=verbose,
+        **model_kwargs,
     )
     for attribute, value in (
         ("rankcloak_model_path", str(resolved_model_path)),
         ("rankcloak_n_gpu_layers", int(n_gpu_layers)),
+        ("rankcloak_n_batch", model_kwargs.get("n_batch")),
+        ("rankcloak_n_ubatch", model_kwargs.get("n_ubatch")),
         ("rankcloak_gpu_offload_supported", llama_cpp_gpu_offload_supported()),
     ):
         try:
@@ -361,4 +374,3 @@ def get_last_logits(model: Any) -> np.ndarray:
     if logits.ndim != 1:
         logits = np.asarray(logits).reshape(-1)
     return logits
-

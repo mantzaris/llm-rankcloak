@@ -155,6 +155,63 @@ def test_paper_profile_scope_note_matches_resolved_profile():
     assert "larger frozen" in paper_suite.paper_profile_scope_note("paper-main")
 
 
+def test_full_paper_summary_recommends_full_profile_resume(tmp_path):
+    paper_suite.write_staged_summary(
+        output_dir=tmp_path,
+        project_root=tmp_path,
+        profile="paper-main",
+        stage="paper-statistics",
+        model_loaded=False,
+        model_status="test",
+        notes=[],
+    )
+
+    summary_text = (tmp_path / "SUMMARY.md").read_text(encoding="utf-8")
+    assert ".venv/bin/python scripts/run_experiment.py --profile paper-main --output-dir . --resume" in summary_text
+    assert "paper-main-pilot-resume" not in summary_text
+
+
+def test_full_paper_summary_preserves_recorded_gpu_resume_options(tmp_path):
+    (tmp_path / "MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "inference_backend": {
+                    "cuda_device_order": "PCI_BUS_ID",
+                    "cuda_visible_devices": "1",
+                },
+                "command_line_args": [
+                    "--profile",
+                    "paper-main",
+                    "--model-path",
+                    "models/model.gguf",
+                    "--n-gpu-layers",
+                    "-1",
+                    "--resume",
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    paper_suite.write_staged_summary(
+        output_dir=tmp_path,
+        project_root=tmp_path,
+        profile="paper-main",
+        stage="paper-statistics",
+        model_loaded=True,
+        model_status="loaded",
+        notes=[],
+    )
+
+    summary_text = (tmp_path / "SUMMARY.md").read_text(encoding="utf-8")
+    assert (
+        "CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 "
+        ".venv/bin/python scripts/run_experiment.py --profile paper-main "
+        "--output-dir . --model-path models/model.gguf --n-gpu-layers -1 --resume"
+        in summary_text
+    )
+
+
 def test_nonseg_rank_drift_is_recorded_as_recovery_failure(monkeypatch):
     payload = SimpleNamespace(
         payload_name="payload",
@@ -245,6 +302,21 @@ def test_staged_paper_profiles_are_registered():
         "paper-detector",
         "paper-statistics",
         "paper-main-pilot-resume",
+        "paper-main",
     ]:
         assert profile in PROFILE_CONFIGS
         assert PROFILE_CONFIGS[profile]["write_staged_paper"] is True
+
+
+def test_paper_main_uses_the_complete_staged_sequence():
+    expected = [
+        "paper-diagnostics",
+        "paper-nonseg-generation",
+        "paper-segmented-generation",
+        "paper-baselines",
+        "paper-detector",
+        "paper-statistics",
+    ]
+
+    assert paper_suite.staged_paper_stage_names("paper-main") == expected
+    assert paper_suite.staged_paper_stage_names("paper-main-pilot-resume") == expected

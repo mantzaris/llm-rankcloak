@@ -1,0 +1,37 @@
+{
+  "profile": "paper-main",
+  "stage": "paper-diagnostics",
+  "timestamp": "2026-08-08T04:06:34.408046+00:00",
+  "output_dir": "results/rankcloak_paper_gpu_main_deterministic",
+  "model_loaded": true,
+  "completed_stage_names": [
+    "paper-diagnostics"
+  ],
+  "generated_result_files": [
+    "results/rankcloak_paper_gpu_main_deterministic/paper_payloads.csv",
+    "results/rankcloak_paper_gpu_main_deterministic/paper_rank_pressure.csv",
+    "results/rankcloak_paper_gpu_main_deterministic/paper_codec_comparison.csv",
+    "results/rankcloak_paper_gpu_main_deterministic/MANIFEST.json",
+    "results/rankcloak_paper_gpu_main_deterministic/RUN_PROGRESS.json"
+  ],
+  "nonseg_trial_count": 0,
+  "nonseg_planned_trial_count": 475,
+  "nonseg_remaining_trial_count": 475,
+  "segmented_trial_count": 0,
+  "segmented_planned_trial_count": 75,
+  "segmented_remaining_trial_count": 75,
+  "baseline_count": 0,
+  "detector_rows": 0,
+  "detector_results_available": false,
+  "statistical_summary_rows": 0,
+  "effect_size_rows": 0,
+  "recovery_pass_count": 0,
+  "recovery_fail_count": 0,
+  "important_notes": [
+    "diagnostic stage only; no cover generation",
+    "paper_payloads.csv written",
+    "paper_rank_pressure.csv written",
+    "paper_codec_comparison.csv written",
+    "Model status: loaded"
+  ]
+}

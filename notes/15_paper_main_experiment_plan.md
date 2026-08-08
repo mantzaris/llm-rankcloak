@@ -1,5 +1,8 @@
 # Paper Main Experiment Plan
 
+The canonical GPU, CPU, resume, replication, filtered-batch, monitoring, and
+verification commands are collected in `notes/22_key_experiment_commands.md`.
+
 ## Purpose
 
 The paper-main suite turns the pilot methodology into a locked results framework for
@@ -13,7 +16,7 @@ credential handling, cryptographic security, or undetectability.
 ## Profiles
 
 - `paper-main-pilot`: small enough to run first; writes to `results/rankcloak_paper_main_pilot/`.
-- `paper-main`: frozen larger matrix for Alex to run when CPU time is available; writes to `results/rankcloak_paper_main/`.
+- `paper-main`: frozen larger matrix, now staged and resumable for CPU or GPU execution; writes to `results/rankcloak_paper_main/` unless `--output-dir` overrides it.
 - `paper-analysis`: aggregation profile that reads existing result directories without model generation; writes to `results/rankcloak_paper_analysis/`.
 - `paper-smoke`: tiny staged end-to-end check that writes every expected paper artifact.
 - `paper-diagnostics`: deterministic payload, rank-pressure, and codec comparison stage.
@@ -23,6 +26,10 @@ credential handling, cryptographic security, or undetectability.
 - `paper-detector`: analysis-only detector dataset and baseline stage.
 - `paper-statistics`: analysis-only bootstrap, effect-size, figures, and paper Markdown stage.
 - `paper-main-pilot-resume`: staged pilot sequence that can be resumed and batched.
+
+Both `paper-main-pilot-resume` and `paper-main` run the complete ordered stage
+sequence: diagnostics, non-segmented generation, segmented generation, baselines,
+detector analysis, and statistics/effects/reports/figures.
 
 ## Payload Suite
 
@@ -117,12 +124,21 @@ python3 scripts/run_experiment.py \
   --overwrite
 ```
 
+Full frozen matrix on the validated GPU (safe to stop and resume with the same
+command):
+
 ```bash
-python3 scripts/run_experiment.py \
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 \
+  .venv/bin/python scripts/run_experiment.py \
   --profile paper-main \
-  --output-dir results/rankcloak_paper_main \
-  --overwrite
+  --output-dir results/rankcloak_paper_gpu_main_rank_safe \
+  --model-path models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf \
+  --n-gpu-layers -1 \
+  --resume
 ```
+
+For CPU, use `--n-gpu-layers 0` (or omit the option). GPU mode automatically enables
+rank-safe single-token batching; CPU mode retains normal llama.cpp batching.
 
 ```bash
 python3 scripts/run_experiment.py \

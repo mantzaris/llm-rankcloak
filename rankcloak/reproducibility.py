@@ -152,11 +152,18 @@ def write_manifest(
         "selected_thread_count": default_thread_count(),
         "inference_backend": {
             "n_gpu_layers_requested": n_gpu_layers_requested,
+            "rank_replay_n_batch": 1 if n_gpu_layers_requested != 0 else None,
+            "rank_replay_n_ubatch": 1 if n_gpu_layers_requested != 0 else None,
             "llama_cpp_gpu_offload_supported": gpu_offload_supported,
             "gpu_backend_active": bool(n_gpu_layers_requested and gpu_offload_supported),
             "cuda_device_order": os.environ.get("CUDA_DEVICE_ORDER"),
             "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "cuda_launch_blocking": os.environ.get("CUDA_LAUNCH_BLOCKING"),
             "ggml_cuda_disable_graphs": os.environ.get("GGML_CUDA_DISABLE_GRAPHS"),
+            "ggml_cuda_disable_fusion": os.environ.get("GGML_CUDA_DISABLE_FUSION"),
+            "ggml_cuda_force_cublas_compute_32f": os.environ.get(
+                "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F"
+            ),
             "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
         },
         "installed_package_versions": installed_package_versions(),
@@ -177,4 +184,3 @@ def write_manifest(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest
-

@@ -42,15 +42,40 @@ Interpretation target:
 
 ## Paper-Main Full Run
 
-Expected output directory:
+Authoritative validated output directory:
 
 ```text
-results/rankcloak_paper_main/
+results/rankcloak_paper_gpu_main_rank_safe/
 ```
 
 The full profile uses a larger deterministic payload suite and five ordinary prose
-prompts. It should be treated as the main manuscript candidate only after runtime and
-quality are reviewed.
+prompts. The rank-safe GPU run completed the full frozen matrix and every downstream
+stage on 2026-08-08.
+
+Validated counts:
+
+- 35 deterministic synthetic payloads and 5 prompts.
+- 475/475 non-segmented exact recoveries.
+- 75/75 segmented exact recoveries, including 25/25 lead-in rows.
+- 25 canonical greedy baselines.
+- 2,360 cover-feature rows and 2,445 detector-dataset rows.
+- 60 detector results, 262 statistical summaries, and 14 effect-size rows; every
+  status is `ok`.
+- 10 structurally valid, nonempty PNG figures.
+
+An independent artifact audit passed 3,578 checks with zero errors. A no-op resume
+skipped all 475 non-segmented, 75 segmented, and 25 baseline rows without duplicates.
+Two fresh-process replays of a formerly unstable trial matched one another and the
+full-run row exactly in generated text, token IDs, recovered ranks, and recorded
+rank/log-probability metrics.
+
+This full run preserves the manuscript's main qualitative directions: B=8 uses
+longer but more model-likely covers than B=16, hex-nibble coding is shorter but has
+lower mean token log probability, and segmented full-message quality is strongly
+tail-driven. It does not reproduce the historical partial pilot's single lead-in
+failure. The manuscript and supplement are explicitly labeled as partial-pilot
+evidence, so their historical counts remain internally scoped; update those files
+before using this full matrix as the paper's reported dataset.
 
 ## Paper Analysis
 
@@ -82,7 +107,9 @@ Current implementation status:
   17 segmented rows remain.
 - `paper-analysis` completed in `results/rankcloak_paper_analysis/` and aggregated
   existing pilot directories plus the current partial paper-main-pilot package.
-- `paper-main` is implemented but has not been run.
+- `paper-main` is staged, resumable, and fully validated on the local RTX 5000 Ada in
+  `results/rankcloak_paper_gpu_main_rank_safe/`: 550/550 exact recovery with every
+  downstream stage complete.
 
 For actual numbers, use `summary.json`, `PAPER_RESULTS_SUMMARY.md`, and the generated
 CSV files when they exist. Do not fabricate missing values.

@@ -11,7 +11,10 @@ from rankcloak.reproducibility import command_line_option_int
 
 def test_load_model_forwards_gpu_layer_count(monkeypatch, tmp_path: Path):
     captured = {}
+    monkeypatch.delenv("CUDA_LAUNCH_BLOCKING", raising=False)
     monkeypatch.delenv("GGML_CUDA_DISABLE_GRAPHS", raising=False)
+    monkeypatch.delenv("GGML_CUDA_DISABLE_FUSION", raising=False)
+    monkeypatch.delenv("GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F", raising=False)
     monkeypatch.delenv("CUBLAS_WORKSPACE_CONFIG", raising=False)
 
     class FakeLlama:
@@ -26,10 +29,38 @@ def test_load_model_forwards_gpu_layer_count(monkeypatch, tmp_path: Path):
     model = model_io.load_llama_cpp_model(model_path=model_path, n_gpu_layers=-1)
 
     assert captured["n_gpu_layers"] == -1
+    assert captured["n_batch"] == 1
+    assert captured["n_ubatch"] == 1
     assert model.rankcloak_n_gpu_layers == -1
+    assert model.rankcloak_n_batch == 1
+    assert model.rankcloak_n_ubatch == 1
     assert model.rankcloak_gpu_offload_supported is True
+    assert os.environ["CUDA_LAUNCH_BLOCKING"] == "1"
     assert os.environ["GGML_CUDA_DISABLE_GRAPHS"] == "1"
+    assert os.environ["GGML_CUDA_DISABLE_FUSION"] == "1"
+    assert os.environ["GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F"] == "1"
     assert os.environ["CUBLAS_WORKSPACE_CONFIG"] == ":4096:8"
+
+
+def test_cpu_load_preserves_default_batching(monkeypatch, tmp_path: Path):
+    captured = {}
+
+    class FakeLlama:
+        def __init__(self, **kwargs):
+            captured.update(kwargs)
+
+    monkeypatch.setattr(model_io, "llama_cpp_gpu_offload_supported", lambda: True)
+    monkeypatch.setitem(sys.modules, "llama_cpp", SimpleNamespace(Llama=FakeLlama))
+    model_path = tmp_path / "model.gguf"
+    model_path.write_bytes(b"GGUF")
+
+    model = model_io.load_llama_cpp_model(model_path=model_path, n_gpu_layers=0)
+
+    assert captured["n_gpu_layers"] == 0
+    assert "n_batch" not in captured
+    assert "n_ubatch" not in captured
+    assert model.rankcloak_n_batch is None
+    assert model.rankcloak_n_ubatch is None
 
 
 def test_explicit_gpu_request_rejects_cpu_only_build(monkeypatch, tmp_path: Path):
@@ -91,7 +122,10 @@ def test_manifest_records_gpu_backend(monkeypatch, tmp_path: Path):
     monkeypatch.setattr(reproducibility, "llama_cpp_gpu_offload_supported", lambda: True)
     monkeypatch.setenv("CUDA_DEVICE_ORDER", "PCI_BUS_ID")
     monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "1")
+    monkeypatch.setenv("CUDA_LAUNCH_BLOCKING", "1")
     monkeypatch.setenv("GGML_CUDA_DISABLE_GRAPHS", "1")
+    monkeypatch.setenv("GGML_CUDA_DISABLE_FUSION", "1")
+    monkeypatch.setenv("GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F", "1")
     monkeypatch.setenv("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     model_path = tmp_path / "model.gguf"
     model_path.write_bytes(b"GGUF")
@@ -109,11 +143,16 @@ def test_manifest_records_gpu_backend(monkeypatch, tmp_path: Path):
 
     assert manifest["inference_backend"] == {
         "n_gpu_layers_requested": -1,
+        "rank_replay_n_batch": 1,
+        "rank_replay_n_ubatch": 1,
         "llama_cpp_gpu_offload_supported": True,
         "gpu_backend_active": True,
         "cuda_device_order": "PCI_BUS_ID",
         "cuda_visible_devices": "1",
+        "cuda_launch_blocking": "1",
         "ggml_cuda_disable_graphs": "1",
+        "ggml_cuda_disable_fusion": "1",
+        "ggml_cuda_force_cublas_compute_32f": "1",
         "cublas_workspace_config": ":4096:8",
     }
     assert manifest["model_sha256"] is not None

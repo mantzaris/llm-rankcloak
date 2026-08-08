@@ -1,0 +1,28 @@
+{
+  "profile": "paper-main",
+  "stage": "paper-nonseg-generation",
+  "output_dir": "results/rankcloak_paper_gpu_main_strict_deterministic",
+  "started_at": "2026-08-08T04:24:42.767466+00:00",
+  "finished_at": "2026-08-08T04:30:12.624867+00:00",
+  "planned_trials": 475,
+  "completed_trials": 75,
+  "skipped_existing_trials": 0,
+  "failed_trials": 0,
+  "remaining_trials": 400,
+  "last_completed_trial_id": "nonseg_hex_nibble_b16__paper_sha256_hex_004__raw_hex_nibbles__b16__plant_care_note_specific",
+  "generated_files": [
+    "results/rankcloak_paper_gpu_main_strict_deterministic/paper_payloads.csv",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/paper_rank_pressure.csv",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/paper_codec_comparison.csv",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/paper_stegotext_trials.csv",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/paper_nonseg_examples.jsonl",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/paper_cover_text_features.csv",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/summary.json",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/SUMMARY.md",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/MANIFEST.json",
+    "results/rankcloak_paper_gpu_main_strict_deterministic/RUN_PROGRESS.json"
+  ],
+  "notes": [
+    "non-segmented generation stage"
+  ]
+}

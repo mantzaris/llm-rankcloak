@@ -31,6 +31,9 @@ This directory documents the current RankCloak repository state, implemented cod
 - `21_gpu_support_and_validation.md`: GPU-loading implementation, CUDA runtime
   setup, deterministic rank-replay controls, manifest changes, paper-matched
   validation, timing, and CPU/GPU consistency limits.
+- `22_key_experiment_commands.md`: copy/paste GPU and CPU commands for environment
+  checks, smoke tests, authoritative resume, independent replication, filtered
+  batches, monitoring, and repository verification.
 - Staged paper-suite resume behavior is documented in `15_paper_main_experiment_plan.md`
   and current staged run status is tracked in `16_paper_main_results_summary.md`.
 
@@ -56,7 +59,10 @@ The latest completed pilots are:
   dedicated consistency report.
 - `results/rankcloak_paper_gpu_pilot_complete/`: complete RTX 5000 Ada pilot with
   96/96 non-segmented and 24/24 segmented rows, canonical baselines, downstream
-  analyses, and all paper figures.
+  analyses, and all paper figures. This is a pre-rank-safe diagnostic dataset.
+- `results/rankcloak_paper_gpu_main_rank_safe/`: authoritative complete frozen
+  paper-main GPU run with 475/475 non-segmented and 75/75 segmented exact
+  recoveries, canonical baselines, all downstream analyses, and 10 paper figures.
 
 All payloads are deterministic synthetic examples. This project studies exact-copy concealment behavior; it is not encryption, key exchange, authentication, or credential handling.
 
@@ -74,7 +80,9 @@ For paper drafting, start with:
 - `19_final_paper_results_package.md` for the current manuscript package status.
 - `20_current_experiment_artifact_inventory.md` for the most compact current inventory.
 - `21_gpu_support_and_validation.md` for GPU setup, implementation details, and
-  interpretation of the paper-matched validation.
-- Use `paper-smoke` to validate the staged pipeline quickly, then continue
-  `results/rankcloak_paper_main_pilot/` with the staged `paper-*` profiles and
-  `--resume --limit-trials N`.
+  interpretation of the paper-matched and full-matrix validation.
+- `22_key_experiment_commands.md` for the commands to run before and during new
+  experiments.
+- Use `paper-smoke` to validate the staged pipeline quickly. Use the documented
+  staged `paper-main --resume --n-gpu-layers -1` command to extend the complete
+  rank-safe GPU dataset without duplicating stable trial IDs.

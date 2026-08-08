@@ -314,7 +314,7 @@ PROFILE_CONFIGS = {
         "default_max_payload_bytes": None,
         "requires_stegotext": False,
         "baseline_token_cap": 0,
-        "write_paper_suite": True,
+        "write_staged_paper": True,
     },
     "paper-analysis": {
         "default_output_dir": PROJECT_ROOT / "results" / "rankcloak_paper_analysis",

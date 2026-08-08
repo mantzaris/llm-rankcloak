@@ -5,6 +5,11 @@
 GPU execution was implemented and locally validated on 2026-08-08. CPU execution
 remains the default, so existing commands retain their previous behavior.
 
+GPU-backed rank experiments now use rank-safe execution automatically. This is
+deliberately more conservative than ordinary text generation because RankCloak must
+reproduce the complete candidate ordering, not merely generate visually similar
+text.
+
 The new --n-gpu-layers option controls llama.cpp layer offload:
 
 | Value | Behavior |
@@ -81,16 +86,25 @@ plausible. GPU initialization therefore sets these defaults before llama.cpp is
 loaded:
 
 ~~~text
+CUDA_LAUNCH_BLOCKING=1
 GGML_CUDA_DISABLE_GRAPHS=1
+GGML_CUDA_DISABLE_FUSION=1
+GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F=1
 CUBLAS_WORKSPACE_CONFIG=:4096:8
 ~~~
 
-Existing user values take precedence. Model reset now also clears the complete
-llama.cpp KV cache, preventing stale prompt state from leaking between trials.
+For GPU execution the loader also passes `n_batch=1` and `n_ubatch=1`. CPU execution
+does not set those arguments and therefore keeps llama.cpp's normal batching.
+Existing user values take precedence for environment variables. Model reset also
+clears the complete llama.cpp KV cache, preventing stale prompt state from leaking
+between trials.
 
-These controls reduce avoidable variation. They do not promise bit-identical CPU and
-GPU logits, or bit-identical output across llama.cpp builds, drivers, quantizations,
-and model files.
+The single-token batch shape was the decisive local control: two independent
+20-repetition stress checks produced bit-identical replay logits and exact recovery
+in all 40 repetitions. Larger prompt batches intermittently produced a sudden logit
+drift after context reset even with CUDA graphs, fusion, and reduced-precision
+compute disabled. These controls do not promise bit-identical CPU and GPU logits, or
+bit-identical output across llama.cpp builds, drivers, quantizations, and model files.
 
 ## GPU Environment
 
@@ -117,6 +131,7 @@ llama.cpp wheel, CUDA major version, driver, and model file fixed for comparison
 MANIFEST.json now records:
 
 - requested n_gpu_layers, detected GPU-offload support, and inferred backend-active state;
+- replay `n_batch` and `n_ubatch` values;
 - CUDA device-order, visibility, and deterministic environment settings;
 - installed llama-cpp-python and NVIDIA CUDA package versions;
 - model path, byte size, and SHA-256 when the model is at most 8 GiB.
@@ -125,7 +140,58 @@ The locally validated model was
 Meta-Llama-3-8B-Instruct.Q4_K_M.gguf with SHA-256
 86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7.
 
-## Paper-Matched Validation
+## Authoritative Full Paper-Main GPU Validation
+
+The rank-safe staged run completed in
+`results/rankcloak_paper_gpu_main_rank_safe/` on 2026-08-08. It used the frozen
+`paper-main` plan, full GPU offload, the model hash above, and every rank-stability
+control recorded in `MANIFEST.json`.
+
+| Protocol variant | Trials | Exact recoveries |
+| --- | ---: | ---: |
+| Non-segmented ASCII B=8 | 175 | 175 |
+| Non-segmented ASCII B=16 | 175 | 175 |
+| Non-segmented raw hex-nibble B=16 | 125 | 125 |
+| Segmented single-topic | 25 | 25 |
+| Segmented multi-topic | 25 | 25 |
+| Segmented multi-topic with eight-token lead-in | 25 | 25 |
+| Total | 550 | 550 |
+
+All 550 rows are distinct frozen-plan IDs; no runner or recovery failure occurred.
+The downstream package contains 25 canonical greedy baselines, 2,360 cover-feature
+rows, 2,445 detector-dataset rows, 60 detector results, 262 statistical summaries,
+14 effect-size rows, and 10 paper figures. Every detector, statistic, and effect row
+has `status=ok`; all metric range/finite checks and PNG structure checks passed.
+
+The completed data preserve the paper's main qualitative findings. Mean non-segmented
+token counts/log probabilities were 132.86/-3.450 for ASCII B=8, 99.43/-3.965 for
+ASCII B=16, and 49.60/-4.601 for hex-nibble B=16. Thus lower rank pressure gives
+more model-likely but longer cover text. Across the three segmented variants, adding
+the non-payload tail increased the full-message mean log-probability proxy by 3.487
+to 4.548 relative to the forced span. All 60 feature-only detector AUC values were
+1.0; these remain diagnostics, not evidence of undetectability.
+
+Validation included three independent checks beyond runner completion:
+
+1. A no-op resume skipped 475/475 non-segmented trials, 75/75 segmented trials, and
+   25/25 baselines, then regenerated downstream artifacts without duplicates.
+2. A read-only audit passed 3,578 plan, identity, relationship, null, range, status,
+   manifest, report, and PNG checks with zero errors.
+3. Two fresh processes reran a trial that had failed intermittently before rank-safe
+   batching. Both reruns recovered exactly and matched each other and the full-run row
+   byte-for-byte in text, token IDs, recovered ranks, and rank/log-probability metrics.
+
+The historical manuscript and supplement report a deliberately scoped partial pilot
+with one lead-in failure. The full rank-safe matrix did not reproduce that failure:
+all 25 lead-in rows passed. This does not make the historical partial-pilot statement
+internally false, but those manuscript counts and interpretations must be revised if
+the full matrix becomes the paper's reported dataset.
+
+## Earlier Paper-Matched Diagnostic (Pre-Rank-Safe)
+
+The results in this section were generated before single-token GPU batching was
+enabled. They are retained to document how the intermittent replay problem was
+detected, but they are not the authoritative GPU validation dataset.
 
 The GPU validation used the exact trial IDs present in the historical
 paper-main-pilot package, including segmented rows 1-5 and 7-8. Downstream baseline,
@@ -157,7 +223,7 @@ GPU, the historical lead-in segmented failure passed on the GPU, and two histori
 multi-topic segmented passes failed on the GPU. The specific artifact directions
 therefore changed even though the aggregate conclusion did not.
 
-## Complete GPU Pilot
+## Earlier Complete GPU Pilot (Pre-Rank-Safe)
 
 After the paper-ID-matched check, the staged `paper-main-pilot-resume` orchestrator
 was run in a fresh directory through the full planned pilot matrix. It completed every
@@ -227,6 +293,11 @@ artifacts.
 
 ## Result Locations
 
+- results/rankcloak_paper_gpu_main_rank_safe/: authoritative rank-safe full
+  paper-main matrix and downstream artifacts.
+- results/rankcloak_paper_gpu_rank_safe_replay_post_a/ and
+  results/rankcloak_paper_gpu_rank_safe_replay_post_b/: independent post-run replay
+  packages used for byte-for-byte comparison.
 - results/rankcloak_paper_gpu_validation/: GPU-generated validation package.
 - results/rankcloak_paper_gpu_validation/GPU_VALIDATION_REPORT.md: exact
   historical/GPU comparison and caveats.
@@ -242,10 +313,11 @@ artifacts.
 After the implementation:
 
 - python3 -m compileall rankcloak scripts tests passed;
-- python3 -m pytest passed all 93 tests;
+- python3 -m pytest passed all 97 tests;
 - git diff --check passed.
 
-The artifact audit also passed exact planned-ID, duplicate, critical-null, canonical
-baseline, analysis-status, model-hash, backend-manifest, and nonempty-figure checks.
+The full paper-main artifact audit passed 3,578 exact planned-ID, duplicate,
+relationship, critical-null, canonical-baseline, numeric-range, analysis-status,
+model-hash, backend-manifest, report, and nonempty-figure checks with zero errors.
 The GPU-focused unit tests use mocks, so the normal test suite remains runnable on a
 CPU-only host.

@@ -6,6 +6,7 @@ import json
 import math
 import hashlib
 import re
+import shlex
 import sys
 import time
 from datetime import datetime, timezone
@@ -190,7 +191,12 @@ def append_frame_unique(
 ) -> pd.DataFrame:
     existing = read_frame_if_exists(path, columns)
     new_frame = ordered_frame(rows, columns)
-    combined = pd.concat([existing, new_frame], ignore_index=True)
+    if existing.empty:
+        combined = new_frame.copy()
+    elif new_frame.empty:
+        combined = existing.copy()
+    else:
+        combined = pd.concat([existing, new_frame], ignore_index=True)
     if not combined.empty and all(column in combined.columns for column in id_columns):
         combined = combined.drop_duplicates(subset=list(id_columns), keep="last")
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1676,9 +1682,60 @@ def write_staged_summary(
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     segmented_scope_note = segmented_failure_note or "No segmented exact-recovery failures were observed."
-    next_command = (
-        "python3 scripts/run_experiment.py --profile paper-main-pilot-resume "
-        "--output-dir {} --resume --limit-trials 10".format(repo_relative_path(output_dir, project_root))
+    if suite_profile == "paper-main":
+        resume_profile = "paper-main"
+        batch_argument = ""
+    elif suite_profile == "paper-smoke":
+        resume_profile = "paper-smoke"
+        batch_argument = ""
+    else:
+        resume_profile = "paper-main-pilot-resume"
+        batch_argument = " --limit-trials 10"
+    command_parts = [
+        ".venv/bin/python",
+        "scripts/run_experiment.py",
+        "--profile",
+        resume_profile,
+        "--output-dir",
+        repo_relative_path(output_dir, project_root),
+    ]
+    environment_parts: List[str] = []
+    manifest_path = output_dir / "MANIFEST.json"
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, TypeError):
+            manifest = {}
+        backend = manifest.get("inference_backend", {})
+        for environment_name, manifest_name in (
+            ("CUDA_DEVICE_ORDER", "cuda_device_order"),
+            ("CUDA_VISIBLE_DEVICES", "cuda_visible_devices"),
+        ):
+            value = backend.get(manifest_name) if isinstance(backend, dict) else None
+            if value is not None:
+                environment_parts.append("{}={}".format(environment_name, value))
+        recorded_args = manifest.get("command_line_args", [])
+        if not isinstance(recorded_args, list):
+            recorded_args = []
+
+        def recorded_option(option: str) -> Optional[str]:
+            for index, value in enumerate(recorded_args):
+                if value == option and index + 1 < len(recorded_args):
+                    return str(recorded_args[index + 1])
+                prefix = option + "="
+                if str(value).startswith(prefix):
+                    return str(value)[len(prefix) :]
+            return None
+
+        for option in ("--model-path", "--n-gpu-layers"):
+            value = recorded_option(option)
+            if value is not None:
+                command_parts.extend([option, value])
+    command_parts.append("--resume")
+    if batch_argument:
+        command_parts.extend(batch_argument.strip().split())
+    next_command = " ".join(
+        shlex.quote(str(value)) for value in environment_parts + command_parts
     )
     summary_md = """# RankCloak Staged Paper Suite Summary
 
@@ -2196,6 +2253,22 @@ def run_paper_statistics_stage(
     return write_staged_summary(output_dir, project_root, profile, stage, model_loaded, model_status, notes)
 
 
+def staged_paper_stage_names(profile: str) -> List[str]:
+    """Return the ordered stages for a staged paper profile."""
+
+    all_stages = [
+        "paper-diagnostics",
+        "paper-nonseg-generation",
+        "paper-segmented-generation",
+        "paper-baselines",
+        "paper-detector",
+        "paper-statistics",
+    ]
+    if profile in {"paper-smoke", "paper-main-pilot-resume", "paper-main"}:
+        return all_stages
+    return [profile]
+
+
 def run_staged_paper_profile(
     profile: str,
     output_dir: Path,
@@ -2211,26 +2284,7 @@ def run_staged_paper_profile(
     model_error: Optional[str],
     args: Any,
 ) -> dict:
-    if profile == "paper-smoke":
-        stages = [
-            "paper-diagnostics",
-            "paper-nonseg-generation",
-            "paper-segmented-generation",
-            "paper-baselines",
-            "paper-detector",
-            "paper-statistics",
-        ]
-    elif profile == "paper-main-pilot-resume":
-        stages = [
-            "paper-diagnostics",
-            "paper-nonseg-generation",
-            "paper-segmented-generation",
-            "paper-baselines",
-            "paper-detector",
-            "paper-statistics",
-        ]
-    else:
-        stages = [profile]
+    stages = staged_paper_stage_names(profile)
     summary: dict = {}
     for stage in stages:
         if stage == "paper-diagnostics":

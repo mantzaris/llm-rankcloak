@@ -1,5 +1,9 @@
 # Reproducibility Runbook
 
+For the concise copy/paste command sequence, start with
+`notes/22_key_experiment_commands.md`. This runbook provides the supporting setup and
+interpretation details.
+
 ## Environment Setup
 
 Create and activate a virtual environment:
@@ -54,6 +58,17 @@ python3 scripts/run_experiment.py \
   --overwrite
 ```
 
+The backend switch is a single command-line option:
+
+- `--n-gpu-layers 0`: CPU only (also the default when the option is omitted).
+- `--n-gpu-layers -1`: offload every model layer to the selected GPU.
+- `--n-gpu-layers N`: offload the first `N` layers.
+
+GPU mode automatically uses the rank-safe CUDA controls and single-token
+`n_batch=1`, `n_ubatch=1` execution required by replay-sensitive experiments. CPU
+mode keeps llama.cpp's normal batching defaults. No source edit is needed to switch
+between them.
+
 On a multi-GPU host, select the device before starting the process:
 
 ```bash
@@ -62,6 +77,26 @@ CUDA_VISIBLE_DEVICES=0 python3 scripts/run_experiment.py \
   --n-gpu-layers -1 \
   --overwrite
 ```
+
+Run or resume the complete frozen `paper-main` matrix and every downstream stage on
+the validated GPU:
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 \
+  .venv/bin/python scripts/run_experiment.py \
+  --profile paper-main \
+  --output-dir results/rankcloak_paper_gpu_main_rank_safe \
+  --model-path models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf \
+  --n-gpu-layers -1 \
+  --resume
+```
+
+Use the same command with `--n-gpu-layers 0` for CPU execution. `paper-main` is a
+staged profile: `--resume` safely skips stable trial IDs already present and then
+continues through diagnostics, 475 non-segmented trials, 75 segmented trials,
+baselines, detector analysis, statistics, effects, reports, and figures. Prefer
+`--resume` for this long run; use `--overwrite` only when intentionally replacing an
+output directory.
 
 Run or resume the complete pilot and all downstream stages:
 
@@ -77,7 +112,9 @@ CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 \
 
 GPU-backed ranks can differ from CPU-backed ranks, and ranks can also differ across
 model artifacts or llama.cpp builds. Preserve the generated manifest and compare
-exact trial IDs instead of overwriting historical results. See
+exact trial IDs instead of overwriting historical results. Rank-safe GPU batching
+removes the intermittent same-backend replay drift found during local testing; it
+does not make different backends or model artifacts interchangeable. See
 `notes/21_gpu_support_and_validation.md` for the implementation, validated
 environment, result comparison, and limitations.
 
@@ -119,9 +156,9 @@ python3 -m pytest
 
 Known recent status:
 
-- `compileall`: passed after the complete GPU pilot and resume fixes.
-- `pytest`: 93 tests passed after the complete GPU pilot, resume fixes, and
-  generated-report regression checks.
+- `compileall`: passed after the rank-safe full paper-main GPU validation.
+- `pytest`: 97 tests passed after the full paper-main run, GPU rank-stability,
+  CPU/GPU batching, staged-resume, and generated-report regression checks.
 
 ## Core Experiment Commands
 

@@ -18,13 +18,22 @@ rule where applicable.
 
 ## GPU Completion Update
 
-A separate GPU-native pilot is complete at
+The authoritative full frozen matrix is complete at
+`results/rankcloak_paper_gpu_main_rank_safe/`. It contains all 475 planned
+non-segmented and all 75 planned segmented trials with 550 exact recoveries and zero
+recovery or runner failures. Its downstream package contains 25 baselines, 2,360
+cover-feature rows, 2,445 detector-dataset rows, 60 detector results, 262 statistical
+rows, 14 effect-size rows, and 10 figures. All detector, statistical, and effect-size
+statuses are `ok`; an independent 3,578-check audit passed with zero errors.
+
+A separate earlier GPU-native pilot is retained at
 `results/rankcloak_paper_gpu_pilot_complete/`. It contains all 96 planned
 non-segmented and all 24 planned segmented trials, with 111 exact recoveries and 9
 recorded recovery failures. Its canonical downstream package contains 20 baselines,
 686 detector-dataset rows, 57 detector results, 223 statistical rows, 14 effect-size
 rows, and 10 figures. All detector, statistical, and effect-size status rows are
-`ok`.
+`ok`. It predates rank-safe single-token batching and is diagnostic rather than the
+authoritative continuation point.
 
 The historical `results/rankcloak_paper_main_pilot/` directory remains the partial
 CPU manuscript package described below. Do not merge its rows with the complete GPU
@@ -66,6 +75,7 @@ tests, result comparison, resume fixes, and interpretation.
 | `segmented-quality-controls` | `results/rankcloak_segmented_quality_controls/` | Forced-prefix/full-message metrics, sentence tails, control tails, filtering. | Present, 5/5 control and 10/10 response recovery. |
 | `paper-smoke` | `results/rankcloak_paper_smoke/` | End-to-end tiny paper-suite check. | Present, 6/6 recovery. |
 | `paper-main-pilot` and staged `paper-*` profiles | `results/rankcloak_paper_main_pilot/` | Partial paper-main-pilot manuscript package. | Present, partial: 26 pass and 1 fail. |
+| `paper-main` | `results/rankcloak_paper_gpu_main_rank_safe/` | Frozen full matrix and all downstream stages. | Present and audited: 550/550 exact recovery. |
 | `paper-analysis` | `results/rankcloak_paper_analysis/` | Aggregation across pilot and paper-suite artifacts. | Present, analysis-only. |
 
 ## Result Directory Index
@@ -82,6 +92,7 @@ tests, result comparison, resume fixes, and interpretation.
 | `results/rankcloak_segmented_quality_controls/` | 5 control rows, 10 response rows, 10 pass, 0 fail; 130 feature rows. | `control_request_trials.jsonl`, `segmented_quality_trials.csv`, `segmented_quality_messages.jsonl`, forced/full quality figures. |
 | `results/rankcloak_paper_smoke/` | 2 payload rows, 4 nonseg rows, 2 segmented rows, 6 pass, 0 fail; 56 detector rows. | Complete tiny paper artifact set and 10 paper figures. |
 | `results/rankcloak_paper_main_pilot/` | 12 payload rows, 20 nonseg rows, 7 segmented rows, 26 pass, 1 fail; 272 detector rows; 97 bootstrap rows. | Partial manuscript package, paper figures, detector/statistics outputs, summaries. |
+| `results/rankcloak_paper_gpu_main_rank_safe/` | 35 payloads, 475 nonseg rows, 75 segmented rows, 550 pass, 0 fail; 2,445 detector rows; 262 statistical rows. | Authoritative full GPU matrix, manifest, summaries, detector/effects outputs, and 10 figures. |
 | `results/rankcloak_paper_analysis/` | 8 recovery summary rows, 622 prompt-quality rows, 29 segmented summary rows, 69 detector summary rows. | Cross-pilot aggregation CSVs, summary Markdown, analysis figures. |
 
 ## Paper-Main-Pilot Current State
