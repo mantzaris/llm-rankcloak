@@ -1,0 +1,61 @@
+{
+  "lock_schema_version": "1.0",
+  "environment_id": "rankcloak_revision_v1_r_4_4_2",
+  "r": {
+    "version": "4.4.2",
+    "executable_default": "/usr/bin/Rscript"
+  },
+  "library": {
+    "scope": "controlled_composite_exact_version_resolution",
+    "resolution_order": [
+      {
+        "role": "project_revision_library",
+        "path_kind": "repository_relative",
+        "path": ".r_libs/revision_v1"
+      },
+      {
+        "role": "existing_user_r_4_4_library",
+        "path_kind": "absolute_existing",
+        "path": "/home/meow/R/x86_64-pc-linux-gnu-library/4.4"
+      },
+      {
+        "role": "r_default_libraries",
+        "path_kind": "r_runtime_default",
+        "path": ".Library/.Library.site"
+      }
+    ],
+    "vendored_binaries": false,
+    "automatic_network_install": false,
+    "resolved_path_recording_required": true
+  },
+  "packages": {
+    "lme4": {
+      "version": "2.0.6",
+      "required_library_role": "project_revision_library",
+      "required_for": ["binomial_glmer", "negative_binomial_glmer", "gaussian_lmer"]
+    },
+    "ordinal": {
+      "version": "2026.7.26",
+      "description_version": "2026.7-26",
+      "required_library_role": "project_revision_library",
+      "required_for": ["future_human_clmm_after_external_authorization"]
+    },
+    "emmeans": {
+      "version": "1.10.5",
+      "required_library_role": "existing_user_r_4_4_library",
+      "required_for": ["prespecified_contrasts"]
+    },
+    "jsonlite": {
+      "version": "1.8.9",
+      "required_library_role": "existing_user_r_4_4_library",
+      "required_for": ["plan_and_manifest_io"]
+    }
+  },
+  "policy": {
+    "exact_version_match_required": true,
+    "only_declared_library_role_satisfies_each_locked_package": true,
+    "resolved_package_path_must_be_recorded": true,
+    "fixed_effects_fallback_for_failed_mixed_models": false,
+    "human_model_runs_before_ratings": false
+  }
+}

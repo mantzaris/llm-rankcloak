@@ -1,0 +1,28 @@
+{
+  "action_id": "evaluator:ablation_v2:llama3_8b_instruct_q4_k_m:export",
+  "argv": [
+    "/home/meow/Documents/repos/llm-rankcloak/.venv/bin/python",
+    "scripts/run_revision_evaluator.py",
+    "--evaluator-model",
+    "llama3_8b_instruct_q4_k_m",
+    "--source-stage",
+    "ablation_v2",
+    "--source-results-root",
+    "results/revision_v1",
+    "--gpu-uuid",
+    "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "--context",
+    "4096",
+    "--n-gpu-layers",
+    "-1",
+    "--output-dir",
+    "results/revision_v1/heldout_evaluator/ablation_v2/llama3_8b_instruct_q4_k_m",
+    "--resume"
+  ],
+  "argv_sha256": "9c0ab6112384b8a26eb0df75327509cbca60c4047b365b6ffbacf5cd6cf56265",
+  "completed_at": "2026-08-12T01:14:41.923668+00:00",
+  "features_manifest_sha256": "9f48edb32fc74839529ee5cd3fcde36b715137c6fcb8e13950672e3343875ab1",
+  "marker_sha256": "a8d87446d57d96b6dc811b6c4905759974e4a17d5c30a0057e13a28dba2cd882",
+  "schema_version": "rankcloak-confirmatory-v2-action-marker-v1",
+  "semantics": "identical_resume_export_pass_completed_without_pending_trials"
+}

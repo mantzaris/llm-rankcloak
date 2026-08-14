@@ -1,0 +1,85 @@
+{
+  "input_manifest_sha256": "aa97203bafb55e899057e31e3490178a7ac72e95ad9268d28511e1a9a6a0681a",
+  "invariants": {
+    "detector_grouping_unit": "payload_name",
+    "detector_pair_count": 58,
+    "missing_values_imputed": false,
+    "payload_fidelity_contract": {
+      "alias_equality_validated": true,
+      "compatibility_alias": "exact_recovery",
+      "contract_version": "payload_fidelity_v2",
+      "direct_rows": 9,
+      "direct_rows_contract_verified": 9,
+      "exact_rank_replay_role": "diagnostic_only",
+      "primary_outcome": "exact_payload_recovery",
+      "result_schema_revision": "payload_aware_result_v2",
+      "semantics": "original_serialized_payload_bytes_sha256_v1"
+    },
+    "segment_rows_nested": true,
+    "trial_unit": "one payload-condition/replay/transformation row",
+    "unavailable_rows_are_not_recovery_failures": true,
+    "unavailable_rows_excluded_from_estimands": true
+  },
+  "manifest_type": "revision_preprocessing_outputs",
+  "outputs": [
+    {
+      "path": "trials.csv",
+      "role": "trials",
+      "row_count": 105,
+      "sha256": "2a379ad94f0ac7b37c1b59d1e79369414491c1ca08857af43b247d4567e74f4b",
+      "size_bytes": 88599
+    },
+    {
+      "path": "features.csv",
+      "role": "features",
+      "row_count": 302,
+      "sha256": "0fd91b19eb5128c88c44d6b4baa86ed302fe6972a7162337fd108fe4b45078f9",
+      "size_bytes": 546539
+    },
+    {
+      "path": "runtime.csv",
+      "role": "runtime",
+      "row_count": 102,
+      "sha256": "5cd7283f36c2aa1d2f979adcb1ccc11c63ae5b4ed1e997414b3ca44a2683ee4e",
+      "size_bytes": 78184
+    },
+    {
+      "path": "failures.csv",
+      "role": "failures",
+      "row_count": 14,
+      "sha256": "29996263e32fd24a6d2ec1e543cb40f321dc0ede2e1e2521c4df19dfe0942e98",
+      "size_bytes": 9393
+    },
+    {
+      "path": "detector_corpus.jsonl",
+      "role": "detector",
+      "row_count": 116,
+      "sha256": "c6a7e627531d6bebf42f5caa8a1bfb3a366c111bd4d4663977bdaa72093c4b20",
+      "size_bytes": 152524
+    },
+    {
+      "path": "unavailable.csv",
+      "role": "unavailable",
+      "row_count": 3,
+      "sha256": "11b5f9fedba539870bae7c88986298df2b2402955a47447148a8a3b388a6c996",
+      "size_bytes": 4623
+    },
+    {
+      "path": "preprocessing_input_manifest.json",
+      "role": "input_manifest",
+      "row_count": null,
+      "sha256": "aa97203bafb55e899057e31e3490178a7ac72e95ad9268d28511e1a9a6a0681a",
+      "size_bytes": 11558
+    }
+  ],
+  "outputs_sha256": "11b03a87249aafbbe6445927325844c2a07d3e39805822177df8f859ecf2ddd8",
+  "row_counts": {
+    "detector": 116,
+    "failures": 14,
+    "features": 302,
+    "runtime": 102,
+    "trials": 105,
+    "unavailable": 3
+  },
+  "schema_version": "2.0"
+}

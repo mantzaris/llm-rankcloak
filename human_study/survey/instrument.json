@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "status": "DRAFT_NOT_IRB_APPROVED",
+  "language": "English",
+  "response_format": {
+    "type": "single_integer",
+    "minimum": 1,
+    "maximum": 7,
+    "required": true,
+    "display": "radio_buttons_horizontal_with_endpoint_and_midpoint_labels"
+  },
+  "instructions": "Read the message once at a natural pace. Judge only the displayed message and its stated topic. Use the full 1-to-7 range when appropriate. There are no correct quality ratings.",
+  "scales": [
+    {
+      "scale_id": "grammaticality",
+      "role": "secondary",
+      "prompt": "How grammatically well formed is this message?",
+      "definition": "Consider sentence structure, agreement, word forms, and punctuation; do not penalize an informal style by itself.",
+      "anchors": {"1": "many serious grammatical problems", "4": "mixed or minor problems", "7": "no noticeable grammatical problems"}
+    },
+    {
+      "scale_id": "fluency",
+      "role": "secondary",
+      "prompt": "How smoothly and easily does this message read?",
+      "definition": "Consider flow and ease of reading, independently of whether you agree with the content.",
+      "anchors": {"1": "very difficult and halting", "4": "moderately smooth", "7": "effortless and smooth"}
+    },
+    {
+      "scale_id": "coherence",
+      "role": "secondary",
+      "prompt": "How coherent is this message as a whole?",
+      "definition": "Consider whether its ideas connect logically and remain understandable from beginning to end.",
+      "anchors": {"1": "disconnected or contradictory", "4": "partly connected", "7": "fully connected and logical"}
+    },
+    {
+      "scale_id": "topic_adherence",
+      "role": "secondary",
+      "prompt": "How well does this message stay on the stated topic?",
+      "definition": "Judge relevance to the topic label shown above the message, not factual correctness beyond that topic.",
+      "anchors": {"1": "almost entirely off topic", "4": "partly on topic", "7": "fully on topic"}
+    },
+    {
+      "scale_id": "completeness",
+      "role": "secondary",
+      "prompt": "How complete does this message feel?",
+      "definition": "Consider whether it ends at a sensible point and expresses a complete thought for its apparent purpose.",
+      "anchors": {"1": "clearly cut off or incomplete", "4": "partly complete", "7": "fully complete"}
+    },
+    {
+      "scale_id": "overall_naturalness",
+      "role": "co_primary",
+      "prompt": "Overall, how natural does this message sound as English communication?",
+      "definition": "Combine your impression of ordinary wording, flow, and plausibility without trying to identify its source.",
+      "anchors": {"1": "very artificial or unnatural", "4": "mixed", "7": "very natural"}
+    },
+    {
+      "scale_id": "suspiciousness",
+      "role": "co_primary",
+      "prompt": "How suspicious or unusually constrained does this message seem?",
+      "definition": "Consider unexplained odd wording, formatting, repetition, or abruptness. Do not assume that unusual subject matter is suspicious by itself.",
+      "anchors": {"1": "entirely ordinary", "4": "somewhat unusual", "7": "strongly suspicious or constrained"}
+    }
+  ],
+  "presentation_rules": {
+    "scale_order": "fixed_as_listed",
+    "condition_label_visible": false,
+    "model_label_visible": false,
+    "payload_label_visible": false,
+    "topic_label_visible": true,
+    "allow_backtracking": false,
+    "collect_free_text": false
+  }
+}

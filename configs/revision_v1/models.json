@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_models",
+  "planned_model_count": 3,
+  "execution_policy": {
+    "backend": "llama_cpp",
+    "one_model_loaded_at_a_time": true,
+    "rank_replay_n_batch": 1,
+    "rank_replay_n_ubatch": 1,
+    "tokenizer_source": "embedded_gguf",
+    "require_exact_artifact_sha256": true,
+    "require_exact_library_and_backend_manifest": true
+  },
+  "models": [
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "family": "llama",
+      "architecture_scale": "8B",
+      "role": "submitted-study anchor",
+      "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+      "revision": "local artifact pinned by content hash",
+      "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "relative_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "artifact_size_bytes": 4920734272,
+      "artifact_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "pin_status": "pinned"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "family": "qwen2",
+      "architecture_scale": "7B",
+      "role": "cross-family confirmatory model",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "upstream_repo_id": "Qwen/Qwen2.5-7B-Instruct",
+      "upstream_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "license": "Apache-2.0",
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "artifact_size_bytes": 4683074240,
+      "artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "pin_status": "pinned"
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "family": "mistral",
+      "architecture_scale": "7B",
+      "role": "cross-family confirmatory model",
+      "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+      "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+      "upstream_repo_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "upstream_revision": "c170c708c41dac9275d15a8fff4eca08d52bab71",
+      "license": "Apache-2.0",
+      "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "artifact_size_bytes": 4372812000,
+      "artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "pin_status": "pinned"
+    }
+  ]
+}

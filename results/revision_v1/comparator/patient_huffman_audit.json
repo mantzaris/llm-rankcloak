@@ -1,0 +1,390 @@
+{
+  "audit_policy": {
+    "dependency_installation": false,
+    "model_downloads": false,
+    "network_access": false,
+    "official_method_modified_or_vendored": false,
+    "read_only_external_checkout": true,
+    "submodule_initialization": false
+  },
+  "dependency_and_asset_assessment": {
+    "decisive_reproducibility_blocker": true,
+    "gpt2_117m_model_assets_present": false,
+    "gpt2_source_present": false,
+    "gpt2_submodule_initialized": false,
+    "historical_tag_has_requirements": false,
+    "later_requirements_are_2019_era": true,
+    "later_tensorflow_pin": "1.12.0",
+    "tensorflow_available_to_entry_point": false
+  },
+  "fair_comparison": {
+    "criteria": [
+      {
+        "criterion": "same_prompt_instances_and_conditioning",
+        "met": false,
+        "rationale": "Prompt/topic conditioning must be identical or explicitly counterbalanced so prose-quality differences are not prompt effects.",
+        "required": true
+      },
+      {
+        "criterion": "same_or_comparable_model_scale_and_tokenizer",
+        "met": false,
+        "rationale": "The codec comparison should use the same underlying LM when possible; GPT-2 117M versus modern 7--8B instruction models is a model-era and scale confound.",
+        "required": true
+      },
+      {
+        "criterion": "same_independent_payload_bits_and_assignments",
+        "met": false,
+        "rationale": "Methods must receive the same payload bits, with independent payload identifiers retained as the statistical units.",
+        "required": true
+      },
+      {
+        "criterion": "matched_controls_lengths_and_stopping",
+        "met": false,
+        "rationale": "Ordinary-LM controls, cover lengths, truncation, and stopping rules must be matched or adjusted prospectively.",
+        "required": true
+      },
+      {
+        "criterion": "end_to_end_recovery_under_declared_assumptions",
+        "met": false,
+        "rationale": "A successful local Huffman calculation is insufficient; encoding, text serialization, decoding, and exact recovery must be measured.",
+        "required": true
+      },
+      {
+        "criterion": "same_blinded_quality_and_steganalysis_evaluation",
+        "met": false,
+        "rationale": "Human ratings, automated quality measures, and detectors must be applied blindly to length- and prompt-matched outputs.",
+        "required": true
+      },
+      {
+        "criterion": "official_or_validated_faithful_implementation",
+        "met": false,
+        "rationale": "A port or rewrite must be separately validated against official outputs before being called a published-method comparator.",
+        "required": true
+      }
+    ],
+    "decision": "not_defensible_without_a_validated_reimplementation_or_historical_runtime",
+    "decisive_blockers": [
+      "The pinned official historical implementation is not end-to-end runnable with the present dependency and model assets.",
+      "Running the official GPT-2 117M/SOS configuration as-is would confound the steganographic method with model scale, tokenizer, and prompting.",
+      "No prospectively matched payload/control/length corpus has been generated for the comparator."
+    ],
+    "future_path": [
+      "Reconstruct the exact historical TensorFlow/GPT-2 117M environment and model assets in an isolated, licensed archive, then run its native SOS-conditioned study as a historically faithful but model-confounded comparison.",
+      "Alternatively, implement patient-Huffman on the same pinned models and prompts as RankCloak, validate it against official small test vectors/outputs, and label it a faithful reimplementation rather than the untouched official code."
+    ],
+    "numeric_patient_huffman_comparison_defensible_without_rewriting_official_method": false,
+    "permitted_claim": "The official standalone Huffman kernel can be reported as an audit smoke check if it passes. It cannot be reported as a numeric cover-text baseline or as evidence of comparative recovery, quality, or detectability.",
+    "required_criteria_met": 0,
+    "required_criteria_total": 7,
+    "unmet_required_criteria": [
+      "same_prompt_instances_and_conditioning",
+      "same_or_comparable_model_scale_and_tokenizer",
+      "same_independent_payload_bits_and_assignments",
+      "matched_controls_lengths_and_stopping",
+      "end_to_end_recovery_under_declared_assumptions",
+      "same_blinded_quality_and_steganalysis_evaluation",
+      "official_or_validated_faithful_implementation"
+    ]
+  },
+  "generated_at_utc": "2026-08-08T23:28:30.663520+00:00",
+  "historical_tag_tree": {
+    "file_count": 12,
+    "files": [
+      ".gitignore",
+      ".gitmodules",
+      "README.md",
+      "bucket.py",
+      "core.py",
+      "encoder.py",
+      "entropy.ipynb",
+      "external/gpt-2",
+      "gpt_sample.py",
+      "gptlm.py",
+      "huffman.py",
+      "lm.py"
+    ],
+    "gpt2_117m_checkpoint_files": [],
+    "gpt2_117m_model_asset_files": [],
+    "gpt2_117m_model_assets_present": false,
+    "gpt2_gitlink": "c5b9c8924be4543e7aadd4b050cedfea9c910e3d",
+    "gpt2_source_model_py_present": false,
+    "gpt2_submodule_initialized": false,
+    "gpt2_submodule_status": "-c5b9c8924be4543e7aadd4b050cedfea9c910e3d external/gpt-2",
+    "license_file_present": false,
+    "requirements_file_present": false
+  },
+  "integrity": {
+    "all_provenance_checks_passed": true,
+    "external_checkout_unchanged": true,
+    "report_complete": true
+  },
+  "later_current_ref": {
+    "files_added_or_changed_since_historical_tag": [
+      "LICENSE",
+      "README.md",
+      "core.py",
+      "example.ipynb",
+      "gpt_sample.py",
+      "gptlm.py",
+      "huffman.py",
+      "requirements.txt",
+      "samples/controlled-sample-00.txt",
+      "samples/controlled-sample-01.txt",
+      "samples/controlled-sample-02.txt",
+      "samples/controlled-sample-03.txt",
+      "samples/controlled-sample-04.txt",
+      "samples/controlled-sample-05.txt",
+      "samples/controlled-sample-06.txt",
+      "samples/controlled-sample-07.txt",
+      "samples/controlled-sample-08.txt",
+      "samples/controlled-sample-09.txt",
+      "samples/controlled-sample-10.txt",
+      "samples/controlled-sample-11.txt",
+      "samples/controlled-sample-12.txt",
+      "samples/controlled-sample-13.txt",
+      "samples/controlled-sample-14.txt",
+      "samples/controlled-sample-15.txt",
+      "samples/controlled-sample-16.txt",
+      "samples/controlled-sample-17.txt",
+      "samples/controlled-sample-18.txt",
+      "samples/controlled-sample-19.txt",
+      "samples/uncontrolled-sample-00.txt",
+      "samples/uncontrolled-sample-01.txt",
+      "samples/uncontrolled-sample-02.txt",
+      "samples/uncontrolled-sample-03.txt",
+      "samples/uncontrolled-sample-04.txt",
+      "samples/uncontrolled-sample-05.txt",
+      "samples/uncontrolled-sample-06.txt",
+      "samples/uncontrolled-sample-07.txt",
+      "samples/uncontrolled-sample-08.txt",
+      "samples/uncontrolled-sample-09.txt",
+      "samples/uncontrolled-sample-10.txt",
+      "samples/uncontrolled-sample-11.txt",
+      "samples/uncontrolled-sample-12.txt",
+      "samples/uncontrolled-sample-13.txt",
+      "samples/uncontrolled-sample-14.txt",
+      "samples/uncontrolled-sample-15.txt",
+      "samples/uncontrolled-sample-16.txt",
+      "samples/uncontrolled-sample-17.txt",
+      "samples/uncontrolled-sample-18.txt",
+      "samples/uncontrolled-sample-19.txt"
+    ],
+    "license": {
+      "classification": "MIT",
+      "copyright_line": "Copyright (c) 2019 Falcon Dai",
+      "legal_advice": false,
+      "mit_markers_present": true,
+      "sha256": "fa25f1f6faea89568194b6c65518831079c9b863d7e191b0a0050f2fc5652ebc"
+    },
+    "license_file_present": true,
+    "requirements_file_present": true,
+    "requirements_sha256": "b9ac17070d04bfdf3ad7dd6d3cd32b0db739ac2b6e18962d64c998c3727ced05",
+    "selected_pinned_requirements": {
+      "nltk": "3.4",
+      "numpy": "1.16.1",
+      "tensorflow": "1.12.0",
+      "torch": "1.0.1.post2"
+    }
+  },
+  "licensing_interpretation": {
+    "caution": "This is a repository-provenance interpretation, not a legal determination. Preserve the later MIT notice when permitted code is redistributed and audit third-party assets separately.",
+    "conclusion": "The MIT license added on the later current branch likely covers the repository code distributed there, including code derived from the historical implementation. The acl-2019 tree itself omits the license file and notice.",
+    "historical_tag_archive_contains_license_notice": false,
+    "is_decisive_numeric_comparison_blocker": false,
+    "later_mit_license_is_positive_provenance_evidence": true,
+    "third_party_gpt2_code_and_model_assets_require_separate_provenance": true
+  },
+  "method": {
+    "historical_example_configuration": {
+      "ciphertext_bits": 32,
+      "conditioning": "GPT-2 end-of-text/SOS prefix; the historical core example does not accept RankCloak-style topic prompts",
+      "maximum_sequence_length_default": 80,
+      "sender_seed": 123,
+      "tv_threshold": 0.08
+    },
+    "historical_source_locations": {
+      "gpt2_117m_default": {
+        "file": "gptlm.py",
+        "line": 19
+      },
+      "gpt2_model_loader": {
+        "file": "gptlm.py",
+        "line": 13
+      },
+      "ordinary_sampling_when_not_accepted": {
+        "file": "core.py",
+        "line": 88
+      },
+      "per_step_huffman_tree": {
+        "file": "core.py",
+        "line": 66
+      },
+      "receiver_rebuild_and_recovery": {
+        "file": "core.py",
+        "line": 126
+      },
+      "sender_embed_bits": {
+        "file": "core.py",
+        "line": 52
+      },
+      "tensorflow_import": {
+        "file": "gptlm.py",
+        "line": 6
+      },
+      "total_variation_implementation": {
+        "file": "huffman.py",
+        "line": 37
+      },
+      "tv_acceptance_threshold": {
+        "file": "core.py",
+        "line": 69
+      }
+    },
+    "method_name": "patient-Huffman",
+    "method_summary": "At each autoregressive step the sender constructs a Huffman tree from the model conditional distribution. It consumes payload bits only when the induced Huffman distribution is below a total-variation threshold; otherwise it samples normally. The receiver reconstructs the same tree from the same prefix and maps observed tokens back to bits."
+  },
+  "overall_conclusion": {
+    "numeric_patient_huffman_baseline_approved": false,
+    "official_published_method_end_to_end_reproduced": false,
+    "primary_rankcloak_experiments_blocked": false,
+    "recommended_manuscript_treatment": "Discuss Dai and Cai (ACL 2019) as a peer-reviewed prior method and report the read-only compatibility attempt transparently. Do not place a numeric patient-Huffman result in comparative figures or tables until all fair-comparison criteria are met.",
+    "standalone_huffman_core_reproduced": true
+  },
+  "provenance": {
+    "checks": {
+      "checkout_exactly_at_historical_tag": true,
+      "clean_after": true,
+      "clean_before": true,
+      "current_ref_matches_expected_commit": true,
+      "head_matches_expected_historical_commit": true,
+      "head_unchanged_by_audit": true,
+      "status_unchanged_by_audit": true,
+      "tag_resolves_to_expected_historical_commit": true
+    },
+    "current_commit_metadata": {
+      "author_date": "2019-08-07T17:37:40-05:00",
+      "commit": "f0ee4b0097a90ffe368c52adf61f2601970c0435",
+      "committer_date": "2019-08-07T17:37:40-05:00",
+      "subject": "Merge branch 'dai-dev'"
+    },
+    "current_ref": "origin/master",
+    "current_ref_commit": "f0ee4b0097a90ffe368c52adf61f2601970c0435",
+    "exact_tag": "acl-2019",
+    "expected_current_commit": "f0ee4b0097a90ffe368c52adf61f2601970c0435",
+    "expected_historical_commit": "0f0c41061242688e1830e16de5718f04662b10b2",
+    "head": "0f0c41061242688e1830e16de5718f04662b10b2",
+    "historical_commit_metadata": {
+      "author_date": "2019-03-09T17:36:09-06:00",
+      "commit": "0f0c41061242688e1830e16de5718f04662b10b2",
+      "committer_date": "2019-03-09T17:36:09-06:00",
+      "subject": "add plot notebook"
+    },
+    "historical_source_files": {
+      "core.py": {
+        "bytes_utf8": 7605,
+        "git_blob": "0c9e5f10e3ccdd3c477afe1487e3bcef8fcaae76",
+        "path": "core.py",
+        "sha256": "9a1f1b13f27951039361d0a4b05c3f87a533fcd15999bdaec57f9290cde93365"
+      },
+      "encoder.py": {
+        "bytes_utf8": 4693,
+        "git_blob": "7605e3ed1da0110be9b55c133d4d2e70e889afca",
+        "path": "encoder.py",
+        "sha256": "ecde08deb69ffe1c1aba295f6c34f54e657081e3e721c4653f622d935407436b"
+      },
+      "gptlm.py": {
+        "bytes_utf8": 4071,
+        "git_blob": "0d057bf2a5f3ff0f5cc63c610a9029dcdeb77eaf",
+        "path": "gptlm.py",
+        "sha256": "5affb7b424013417fa44525b68f75c0f5bae730a2db27c80acffaff187ee90ab"
+      },
+      "huffman.py": {
+        "bytes_utf8": 4990,
+        "git_blob": "9dcbb6b14ed6f040d2a79f07a3e5d4985a20c053",
+        "path": "huffman.py",
+        "sha256": "c9befbf9cd47391634a9f2f71fb75300cf1d639f88dd2a81b423938f61cee9e7"
+      }
+    },
+    "historical_tag": "acl-2019",
+    "historical_tag_commit": "0f0c41061242688e1830e16de5718f04662b10b2",
+    "historical_tag_object": "5c44fbd55a10ffd638075f0fec221d67236bcae2",
+    "origin_url": "https://github.com/falcondai/lm-steganography.git",
+    "repository": "/home/meow/Documents/repos/llm-rankcloak/external_sources/lm-steganography",
+    "working_tree_status_after": "",
+    "working_tree_status_before": ""
+  },
+  "reproduction": {
+    "cover_quality_measured": false,
+    "end_to_end_cover_generation_completed": false,
+    "exact_payload_recovery_measured": false,
+    "interpretation": "The dyadic p check validates a small official Huffman/TV code path. It does not validate patient-Huffman generation with GPT-2, serialization/recovery, or any comparative outcome.",
+    "official_entry_point": {
+      "command": {
+        "argv": [
+          "/home/meow/Documents/repos/llm-rankcloak/.venv/bin/python",
+          "-B",
+          "core.py"
+        ],
+        "cwd": "/home/meow/Documents/repos/llm-rankcloak/external_sources/lm-steganography",
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/meow/Documents/repos/llm-rankcloak/external_sources/lm-steganography/core.py\", line 160, in <module>\n    from gptlm import GptLanguageModel\n  File \"/home/meow/Documents/repos/llm-rankcloak/external_sources/lm-steganography/gptlm.py\", line 6, in <module>\n    import tensorflow as tf\nModuleNotFoundError: No module named 'tensorflow'\n",
+        "stdout": "",
+        "timed_out": false
+      },
+      "completed": false,
+      "failure": {
+        "message": "No module named 'tensorflow'",
+        "stage": "dependency_import",
+        "type": "ModuleNotFoundError"
+      },
+      "network_or_install_permitted": false,
+      "purpose": "official historical end-to-end illustrative entry point"
+    },
+    "standalone_huffman_dyadic_check": {
+      "command": {
+        "argv": [
+          "/home/meow/Documents/repos/llm-rankcloak/.venv/bin/python",
+          "-B",
+          "-c",
+          "import json, numpy as np; from huffman import build_min_heap, huffman_tree, tv_huffman; p=np.asarray([0.5,0.25,0.125,0.125], dtype=float); tree=huffman_tree(build_min_heap(p)); tv,gap=tv_huffman(tree,p); print(json.dumps({'distribution':p.tolist(),'code_tree':tree,'total_variation':float(tv),'cross_entropy_gap':float(gap)},sort_keys=True))"
+        ],
+        "cwd": "/home/meow/Documents/repos/llm-rankcloak/external_sources/lm-steganography",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"code_tree\": [0, [1, [2, 3]]], \"cross_entropy_gap\": 0.0, \"distribution\": [0.5, 0.25, 0.125, 0.125], \"total_variation\": 0.0}\n",
+        "timed_out": false
+      },
+      "distribution": [
+        0.5,
+        0.25,
+        0.125,
+        0.125
+      ],
+      "expected_total_variation": 0.0,
+      "observed": {
+        "code_tree": [
+          0,
+          [
+            1,
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        "cross_entropy_gap": 0.0,
+        "distribution": [
+          0.5,
+          0.25,
+          0.125,
+          0.125
+        ],
+        "total_variation": 0.0
+      },
+      "passed": true,
+      "purpose": "mathematical-kernel smoke check only; not cover generation, recovery, naturalness, or detectability evidence"
+    },
+    "steganalysis_measured": false
+  },
+  "schema_version": "rankcloak-published-comparator-audit-v1"
+}

@@ -1,0 +1,73 @@
+{
+  "determinism": {
+    "bootstrap_resamples": 100,
+    "bootstrap_seed": 2026080801
+  },
+  "inputs": [
+    {
+      "bytes": 72155,
+      "category": "trials",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_preprocessed/trials.csv",
+      "sha256": "75bebb34639fb8be63e2b866898c86a7f04fbd8a3e655116552a3963c84b8445"
+    },
+    {
+      "bytes": 503244,
+      "category": "features",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_preprocessed/features.csv",
+      "sha256": "f8c900fe79d0b36a5d8c4761dce78374aa94afe3ed05c38a20682827f809a5b0"
+    },
+    {
+      "bytes": 71389,
+      "category": "runtime",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_preprocessed/runtime.csv",
+      "sha256": "7c77c5d72f61b7ccef3211457c630dec6573270a7c636201296a80330a4c6b60"
+    }
+  ],
+  "outputs": {
+    "continuous": {
+      "bytes": 290564,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/continuous_summary.csv",
+      "sha256": "1fab00f0f10005808a9dc5884761fdacc3b5a4d81694819d75110e1ede2887c1"
+    },
+    "detectors": {
+      "bytes": 7,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/detector_summary.csv",
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "effects": {
+      "bytes": 77215,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/effect_sizes.csv",
+      "sha256": "39c8c22efc87ca7471d91c5c570b3ce3abe5347362a2d16c56d635dad04770a4"
+    },
+    "integrity": {
+      "bytes": 774,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/statistics_integrity_report.json",
+      "sha256": "e4175b8b01406df23f15c7a6d2117b93aa564d12705f2666dc00c82b12abaa47"
+    },
+    "mixed": {
+      "bytes": 7,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/mixed_effects_coefficients.csv",
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "mixed_status": {
+      "bytes": 79,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/mixed_effects_status.json",
+      "sha256": "716986a306f85b8de0df6716fb8145690e983ab5a51e07f172c554f7b052c46e"
+    },
+    "quality": {
+      "bytes": 63370,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/quality_trial_metrics.csv",
+      "sha256": "6c0b716e5fb2776b7e5afc60ec9b0a798b421260c39870b9ccdfbb24009017d5"
+    },
+    "recovery": {
+      "bytes": 23127,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_statistics_v2/recovery_summary.csv",
+      "sha256": "05c204af30cfef4fec8891a399a0315a66815010106fb785a4bb631238b45834"
+    }
+  },
+  "schema_version": "1.0",
+  "statistics_config": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/statistics.json",
+    "sha256": "62029282f69e6ec50235b92a5bd63e04b37191c9154f11493220453d64311b9e"
+  }
+}

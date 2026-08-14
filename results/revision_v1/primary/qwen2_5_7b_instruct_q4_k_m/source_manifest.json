@@ -1,0 +1,72 @@
+{
+  "files": [
+    {
+      "path": "rankcloak/revision_runner.py",
+      "sha256": "8c3534211f0a1d279b38ec368cad9679e4231c1dd99a8687fccaca0da895742f",
+      "size_bytes": 142747
+    },
+    {
+      "path": "rankcloak/revision_config.py",
+      "sha256": "567b60a6d335ea82136ba5f1322cc56d18cacb0056274126a3bf15059b67f6bf",
+      "size_bytes": 31367
+    },
+    {
+      "path": "rankcloak/revision_payloads.py",
+      "sha256": "3e531a059a11083e25b630f1d9bf07b22906da2b482b2afb7cfb1beddfae5402",
+      "size_bytes": 20471
+    },
+    {
+      "path": "rankcloak/revision_artifacts.py",
+      "sha256": "ca0e9ffdf11a2d474eca14abe2245285a5d16e1c8b616eaa524d9081a82904e5",
+      "size_bytes": 15623
+    },
+    {
+      "path": "rankcloak/revision_protocol.py",
+      "sha256": "c94aafd68ce39625399274b83ce0347715dc0db3165e745d78733e6608896301",
+      "size_bytes": 25548
+    },
+    {
+      "path": "rankcloak/model_io.py",
+      "sha256": "c87d4ad88201d2989bf93005aa36c250ed94a86801648b2b8b68b2747320151f",
+      "size_bytes": 12973
+    },
+    {
+      "path": "rankcloak/rank_codec.py",
+      "sha256": "c2687b1bb9edd6e7de928bf7fe3729d9f88de6b10cc99244302dc5ff35cbed40",
+      "size_bytes": 13302
+    },
+    {
+      "path": "rankcloak/token_filters.py",
+      "sha256": "8d09fdfd4670bead5d233cb9d7b4cb57ae465bf1decf37dd65b223c7d71808d8",
+      "size_bytes": 4981
+    },
+    {
+      "path": "rankcloak/segmented_protocol.py",
+      "sha256": "dd3bb3efd193b9c16e8875fead59a97001c361884ac84dbc8eec6bb1f038395c",
+      "size_bytes": 74853
+    },
+    {
+      "path": "scripts/run_revision_matrix.py",
+      "sha256": "4c718a8c7407e6ef80745e21937f8e14b2c6c3b4597ae147f5f91b10af1ba4ea",
+      "size_bytes": 197
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "6563e0aac0930db5b359867f74282676e1a0ca1f456df76cde576e3f81612164",
+      "size_bytes": 850
+    }
+  ],
+  "files_sha256": "f7ae057ba165cbbc091932f04ad35aa3c15643f6077a4ae48cdda399cb59bb9a",
+  "git_head": "9e27144a46bc12be24b6579a02640a76f8b0ba56",
+  "manifest_type": "revision_runner_source",
+  "schema_version": "1.0",
+  "selected_source_status": [
+    " M pyproject.toml",
+    "?? rankcloak/revision_artifacts.py",
+    "?? rankcloak/revision_config.py",
+    "?? rankcloak/revision_payloads.py",
+    "?? rankcloak/revision_protocol.py",
+    "?? rankcloak/revision_runner.py",
+    "?? scripts/run_revision_matrix.py"
+  ]
+}

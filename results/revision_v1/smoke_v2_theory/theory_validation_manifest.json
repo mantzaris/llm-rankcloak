@@ -1,0 +1,77 @@
+{
+  "artifact_type": "rankcloak_capacity_quality_theory_validation",
+  "inputs": [
+    {
+      "path": "results/revision_v1/smoke_v2/llama3_8b_instruct_q4_k_m/records.jsonl",
+      "record_count": 32,
+      "sha256": "24120110e1bfd8157dec84699398449055e02c87ca54221f04b0afa92510adc7",
+      "size_bytes": 513125
+    },
+    {
+      "path": "results/revision_v1/smoke_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+      "record_count": 32,
+      "sha256": "1c52e6ba5963e1bf5b22df1126624848850bf8e3cdf540a504de42b1020c96d5",
+      "size_bytes": 455672
+    },
+    {
+      "path": "results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+      "record_count": 32,
+      "sha256": "bd9d54b90bc22518e3d848bc090c583af27f525c8beec06d07a02f14f321a2ff",
+      "size_bytes": 472922
+    }
+  ],
+  "missing_result_policy": "no imputation, reconstruction, or synthetic substitution",
+  "probability_log_base": "natural",
+  "proposition": "If encoder and decoder begin with identical token-ID contexts, use the same deterministic model, tokenizer, inference configuration, admissible token set, and descending-score/ascending-token-ID order, and receive identical forced token IDs, inverse ranking recovers every encoded rank. An injective payload codec then recovers the payload exactly.",
+  "quality_unit": "nats_per_forced_token",
+  "rate_unit": "bits_per_token",
+  "schema_version": "1.0",
+  "summary": {
+    "capacity_evaluable_count": 32,
+    "cascade_evaluable_count": 0,
+    "exact_observed_only_count": 35,
+    "exact_proposition_confirmed_count": 0,
+    "input_record_count": 96,
+    "quality_evaluable_count": 35,
+    "quality_fully_bound_validated_count": 32
+  },
+  "tables": [
+    {
+      "name": "capacity_validation",
+      "path": "theory_capacity_validation.csv",
+      "row_count": 96,
+      "sha256": "bcb8fca7c5fd2e3e02d517f043ea5ac76031606daa427530d7c23839d550523f"
+    },
+    {
+      "name": "capacity_plot",
+      "path": "theory_capacity_plot_source.csv",
+      "row_count": 32,
+      "sha256": "9512ed03a4124a8ee168a2be509a496bd4543b3fb5e6be598903009b460dfd80"
+    },
+    {
+      "name": "quality_validation",
+      "path": "theory_quality_validation.csv",
+      "row_count": 96,
+      "sha256": "c91b17d86953aa7d9c30620e8e9fa4197d0e8ae4491837fa0233c2ad3ba6227a"
+    },
+    {
+      "name": "quality_plot",
+      "path": "theory_quality_plot_source.csv",
+      "row_count": 35,
+      "sha256": "f248866b3cd45a1f1352fe6abd5efa4aa55ae8ef87661457d0e82568ea72f17d"
+    },
+    {
+      "name": "exact_recovery",
+      "path": "theory_exact_recovery_validation.csv",
+      "row_count": 96,
+      "sha256": "86b33ce69e3b1cce58eb50d49e8eac05f59a4df03b5b451c762816461ceeb863"
+    },
+    {
+      "name": "cascade",
+      "path": "theory_cascade_diagnostics.csv",
+      "row_count": 0,
+      "sha256": "193c652a8e82149a4ce4cc1e47ef0337706042870b8a73f6202aed9ffe7a18b4"
+    }
+  ],
+  "tie_break_rule": "descending_score_then_ascending_token_id"
+}

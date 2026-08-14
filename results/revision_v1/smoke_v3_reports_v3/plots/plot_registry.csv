@@ -1,0 +1,19 @@
+report_status,label,number,plot_id,source_csv,title
+available,fig:capacity-quality-framework,1,main_figure_1,sources/main_figure_1.csv,Payload representation and theoretical capacity--quality framework
+unavailable,fig:primary-multimodel,2,main_figure_2,sources/main_figure_2.csv,Primary multi-model RankCloak results
+unavailable,fig:human-quality,3,main_figure_3,sources/main_figure_3.csv,Cover quality and blinded human assessment
+unavailable,fig:replay-fragility,4,main_figure_4,sources/main_figure_4.csv,Replay fragility and lead-in analysis
+unavailable,fig:neural-steganalysis,5,main_figure_5,sources/main_figure_5.csv,Neural steganalysis and generalization
+unavailable,fig:s1,S1,supplementary_figure_s1,sources/supplementary_figure_s1.csv,Experiment flow and completed matrix
+available,fig:s2,S2,supplementary_figure_s2,sources/supplementary_figure_s2.csv,Full direct-rank distributions by payload class and model
+available,fig:s3,S3,supplementary_figure_s3,sources/supplementary_figure_s3.csv,Per-model capacity--quality frontiers
+unavailable,fig:s4,S4,supplementary_figure_s4,sources/supplementary_figure_s4.csv,Filter ablation
+unavailable,fig:s5,S5,supplementary_figure_s5,sources/supplementary_figure_s5.csv,Lead-in-length sweep and first-divergence positions
+unavailable,fig:s6,S6,supplementary_figure_s6,sources/supplementary_figure_s6.csv,Tail-policy and segment-size comparison
+unavailable,fig:s7,S7,supplementary_figure_s7,sources/supplementary_figure_s7.csv,Transmission-transformation results
+unavailable,fig:s8,S8,supplementary_figure_s8,sources/supplementary_figure_s8.csv,Human-rating distributions
+unavailable,fig:s9,S9,supplementary_figure_s9,sources/supplementary_figure_s9.csv,Readability and held-out evaluator metrics
+unavailable,fig:s10,S10,supplementary_figure_s10,sources/supplementary_figure_s10.csv,Detector ROC and precision--recall curves
+unavailable,fig:s11,S11,supplementary_figure_s11,sources/supplementary_figure_s11.csv,"Held-out model, prompt, and codec detection"
+unavailable,fig:s12,S12,supplementary_figure_s12,sources/supplementary_figure_s12.csv,Computational overhead
+unavailable,fig:s13,S13,supplementary_figure_s13,sources/supplementary_figure_s13.csv,Multilingual secondary experiment

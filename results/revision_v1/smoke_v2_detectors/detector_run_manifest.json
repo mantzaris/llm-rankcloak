@@ -1,0 +1,33 @@
+{
+  "accept_smoke_fallback": true,
+  "allow_model_downloads_cli": false,
+  "config_path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/smoke.json",
+  "config_sha256": "104616ea864c07f1d28149a4d31e3c119249e1c0a2de81d9225ebacf30e7aa23",
+  "created_at_utc": "2026-08-09T01:04:35.112568+00:00",
+  "environment": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+    "python": "3.10.13 (main, Feb 26 2026, 22:30:03) [GCC 13.3.0]",
+    "scikit_learn": "1.7.2",
+    "torch": "2.5.1+cu124",
+    "transformers": "4.46.3"
+  },
+  "failure_count": 0,
+  "git": {
+    "commit": "9e27144a46bc12be24b6579a02640a76f8b0ba56",
+    "dirty_worktree": true
+  },
+  "input_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_preprocessed/detector_corpus.jsonl",
+  "input_sha256": "8a554c752cb14444b7c40e049cbdf4a1badf692e365d6cf4d7788ccc3472464d",
+  "metric_rows": 1,
+  "normalized_rows": 116,
+  "output_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2_detectors",
+  "prediction_rows": 28,
+  "raw_rows": 116,
+  "schema_version": "rankcloak-revision-detector-run-v1",
+  "skipped_split_count": 0,
+  "smoke": true,
+  "smoke_fallback_metric_rows": 0,
+  "split_count": 1
+}

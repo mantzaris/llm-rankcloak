@@ -1,0 +1,77 @@
+{
+  "schema_version": "rankcloak-revision-detectors-v1",
+  "seed": 20260808,
+  "decision_threshold": 0.5,
+  "columns": {
+    "row_id": "row_id",
+    "text": "text",
+    "label": "label",
+    "payload_group_id": "payload_group_id",
+    "prompt_template_id": "prompt_template_id",
+    "model_id": "model_id",
+    "codec_id": "codec_id"
+  },
+  "splits": {
+    "regimes": [
+      "matched",
+      "held_out_template",
+      "leave_one_model",
+      "leave_one_codec"
+    ],
+    "matched_test_fraction": 0.25,
+    "assert_text_hash_disjoint": true,
+    "minimum_train_rows": 40,
+    "minimum_test_rows": 20,
+    "fail_on_skipped_split": false
+  },
+  "bootstrap": {
+    "unit": "payload_group_id",
+    "resamples": 2000,
+    "smoke_resamples": 100
+  },
+  "detectors": [
+    {
+      "name": "published_textcnn_equivalent",
+      "kind": "text_cnn",
+      "enabled": true,
+      "device": "cpu",
+      "torch_num_threads": 1,
+      "lowercase": true,
+      "minimum_token_frequency": 1,
+      "maximum_vocabulary_size": 30000,
+      "maximum_length": 256,
+      "embedding_dimension": 300,
+      "filter_sizes": [3, 5],
+      "filters_per_width": 100,
+      "dropout": 0.5,
+      "learning_rate": 0.001,
+      "weight_decay": 0.000001,
+      "epochs": 10,
+      "batch_size": 64,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_ngram_min": 3,
+      "fallback_ngram_max": 5,
+      "fallback_maximum_features": 20000
+    },
+    {
+      "name": "deberta_v3_base_classifier",
+      "kind": "pretrained_transformer",
+      "enabled": true,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "offline_only": true,
+      "allow_downloads": false,
+      "device": "cpu",
+      "torch_num_threads": 1,
+      "maximum_length": 256,
+      "learning_rate": 0.00002,
+      "weight_decay": 0.01,
+      "epochs": 3,
+      "batch_size": 8,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_ngram_min": 3,
+      "fallback_ngram_max": 5,
+      "fallback_maximum_features": 20000
+    }
+  ]
+}

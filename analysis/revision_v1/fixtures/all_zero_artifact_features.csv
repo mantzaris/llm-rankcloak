@@ -1,0 +1,2 @@
+trial_id,artifact_count,token_count,model_id,protocol_variant,prompt_id,prompt_category,payload_name,payload_class
+fixture_trial_001,0,64,llama3_8b_instruct_q4_k_m,nonseg_ascii_b16,fixture_prompt_001,casual_conversation,fixture_payload_001,sha256_hex

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "specification_id": "rankcloak_revision_v1_confirmatory_mixed_effects",
+  "frozen_before_confirmatory_results": true,
+  "analysis_unit": "payload_trial",
+  "segments_as_independent_observations_forbidden": true,
+  "input_scope": "primary-stage preprocessed outputs only",
+  "required_filter": {
+    "evidence_status": "confirmatory_after_manifest_freeze",
+    "record_type": "rankcloak_trial",
+    "replay_mode": "saved_token_ids"
+  },
+  "models": [
+    {
+      "name": "primary_exact_recovery_glmer",
+      "backend": "r_lme4",
+      "family": "binomial",
+      "data_source": "trials",
+      "outcome": "exact_recovery",
+      "formula": "exact_recovery ~ model_id * protocol_variant + model_id * prompt_category + protocol_variant * prompt_category + payload_class + (1 | payload_name) + (1 | prompt_id)",
+      "group_column": "payload_name",
+      "variance_component_columns": ["prompt_id"],
+      "required": true,
+      "rscript": "analysis/revision_v1/run_with_locked_r.sh",
+      "all_success_policy": "do_not_fit_unidentified_glmm_report_wilson_sensitivity",
+      "fixed_effects_fallback": false
+    },
+    {
+      "name": "primary_effective_artifact_rate_lmer",
+      "backend": "r_lme4",
+      "family": "gaussian",
+      "data_source": "trials",
+      "outcome": "effective_artifact_bits_per_full_token",
+      "formula": "effective_artifact_bits_per_full_token ~ model_id * protocol_variant + model_id * prompt_category + protocol_variant * prompt_category + payload_class + (1 | payload_name) + (1 | prompt_id)",
+      "group_column": "payload_name",
+      "variance_component_columns": ["prompt_id"],
+      "required": true,
+      "rscript": "analysis/revision_v1/run_with_locked_r.sh",
+      "fixed_effects_fallback": false
+    },
+    {
+      "name": "primary_cover_log_probability_lmer",
+      "backend": "r_lme4",
+      "family": "gaussian",
+      "data_source": "trials",
+      "outcome": "mean_log_probability",
+      "formula": "mean_log_probability ~ model_id * protocol_variant + model_id * prompt_category + protocol_variant * prompt_category + payload_class + (1 | payload_name) + (1 | prompt_id)",
+      "group_column": "payload_name",
+      "variance_component_columns": ["prompt_id"],
+      "required": true,
+      "rscript": "analysis/revision_v1/run_with_locked_r.sh",
+      "input_contract": "preprocessed trial table has one saved-token replay row per payload condition; raw segments are not passed to the mixed model",
+      "fixed_effects_fallback": false
+    }
+  ]
+}

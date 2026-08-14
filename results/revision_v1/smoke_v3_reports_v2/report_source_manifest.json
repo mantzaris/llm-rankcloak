@@ -1,0 +1,205 @@
+{
+  "artifact_type": "report_source_seal",
+  "artifacts": [
+    {
+      "artifact_key": "preprocess_1.detector",
+      "manifest_declared_sha256": true,
+      "path": "detector_corpus.jsonl",
+      "row_count": 116,
+      "sha256": "c6a7e627531d6bebf42f5caa8a1bfb3a366c111bd4d4663977bdaa72093c4b20",
+      "size_bytes": 152524
+    },
+    {
+      "artifact_key": "preprocess_1.failures",
+      "manifest_declared_sha256": true,
+      "path": "failures.csv",
+      "row_count": 14,
+      "sha256": "29996263e32fd24a6d2ec1e543cb40f321dc0ede2e1e2521c4df19dfe0942e98",
+      "size_bytes": 9393
+    },
+    {
+      "artifact_key": "preprocess_1.features",
+      "manifest_declared_sha256": true,
+      "path": "features.csv",
+      "row_count": 302,
+      "sha256": "0fd91b19eb5128c88c44d6b4baa86ed302fe6972a7162337fd108fe4b45078f9",
+      "size_bytes": 546539
+    },
+    {
+      "artifact_key": "preprocess_1.input_manifest",
+      "manifest_declared_sha256": true,
+      "path": "preprocessing_input_manifest.json",
+      "row_count": null,
+      "sha256": "aa97203bafb55e899057e31e3490178a7ac72e95ad9268d28511e1a9a6a0681a",
+      "size_bytes": 11558
+    },
+    {
+      "artifact_key": "preprocess_1.runtime",
+      "manifest_declared_sha256": true,
+      "path": "runtime.csv",
+      "row_count": 102,
+      "sha256": "5cd7283f36c2aa1d2f979adcb1ccc11c63ae5b4ed1e997414b3ca44a2683ee4e",
+      "size_bytes": 78184
+    },
+    {
+      "artifact_key": "preprocess_1.trials",
+      "manifest_declared_sha256": true,
+      "path": "trials.csv",
+      "row_count": 105,
+      "sha256": "2a379ad94f0ac7b37c1b59d1e79369414491c1ca08857af43b247d4567e74f4b",
+      "size_bytes": 88599
+    },
+    {
+      "artifact_key": "preprocess_1.unavailable",
+      "manifest_declared_sha256": true,
+      "path": "unavailable.csv",
+      "row_count": 3,
+      "sha256": "11b5f9fedba539870bae7c88986298df2b2402955a47447148a8a3b388a6c996",
+      "size_bytes": 4623
+    },
+    {
+      "artifact_key": "statistics.continuous",
+      "manifest_declared_sha256": true,
+      "path": "continuous_summary.csv",
+      "row_count": 1380,
+      "sha256": "0b95d83e9ac4a67ef49d73fdfdab545720e9ac60e650898e9e2ccb4244796a06",
+      "size_bytes": 488238
+    },
+    {
+      "artifact_key": "statistics.detectors",
+      "manifest_declared_sha256": true,
+      "path": "detector_summary.csv",
+      "row_count": 0,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c",
+      "size_bytes": 7
+    },
+    {
+      "artifact_key": "statistics.effects",
+      "manifest_declared_sha256": true,
+      "path": "effect_sizes.csv",
+      "row_count": 408,
+      "sha256": "fb3cfd0e6f675f71ad1aca4fc48b90f89471aed4683221ca255b2aaff161991f",
+      "size_bytes": 219068
+    },
+    {
+      "artifact_key": "statistics.integrity",
+      "manifest_declared_sha256": true,
+      "path": "statistics_integrity_report.json",
+      "row_count": null,
+      "sha256": "9f1ccce16eaad9d4350cf382760284a8aa760234214bbb6e2706840497752735",
+      "size_bytes": 2185
+    },
+    {
+      "artifact_key": "statistics.mixed",
+      "manifest_declared_sha256": true,
+      "path": "mixed_effects_coefficients.csv",
+      "row_count": 0,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c",
+      "size_bytes": 7
+    },
+    {
+      "artifact_key": "statistics.mixed_status",
+      "manifest_declared_sha256": true,
+      "path": "mixed_effects_status.json",
+      "row_count": 1,
+      "sha256": "716986a306f85b8de0df6716fb8145690e983ab5a51e07f172c554f7b052c46e",
+      "size_bytes": 79
+    },
+    {
+      "artifact_key": "statistics.quality",
+      "manifest_declared_sha256": true,
+      "path": "quality_trial_metrics.csv",
+      "row_count": 128,
+      "sha256": "a6fc31a639bc85f6a30c75664a8a5fd3f9ea8f58f868695abffbe4e157f85910",
+      "size_bytes": 83761
+    },
+    {
+      "artifact_key": "statistics.recovery",
+      "manifest_declared_sha256": true,
+      "path": "recovery_summary.csv",
+      "row_count": 198,
+      "sha256": "01075443e078e8426b19ae573adfa5fac02e5962b7d8bc987da4588e168bc7b6",
+      "size_bytes": 80387
+    },
+    {
+      "artifact_key": "theory.capacity_plot",
+      "manifest_declared_sha256": true,
+      "path": "theory_capacity_plot_source.csv",
+      "row_count": 32,
+      "sha256": "f928ead190886d63cea92f9f0c0fbdd8d9b447f5b13adaadb4dfbb2ef95ba37e",
+      "size_bytes": 6938
+    },
+    {
+      "artifact_key": "theory.capacity_validation",
+      "manifest_declared_sha256": true,
+      "path": "theory_capacity_validation.csv",
+      "row_count": 96,
+      "sha256": "06e7fc4901302c3a61c90a92d7992fe09df90c6157512e8f3ffd27e6b54eacc5",
+      "size_bytes": 29231
+    },
+    {
+      "artifact_key": "theory.cascade",
+      "manifest_declared_sha256": true,
+      "path": "theory_cascade_diagnostics.csv",
+      "row_count": 0,
+      "sha256": "193c652a8e82149a4ce4cc1e47ef0337706042870b8a73f6202aed9ffe7a18b4",
+      "size_bytes": 383
+    },
+    {
+      "artifact_key": "theory.exact_recovery",
+      "manifest_declared_sha256": true,
+      "path": "theory_exact_recovery_validation.csv",
+      "row_count": 96,
+      "sha256": "4808c809ea9015f459911fa3da97f8f26301c7ad727ea4e67958412f098c8469",
+      "size_bytes": 27997
+    },
+    {
+      "artifact_key": "theory.quality_plot",
+      "manifest_declared_sha256": true,
+      "path": "theory_quality_plot_source.csv",
+      "row_count": 35,
+      "sha256": "22489fc1d54700e916c215ff682771e61385e770203db2bf389ff667cef802da",
+      "size_bytes": 8887
+    },
+    {
+      "artifact_key": "theory.quality_validation",
+      "manifest_declared_sha256": true,
+      "path": "theory_quality_validation.csv",
+      "row_count": 96,
+      "sha256": "ed519676b07a4f92e303e3ed182a14bf53fa9b8a6d6550df44cd6dd7a619487e",
+      "size_bytes": 30388
+    }
+  ],
+  "fixture_mode": false,
+  "manifests": [
+    {
+      "path": "preprocessing_output_manifest.json",
+      "sha256": "51576223a5f05585da5a3e032e578a3e6fc1fb7a21a7d6f0382c1eb025957adf",
+      "size_bytes": 2703,
+      "source_key": "preprocess_1"
+    },
+    {
+      "path": "statistics_run_manifest.json",
+      "sha256": "11ced99f127bf09d7d46029e81ed4c3b401fca19979c938b7d58ee06a443ebbc",
+      "size_bytes": 4098,
+      "source_key": "statistics"
+    },
+    {
+      "path": "theory_validation_manifest.json",
+      "sha256": "365a900a1da67394c801c2788142dad16a4f2d807b7292e72c49337d31e92d13",
+      "size_bytes": 2961,
+      "source_key": "theory"
+    }
+  ],
+  "missing_result_policy": "explicitly unavailable; no imputation or synthetic substitution",
+  "numeric_input_policy": "manifest-addressed machine artifacts only; no numeric overrides",
+  "recovery_reporting_contract": {
+    "compatibility_alias": "exact_recovery",
+    "exact_rank_replay_role": "diagnostic_only",
+    "primary_outcome": "exact_payload_recovery",
+    "protocol_contract_revision": "payload_fidelity_v2",
+    "result_schema_revision": "payload_aware_result_v2",
+    "semantics": "original_serialized_payload_bytes_sha256_v1"
+  },
+  "schema_version": "rankcloak-revision-report-v1"
+}

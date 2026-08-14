@@ -1,0 +1,60 @@
+{
+  "file_count": 10,
+  "files": [
+    {
+      "path": "CHECKSUMS.sha256",
+      "sha256": "d7610e72d4d8bcd7f50a988e9ac6dc0275dbb29b6d7d17a47de6a9f881a07c34",
+      "size_bytes": 766
+    },
+    {
+      "path": "README.md",
+      "sha256": "19c6c91b982a8d0d976544b499a7a548f0d2aa371c3999203bcdba61ca9e0e28",
+      "size_bytes": 1813
+    },
+    {
+      "path": "REPRODUCE.md",
+      "sha256": "010260f584b6eb6636f7fbeb10d602694a43036f6fcd9084d13b5aa1549e6656",
+      "size_bytes": 965
+    },
+    {
+      "path": "backend_cuda_hardware.json",
+      "sha256": "7a26d8635de572c09b2eb035ecb7e71e9346be931203e8a5010b8e453cae69c5",
+      "size_bytes": 5056
+    },
+    {
+      "path": "bundle_status.json",
+      "sha256": "dd98218d9590bedfb4b4bf1c2452dcca8eb580a89428bb20b1c753716189004c",
+      "size_bytes": 306
+    },
+    {
+      "path": "determinism.json",
+      "sha256": "51bb2021c2badf42e85a6ddf9344f61a949e36e40da3f883992621f8f7601bc4",
+      "size_bytes": 1429
+    },
+    {
+      "path": "python_environment.json",
+      "sha256": "f285e78ac361f0b810fbb7882f368414fa59f4d18ca20680744cf32bca353afa",
+      "size_bytes": 58075
+    },
+    {
+      "path": "r_environment.json",
+      "sha256": "b80a0a633f16413d2ffa2cf97b27bf3e0f90b0fdddb2f5282310ba92c07ed233",
+      "size_bytes": 58106
+    },
+    {
+      "path": "requirements-lock.txt",
+      "sha256": "2e1b694449698ee6251b52718dceee56e11e48c71e3b89f586b0806aa44729a2",
+      "size_bytes": 2951
+    },
+    {
+      "path": "scientific_pins.json",
+      "sha256": "cd0ab88e2dba0c3b604da413b10598c11c02f292016868d03d19885dacc7a283",
+      "size_bytes": 34830
+    }
+  ],
+  "files_sha256": "4aeb0156c2937c4bc2e6b8c5ed6fe8a16b47b568c8129b2f24a83681929a32a4",
+  "manifest_type": "rankcloak_revision_environment_file_set",
+  "schema_version": "1.0",
+  "snapshot_id": "rankcloak_scientific_reports_revision_v1_environment",
+  "snapshot_status": "complete"
+}

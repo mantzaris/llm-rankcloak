@@ -1,0 +1,240 @@
+{
+  "main": [
+    {
+      "id": "main_figure_1",
+      "label": "fig:capacity-quality-framework",
+      "number": "1",
+      "title": "Payload representation and theoretical capacity--quality framework",
+      "type": "figure"
+    },
+    {
+      "id": "main_figure_2",
+      "label": "fig:primary-multimodel",
+      "number": "2",
+      "title": "Primary multi-model RankCloak results",
+      "type": "figure"
+    },
+    {
+      "id": "main_figure_3",
+      "label": "fig:human-quality",
+      "number": "3",
+      "title": "Cover quality and blinded human assessment",
+      "type": "figure"
+    },
+    {
+      "id": "main_figure_4",
+      "label": "fig:replay-fragility",
+      "number": "4",
+      "title": "Replay fragility and lead-in analysis",
+      "type": "figure"
+    },
+    {
+      "id": "main_figure_5",
+      "label": "fig:neural-steganalysis",
+      "number": "5",
+      "title": "Neural steganalysis and generalization",
+      "type": "figure"
+    },
+    {
+      "id": "main_table_1",
+      "label": "tab:study-recovery",
+      "number": "1",
+      "title": "Study design and primary recovery summary",
+      "type": "table"
+    },
+    {
+      "id": "main_table_2",
+      "label": "tab:effects-runtime",
+      "number": "2",
+      "title": "Primary effect sizes and computational performance",
+      "type": "table"
+    }
+  ],
+  "main_display_count": 7,
+  "main_display_limit": 7,
+  "schema_version": "rankcloak-revision-report-v1",
+  "supplementary": [
+    {
+      "id": "supplementary_table_s1",
+      "label": "tab:s1",
+      "number": "S1",
+      "title": "Protocol and variant definitions",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s2",
+      "label": "tab:s2",
+      "number": "S2",
+      "title": "Models, tokenizers, revisions, quantization, and hardware",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s3",
+      "label": "tab:s3",
+      "number": "S3",
+      "title": "Payload classes, lengths, algorithms, and corpus counts",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s4",
+      "label": "tab:s4",
+      "number": "S4",
+      "title": "Complete recovery matrix",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s5",
+      "label": "tab:s5",
+      "number": "S5",
+      "title": "Full mixed-effects results",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s6",
+      "label": "tab:s6",
+      "number": "S6",
+      "title": "Prompt-category and multilingual results",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s7",
+      "label": "tab:s7",
+      "number": "S7",
+      "title": "Filter and tail ablations",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s8",
+      "label": "tab:s8",
+      "number": "S8",
+      "title": "Lead-in and replay-boundary failures",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s9",
+      "label": "tab:s9",
+      "number": "S9",
+      "title": "Transmission robustness",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s10",
+      "label": "tab:s10",
+      "number": "S10",
+      "title": "Human evaluation and inter-rater reliability",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s11",
+      "label": "tab:s11",
+      "number": "S11",
+      "title": "Steganalysis metrics",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s12",
+      "label": "tab:s12",
+      "number": "S12",
+      "title": "Runtime and memory measurements",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_table_s13",
+      "label": "tab:s13",
+      "number": "S13",
+      "title": "Failure taxonomy",
+      "type": "table"
+    },
+    {
+      "id": "supplementary_figure_s1",
+      "label": "fig:s1",
+      "number": "S1",
+      "title": "Experiment flow and completed matrix",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s2",
+      "label": "fig:s2",
+      "number": "S2",
+      "title": "Full direct-rank distributions by payload class and model",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s3",
+      "label": "fig:s3",
+      "number": "S3",
+      "title": "Per-model capacity--quality frontiers",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s4",
+      "label": "fig:s4",
+      "number": "S4",
+      "title": "Filter ablation",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s5",
+      "label": "fig:s5",
+      "number": "S5",
+      "title": "Lead-in-length sweep and first-divergence positions",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s6",
+      "label": "fig:s6",
+      "number": "S6",
+      "title": "Tail-policy and segment-size comparison",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s7",
+      "label": "fig:s7",
+      "number": "S7",
+      "title": "Transmission-transformation results",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s8",
+      "label": "fig:s8",
+      "number": "S8",
+      "title": "Human-rating distributions",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s9",
+      "label": "fig:s9",
+      "number": "S9",
+      "title": "Readability and held-out evaluator metrics",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s10",
+      "label": "fig:s10",
+      "number": "S10",
+      "title": "Detector ROC and precision--recall curves",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s11",
+      "label": "fig:s11",
+      "number": "S11",
+      "title": "Held-out model, prompt, and codec detection",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s12",
+      "label": "fig:s12",
+      "number": "S12",
+      "title": "Computational overhead",
+      "type": "figure"
+    },
+    {
+      "id": "supplementary_figure_s13",
+      "label": "fig:s13",
+      "number": "S13",
+      "title": "Multilingual secondary experiment",
+      "type": "figure"
+    }
+  ]
+}

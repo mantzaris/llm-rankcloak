@@ -1,0 +1,2261 @@
+{
+  "auxiliary_timing_inputs": [
+    {
+      "complete": true,
+      "completed_units": 29,
+      "component": "evaluator",
+      "component_id": "heldout_evaluator_smoke_v3_llama3_8b_instruct_q4_k_m_from_mistral_7b_instruct_v0_3_q4_k_m",
+      "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+      "confirmatory_pooling_eligible": false,
+      "elapsed_seconds": 101.12442845010082,
+      "elapsed_seconds_definition": "sum_of_durable_per_task_wall_seconds_excluding_model_load",
+      "evaluator_tokens_per_second": 35.1052663971468,
+      "evidence_partition": "exploratory_smoke_v3_payload_fidelity_v2_no_confirmatory_pooling",
+      "evidence_status": "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+      "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "gpu_count": 1,
+      "incurred_charge_definition": "elapsed_seconds_plus_model_load_seconds",
+      "input_results_manifest_sha256": "e3ecb33dec4652e2d103ecd79ee4c2b4f1e927406580571f141f52a5070dae9e",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load_seconds": 2.5726171840069583,
+      "model_load_seconds_excluded_from_rate": true,
+      "ordered_evaluation_ids_sha256": "24113c6076ca87f1dac1c833e2374e7614ebb2d0162f64f1f275aa07078252fb",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/llama3_8b_instruct_q4_k_m/auxiliary_timing.json",
+      "protocol_contract_revision": "payload_fidelity_v2",
+      "records_jsonl_sha256": "75d73d8b1acd8ac878fedc86b1acb3926b4c5013f0191ffed5272f6e6e13ca24",
+      "result_schema_revision": "payload_aware_result_v2",
+      "schema_version": "rankcloak-revision-compute-timing-v2",
+      "scoring_plan_content_sha256": "e1985aa43379879ec3c00f91dc744fbdb7ede6a2c75736b4b35b325e3d33ca7c",
+      "source_stage": "smoke_v3",
+      "summed_scoring_seconds": 101.10462620091857,
+      "timing_manifest_sha256": "0da6a6fd9583ff6641288fd5aa72e03697fb11ef1b3a97d5b23f12ffa154d26f",
+      "total_evaluator_tokens": 3550,
+      "unit_definition": "one_saved_source_payload_trial_or_control_view"
+    },
+    {
+      "complete": true,
+      "completed_units": 32,
+      "component": "evaluator",
+      "component_id": "heldout_evaluator_smoke_v3_qwen2_5_7b_instruct_q4_k_m_from_llama3_8b_instruct_q4_k_m",
+      "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+      "confirmatory_pooling_eligible": false,
+      "elapsed_seconds": 123.68302666603995,
+      "elapsed_seconds_definition": "sum_of_durable_per_task_wall_seconds_excluding_model_load",
+      "evaluator_tokens_per_second": 37.04631204063261,
+      "evidence_partition": "exploratory_smoke_v3_payload_fidelity_v2_no_confirmatory_pooling",
+      "evidence_status": "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+      "generator_model_id": "llama3_8b_instruct_q4_k_m",
+      "gpu_count": 1,
+      "incurred_charge_definition": "elapsed_seconds_plus_model_load_seconds",
+      "input_results_manifest_sha256": "bf69f41568ca39cbd45393c2db802ffce2873895193b7eb15ecf616596e3c81e",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load_seconds": 2.3611893560009776,
+      "model_load_seconds_excluded_from_rate": true,
+      "ordered_evaluation_ids_sha256": "3370f662b6c6683213fbb2b619a07ff77632458e6221e56331bd33909f4859b5",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/qwen2_5_7b_instruct_q4_k_m/auxiliary_timing.json",
+      "protocol_contract_revision": "payload_fidelity_v2",
+      "records_jsonl_sha256": "c6e274ceb042cdc69d8b8ce2ca1bf403b0d31398413dcdcdaa1f58cac809cce6",
+      "result_schema_revision": "payload_aware_result_v2",
+      "schema_version": "rankcloak-revision-compute-timing-v2",
+      "scoring_plan_content_sha256": "22be8fed784f9481e2c8bba4ea930b9e52ac416f02f70b5e1430df4e2abadc68",
+      "source_stage": "smoke_v3",
+      "summed_scoring_seconds": 123.63431327897706,
+      "timing_manifest_sha256": "76b324282e99969877e98e836dac1a6a6fa727fa465b29f26204866781665b5a",
+      "total_evaluator_tokens": 4582,
+      "unit_definition": "one_saved_source_payload_trial_or_control_view"
+    },
+    {
+      "complete": true,
+      "completed_units": 32,
+      "component": "evaluator",
+      "component_id": "heldout_evaluator_smoke_v3_mistral_7b_instruct_v0_3_q4_k_m_from_qwen2_5_7b_instruct_q4_k_m",
+      "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+      "confirmatory_pooling_eligible": false,
+      "elapsed_seconds": 152.42785733102937,
+      "elapsed_seconds_definition": "sum_of_durable_per_task_wall_seconds_excluding_model_load",
+      "evaluator_tokens_per_second": 40.104217870912706,
+      "evidence_partition": "exploratory_smoke_v3_payload_fidelity_v2_no_confirmatory_pooling",
+      "evidence_status": "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+      "generator_model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "gpu_count": 1,
+      "incurred_charge_definition": "elapsed_seconds_plus_model_load_seconds",
+      "input_results_manifest_sha256": "77a2fab03393343c6a1c90abb55fd18dc61fc98e0e743beab01a4765793d0427",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load_seconds": 2.0921661669999594,
+      "model_load_seconds_excluded_from_rate": true,
+      "ordered_evaluation_ids_sha256": "c0925ad4ec0606b790cc1cacbfbfd359357f46283a9ab46fe3d998f6e0b50a24",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m/auxiliary_timing.json",
+      "protocol_contract_revision": "payload_fidelity_v2",
+      "records_jsonl_sha256": "b91742a061729c46576474e59c951b8c9bef2931f4f47bc5a4c98ec2754b4368",
+      "result_schema_revision": "payload_aware_result_v2",
+      "schema_version": "rankcloak-revision-compute-timing-v2",
+      "scoring_plan_content_sha256": "03b89674ba90465bd9928aa4e27329b1d580e5e98c1c294d9bfa956dec7ad038",
+      "source_stage": "smoke_v3",
+      "summed_scoring_seconds": 152.37185044893704,
+      "timing_manifest_sha256": "1aaa64114f2d5ef41c88fedb287d1955c3d556a84d1fb5910e410754d7cf0d72",
+      "total_evaluator_tokens": 6113,
+      "unit_definition": "one_saved_source_payload_trial_or_control_view"
+    }
+  ],
+  "budget_gpu_hours": 165.0,
+  "combined_incurred_charge_audit": {
+    "combined_gpu_hours": 0.9548676191880794,
+    "combined_seconds": 3437.523429077086,
+    "invalidated_seconds": 2189.687278,
+    "legacy_seconds": 1247.8361510770858,
+    "status": "ok_no_duplicate_paths_identities_or_gpu_intervals"
+  },
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "decision": {
+    "go": true,
+    "reason": "All required smoke evidence is complete and the conservative upper projection is within the approved ceiling.",
+    "status": "go_within_budget"
+  },
+  "evidence_policy": {
+    "accepted_runner_label": "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+    "accepted_runner_stages": [
+      "smoke_v3",
+      "primary_v2",
+      "ablation_v2",
+      "multilingual_v2",
+      "robustness_v2"
+    ],
+    "confirmatory_pooling_permitted": false,
+    "gate_is_compute_only": true,
+    "legacy_artifacts_are_incurred_charge_only": true,
+    "protocol_contract_revision": "payload_fidelity_v2",
+    "result_schema_revision": "payload_aware_result_v2",
+    "smoke_is_exploratory_only": true
+  },
+  "frozen_plan": {
+    "ablation_v2": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 624,
+        "mistral_7b_instruct_v0_3_q4_k_m": 624,
+        "qwen2_5_7b_instruct_q4_k_m": 624
+      },
+      "plan_sha256": "3218f3d0e93af6dea523efffcc319f09f7bb781f125a46b112cebccae8d59eac",
+      "work_kind_counts": {
+        "rankcloak": 1728,
+        "reference": 144
+      },
+      "work_units": 1872
+    },
+    "multilingual_v2": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 384,
+        "mistral_7b_instruct_v0_3_q4_k_m": 384,
+        "qwen2_5_7b_instruct_q4_k_m": 384
+      },
+      "plan_sha256": "2242d9a41ce82d4191147996d1d1520b3324ca112d16211628a30518972436c9",
+      "work_kind_counts": {
+        "control": 576,
+        "rankcloak": 576
+      },
+      "work_units": 1152
+    },
+    "primary_v2": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 4800,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4800,
+        "qwen2_5_7b_instruct_q4_k_m": 4800
+      },
+      "plan_sha256": "2e5d2386098859920fafbe912658049d7ce193a6d2bfefcbe8f851e1030b6e78",
+      "work_kind_counts": {
+        "control": 7920,
+        "rankcloak": 6480
+      },
+      "work_units": 14400
+    },
+    "robustness_v2": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 1200,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1200,
+        "qwen2_5_7b_instruct_q4_k_m": 1344
+      },
+      "plan_sha256": "dcc68561c6393c3bc61688423866ca3f9580c9f577f3c73f9f4a1b85e5484e70",
+      "work_kind_counts": {
+        "reference": 432,
+        "robustness_decode": 3168,
+        "robustness_transform": 144
+      },
+      "work_units": 3744
+    },
+    "smoke_v3": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 32,
+        "mistral_7b_instruct_v0_3_q4_k_m": 32,
+        "qwen2_5_7b_instruct_q4_k_m": 32
+      },
+      "plan_sha256": "697cb6264467acb8d9a176bc529558b89ec25d4255f87531204f0423f4c528d9",
+      "work_kind_counts": {
+        "control": 60,
+        "rankcloak": 36
+      },
+      "work_units": 96
+    }
+  },
+  "incomplete_reasons": [],
+  "input_status": "complete",
+  "legacy_incurred_charge_ledger": {
+    "charge_only_not_rate_evidence": true,
+    "created_at": "2026-08-09T03:24:33+00:00",
+    "entries": [
+      {
+        "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/llama3_8b_instruct_q4_k_m",
+        "charge_only_not_rate_evidence": true,
+        "charge_policy": "memory_profile_wall_span_v1",
+        "component": "legacy_smoke_v2",
+        "directory_manifest": {
+          "file_count": 12,
+          "files": [
+            {
+              "path": "checkpoint.json",
+              "sha256": "9f0759fdccc1f0fc06880897907a3ae7c1680abd3b7acef33adaad9aedee06cb",
+              "size_bytes": 3854
+            },
+            {
+              "path": "events.jsonl",
+              "sha256": "623780d8732f8ac26c0e4a099d8b34c2f15e60c8bab7ee99828b43072ab6d3ac",
+              "size_bytes": 1307
+            },
+            {
+              "path": "filter_masks/llama3_8b_instruct_q4_k_m__roundtrip_stable_filter_v1.json",
+              "sha256": "a395d44d26ca558d804e06a67ec04626ebb5aa70ba66b2879b93114cbe89fb43",
+              "size_bytes": 1376234
+            },
+            {
+              "path": "filter_masks/llama3_8b_instruct_q4_k_m__safe_text_filter_v1.json",
+              "sha256": "d27b50f8c807890ac6779ee718b18c29c676a75a4cba14f8bd546896e15da882",
+              "size_bytes": 1376227
+            },
+            {
+              "path": "hardware_manifest.json",
+              "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+              "size_bytes": 634
+            },
+            {
+              "path": "model_manifest.json",
+              "sha256": "1ed72381c8118a57d779adf03096774b66bbaa9a1e813c67d9d8c598b68c0b49",
+              "size_bytes": 1384
+            },
+            {
+              "path": "payload_manifest.json",
+              "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+              "size_bytes": 643935
+            },
+            {
+              "path": "plan.jsonl",
+              "sha256": "6c380e671fafa58da8da56d28cdd50ce6419d6ed1e6d6a1cd28a30c5cc54b677",
+              "size_bytes": 32493
+            },
+            {
+              "path": "records.jsonl",
+              "sha256": "24120110e1bfd8157dec84699398449055e02c87ca54221f04b0afa92510adc7",
+              "size_bytes": 513125
+            },
+            {
+              "path": "run_identity.json",
+              "sha256": "d9653057e10964528e1021f1687ad3d6320d04d18a55b560442db169702eab94",
+              "size_bytes": 2735
+            },
+            {
+              "path": "runtime_manifest.json",
+              "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+              "size_bytes": 1084
+            },
+            {
+              "path": "source_manifest.json",
+              "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+              "size_bytes": 2377
+            }
+          ],
+          "files_sha256": "3a2d9bb4625de53cd528cb3f69d91c95563970e7d3d9e67e4a74e0187ca14018",
+          "manifest_type": "sha256_file_set",
+          "schema_version": "1.0"
+        },
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "incurred_gpu_seconds": 341.925859,
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "occupancy_ended_at": "2026-08-09T00:53:49.996672+00:00",
+        "occupancy_started_at": "2026-08-09T00:48:08.070813+00:00",
+        "plan_sha256": "9176d193a5d737a08de1b6cf77097613dcc8f4641ddcf75191980522bcff016e",
+        "rate_evidence_allowed": false,
+        "run_identity_sha256": "4f3a9aa7782ecec7f3c9cfe49e8687a8a838def89ffd037934e35eba37a18f96",
+        "scientific_evidence_allowed": false,
+        "scientific_use": "incurred_gpu_charge_only_never_rate_evidence"
+      },
+      {
+        "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/qwen2_5_7b_instruct_q4_k_m",
+        "charge_only_not_rate_evidence": true,
+        "charge_policy": "memory_profile_wall_span_v1",
+        "component": "legacy_smoke_v2",
+        "directory_manifest": {
+          "file_count": 12,
+          "files": [
+            {
+              "path": "checkpoint.json",
+              "sha256": "a7fa26fdc46b8c08208341f2f9326be91fd9deb1d35e1fe9b46517304bfd1a52",
+              "size_bytes": 3855
+            },
+            {
+              "path": "events.jsonl",
+              "sha256": "9eee4002650fc8cbefcf7ed4d2ba35dc3bb346101690cf56f8e5b9f9a71fc74e",
+              "size_bytes": 1310
+            },
+            {
+              "path": "filter_masks/qwen2_5_7b_instruct_q4_k_m__roundtrip_stable_filter_v1.json",
+              "sha256": "f758f94defc4c32411801ffe2dd8b599136e46e0a85aa6dc980c2e0ade5a751c",
+              "size_bytes": 1639147
+            },
+            {
+              "path": "filter_masks/qwen2_5_7b_instruct_q4_k_m__safe_text_filter_v1.json",
+              "sha256": "9db69dce4900fb96f304e1ee64a5ab14541128a21a38e31cac6685eacb10d2a8",
+              "size_bytes": 1658866
+            },
+            {
+              "path": "hardware_manifest.json",
+              "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+              "size_bytes": 634
+            },
+            {
+              "path": "model_manifest.json",
+              "sha256": "39d6e15f359878ba2e80ba4492bec304741dd93c7cce1bf744238392b3bac8d9",
+              "size_bytes": 1545
+            },
+            {
+              "path": "payload_manifest.json",
+              "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+              "size_bytes": 643935
+            },
+            {
+              "path": "plan.jsonl",
+              "sha256": "61902a80ca9f467e34c3cdfc5b311e9380e4f3b5ffa72e2009acb768a1690047",
+              "size_bytes": 32518
+            },
+            {
+              "path": "records.jsonl",
+              "sha256": "1c52e6ba5963e1bf5b22df1126624848850bf8e3cdf540a504de42b1020c96d5",
+              "size_bytes": 455672
+            },
+            {
+              "path": "run_identity.json",
+              "sha256": "f3d8d28873cc880b461716f1bf829ebf50f5d48e56c64051f0ed0c39371cc377",
+              "size_bytes": 2910
+            },
+            {
+              "path": "runtime_manifest.json",
+              "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+              "size_bytes": 1084
+            },
+            {
+              "path": "source_manifest.json",
+              "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+              "size_bytes": 2377
+            }
+          ],
+          "files_sha256": "4a3f4a96d9f242df4db72f928de18364e69d25a309cf181abd8217572348905a",
+          "manifest_type": "sha256_file_set",
+          "schema_version": "1.0"
+        },
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "incurred_gpu_seconds": 313.765465,
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "occupancy_ended_at": "2026-08-09T00:43:06.633328+00:00",
+        "occupancy_started_at": "2026-08-09T00:37:52.867863+00:00",
+        "plan_sha256": "286dc38aeae169c8419d921fed9818671dab6e02920bda460598549fb3610ecb",
+        "rate_evidence_allowed": false,
+        "run_identity_sha256": "75a88c8822e7f61236e9fd6a873f2c9b4f7937a76616cb3c059c598962c715d9",
+        "scientific_evidence_allowed": false,
+        "scientific_use": "incurred_gpu_charge_only_never_rate_evidence"
+      },
+      {
+        "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m",
+        "charge_only_not_rate_evidence": true,
+        "charge_policy": "memory_profile_wall_span_v1",
+        "component": "legacy_smoke_v2",
+        "directory_manifest": {
+          "file_count": 11,
+          "files": [
+            {
+              "path": "checkpoint.json",
+              "sha256": "616514a0fa61a15b62e14dca4f88cc18eda937e4873fd526493cf807ea3da1f6",
+              "size_bytes": 3860
+            },
+            {
+              "path": "events.jsonl",
+              "sha256": "6aff732aecfaedabb4a5d4fde65ebacc3d013241371dcdf9f7e0ec969c06a727",
+              "size_bytes": 1325
+            },
+            {
+              "path": "filter_masks/mistral_7b_instruct_v0_3_q4_k_m__safe_text_filter_v1.json",
+              "sha256": "080c8a36cd70f43574184e617b2738523e96fcc62972ca3d0743f52e85946d45",
+              "size_bytes": 337432
+            },
+            {
+              "path": "hardware_manifest.json",
+              "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+              "size_bytes": 634
+            },
+            {
+              "path": "model_manifest.json",
+              "sha256": "fd8afaa086a49fcc83c2269f6613c3e1f8b0ced714bf71dbd923e4a60d47494f",
+              "size_bytes": 1597
+            },
+            {
+              "path": "payload_manifest.json",
+              "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+              "size_bytes": 643935
+            },
+            {
+              "path": "plan.jsonl",
+              "sha256": "6c146f4c2ff3a90db2f0434f0cf692551c70642691b3c7293b502a2ba81d7699",
+              "size_bytes": 32852
+            },
+            {
+              "path": "records.jsonl",
+              "sha256": "bd9d54b90bc22518e3d848bc090c583af27f525c8beec06d07a02f14f321a2ff",
+              "size_bytes": 472922
+            },
+            {
+              "path": "run_identity.json",
+              "sha256": "c8ce198060b012f93e25a38245b55f2e8f6346f4deb76e6519f36d91de67d738",
+              "size_bytes": 2972
+            },
+            {
+              "path": "runtime_manifest.json",
+              "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+              "size_bytes": 1084
+            },
+            {
+              "path": "source_manifest.json",
+              "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+              "size_bytes": 2377
+            }
+          ],
+          "files_sha256": "eac130cf0fe0c2482dc9838fcc1b9cc01f6409ab62313af15cbfc6b708d1fd1e",
+          "manifest_type": "sha256_file_set",
+          "schema_version": "1.0"
+        },
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "incurred_gpu_seconds": 249.206562,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "occupancy_ended_at": "2026-08-09T00:47:34.125606+00:00",
+        "occupancy_started_at": "2026-08-09T00:43:24.919044+00:00",
+        "plan_sha256": "fba5013253e9d65d8276024427704c99453d8af28056f0d4f7348f14b93750f5",
+        "rate_evidence_allowed": false,
+        "run_identity_sha256": "1f1e1b4c6d9496d13394c494218a2355d92a997551c247042cc8948690d77705",
+        "scientific_evidence_allowed": false,
+        "scientific_use": "incurred_gpu_charge_only_never_rate_evidence"
+      },
+      {
+        "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v2/llama3_8b_instruct_q4_k_m",
+        "charge_only_not_rate_evidence": true,
+        "charge_policy": "durable_task_elapsed_plus_model_load_v1",
+        "component": "legacy_heldout_evaluator_smoke_v2",
+        "directory_manifest": {
+          "file_count": 14,
+          "files": [
+            {
+              "path": "auxiliary_timing.json",
+              "sha256": "ab2feb632e69e1ee824c20258c6293188d85e644aa1c297af90070adfcad76bc",
+              "size_bytes": 1553
+            },
+            {
+              "path": "checkpoint.json",
+              "sha256": "09d2122252d80df765552dd70929e695f44f2714a3a959e3562f96fcef22183f",
+              "size_bytes": 3860
+            },
+            {
+              "path": "continuous_quality.jsonl",
+              "sha256": "14873c02b482702c4aecd367f3d6013c692745685b889f858f91c7919931466d",
+              "size_bytes": 78748
+            },
+            {
+              "path": "evaluator_model_manifest.json",
+              "sha256": "5f924ba59464c008742aeadb84ddab6c78631d81d6325678213f6def65aae1b3",
+              "size_bytes": 1123
+            },
+            {
+              "path": "events.jsonl",
+              "sha256": "49c02b9857428b4557cb674e9a690b1b4047ad6fe00692e79c549487f53606e1",
+              "size_bytes": 1616
+            },
+            {
+              "path": "features.jsonl",
+              "sha256": "94438ff071bcef6851566abc9a8bc485748949b21c52a9e0cc2d2134df4b00aa",
+              "size_bytes": 99802
+            },
+            {
+              "path": "features_manifest.json",
+              "sha256": "2590768470a47227f4f16e2a9c6b713e6dd3f872f5571d922565908f419b74a7",
+              "size_bytes": 1102
+            },
+            {
+              "path": "hardware_manifest.json",
+              "sha256": "d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df",
+              "size_bytes": 609
+            },
+            {
+              "path": "input_results_manifest.json",
+              "sha256": "744cb4993f8f077ef6bc933d19912ca0b129fa5799491d91003dfe39441ea0cd",
+              "size_bytes": 4415
+            },
+            {
+              "path": "plan.jsonl",
+              "sha256": "9cb290637bfb87a46d3e93de046b030b1b136dfdad5f7f5918cbcd6f8c119f7f",
+              "size_bytes": 110023
+            },
+            {
+              "path": "records.jsonl",
+              "sha256": "70e06fbc4c3c56fe35fa07006ff1493cd9447f890d039cbc9a927e8f8fdac496",
+              "size_bytes": 135921
+            },
+            {
+              "path": "run_identity.json",
+              "sha256": "0b398f61d07e5e492f038c2af9bd125e8ef5df98c1798efd21cb77f412f7f850",
+              "size_bytes": 2503
+            },
+            {
+              "path": "runtime_manifest.json",
+              "sha256": "73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+              "size_bytes": 1046
+            },
+            {
+              "path": "source_manifest.json",
+              "sha256": "db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+              "size_bytes": 1570
+            }
+          ],
+          "files_sha256": "461fdcb7ec7f76ba7d39520158983603eee7b1be23352eed3b702fd0446429ef",
+          "manifest_type": "sha256_file_set",
+          "schema_version": "1.0"
+        },
+        "durable_task_elapsed_seconds": 100.32964382701903,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "incurred_gpu_seconds": 102.79948773702199,
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "model_load_seconds": 2.4698439100029645,
+        "occupancy_ended_at": "2026-08-09T01:31:04.986269+00:00",
+        "occupancy_started_at": "2026-08-09T01:29:20.120322+00:00",
+        "rate_evidence_allowed": false,
+        "run_identity_sha256": "03da551d2770f223956939912866f37ed7c593a6211aa1e2a61d6b516517e10a",
+        "scientific_evidence_allowed": false,
+        "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+        "timing_manifest_sha256": "3f0d925f368d3883a722d3e77a0125b638f7f7044a5d11a9abd362e70fd984ea"
+      },
+      {
+        "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v2/qwen2_5_7b_instruct_q4_k_m",
+        "charge_only_not_rate_evidence": true,
+        "charge_policy": "durable_task_elapsed_plus_model_load_v1",
+        "component": "legacy_heldout_evaluator_smoke_v2",
+        "directory_manifest": {
+          "file_count": 14,
+          "files": [
+            {
+              "path": "auxiliary_timing.json",
+              "sha256": "5e8403d20ab332b6cf66455dbdb03d2392f2a004bebfc985a5696178da984d99",
+              "size_bytes": 1544
+            },
+            {
+              "path": "checkpoint.json",
+              "sha256": "425100b769ca6782a0e82e59170bd21c7c9bfbbc3a137bbac648c13513c9a33b",
+              "size_bytes": 4200
+            },
+            {
+              "path": "continuous_quality.jsonl",
+              "sha256": "021d4458bb2f8d96199147952b115fdfcfcee0221fbd4ec97a3c28104986ba30",
+              "size_bytes": 86496
+            },
+            {
+              "path": "evaluator_model_manifest.json",
+              "sha256": "65d8088502292919f6378ae931e4afca8309b680cf5a0a5f383421aa99733d47",
+              "size_bytes": 1284
+            },
+            {
+              "path": "events.jsonl",
+              "sha256": "1b8473dd410b99ab62bbaa2ad26dbc980f50ce4c27b8682863c1cbdcd835e334",
+              "size_bytes": 1614
+            },
+            {
+              "path": "features.jsonl",
+              "sha256": "668d2f30d1a83a923b452a9977f855b885e1b0011ec396ad686ed451daf6675a",
+              "size_bytes": 114128
+            },
+            {
+              "path": "features_manifest.json",
+              "sha256": "3e0bd61b321ab3398dc050659558d9fccb573f11f8833f3ab061c37a2bceb209",
+              "size_bytes": 1104
+            },
+            {
+              "path": "hardware_manifest.json",
+              "sha256": "d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df",
+              "size_bytes": 609
+            },
+            {
+              "path": "input_results_manifest.json",
+              "sha256": "d11b24aec27a2d7f67aa3ea3cb747f0f8aa66b72d79499cc2388f9b47595e06d",
+              "size_bytes": 4329
+            },
+            {
+              "path": "plan.jsonl",
+              "sha256": "4bafaa0fee4a25eaf3ad404c969c50a4a9fed2a6a1c4776da878f216a1d0338b",
+              "size_bytes": 131001
+            },
+            {
+              "path": "records.jsonl",
+              "sha256": "c3d9f761f05352ab2c55002266c8ecb9ba1b5a33aba1a490ee8b519f33a44bcf",
+              "size_bytes": 156069
+            },
+            {
+              "path": "run_identity.json",
+              "sha256": "d604532680e31affb6177f4edf6415cd881108cd4fae49ae8557f23bd2fb7ade",
+              "size_bytes": 2672
+            },
+            {
+              "path": "runtime_manifest.json",
+              "sha256": "73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+              "size_bytes": 1046
+            },
+            {
+              "path": "source_manifest.json",
+              "sha256": "db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+              "size_bytes": 1570
+            }
+          ],
+          "files_sha256": "89c8d39266ebe4343014a6794fd15e594ed8c9f2c991a1d6b1ed321c0a9dc203",
+          "manifest_type": "sha256_file_set",
+          "schema_version": "1.0"
+        },
+        "durable_task_elapsed_seconds": 121.75209248602914,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "incurred_gpu_seconds": 124.10965169202245,
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "model_load_seconds": 2.3575592059933115,
+        "occupancy_ended_at": "2026-08-09T01:25:33.115775+00:00",
+        "occupancy_started_at": "2026-08-09T01:23:26.614628+00:00",
+        "rate_evidence_allowed": false,
+        "run_identity_sha256": "707225b2e0a1192d08fb981f1827a54086e2b8c0fbefd15dc8d1b3cf31f73386",
+        "scientific_evidence_allowed": false,
+        "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+        "timing_manifest_sha256": "0783e1bab9a6f8a8887a49e52fd4677c37348c38d27a323f7fdf3116b4cb345f"
+      },
+      {
+        "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m",
+        "charge_only_not_rate_evidence": true,
+        "charge_policy": "durable_task_elapsed_plus_model_load_v1",
+        "component": "legacy_heldout_evaluator_smoke_v2",
+        "directory_manifest": {
+          "file_count": 14,
+          "files": [
+            {
+              "path": "auxiliary_timing.json",
+              "sha256": "e088e6c46ef890ba1b130c07d1deaa2cb244204863f6d5ecaa7b0a11559dface",
+              "size_bytes": 1555
+            },
+            {
+              "path": "checkpoint.json",
+              "sha256": "c999898e9dc893e713b24052cafc881ed29768c64231ee158dcb2def624e11cd",
+              "size_bytes": 4205
+            },
+            {
+              "path": "continuous_quality.jsonl",
+              "sha256": "4feb222a5c0cfca8d5fd401904fc74538f1bb0105d9f0494f281c870e78c46b9",
+              "size_bytes": 86717
+            },
+            {
+              "path": "evaluator_model_manifest.json",
+              "sha256": "db38609254f69733452e21e2ff82f0c5cb1356a5148c6c178eecfa8848b865c8",
+              "size_bytes": 1336
+            },
+            {
+              "path": "events.jsonl",
+              "sha256": "4312f4fe555844b2a86bcfd45b10abf7a5bdb88f8a6c787aaadcdb98881963ff",
+              "size_bytes": 1634
+            },
+            {
+              "path": "features.jsonl",
+              "sha256": "6bec89fa773960545671a62a9233fced7978a0ef2893f229f6215a7877e9a685",
+              "size_bytes": 109810
+            },
+            {
+              "path": "features_manifest.json",
+              "sha256": "ccaabc9b4dc6aa66838fab50406ff6ee0899d34700de81965c4fd947b34f2b36",
+              "size_bytes": 1114
+            },
+            {
+              "path": "hardware_manifest.json",
+              "sha256": "d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df",
+              "size_bytes": 609
+            },
+            {
+              "path": "input_results_manifest.json",
+              "sha256": "8874a0914a48e4bc158bb6a60fe76cccb0d0e9da7e113a8bdc847554f0995e17",
+              "size_bytes": 4351
+            },
+            {
+              "path": "plan.jsonl",
+              "sha256": "8459fe9002bcc22a3ccdef72fc67a8bbd383637c84db15dcdf386ae1937b933a",
+              "size_bytes": 121955
+            },
+            {
+              "path": "records.jsonl",
+              "sha256": "c62b8cc2af8d728156cd0e50d64da5993a66642093fa1aac1fe5b170c71a13d7",
+              "size_bytes": 151636
+            },
+            {
+              "path": "run_identity.json",
+              "sha256": "8e55caf94ecfec93a12c85adcff13b64e90335f90a2784d90461dff46d104376",
+              "size_bytes": 2735
+            },
+            {
+              "path": "runtime_manifest.json",
+              "sha256": "73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+              "size_bytes": 1046
+            },
+            {
+              "path": "source_manifest.json",
+              "sha256": "db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+              "size_bytes": 1570
+            }
+          ],
+          "files_sha256": "85128efa203ae4bbdc24191073931def163d9e539b93c15d07147ce2c3366318",
+          "manifest_type": "sha256_file_set",
+          "schema_version": "1.0"
+        },
+        "durable_task_elapsed_seconds": 113.94286934104457,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "incurred_gpu_seconds": 116.02912564804137,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "model_load_seconds": 2.086256306996802,
+        "occupancy_ended_at": "2026-08-09T01:28:33.687410+00:00",
+        "occupancy_started_at": "2026-08-09T01:26:35.757815+00:00",
+        "rate_evidence_allowed": false,
+        "run_identity_sha256": "6b917d16cd20a2dc6f4c32fc18ce103b7cf8ab9c4152e922be8c863a56639014",
+        "scientific_evidence_allowed": false,
+        "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+        "timing_manifest_sha256": "f8d00bfe74ddb84a2ac52d19c6ef0b6269e3698128cb744cf45de221e6ded800"
+      }
+    ],
+    "ledger_sha256": "df91692c7e3018b6add60a41c94f5847714154081aff61c3c3a29fd40b77c57e",
+    "legacy_incurred_ledger_sha256": "df91692c7e3018b6add60a41c94f5847714154081aff61c3c3a29fd40b77c57e",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/incurred_charges/legacy_completed_smoke_v2.json",
+    "rate_evidence_allowed": false,
+    "scientific_evidence_allowed": false,
+    "scientific_use": "incurred_charge_only_never_timing_rate_or_evidence",
+    "status": "ok",
+    "total_hours": 0.3466211530769683,
+    "total_incurred_gpu_seconds": 1247.8361510770858,
+    "total_seconds": 1247.8361510770858
+  },
+  "projection_rows": [
+    {
+      "component": "legacy_smoke_v2",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "point_gpu_hours": 0.09497940527777778,
+      "point_seconds": 341.925859,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 1,
+      "timing_source": "memory_profile_wall_span_v1",
+      "upper_gpu_hours": 0.09497940527777778,
+      "upper_seconds": 341.925859
+    },
+    {
+      "component": "legacy_smoke_v2",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "point_gpu_hours": 0.08715707361111111,
+      "point_seconds": 313.765465,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 1,
+      "timing_source": "memory_profile_wall_span_v1",
+      "upper_gpu_hours": 0.08715707361111111,
+      "upper_seconds": 313.765465
+    },
+    {
+      "component": "legacy_smoke_v2",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "point_gpu_hours": 0.069224045,
+      "point_seconds": 249.206562,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 1,
+      "timing_source": "memory_profile_wall_span_v1",
+      "upper_gpu_hours": 0.069224045,
+      "upper_seconds": 249.206562
+    },
+    {
+      "component": "legacy_heldout_evaluator_smoke_v2",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "point_gpu_hours": 0.028555413260283886,
+      "point_seconds": 102.79948773702199,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 1,
+      "timing_source": "durable_task_elapsed_plus_model_load_v1",
+      "upper_gpu_hours": 0.028555413260283886,
+      "upper_seconds": 102.79948773702199
+    },
+    {
+      "component": "legacy_heldout_evaluator_smoke_v2",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "point_gpu_hours": 0.03447490324778402,
+      "point_seconds": 124.10965169202245,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 1,
+      "timing_source": "durable_task_elapsed_plus_model_load_v1",
+      "upper_gpu_hours": 0.03447490324778402,
+      "upper_seconds": 124.10965169202245
+    },
+    {
+      "component": "legacy_heldout_evaluator_smoke_v2",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "point_gpu_hours": 0.032230312680011496,
+      "point_seconds": 116.02912564804137,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 1,
+      "timing_source": "durable_task_elapsed_plus_model_load_v1",
+      "upper_gpu_hours": 0.032230312680011496,
+      "upper_seconds": 116.02912564804137
+    },
+    {
+      "invalidation_manifest_sha256": "a9836f60344c38568f4dbc014deb6c428b1bfad216f9a55da683edd978f9168c",
+      "model_id": "fda1f6aba51df4f18606f017f66eb64c8efe7700ef18b23263157772de772c76",
+      "point_gpu_hours": 0.6082464661111111,
+      "point_seconds": 2189.687278,
+      "resource_class": "gpu",
+      "scientific_use": "invalidated_not_for_pooling_incurred_charge_only",
+      "stage": "invalidated_shard_observed",
+      "target_work_units": 234,
+      "timing_source": "memory_profile_wall_span_v1",
+      "upper_gpu_hours": 0.6082464661111111,
+      "upper_seconds": 2189.687278
+    },
+    {
+      "component": "evaluator",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "point_gpu_hours": 0.02880473489836327,
+      "point_seconds": 103.69704563410778,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_charge_and_v3_rate_source",
+      "stage": "auxiliary_smoke_v3_observed",
+      "target_work_units": 29,
+      "timing_source": "observed_smoke_v3_auxiliary_incurred_charge",
+      "upper_gpu_hours": 0.02880473489836327,
+      "upper_seconds": 103.69704563410778
+    },
+    {
+      "component": "evaluator",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "point_gpu_hours": 0.0350122822283447,
+      "point_seconds": 126.04421602204093,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_charge_and_v3_rate_source",
+      "stage": "auxiliary_smoke_v3_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_smoke_v3_auxiliary_incurred_charge",
+      "upper_gpu_hours": 0.0350122822283447,
+      "upper_seconds": 126.04421602204093
+    },
+    {
+      "component": "evaluator",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "point_gpu_hours": 0.04292222874945259,
+      "point_seconds": 154.52002349802933,
+      "resource_class": "gpu",
+      "scientific_use": "incurred_charge_and_v3_rate_source",
+      "stage": "auxiliary_smoke_v3_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_smoke_v3_auxiliary_incurred_charge",
+      "upper_gpu_hours": 0.04292222874945259,
+      "upper_seconds": 154.52002349802933
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "point_gpu_hours": 0.09601977055555556,
+      "point_seconds": 345.671174,
+      "projected_available_work_units": 32,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "smoke_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_completed_smoke_including_all_replays_and_loads",
+      "upper_gpu_hours": 0.09601977055555556,
+      "upper_seconds": 345.671174
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "point_gpu_hours": 0.10500590861111112,
+      "point_seconds": 378.021271,
+      "projected_available_work_units": 32,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "smoke_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_completed_smoke_including_all_replays_and_loads",
+      "upper_gpu_hours": 0.10500590861111112,
+      "upper_seconds": 378.021271
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "point_gpu_hours": 0.06957091833333333,
+      "point_seconds": 250.455306,
+      "projected_available_work_units": 29,
+      "projected_unavailable_work_units": 3,
+      "resource_class": "gpu",
+      "stage": "smoke_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_completed_smoke_including_all_replays_and_loads",
+      "upper_gpu_hours": 0.06957091833333333,
+      "upper_seconds": 250.455306
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5524399850110058,
+        "observed_min_seconds": 2.5524399850110058,
+        "point_seconds_per_unit": 2.5524399850110058,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.1048799700220115
+      },
+      "point_gpu_hours": 9.283620615212365,
+      "point_seconds": 33421.03421476451,
+      "projected_available_work_units": 4800,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "primary_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 2.6459914070001105,
+          "observed_min_seconds": 1.2457500429882202,
+          "point_seconds": 780.9652368002571,
+          "point_seconds_per_unit": 1.6270109100005357,
+          "sample_size": 8,
+          "stratum": "control:forced_span",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1714.6024317360716,
+          "upper_seconds_per_unit": 3.5720883994501493
+        },
+        {
+          "observed_max_seconds": 13.52844301200821,
+          "observed_min_seconds": 1.6240231789997779,
+          "point_seconds": 10743.227546042763,
+          "point_seconds_per_unit": 4.973716456501279,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 2160,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 39448.93982301594,
+          "upper_seconds_per_unit": 18.263398066211085
+        },
+        {
+          "observed_max_seconds": 8.134279392004828,
+          "observed_min_seconds": 8.134279392004828,
+          "point_seconds": 3904.4541081623174,
+          "point_seconds_per_unit": 8.134279392004828,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 7808.908216324635,
+          "upper_seconds_per_unit": 16.268558784009656
+        },
+        {
+          "observed_max_seconds": 10.764728639027453,
+          "observed_min_seconds": 10.764728639027453,
+          "point_seconds": 5167.069746733177,
+          "point_seconds_per_unit": 10.764728639027453,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 10334.139493466355,
+          "upper_seconds_per_unit": 21.529457278054906
+        },
+        {
+          "observed_max_seconds": 8.229597955010831,
+          "observed_min_seconds": 8.229597955010831,
+          "point_seconds": 3950.207018405199,
+          "point_seconds_per_unit": 8.229597955010831,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b8",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 7900.414036810398,
+          "upper_seconds_per_unit": 16.459195910021663
+        },
+        {
+          "observed_max_seconds": 5.951535722997505,
+          "observed_min_seconds": 5.951535722997505,
+          "point_seconds": 1428.3685735194013,
+          "point_seconds_per_unit": 5.951535722997505,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_hex_nibble_b16",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 2856.7371470388025,
+          "upper_seconds_per_unit": 11.90307144599501
+        },
+        {
+          "observed_max_seconds": 22.838346365984762,
+          "observed_min_seconds": 6.407858913007658,
+          "point_seconds": 3103.2970072806347,
+          "point_seconds_per_unit": 12.930404197002645,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 7399.624222579063,
+          "upper_seconds_per_unit": 30.83176759407943
+        },
+        {
+          "observed_max_seconds": 18.087052240982302,
+          "observed_min_seconds": 18.087052240982302,
+          "point_seconds": 4340.892537835753,
+          "point_seconds_per_unit": 18.087052240982302,
+          "sample_size": 1,
+          "stratum": "rankcloak:segmented_hex_single_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 8681.785075671505,
+          "upper_seconds_per_unit": 36.174104481964605
+        }
+      ],
+      "target_work_units": 4800,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 23.930626479614666,
+      "upper_seconds": 86150.2553266128,
+      "work_kind_counts": {
+        "control": 2640,
+        "rankcloak": 2160
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.3637279859976843,
+        "observed_min_seconds": 2.3637279859976843,
+        "point_seconds_per_unit": 2.3637279859976843,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.727455971995369
+      },
+      "point_gpu_hours": 10.028749247647905,
+      "point_seconds": 36103.49729153246,
+      "projected_available_work_units": 4800,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "primary_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 2.831037183001172,
+          "observed_min_seconds": 1.2293796190060675,
+          "point_seconds": 715.3625551227015,
+          "point_seconds_per_unit": 1.490338656505628,
+          "sample_size": 8,
+          "stratum": "control:forced_span",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1834.5120945847593,
+          "upper_seconds_per_unit": 3.821900197051582
+        },
+        {
+          "observed_max_seconds": 24.368069646996446,
+          "observed_min_seconds": 1.6360053459939081,
+          "point_seconds": 11150.988623276353,
+          "point_seconds_per_unit": 5.1624947329983115,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 2160,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 71057.29109064165,
+          "upper_seconds_per_unit": 32.896894023445206
+        },
+        {
+          "observed_max_seconds": 9.12627609698393,
+          "observed_min_seconds": 9.12627609698393,
+          "point_seconds": 4380.612526552286,
+          "point_seconds_per_unit": 9.12627609698393,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 8761.225053104572,
+          "upper_seconds_per_unit": 18.25255219396786
+        },
+        {
+          "observed_max_seconds": 11.43219289901026,
+          "observed_min_seconds": 11.43219289901026,
+          "point_seconds": 5487.452591524925,
+          "point_seconds_per_unit": 11.43219289901026,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 10974.90518304985,
+          "upper_seconds_per_unit": 22.86438579802052
+        },
+        {
+          "observed_max_seconds": 8.823320085022715,
+          "observed_min_seconds": 8.823320085022715,
+          "point_seconds": 4235.193640810903,
+          "point_seconds_per_unit": 8.823320085022715,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b8",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 8470.387281621806,
+          "upper_seconds_per_unit": 17.64664017004543
+        },
+        {
+          "observed_max_seconds": 3.7238404769886984,
+          "observed_min_seconds": 3.7238404769886984,
+          "point_seconds": 893.7217144772876,
+          "point_seconds_per_unit": 3.7238404769886984,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_hex_nibble_b16",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1787.4434289545752,
+          "upper_seconds_per_unit": 7.447680953977397
+        },
+        {
+          "observed_max_seconds": 32.66458612102724,
+          "observed_min_seconds": 7.612686238993774,
+          "point_seconds": 2963.23048176826,
+          "point_seconds_per_unit": 12.346793674034416,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 10583.325903212826,
+          "upper_seconds_per_unit": 44.097191263386776
+        },
+        {
+          "observed_max_seconds": 26.144047625057283,
+          "observed_min_seconds": 26.144047625057283,
+          "point_seconds": 6274.571430013748,
+          "point_seconds_per_unit": 26.144047625057283,
+          "sample_size": 1,
+          "stratum": "rankcloak:segmented_hex_single_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 12549.142860027496,
+          "upper_seconds_per_unit": 52.288095250114566
+        }
+      ],
+      "target_work_units": 4800,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 35.00637787532487,
+      "upper_seconds": 126022.96035116953,
+      "work_kind_counts": {
+        "control": 2640,
+        "rankcloak": 2160
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0832425099943066,
+        "observed_min_seconds": 2.0832425099943066,
+        "point_seconds_per_unit": 2.0832425099943066,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.166485019988613
+      },
+      "point_gpu_hours": 6.162994742815989,
+      "point_seconds": 22186.781074137558,
+      "projected_available_work_units": 4800,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "primary_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 1.9775881300010951,
+          "observed_min_seconds": 1.0115657949936576,
+          "point_seconds": 587.6124926400371,
+          "point_seconds_per_unit": 1.2241926930000773,
+          "sample_size": 7,
+          "stratum": "control:forced_span",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1281.4771082407099,
+          "upper_seconds_per_unit": 2.6697439755014787
+        },
+        {
+          "observed_max_seconds": 17.195864208988496,
+          "observed_min_seconds": 1.028919580989168,
+          "point_seconds": 7900.836461295839,
+          "point_seconds_per_unit": 3.657794658007333,
+          "sample_size": 11,
+          "stratum": "control:full_message",
+          "target_units": 2160,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 50143.140033410455,
+          "upper_seconds_per_unit": 23.21441668213447
+        },
+        {
+          "observed_max_seconds": 7.305155472990009,
+          "observed_min_seconds": 7.305155472990009,
+          "point_seconds": 3506.4746270352043,
+          "point_seconds_per_unit": 7.305155472990009,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 7012.949254070409,
+          "upper_seconds_per_unit": 14.610310945980018
+        },
+        {
+          "observed_max_seconds": 7.028520788997412,
+          "observed_min_seconds": 7.028520788997412,
+          "point_seconds": 3373.6899787187576,
+          "point_seconds_per_unit": 7.028520788997412,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 6747.379957437515,
+          "upper_seconds_per_unit": 14.057041577994823
+        },
+        {
+          "observed_max_seconds": 5.48181127801945,
+          "observed_min_seconds": 5.48181127801945,
+          "point_seconds": 2631.269413449336,
+          "point_seconds_per_unit": 5.48181127801945,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b8",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 5262.538826898672,
+          "upper_seconds_per_unit": 10.9636225560389
+        },
+        {
+          "observed_max_seconds": 2.1036633199983044,
+          "observed_min_seconds": 2.1036633199983044,
+          "point_seconds": 504.87919679959305,
+          "point_seconds_per_unit": 2.1036633199983044,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_hex_nibble_b16",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1009.7583935991861,
+          "upper_seconds_per_unit": 4.207326639996609
+        },
+        {
+          "observed_max_seconds": 27.081714375002775,
+          "observed_min_seconds": 5.413705626968294,
+          "point_seconds": 1676.9041471247328,
+          "point_seconds_per_unit": 6.98710061301972,
+          "sample_size": 6,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 8774.475457500901,
+          "upper_seconds_per_unit": 36.56031440625375
+        },
+        {
+          "observed_max_seconds": 8.34596464401693,
+          "observed_min_seconds": 8.34596464401693,
+          "point_seconds": 2003.0315145640634,
+          "point_seconds_per_unit": 8.34596464401693,
+          "sample_size": 1,
+          "stratum": "rankcloak:segmented_hex_single_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 4006.063029128127,
+          "upper_seconds_per_unit": 16.69192928803386
+        }
+      ],
+      "target_work_units": 4800,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 23.40054126258499,
+      "upper_seconds": 84241.94854530596,
+      "work_kind_counts": {
+        "control": 2640,
+        "rankcloak": 2160
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5524399850110058,
+        "observed_min_seconds": 2.5524399850110058,
+        "point_seconds_per_unit": 2.5524399850110058,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.1048799700220115
+      },
+      "point_gpu_hours": 2.0695736826273707,
+      "point_seconds": 7450.465257458534,
+      "projected_available_work_units": 624,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "ablation_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 22.838346365984762,
+          "observed_min_seconds": 6.407858913007658,
+          "point_seconds": 7447.912817473523,
+          "point_seconds_per_unit": 12.930404197002645,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 576,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 17759.098134189753,
+          "upper_seconds_per_unit": 30.83176759407943
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 48,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        }
+      ],
+      "target_work_units": 624,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 4.934500837266604,
+      "upper_seconds": 17764.203014159775,
+      "work_kind_counts": {
+        "rankcloak": 576,
+        "reference": 48
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.3637279859976843,
+        "observed_min_seconds": 2.3637279859976843,
+        "point_seconds_per_unit": 2.3637279859976843,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.727455971995369
+      },
+      "point_gpu_hours": 1.9761435789527282,
+      "point_seconds": 7114.116884229821,
+      "projected_available_work_units": 624,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "ablation_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 32.66458612102724,
+          "observed_min_seconds": 7.612686238993774,
+          "point_seconds": 7111.7531562438235,
+          "point_seconds_per_unit": 12.346793674034416,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 576,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 25399.982167710783,
+          "upper_seconds_per_unit": 44.097191263386776
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 48,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        }
+      ],
+      "target_work_units": 624,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 7.056863784356327,
+      "upper_seconds": 25404.70962368278,
+      "work_kind_counts": {
+        "rankcloak": 576,
+        "reference": 48
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0832425099943066,
+        "observed_min_seconds": 2.0832425099943066,
+        "point_seconds_per_unit": 2.0832425099943066,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.166485019988613
+      },
+      "point_gpu_hours": 1.0253534350512241,
+      "point_seconds": 3691.2723661844066,
+      "projected_available_work_units": 576,
+      "projected_unavailable_work_units": 48,
+      "resource_class": "gpu",
+      "stage": "ablation_v2",
+      "strata": [
+        {
+          "excluded_from_timing_and_recovery_estimands": true,
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "planned_unavailable:condition_unavailable",
+          "target_units": 48,
+          "upper_method": "structural_unavailability_propagated_from_smoke_v2",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 27.081714375002775,
+          "observed_min_seconds": 5.413705626968294,
+          "point_seconds": 3689.1891236744123,
+          "point_seconds_per_unit": 6.98710061301972,
+          "sample_size": 6,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 528,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 19303.846006501983,
+          "upper_seconds_per_unit": 36.56031440625375
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 48,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        }
+      ],
+      "target_work_units": 624,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 5.363336803200547,
+      "upper_seconds": 19308.01249152197,
+      "work_kind_counts": {
+        "rankcloak": 576,
+        "reference": 48
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5524399850110058,
+        "observed_min_seconds": 2.5524399850110058,
+        "point_seconds_per_unit": 2.5524399850110058,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.1048799700220115
+      },
+      "point_gpu_hours": 0.7699474362812099,
+      "point_seconds": 2771.8107706123556,
+      "projected_available_work_units": 384,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "multilingual_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 13.52844301200821,
+          "observed_min_seconds": 1.6240231789997779,
+          "point_seconds": 954.9535596482456,
+          "point_seconds_per_unit": 4.973716456501279,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 192,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 3506.5724287125286,
+          "upper_seconds_per_unit": 18.263398066211085
+        },
+        {
+          "observed_max_seconds": 8.134279392004828,
+          "observed_min_seconds": 8.134279392004828,
+          "point_seconds": 780.8908216324635,
+          "point_seconds_per_unit": 8.134279392004828,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1561.781643264927,
+          "upper_seconds_per_unit": 16.268558784009656
+        },
+        {
+          "observed_max_seconds": 10.764728639027453,
+          "observed_min_seconds": 10.764728639027453,
+          "point_seconds": 1033.4139493466355,
+          "point_seconds_per_unit": 10.764728639027453,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 2066.827898693271,
+          "upper_seconds_per_unit": 21.529457278054906
+        }
+      ],
+      "target_work_units": 384,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 1.9834130140668746,
+      "upper_seconds": 7140.2868506407485,
+      "work_kind_counts": {
+        "control": 192,
+        "rankcloak": 192
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.3637279859976843,
+        "observed_min_seconds": 2.3637279859976843,
+        "point_seconds_per_unit": 2.3637279859976843,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.727455971995369
+      },
+      "point_gpu_hours": 0.8242154834269766,
+      "point_seconds": 2967.1757403371157,
+      "projected_available_work_units": 384,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "multilingual_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 24.368069646996446,
+          "observed_min_seconds": 1.6360053459939081,
+          "point_seconds": 991.1989887356758,
+          "point_seconds_per_unit": 5.1624947329983115,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 192,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 6316.203652501479,
+          "upper_seconds_per_unit": 32.896894023445206
+        },
+        {
+          "observed_max_seconds": 9.12627609698393,
+          "observed_min_seconds": 9.12627609698393,
+          "point_seconds": 876.1225053104572,
+          "point_seconds_per_unit": 9.12627609698393,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1752.2450106209144,
+          "upper_seconds_per_unit": 18.25255219396786
+        },
+        {
+          "observed_max_seconds": 11.43219289901026,
+          "observed_min_seconds": 11.43219289901026,
+          "point_seconds": 1097.490518304985,
+          "point_seconds_per_unit": 11.43219289901026,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 2194.98103660997,
+          "upper_seconds_per_unit": 22.86438579802052
+        }
+      ],
+      "target_work_units": 384,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 2.852265876584544,
+      "upper_seconds": 10268.157155704359,
+      "work_kind_counts": {
+        "control": 192,
+        "rankcloak": 192
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0832425099943066,
+        "observed_min_seconds": 2.0832425099943066,
+        "point_seconds_per_unit": 2.0832425099943066,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.166485019988613
+      },
+      "point_gpu_hours": 0.5778924272217207,
+      "point_seconds": 2080.4127379981946,
+      "projected_available_work_units": 384,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "multilingual_v2",
+      "strata": [
+        {
+          "observed_max_seconds": 17.195864208988496,
+          "observed_min_seconds": 1.028919580989168,
+          "point_seconds": 702.296574337408,
+          "point_seconds_per_unit": 3.657794658007333,
+          "sample_size": 11,
+          "stratum": "control:full_message",
+          "target_units": 192,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 4457.168002969818,
+          "upper_seconds_per_unit": 23.21441668213447
+        },
+        {
+          "observed_max_seconds": 7.305155472990009,
+          "observed_min_seconds": 7.305155472990009,
+          "point_seconds": 701.2949254070409,
+          "point_seconds_per_unit": 7.305155472990009,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1402.5898508140817,
+          "upper_seconds_per_unit": 14.610310945980018
+        },
+        {
+          "observed_max_seconds": 7.028520788997412,
+          "observed_min_seconds": 7.028520788997412,
+          "point_seconds": 674.7379957437515,
+          "point_seconds_per_unit": 7.028520788997412,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1349.475991487503,
+          "upper_seconds_per_unit": 14.057041577994823
+        }
+      ],
+      "target_work_units": 384,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 2.003722313969831,
+      "upper_seconds": 7213.400330291392,
+      "work_kind_counts": {
+        "control": 192,
+        "rankcloak": 192
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5524399850110058,
+        "observed_min_seconds": 2.5524399850110058,
+        "point_seconds_per_unit": 2.5524399850110058,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.1048799700220115
+      },
+      "point_gpu_hours": 0.818069573635625,
+      "point_seconds": 2945.0504650882503,
+      "projected_available_work_units": 1200,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "robustness_v2",
+      "strata": [
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 144,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 9.136558312980924,
+          "observed_min_seconds": 3.3778627419815166,
+          "point_seconds": 226.58374084881507,
+          "point_seconds_per_unit": 4.720494601016981,
+          "sample_size": 7,
+          "stratum": "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic",
+          "target_units": 48,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 888.0734680217458,
+          "upper_seconds_per_unit": 18.501530583786373
+        },
+        {
+          "observed_max_seconds": 5.267604742999538,
+          "observed_min_seconds": 1.9407064310071291,
+          "point_seconds": 2715.9142842544243,
+          "point_seconds_per_unit": 2.6943594089825638,
+          "sample_size": 7,
+          "stratum": "robustness_decode:text_retokenized:segmented_hex_multi_topic",
+          "target_units": 1008,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 10752.234801410657,
+          "upper_seconds_per_unit": 10.666899604574064
+        }
+      ],
+      "target_work_units": 1200,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 3.2348369859451185,
+      "upper_seconds": 11645.413149402426,
+      "work_kind_counts": {
+        "reference": 144,
+        "robustness_decode": 1056
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.3637279859976843,
+        "observed_min_seconds": 2.3637279859976843,
+        "point_seconds_per_unit": 2.3637279859976843,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.727455971995369
+      },
+      "point_gpu_hours": 1.1486494460616248,
+      "point_seconds": 4135.138005821849,
+      "projected_available_work_units": 1344,
+      "projected_unavailable_work_units": 0,
+      "resource_class": "gpu",
+      "stage": "robustness_v2",
+      "strata": [
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 144,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 8.592730593998567,
+          "observed_min_seconds": 2.998870192008326,
+          "point_seconds": 277.0006514880806,
+          "point_seconds_per_unit": 5.77084690600168,
+          "sample_size": 7,
+          "stratum": "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic",
+          "target_units": 48,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 835.2134137366609,
+          "upper_seconds_per_unit": 17.4002794528471
+        },
+        {
+          "observed_max_seconds": 4.97871420699812,
+          "observed_min_seconds": 1.7518906620098278,
+          "point_seconds": 2740.6747640201356,
+          "point_seconds_per_unit": 2.718923377004103,
+          "sample_size": 7,
+          "stratum": "robustness_decode:text_retokenized:segmented_hex_multi_topic",
+          "target_units": 1008,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 10162.551439324563,
+          "upper_seconds_per_unit": 10.081896269171194
+        },
+        {
+          "observed_max_seconds": 24.368069646996446,
+          "observed_min_seconds": 1.6360053459939081,
+          "point_seconds": 1115.0988623276353,
+          "point_seconds_per_unit": 7.743742099497467,
+          "sample_size": 12,
+          "stratum": "robustness_transform",
+          "target_units": 144,
+          "upper_method": "full_control_proxy_with_twofold_paraphrase_upper",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 9474.30547875222,
+          "upper_seconds_per_unit": 65.79378804689041
+        }
+      ],
+      "target_work_units": 1344,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 5.687999385495956,
+      "upper_seconds": 20476.79778778544,
+      "work_kind_counts": {
+        "reference": 144,
+        "robustness_decode": 1056,
+        "robustness_transform": 144
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0832425099943066,
+        "observed_min_seconds": 2.0832425099943066,
+        "point_seconds_per_unit": 2.0832425099943066,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.166485019988613
+      },
+      "point_gpu_hours": 0.6128199092397739,
+      "point_seconds": 2206.1516732631862,
+      "projected_available_work_units": 864,
+      "projected_unavailable_work_units": 336,
+      "resource_class": "gpu",
+      "stage": "robustness_v2",
+      "strata": [
+        {
+          "excluded_from_timing_and_recovery_estimands": true,
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "planned_unavailable:dependent_unavailable",
+          "target_units": 336,
+          "upper_method": "structural_unavailability_propagated_from_smoke_v2",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 96,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 11.828968582034577,
+          "observed_min_seconds": 3.4076880639913725,
+          "point_seconds": 234.9884752803482,
+          "point_seconds_per_unit": 4.895593235007254,
+          "sample_size": 6,
+          "stratum": "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic",
+          "target_units": 48,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1149.775746173761,
+          "upper_seconds_per_unit": 23.95366137862002
+        },
+        {
+          "observed_max_seconds": 6.487540323010762,
+          "observed_min_seconds": 1.9416381209885003,
+          "point_seconds": 1969.0799554728437,
+          "point_seconds_per_unit": 2.7348332714900607,
+          "sample_size": 6,
+          "stratum": "robustness_decode:text_retokenized:segmented_hex_multi_topic",
+          "target_units": 720,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 9458.833790949693,
+          "upper_seconds_per_unit": 13.137269154096796
+        }
+      ],
+      "target_work_units": 1200,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 2.94799333948429,
+      "upper_seconds": 10612.776022143444,
+      "work_kind_counts": {
+        "reference": 144,
+        "robustness_decode": 1056
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5524399850110058,
+        "observed_min_seconds": 2.5524399850110058,
+        "point_seconds_per_unit": 2.5524399850110058,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.1048799700220115
+      },
+      "point_gpu_hours": 5.579987822146992,
+      "point_seconds": 20087.956159729172,
+      "rate": {
+        "gpu_count": 1,
+        "input_count": 1,
+        "observed_max_seconds": 3.487049256900028,
+        "observed_min_seconds": 3.487049256900028,
+        "point_seconds_per_unit": 3.487049256900028,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 6.974098513800056
+      },
+      "resource_class": "gpu",
+      "stage": "heldout_evaluator",
+      "target_work_units": 5760,
+      "timing_source": "required_completed_evaluator_smoke_v3_timing",
+      "upper_gpu_hours": 11.159975644293985,
+      "upper_seconds": 40175.912319458344
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.3637279859976843,
+        "observed_min_seconds": 2.3637279859976843,
+        "point_seconds_per_unit": 2.3637279859976843,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.727455971995369
+      },
+      "point_gpu_hours": 6.184807924409219,
+      "point_seconds": 22265.30852787319,
+      "rate": {
+        "gpu_count": 1,
+        "input_count": 1,
+        "observed_max_seconds": 3.8650945833137484,
+        "observed_min_seconds": 3.8650945833137484,
+        "point_seconds_per_unit": 3.8650945833137484,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 7.730189166627497
+      },
+      "resource_class": "gpu",
+      "stage": "heldout_evaluator",
+      "target_work_units": 5760,
+      "timing_source": "required_completed_evaluator_smoke_v3_timing",
+      "upper_gpu_hours": 12.369615848818437,
+      "upper_seconds": 44530.61705574638
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0832425099943066,
+        "observed_min_seconds": 2.0832425099943066,
+        "point_seconds_per_unit": 2.0832425099943066,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.166485019988613
+      },
+      "point_gpu_hours": 7.621971545026467,
+      "point_seconds": 27439.09756209528,
+      "rate": {
+        "gpu_count": 1,
+        "input_count": 1,
+        "observed_max_seconds": 4.763370541594668,
+        "observed_min_seconds": 4.763370541594668,
+        "point_seconds_per_unit": 4.763370541594668,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 9.526741083189336
+      },
+      "resource_class": "gpu",
+      "stage": "heldout_evaluator",
+      "target_work_units": 5760,
+      "timing_source": "required_completed_evaluator_smoke_v3_timing",
+      "upper_gpu_hours": 15.243943090052934,
+      "upper_seconds": 54878.19512419056
+    },
+    {
+      "epochs_per_fit": 10,
+      "gpu_budget_note": "CPU-configured detector contributes zero GPU-hours; wall time is unknown until optional timing is supplied.",
+      "model_id": "published_textcnn_equivalent",
+      "point_gpu_hours": 0.0,
+      "point_seconds": null,
+      "rate": null,
+      "resource_class": "cpu",
+      "stage": "neural_detector",
+      "target_work_units": 28,
+      "timing_source": "configured_cpu_optional_wall_timing_not_supplied",
+      "upper_gpu_hours": 0.0,
+      "upper_seconds": null
+    },
+    {
+      "epochs_per_fit": 3,
+      "gpu_budget_note": "CPU-configured detector contributes zero GPU-hours; wall time is unknown until optional timing is supplied.",
+      "model_id": "deberta_v3_base_classifier",
+      "point_gpu_hours": 0.0,
+      "point_seconds": null,
+      "rate": null,
+      "resource_class": "cpu",
+      "stage": "neural_detector",
+      "target_work_units": 28,
+      "timing_source": "configured_cpu_optional_wall_timing_not_supplied",
+      "upper_gpu_hours": 0.0,
+      "upper_seconds": null
+    }
+  ],
+  "projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3",
+  "schema_version": "rankcloak-revision-compute-projection-v1",
+  "stage_totals": [
+    {
+      "point_gpu_hours": 5.071070696631323,
+      "projected_available_work_units": 1824,
+      "projected_unavailable_work_units": 48,
+      "stage": "ablation_v2",
+      "target_work_units": 1872,
+      "upper_gpu_hours": 17.354701424823478
+    },
+    {
+      "point_gpu_hours": 0.10673924587616057,
+      "projected_available_work_units": 93,
+      "projected_unavailable_work_units": 0,
+      "stage": "auxiliary_smoke_v3_observed",
+      "target_work_units": 93,
+      "upper_gpu_hours": 0.10673924587616057
+    },
+    {
+      "point_gpu_hours": 19.38676729158268,
+      "projected_available_work_units": 17280,
+      "projected_unavailable_work_units": 0,
+      "stage": "heldout_evaluator",
+      "target_work_units": 17280,
+      "upper_gpu_hours": 38.77353458316536
+    },
+    {
+      "point_gpu_hours": 0.6082464661111111,
+      "projected_available_work_units": 234,
+      "projected_unavailable_work_units": 0,
+      "stage": "invalidated_shard_observed",
+      "target_work_units": 234,
+      "upper_gpu_hours": 0.6082464661111111
+    },
+    {
+      "point_gpu_hours": 0.3466211530769683,
+      "projected_available_work_units": 6,
+      "projected_unavailable_work_units": 0,
+      "stage": "legacy_incurred_observed",
+      "target_work_units": 6,
+      "upper_gpu_hours": 0.3466211530769683
+    },
+    {
+      "point_gpu_hours": 2.1720553469299073,
+      "projected_available_work_units": 1152,
+      "projected_unavailable_work_units": 0,
+      "stage": "multilingual_v2",
+      "target_work_units": 1152,
+      "upper_gpu_hours": 6.83940120462125
+    },
+    {
+      "point_gpu_hours": 0.0,
+      "projected_available_work_units": 56,
+      "projected_unavailable_work_units": 0,
+      "stage": "neural_detector",
+      "target_work_units": 56,
+      "upper_gpu_hours": 0.0
+    },
+    {
+      "point_gpu_hours": 25.475364605676262,
+      "projected_available_work_units": 14400,
+      "projected_unavailable_work_units": 0,
+      "stage": "primary_v2",
+      "target_work_units": 14400,
+      "upper_gpu_hours": 82.33754561752453
+    },
+    {
+      "point_gpu_hours": 2.5795389289370236,
+      "projected_available_work_units": 3408,
+      "projected_unavailable_work_units": 336,
+      "stage": "robustness_v2",
+      "target_work_units": 3744,
+      "upper_gpu_hours": 11.870829710925364
+    },
+    {
+      "point_gpu_hours": 0.27059659750000004,
+      "projected_available_work_units": 93,
+      "projected_unavailable_work_units": 3,
+      "stage": "smoke_observed",
+      "target_work_units": 96,
+      "upper_gpu_hours": 0.27059659750000004
+    }
+  ],
+  "totals": {
+    "budget_gpu_hours": 165.0,
+    "point_gpu_hours": 56.01700033232143,
+    "upper_gpu_hours": 158.50821600362423,
+    "upper_headroom_gpu_hours": 6.491783996375773
+  },
+  "unavailability_propagation": {
+    "method": "smoke_condition_contract_to_ablation_factor_then_exact_source_trial_id_join",
+    "projected_counts_by_stage_model": {
+      "ablation_v2": {
+        "mistral_7b_instruct_v0_3_q4_k_m": 48
+      },
+      "robustness_v2": {
+        "mistral_7b_instruct_v0_3_q4_k_m": 336
+      }
+    },
+    "projected_counts_by_stage_work_kind": {
+      "ablation_v2": {
+        "rankcloak": 48
+      },
+      "robustness_v2": {
+        "reference": 48,
+        "robustness_decode": 288
+      }
+    },
+    "smoke_unavailable_counts": {
+      "mistral_7b_instruct_v0_3_q4_k_m": {
+        "condition_unavailable": 1,
+        "dependent_unavailable": 2
+      }
+    },
+    "timing_and_recovery_policy": "Completed unavailable rows are zero-execution non-outcomes and are excluded from timing-rate and recovery estimands.",
+    "unavailable_ablation_source_count": 48,
+    "unavailable_ablation_source_ids_sha256": "7ea4e04076a7868e1090313dd65cc9a7344e204fedb17f50b3a3053eceee0f77"
+  },
+  "verified_invalidation_manifests": [
+    {
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "memory_profile_wall_span_v1",
+      "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+      "execution_state": {
+        "caller_confirmed_stopped": true,
+        "completed_work_units": 234,
+        "durable_attempt_rows": 234,
+        "event_count": 2,
+        "failed_work_units_current": 0,
+        "incomplete": true,
+        "original_evidence_statuses": [
+          "confirmatory_after_manifest_freeze"
+        ],
+        "planned_work_units": 4800,
+        "remaining_work_units": 4566,
+        "session_finished_event_observed": false,
+        "session_finished_remaining": null,
+        "terminal_state": "stopped_incomplete"
+      },
+      "incurred_gpu_seconds": 2189.687278,
+      "invalidation_manifest_sha256": "a9836f60344c38568f4dbc014deb6c428b1bfad216f9a55da683edd978f9168c",
+      "occupancy_intervals": [
+        {
+          "ended_at": "2026-08-09T02:08:22.263661+00:00",
+          "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+          "started_at": "2026-08-09T01:31:52.576383+00:00"
+        }
+      ],
+      "planned_trial_ids_sha256": "93d6cdeaf12f402d33bca9198d54770c77898d0f272eceb47c6a0436e2cab39d",
+      "rate_evidence_allowed": false,
+      "registry_entry_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/invalidations/primary__qwen2_5_7b__direct_payload_fidelity.json",
+      "run_identity_sha256": "fda1f6aba51df4f18606f017f66eb64c8efe7700ef18b23263157772de772c76",
+      "scientific_evidence_allowed": false,
+      "scientific_status": "invalidated_not_for_pooling",
+      "shard_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary/qwen2_5_7b_instruct_q4_k_m",
+      "shard_tree_sha256": "97af0aeadc76127c1d7eaa426869f084ec6f16769ffd2b58ab154a774aa0f108",
+      "source_manifest_sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+      "status": "ok",
+      "superseding_stages": [
+        "smoke_v3",
+        "primary_v2"
+      ],
+      "superseding_target_namespace": "rankcloak_scientific_reports_revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m"
+    }
+  ],
+  "verified_smoke_shards": [
+    {
+      "actual_gpu_charge_policy": "memory_profile_wall_span_v1",
+      "actual_gpu_seconds": 345.671174,
+      "available_work_units": 32,
+      "diagnostic_model_load_plus_record_seconds": 343.3998609280243,
+      "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+      "load_seconds": [
+        2.5524399850110058
+      ],
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m",
+      "plan_sha256": "907b4b8f4fd852cb5bf8d67bd97a0159361f461e0281c1175801fbb24801c00e",
+      "records_sha256": "6d852c8c1c49ce44066f2efd7fd868a293aafc786779ba92c3be3707bca9a10e",
+      "run_identity_sha256": "8983e220c50ab516441dd1956b4ef9614e3e19d1f05751b7c7710309153e5205",
+      "unavailability_contracts": [],
+      "unavailable_record_counts": {},
+      "unavailable_work_units": 0,
+      "work_units": 32
+    },
+    {
+      "actual_gpu_charge_policy": "memory_profile_wall_span_v1",
+      "actual_gpu_seconds": 378.021271,
+      "available_work_units": 32,
+      "diagnostic_model_load_plus_record_seconds": 375.6729900470091,
+      "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+      "load_seconds": [
+        2.3637279859976843
+      ],
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/qwen2_5_7b_instruct_q4_k_m",
+      "plan_sha256": "0ccf734e71cfa4c1186324f8a042127935785fd7171c7f0073de5ad9f854c014",
+      "records_sha256": "d15738da4a1b25a099fd181c8b653419b375786460eca29f1c9431493d1eaabd",
+      "run_identity_sha256": "fcfb9eccd8ee162a7c939f2001f1af51b6f0a5f86dd2a76978f5baabbc3ed49a",
+      "unavailability_contracts": [],
+      "unavailable_record_counts": {},
+      "unavailable_work_units": 0,
+      "work_units": 32
+    },
+    {
+      "actual_gpu_charge_policy": "memory_profile_wall_span_v1",
+      "actual_gpu_seconds": 250.455306,
+      "available_work_units": 29,
+      "diagnostic_model_load_plus_record_seconds": 247.4725013639836,
+      "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+      "load_seconds": [
+        2.0832425099943066
+      ],
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m",
+      "plan_sha256": "821488989a0977119dfb71846cb1ce8494225ae8913b7edc4a640d29db4f0c3a",
+      "records_sha256": "c261e62113e725f19a6d05b7082fdf7c0187d9a114da7327609eb7bdae34fb54",
+      "run_identity_sha256": "9c3682061f29e82419b131ac8c4e15906c779fa4c8c5f767719ce3968e384a51",
+      "unavailability_contracts": [
+        {
+          "ablation_factor": "token_filter",
+          "ablation_level": "roundtrip_stable_filter_v1",
+          "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+          "protocol_variant": "segmented_hex_multi_topic",
+          "reason_code": "empty_isolated_roundtrip_vocabulary",
+          "root_smoke_work_id": "revision_v1_smoke_v3_payload_fidelity_v2__73d56771e70a1d6727dd",
+          "safe_count": 31464,
+          "stable_count": 0,
+          "token_filter": "roundtrip_stable_filter_v1"
+        }
+      ],
+      "unavailable_record_counts": {
+        "condition_unavailable": 1,
+        "dependent_unavailable": 2
+      },
+      "unavailable_work_units": 3,
+      "work_units": 32
+    }
+  ]
+}

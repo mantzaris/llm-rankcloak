@@ -1,0 +1,4 @@
+replay_mode,n_payloads,exact_rank_successes,exact_payload_successes,exact_rank_rate,exact_payload_rate,evidence_status,confirmatory_pooling_eligible
+detokenized_text_retokenized,35,21,21,0.6,0.6,exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling,False
+greedy_leadin_regeneration,35,35,35,1.0,1.0,exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling,False
+saved_token_ids,35,35,35,1.0,1.0,exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling,False

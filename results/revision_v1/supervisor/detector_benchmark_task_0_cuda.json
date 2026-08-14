@@ -1,0 +1,108 @@
+{
+  "benchmark_sha256": "14a728b4d715c1bb8f6992b3836a29594c69bf6a8f390ef66cba7e3ed8c00a73",
+  "benchmark_task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "text_cnn",
+    "detector_name": "published_textcnn_equivalent",
+    "detector_position": 0,
+    "effective_detector_config": {
+      "batch_size": 64,
+      "device": "cuda:0",
+      "dropout": 0.5,
+      "embedding_dimension": 300,
+      "enabled": true,
+      "epochs": 10,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "filter_sizes": [
+        3,
+        5
+      ],
+      "filters_per_width": 100,
+      "kind": "text_cnn",
+      "learning_rate": 0.001,
+      "lowercase": true,
+      "maximum_length": 256,
+      "maximum_vocabulary_size": 30000,
+      "minimum_token_frequency": 1,
+      "name": "published_textcnn_equivalent",
+      "torch_num_threads": 1,
+      "weight_decay": 1e-06
+    },
+    "effective_detector_config_sha256": "91382ac313009ec933da15d23b8ff4f49c4c32472d378a66d077cf4bf7251d97",
+    "excluded_held_out_rows": 0,
+    "held_out_column": null,
+    "held_out_value": null,
+    "ordinal": 0,
+    "partition_policy": "full_held_out_condition",
+    "purged_train_rows": 0,
+    "regime": "matched",
+    "scientific_detector_config_sha256": "32a329fca7f37234612393dfd9c488b88ffb0e91127b1d86231cc519f860cf56",
+    "seed": 3996075400,
+    "split_id": "matched",
+    "split_position": 0,
+    "test_indices_sha256": "b55b372bef0b9dbf824919a6b14f046e653736baa3e28da17c4b7b681b705d9d",
+    "test_row_count": 3960,
+    "test_row_ids_ordered_sha256": "3ca85a56dfb6e75d2388c5f5cbfa1a1ab7d2bf8a102b873f55487dcb6098622c",
+    "train_indices_sha256": "af6d297128b0a2e6c63d637bda065c885df0dc5c2d3482c6f34ace4b107990f4",
+    "train_row_count": 11880,
+    "train_row_ids_ordered_sha256": "b33dfcce847834337bdaf2797501c20500a01467d4480a131a3f2e6f7a1eedd4"
+  },
+  "benchmark_task_index": 0,
+  "checkpoint_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints",
+  "completed_fit_count": 1,
+  "created_at_utc": "2026-08-13T11:37:09.170663+00:00",
+  "device": "cuda:0",
+  "execution_completed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+  "execution_plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "finalization_candidate": {
+    "candidate_sha256": "ab9c7d8a63dc41bf3867df23423800a06fbc531a440e9c95cabf659bfc8eeddb",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/finalization_candidates/benchmark_artifact-task0-benchmark-27235ab35626bb02.json",
+    "sha256": "6caf6b8eafb0d8972728962903e746d090b840e33d2d746eefbc991705608b6b",
+    "size_bytes": 5040
+  },
+  "fit_durations_seconds": [
+    32.0789109080215
+  ],
+  "fit_elapsed_seconds": 32.0789109080215,
+  "gpu_accounting": {
+    "cumulative_elapsed_seconds": 86.859575,
+    "derivation_policy": "nonoverlapping_detector_process_wall_intervals_v1",
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "intervals": [
+      {
+        "completed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 86.859575,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+        "pid": 2461683,
+        "process_start_ticks": 48519807,
+        "started_at_utc": "2026-08-13T11:35:44.731997+00:00"
+      }
+    ]
+  },
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "last_completed_checkpoint": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/fits/0000/manifest.json",
+    "sha256": "815b0db022d6d0caf76607182a2580d59cbcc0612953422dcfd4de10dbd854d8",
+    "task_ordinal": 0
+  },
+  "new_fit_count": 1,
+  "peak_rss_bytes": 1498378240,
+  "peak_vram_bytes": 306247680,
+  "pre_final_gpu_accounting_ledger": null,
+  "resumed_fit_count": 0,
+  "run_identity_sha256": "ea7ba5a0a73289254d70442c2470e39df3131905412a9b061e8c7592da057699",
+  "schema_version": "rankcloak-revision-detector-benchmark-v1",
+  "status_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.status.json",
+  "terminal_accounting_status_sha256": "c492a826267b4468e082ee75b99f7106902bb125e00736860aecc2e6293e4a27",
+  "total_fit_count": 56,
+  "wall_seconds": 85.74652639497072,
+  "workers": 1
+}

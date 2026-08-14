@@ -1,0 +1,31 @@
+{
+  "configured_model": {
+    "architecture_scale": "7B",
+    "artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+    "artifact_size_bytes": 4372812000,
+    "family": "mistral",
+    "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+    "license": "Apache-2.0",
+    "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+    "pin_status": "pinned",
+    "quantization": "Q4_K_M",
+    "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+    "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+    "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+    "role": "cross-family confirmatory model",
+    "upstream_repo_id": "mistralai/Mistral-7B-Instruct-v0.3",
+    "upstream_revision": "c170c708c41dac9275d15a8fff4eca08d52bab71"
+  },
+  "role": "heldout_evaluator_only",
+  "schema_version": "1.0",
+  "verification": {
+    "actual_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+    "actual_size_bytes": 4372812000,
+    "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+    "expected_size_bytes": 4372812000,
+    "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+    "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+    "sha256_checked": true,
+    "status": "ok"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "command_line_args": [
+    "stage=smoke",
+    "model_id=mistral_7b_instruct_v0_3_q4_k_m",
+    "evidence_status=exploratory_smoke_not_for_confirmatory_pooling",
+    "context_limit=4096",
+    "gpu_uuid=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "n_gpu_layers=-1",
+    "source_manifest_sha256=d49a6ed250661f64c3bb5274f586e549bcb9c8d49eea5ef7338dfc2f50181d1c",
+    "runtime_manifest_sha256=c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+    "hardware_manifest_sha256=3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+    "input_results_manifest_sha256=none"
+  ],
+  "config_manifest_sha256": "4a4882476c7070e5fc04cc40900965bab18a94f6523e9fbb638b74a3badaf397",
+  "manifest_type": "revision_run_identity",
+  "model_artifacts": [
+    {
+      "configured_model": {
+        "architecture_scale": "7B",
+        "artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "artifact_size_bytes": 4372812000,
+        "family": "mistral",
+        "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "license": "Apache-2.0",
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "pin_status": "pinned",
+        "quantization": "Q4_K_M",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+        "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+        "role": "cross-family confirmatory model",
+        "upstream_repo_id": "mistralai/Mistral-7B-Instruct-v0.3",
+        "upstream_revision": "c170c708c41dac9275d15a8fff4eca08d52bab71"
+      },
+      "execution_policy": {
+        "backend": "llama_cpp",
+        "one_model_loaded_at_a_time": true,
+        "rank_replay_n_batch": 1,
+        "rank_replay_n_ubatch": 1,
+        "require_exact_artifact_sha256": true,
+        "require_exact_library_and_backend_manifest": true,
+        "tokenizer_source": "embedded_gguf"
+      },
+      "schema_version": "1.0",
+      "verification": {
+        "actual_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "actual_size_bytes": 4372812000,
+        "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "expected_size_bytes": 4372812000,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      }
+    }
+  ],
+  "payload_manifest_sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+  "planned_trial_count": 32,
+  "planned_trial_ids_sha256": "e5d1779a2e27d83ddf63243e2b3056bf339246fb4db3efbfb0624d51e1baa281",
+  "run_identity_sha256": "54f1d472203018fe9753ff6273a137713bc3844119f0c166c90d9aa73b40be1d",
+  "schema_version": "1.0",
+  "study_id": "rankcloak_scientific_reports_revision_v1/smoke/mistral_7b_instruct_v0_3_q4_k_m"
+}

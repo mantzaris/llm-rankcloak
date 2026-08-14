@@ -1,0 +1,16 @@
+scenario_id,simulations,seed,stimuli_per_condition,ratings_per_stimulus,participant_slots,two_sided_alpha,common_odds_ratio,participant_sd,stimulus_sd,rejection_probability,monte_carlo_se,mean_observed_rating_difference,planning_method
+null_calibration_120x5,2000,20260809,120,5,200,0.025,1.0,0.65,0.5,0.0135,0.00258,-0.001058,stimulus_cluster_welch_normal_approximation
+or1_5_typical_72x3,2000,20360812,72,3,72,0.025,1.5,0.65,0.5,0.4035,0.01097,0.41285,stimulus_cluster_welch_normal_approximation
+or1_5_typical_96x3,2000,20460815,96,3,96,0.025,1.5,0.65,0.5,0.529,0.011162,0.413873,stimulus_cluster_welch_normal_approximation
+or1_5_typical_144x3,2000,20560818,144,3,144,0.025,1.5,0.65,0.5,0.7415,0.00979,0.414417,stimulus_cluster_welch_normal_approximation
+or1_5_typical_192x3,2000,20660821,192,3,192,0.025,1.5,0.65,0.5,0.8525,0.007929,0.411181,stimulus_cluster_welch_normal_approximation
+or1_5_typical_72x5,2000,20760824,72,5,120,0.025,1.5,0.65,0.5,0.5945,0.010979,0.415756,stimulus_cluster_welch_normal_approximation
+or1_5_typical_96x5,2000,20860827,96,5,160,0.025,1.5,0.65,0.5,0.7185,0.010056,0.411602,stimulus_cluster_welch_normal_approximation
+or1_5_typical_120x5,2000,20960830,120,5,200,0.025,1.5,0.65,0.5,0.8315,0.00837,0.416727,stimulus_cluster_welch_normal_approximation
+or1_5_typical_144x5,2000,21060833,144,5,240,0.025,1.5,0.65,0.5,0.9,0.006708,0.410307,stimulus_cluster_welch_normal_approximation
+or1_5_high_96x5,2000,21160836,96,5,160,0.025,1.5,0.9,0.75,0.5525,0.011119,0.387395,stimulus_cluster_welch_normal_approximation
+or1_5_high_144x5,2000,21260839,144,5,240,0.025,1.5,0.9,0.75,0.7635,0.009502,0.388215,stimulus_cluster_welch_normal_approximation
+or1_5_high_192x5,2000,21360842,192,5,320,0.025,1.5,0.9,0.75,0.886,0.007106,0.388095,stimulus_cluster_welch_normal_approximation
+or1_5_high_240x5,2000,21460845,240,5,400,0.025,1.5,0.9,0.75,0.95,0.004873,0.391199,stimulus_cluster_welch_normal_approximation
+or1_25_typical_192x5,2000,21560848,192,5,320,0.025,1.25,0.65,0.5,0.4725,0.011163,0.225526,stimulus_cluster_welch_normal_approximation
+or1_25_typical_240x5,2000,21660851,240,5,400,0.025,1.25,0.65,0.5,0.583,0.011025,0.225922,stimulus_cluster_welch_normal_approximation

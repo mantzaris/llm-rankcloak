@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_primary_confirmatory",
+  "study_id": "rankcloak_scientific_reports_revision_v1",
+  "evidence_status": "confirmatory_after_manifest_freeze",
+  "corpus": {
+    "generator": "rankcloak.revision_payloads.generate_revision_v1_payloads",
+    "corpus_id": "rankcloak_scientific_reports_revision_v1",
+    "payload_classes": [
+      "sha256_hex",
+      "hmac_sha256_hex",
+      "nonce_96_bit_hex",
+      "token_128_bit_hex",
+      "uuid_v4",
+      "aes256_gcm_base64",
+      "chacha20_poly1305_base64",
+      "ed25519_signature_base64"
+    ],
+    "hex_eligible_classes": [
+      "sha256_hex",
+      "hmac_sha256_hex",
+      "nonce_96_bit_hex",
+      "token_128_bit_hex"
+    ],
+    "instances_per_class": 60,
+    "payload_count": 480,
+    "corpus_sha256": "caf0db84c814e02474a3cd2fc5588a8283cbe00fe41ce448764c6cdc67baa8c0",
+    "split_by_payload_index": {
+      "train": [0, 35],
+      "validation": [36, 47],
+      "test": [48, 59]
+    }
+  },
+  "model_config": "models.json",
+  "prompt_config": "prompts.json",
+  "assignment": {
+    "algorithm": "balanced_cyclic_v1",
+    "category_index": "(payload_index + model_index + payload_class_index) mod 6",
+    "template_index": "(floor(payload_index / 6) + model_index + payload_class_index) mod 3",
+    "same_prompt_across_paired_protocols": true,
+    "expected_model_payload_blocks": 1440,
+    "expected_blocks_per_template": 80,
+    "expected_hex_blocks_per_template": 40,
+    "expected_nonhex_blocks_per_template": 40
+  },
+  "protocols": [
+    {
+      "protocol_variant": "direct_subword_calgacus",
+      "representation_name": "raw_subword_direct",
+      "applies_to": "all",
+      "segmented": false,
+      "expected_trials": 1440
+    },
+    {
+      "protocol_variant": "nonseg_ascii_b8",
+      "representation_name": "ascii_bytes_fixed_radix",
+      "alphabet_size": 8,
+      "applies_to": "all",
+      "segmented": false,
+      "expected_trials": 1440
+    },
+    {
+      "protocol_variant": "nonseg_ascii_b16",
+      "representation_name": "ascii_bytes_fixed_radix",
+      "alphabet_size": 16,
+      "applies_to": "all",
+      "segmented": false,
+      "expected_trials": 1440
+    },
+    {
+      "protocol_variant": "nonseg_hex_nibble_b16",
+      "representation_name": "raw_hex_nibbles",
+      "alphabet_size": 16,
+      "applies_to": "hex_eligible",
+      "segmented": false,
+      "expected_trials": 720
+    },
+    {
+      "protocol_variant": "segmented_hex_single_topic",
+      "representation_name": "raw_hex_nibbles",
+      "alphabet_size": 16,
+      "applies_to": "hex_eligible",
+      "segmented": true,
+      "topic_schedule": "single_assigned_prompt",
+      "expected_trials": 720
+    },
+    {
+      "protocol_variant": "segmented_hex_multi_topic",
+      "representation_name": "raw_hex_nibbles",
+      "alphabet_size": 16,
+      "applies_to": "hex_eligible",
+      "segmented": true,
+      "topic_schedule": "deterministic_six_category_rotation",
+      "expected_trials": 720
+    }
+  ],
+  "segmented_canonical": {
+    "segment_size_ranks": 8,
+    "leadin_tokens": 0,
+    "token_filter": "safe_text_filter_v1",
+    "tail_policy": {
+      "tail_policy_id": "dynamic_completion_v1",
+      "generation_mode": "greedy",
+      "minimum_natural_tokens": 8,
+      "candidate_endings": [".", "!", "?", "\n\n"],
+      "require_balanced_delimiters": true,
+      "reject_dangling_connective_or_punctuation": true,
+      "emergency_max_tokens": 256,
+      "emergency_cap_is_censoring_event": true
+    }
+  },
+  "controls": {
+    "full_message": {
+      "mode": "seeded_prompt_and_length_matched_sampling",
+      "seed_derivation": "sha256(trial_id || '/full-control')",
+      "temperature": 0.8,
+      "top_p": 0.95,
+      "expected_texts": 6480
+    },
+    "forced_span_length": {
+      "mode": "seeded_prompt_and_length_matched_sampling",
+      "seed_derivation": "sha256(trial_id || '/forced-control')",
+      "temperature": 0.8,
+      "top_p": 0.95,
+      "applies_to": "segmented",
+      "expected_texts": 1440
+    }
+  },
+  "expected_counts": {
+    "rankcloak_trials": 6480,
+    "ordinary_control_texts": 7920,
+    "generated_texts_total": 14400,
+    "derived_forced_span_views": 1440,
+    "rankcloak_trials_per_model": 2160,
+    "rankcloak_trials_per_prompt_template": 360
+  }
+}

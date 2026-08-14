@@ -1,0 +1,101 @@
+{
+  "inputs_sha256": "c035f130d1b71ed6d9b965bf24a6356805fe9102519f69eef64116a8a12cdd94",
+  "manifest_type": "robustness_execution_inputs",
+  "schema_version": "1.0",
+  "source_results": {
+    "files": [
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/llama3_8b_instruct_q4_k_m/records.jsonl",
+        "role": "records",
+        "sha256": "30653d13b3a624123a1fdc8b8e8b4e688b92c72ea395506ad652b1668b80f250",
+        "size_bytes": 22489514,
+        "source_model_id": "llama3_8b_instruct_q4_k_m",
+        "stage": "ablation_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/llama3_8b_instruct_q4_k_m/run_identity.json",
+        "role": "run_identity",
+        "sha256": "c7a1c4c24270b0bfcfed89736c5d4c1dc2306105ecc2720acbccafed9fc2fcac",
+        "size_bytes": 2977,
+        "source_model_id": "llama3_8b_instruct_q4_k_m",
+        "stage": "ablation_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl",
+        "role": "records",
+        "sha256": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+        "size_bytes": 75133856,
+        "source_model_id": "llama3_8b_instruct_q4_k_m",
+        "stage": "primary_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/run_identity.json",
+        "role": "run_identity",
+        "sha256": "11642857c5b5fd14b4ed06d5b5cf5ad2121abd3a097c8b7c8047a9766a5388b3",
+        "size_bytes": 2975,
+        "source_model_id": "llama3_8b_instruct_q4_k_m",
+        "stage": "primary_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+        "role": "records",
+        "sha256": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+        "size_bytes": 75466438,
+        "source_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "stage": "primary_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/run_identity.json",
+        "role": "run_identity",
+        "sha256": "1e4a5fe0be8cc774e3a7535711bc4e6f85fab646698846acb4da59380f8c059d",
+        "size_bytes": 3212,
+        "source_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "stage": "primary_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+        "role": "records",
+        "sha256": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a",
+        "size_bytes": 69701371,
+        "source_model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "stage": "primary_v2"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/run_identity.json",
+        "role": "run_identity",
+        "sha256": "d83c429794ac77f9f909b463d004276c8381a79eedc6a2aafd60135f09fe0593",
+        "size_bytes": 3150,
+        "source_model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "stage": "primary_v2"
+      }
+    ],
+    "files_sha256": "3a026bc9e7ba1531d416a98ff76559ff4c312852e23798f57eaa32e4f8ec0e6c",
+    "manifest_type": "robustness_external_source_results",
+    "required_source_record_count": 240,
+    "required_source_trial_ids_sha256": "5a8a30bbdc629510b4463fa39b9aca7589c120500269392652d0bcdc117d3ae4",
+    "schema_version": "1.0"
+  },
+  "transformation_results": {
+    "files": [
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/robustness_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+        "role": "records",
+        "sha256": "ba4b6bce6faa60dca7d1ff227b795fdab9d5597a7069f749de119d853c153710",
+        "size_bytes": 18629114,
+        "transformation_model_id": "qwen2_5_7b_instruct_q4_k_m"
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/robustness_v2/qwen2_5_7b_instruct_q4_k_m/run_identity.json",
+        "role": "run_identity",
+        "sha256": "19bdbf54746c33fb3ecb4251b05b2a39f4e85e4106baaddf74b7bf5b1b4e454b",
+        "size_bytes": 3230,
+        "transformation_model_id": "qwen2_5_7b_instruct_q4_k_m"
+      }
+    ],
+    "files_sha256": "2b318c2368feaac80384054eb46c3f6ab2566b02d1ee91e353d99d09299d9d11",
+    "manifest_type": "robustness_external_transform_results",
+    "required_transform_record_count": 48,
+    "required_transform_work_ids_sha256": "6ee249747c8a35e4cb2881e463308981d7915df21619d28344008818ffda8d2a",
+    "schema_version": "1.0"
+  }
+}

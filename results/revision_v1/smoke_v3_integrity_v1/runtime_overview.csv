@@ -1,0 +1,15 @@
+model_id,runtime_scope,record_type,n_records,total_model_load_seconds,total_execution_seconds,total_generation_seconds,peak_ram_mib,peak_gpu_memory_mib
+llama3_8b_instruct_q4_k_m,model_load_session,model_load_event,1,2.5524399850110058,0.0,0.0,,
+llama3_8b_instruct_q4_k_m,model_shard_memory_profile,memory_profile_event,1,0.0,0.0,0.0,5044.69140625,5279.0
+llama3_8b_instruct_q4_k_m,ordinary_control_generation,ordinary_control,20,0.0,92.83044365100795,92.83044365100795,,
+llama3_8b_instruct_q4_k_m,trial,rankcloak_trial,12,0.0,248.01697729200532,102.4214186269819,5044.69140625,
+mistral_7b_instruct_v0_3_q4_k_m,condition_unavailable_no_execution,condition_unavailable,1,0.0,0.0,0.0,,
+mistral_7b_instruct_v0_3_q4_k_m,dependent_unavailable_no_execution,dependent_unavailable,2,0.0,0.0,0.0,,
+mistral_7b_instruct_v0_3_q4_k_m,model_load_session,model_load_event,1,2.0832425099943066,0.0,0.0,,
+mistral_7b_instruct_v0_3_q4_k_m,model_shard_memory_profile,memory_profile_event,1,0.0,0.0,0.0,4462.640625,4973.0
+mistral_7b_instruct_v0_3_q4_k_m,ordinary_control_generation,ordinary_control,18,0.0,58.88197871099692,58.88197871099692,,
+mistral_7b_instruct_v0_3_q4_k_m,trial,rankcloak_trial,11,0.0,186.50728014299239,63.21366640893393,4462.640625,
+qwen2_5_7b_instruct_q4_k_m,model_load_session,model_load_event,1,2.3637279859976843,0.0,0.0,,
+qwen2_5_7b_instruct_q4_k_m,model_shard_memory_profile,memory_profile_event,1,0.0,0.0,0.0,4804.10546875,4757.0
+qwen2_5_7b_instruct_q4_k_m,ordinary_control_generation,ordinary_control,20,0.0,112.54410748998635,112.54410748998635,,
+qwen2_5_7b_instruct_q4_k_m,trial,rankcloak_trial,12,0.0,260.76515457102505,122.06247457611607,4804.10546875,

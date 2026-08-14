@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "status": "DRAFT_NOT_IRB_APPROVED",
+  "checks_per_panel_slot": 2,
+  "checks": [
+    {
+      "attention_check_id": "instruction_check_low",
+      "prompt": "This is an attention check. To show that you read this instruction, select response 2.",
+      "response_min": 1,
+      "response_max": 7,
+      "expected_response": 2
+    },
+    {
+      "attention_check_id": "instruction_check_high",
+      "prompt": "This is an attention check. To show that you read this instruction, select response 6.",
+      "response_min": 1,
+      "response_max": 7,
+      "expected_response": 6
+    }
+  ],
+  "scoring": {
+    "participant_exclusion_threshold": "exclude only when both instructed-response checks are incorrect",
+    "single_failure_handling": "retain in the primary analysis and flag for sensitivity analysis",
+    "outcome_use": "checks are never outcomes and are not included in the 1,728 rating exposures"
+  },
+  "rationale": "Checks test instruction attention without relying on English-topic knowledge or condition-specific message quality."
+}

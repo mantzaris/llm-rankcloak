@@ -1,0 +1,65 @@
+{
+  "artifact_type": "rankcloak_capacity_quality_theory_validation",
+  "inputs": [
+    {
+      "path": "results/revision_v1/smoke_v3_preprocessed_v1/trials.csv",
+      "record_count": 105,
+      "sha256": "2a379ad94f0ac7b37c1b59d1e79369414491c1ca08857af43b247d4567e74f4b",
+      "size_bytes": 88599
+    }
+  ],
+  "missing_result_policy": "no imputation, reconstruction, or synthetic substitution",
+  "probability_log_base": "natural",
+  "proposition": "If encoder and decoder begin with identical token-ID contexts, use the same deterministic model, tokenizer, inference configuration, admissible token set, and descending-score/ascending-token-ID order, and receive identical forced token IDs, inverse ranking recovers every encoded rank. An injective payload codec then recovers the payload exactly.",
+  "quality_unit": "nats_per_forced_token",
+  "rate_unit": "bits_per_token",
+  "schema_version": "1.0",
+  "summary": {
+    "capacity_evaluable_count": 96,
+    "cascade_evaluable_count": 0,
+    "exact_observed_only_count": 0,
+    "exact_proposition_confirmed_count": 0,
+    "input_record_count": 105,
+    "quality_evaluable_count": 0,
+    "quality_fully_bound_validated_count": 0
+  },
+  "tables": [
+    {
+      "name": "capacity_validation",
+      "path": "theory_capacity_validation.csv",
+      "row_count": 105,
+      "sha256": "00be50590c67787a4e3fb564d204ab2b535369a51dc76a77306195a69dec07d7"
+    },
+    {
+      "name": "capacity_plot",
+      "path": "theory_capacity_plot_source.csv",
+      "row_count": 96,
+      "sha256": "be74c782c7461a028edf1fb1c632eda5de029ed4971f15f47691ad10d3ffc101"
+    },
+    {
+      "name": "quality_validation",
+      "path": "theory_quality_validation.csv",
+      "row_count": 105,
+      "sha256": "49d2ba0e19698b7c3cfab34956f2dd6dff6b78c0e47d4a6c3d125b5ec894a35e"
+    },
+    {
+      "name": "quality_plot",
+      "path": "theory_quality_plot_source.csv",
+      "row_count": 0,
+      "sha256": "0da36460092e0f852a19544db27ffcd3176b46f2c0275f4b6ee77489ab7c9dc5"
+    },
+    {
+      "name": "exact_recovery",
+      "path": "theory_exact_recovery_validation.csv",
+      "row_count": 105,
+      "sha256": "4dd64f494b708d6613049546bcc8f1dba55a83d2f72109002b993c1345c1ffd8"
+    },
+    {
+      "name": "cascade",
+      "path": "theory_cascade_diagnostics.csv",
+      "row_count": 0,
+      "sha256": "193c652a8e82149a4ce4cc1e47ef0337706042870b8a73f6202aed9ffe7a18b4"
+    }
+  ],
+  "tie_break_rule": "descending_score_then_ascending_token_id"
+}

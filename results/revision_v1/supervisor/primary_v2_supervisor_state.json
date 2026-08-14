@@ -1,0 +1,80 @@
+{
+  "active_runner_pids": [],
+  "authorized_projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3",
+  "budget": {
+    "actual_primary_gpu_hours": 27.751937854999998,
+    "baseline_upper_gpu_hours": 158.50821600362423,
+    "projected_upper_consumed_gpu_hours": 82.33754561752843,
+    "revised_headroom_gpu_hours": 61.07739175890421,
+    "revised_upper_gpu_hours": 103.92260824109579
+  },
+  "current_model": null,
+  "generated_at": "2026-08-10T16:58:50.677890+00:00",
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "message": "All three primary_v2 checkpoints are exact and complete.",
+  "model_order": [
+    "llama3_8b_instruct_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m",
+    "mistral_7b_instruct_v0_3_q4_k_m"
+  ],
+  "progress_refresh_recovery": {
+    "deferred_unstable_source_race_events": 18,
+    "deferred_updater_timeout_events": 0,
+    "last_deferred_unstable_source_race": {
+      "active_runner_pids_left_unchanged": [
+        3254941
+      ],
+      "at": "2026-08-10T16:05:26.267031+00:00",
+      "automatic_resume": true,
+      "detail": "revision progress failed: Progress sources remained unstable: A progress source changed during snapshot construction",
+      "event": "canonical_progress_unstable_source_race_deferred",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_retry_count_unchanged": 0,
+      "progress_refresh_backoff_seconds": [
+        2.0,
+        4.0
+      ],
+      "progress_refresh_outer_attempts": 3
+    },
+    "last_deferred_updater_timeout": null,
+    "last_successful_outer_recovery": {
+      "active_runner_pids_left_unchanged": [
+        3254941
+      ],
+      "at": "2026-08-10T16:57:33.534321+00:00",
+      "automatic_resume": true,
+      "event": "canonical_progress_unstable_source_race_recovered",
+      "last_source_race": "revision progress failed: Progress sources remained unstable: A progress source changed during snapshot construction",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_retry_count_unchanged": 0,
+      "progress_refresh_backoff_seconds": [
+        2.0
+      ],
+      "progress_refresh_outer_attempts": 2,
+      "source_races_recovered": 1
+    },
+    "successful_outer_recovery_events": 32,
+    "unstable_source_races_recovered": 43
+  },
+  "progress_update": {
+    "deferred_progress_refresh": false,
+    "deferred_reason": null,
+    "deferred_unstable_source_race": false,
+    "exit_code": 0,
+    "last_observed_unstable_source_race": null,
+    "last_recovered_unstable_source_race": null,
+    "observed_unstable_source_races": 0,
+    "outer_attempts": 1,
+    "recovered_unstable_source_races": 0,
+    "stderr": "",
+    "stdout": "{\"completed_per_gpu_hour\": 518.8814533043285, \"counts\": {\"completed\": 14400, \"failures\": 0, \"remaining\": 24104, \"successes\": 14400, \"total\": 38504, \"unavailable\": 0}, \"cumulative_actual_gpu_hours\": 29.08420713950868, \"current\": null, \"generated_at\": \"2026-08-10T16:58:39.259581+00:00\", \"last_checkpoint\": {\"model_id\": \"mistral_7b_instruct_v0_3_q4_k_m\", \"path\": \"/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/checkpoint.json\", \"sha256\": \"befa27f6b7689bef6c654ec0195dbd7082df2364665b9356cc96a2bf4c59d1da\", \"stage\": \"primary_v2\", \"updated_at\": \"2026-08-10T16:57:37.611594+00:00\"}, \"progress_sha256\": \"0933377490f50a65209ae354afb9ef5995ce4fc18eb3405904771085721ec261\", \"recovered_error_count\": 0, \"recovery_counts\": {\"payload_bearing_recovery_attempted\": 6480, \"payload_recovery_failures\": 0, \"successful_payload_recoveries\": 6480, \"unavailable\": 0}, \"rolling_eta_hours\": 47.79436292539682, \"status\": \"in_progress_or_paused\"}"
+  },
+  "retry_counts": {
+    "llama3_8b_instruct_q4_k_m": 0,
+    "mistral_7b_instruct_v0_3_q4_k_m": 0,
+    "qwen2_5_7b_instruct_q4_k_m": 0
+  },
+  "schema_version": "rankcloak-primary-v2-supervisor-v1",
+  "status": "primary_v2_complete",
+  "supervisor_state_sha256": "abb20fc285062c32b9b3a7761cb599d709ee1a2f54c22fc38bfdf97f9ead0772"
+}

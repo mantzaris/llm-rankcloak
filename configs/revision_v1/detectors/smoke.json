@@ -1,0 +1,38 @@
+{
+  "schema_version": "rankcloak-revision-detectors-v1",
+  "seed": 20260808,
+  "decision_threshold": 0.5,
+  "columns": {
+    "row_id": "row_id",
+    "text": "text",
+    "label": "label",
+    "payload_group_id": "payload_group_id",
+    "prompt_template_id": "prompt_template_id",
+    "model_id": "model_id",
+    "codec_id": "codec_id"
+  },
+  "splits": {
+    "regimes": ["matched"],
+    "matched_test_fraction": 0.25,
+    "assert_text_hash_disjoint": true,
+    "minimum_train_rows": 4,
+    "minimum_test_rows": 2,
+    "fail_on_skipped_split": true
+  },
+  "bootstrap": {
+    "unit": "payload_group_id",
+    "resamples": 40,
+    "smoke_resamples": 40
+  },
+  "detectors": [
+    {
+      "name": "hashed_ngram_smoke",
+      "kind": "hashed_ngram_smoke",
+      "enabled": true,
+      "lowercase": true,
+      "fallback_ngram_min": 2,
+      "fallback_ngram_max": 4,
+      "fallback_maximum_features": 2000
+    }
+  ]
+}

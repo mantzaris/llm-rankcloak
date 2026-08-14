@@ -1,0 +1,58 @@
+{
+  "file_count": 10,
+  "files": [
+    {
+      "path": "ablations.json",
+      "sha256": "49224bb5f9b4e356a5f67fb1c551cf7ecbc0fb6124dc1ed0be68ba74e9972cd5",
+      "size_bytes": 2496
+    },
+    {
+      "path": "detectors/README.md",
+      "sha256": "ab355995786796d86533228a2bb7734b89849165f6edf3b296d479b88580c149",
+      "size_bytes": 1652
+    },
+    {
+      "path": "detectors/default.json",
+      "sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+      "size_bytes": 2021
+    },
+    {
+      "path": "detectors/smoke.json",
+      "sha256": "104616ea864c07f1d28149a4d31e3c119249e1c0a2de81d9225ebacf30e7aa23",
+      "size_bytes": 909
+    },
+    {
+      "path": "models.json",
+      "sha256": "ddeeabbb94c843f2ebc685d354d22891fee83471525e94486816d85aab403e7d",
+      "size_bytes": 2611
+    },
+    {
+      "path": "multilingual.json",
+      "sha256": "04b8ec3f74afdfde121404ce5a9662e5f4272724c0f82828c8684ccc76fae5c9",
+      "size_bytes": 3200
+    },
+    {
+      "path": "primary.json",
+      "sha256": "bf18474386378658e54357bfb3e92bd87081af03f87a33b04aaa4bc97e63c918",
+      "size_bytes": 4282
+    },
+    {
+      "path": "prompts.json",
+      "sha256": "e638d7fe3451f4779d192977f818544857df3b9ad87c2d8a92b2b9809b09d4c5",
+      "size_bytes": 4730
+    },
+    {
+      "path": "robustness.json",
+      "sha256": "08a1db08015da4cfcefe918b272e73a157b5ede1919284b90567efb5e8a2c1ea",
+      "size_bytes": 3639
+    },
+    {
+      "path": "statistics.json",
+      "sha256": "62029282f69e6ec50235b92a5bd63e04b37191c9154f11493220453d64311b9e",
+      "size_bytes": 2570
+    }
+  ],
+  "files_sha256": "63db256f44c8f94a3d5e81fb69d1f3cdd3af0b88e2dcf77bf19fd02c974eb4df",
+  "manifest_type": "sha256_file_set",
+  "schema_version": "1.0"
+}

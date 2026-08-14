@@ -1,0 +1,91 @@
+{
+  "determinism": {
+    "bootstrap_resamples": 100,
+    "bootstrap_seed": 2026080801
+  },
+  "inputs": [
+    {
+      "bytes": 88599,
+      "category": "trials",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_preprocessed_v1/trials.csv",
+      "sha256": "2a379ad94f0ac7b37c1b59d1e79369414491c1ca08857af43b247d4567e74f4b"
+    },
+    {
+      "bytes": 90614,
+      "category": "trials",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+      "sha256": "62819f60b49dec1493a118beed9935bbb7f6e3d87fcb5c53dc1585ede068f141"
+    },
+    {
+      "bytes": 99612,
+      "category": "trials",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/qwen2_5_7b_instruct_q4_k_m/continuous_quality.jsonl",
+      "sha256": "f8389e22e1a9c68f44cbb51568655778d669a49b7b2d77789bb9ed5cd2fd9776"
+    },
+    {
+      "bytes": 99831,
+      "category": "trials",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m/continuous_quality.jsonl",
+      "sha256": "a421056590daa8f9430aab0c94c35851c89735cfa329166a43b4705400baf68b"
+    },
+    {
+      "bytes": 546539,
+      "category": "features",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_preprocessed_v1/features.csv",
+      "sha256": "0fd91b19eb5128c88c44d6b4baa86ed302fe6972a7162337fd108fe4b45078f9"
+    },
+    {
+      "bytes": 78184,
+      "category": "runtime",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_preprocessed_v1/runtime.csv",
+      "sha256": "5cd7283f36c2aa1d2f979adcb1ccc11c63ae5b4ed1e997414b3ca44a2683ee4e"
+    }
+  ],
+  "outputs": {
+    "continuous": {
+      "bytes": 488238,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/continuous_summary.csv",
+      "sha256": "0b95d83e9ac4a67ef49d73fdfdab545720e9ac60e650898e9e2ccb4244796a06"
+    },
+    "detectors": {
+      "bytes": 7,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/detector_summary.csv",
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "effects": {
+      "bytes": 219068,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/effect_sizes.csv",
+      "sha256": "fb3cfd0e6f675f71ad1aca4fc48b90f89471aed4683221ca255b2aaff161991f"
+    },
+    "integrity": {
+      "bytes": 2185,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/statistics_integrity_report.json",
+      "sha256": "9f1ccce16eaad9d4350cf382760284a8aa760234214bbb6e2706840497752735"
+    },
+    "mixed": {
+      "bytes": 7,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/mixed_effects_coefficients.csv",
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "mixed_status": {
+      "bytes": 79,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/mixed_effects_status.json",
+      "sha256": "716986a306f85b8de0df6716fb8145690e983ab5a51e07f172c554f7b052c46e"
+    },
+    "quality": {
+      "bytes": 83761,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/quality_trial_metrics.csv",
+      "sha256": "a6fc31a639bc85f6a30c75664a8a5fd3f9ea8f58f868695abffbe4e157f85910"
+    },
+    "recovery": {
+      "bytes": 80387,
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3_statistics_v2/recovery_summary.csv",
+      "sha256": "01075443e078e8426b19ae573adfa5fac02e5962b7d8bc987da4588e168bc7b6"
+    }
+  },
+  "schema_version": "1.0",
+  "statistics_config": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/statistics.json",
+    "sha256": "62029282f69e6ec50235b92a5bd63e04b37191c9154f11493220453d64311b9e"
+  }
+}

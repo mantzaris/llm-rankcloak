@@ -1,0 +1,31 @@
+{
+  "configured_model": {
+    "architecture_scale": "7B",
+    "artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "artifact_size_bytes": 4683074240,
+    "family": "qwen2",
+    "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "license": "Apache-2.0",
+    "model_id": "qwen2_5_7b_instruct_q4_k_m",
+    "pin_status": "pinned",
+    "quantization": "Q4_K_M",
+    "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+    "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+    "role": "cross-family confirmatory model",
+    "upstream_repo_id": "Qwen/Qwen2.5-7B-Instruct",
+    "upstream_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+  },
+  "role": "heldout_evaluator_only",
+  "schema_version": "1.0",
+  "verification": {
+    "actual_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "actual_size_bytes": 4683074240,
+    "expected_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "expected_size_bytes": 4683074240,
+    "model_id": "qwen2_5_7b_instruct_q4_k_m",
+    "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "sha256_checked": true,
+    "status": "ok"
+  }
+}

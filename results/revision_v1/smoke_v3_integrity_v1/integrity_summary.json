@@ -1,0 +1,133 @@
+{
+  "analysis_unit": "source_payload_trial_or_control_view",
+  "artifact_type": "smoke_v3_exploratory_integrity_summary",
+  "confirmatory_pooling_eligible": false,
+  "counts": {
+    "failure_records": 14,
+    "heldout_evaluator_rows": 93,
+    "heldout_quality_join_rows": 93,
+    "heldout_quality_text_hash_exact": 93,
+    "rankcloak_payload_trials": 35,
+    "rankcloak_replay_rows": 105,
+    "runner_available_records": 93,
+    "runner_planned_work_units": 96,
+    "runner_unavailable_records": 3
+  },
+  "evaluator_inputs": [
+    {
+      "path": "results/revision_v1/heldout_evaluator/smoke_v3/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+      "rows": 29,
+      "sha256": "62819f60b49dec1493a118beed9935bbb7f6e3d87fcb5c53dc1585ede068f141"
+    },
+    {
+      "path": "results/revision_v1/heldout_evaluator/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m/continuous_quality.jsonl",
+      "rows": 32,
+      "sha256": "a421056590daa8f9430aab0c94c35851c89735cfa329166a43b4705400baf68b"
+    },
+    {
+      "path": "results/revision_v1/heldout_evaluator/smoke_v3/qwen2_5_7b_instruct_q4_k_m/continuous_quality.jsonl",
+      "rows": 32,
+      "sha256": "f8389e22e1a9c68f44cbb51568655778d669a49b7b2d77789bb9ed5cd2fd9776"
+    }
+  ],
+  "evidence_role": "exploratory_smoke_only",
+  "evidence_status": "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+  "heldout_evaluator_contract": {
+    "human_rating_substitute": false,
+    "same_model_evaluation": false,
+    "source_text_sha256_join_exact": true,
+    "source_work_id_join_exact": true
+  },
+  "legacy_labels_accepted": false,
+  "mistral_unavailability": {
+    "condition_unavailable": 1,
+    "counted_as_recovery_failure": false,
+    "dependent_unavailable": 2,
+    "reason_code": "empty_isolated_roundtrip_vocabulary",
+    "safe_count": 31464,
+    "stable_count": 0
+  },
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "quality_contract": {
+    "human_rating_substitute": false,
+    "nested_log_probability_aggregation": "token_count_weighted",
+    "nested_segments_independent": false,
+    "nested_text_separator": "\\n\\n"
+  },
+  "recovery_contract": {
+    "compatibility_alias": "exact_recovery",
+    "exact_rank_replay_role": "diagnostic_only",
+    "primary_outcome": "exact_payload_recovery",
+    "semantics": "original_serialized_payload_bytes_sha256_v1"
+  },
+  "result_schema_revision": "payload_aware_result_v2",
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "bytes": 2703,
+      "path": "results/revision_v1/smoke_v3_preprocessed_v1/preprocessing_output_manifest.json",
+      "sha256": "51576223a5f05585da5a3e032e578a3e6fc1fb7a21a7d6f0382c1eb025957adf"
+    },
+    {
+      "bytes": 4098,
+      "path": "results/revision_v1/smoke_v3_statistics_v3/statistics_run_manifest.json",
+      "sha256": "5ed42e364680077d6cbee9af2d4775220a905ed3ec39690cf89e3bcdd45c659e"
+    },
+    {
+      "bytes": 2961,
+      "path": "results/revision_v1/smoke_v3_theory_v2/theory_validation_manifest.json",
+      "sha256": "365a900a1da67394c801c2788142dad16a4f2d807b7292e72c49337d31e92d13"
+    },
+    {
+      "bytes": 9460,
+      "path": "results/revision_v1/smoke_v3_reports_v3/report_output_manifest.json",
+      "sha256": "42dd610db0219e2363dcb0d3b20be73e3ec88158673e2957df18d1e76ce66ae9"
+    },
+    {
+      "bytes": 538389,
+      "path": "results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/records.jsonl",
+      "sha256": "6d852c8c1c49ce44066f2efd7fd868a293aafc786779ba92c3be3707bca9a10e"
+    },
+    {
+      "bytes": 498386,
+      "path": "results/revision_v1/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+      "sha256": "c261e62113e725f19a6d05b7082fdf7c0187d9a114da7327609eb7bdae34fb54"
+    },
+    {
+      "bytes": 589936,
+      "path": "results/revision_v1/smoke_v3/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+      "sha256": "d15738da4a1b25a099fd181c8b653419b375786460eca29f1c9431493d1eaabd"
+    },
+    {
+      "bytes": 90614,
+      "path": "results/revision_v1/heldout_evaluator/smoke_v3/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+      "sha256": "62819f60b49dec1493a118beed9935bbb7f6e3d87fcb5c53dc1585ede068f141"
+    },
+    {
+      "bytes": 99831,
+      "path": "results/revision_v1/heldout_evaluator/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m/continuous_quality.jsonl",
+      "sha256": "a421056590daa8f9430aab0c94c35851c89735cfa329166a43b4705400baf68b"
+    },
+    {
+      "bytes": 99612,
+      "path": "results/revision_v1/heldout_evaluator/smoke_v3/qwen2_5_7b_instruct_q4_k_m/continuous_quality.jsonl",
+      "sha256": "f8389e22e1a9c68f44cbb51568655778d669a49b7b2d77789bb9ed5cd2fd9776"
+    }
+  ],
+  "theory_contract": {
+    "capacity_evaluable": 32,
+    "capacity_forced_count_feasible": 32,
+    "capacity_rate_bound_holds": 32,
+    "cascade_evaluable": 0,
+    "confirmatory_pooling_eligible": false,
+    "evidence_status": "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+    "exact_observed_only": 35,
+    "exact_proposition_confirmed": 0,
+    "input_records": 96,
+    "missing_result_policy": "no imputation, reconstruction, or synthetic substitution",
+    "quality_all_available_checks_hold": 35,
+    "quality_evaluable": 35,
+    "quality_fully_bound_validated": 32,
+    "quality_partially_evaluable_direct": 3
+  }
+}

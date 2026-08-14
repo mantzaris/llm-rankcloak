@@ -1,0 +1,72 @@
+{
+  "attempt_counts": {
+    "revision_v1_smoke__28216aca83ec7a21bff5": 1,
+    "revision_v1_smoke__2eb0968a4bfe240dcdcf": 1,
+    "revision_v1_smoke__5fe353a9589292a54f88": 1,
+    "revision_v1_smoke__71500cbfe46daf3962fc": 1,
+    "revision_v1_smoke__87a3400c153942ccb26a": 1,
+    "revision_v1_smoke__909b37ae97aa2ad113a3": 1,
+    "revision_v1_smoke__a140462344a6654f9c5d": 1,
+    "revision_v1_smoke__e3e76cc7e78e84200df8": 1,
+    "revision_v1_smoke_control__0e7d9267040b0ab9bf02": 1,
+    "revision_v1_smoke_control__3617e95152339b3095c3": 1,
+    "revision_v1_smoke_control__392b7c7f4093d74e3f8e": 1,
+    "revision_v1_smoke_control__541b50e09bec72d3cec7": 1,
+    "revision_v1_smoke_control__73c1659b6571d99c9027": 1,
+    "revision_v1_smoke_control__7d691c1f4766b1870036": 1,
+    "revision_v1_smoke_control__805762eedf2d9be68ce2": 1,
+    "revision_v1_smoke_control__87212e0c8b1c4887c209": 1,
+    "revision_v1_smoke_control__b007214cc9692dca9a48": 1,
+    "revision_v1_smoke_control__d2a8dd8a2a4b49b587dd": 1,
+    "revision_v1_smoke_control__e62f51d1592ace50dad0": 1,
+    "revision_v1_smoke_control__e8ac11f764c614b11b8a": 1
+  },
+  "completed_trial_ids": [
+    "revision_v1_smoke__28216aca83ec7a21bff5",
+    "revision_v1_smoke__5fe353a9589292a54f88",
+    "revision_v1_smoke__71500cbfe46daf3962fc",
+    "revision_v1_smoke__87a3400c153942ccb26a",
+    "revision_v1_smoke__909b37ae97aa2ad113a3",
+    "revision_v1_smoke__a140462344a6654f9c5d",
+    "revision_v1_smoke__e3e76cc7e78e84200df8",
+    "revision_v1_smoke_control__0e7d9267040b0ab9bf02",
+    "revision_v1_smoke_control__3617e95152339b3095c3",
+    "revision_v1_smoke_control__392b7c7f4093d74e3f8e",
+    "revision_v1_smoke_control__73c1659b6571d99c9027",
+    "revision_v1_smoke_control__7d691c1f4766b1870036",
+    "revision_v1_smoke_control__805762eedf2d9be68ce2",
+    "revision_v1_smoke_control__87212e0c8b1c4887c209",
+    "revision_v1_smoke_control__d2a8dd8a2a4b49b587dd",
+    "revision_v1_smoke_control__e62f51d1592ace50dad0",
+    "revision_v1_smoke_control__e8ac11f764c614b11b8a"
+  ],
+  "config_manifest_sha256": "4a4882476c7070e5fc04cc40900965bab18a94f6523e9fbb638b74a3badaf397",
+  "created_at": "2026-08-08T23:57:42.339471+00:00",
+  "failed_trial_ids": [
+    "revision_v1_smoke__2eb0968a4bfe240dcdcf",
+    "revision_v1_smoke_control__541b50e09bec72d3cec7",
+    "revision_v1_smoke_control__b007214cc9692dca9a48"
+  ],
+  "failure_details": {
+    "revision_v1_smoke__2eb0968a4bfe240dcdcf": {
+      "message": "Round-trip-stable filter rejected the entire vocabulary",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_runner.py\", line 2463, in run_work_plan\n    record = execute_rankcloak_trial(\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_runner.py\", line 1118, in execute_rankcloak_trial\n    allowed_mask, allowed_mask_metadata = _get_filter_mask(\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_runner.py\", line 1018, in _get_filter_mask\n    mask = build_revision_filter_mask(model, key)\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_protocol.py\", line 156, in build_revision_filter_mask\n    return build_round_trip_stable_mask(model, require_safe_text=True)\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_protocol.py\", line 146, in build_round_trip_stable_mask\n    raise ValueError(\"Round-trip-stable filter rejected the entire vocabulary\")\nValueError: Round-trip-stable filter rejected the entire vocabulary\n",
+      "type": "ValueError"
+    },
+    "revision_v1_smoke_control__541b50e09bec72d3cec7": {
+      "message": "Control source result is unavailable: revision_v1_smoke__2eb0968a4bfe240dcdcf",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_runner.py\", line 2475, in run_work_plan\n    raise RevisionRunnerError(\nrankcloak.revision_runner.RevisionRunnerError: Control source result is unavailable: revision_v1_smoke__2eb0968a4bfe240dcdcf\n",
+      "type": "RevisionRunnerError"
+    },
+    "revision_v1_smoke_control__b007214cc9692dca9a48": {
+      "message": "Control source result is unavailable: revision_v1_smoke__2eb0968a4bfe240dcdcf",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_runner.py\", line 2475, in run_work_plan\n    raise RevisionRunnerError(\nrankcloak.revision_runner.RevisionRunnerError: Control source result is unavailable: revision_v1_smoke__2eb0968a4bfe240dcdcf\n",
+      "type": "RevisionRunnerError"
+    }
+  },
+  "planned_trial_count": 32,
+  "planned_trial_ids_sha256": "e5d1779a2e27d83ddf63243e2b3056bf339246fb4db3efbfb0624d51e1baa281",
+  "schema_version": "1.0",
+  "study_id": "rankcloak_scientific_reports_revision_v1/smoke/mistral_7b_instruct_v0_3_q4_k_m",
+  "updated_at": "2026-08-08T23:59:55.205436+00:00"
+}

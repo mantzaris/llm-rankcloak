@@ -1,0 +1,183 @@
+{
+  "created_at_utc": "2026-08-13T11:42:07.435743+00:00",
+  "decision": {
+    "cpu_cuda": {
+      "checks": {
+        "metric_max_abs_max": true,
+        "model_state_hash_policy": true,
+        "model_state_tensor_schema_exact": true,
+        "prediction_agreement_min": false,
+        "row_identity_order_labels_exact": true,
+        "score_mae_max": false,
+        "score_max_abs_max": false,
+        "score_pearson_min": false,
+        "task_design_exact": true
+      },
+      "measurements": {
+        "cpu_model_state_sha256": "3e0f5450ba1790bb6b7d37148af2a877e296d0b7d7765168d73f0d95eed1191c",
+        "cuda_model_state_sha256": "bfd7c7779e8406c6d272b1024921f6e934a6eebc5a63f41ede14401de7296dd1",
+        "metric_absolute_differences": {
+          "balanced_accuracy": 0.007323232323232398,
+          "balanced_accuracy_ci_high_95": 0.00735418806579291,
+          "balanced_accuracy_ci_low_95": 0.007420850512091404,
+          "f1": 0.006799307808693977,
+          "f1_ci_high_95": 0.007036285373569484,
+          "f1_ci_low_95": 0.006879058959265438,
+          "pr_auc": 0.001411777902977529,
+          "pr_auc_ci_high_95": 0.001167449367512452,
+          "pr_auc_ci_low_95": 0.0018137303799407034,
+          "roc_auc": 0.0015123456790122614,
+          "roc_auc_ci_high_95": 0.001235522947811818,
+          "roc_auc_ci_low_95": 0.002030157532066146,
+          "sensitivity": 0.002525252525252486,
+          "sensitivity_ci_high_95": 0.0021933014749995206,
+          "sensitivity_ci_low_95": 0.002649872254340324,
+          "specificity": 0.01717171717171717,
+          "specificity_ci_high_95": 0.015510813810958646,
+          "specificity_ci_low_95": 0.018800239820303544
+        },
+        "metric_max_abs": 0.018800239820303544,
+        "model_state_hash_policy": "device_specific",
+        "model_state_tensor_schema_exact": true,
+        "prediction_agreement": 0.9719696969696969,
+        "row_identity_order_labels_exact": true,
+        "score_mae": 0.029576673937909574,
+        "score_max_abs": 0.8853996321558952,
+        "score_pearson": 0.9769206709380491,
+        "task_design_exact": true
+      },
+      "passed": false,
+      "predeclared_policy": {
+        "metric_max_abs_max": 0.02,
+        "model_state_hash_policy": "device_specific",
+        "model_state_tensor_schema_exact": true,
+        "prediction_agreement_min": 0.995,
+        "row_identity_order_labels_exact": true,
+        "score_mae_max": 0.005,
+        "score_max_abs_max": 0.05,
+        "score_pearson_min": 0.999,
+        "task_design_exact": true
+      }
+    },
+    "equivalent": false,
+    "same_device_cuda": {
+      "checks": {
+        "metrics_exact": true,
+        "model_state_sha256_exact": true,
+        "predictions_exact": true,
+        "row_identity_order_labels_exact": true,
+        "scores_exact": true,
+        "task_design_exact": true
+      },
+      "passed": true,
+      "predeclared_policy": {
+        "metrics_exact": true,
+        "model_state_sha256_exact": true,
+        "predictions_exact": true,
+        "row_identity_order_labels_exact": true,
+        "scores_exact": true,
+        "task_design_exact": true
+      }
+    },
+    "schema_version": "rankcloak-revision-detector-device-equivalence-v1",
+    "scientific_task_identity_exact": true
+  },
+  "input_artifacts": {
+    "cpu": {
+      "artifact_sha256": "d1a7e59a1905f93466bf3338f75d81786cf3b1c566d6f329b0a37ccc1f1ca114",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_0/cpu_artifact.json",
+      "sha256": "923ae9b083e85a408b73366bb2d70f34aeddec2c688bd6977a89f2980b11d45c",
+      "size_bytes": 2514164
+    },
+    "cuda": {
+      "artifact_sha256": "d6cbe3212bc2dbe7c3b883ea05342a52460d76665377371544f32e0bb9bbbcd5",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_0/cuda_artifact.json",
+      "sha256": "c2cf981d8cba3e2840355dd1ae9896fe0ef973f41b0d102d2d1364977a5828ee",
+      "size_bytes": 2518130
+    },
+    "cuda_repeat": {
+      "artifact_sha256": "283e45d2c3be08d78eaecfa4432f8fa778770d757ca90c26ff190ce0ccf3d76a",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_0/cuda_repeat_artifact.json",
+      "sha256": "992afc92178b1f1ca9d40f55e60084f606f8b48dcff4652c14a613ef89953f42",
+      "size_bytes": 2517307
+    }
+  },
+  "input_artifacts_sha256": "bf7ccca2c840c72fe2965147bc94646310c26929e76e954c78c6878febb6a87c",
+  "policy_identity": {
+    "environment_binding": {
+      "environment_files_sha256": "4aeb0156c2937c4bc2e6b8c5ed6fe8a16b47b568c8129b2f24a83681929a32a4",
+      "required_files": {
+        "CHECKSUMS.sha256": {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/CHECKSUMS.sha256",
+          "sha256": "d7610e72d4d8bcd7f50a988e9ac6dc0275dbb29b6d7d17a47de6a9f881a07c34",
+          "size_bytes": 766
+        },
+        "environment_manifest.json": {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/environment_manifest.json",
+          "sha256": "a7b57556892752aa7131bddd625960c48aad23267a14648608246a1cdf5bd374",
+          "size_bytes": 1900
+        },
+        "scientific_pins.json": {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/scientific_pins.json",
+          "sha256": "cd0ab88e2dba0c3b604da413b10598c11c02f292016868d03d19885dacc7a283",
+          "size_bytes": 34830
+        }
+      },
+      "root": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1",
+      "schema_version": "rankcloak-revision-detector-environment-binding-v1",
+      "verification_status": "ok",
+      "verified_file_count": 10
+    },
+    "environment_binding_sha256": "44774ae7061cce4a00412751bb092e76899ff17b76c65523a6682041ed383fd1",
+    "equivalence_policy": {
+      "cpu_cuda": {
+        "metric_max_abs_max": 0.02,
+        "model_state_hash_policy": "device_specific",
+        "model_state_tensor_schema_exact": true,
+        "prediction_agreement_min": 0.995,
+        "row_identity_order_labels_exact": true,
+        "score_mae_max": 0.005,
+        "score_max_abs_max": 0.05,
+        "score_pearson_min": 0.999,
+        "task_design_exact": true
+      },
+      "same_device_cuda": {
+        "metrics_exact": true,
+        "model_state_sha256_exact": true,
+        "predictions_exact": true,
+        "row_identity_order_labels_exact": true,
+        "scores_exact": true,
+        "task_design_exact": true
+      }
+    },
+    "equivalence_policy_sha256": "9594559a5a5821d96fb378fa9acecdfc2239b44cc519fd983f978a75e78224c7",
+    "execution_policy_content_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+    "execution_policy_path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_acceleration_policy_v1.json",
+    "execution_policy_sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
+    "schema_version": "rankcloak-revision-detector-equivalence-policy-identity-v1"
+  },
+  "policy_identity_sha256": "de8386b92176bd302f9b569be7bd2819238c11e1a8eff399d366cc55b0b26a58",
+  "predeclared_policy": {
+    "cpu_cuda": {
+      "metric_max_abs_max": 0.02,
+      "model_state_hash_policy": "device_specific",
+      "model_state_tensor_schema_exact": true,
+      "prediction_agreement_min": 0.995,
+      "row_identity_order_labels_exact": true,
+      "score_mae_max": 0.005,
+      "score_max_abs_max": 0.05,
+      "score_pearson_min": 0.999,
+      "task_design_exact": true
+    },
+    "same_device_cuda": {
+      "metrics_exact": true,
+      "model_state_sha256_exact": true,
+      "predictions_exact": true,
+      "row_identity_order_labels_exact": true,
+      "scores_exact": true,
+      "task_design_exact": true
+    }
+  },
+  "report_sha256": "87403221e98801b9c2f1a78e86ed105a942d3916e3d5a3bac336686388af405e",
+  "schema_version": "rankcloak-revision-detector-device-equivalence-v1"
+}

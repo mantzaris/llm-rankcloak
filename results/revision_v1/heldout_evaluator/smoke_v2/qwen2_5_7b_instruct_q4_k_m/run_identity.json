@@ -1,0 +1,55 @@
+{
+  "command_line_args": [
+    "evaluator_model_id=qwen2_5_7b_instruct_q4_k_m",
+    "generator_model_id=llama3_8b_instruct_q4_k_m",
+    "context_limit=4096",
+    "gpu_uuid=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "n_gpu_layers=-1",
+    "evidence_partitions=exploratory_smoke_v2_no_confirmatory_pooling",
+    "source_stages=smoke_v2",
+    "source_manifest_sha256=db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+    "runtime_manifest_sha256=73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+    "hardware_manifest_sha256=d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df"
+  ],
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "manifest_type": "revision_run_identity",
+  "model_artifacts": [
+    {
+      "configured_model": {
+        "architecture_scale": "7B",
+        "artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "artifact_size_bytes": 4683074240,
+        "family": "qwen2",
+        "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "license": "Apache-2.0",
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "pin_status": "pinned",
+        "quantization": "Q4_K_M",
+        "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+        "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+        "role": "cross-family confirmatory model",
+        "upstream_repo_id": "Qwen/Qwen2.5-7B-Instruct",
+        "upstream_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "role": "heldout_evaluator_only",
+      "schema_version": "1.0",
+      "verification": {
+        "actual_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "actual_size_bytes": 4683074240,
+        "expected_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "expected_size_bytes": 4683074240,
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      }
+    }
+  ],
+  "payload_manifest_sha256": "d11b24aec27a2d7f67aa3ea3cb747f0f8aa66b72d79499cc2388f9b47595e06d",
+  "planned_trial_count": 32,
+  "planned_trial_ids_sha256": "c89c24e3a8730cf08243672f09fcd85c88dfe548bfe4db9898739b656c4a875a",
+  "run_identity_sha256": "707225b2e0a1192d08fb981f1827a54086e2b8c0fbefd15dc8d1b3cf31f73386",
+  "schema_version": "1.0",
+  "study_id": "revision_v1/heldout_evaluator/exploratory_smoke_v2_no_confirmatory_pooling/qwen2_5_7b_instruct_q4_k_m"
+}

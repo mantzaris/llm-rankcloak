@@ -1,0 +1,67 @@
+{
+  "command_line_args": [
+    "stage=smoke_v3",
+    "model_id=mistral_7b_instruct_v0_3_q4_k_m",
+    "evidence_status=exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+    "context_limit=4096",
+    "gpu_uuid=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "n_gpu_layers=-1",
+    "source_manifest_sha256=2263a64989b188ed8af88b72fec4a753bc007f60b5ac88fd899c7b44a17a9f64",
+    "runtime_manifest_sha256=c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+    "hardware_manifest_sha256=3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+    "input_results_manifest_sha256=none",
+    "protocol_contract_revision=payload_fidelity_v2",
+    "result_schema_revision=payload_aware_result_v2"
+  ],
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "manifest_type": "revision_run_identity",
+  "model_artifacts": [
+    {
+      "configured_model": {
+        "architecture_scale": "7B",
+        "artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "artifact_size_bytes": 4372812000,
+        "family": "mistral",
+        "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "license": "Apache-2.0",
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "pin_status": "pinned",
+        "quantization": "Q4_K_M",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+        "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+        "role": "cross-family confirmatory model",
+        "upstream_repo_id": "mistralai/Mistral-7B-Instruct-v0.3",
+        "upstream_revision": "c170c708c41dac9275d15a8fff4eca08d52bab71"
+      },
+      "execution_policy": {
+        "backend": "llama_cpp",
+        "one_model_loaded_at_a_time": true,
+        "rank_replay_n_batch": 1,
+        "rank_replay_n_ubatch": 1,
+        "require_exact_artifact_sha256": true,
+        "require_exact_library_and_backend_manifest": true,
+        "tokenizer_source": "embedded_gguf"
+      },
+      "schema_version": "1.0",
+      "verification": {
+        "actual_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "actual_size_bytes": 4372812000,
+        "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "expected_size_bytes": 4372812000,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      }
+    }
+  ],
+  "payload_manifest_sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+  "planned_trial_count": 32,
+  "planned_trial_ids_sha256": "65b78a0bbc6e502addb380161777012b0dbe4b68e41853eb1c056974c1be63e3",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "run_identity_sha256": "9c3682061f29e82419b131ac8c4e15906c779fa4c8c5f767719ce3968e384a51",
+  "schema_version": "1.0",
+  "study_id": "rankcloak_scientific_reports_revision_v1/smoke_v3/mistral_7b_instruct_v0_3_q4_k_m"
+}

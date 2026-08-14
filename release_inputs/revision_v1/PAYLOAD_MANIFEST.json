@@ -1,0 +1,43 @@
+{
+  "class_counts": {
+    "aes256_gcm_base64": 60,
+    "chacha20_poly1305_base64": 60,
+    "ed25519_signature_base64": 60,
+    "hmac_sha256_hex": 60,
+    "nonce_96_bit_hex": 60,
+    "sha256_hex": 60,
+    "token_128_bit_hex": 60,
+    "uuid_v4": 60
+  },
+  "corpus_id": "rankcloak_scientific_reports_revision_v1",
+  "corpus_sha256": "caf0db84c814e02474a3cd2fc5588a8283cbe00fe41ce448764c6cdc67baa8c0",
+  "cryptography_version": "46.0.7",
+  "derivation_version": "shake256-domain-separated-v1",
+  "manifest_type": "revision_payload_corpus",
+  "payload_count": 480,
+  "payload_file": "revision_payloads.jsonl",
+  "payload_file_sha256": "6e45aafbc639f49c8fb07fc3055aa2d25e47025a2e945c4ffd2f5ac017322fd2",
+  "payload_file_size_bytes": 534460,
+  "public_seed_material_sha256": "fe3f8323471b8b6f7e71eae6d2447fafc786f8ab938ed2778fbb881e44d01520",
+  "public_seed_material_utf8": "RankCloak Scientific Reports major revision v1 public deterministic test-vector seed; NOT SECRET; DO NOT USE OPERATIONALLY",
+  "schema_version": "1.0",
+  "scope": "Public deterministic test vectors only; no operational secrets.",
+  "validation": {
+    "class_counts": {
+      "aes256_gcm_base64": 60,
+      "chacha20_poly1305_base64": 60,
+      "ed25519_signature_base64": 60,
+      "hmac_sha256_hex": 60,
+      "nonce_96_bit_hex": 60,
+      "sha256_hex": 60,
+      "token_128_bit_hex": 60,
+      "uuid_v4": 60
+    },
+    "corpus_id": "rankcloak_scientific_reports_revision_v1",
+    "corpus_sha256": "caf0db84c814e02474a3cd2fc5588a8283cbe00fe41ce448764c6cdc67baa8c0",
+    "errors": [],
+    "invalid_payload_names": [],
+    "payload_count": 480,
+    "status": "ok"
+  }
+}

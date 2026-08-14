@@ -1,0 +1,74 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "0defc88bd4f1b5b657bc80619118f05e8b33784471dc20ce85fcc397f5a31ac5",
+      "size_bytes": 2965
+    },
+    "predictions.json": {
+      "row_count": 3960,
+      "sha256": "7916a6358c5ec6997b463bd0fcd8e7e6ce3db48d63a0b721a2d2a00fd90fc603",
+      "size_bytes": 1582175
+    }
+  },
+  "children_sha256": "213f8f3d5fc9dcf860eecb0418a7b36c6717a8dde00497bbc873088685e26909",
+  "completed_at_utc": "2026-08-13T11:37:08.609531+00:00",
+  "elapsed_seconds": 32.0789109080215,
+  "manifest_sha256": "6e435ec4020c0cf2f7738217ab5749b5bbe756ce8282e71181e87b440e35e554",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "ea7ba5a0a73289254d70442c2470e39df3131905412a9b061e8c7592da057699",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-13T11:36:36.530639+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "text_cnn",
+    "detector_name": "published_textcnn_equivalent",
+    "detector_position": 0,
+    "effective_detector_config": {
+      "batch_size": 64,
+      "device": "cuda:0",
+      "dropout": 0.5,
+      "embedding_dimension": 300,
+      "enabled": true,
+      "epochs": 10,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "filter_sizes": [
+        3,
+        5
+      ],
+      "filters_per_width": 100,
+      "kind": "text_cnn",
+      "learning_rate": 0.001,
+      "lowercase": true,
+      "maximum_length": 256,
+      "maximum_vocabulary_size": 30000,
+      "minimum_token_frequency": 1,
+      "name": "published_textcnn_equivalent",
+      "torch_num_threads": 1,
+      "weight_decay": 1e-06
+    },
+    "effective_detector_config_sha256": "91382ac313009ec933da15d23b8ff4f49c4c32472d378a66d077cf4bf7251d97",
+    "excluded_held_out_rows": 0,
+    "held_out_column": null,
+    "held_out_value": null,
+    "ordinal": 0,
+    "partition_policy": "full_held_out_condition",
+    "purged_train_rows": 0,
+    "regime": "matched",
+    "scientific_detector_config_sha256": "32a329fca7f37234612393dfd9c488b88ffb0e91127b1d86231cc519f860cf56",
+    "seed": 3996075400,
+    "split_id": "matched",
+    "split_position": 0,
+    "test_indices_sha256": "b55b372bef0b9dbf824919a6b14f046e653736baa3e28da17c4b7b681b705d9d",
+    "test_row_count": 3960,
+    "test_row_ids_ordered_sha256": "3ca85a56dfb6e75d2388c5f5cbfa1a1ab7d2bf8a102b873f55487dcb6098622c",
+    "train_indices_sha256": "af6d297128b0a2e6c63d637bda065c885df0dc5c2d3482c6f34ace4b107990f4",
+    "train_row_count": 11880,
+    "train_row_ids_ordered_sha256": "b33dfcce847834337bdaf2797501c20500a01467d4480a131a3f2e6f7a1eedd4"
+  },
+  "task_identity_sha256": "82c34429b80f9d9c9b38d22b137e69cfc3275b1938b8e00dff5ebb06992ff7bf"
+}

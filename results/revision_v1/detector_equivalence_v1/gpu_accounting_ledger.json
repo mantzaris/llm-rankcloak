@@ -1,0 +1,81 @@
+{
+  "cumulative_elapsed_seconds": 200.053008,
+  "derivation_policy": "terminal_receipt_interval_union_deduplicated_v1",
+  "device": "cuda:0",
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "intervals": [
+    {
+      "completed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+      "derivation_policy": "detector_process_wall_span_v1",
+      "device": "cuda:0",
+      "elapsed_seconds": 86.859575,
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "last_observed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+      "pid": 2461683,
+      "process_start_ticks": 48519807,
+      "started_at_utc": "2026-08-13T11:35:44.731997+00:00"
+    },
+    {
+      "completed_at_utc": "2026-08-13T11:38:56.711281+00:00",
+      "derivation_policy": "detector_process_wall_span_v1",
+      "device": "cuda:0",
+      "elapsed_seconds": 17.872341,
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "last_observed_at_utc": "2026-08-13T11:38:56.711281+00:00",
+      "pid": 2466998,
+      "process_start_ticks": 48537193,
+      "started_at_utc": "2026-08-13T11:38:38.838940+00:00"
+    },
+    {
+      "completed_at_utc": "2026-08-13T11:42:01.386458+00:00",
+      "derivation_policy": "detector_process_wall_span_v1",
+      "device": "cuda:0",
+      "elapsed_seconds": 95.321092,
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "last_observed_at_utc": "2026-08-13T11:42:01.386458+00:00",
+      "pid": 2470252,
+      "process_start_ticks": 48547965,
+      "started_at_utc": "2026-08-13T11:40:26.065366+00:00"
+    }
+  ],
+  "intervals_sha256": "4827564ce6a9fd22b5ee21d04bfd74c5a12fb2bafcc48f5229d0c0103f6f6f1c",
+  "ledger_sha256": "ae106ee522af58ef1ed426371067ace5167ba1f7a3d039751c95aa1bac204dd1",
+  "schema_version": "rankcloak-revision-detector-gpu-accounting-ledger-v1",
+  "sources": [
+    {
+      "component": "detector_production_benchmark",
+      "gpu_accounting_sha256": "54e3c3308f00e0359ceb4141be7f2af9e27aed1d2a059f3122b0c4ccd567cc70",
+      "source_id": "production_benchmark_task_0",
+      "terminal_receipt": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/finalization_candidates/benchmark_artifact-task0-benchmark-27235ab35626bb02.terminal_receipt.json",
+        "sha256": "8afb0b0b26451a5660081d24cc076cea5ea0efaa9a8dbd7e5a42d3de5d1f144d",
+        "size_bytes": 15861,
+        "terminal_receipt_sha256": "196ca57a498de3b6dfb41503769c3819598b7344fc2c9825336d8643fb1d6daf"
+      }
+    },
+    {
+      "component": "detector_device_equivalence_cuda",
+      "gpu_accounting_sha256": "645862dae541a445e1398c76f2f1815e636337eedc45cfa5caa7aad3ea7800af",
+      "source_id": "equivalence_cuda_task_0",
+      "terminal_receipt": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/finalization_candidates/equivalence_artifact-task0-cuda-54362f4128c6a49a.terminal_receipt.json",
+        "sha256": "f6a35d53fb4989c1fef4531d8574ca35bee396af2b21ed1c9afe7ab5640dc982",
+        "size_bytes": 16108,
+        "terminal_receipt_sha256": "6d978d0e9258974af0cee2dc2ffdea9f9ac688d35018d2087887c3eab9d65f68"
+      }
+    },
+    {
+      "component": "detector_device_equivalence_cuda_repeat",
+      "gpu_accounting_sha256": "c97be77b5dcb0b710c7f6e411916b9bc14e6e2fe33cc50d93ed6da4edc9081c6",
+      "source_id": "equivalence_cuda_repeat_task_0",
+      "terminal_receipt": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_0/cuda_repeat_run.checkpoints/finalization_candidates/equivalence_artifact-task0-cuda_repeat-813bd072058f18d6.terminal_receipt.json",
+        "sha256": "bc30e00dd03e1c7405f42a7bd16e79ff24d46d832708b423467953f8298931c4",
+        "size_bytes": 16057,
+        "terminal_receipt_sha256": "74ae5b1fc0826d45666b5cb4501875124b14c3f43c841195440c76f529458382"
+      }
+    }
+  ],
+  "sources_sha256": "d81b5820c86929976ad0113f817d1a8bd51e8c8123f3e2feb8b39fe964d33e30",
+  "updated_at_utc": "2026-08-13T11:42:03.052308+00:00"
+}

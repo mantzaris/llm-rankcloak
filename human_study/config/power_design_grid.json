@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.1.0",
+  "status": "PLANNING_GRID_NOT_APPROVED_DESIGN_OR_EMPIRICAL_RESULT",
+  "seed": 20260809,
+  "default_simulations": 2000,
+  "two_sided_alpha": 0.025,
+  "ratings_per_stimulus": 3,
+  "participant_slots": 72,
+  "thresholds": [
+    -2.1,
+    -1.3,
+    -0.6,
+    0.1,
+    0.8,
+    1.6
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "null_calibration_120x5",
+      "stimuli_per_condition": 120,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 200,
+      "common_odds_ratio": 1,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_72x3",
+      "stimuli_per_condition": 72,
+      "ratings_per_stimulus": 3,
+      "participant_slots": 72,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_96x3",
+      "stimuli_per_condition": 96,
+      "ratings_per_stimulus": 3,
+      "participant_slots": 96,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_144x3",
+      "stimuli_per_condition": 144,
+      "ratings_per_stimulus": 3,
+      "participant_slots": 144,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_192x3",
+      "stimuli_per_condition": 192,
+      "ratings_per_stimulus": 3,
+      "participant_slots": 192,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_72x5",
+      "stimuli_per_condition": 72,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 120,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_96x5",
+      "stimuli_per_condition": 96,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 160,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_120x5",
+      "stimuli_per_condition": 120,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 200,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_typical_144x5",
+      "stimuli_per_condition": 144,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 240,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_5_high_96x5",
+      "stimuli_per_condition": 96,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 160,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.9,
+      "stimulus_sd": 0.75
+    },
+    {
+      "scenario_id": "or1_5_high_144x5",
+      "stimuli_per_condition": 144,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 240,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.9,
+      "stimulus_sd": 0.75
+    },
+    {
+      "scenario_id": "or1_5_high_192x5",
+      "stimuli_per_condition": 192,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 320,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.9,
+      "stimulus_sd": 0.75
+    },
+    {
+      "scenario_id": "or1_5_high_240x5",
+      "stimuli_per_condition": 240,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 400,
+      "common_odds_ratio": 1.5,
+      "participant_sd": 0.9,
+      "stimulus_sd": 0.75
+    },
+    {
+      "scenario_id": "or1_25_typical_192x5",
+      "stimuli_per_condition": 192,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 320,
+      "common_odds_ratio": 1.25,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    },
+    {
+      "scenario_id": "or1_25_typical_240x5",
+      "stimuli_per_condition": 240,
+      "ratings_per_stimulus": 5,
+      "participant_slots": 400,
+      "common_odds_ratio": 1.25,
+      "participant_sd": 0.65,
+      "stimulus_sd": 0.5
+    }
+  ]
+}

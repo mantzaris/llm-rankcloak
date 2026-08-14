@@ -1,0 +1,64 @@
+{
+  "command_line_args": [
+    "stage=ablation_v2",
+    "model_id=llama3_8b_instruct_q4_k_m",
+    "evidence_status=confirmatory_ablation_v2_payload_fidelity_after_manifest_freeze",
+    "context_limit=4096",
+    "gpu_uuid=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "n_gpu_layers=-1",
+    "source_manifest_sha256=2263a64989b188ed8af88b72fec4a753bc007f60b5ac88fd899c7b44a17a9f64",
+    "runtime_manifest_sha256=c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+    "hardware_manifest_sha256=3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+    "input_results_manifest_sha256=none",
+    "protocol_contract_revision=payload_fidelity_v2",
+    "result_schema_revision=payload_aware_result_v2"
+  ],
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "manifest_type": "revision_run_identity",
+  "model_artifacts": [
+    {
+      "configured_model": {
+        "architecture_scale": "8B",
+        "artifact_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "artifact_size_bytes": 4920734272,
+        "family": "llama",
+        "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "pin_status": "pinned",
+        "quantization": "Q4_K_M",
+        "relative_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+        "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+        "revision": "local artifact pinned by content hash",
+        "role": "submitted-study anchor"
+      },
+      "execution_policy": {
+        "backend": "llama_cpp",
+        "one_model_loaded_at_a_time": true,
+        "rank_replay_n_batch": 1,
+        "rank_replay_n_ubatch": 1,
+        "require_exact_artifact_sha256": true,
+        "require_exact_library_and_backend_manifest": true,
+        "tokenizer_source": "embedded_gguf"
+      },
+      "schema_version": "1.0",
+      "verification": {
+        "actual_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "actual_size_bytes": 4920734272,
+        "expected_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "expected_size_bytes": 4920734272,
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "relative_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      }
+    }
+  ],
+  "payload_manifest_sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+  "planned_trial_count": 624,
+  "planned_trial_ids_sha256": "46ff75af8942db88683b7aa124dbc443703001ff7d307b1b6036db7f939cacbf",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "run_identity_sha256": "03410644d277c98c9852f0c814d2ebb2eb218bc3a26be19460ac4e7c643ef89c",
+  "schema_version": "1.0",
+  "study_id": "rankcloak_scientific_reports_revision_v1/ablation_v2/llama3_8b_instruct_q4_k_m"
+}

@@ -293,15 +293,37 @@ def tokenize_bytes(model: Any, text_bytes: bytes, add_bos: bool = True) -> List[
 
 
 def tokenize_payload_text(model: Any, text: str) -> List[int]:
-    """Tokenize payload display text with the same leading-space convention."""
+    """Tokenize the literal payload bytes without adding special tokens.
 
-    token_ids = tokenize_bytes(model, (" " + text).encode("utf-8"), add_bos=True)
-    bos_id = get_bos_token_id(model)
-    if token_ids and bos_id is not None and token_ids[0] == bos_id:
-        return token_ids[1:]
-    if token_ids:
-        return token_ids[1:]
-    return []
+    ``llama.cpp``’s historical ``add_bos`` parameter is an ``add_special``
+    switch: a BOS is inserted only when the model vocabulary requests one and
+    an EOS may also be inserted. Payload tokenization therefore disables it
+    and never deletes a token by position.
+    """
+
+    if not isinstance(text, str) or not text:
+        raise ValueError("Direct-subword payload text must be a non-empty string")
+    try:
+        token_ids = list(
+            model.tokenize(
+                text.encode("utf-8"), add_bos=False, special=False
+            )
+        )
+    except TypeError:
+        # Older compatible test doubles may not expose ``special``; the
+        # explicit add_bos=False contract remains mandatory and must not fall
+        # back to a backend default that can insert special tokens.
+        try:
+            token_ids = list(
+                model.tokenize(text.encode("utf-8"), add_bos=False)
+            )
+        except TypeError as exc:
+            raise TypeError(
+                "Tokenizer cannot guarantee explicit add_bos=False semantics"
+            ) from exc
+    if not token_ids:
+        raise ValueError("Direct-subword payload tokenization produced no tokens")
+    return list(map(int, token_ids))
 
 
 def make_context_token_ids(model: Any, prompt: str) -> List[int]:
@@ -311,14 +333,28 @@ def make_context_token_ids(model: Any, prompt: str) -> List[int]:
         token_ids = tokenize_bytes(model, prompt.encode("utf-8"), add_bos=True)
         bos_id = get_bos_token_id(model)
         if token_ids and bos_id is not None and token_ids[0] == bos_id:
-            return token_ids[1:]
+            token_ids = token_ids[1:]
         if token_ids:
-            return token_ids[1:]
+            return list(map(int, token_ids))
+        raise ValueError(
+            "A non-empty prompt tokenized to no non-BOS context tokens"
+        )
 
     bos_id = get_bos_token_id(model)
     if bos_id is None:
         raise ValueError("The model does not expose a BOS token for empty context.")
     return [bos_id]
+
+
+def detokenize_bytes(model: Any, token_ids: List[int]) -> bytes:
+    """Detokenize token IDs to exact bytes or fail closed."""
+
+    raw = model.detokenize(list(map(int, token_ids)))
+    if isinstance(raw, bytes):
+        return raw
+    if isinstance(raw, str):
+        return raw.encode("utf-8")
+    raise TypeError("Model detokenize must return bytes or str")
 
 
 def safe_detokenize(model: Any, token_ids: List[int]) -> str:

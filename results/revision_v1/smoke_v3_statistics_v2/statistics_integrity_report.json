@@ -1,0 +1,73 @@
+{
+  "analysis_unit": "payload",
+  "bootstrap_resamples": 100,
+  "bootstrap_seed": 2026080801,
+  "bootstrap_unit": "payload",
+  "confidence_level": 0.95,
+  "estimand_exclusions": {
+    "unavailable_rows_counted": false,
+    "unavailable_trial_rows": 0
+  },
+  "independent_payloads": {
+    "features": 24,
+    "runtime": 26,
+    "trials": 24
+  },
+  "input_rows": {
+    "detectors": 0,
+    "features": 302,
+    "runtime": 102,
+    "trials": 198
+  },
+  "mixed_effects": [
+    {
+      "fixed_effects_fallback": false,
+      "status": "not_requested"
+    }
+  ],
+  "nested_segments_collapsed_before_quality_inference": true,
+  "payload_fidelity_contract": {
+    "alias_equality_validated": true,
+    "compatibility_alias": "exact_recovery",
+    "contract_version": "payload_fidelity_v2",
+    "direct_rows": 9,
+    "direct_rows_contract_verified": 9,
+    "exact_rank_replay_role": "diagnostic_only",
+    "primary_outcome": "exact_payload_recovery",
+    "result_schema_revision": "payload_aware_result_v2",
+    "semantics": "original_serialized_payload_bytes_sha256_v1"
+  },
+  "primary_effect_scope": {
+    "diagnostic_replay_fallback": false,
+    "eligible_trial_rows": 0,
+    "evidence_status": "confirmatory_primary_v2_payload_fidelity_after_manifest_freeze",
+    "mitigation_id": "none",
+    "pairwise_effects_are_primary_inference": false,
+    "protocol_contract_revision": "payload_fidelity_v2",
+    "replay_mode": "saved_token_ids",
+    "result_schema_revision": "payload_aware_result_v2",
+    "study_phase": "primary_v2_confirmatory",
+    "transformation_id": "unmodified"
+  },
+  "quality_effect_scope": {
+    "effect_rows": 408,
+    "exclusion_reason": null,
+    "unscoped_effect_rows": 0,
+    "view_column": "view",
+    "view_levels": [
+      "forced_span",
+      "full_message"
+    ],
+    "view_stratified": true
+  },
+  "quality_metric_notice": "Readability, repetition, surface flags, and TF-IDF similarity are deterministic diagnostics and not substitutes for human ratings.",
+  "raw_input_rows": {
+    "detectors": 0,
+    "features": 302,
+    "runtime": 102,
+    "trials": 198
+  },
+  "segments_as_independent_observations": false,
+  "smoke_fixture": false,
+  "status": "passed"
+}

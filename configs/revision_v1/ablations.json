@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_one_factor_ablations",
+  "design": "paired_one_factor_at_a_time",
+  "subset": {
+    "payload_classes": [
+      "sha256_hex",
+      "hmac_sha256_hex",
+      "nonce_96_bit_hex",
+      "token_128_bit_hex"
+    ],
+    "selection": "payload_index_0_through_11",
+    "payloads_per_class": 12,
+    "payload_count": 48,
+    "model_count": 3,
+    "paired_blocks": 144
+  },
+  "canonical": {
+    "protocol_variant": "segmented_hex_multi_topic",
+    "token_filter": "safe_text_filter_v1",
+    "leadin_tokens": 0,
+    "tail_policy": "dynamic_completion_v1",
+    "segment_size_ranks": 8,
+    "overlaps_primary": true
+  },
+  "feasibility_gates": {
+    "roundtrip_stable_filter_v1": {
+      "criterion": "safe_text_true_and_isolated_detokenize_retokenize_exact",
+      "minimum_allowed_token_count": 1,
+      "evaluation_scope": "pinned_model_and_embedded_tokenizer_before_confirmatory_generation",
+      "on_empty": "emit_completed_condition_unavailable_and_propagate_dependent_unavailable",
+      "reason_code": "empty_isolated_roundtrip_vocabulary",
+      "prefix_conditioned_substitution_permitted": false
+    }
+  },
+  "factors": [
+    {
+      "factor_id": "token_filter",
+      "levels": ["none", "safe_text_filter_v1", "roundtrip_stable_filter_v1"],
+      "canonical_level": "safe_text_filter_v1",
+      "factor_rows": 432,
+      "new_generation_rows": 288
+    },
+    {
+      "factor_id": "leadin_tokens",
+      "levels": [0, 2, 4, 8, 16, 32],
+      "canonical_level": 0,
+      "factor_rows": 864,
+      "new_generation_rows": 720
+    },
+    {
+      "factor_id": "tail_policy",
+      "levels": ["none", "sentence_tail_min20_max60", "dynamic_completion_v1"],
+      "canonical_level": "dynamic_completion_v1",
+      "factor_rows": 432,
+      "new_generation_rows": 288
+    },
+    {
+      "factor_id": "segment_size_ranks",
+      "levels": [4, 8, 16, 32],
+      "canonical_level": 8,
+      "factor_rows": 576,
+      "new_generation_rows": 432
+    }
+  ],
+  "expected_counts": {
+    "factor_rows_before_deduplicating_canonical": 2304,
+    "duplicate_canonical_rows_removed": 432,
+    "unique_condition_rows": 1872,
+    "primary_overlap_rows": 144,
+    "new_generated_rankcloak_texts_planned": 1728,
+    "new_generated_rankcloak_texts_executable": {
+      "status": "model_dependent_observed_count",
+      "calculation": "planned_generation_rows_minus_completed_condition_unavailable_rows",
+      "reported_from": "immutable_completed_records"
+    }
+  }
+}

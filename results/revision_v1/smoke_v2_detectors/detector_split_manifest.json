@@ -1,0 +1,20 @@
+{
+  "skipped_splits": [],
+  "splits": [
+    {
+      "held_out_column": null,
+      "held_out_value": null,
+      "purged_train_rows": 0,
+      "regime": "matched",
+      "split_id": "matched",
+      "test_payload_groups": 6,
+      "test_positive_rows": 14,
+      "test_row_ids_sha256": "b35c71b69c08a958bf74c71188fb17ce5ef821ee2063d647e8bb301ca408745b",
+      "test_rows": 28,
+      "train_payload_groups": 18,
+      "train_positive_rows": 44,
+      "train_row_ids_sha256": "8424b942c9efcb5c65b9e328cac9340f2c1708ec2d1e5ce719d1635b7b6735b4",
+      "train_rows": 88
+    }
+  ]
+}

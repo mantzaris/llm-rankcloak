@@ -1,0 +1,97 @@
+{
+  "schema_version": "rankcloak-detector-live-readonly-audit-v1",
+  "captured_at": "2026-08-13T01:47:56.981911+00:00",
+  "decision": {
+    "credible_completion_within_four_additional_hours": false,
+    "disposition": "stop_only_uncheckpointed_detector_after_disarming_blind_supervisor_retry",
+    "reason": "The process is actively computing, but the atomic 56-fit loop exposes no fit counter and there is no concrete evidence that at least 83 percent of the workload is complete. Completion within four additional hours is therefore not evidence-backed."
+  },
+  "live_process": {
+    "pid": 3353725,
+    "ppid": 3347410,
+    "process_group_id": 3347410,
+    "session_id": 3347410,
+    "started_at": "2026-08-12T02:42:25.980000+00:00",
+    "elapsed_seconds": 83131.00191092491,
+    "cpu_seconds": 82989.05,
+    "state": "R",
+    "command": "/home/meow/Documents/repos/llm-rankcloak/.venv/bin/python scripts/run_revision_detectors.py --input /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl --preprocessing-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2 --overwrite",
+    "observed_cpu_utilization_percent": 99.8,
+    "observed_resident_memory_kib": 8693324,
+    "observed_peak_resident_memory_kib": 9772216,
+    "major_faults": 0,
+    "swap_kib": 0,
+    "threads": 26,
+    "busy_threads": 1,
+    "open_regular_detector_output_files": 0,
+    "stdout_pipe_buffered_bytes_at_probe": 0,
+    "stderr_pipe_buffered_bytes_at_probe": 0,
+    "tracer_pid": 0
+  },
+  "execution_contract": {
+    "dataset_rows": 15840,
+    "payload_pairs": 7920,
+    "payload_groups": 480,
+    "splits": 28,
+    "detectors_per_split": 2,
+    "total_executions": 56,
+    "execution_order": "split_outer_detector_inner_serial",
+    "output_behavior": "all metrics and predictions buffered in memory; five products then detector_run_manifest.json written only after all 56 executions",
+    "current_execution_identity": null,
+    "current_execution_identity_reason": "No per-fit log, checkpoint, output, or safely observable runtime marker exists.",
+    "models": [
+      {
+        "name": "published_textcnn_equivalent",
+        "kind": "text_cnn",
+        "model_class": "genuine_neural_pytorch_model",
+        "epochs": 10,
+        "batch_size": 64,
+        "device": "cpu",
+        "torch_num_threads": 1
+      },
+      {
+        "name": "deberta_v3_base_classifier",
+        "kind": "pretrained_transformer",
+        "model_class": "genuine_neural_pytorch_model",
+        "epochs": 3,
+        "batch_size": 8,
+        "device": "cpu",
+        "torch_num_threads": 1
+      }
+    ],
+    "statistical_fallback_in_confirmatory_run": false,
+    "grouped_bootstrap_resamples_per_execution": 2000
+  },
+  "durable_preceding_state": {
+    "canonical_progress_file": "results/revision_v1/confirmatory_progress_v1.json",
+    "canonical_progress_file_sha256": "85c73c8fbcdc0b1a96455eaaebb77ebfa608624fe46e913979bf3bbef74d6980",
+    "canonical_progress_sha256": "a831996904b4a219ea7c0032c8c000db6c4c64ae3769b8ca46ad02708f82c123",
+    "completed": 38448,
+    "total": 38504,
+    "successes": 38016,
+    "unavailable": 432,
+    "failures": 0,
+    "remaining_detector_executions": 56,
+    "cumulative_actual_gpu_hours": 61.549997679508685,
+    "verified_gpu_actions_complete": 27,
+    "verified_gpu_actions_total": 27,
+    "primary_gate_complete": true,
+    "preprocessing_manifests_verified": 4,
+    "primary_evaluator_join_verified": true,
+    "detector_output_directory_was_empty": true
+  },
+  "pinned_files": {
+    "analysis/revision_v1/detector_confirmatory_plan.json": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+    "configs/revision_v1/detectors/default.json": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+    "rankcloak/revision_detection.py": "fb6f99ea315c8724d6fd9e9a60b3823a21b91248c41845cc61b2f97a9514c543",
+    "scripts/run_revision_detectors.py": "4a3b9912ab61511e9bf8fc1b32825439e697298d84e84b79e1b41e1730bee352",
+    "scripts/supervise_confirmatory_v2.py": "55402d6c2f5b7e2ae3732166e5e90ee3665d66ef19a6fd01b2a7700bf871e6c2",
+    "results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+    "results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1"
+  },
+  "safety_notes": [
+    "Never signal process group 3347410 because it contains both supervisor and detector.",
+    "The supervisor must be terminated by exact PID before the detector so it cannot blindly relaunch the atomic 56-fit action.",
+    "Stopping the detector loses only in-memory detector work; all 38448 preceding terminal units are independently hash-verified and durable."
+  ]
+}

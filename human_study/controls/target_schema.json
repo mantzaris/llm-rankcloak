@@ -1,0 +1,23 @@
+{
+  "schema_version": "rankcloak-human-control-length-targets-v1",
+  "status": "AWAITING_COMPLETED_GENERATED_STIMULI",
+  "format": "CSV with exactly 72 unique rows",
+  "required_columns": [
+    "prompt_category",
+    "template_id",
+    "payload_class",
+    "target_word_count",
+    "target_character_count"
+  ],
+  "optional_columns": [
+    "payload_id",
+    "target_source_condition",
+    "target_source_work_id",
+    "target_source_sha256"
+  ],
+  "stratum_rule": "One row for each of 6 prompt categories x 3 templates x 4 eligible payload classes.",
+  "target_definition": "Predeclare one human-control length target per stratum from the completed generated-condition sampling frame without examining human naturalness ratings.",
+  "selection_objective": "Minimum total normalized word-count difference with character-count difference as a secondary cost; source texts remain unique.",
+  "default_max_relative_word_difference": 0.35,
+  "segments_are_not_independent_targets": true
+}

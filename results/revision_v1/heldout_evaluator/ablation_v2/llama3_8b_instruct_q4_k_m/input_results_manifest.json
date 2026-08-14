@@ -1,0 +1,94 @@
+{
+  "evaluator_model_id": "llama3_8b_instruct_q4_k_m",
+  "generator_artifact_opened_by_evaluator": false,
+  "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+  "inputs_sha256": "cb0566a45b2d0ccd7e16fffa44113cc0f7b5901dd0fbdcf3346898738a875349",
+  "manifest_type": "heldout_evaluator_inputs",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "runner_shards": [
+    {
+      "confirmatory_pooling_eligible": true,
+      "evidence_partition": "confirmatory_supporting_ablation_v2_payload_fidelity_v2",
+      "files": [
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/checkpoint.json",
+          "role": "checkpoint",
+          "sha256": "60d578b42b1dcffbf36cc37970cf6e4bd08c043662f9ec85488eac1e57e4f6b5",
+          "size_bytes": 93544
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/hardware_manifest.json",
+          "role": "hardware_manifest",
+          "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+          "size_bytes": 634
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/model_manifest.json",
+          "role": "model_manifest",
+          "sha256": "fd8afaa086a49fcc83c2269f6613c3e1f8b0ced714bf71dbd923e4a60d47494f",
+          "size_bytes": 1597
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/payload_manifest.json",
+          "role": "payload_manifest",
+          "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+          "size_bytes": 643935
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/plan.jsonl",
+          "role": "plan",
+          "sha256": "034da042fe1de01e0321f16a31241ac5a068e55e5d89bd3f27ee115b0ddf6f44",
+          "size_bytes": 884644
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+          "role": "records",
+          "sha256": "797bcfce85cc9cda12e091a04c402c39ebc5141ed724c438d72ddafc30174fff",
+          "size_bytes": 20162699
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/run_identity.json",
+          "role": "run_identity",
+          "sha256": "8082ea1049c63c9adc43ce14c23678115d6cc8ee4f6a4db8b8be3a25d761d71f",
+          "size_bytes": 3214
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/runtime_manifest.json",
+          "role": "runtime_manifest",
+          "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+          "size_bytes": 1084
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/source_manifest.json",
+          "role": "source_manifest",
+          "sha256": "2263a64989b188ed8af88b72fec4a753bc007f60b5ac88fd899c7b44a17a9f64",
+          "size_bytes": 2409
+        }
+      ],
+      "files_sha256": "d4d3bd3df087b8dc8d6f5db0502307884c36765f9798104017d2f1b474dedc82",
+      "generator_artifact_opened_by_evaluator": false,
+      "generator_artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "generator_artifact_verification": {
+        "actual_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "actual_size_bytes": 4372812000,
+        "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "expected_size_bytes": 4372812000,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      },
+      "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "manifest_type": "heldout_evaluator_verified_runner_input",
+      "protocol_contract_revision": "payload_fidelity_v2",
+      "result_schema_revision": "payload_aware_result_v2",
+      "runner_planned_count": 624,
+      "schema_version": "2.0",
+      "selected_score_record_count": 528,
+      "stage": "ablation_v2"
+    }
+  ],
+  "same_model_evaluation": false,
+  "schema_version": "2.0"
+}

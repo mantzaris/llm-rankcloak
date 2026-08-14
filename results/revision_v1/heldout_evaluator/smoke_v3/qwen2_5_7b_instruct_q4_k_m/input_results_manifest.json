@@ -1,0 +1,94 @@
+{
+  "evaluator_model_id": "qwen2_5_7b_instruct_q4_k_m",
+  "generator_artifact_opened_by_evaluator": false,
+  "generator_model_id": "llama3_8b_instruct_q4_k_m",
+  "inputs_sha256": "4a54914c14a7d2f2fc4641084c27ee715dd804ed5248ec395714a8cb26a66a9c",
+  "manifest_type": "heldout_evaluator_inputs",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "runner_shards": [
+    {
+      "confirmatory_pooling_eligible": false,
+      "evidence_partition": "exploratory_smoke_v3_payload_fidelity_v2_no_confirmatory_pooling",
+      "files": [
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/checkpoint.json",
+          "role": "checkpoint",
+          "sha256": "5725a85f0570dca063bc61252ea127af1c2ccb8b06044d12601d251323d267e7",
+          "size_bytes": 5134
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/hardware_manifest.json",
+          "role": "hardware_manifest",
+          "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+          "size_bytes": 634
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/model_manifest.json",
+          "role": "model_manifest",
+          "sha256": "1ed72381c8118a57d779adf03096774b66bbaa9a1e813c67d9d8c598b68c0b49",
+          "size_bytes": 1384
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/payload_manifest.json",
+          "role": "payload_manifest",
+          "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+          "size_bytes": 643935
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/plan.jsonl",
+          "role": "plan",
+          "sha256": "d42ddeebac9172fde76a2f824f3c967b1dd42be8edcfe5be107d5c3144e8e321",
+          "size_bytes": 43283
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/records.jsonl",
+          "role": "records",
+          "sha256": "6d852c8c1c49ce44066f2efd7fd868a293aafc786779ba92c3be3707bca9a10e",
+          "size_bytes": 538389
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/run_identity.json",
+          "role": "run_identity",
+          "sha256": "847d931a8200f4410cec85e3e69d90e58ee8eb44718291930976f6df6c17ceae",
+          "size_bytes": 2976
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/runtime_manifest.json",
+          "role": "runtime_manifest",
+          "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+          "size_bytes": 1084
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v3/llama3_8b_instruct_q4_k_m/source_manifest.json",
+          "role": "source_manifest",
+          "sha256": "2263a64989b188ed8af88b72fec4a753bc007f60b5ac88fd899c7b44a17a9f64",
+          "size_bytes": 2409
+        }
+      ],
+      "files_sha256": "4440fbf81a1b9ce11970b005e1a3f83d498604c51f796e5bc3c6a3e8f88b548d",
+      "generator_artifact_opened_by_evaluator": false,
+      "generator_artifact_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "generator_artifact_verification": {
+        "actual_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "actual_size_bytes": 4920734272,
+        "expected_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "expected_size_bytes": 4920734272,
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "relative_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      },
+      "generator_model_id": "llama3_8b_instruct_q4_k_m",
+      "manifest_type": "heldout_evaluator_verified_runner_input",
+      "protocol_contract_revision": "payload_fidelity_v2",
+      "result_schema_revision": "payload_aware_result_v2",
+      "runner_planned_count": 32,
+      "schema_version": "2.0",
+      "selected_score_record_count": 32,
+      "stage": "smoke_v3"
+    }
+  ],
+  "same_model_evaluation": false,
+  "schema_version": "2.0"
+}

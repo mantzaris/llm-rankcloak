@@ -1,0 +1,261 @@
+{
+  "checkpoint_cumulative_fit_seconds": 32.0789109080215,
+  "checkpoint_fit_seconds_at_process_start": 32.0789109080215,
+  "completed_fit_count": 1,
+  "current_fit": null,
+  "current_fit_elapsed_seconds": null,
+  "current_fit_started_at_utc": null,
+  "device": "cuda:0",
+  "final_manifest": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_0/cuda_artifact.json",
+    "sha256": "c2cf981d8cba3e2840355dd1ae9896fe0ef973f41b0d102d2d1364977a5828ee",
+    "size_bytes": 2518130
+  },
+  "finalization_candidate": {
+    "candidate_sha256": "7c34d1eb902ffc4a7710999be63b0120ac89fc6aa5c33b6a66e23c92f74044d3",
+    "kind": "equivalence_artifact",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/finalization_candidates/equivalence_artifact-task0-cuda-54362f4128c6a49a.json",
+    "sha256": "1b06a1fe145ccdc62fad9926e2b727ce491d12be6052894741050324f495a2ec",
+    "size_bytes": 2651884
+  },
+  "fit_gate_nonce": null,
+  "fit_permit_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.fit_permit.json",
+  "fit_permit_receipt_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/fit_permit_receipts",
+  "fits_per_hour": 112.22326126725834,
+  "global_elapsed_policy": "sum_of_valid_fit_intervals_plus_active_fit_v1",
+  "global_elapsed_seconds": 32.0789109080215,
+  "global_started_at_utc": "2026-08-13T11:38:38.838940+00:00",
+  "gpu_accounting": {
+    "cumulative_elapsed_seconds": 104.73191600000001,
+    "derivation_policy": "nonoverlapping_detector_process_wall_intervals_v1",
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "intervals": [
+      {
+        "completed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 86.859575,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-13T11:37:11.591572+00:00",
+        "pid": 2461683,
+        "process_start_ticks": 48519807,
+        "started_at_utc": "2026-08-13T11:35:44.731997+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-13T11:38:56.711281+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 17.872341,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-13T11:38:56.711281+00:00",
+        "pid": 2466998,
+        "process_start_ticks": 48537193,
+        "started_at_utc": "2026-08-13T11:38:38.838940+00:00"
+      }
+    ]
+  },
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "last_completed_checkpoint": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/fits/0000/manifest.json",
+    "sha256": "815b0db022d6d0caf76607182a2580d59cbcc0612953422dcfd4de10dbd854d8",
+    "task_ordinal": 0
+  },
+  "last_consumed_fit_permit": null,
+  "next_fit": null,
+  "next_fit_upper_seconds": null,
+  "peak_rss_bytes": 748077056,
+  "peak_vram_bytes": 0,
+  "pid": 2466998,
+  "process_elapsed_seconds": 0.07640111801447347,
+  "process_start_ticks": 48537193,
+  "recovered_errors": [
+    {
+      "action": "resume_from_latest_valid_fit_checkpoint",
+      "observed_absent_at_utc": "2026-08-13T11:38:56.711281+00:00",
+      "pid": 2466998,
+      "process_start_ticks": 48537193,
+      "type": "supervisor_closed_exited_gpu_interval"
+    }
+  ],
+  "rolling_estimated_completion_utc": "2026-08-13T12:08:03.255443+00:00",
+  "rolling_eta_seconds": 1764.3400999411824,
+  "rolling_fits_per_hour": 112.22326126725834,
+  "run_identity": {
+    "checkpoint_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints",
+    "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+    "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+    "device": "cuda:0",
+    "excluded_operational_gate_fields": [
+      "pre_final_gpu_accounting_ledger",
+      "pre_final_gpu_accounting_ledger_path",
+      "required_equivalence_reports"
+    ],
+    "execution_policy_path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_acceleration_policy_v1.json",
+    "execution_policy_sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
+    "fit_permit_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.fit_permit.json",
+    "fit_permit_receipt_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/fit_permit_receipts",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+    "lineage": {
+      "config_path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/default.json",
+      "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+      "confirmatory_plan_path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/detector_confirmatory_plan.json",
+      "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+      "environment_binding": {
+        "environment_files_sha256": "4aeb0156c2937c4bc2e6b8c5ed6fe8a16b47b568c8129b2f24a83681929a32a4",
+        "required_files": {
+          "CHECKSUMS.sha256": {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/CHECKSUMS.sha256",
+            "sha256": "d7610e72d4d8bcd7f50a988e9ac6dc0275dbb29b6d7d17a47de6a9f881a07c34",
+            "size_bytes": 766
+          },
+          "environment_manifest.json": {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/environment_manifest.json",
+            "sha256": "a7b57556892752aa7131bddd625960c48aad23267a14648608246a1cdf5bd374",
+            "size_bytes": 1900
+          },
+          "scientific_pins.json": {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/scientific_pins.json",
+            "sha256": "cd0ab88e2dba0c3b604da413b10598c11c02f292016868d03d19885dacc7a283",
+            "size_bytes": 34830
+          }
+        },
+        "root": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1",
+        "schema_version": "rankcloak-revision-detector-environment-binding-v1",
+        "verification_status": "ok",
+        "verified_file_count": 10
+      },
+      "execution_policy": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_acceleration_policy_v1.json",
+        "policy": {
+          "audit": {
+            "cpu_deberta_upper_seconds": 108000.0,
+            "cpu_textcnn_upper_seconds": 14400.0,
+            "derivation": "read_only_2026-08-12_detector_audit_with_conservative_margin_v1",
+            "diagnostic_path": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+            "diagnostic_sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7"
+          },
+          "authorized_ceiling": {
+            "gpu_hours": 165.0,
+            "projection_path": "results/revision_v1/compute_projection_165h_v2.json",
+            "projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3"
+          },
+          "benchmark": {
+            "checkpoint_reuse": true,
+            "task_indices": [
+              0,
+              1
+            ]
+          },
+          "ceiling": {
+            "next_fit_upper_seconds_by_detector": {
+              "deberta_v3_base_classifier": 108000.0,
+              "published_textcnn_equivalent": 14400.0
+            }
+          },
+          "equivalence": {
+            "cpu_cuda": {
+              "metric_max_abs_max": 0.02,
+              "model_state_hash_policy": "device_specific",
+              "model_state_tensor_schema_exact": true,
+              "prediction_agreement_min": 0.995,
+              "row_identity_order_labels_exact": true,
+              "score_mae_max": 0.005,
+              "score_max_abs_max": 0.05,
+              "score_pearson_min": 0.999,
+              "task_design_exact": true
+            },
+            "same_device_cuda": {
+              "metrics_exact": true,
+              "model_state_sha256_exact": true,
+              "predictions_exact": true,
+              "row_identity_order_labels_exact": true,
+              "scores_exact": true,
+              "task_design_exact": true
+            }
+          },
+          "execution": {
+            "device": "cuda:0",
+            "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+            "torch_num_threads": 1,
+            "workers": 1
+          },
+          "policy_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+          "policy_status": "predeclared_before_acceleration_benchmarks",
+          "schema_version": "rankcloak-revision-detector-acceleration-policy-v1"
+        },
+        "policy_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+        "sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
+        "size_bytes": 1890
+      },
+      "input_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+      "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+      "preprocessing_binding": {
+        "detector_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+        "detector_row_count": 15840,
+        "detector_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+        "detector_size_bytes": 21444549,
+        "preprocessing_input_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_input_manifest.json",
+        "preprocessing_input_manifest_sha256": "2b52d551a36497aaae754094345af1e89da59885f5df253a117786bc7ed5aee9",
+        "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+        "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+        "primary_model_ids": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "primary_shard_count": 3,
+        "schema_version": "rankcloak-revision-primary-detector-preprocessing-binding-v1",
+        "strict_complete": true,
+        "verified_input_file_count": 24,
+        "verified_input_files_sha256": "e6c463e1681403b5515d7b25b6ae7f32f314f5ef5870e1681728e3a5afc8c34b"
+      },
+      "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+      "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+      "runtime_config_sha256": "ef45202cf66699f2a019af1580cc0a49dc8aef778c4773bf7b30ce1db9e03452"
+    },
+    "lineage_sha256": "0c999e531ae5274a6773cc9f72b53ca66f07bc7ffe6315fb66d2968f72e124cc",
+    "output_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2",
+    "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+    "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+    "require_fit_permit": true,
+    "schema_version": "rankcloak-revision-detector-run-identity-v1",
+    "source": {
+      "files": [
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_detection.py",
+          "sha256": "835b6e569808ff03c2242dbc6ee2a8b0ae8f2cae4cd2b6651ce14e4a7fa59254",
+          "size_bytes": 86473
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_detector_execution.py",
+          "sha256": "b8211ac3c91bc0a55566cb2db96e08b141a6ec08673a635cc5df65c60dde2c5a",
+          "size_bytes": 163440
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/scripts/run_revision_detectors.py",
+          "sha256": "21f4d9f1722fd4481757c2fe42ecb5b801fae8fe3d4b45988de04e667324c52a",
+          "size_bytes": 72456
+        }
+      ],
+      "files_sha256": "e2ec6e7d07acc3b8468b2eed19c1d052dc67f8ec3b8fcfcb73bf31942014aa8c"
+    },
+    "source_sha256": "0b7f8efd1a5f1563f100da82c658d487ca9a210a31cd9df77db27e6aa9f5ab1d",
+    "status_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.status.json",
+    "workers": 1
+  },
+  "run_identity_sha256": "ea7ba5a0a73289254d70442c2470e39df3131905412a9b061e8c7592da057699",
+  "schema_version": "rankcloak-revision-detector-status-v1",
+  "state": "complete",
+  "status_sha256": "35740c42148d8351bda6414b84f263576534ce24db3d6082a1d4fc99cac3e4b1",
+  "terminal_receipt": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2.checkpoints/finalization_candidates/equivalence_artifact-task0-cuda-54362f4128c6a49a.terminal_receipt.json",
+    "sha256": "f6a35d53fb4989c1fef4531d8574ca35bee396af2b21ed1c9afe7ab5640dc982",
+    "size_bytes": 16108,
+    "terminal_receipt_sha256": "6d978d0e9258974af0cee2dc2ffdea9f9ac688d35018d2087887c3eab9d65f68"
+  },
+  "total_fit_count": 56,
+  "updated_at_utc": "2026-08-13T11:38:57.431121+00:00",
+  "workers": 1
+}

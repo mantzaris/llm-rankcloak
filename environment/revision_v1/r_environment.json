@@ -1,0 +1,1865 @@
+{
+  "automatic_installation": false,
+  "declared_library_resolution": [
+    {
+      "path": ".r_libs/revision_v1",
+      "path_kind": "repository_relative",
+      "role": "project_revision_library"
+    },
+    {
+      "path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "path_kind": "absolute_existing",
+      "role": "existing_user_r_4_4_library"
+    },
+    {
+      "path": ".Library/.Library.site",
+      "path_kind": "r_runtime_default",
+      "role": "r_default_libraries"
+    }
+  ],
+  "declared_lock": {
+    "environment_id": "rankcloak_revision_v1_r_4_4_2",
+    "library": {
+      "automatic_network_install": false,
+      "resolution_order": [
+        {
+          "path": ".r_libs/revision_v1",
+          "path_kind": "repository_relative",
+          "role": "project_revision_library"
+        },
+        {
+          "path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+          "path_kind": "home_relative",
+          "role": "existing_user_r_4_4_library"
+        },
+        {
+          "path": ".Library/.Library.site",
+          "path_kind": "r_runtime_default",
+          "role": "r_default_libraries"
+        }
+      ],
+      "resolved_path_recording_required": true,
+      "scope": "controlled_composite_exact_version_resolution",
+      "vendored_binaries": false
+    },
+    "lock_schema_version": "1.0",
+    "packages": {
+      "emmeans": {
+        "required_for": [
+          "prespecified_contrasts"
+        ],
+        "required_library_role": "existing_user_r_4_4_library",
+        "version": "1.10.5"
+      },
+      "jsonlite": {
+        "required_for": [
+          "plan_and_manifest_io"
+        ],
+        "required_library_role": "existing_user_r_4_4_library",
+        "version": "1.8.9"
+      },
+      "lme4": {
+        "required_for": [
+          "binomial_glmer",
+          "negative_binomial_glmer",
+          "gaussian_lmer"
+        ],
+        "required_library_role": "project_revision_library",
+        "version": "2.0.6"
+      },
+      "ordinal": {
+        "description_version": "2026.7-26",
+        "required_for": [
+          "future_human_clmm_after_external_authorization"
+        ],
+        "required_library_role": "project_revision_library",
+        "version": "2026.7.26"
+      }
+    },
+    "policy": {
+      "exact_version_match_required": true,
+      "fixed_effects_fallback_for_failed_mixed_models": false,
+      "human_model_runs_before_ratings": false,
+      "only_declared_library_role_satisfies_each_locked_package": true,
+      "resolved_package_path_must_be_recorded": true
+    },
+    "r": {
+      "executable_default": "/usr/bin/Rscript",
+      "version": "4.4.2"
+    }
+  },
+  "declared_lock_relative_path": "analysis/revision_v1/r_environment.lock.json",
+  "declared_lock_sha256": "96ec333d847d845280e1aba5197ee298d46eeeedcd72e88e8ec1aa9d22cf368b",
+  "errors": [],
+  "launcher_probe_returncode": 0,
+  "launcher_relative_path": "analysis/revision_v1/run_with_locked_r.sh",
+  "launcher_sha256": "7a4069696eabfc422d6fc1911f5934b2f50a567e865a026eac9767db35242ab0",
+  "library_paths": [
+    {
+      "library_index": 1,
+      "path": ".r_libs/revision_v1",
+      "path_kind": "repository_relative",
+      "role": "project_revision_library"
+    },
+    {
+      "library_index": 2,
+      "path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "path_kind": "home_relative",
+      "role": "existing_user_r_4_4_library"
+    },
+    {
+      "library_index": 3,
+      "path": "/usr/local/lib/R/site-library",
+      "path_kind": "system_absolute",
+      "role": "r_runtime_default"
+    },
+    {
+      "library_index": 4,
+      "path": "/usr/lib/R/site-library",
+      "path_kind": "system_absolute",
+      "role": "r_runtime_default"
+    },
+    {
+      "library_index": 5,
+      "path": "/usr/lib/R/library",
+      "path_kind": "system_absolute",
+      "role": "r_runtime_default"
+    }
+  ],
+  "observed_package_count": 163,
+  "observed_packages": [
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "DBI",
+      "priority": null,
+      "version": "1.2.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "Deriv",
+      "priority": null,
+      "version": "4.1.6"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "Formula",
+      "priority": null,
+      "version": "1.2-5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "IRdisplay",
+      "priority": null,
+      "version": "1.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "IRkernel",
+      "priority": null,
+      "version": "1.3.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "KernSmooth",
+      "priority": "recommended",
+      "version": "2.23-22"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "system_or_recommended",
+      "name": "MASS",
+      "priority": "recommended",
+      "version": "7.3-61"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "MASS",
+      "priority": "recommended",
+      "version": "7.3-60.0.1"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "Matrix",
+      "priority": "recommended",
+      "version": "1.6-5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "MatrixModels",
+      "priority": null,
+      "version": "0.5-3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "R.cache",
+      "priority": null,
+      "version": "0.16.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "R.methodsS3",
+      "priority": null,
+      "version": "1.8.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "R.oo",
+      "priority": null,
+      "version": "1.27.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "R.utils",
+      "priority": null,
+      "version": "2.12.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "R6",
+      "priority": null,
+      "version": "2.5.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "RColorBrewer",
+      "priority": null,
+      "version": "1.1-3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "RSQLite",
+      "priority": null,
+      "version": "2.3.8"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "Rcpp",
+      "priority": null,
+      "version": "1.1.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "Rcpp",
+      "priority": null,
+      "version": "1.0.13-1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "RcppEigen",
+      "priority": null,
+      "version": "0.3.4.0.2"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "Rdpack",
+      "priority": null,
+      "version": "2.6.6"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "SparseM",
+      "priority": null,
+      "version": "1.84-2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "abind",
+      "priority": null,
+      "version": "1.4-8"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "backports",
+      "priority": null,
+      "version": "1.5.0"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "base",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "base64enc",
+      "priority": null,
+      "version": "0.1-3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "bit",
+      "priority": null,
+      "version": "4.5.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "bit64",
+      "priority": null,
+      "version": "4.5.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "blob",
+      "priority": null,
+      "version": "1.2.4"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "boot",
+      "priority": "recommended",
+      "version": "1.3-30"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "brew",
+      "priority": null,
+      "version": "1.0-10"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "brio",
+      "priority": null,
+      "version": "1.1.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "broom",
+      "priority": null,
+      "version": "1.0.7"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "bslib",
+      "priority": null,
+      "version": "0.8.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "cachem",
+      "priority": null,
+      "version": "1.1.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "callr",
+      "priority": null,
+      "version": "3.7.6"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "carData",
+      "priority": null,
+      "version": "3.0-5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "chron",
+      "priority": null,
+      "version": "2.3-61"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "class",
+      "priority": "recommended",
+      "version": "7.3-22"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "cli",
+      "priority": null,
+      "version": "3.6.3"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "cluster",
+      "priority": "recommended",
+      "version": "2.1.6"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "codetools",
+      "priority": "recommended",
+      "version": "0.2-19"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "collections",
+      "priority": null,
+      "version": "0.3.7"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "colorspace",
+      "priority": null,
+      "version": "2.1-1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "commonmark",
+      "priority": null,
+      "version": "1.9.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "compiler",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "corrplot",
+      "priority": null,
+      "version": "0.95"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "cpp11",
+      "priority": null,
+      "version": "0.5.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "crayon",
+      "priority": null,
+      "version": "1.5.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "crosstalk",
+      "priority": null,
+      "version": "1.2.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "cyclocomp",
+      "priority": null,
+      "version": "1.1.1"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "datasets",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "desc",
+      "priority": null,
+      "version": "1.4.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "diffobj",
+      "priority": null,
+      "version": "0.3.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "digest",
+      "priority": null,
+      "version": "0.6.37"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "dplyr",
+      "priority": null,
+      "version": "1.1.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "ellipse",
+      "priority": null,
+      "version": "0.5.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "emmeans",
+      "priority": null,
+      "version": "1.10.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "estimability",
+      "priority": null,
+      "version": "1.5.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "evaluate",
+      "priority": null,
+      "version": "1.0.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "fansi",
+      "priority": null,
+      "version": "1.0.6"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "farver",
+      "priority": null,
+      "version": "2.1.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "fastmap",
+      "priority": null,
+      "version": "1.2.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "flashClust",
+      "priority": null,
+      "version": "1.01-2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "fontawesome",
+      "priority": null,
+      "version": "0.5.3"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "foreign",
+      "priority": "recommended",
+      "version": "0.8-86"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "fs",
+      "priority": null,
+      "version": "1.6.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "generics",
+      "priority": null,
+      "version": "0.1.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "glue",
+      "priority": null,
+      "version": "1.8.0"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "grDevices",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "graphics",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "grid",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "gridExtra",
+      "priority": null,
+      "version": "2.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "gsubfn",
+      "priority": null,
+      "version": "0.7"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "gtable",
+      "priority": null,
+      "version": "0.3.6"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "highr",
+      "priority": null,
+      "version": "0.11"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "htmltools",
+      "priority": null,
+      "version": "0.5.8.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "htmlwidgets",
+      "priority": null,
+      "version": "1.6.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "isoband",
+      "priority": null,
+      "version": "0.2.7"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "jquerylib",
+      "priority": null,
+      "version": "0.1.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "jsonlite",
+      "priority": null,
+      "version": "1.8.9"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "knitr",
+      "priority": null,
+      "version": "1.49"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "labeling",
+      "priority": null,
+      "version": "0.4.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "later",
+      "priority": null,
+      "version": "1.3.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "lattice",
+      "priority": "recommended",
+      "version": "0.22-5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "lazyeval",
+      "priority": null,
+      "version": "0.2.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "leaps",
+      "priority": null,
+      "version": "3.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "lifecycle",
+      "priority": null,
+      "version": "1.0.4"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "lme4",
+      "priority": null,
+      "version": "2.0-6"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "magrittr",
+      "priority": null,
+      "version": "2.0.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "memoise",
+      "priority": null,
+      "version": "2.0.1"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "methods",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "mgcv",
+      "priority": "recommended",
+      "version": "1.9-1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "microbenchmark",
+      "priority": null,
+      "version": "1.5.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "mime",
+      "priority": null,
+      "version": "0.12"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "minqa",
+      "priority": null,
+      "version": "1.2.8"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "modelr",
+      "priority": null,
+      "version": "0.1.11"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "multcompView",
+      "priority": null,
+      "version": "0.1-10"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "munsell",
+      "priority": null,
+      "version": "0.5.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "mvtnorm",
+      "priority": null,
+      "version": "1.3-2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "nlme",
+      "priority": "recommended",
+      "version": "3.1-164"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "nloptr",
+      "priority": null,
+      "version": "2.2.1"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "nnet",
+      "priority": "recommended",
+      "version": "7.3-19"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "numDeriv",
+      "priority": null,
+      "version": "2016.8-1.1"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "ordinal",
+      "priority": null,
+      "version": "2026.7-26"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "parallel",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "pbdZMQ",
+      "priority": null,
+      "version": "0.3-13"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "pillar",
+      "priority": null,
+      "version": "1.9.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "pkgbuild",
+      "priority": null,
+      "version": "1.4.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "pkgconfig",
+      "priority": null,
+      "version": "2.0.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "pkgload",
+      "priority": null,
+      "version": "1.4.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "plogr",
+      "priority": null,
+      "version": "0.2.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "plyr",
+      "priority": null,
+      "version": "1.8.9"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "polynom",
+      "priority": null,
+      "version": "1.4-1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "praise",
+      "priority": null,
+      "version": "1.0.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "processx",
+      "priority": null,
+      "version": "3.8.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "promises",
+      "priority": null,
+      "version": "1.3.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "proto",
+      "priority": null,
+      "version": "1.0.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "ps",
+      "priority": null,
+      "version": "1.8.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "purrr",
+      "priority": null,
+      "version": "1.0.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "quantreg",
+      "priority": null,
+      "version": "5.99.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "randomForest",
+      "priority": null,
+      "version": "4.7-1.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "rappdirs",
+      "priority": null,
+      "version": "0.3.3"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "rbibutils",
+      "priority": null,
+      "version": "2.4.1"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "reformulas",
+      "priority": null,
+      "version": "0.4.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "remotes",
+      "priority": null,
+      "version": "2.5.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "repr",
+      "priority": null,
+      "version": "1.1.7"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "reshape2",
+      "priority": null,
+      "version": "1.4.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "rex",
+      "priority": null,
+      "version": "1.2.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "rlang",
+      "priority": null,
+      "version": "1.1.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "rmarkdown",
+      "priority": null,
+      "version": "2.29"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "rpart",
+      "priority": "recommended",
+      "version": "4.1.23"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "rprojroot",
+      "priority": null,
+      "version": "2.0.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "sass",
+      "priority": null,
+      "version": "0.4.9"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "scales",
+      "priority": null,
+      "version": "1.3.0"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "scatterplot3d",
+      "priority": null,
+      "version": "0.3-44"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "spatial",
+      "priority": "recommended",
+      "version": "7.3-17"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "splines",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "sqldf",
+      "priority": null,
+      "version": "0.4-11"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "stats",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "stats4",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "stringi",
+      "priority": null,
+      "version": "1.8.4"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "stringr",
+      "priority": null,
+      "version": "1.5.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "styler",
+      "priority": null,
+      "version": "1.10.3"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "survival",
+      "priority": "recommended",
+      "version": "3.5-8"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "tcltk",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "testthat",
+      "priority": null,
+      "version": "3.2.1.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "tibble",
+      "priority": null,
+      "version": "3.2.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "tidyr",
+      "priority": null,
+      "version": "1.3.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "tidyselect",
+      "priority": null,
+      "version": "1.2.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "tinytex",
+      "priority": null,
+      "version": "0.54"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "tools",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 1,
+      "library_path": ".r_libs/revision_v1",
+      "library_path_kind": "repository_relative",
+      "library_role": "project_revision_library",
+      "library_scope": "project_local",
+      "name": "ucminf",
+      "priority": null,
+      "version": "1.2.3"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "utf8",
+      "priority": null,
+      "version": "1.2.4"
+    },
+    {
+      "library_index": 5,
+      "library_path": "/usr/lib/R/library",
+      "library_path_kind": "system_absolute",
+      "library_role": "r_runtime_default",
+      "library_scope": "system_or_recommended",
+      "name": "utils",
+      "priority": "base",
+      "version": "4.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "uuid",
+      "priority": null,
+      "version": "1.2-1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "vctrs",
+      "priority": null,
+      "version": "0.6.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "viridisLite",
+      "priority": null,
+      "version": "0.4.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "waldo",
+      "priority": null,
+      "version": "0.6.1"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "withr",
+      "priority": null,
+      "version": "3.0.2"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "xfun",
+      "priority": null,
+      "version": "0.49"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "xmlparsedata",
+      "priority": null,
+      "version": "1.0.5"
+    },
+    {
+      "library_index": 2,
+      "library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+      "library_path_kind": "home_relative",
+      "library_role": "existing_user_r_4_4_library",
+      "library_scope": "user_or_site",
+      "name": "yaml",
+      "priority": null,
+      "version": "2.3.10"
+    }
+  ],
+  "observed_packages_sha256": "238bfe2c1f12b4aa7801e6df807140f1229c43832ea6e1b09aaee4a60a3b4326",
+  "project_library_inventory": {
+    "directory_present": true,
+    "observed_package_count": 8,
+    "records": [
+      {
+        "description_sha256": "b8a4d18d07900065e0e3cc3506db67c69cae4c593923f1aa0dd2c1777277407e",
+        "package": "Rcpp",
+        "version": "1.1.2"
+      },
+      {
+        "description_sha256": "6d0cb0b84b2dc6177e701d0a278eb0f05a951eb25c6aacc8060b29b8c11fc090",
+        "package": "Rdpack",
+        "version": "2.6.6"
+      },
+      {
+        "description_sha256": "29b0097432ba0ed5e5fc315c0d6f6c9288395274578cec9538df88ace76e023f",
+        "package": "lme4",
+        "version": "2.0-6"
+      },
+      {
+        "description_sha256": "78a3007c12cbb71375f0b6a017b79bfc35c3c6c1288504c7f0c089b99820ba86",
+        "package": "nloptr",
+        "version": "2.2.1"
+      },
+      {
+        "description_sha256": "32cea7509310591ef643e8cfc0a97b463118c69fc51577a588ad96db2c6b3d2b",
+        "package": "ordinal",
+        "version": "2026.7-26"
+      },
+      {
+        "description_sha256": "80020078a64d182d57c73bdd882f6a8fb383f2c223df2e8f1c99dbce5d1cf4c0",
+        "package": "rbibutils",
+        "version": "2.4.1"
+      },
+      {
+        "description_sha256": "fd3ba71719d309c47cd6353e442bb567f7cdb6728c5558e745552722697f7363",
+        "package": "reformulas",
+        "version": "0.4.4"
+      },
+      {
+        "description_sha256": "400609726ada91214a626366cce6c4ec94a38fe1c3bab9d87ee2dae898af418f",
+        "package": "ucminf",
+        "version": "1.2.3"
+      }
+    ],
+    "records_sha256": "0a1826621dec9953af0133b9472988d8c7e663cded94bb3077e8281705559f7c",
+    "relative_path": ".r_libs/revision_v1"
+  },
+  "required_package_resolution": {
+    "complete": true,
+    "errors": [],
+    "records": [
+      {
+        "expected_version": "1.10.5",
+        "found_version": "1.10.5",
+        "package": "emmeans",
+        "resolved_library_index": 2,
+        "resolved_library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+        "resolved_library_path_kind": "home_relative",
+        "resolved_library_role": "existing_user_r_4_4_library",
+        "status": "ok"
+      },
+      {
+        "expected_version": "1.8.9",
+        "found_version": "1.8.9",
+        "package": "jsonlite",
+        "resolved_library_index": 2,
+        "resolved_library_path": "$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+        "resolved_library_path_kind": "home_relative",
+        "resolved_library_role": "existing_user_r_4_4_library",
+        "status": "ok"
+      },
+      {
+        "expected_version": "2.0.6",
+        "found_version": "2.0-6",
+        "package": "lme4",
+        "resolved_library_index": 1,
+        "resolved_library_path": ".r_libs/revision_v1",
+        "resolved_library_path_kind": "repository_relative",
+        "resolved_library_role": "project_revision_library",
+        "status": "ok"
+      },
+      {
+        "expected_version": "2026.7.26",
+        "found_version": "2026.7-26",
+        "package": "ordinal",
+        "resolved_library_index": 1,
+        "resolved_library_path": ".r_libs/revision_v1",
+        "resolved_library_path_kind": "repository_relative",
+        "resolved_library_role": "project_revision_library",
+        "status": "ok"
+      }
+    ]
+  },
+  "required_runtime_version": "4.4.2",
+  "runtime_available": true,
+  "runtime_exact": true,
+  "runtime_platform": "x86_64-pc-linux-gnu",
+  "runtime_version": "4.4.2",
+  "schema_version": "1.0",
+  "startup_files_disabled_during_probe": true,
+  "status": "complete"
+}

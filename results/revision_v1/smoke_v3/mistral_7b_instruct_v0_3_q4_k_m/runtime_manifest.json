@@ -1,0 +1,28 @@
+{
+  "control_sampler": "numpy_pcg64_serial_top_p_v1_token_id_tiebreak",
+  "deterministic_environment": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "CUDA_VISIBLE_DEVICES": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "GGML_CUDA_DISABLE_FUSION": "1",
+    "GGML_CUDA_DISABLE_GRAPHS": "1",
+    "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": "1"
+  },
+  "llama_cpp_backend": {
+    "available": true,
+    "gpu_offload_supported": true,
+    "python_package_version": "0.3.23",
+    "system_info": "CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | "
+  },
+  "packages": {
+    "cryptography": "46.0.7",
+    "llama-cpp-python": "0.3.23",
+    "numpy": "2.2.6",
+    "rankcloak": "0.1.0"
+  },
+  "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+  "python_implementation": "CPython",
+  "python_version": "3.10.13",
+  "schema_version": "1.0"
+}

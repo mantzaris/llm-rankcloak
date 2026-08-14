@@ -1,0 +1,40 @@
+{
+  "backend_semantics": "single_model_serial_llama_cpp_exact_token_replay",
+  "model_loading_policy": {
+    "gpu_selection_by_exact_uuid": true,
+    "one_model_loaded_at_a_time": true,
+    "rank_replay_n_batch": 1,
+    "rank_replay_n_ubatch": 1,
+    "tokenizer_source": "embedded_gguf"
+  },
+  "observed_values_are_not_substitutes_for_launch_requirements": true,
+  "observed_while_snapshot_was_built": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "CUDA_DEVICE_ORDER": null,
+    "CUDA_LAUNCH_BLOCKING": null,
+    "CUDA_VISIBLE_DEVICES": null,
+    "GGML_CUDA_DISABLE_FUSION": null,
+    "GGML_CUDA_DISABLE_GRAPHS": null,
+    "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": null,
+    "MKL_NUM_THREADS": null,
+    "OMP_NUM_THREADS": null,
+    "PYTHONHASHSEED": null,
+    "TOKENIZERS_PARALLELISM": null
+  },
+  "required_for_gpu_runs": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "CUDA_VISIBLE_DEVICES": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "GGML_CUDA_DISABLE_FUSION": "1",
+    "GGML_CUDA_DISABLE_GRAPHS": "1",
+    "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": "1"
+  },
+  "required_for_locked_r_runs": {
+    "R_ENVIRON_USER": "/dev/null",
+    "R_LIBS_USER": ".r_libs/revision_v1:$HOME/R/x86_64-pc-linux-gnu-library/4.4",
+    "R_PROFILE_USER": "/dev/null"
+  },
+  "schema_version": "1.0",
+  "seed_policy": "seeds_and_trial identities are frozen in configs/revision_v1"
+}

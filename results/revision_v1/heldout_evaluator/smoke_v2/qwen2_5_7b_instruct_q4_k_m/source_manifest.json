@@ -1,0 +1,47 @@
+{
+  "cyclic_mapping": {
+    "llama3_8b_instruct_q4_k_m": "qwen2_5_7b_instruct_q4_k_m",
+    "mistral_7b_instruct_v0_3_q4_k_m": "llama3_8b_instruct_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m": "mistral_7b_instruct_v0_3_q4_k_m"
+  },
+  "files": [
+    {
+      "path": "rankcloak/revision_evaluator.py",
+      "sha256": "b82eba2704313ac2e7dce0e8de07c9d215bfd1ba3d01ccbed04271e4b5f5d795",
+      "size_bytes": 76875
+    },
+    {
+      "path": "rankcloak/revision_artifacts.py",
+      "sha256": "ca0e9ffdf11a2d474eca14abe2245285a5d16e1c8b616eaa524d9081a82904e5",
+      "size_bytes": 15623
+    },
+    {
+      "path": "rankcloak/revision_config.py",
+      "sha256": "567b60a6d335ea82136ba5f1322cc56d18cacb0056274126a3bf15059b67f6bf",
+      "size_bytes": 31367
+    },
+    {
+      "path": "rankcloak/model_io.py",
+      "sha256": "c87d4ad88201d2989bf93005aa36c250ed94a86801648b2b8b68b2747320151f",
+      "size_bytes": 12973
+    },
+    {
+      "path": "rankcloak/rank_codec.py",
+      "sha256": "c2687b1bb9edd6e7de928bf7fe3729d9f88de6b10cc99244302dc5ff35cbed40",
+      "size_bytes": 13302
+    },
+    {
+      "path": "scripts/run_revision_evaluator.py",
+      "sha256": "a7464c50f56031324cedbff424e2d3d8066893d7028f0072b4681c031b02fc52",
+      "size_bytes": 196
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "6563e0aac0930db5b359867f74282676e1a0ca1f456df76cde576e3f81612164",
+      "size_bytes": 850
+    }
+  ],
+  "files_sha256": "689b7f850d699966ff9498a94dc7f9ee518492044ee8054b5f71ec95670aa1c7",
+  "manifest_type": "heldout_evaluator_source",
+  "schema_version": "1.0"
+}

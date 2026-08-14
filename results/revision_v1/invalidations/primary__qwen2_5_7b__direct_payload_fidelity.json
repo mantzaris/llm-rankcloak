@@ -1,0 +1,236 @@
+{
+  "created_at": "2026-08-09T02:44:10.134430+00:00",
+  "execution_state": {
+    "caller_confirmed_stopped": true,
+    "completed_work_units": 234,
+    "durable_attempt_rows": 234,
+    "event_count": 2,
+    "failed_work_units_current": 0,
+    "incomplete": true,
+    "original_evidence_statuses": [
+      "confirmatory_after_manifest_freeze"
+    ],
+    "planned_work_units": 4800,
+    "remaining_work_units": 4566,
+    "session_finished_event_observed": false,
+    "session_finished_remaining": null,
+    "terminal_state": "stopped_incomplete"
+  },
+  "incurred_compute": {
+    "charge_policy": "memory_profile_wall_span_v1",
+    "charge_status": "observed_incurred_invalidated_shard",
+    "definition": "exact sum of each hashed memory_profile interval (event.at - event.started_at); includes model load, all completed attempts, runner overhead, and any interrupted partial attempt while the selected GPU was monitored",
+    "durable_attempt_execution_seconds_sum": 2170.4908921580063,
+    "durable_attempt_rows_missing_execution_seconds": 0,
+    "incurred_gpu_seconds": 2189.687278,
+    "memory_profile_event_count": 1,
+    "memory_profile_events_sha256": "23d1a8167bd9ca87302d65fbe4b4cf2adca68c503e85df2a017ecaa51ba3a03b",
+    "memory_profile_spans": [
+      {
+        "elapsed_seconds": 2189.687278,
+        "ended_at": "2026-08-09T02:08:22.263661+00:00",
+        "poll_interval_seconds": 1.0,
+        "process_peak_rss_bytes_os_high_water": 5044297728.0,
+        "process_peak_rss_bytes_sampled": 5044826112.0,
+        "process_rss_sample_count": 2130,
+        "sample_count": 2130,
+        "selected_gpu_final_used_memory_mib": 4757.0,
+        "selected_gpu_initial_used_memory_mib": 14.0,
+        "selected_gpu_peak_used_memory_mib_sampled": 4757.0,
+        "selected_gpu_sample_count": 2130,
+        "selected_gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "started_at": "2026-08-09T01:31:52.576383+00:00"
+      }
+    ],
+    "model_load_seconds_sum": 2.298873965002713,
+    "selected_gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+  },
+  "invalidation": {
+    "reason": "Direct token replay did not guarantee recovery of the original payload bytes, and unverified BOS removal changed Qwen prompt contexts.",
+    "reason_code": "direct_subword_payload_fidelity"
+  },
+  "invalidation_manifest_sha256": "a9836f60344c38568f4dbc014deb6c428b1bfad216f9a55da683edd978f9168c",
+  "manifest_type": "revision_shard_invalidation",
+  "schema_version": "1.0",
+  "scientific_status": "invalidated_not_for_pooling",
+  "scope": "entire_shard",
+  "shard": {
+    "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary/qwen2_5_7b_instruct_q4_k_m",
+    "preservation_policy": "verify_in_place_never_edit_move_rename_or_delete",
+    "snapshot": {
+      "directories": [
+        {
+          "ctime_ns": 1786241301829269388,
+          "device": 66306,
+          "inode": 24123842,
+          "mode": 509,
+          "mtime_ns": 1786241301829269388,
+          "path": ".",
+          "size_bytes": 4096
+        },
+        {
+          "ctime_ns": 1786239172728188896,
+          "device": 66306,
+          "inode": 24123853,
+          "mode": 509,
+          "mtime_ns": 1786239172728188896,
+          "path": "filter_masks",
+          "size_bytes": 4096
+        }
+      ],
+      "directories_sha256": "deaabb0843855187dd2d2039624f4e1dbfdff77acb39eb427284b52119b6bb83",
+      "directory_count": 2,
+      "file_count": 11,
+      "files": [
+        {
+          "ctime_ns": 1786241301829269388,
+          "device": 66306,
+          "inode": 24123775,
+          "mode": 384,
+          "mtime_ns": 1786241301827899451,
+          "path": "checkpoint.json",
+          "sha256": "390eb32626815afd3dcc38be577c7272601be5481b69ae4817bd2bfa363f6ec0",
+          "size_bytes": 65040
+        },
+        {
+          "ctime_ns": 1786241302263267805,
+          "device": 66306,
+          "inode": 24123851,
+          "mode": 436,
+          "mtime_ns": 1786241302263267805,
+          "path": "events.jsonl",
+          "sha256": "8ecd8f82016ac55028c0ada5fed06420a2b7c1f6913c626c93a6ea494385991b",
+          "size_bytes": 921
+        },
+        {
+          "ctime_ns": 1786239172728188896,
+          "device": 66306,
+          "inode": 24123854,
+          "mode": 384,
+          "mtime_ns": 1786239172659433889,
+          "path": "filter_masks/qwen2_5_7b_instruct_q4_k_m__safe_text_filter_v1.json",
+          "sha256": "9db69dce4900fb96f304e1ee64a5ab14541128a21a38e31cac6685eacb10d2a8",
+          "size_bytes": 1658866
+        },
+        {
+          "ctime_ns": 1786239112550437947,
+          "device": 66306,
+          "inode": 24123848,
+          "mode": 384,
+          "mtime_ns": 1786239112549104984,
+          "path": "hardware_manifest.json",
+          "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+          "size_bytes": 634
+        },
+        {
+          "ctime_ns": 1786239112245044809,
+          "device": 66306,
+          "inode": 24123845,
+          "mode": 384,
+          "mtime_ns": 1786239112245044809,
+          "path": "model_manifest.json",
+          "sha256": "39d6e15f359878ba2e80ba4492bec304741dd93c7cce1bf744238392b3bac8d9",
+          "size_bytes": 1545
+        },
+        {
+          "ctime_ns": 1786239112127432669,
+          "device": 66306,
+          "inode": 24123843,
+          "mode": 384,
+          "mtime_ns": 1786239112056893957,
+          "path": "payload_manifest.json",
+          "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+          "size_bytes": 643935
+        },
+        {
+          "ctime_ns": 1786239112243434117,
+          "device": 66306,
+          "inode": 24123844,
+          "mode": 384,
+          "mtime_ns": 1786239112231778153,
+          "path": "plan.jsonl",
+          "sha256": "9c952719ce941db71bcf9a2cf71373eb4f28398d4304c176986395371c00c563",
+          "size_bytes": 5200561
+        },
+        {
+          "ctime_ns": 1786241301756269655,
+          "device": 66306,
+          "inode": 24123850,
+          "mode": 436,
+          "mtime_ns": 1786241301756269655,
+          "path": "records.jsonl",
+          "sha256": "bdc720371129c84e31c5f6fd4c3d5eb983a4f195c649729e60e52a4e429cb00a",
+          "size_bytes": 4244118
+        },
+        {
+          "ctime_ns": 1786239112562438096,
+          "device": 66306,
+          "inode": 24123849,
+          "mode": 384,
+          "mtime_ns": 1786239112560545925,
+          "path": "run_identity.json",
+          "sha256": "08b77d41fe8c122e707b0b34ee1a1d21363013dd2da3a09a17205f3c89aa145c",
+          "size_bytes": 2898
+        },
+        {
+          "ctime_ns": 1786239112511437460,
+          "device": 66306,
+          "inode": 24123847,
+          "mode": 384,
+          "mtime_ns": 1786239112442601642,
+          "path": "runtime_manifest.json",
+          "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+          "size_bytes": 1084
+        },
+        {
+          "ctime_ns": 1786239112251556488,
+          "device": 66306,
+          "inode": 24123846,
+          "mode": 384,
+          "mtime_ns": 1786239112251556488,
+          "path": "source_manifest.json",
+          "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+          "size_bytes": 2377
+        }
+      ],
+      "files_sha256": "1aa4e1158a33d82b3929f551716007290decabbcc04f7d0db66c6845c76ba94c",
+      "schema_version": "1.0",
+      "shard_tree_sha256": "97af0aeadc76127c1d7eaa426869f084ec6f16769ffd2b58ab154a774aa0f108"
+    }
+  },
+  "stop_attestation": {
+    "confirmed_stopped": true,
+    "method": "explicit_caller_confirmation"
+  },
+  "superseded_identity": {
+    "checkpoint_file_sha256": "390eb32626815afd3dcc38be577c7272601be5481b69ae4817bd2bfa363f6ec0",
+    "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+    "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+    "model_artifacts_sha256": "abf684c88bcb9494eac6d7ca646df90129d2126e4431eeb96be62de5d2523505",
+    "payload_manifest_sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+    "plan_file_sha256": "9c952719ce941db71bcf9a2cf71373eb4f28398d4304c176986395371c00c563",
+    "planned_trial_count": 4800,
+    "planned_trial_ids_sha256": "93d6cdeaf12f402d33bca9198d54770c77898d0f272eceb47c6a0436e2cab39d",
+    "progress_at_invalidation": {
+      "completed_work_units": 234,
+      "durable_attempt_rows": 234,
+      "failed_work_units_current": 0,
+      "planned_work_units": 4800
+    },
+    "records_file_sha256": "bdc720371129c84e31c5f6fd4c3d5eb983a4f195c649729e60e52a4e429cb00a",
+    "run_identity_file_sha256": "08b77d41fe8c122e707b0b34ee1a1d21363013dd2da3a09a17205f3c89aa145c",
+    "run_identity_sha256": "fda1f6aba51df4f18606f017f66eb64c8efe7700ef18b23263157772de772c76",
+    "runtime_manifest_sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+    "source_files_sha256": "f7ae057ba165cbbc091932f04ad35aa3c15643f6077a4ae48cdda399cb59bb9a",
+    "source_manifest_sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+    "study_id": "rankcloak_scientific_reports_revision_v1/primary/qwen2_5_7b_instruct_q4_k_m"
+  },
+  "superseding_target": {
+    "materialization_asserted": false,
+    "namespace": "rankcloak_scientific_reports_revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m",
+    "stages": [
+      "smoke_v3",
+      "primary_v2"
+    ]
+  }
+}

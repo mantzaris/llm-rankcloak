@@ -1,0 +1,28 @@
+{
+  "configured_model": {
+    "architecture_scale": "8B",
+    "artifact_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+    "artifact_size_bytes": 4920734272,
+    "family": "llama",
+    "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+    "model_id": "llama3_8b_instruct_q4_k_m",
+    "pin_status": "pinned",
+    "quantization": "Q4_K_M",
+    "relative_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+    "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+    "revision": "local artifact pinned by content hash",
+    "role": "submitted-study anchor"
+  },
+  "role": "heldout_evaluator_only",
+  "schema_version": "1.0",
+  "verification": {
+    "actual_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+    "actual_size_bytes": 4920734272,
+    "expected_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+    "expected_size_bytes": 4920734272,
+    "model_id": "llama3_8b_instruct_q4_k_m",
+    "relative_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+    "sha256_checked": true,
+    "status": "ok"
+  }
+}

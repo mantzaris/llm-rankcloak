@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_multilingual_secondary",
+  "evidence_status": "secondary_supplementary",
+  "subset": {
+    "payload_classes": [
+      "sha256_hex",
+      "hmac_sha256_hex",
+      "nonce_96_bit_hex",
+      "token_128_bit_hex",
+      "uuid_v4",
+      "aes256_gcm_base64",
+      "chacha20_poly1305_base64",
+      "ed25519_signature_base64"
+    ],
+    "selection": "payload_index_0_through_5",
+    "payloads_per_class": 6,
+    "payload_count": 48
+  },
+  "protocols": ["direct_subword_calgacus", "nonseg_ascii_b16"],
+  "languages": [
+    {
+      "language_id": "es",
+      "name": "Spanish",
+      "prompts_by_category": {
+        "casual_conversation": "Escribe un mensaje amistoso a una persona conocida sobre planes tranquilos para el fin de semana. Usa un español cotidiano y termina las ideas de forma natural.",
+        "professional_communication": "Escribe una actualización profesional breve para colegas, explicando el progreso reciente, el siguiente paso y una consideración práctica.",
+        "forum_question_answer": "Escribe una respuesta útil para un foro sobre un problema doméstico común. Explica el razonamiento con lenguaje claro.",
+        "recipe_procedure": "Escribe instrucciones claras para preparar una comida sencilla entre semana. Explica el orden de los pasos y cómo saber que está lista.",
+        "personal_narrative_blog": "Escribe un breve texto personal sobre algo útil descubierto durante un día normal. Mantén un tono concreto y moderado.",
+        "factual_explanatory": "Explica un fenómeno meteorológico conocido para un público general. Relaciona causa y efecto sin jerga especializada."
+      }
+    },
+    {
+      "language_id": "zh_hans",
+      "name": "Mandarin Chinese, Simplified",
+      "prompts_by_category": {
+        "casual_conversation": "写一段给朋友的自然消息，谈谈轻松的周末计划。使用日常语言，并把意思表达完整。",
+        "professional_communication": "为同事写一段简洁的工作进展说明，包括最近的进展、下一步以及一个实际注意事项。",
+        "forum_question_answer": "针对一个常见的家庭问题写一段有帮助的论坛回复，用清楚的语言解释理由。",
+        "recipe_procedure": "用完整的句子说明如何准备一顿简单的工作日晚餐，包括步骤顺序以及如何判断已经完成。",
+        "personal_narrative_blog": "写一段简短的个人经历，讲述在普通一天里发现的一件有用的事情，语气具体而克制。",
+        "factual_explanatory": "面向普通读者解释一种常见的天气现象，清楚说明因果关系，不使用专业术语。"
+      }
+    }
+  ],
+  "assignment": {
+    "one_prompt_category_per_model_payload_language": true,
+    "category_index": "(payload_index + model_index + payload_class_index) mod 6"
+  },
+  "controls": {
+    "mode": "seeded_prompt_and_length_matched_sampling",
+    "temperature": 0.8,
+    "top_p": 0.95
+  },
+  "expected_counts": {
+    "model_count": 3,
+    "language_count": 2,
+    "protocol_count": 2,
+    "rankcloak_trials": 576,
+    "ordinary_control_texts": 576,
+    "generated_texts_total": 1152
+  }
+}

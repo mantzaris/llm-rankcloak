@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0",
+  "synthetic_only": true,
+  "candidate_replicates_per_stratum": 2,
+  "text_prefix": "SYNTHETIC FIXTURE ONLY",
+  "warning": "Fixture text validates code and must never be shown to recruited participants."
+}

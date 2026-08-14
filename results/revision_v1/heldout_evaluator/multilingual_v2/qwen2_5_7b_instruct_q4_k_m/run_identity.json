@@ -1,0 +1,59 @@
+{
+  "command_line_args": [
+    "evaluator_model_id=qwen2_5_7b_instruct_q4_k_m",
+    "generator_model_id=llama3_8b_instruct_q4_k_m",
+    "context_limit=4096",
+    "gpu_uuid=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "n_gpu_layers=-1",
+    "evidence_partitions=secondary_supplementary_multilingual_v2_payload_fidelity_v2",
+    "source_stages=multilingual_v2",
+    "protocol_contract_revision=payload_fidelity_v2",
+    "result_schema_revision=payload_aware_result_v2",
+    "source_manifest_sha256=b359db3de6714c1915b0503137eff24d97c14c48a74c5dd72035e82bf370c36e",
+    "runtime_manifest_sha256=076367eeda3c149e33900b2ece93c6202637a715f957f09b392a15821f98eec3",
+    "hardware_manifest_sha256=fe1f1e59596e3a1eebfa46d9bfcd96954ba99cd7ec5dac6c8497b836b5647052"
+  ],
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "manifest_type": "revision_run_identity",
+  "model_artifacts": [
+    {
+      "configured_model": {
+        "architecture_scale": "7B",
+        "artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "artifact_size_bytes": 4683074240,
+        "family": "qwen2",
+        "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "license": "Apache-2.0",
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "pin_status": "pinned",
+        "quantization": "Q4_K_M",
+        "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+        "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+        "role": "cross-family confirmatory model",
+        "upstream_repo_id": "Qwen/Qwen2.5-7B-Instruct",
+        "upstream_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "role": "heldout_evaluator_only",
+      "schema_version": "2.0",
+      "verification": {
+        "actual_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "actual_size_bytes": 4683074240,
+        "expected_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "expected_size_bytes": 4683074240,
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      }
+    }
+  ],
+  "payload_manifest_sha256": "2cf7dbe38519a44b3e534d2df72086221c0c7e3eec78bf8999fc24df76fafec2",
+  "planned_trial_count": 384,
+  "planned_trial_ids_sha256": "f86e2f1df4093aa38348d82dbc82bbec57424c2d7634d6cd0291818e141311c2",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "run_identity_sha256": "7abfe3a2926596391c2b0abcbd4c6ca7f1e809d525f96df6c7f2e813be18e38b",
+  "schema_version": "1.0",
+  "study_id": "revision_v1/heldout_evaluator/secondary_supplementary_multilingual_v2_payload_fidelity_v2/qwen2_5_7b_instruct_q4_k_m"
+}

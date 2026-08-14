@@ -1,0 +1,652 @@
+{
+  "active_pid": 2499445,
+  "authorized_projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3",
+  "automatically_recovered_errors": [],
+  "budget": {
+    "actual_confirmatory_gpu_hours": 60.27336449694445,
+    "authorized_baseline_upper_gpu_hours": 158.50821600362423,
+    "baseline_upper_gpu_hours": 158.5159931263809,
+    "canonical_actual_confirmatory_gpu_hours": 60.27336449694445,
+    "canonical_cumulative_actual_gpu_hours": 61.60556795950869,
+    "consumption_rows": [
+      {
+        "completed_by_stratum": {
+          "rankcloak:segmented_hex_multi_topic": 576,
+          "reference": 48
+        },
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 17764.203014159844,
+        "stage": "ablation_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "planned_unavailable:condition_unavailable": 48,
+          "rankcloak:segmented_hex_multi_topic": 528,
+          "reference": 48
+        },
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 19308.012491521968,
+        "stage": "ablation_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "rankcloak:segmented_hex_multi_topic": 576,
+          "reference": 48
+        },
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 25404.70962368278,
+        "stage": "ablation_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "all_evaluator_tasks": 5712
+        },
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "observed_model_load_events": 3,
+        "planned_model_loads": 3,
+        "projected_model_loads_consumed": 3,
+        "projected_upper_seconds_consumed": 39851.365350735985,
+        "stage": "heldout_evaluator"
+      },
+      {
+        "completed_by_stratum": {
+          "all_evaluator_tasks": 5760
+        },
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "observed_model_load_events": 3,
+        "planned_model_loads": 3,
+        "projected_model_loads_consumed": 3,
+        "projected_upper_seconds_consumed": 54886.52809423054,
+        "stage": "heldout_evaluator"
+      },
+      {
+        "completed_by_stratum": {
+          "all_evaluator_tasks": 5760
+        },
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "observed_model_load_events": 3,
+        "planned_model_loads": 3,
+        "projected_model_loads_consumed": 3,
+        "projected_upper_seconds_consumed": 44540.07196769037,
+        "stage": "heldout_evaluator"
+      },
+      {
+        "completed_by_stratum": {
+          "control:full_message": 192,
+          "rankcloak:direct_subword_calgacus": 96,
+          "rankcloak:nonseg_ascii_b16": 96
+        },
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 7140.286850640771,
+        "stage": "multilingual_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "control:full_message": 192,
+          "rankcloak:direct_subword_calgacus": 96,
+          "rankcloak:nonseg_ascii_b16": 96
+        },
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 7213.400330291392,
+        "stage": "multilingual_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "control:full_message": 192,
+          "rankcloak:direct_subword_calgacus": 96,
+          "rankcloak:nonseg_ascii_b16": 96
+        },
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 10268.157155704352,
+        "stage": "multilingual_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "control:forced_span": 480,
+          "control:full_message": 2160,
+          "rankcloak:direct_subword_calgacus": 480,
+          "rankcloak:nonseg_ascii_b16": 480,
+          "rankcloak:nonseg_ascii_b8": 480,
+          "rankcloak:nonseg_hex_nibble_b16": 240,
+          "rankcloak:segmented_hex_multi_topic": 240,
+          "rankcloak:segmented_hex_single_topic": 240
+        },
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 86150.25532661274,
+        "stage": "primary_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "control:forced_span": 480,
+          "control:full_message": 2160,
+          "rankcloak:direct_subword_calgacus": 480,
+          "rankcloak:nonseg_ascii_b16": 480,
+          "rankcloak:nonseg_ascii_b8": 480,
+          "rankcloak:nonseg_hex_nibble_b16": 240,
+          "rankcloak:segmented_hex_multi_topic": 240,
+          "rankcloak:segmented_hex_single_topic": 240
+        },
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 84241.94854530988,
+        "stage": "primary_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "control:forced_span": 480,
+          "control:full_message": 2160,
+          "rankcloak:direct_subword_calgacus": 480,
+          "rankcloak:nonseg_ascii_b16": 480,
+          "rankcloak:nonseg_ascii_b8": 480,
+          "rankcloak:nonseg_hex_nibble_b16": 240,
+          "rankcloak:segmented_hex_multi_topic": 240,
+          "rankcloak:segmented_hex_single_topic": 240
+        },
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 126022.96035117464,
+        "stage": "primary_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "reference": 144,
+          "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic": 48,
+          "robustness_decode:text_retokenized:segmented_hex_multi_topic": 1008
+        },
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 11645.413149402199,
+        "stage": "robustness_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "planned_unavailable:dependent_unavailable": 336,
+          "reference": 96,
+          "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic": 48,
+          "robustness_decode:text_retokenized:segmented_hex_multi_topic": 720
+        },
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 10612.776022143313,
+        "stage": "robustness_v2"
+      },
+      {
+        "completed_by_stratum": {
+          "reference": 144,
+          "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic": 48,
+          "robustness_decode:text_retokenized:segmented_hex_multi_topic": 1008,
+          "robustness_transform": 144
+        },
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "observed_model_load_events": 1,
+        "planned_model_loads": 1,
+        "projected_model_loads_consumed": 1,
+        "projected_upper_seconds_consumed": 20476.7977877854,
+        "stage": "robustness_v2"
+      }
+    ],
+    "cumulative_actual_gpu_hours": 61.60556795950869,
+    "hard_ceiling_gpu_hours": 165.0,
+    "live_detector_gpu_hours": 0.0,
+    "live_detector_gpu_seconds": 0.0,
+    "live_detector_remaining_gpu_hours": 0.0,
+    "live_detector_remaining_seconds": 0.0,
+    "projected_upper_consumed_gpu_hours": 157.09080168363508,
+    "revised_headroom_gpu_hours": 103.30144406030973,
+    "revised_upper_gpu_hours": 61.698555939690266,
+    "stage_isolated_evaluator_load_adjustment_gpu_hours": 0.007777122756669997
+  },
+  "canonical_progress_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/confirmatory_progress_v1.json",
+  "canonical_progress_sha256": "5efb1a3f443376fdcf4436bab1fa0b68106e4426356dfbd88a0f49dd47688df0",
+  "counts": {
+    "completed": 38448,
+    "failures": 0,
+    "remaining": 56,
+    "successes": 38016,
+    "total": 38504,
+    "unavailable": 432
+  },
+  "cumulative_actual_gpu_hours": 61.60556795950869,
+  "current_action_id": "downstream:detector:equivalence:1:cpu",
+  "current_condition": {
+    "condition_state": "running_fit",
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "fit_index": 1,
+    "next_fit_upper_seconds": null,
+    "split_id": "matched"
+  },
+  "current_stage": "neural_detector",
+  "detector_completed_fits": 0,
+  "detector_elapsed_seconds": 48516.91451081401,
+  "detector_execution": {
+    "checkpoint_cumulative_fit_seconds": 0.0,
+    "checkpoint_fit_seconds_at_process_start": 0.0,
+    "completed_fit_count": 0,
+    "current_fit": {
+      "detector_kind": "pretrained_transformer",
+      "detector_name": "deberta_v3_base_classifier",
+      "fit_number": 2,
+      "index": 1,
+      "ordinal": 1,
+      "regime": "matched",
+      "seed": 2544512008,
+      "split_id": "matched",
+      "task_identity_sha256": "7c15c362d5280243b84e9e059afcf918516d750cc5dbf016ad9e1fa00ba47f2f"
+    },
+    "current_fit_elapsed_seconds": 48516.91451081401,
+    "current_fit_started_at_utc": "2026-08-13T11:55:26.353263+00:00",
+    "device": "cpu",
+    "fit_gate_nonce": null,
+    "fit_permit_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run.fit_permit.json",
+    "fit_permit_receipt_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run.checkpoints/fit_permit_receipts",
+    "fits_per_hour": 0.0,
+    "global_elapsed_policy": "sum_of_valid_fit_intervals_plus_active_fit_v1",
+    "global_elapsed_seconds": 48516.91451081401,
+    "global_started_at_utc": "2026-08-13T11:55:26.348814+00:00",
+    "gpu_accounting": null,
+    "gpu_uuid": null,
+    "last_completed_checkpoint": null,
+    "last_consumed_fit_permit": null,
+    "next_fit": null,
+    "next_fit_upper_seconds": null,
+    "peak_rss_bytes": 9890091008,
+    "peak_vram_bytes": 0,
+    "pid": 2499445,
+    "process_elapsed_seconds": 48516.918957452,
+    "process_start_ticks": 48638001,
+    "recovered_errors": [],
+    "rolling_estimated_completion_utc": null,
+    "rolling_eta_seconds": null,
+    "rolling_fits_per_hour": null,
+    "run_identity": {
+      "checkpoint_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run.checkpoints",
+      "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+      "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+      "device": "cpu",
+      "excluded_operational_gate_fields": [
+        "pre_final_gpu_accounting_ledger",
+        "pre_final_gpu_accounting_ledger_path",
+        "required_equivalence_reports"
+      ],
+      "execution_policy_path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_acceleration_policy_v1.json",
+      "execution_policy_sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
+      "fit_permit_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run.fit_permit.json",
+      "fit_permit_receipt_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run.checkpoints/fit_permit_receipts",
+      "gpu_uuid": null,
+      "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+      "lineage": {
+        "config_path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/default.json",
+        "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+        "confirmatory_plan_path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/detector_confirmatory_plan.json",
+        "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+        "environment_binding": {
+          "environment_files_sha256": "4aeb0156c2937c4bc2e6b8c5ed6fe8a16b47b568c8129b2f24a83681929a32a4",
+          "required_files": {
+            "CHECKSUMS.sha256": {
+              "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/CHECKSUMS.sha256",
+              "sha256": "d7610e72d4d8bcd7f50a988e9ac6dc0275dbb29b6d7d17a47de6a9f881a07c34",
+              "size_bytes": 766
+            },
+            "environment_manifest.json": {
+              "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/environment_manifest.json",
+              "sha256": "a7b57556892752aa7131bddd625960c48aad23267a14648608246a1cdf5bd374",
+              "size_bytes": 1900
+            },
+            "scientific_pins.json": {
+              "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/scientific_pins.json",
+              "sha256": "cd0ab88e2dba0c3b604da413b10598c11c02f292016868d03d19885dacc7a283",
+              "size_bytes": 34830
+            }
+          },
+          "root": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1",
+          "schema_version": "rankcloak-revision-detector-environment-binding-v1",
+          "verification_status": "ok",
+          "verified_file_count": 10
+        },
+        "execution_policy": {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_acceleration_policy_v1.json",
+          "policy": {
+            "audit": {
+              "cpu_deberta_upper_seconds": 108000.0,
+              "cpu_textcnn_upper_seconds": 14400.0,
+              "derivation": "read_only_2026-08-12_detector_audit_with_conservative_margin_v1",
+              "diagnostic_path": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+              "diagnostic_sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7"
+            },
+            "authorized_ceiling": {
+              "gpu_hours": 165.0,
+              "projection_path": "results/revision_v1/compute_projection_165h_v2.json",
+              "projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3"
+            },
+            "benchmark": {
+              "checkpoint_reuse": true,
+              "task_indices": [
+                0,
+                1
+              ]
+            },
+            "ceiling": {
+              "next_fit_upper_seconds_by_detector": {
+                "deberta_v3_base_classifier": 108000.0,
+                "published_textcnn_equivalent": 14400.0
+              }
+            },
+            "equivalence": {
+              "cpu_cuda": {
+                "metric_max_abs_max": 0.02,
+                "model_state_hash_policy": "device_specific",
+                "model_state_tensor_schema_exact": true,
+                "prediction_agreement_min": 0.995,
+                "row_identity_order_labels_exact": true,
+                "score_mae_max": 0.005,
+                "score_max_abs_max": 0.05,
+                "score_pearson_min": 0.999,
+                "task_design_exact": true
+              },
+              "same_device_cuda": {
+                "metrics_exact": true,
+                "model_state_sha256_exact": true,
+                "predictions_exact": true,
+                "row_identity_order_labels_exact": true,
+                "scores_exact": true,
+                "task_design_exact": true
+              }
+            },
+            "execution": {
+              "device": "cuda:0",
+              "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+              "torch_num_threads": 1,
+              "workers": 1
+            },
+            "policy_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+            "policy_status": "predeclared_before_acceleration_benchmarks",
+            "schema_version": "rankcloak-revision-detector-acceleration-policy-v1"
+          },
+          "policy_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+          "sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
+          "size_bytes": 1890
+        },
+        "input_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+        "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+        "preprocessing_binding": {
+          "detector_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+          "detector_row_count": 15840,
+          "detector_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+          "detector_size_bytes": 21444549,
+          "preprocessing_input_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_input_manifest.json",
+          "preprocessing_input_manifest_sha256": "2b52d551a36497aaae754094345af1e89da59885f5df253a117786bc7ed5aee9",
+          "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+          "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+          "primary_model_ids": [
+            "llama3_8b_instruct_q4_k_m",
+            "mistral_7b_instruct_v0_3_q4_k_m",
+            "qwen2_5_7b_instruct_q4_k_m"
+          ],
+          "primary_shard_count": 3,
+          "schema_version": "rankcloak-revision-primary-detector-preprocessing-binding-v1",
+          "strict_complete": true,
+          "verified_input_file_count": 24,
+          "verified_input_files_sha256": "e6c463e1681403b5515d7b25b6ae7f32f314f5ef5870e1681728e3a5afc8c34b"
+        },
+        "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+        "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+        "runtime_config_sha256": "c29a6c051db43d5c18abc931353d0904d9528b855138b2dc57d56c9d4d75c60e"
+      },
+      "lineage_sha256": "c164150d9c03cb68b235945390d75bca84a35f453e1336d8fe7f76d416311e92",
+      "output_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run",
+      "plan_sha256": "6465aed92ac7169f6e468fa3007e8377209d78f65aae045afe697b4107fcb247",
+      "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+      "require_fit_permit": false,
+      "schema_version": "rankcloak-revision-detector-run-identity-v1",
+      "source": {
+        "files": [
+          {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_detection.py",
+            "sha256": "835b6e569808ff03c2242dbc6ee2a8b0ae8f2cae4cd2b6651ce14e4a7fa59254",
+            "size_bytes": 86473
+          },
+          {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_detector_execution.py",
+            "sha256": "b8211ac3c91bc0a55566cb2db96e08b141a6ec08673a635cc5df65c60dde2c5a",
+            "size_bytes": 163440
+          },
+          {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/scripts/run_revision_detectors.py",
+            "sha256": "21f4d9f1722fd4481757c2fe42ecb5b801fae8fe3d4b45988de04e667324c52a",
+            "size_bytes": 72456
+          }
+        ],
+        "files_sha256": "e2ec6e7d07acc3b8468b2eed19c1d052dc67f8ec3b8fcfcb73bf31942014aa8c"
+      },
+      "source_sha256": "0b7f8efd1a5f1563f100da82c658d487ca9a210a31cd9df77db27e6aa9f5ab1d",
+      "status_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_equivalence_v1/task_1/cpu_run.status.json",
+      "workers": 1
+    },
+    "run_identity_sha256": "36258fc12ee9eef1fd5f4b9a508576a09f2cbdfa949a2415855a43c57e7a56ed",
+    "schema_version": "rankcloak-revision-detector-status-v1",
+    "state": "running_fit",
+    "status_sha256": "b40b91a83ab2d84484a7cc0ecbbaa46c3273ae97e0abbd5cec18ff8c473286dd",
+    "total_fit_count": 56,
+    "updated_at_utc": "2026-08-14T01:24:03.267771+00:00",
+    "workers": 1
+  },
+  "detector_fits_per_hour": 0.0,
+  "detector_last_completed_checkpoint": null,
+  "detector_rolling_eta_seconds": null,
+  "detector_total_fits": 56,
+  "evaluator_unavailability_accounting": {
+    "manifest_sha256": "d01a8f9921760675894611e50b0df5743003d25c03d218b5b83f290573bbc2cd",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/upstream_dependent_unavailability_v1.json",
+    "scoreable_evaluator_units": 17232,
+    "sha256": "3fc25fa5a86c91c7530f930799adc22100f4ecaf57a0d3eeb467a22be50a743c",
+    "terminal_accounted_units": 17280,
+    "upstream_dependent_unavailable_units": 48
+  },
+  "failures": 0,
+  "generated_at": "2026-08-14T01:25:03.093209+00:00",
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "last_completed_checkpoint": null,
+  "measured_throughput": {
+    "canonical": {
+      "completed_per_gpu_hour": 637.8937084547373,
+      "denominator_excludes_verified_prior_charges": true,
+      "rolling_completed_per_gpu_hour": 1217.472527998124,
+      "rolling_window_completed": 50,
+      "rolling_window_seconds": 144.890333,
+      "successful_per_gpu_hour": 630.72636341592,
+      "unit": "terminal_work_units_per_confirmatory_GPU_hour"
+    },
+    "detector_fits_per_hour": 0.0,
+    "detector_rolling_fits_per_hour": null
+  },
+  "message": "Monitoring one exact checkpointed CPU equivalence reference; its signed heartbeat and manifest-last checkpoint remain fresh.",
+  "orchestrator_state_sha256": "039c16c7407fb786b974a3934bf901c8fb39d9f5a89405349533a84c4da6fa20",
+  "process_recovery": {
+    "last_recoverable_error": null,
+    "last_successful_recovery": null,
+    "recoverable_error_events": 0,
+    "successful_recovery_events": 0
+  },
+  "progress_refresh_event_log": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/supervisor/confirmatory_v2_events.jsonl",
+  "progress_refresh_recovery": {
+    "deferred_unstable_source_race_events": 28,
+    "deferred_updater_timeout_events": 0,
+    "last_deferred_unstable_source_race": {
+      "action_id": "evaluator:primary_v2:llama3_8b_instruct_q4_k_m",
+      "active_pid": 2248687,
+      "at": "2026-08-11T20:25:35.421195+00:00",
+      "cumulative_actual_gpu_hours": 55.71851252895313,
+      "deferral_kind": "unstable_source_race",
+      "detail": "canonical progress refresh deferred after 3 outer attempts: revision progress failed: Progress sources remained unstable: A progress source changed during snapshot construction",
+      "event": "canonical_progress_unstable_source_race_deferred",
+      "occupancy_status": "running_managed_gpu_action",
+      "progress_refresh_backoff_seconds": [
+        2.0,
+        4.0
+      ],
+      "progress_refresh_outer_attempts": 3,
+      "retry_count_unchanged": 0,
+      "revised_upper_gpu_hours": 62.90661691884417
+    },
+    "last_deferred_updater_timeout": null,
+    "last_successful_outer_recovery": {
+      "action_retry_count_changed": false,
+      "at": "2026-08-12T02:05:03.568224+00:00",
+      "event": "canonical_progress_unstable_source_race_recovered",
+      "last_source_race": "revision progress failed: Progress sources remained unstable: A progress source changed during snapshot construction",
+      "progress_refresh_backoff_seconds": [
+        2.0
+      ],
+      "progress_refresh_outer_attempts": 2,
+      "source_races_recovered": 1
+    },
+    "successful_outer_recovery_events": 96,
+    "unstable_source_races_recovered": 120
+  },
+  "recovered_error_log": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/supervisor/confirmatory_v2_recovered_errors.jsonl",
+  "recovery_counts": {
+    "payload_bearing_recovery_attempted": 11616,
+    "payload_recovery_failures": 2215,
+    "successful_payload_recoveries": 9401,
+    "unavailable": 336
+  },
+  "retry_counts": {},
+  "rolling_estimated_completion": {
+    "estimated_completion_at": null,
+    "rolling_eta_seconds": null
+  },
+  "schema_version": "rankcloak-confirmatory-v2-orchestrator-state-v1",
+  "stage_progress": [
+    {
+      "completed": 14400,
+      "failures": 0,
+      "recovery_counts": {
+        "payload_bearing_recovery_attempted": 6480,
+        "payload_recovery_failures": 0,
+        "successful_payload_recoveries": 6480,
+        "unavailable": 0
+      },
+      "remaining": 0,
+      "stage": "primary_v2",
+      "successes": 14400,
+      "target_source": "fail_closed_verified_compute_projection",
+      "total": 14400,
+      "unavailable": 0
+    },
+    {
+      "completed": 1872,
+      "failures": 0,
+      "recovery_counts": {
+        "payload_bearing_recovery_attempted": 1680,
+        "payload_recovery_failures": 0,
+        "successful_payload_recoveries": 1680,
+        "unavailable": 48
+      },
+      "remaining": 0,
+      "stage": "ablation_v2",
+      "successes": 1824,
+      "target_source": "fail_closed_verified_compute_projection",
+      "total": 1872,
+      "unavailable": 48
+    },
+    {
+      "completed": 3744,
+      "failures": 0,
+      "recovery_counts": {
+        "payload_bearing_recovery_attempted": 2880,
+        "payload_recovery_failures": 2215,
+        "successful_payload_recoveries": 665,
+        "unavailable": 288
+      },
+      "remaining": 0,
+      "stage": "robustness_v2",
+      "successes": 3408,
+      "target_source": "fail_closed_verified_compute_projection",
+      "total": 3744,
+      "unavailable": 336
+    },
+    {
+      "completed": 1152,
+      "failures": 0,
+      "recovery_counts": {
+        "payload_bearing_recovery_attempted": 576,
+        "payload_recovery_failures": 0,
+        "successful_payload_recoveries": 576,
+        "unavailable": 0
+      },
+      "remaining": 0,
+      "stage": "multilingual_v2",
+      "successes": 1152,
+      "target_source": "fail_closed_verified_compute_projection",
+      "total": 1152,
+      "unavailable": 0
+    },
+    {
+      "completed": 17280,
+      "failures": 0,
+      "recovery_counts": {
+        "payload_bearing_recovery_attempted": 0,
+        "payload_recovery_failures": 0,
+        "successful_payload_recoveries": 0,
+        "unavailable": 0
+      },
+      "remaining": 0,
+      "stage": "heldout_evaluator",
+      "successes": 17232,
+      "target_source": "fail_closed_verified_compute_projection",
+      "total": 17280,
+      "unavailable": 48
+    },
+    {
+      "completed": 0,
+      "failures": 0,
+      "recovery_counts": {
+        "payload_bearing_recovery_attempted": 0,
+        "payload_recovery_failures": 0,
+        "successful_payload_recoveries": 0,
+        "unavailable": 0
+      },
+      "remaining": 56,
+      "stage": "neural_detector",
+      "successes": 0,
+      "target_source": "fail_closed_verified_compute_projection",
+      "total": 56,
+      "unavailable": 0
+    }
+  ],
+  "status": "running_checkpointed_cpu_detector",
+  "successful_recoveries": {
+    "payload": 9401,
+    "process": 0
+  }
+}

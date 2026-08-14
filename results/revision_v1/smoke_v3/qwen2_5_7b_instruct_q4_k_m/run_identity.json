@@ -1,0 +1,67 @@
+{
+  "command_line_args": [
+    "stage=smoke_v3",
+    "model_id=qwen2_5_7b_instruct_q4_k_m",
+    "evidence_status=exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling",
+    "context_limit=4096",
+    "gpu_uuid=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "n_gpu_layers=-1",
+    "source_manifest_sha256=2263a64989b188ed8af88b72fec4a753bc007f60b5ac88fd899c7b44a17a9f64",
+    "runtime_manifest_sha256=c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+    "hardware_manifest_sha256=3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+    "input_results_manifest_sha256=none",
+    "protocol_contract_revision=payload_fidelity_v2",
+    "result_schema_revision=payload_aware_result_v2"
+  ],
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "manifest_type": "revision_run_identity",
+  "model_artifacts": [
+    {
+      "configured_model": {
+        "architecture_scale": "7B",
+        "artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "artifact_size_bytes": 4683074240,
+        "family": "qwen2",
+        "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "license": "Apache-2.0",
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "pin_status": "pinned",
+        "quantization": "Q4_K_M",
+        "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+        "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+        "role": "cross-family confirmatory model",
+        "upstream_repo_id": "Qwen/Qwen2.5-7B-Instruct",
+        "upstream_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "execution_policy": {
+        "backend": "llama_cpp",
+        "one_model_loaded_at_a_time": true,
+        "rank_replay_n_batch": 1,
+        "rank_replay_n_ubatch": 1,
+        "require_exact_artifact_sha256": true,
+        "require_exact_library_and_backend_manifest": true,
+        "tokenizer_source": "embedded_gguf"
+      },
+      "schema_version": "1.0",
+      "verification": {
+        "actual_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "actual_size_bytes": 4683074240,
+        "expected_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "expected_size_bytes": 4683074240,
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "relative_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      }
+    }
+  ],
+  "payload_manifest_sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+  "planned_trial_count": 32,
+  "planned_trial_ids_sha256": "92fef61ade5989c8667473e84e091beee1db8059a987d278179ba3e7626c1dd8",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "run_identity_sha256": "fcfb9eccd8ee162a7c939f2001f1af51b6f0a5f86dd2a76978f5baabbc3ed49a",
+  "schema_version": "1.0",
+  "study_id": "rankcloak_scientific_reports_revision_v1/smoke_v3/qwen2_5_7b_instruct_q4_k_m"
+}

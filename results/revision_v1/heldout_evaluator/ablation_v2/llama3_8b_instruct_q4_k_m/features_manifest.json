@@ -1,0 +1,20 @@
+{
+  "analysis_unit": "source_payload_trial_or_control_view",
+  "confirmatory_pooling_eligible": true,
+  "continuous_quality_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/ablation_v2/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+  "continuous_quality_sha256": "35c4aba3943dcebe9f7f64d4bfb60f431d3212c4df54fdda1f602c498ecc7713",
+  "evidence_partition": "non_smoke_evaluator_outputs",
+  "evidence_statuses": [
+    "confirmatory_supporting_heldout_evaluator_ablation_v2_payload_fidelity_after_source_manifest_freeze"
+  ],
+  "manifest_type": "heldout_evaluator_feature_table",
+  "nested_segments_are_not_independent": true,
+  "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/ablation_v2/llama3_8b_instruct_q4_k_m/features.jsonl",
+  "row_count": 528,
+  "schema_version": "2.0",
+  "sha256": "4857219b64275f62fff4853eaeddf684cf6a7c688f307d6147a053b67b67f8ba",
+  "statistics_ingestion": {
+    "continuous_quality": "--trials continuous_quality.jsonl",
+    "features": "--features features.jsonl"
+  }
+}

@@ -1,0 +1,1499 @@
+{
+  "absolute_executable_path_recorded": false,
+  "automatic_installation": false,
+  "executable_name": "python",
+  "lock_strength": "installed_versions_plus_distribution_metadata_fingerprints",
+  "package_count": 148,
+  "packages": [
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c5e6fc4dfd833319913b287be7a30d9935e9208c7ef917630621855aaac4d419",
+      "name": "anyio",
+      "record_sha256": "709132999c8eb3185ac3f22e9869ec436b28995941a82ee5d39f29adce80b693",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.14.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "e90851075b68261faccf407b29430f45e6a5b1a0759a0d50b8d93101b0de2179",
+      "name": "argon2-cffi",
+      "record_sha256": "5511417db0e0466160e2a34b52d847b92b4fb75f81599ba9a5907a364fb6ee50",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "25.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2e8ecd88b836481ff2a0fcd3206ce14969689f1d382c5277ddd6d7240f129f0f",
+      "name": "argon2-cffi-bindings",
+      "record_sha256": "92fa24a51249ec21916db8631891ebaf43fff8e0dc96bb552a04a0f34981b05d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "25.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "36407a40cd6a7f3147f8c8ab802d516fb4c152d7e2aabab52718ff3407a1706d",
+      "name": "arrow",
+      "record_sha256": "97bdec686e48eb34a1c854a460d89f92a99508293fa639efff44d7f44ad6f0c0",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.4.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "8b3567b29654e6e9a60ab50fde2c317899152790acadaab7868a708bf931c3d3",
+      "name": "asttokens",
+      "record_sha256": "de2c982667430a607ba85113698c7666483e755970da57768d0568ed9d3873e1",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.0.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "ce20436dd22cbc90f0da0491c01ec43edc37953a3beaa9b9cb15d6b48bb469a8",
+      "name": "async-lru",
+      "record_sha256": "999e8700b5e02efdadf3fe4b9445debb15c4400fc729fcd8223c2fde4aac7602",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc",
+      "name": "attrs",
+      "record_sha256": "54341b8c2856b0fced870ed87fc7b2e782e7707f8e6cd09a090a34c98413e16b",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "26.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "11399bc03a6b81fd20e8b82823392052a8db969a8ef150382b0cf5996afcf41a",
+      "name": "babel",
+      "record_sha256": "b7557036174e42a9aa7e356f25fabde745b8c5a24fb537da6d04ad93ae733892",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.18.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b2f888103259f1607c85f3b1163be1bc49fc9941a3243c3b89a21075bfc6d4fb",
+      "name": "beautifulsoup4",
+      "record_sha256": "f7eda8af35ba817684fae6baac7ef86be6970e5b40a1ddf06a62e22c40c96e56",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.15.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "757bfd0f144af9186a9bd94f06014963f5b0919a4e124fa55e9737a8c8981764",
+      "name": "bleach",
+      "record_sha256": "2f7c42097c8985ec01d7788fc7431de55869af5c88c615f5f6c7893661f7d06a",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "6.4.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "ef5af1638fbb23676ac3c5777dfcfc2cd9c348fe4172ed5ba3d277655b248090",
+      "name": "certifi",
+      "record_sha256": "9ada6a943d4067c8dab8f4a56522b710502405492907915403d3d57f9b168908",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2026.7.22"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918",
+      "name": "cffi",
+      "record_sha256": "7bd4cadad55a7bb4a47b4448362e53b3fb036fb25acc83ca0a3d4bbf191296ee",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.1.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "0dd3de17609b0db64bd1d4643c5bd0dd35b5eb3c5be77f8b17bc190f2f4a2ac0",
+      "name": "charset-normalizer",
+      "record_sha256": "5b23bdb460c2b67c6bedebde3a31e900b822447e2dab1d48ad83397117245515",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.4.9"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "194c9dd81d567f9081f026c7e401060fbafa7bc147c8e0a58b3668b40a64c031",
+      "name": "click",
+      "record_sha256": "d80004e61b3a1060dbdd57a49506a9ab45976edb358ad6436b3f3d0d98c1a2a2",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "8.4.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "06e9e4a7591a8a75fa035e57544d9742ded0c315514e68c43c8e8102a038b168",
+      "name": "cmake",
+      "record_sha256": "8ca7abeea3fedeb308b41a50a3815405834408852639f4cfe7792f9f522bc151",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.31.10"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "e475291f8fdedbecbbfd788a2c5de9c912424d23574aba7b9fc51985d7158878",
+      "name": "comm",
+      "record_sha256": "623a17b04c0ae01e64298e1bd2b50ecc6074414917889973e4836538c3b8da28",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.2.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "0d860f7cb8af8e85005c209499e0ca25da8515b4b67915ee8b88b8852c316c08",
+      "name": "contourpy",
+      "record_sha256": "084bc0c7c2c9f3dd30b251dddfcccdd19971b76cbe369689f4245ecadb510eaf",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.3.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "cd6e7fad3b9e42368313d459aa4914bd59f39893828145a00219fbc61c75cff1",
+      "name": "cryptography",
+      "record_sha256": "dd6643093531a5840cc49b6a640c050902f2a72ee8936f809aa5672235cb07fe",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "46.0.7"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "23289e19b76f1e01394227696e6af2b6cd1ce79e89731209bf9195148b18ed36",
+      "name": "cycler",
+      "record_sha256": "cc7e94d56e5f6d77f3fc63948b54dccb481f6970595ee8ab6eda43d868e22261",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.12.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "a22dcaaa52c12089d5aada8313f7eeaeadc65e139e5c1218f905b1593f827fee",
+      "name": "debugpy",
+      "record_sha256": "9393117f7a3681e50fa8dcd1f9c672f2d26f0f041a84ccf88d4aff05ab4c99b0",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.8.21"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2133792485403bbd739e1db5960228bedbcde6d00c0acc052b27f39dbae5b5c4",
+      "name": "decorator",
+      "record_sha256": "e88d544eaad85db227ad1370df7734722ff7502ce0d22c7b89fe87c3df5d8dae",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "5.3.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "369d3cef64870daf849fba711cb8d05a7efe3c8d9ab0f763adc34079fe378bb1",
+      "name": "defusedxml",
+      "record_sha256": "2bbc0f917fc306dc6134e74f4d3fca83a7ecb37d5697d98a46631b3f08b16dc8",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.7.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "6fc70cff43a3c6666531e6c268e90059fb93ae58aed708163c0ceecab24dbaef",
+      "name": "diskcache",
+      "record_sha256": "61d23c3656ff388edcdf8b4b93daa2418c82a725e85364ce760e1536702896d6",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "5.6.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "81984a523a2f7a522ad12bea784a8bb85edec0805ebbd0fb4e350169a36dd802",
+      "name": "exceptiongroup",
+      "record_sha256": "669a02cf632e1e4e1896c7b3680be256683aea53e11a0ed823c90501030dd746",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.3.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "d7586d1ae225bee126c4237eb0c4d7699a8580b81eb558cc500c263d29a633ff",
+      "name": "executing",
+      "record_sha256": "694991de7522a64c4e3d60664bd4ee8211eb41c84850c4360e9c55d110c28623",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.2.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2f5d39e8190513f23e681618f611177a32767fe858b10008c96e56dbae004fbc",
+      "name": "fastjsonschema",
+      "record_sha256": "2ca674a195e1e196b104a62d7e78aa8bfe7310e5bc299c05517f1c9c205b9b9d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.22.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "02c1fa9abf083b9bd5792cc1f300088bde118bbb3db9c9f7c19595cb4101d0ba",
+      "name": "filelock",
+      "record_sha256": "74a24d811e32fc0ca53bebc11fe47ac3c04271e9db18ed9a5e7d1001f0c14a08",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.32.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "878374d811bfa83c045c55eabbcaa09e646f426fd4777b5e7f716e4e2198fbc1",
+      "name": "fonttools",
+      "record_sha256": "c334d383f728e67a7cd5d46d14a03f83f25afde7ae08723c8b614f57edb0e1cf",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.63.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b8f4f402018d1dc56fb20d41eb2c39b9f8faca17f6e8080fbe05abdd0be8b8fb",
+      "name": "fqdn",
+      "record_sha256": "aa23db56ed060760e255c17b21b8a5612a748785cfeb182c0c75f6e99691b815",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.5.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "88b1657585de14e3bb82aa5278aa9595b30aa4ca74ead073d8950615c808099d",
+      "name": "fsspec",
+      "record_sha256": "eda3028cbb124322c8d7cd103470d6bbfbc0018d85393a970076df503bd16803",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2026.7.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64",
+      "name": "h11",
+      "record_sha256": "fb9ce0853bf149aa7cbe868c1c128e8408ae933145e032b102d384759fd7a4ed",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.16.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "becdd6ec73b515dc38c59501956134eb0b903bfed33ffcd99b252361acd926e9",
+      "name": "hf-xet",
+      "record_sha256": "812edd7d0969444f422fafe9d11da3b874cbad2cc2fb14bbe895cc2436efe09a",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.6.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "fe2d4fda6199128978779e0cf27f3c045c531863fcdd987eacc74f3a18d41c21",
+      "name": "httpcore",
+      "record_sha256": "e8e01b29f191b00707540b5c1e5f7a17360540209797ef942fdc513cd03fce08",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.0.9"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "febb9b0f8f3e80d57c8199c304f35c4336e8581d1d18d7983c92766b82793b25",
+      "name": "httpx",
+      "record_sha256": "cb227e74cdfd64ada600db6b5eeb05ca5b88881be622ab9aafdb1ff3044998b1",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.28.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "4dc2b0a3fb27bcba8b091f98bccff4b94369d269c9768aeaecd0b99d970665d9",
+      "name": "huggingface-hub",
+      "record_sha256": "469d046e7c9f53362cf6bba14e69454a38a0e0fc4fc15974c91395a16e0fc2e6",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.36.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "46dfe6e5ac462d0f680ecd9abcf66e829b6a2334824b4d9e3979b31135caf281",
+      "name": "idna",
+      "record_sha256": "a9845815ca612c9f8dbc6a79f54c32c96fc27f743d2aaef86c456c227676bdb0",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.18"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
+      "name": "iniconfig",
+      "record_sha256": "d18d73e2ee60346b595967730bb557d58fb120d5e80e5cb231642a35fa18f713",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "7da2974ed5ca7339b27832dbeb0fe66f68a831efad0961cd2ecca2b44550704e",
+      "name": "ipykernel",
+      "record_sha256": "e64da05df280aee485d64749f0f9cc1b146a45daafae4dfec6a1c0bbb0cd18ca",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "7.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "91f8aad15630af8a0972e7e1365d7b3ea2ea64147a80142b544c1874080cd3aa",
+      "name": "ipython",
+      "record_sha256": "6e8731d21b2cdefe5807b4f1eccea87f9d2c055a8d541b2e3578f40625a88496",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "8.39.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "440045201154827793cad24bafbd54deca6800819259e3b17f6edbc06ca7b56b",
+      "name": "isoduration",
+      "record_sha256": "757178db391a690a83564131fd40b5ef6f98468186d87bbe82fbdc837d31c3d9",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "20.11.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "436bd0fb249b82dee15e85e2fb91d08d8e797481a16af48a725b8e4fb5340478",
+      "name": "jedi",
+      "record_sha256": "59f7204f7506254c0c6fd6b6159299ce49470d52b391c7124ed2d0a09bd20ac3",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.20.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "68c5548fb67c4132a13898d9b31ec50c6bea2abdd915d921f214355c3a6499c8",
+      "name": "jinja2",
+      "record_sha256": "9b5a86efc4f4a4d9fce05c6586c1d7d36358add798cfd99135247a2e4908ab09",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.1.6"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "cee9c60896ae4e7a965a840fbde50d111d2f8018f61201d1ed2e9fc3dd4883e6",
+      "name": "joblib",
+      "record_sha256": "e1d4bcafa03069d46b290dbfe6298aeb6f4ec414f470320004e6bd4fa6b004c4",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.5.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "4c3b0f1382e4c994a7762b5b142543e19b31d5f7a6dbdecfe1674fc9c3276404",
+      "name": "json5",
+      "record_sha256": "d3a2efe16f630c9cc25441e44535853f878770de94438130c2bbee813a76aa8e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.15.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b461427459b7a1d595585ba05a9d0466b134b849204f4ddfbc1b1ed20775ba5d",
+      "name": "jsonpointer",
+      "record_sha256": "ff37ef483470e9d4a36c0ba38603b55ae9895c66444f65002896224ce6bef42c",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.1.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+      "name": "jsonschema",
+      "record_sha256": "3fbee994eeb404f79edcdce134f5dfaf83565a6636f143f5d2915dcfccd94ce7",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.26.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+      "name": "jsonschema-specifications",
+      "record_sha256": "587d55d1f5bd0e85cce8b17b804b07078c5d1584ec685948da4a00a0fc1ba6dd",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2025.9.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "f046cd9746f39211aa1f9461b55519727309dfbbc17ce3050853223e800eeeb9",
+      "name": "jupyter-builder",
+      "record_sha256": "f2a1c330a0ebc77bac85c4febcf5fce47fba25b419f474306991f777ee146956",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.2.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "d4166c60bdabbdb174aaee17506ce99ee113b2ab4689a36eea82bd3a73a1dc9d",
+      "name": "jupyter-client",
+      "record_sha256": "45d1032ef7cd02ca8ce38de60f4abb8a331311295c8e1ad9087671fbc02cd4a4",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "8.9.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "68a656d7e2ebe45d40becf6032998192790d8a7536942f72167d79b8559e5ded",
+      "name": "jupyter-core",
+      "record_sha256": "c3184e001d1e31408d9289f4e4efb93e11f15f3763b0b950570bd5bc2f150f46",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "5.9.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "eaba123d824409959b98e9d5ab4e725f7bc64de041da34779df7bc993b03d4fa",
+      "name": "jupyter-events",
+      "record_sha256": "671e0d8f0c46c14a97bec8af30566a75a9c06207dd6035437496b84a0da06881",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.12.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "75517195ccde8ffad9eecfc42bb39d26f12d55cfe5623e1f369497eff4d3c334",
+      "name": "jupyter-lsp",
+      "record_sha256": "61efeeb69f52d34e1aac690a56893f80f4ba912b5c2e60e570cc01ff246fca3e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.3.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "99bfa2382d126124baf2f9f6b8693cf0d12ec0a12ab18969a8b48ca8d860fd0e",
+      "name": "jupyter-server",
+      "record_sha256": "0754564b87a2fa2ec25fbde369dca23d42cae098ad5c4da9cb1704de7b8dc576",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.20.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "811110bdf2240b02fde7baf2a6ace5ba8e6726739daf00547922675919daae8e",
+      "name": "jupyter-server-terminals",
+      "record_sha256": "de725b653f10f6c8b69795346bb537598c8afd92cd7b64dc2c45b37bec3b157c",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.5.4"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "4c017d322298c2f8ca42d790f86688218e5f761ac3006c768e9977b15d547996",
+      "name": "jupyterlab",
+      "record_sha256": "71b88d67f2966eb4c94fa102656a9b91cd396fc0a4cf4eee54064d51e4204e7b",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.6.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "779802ccb231a915a67e42fd6247daacf6c6f5c2a29d3a61914b58b4c35cae46",
+      "name": "jupyterlab-pygments",
+      "record_sha256": "a12a691ce6630e75485f9ca1118da87c52c26aaee31aa8886b52fd82f74cf4e9",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "1e0a08b8178c15528729a05cb04fd291b9e0db3f7af056220bb77160d5432797",
+      "name": "jupyterlab-server",
+      "record_sha256": "3a078f90c8a6d54456565fd5c32ee15aad471f501ade4d0f24c4a3e8ef431474",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.28.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "bb843307a98b7bd2a7055f831cbfa2fe7c864716dea9d04c7a5c03e51f648b79",
+      "name": "kiwisolver",
+      "record_sha256": "8c4a63a9d1b8bdd76baa3f280c74e5049f919ea6a7c4f5fae641bee81d0d5d81",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.5.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "730d3f056045a9096bc0a65e4faccae53fe7f3634055174d4b8245cd19cb4cde",
+      "name": "lark",
+      "record_sha256": "dcb1a3bc619580cc1dbf7d47fc27c227f255898341c7730e7bfb8f55188a62a3",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.3.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "dac36c55dad40e535855b2366a7e3d42a047ac0cf0fbf2e37f26de1b60b0ebe3",
+      "name": "llama-cpp-python",
+      "record_sha256": "e142df719ad952355ce886a8c078dc52ed4ab69e1dc0a94dd8478adef2ca630e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.3.23"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "12b4cc61a7fa288cf7667ee3f213786d9619db57fb33ff6f934afbcb5c12ec81",
+      "name": "markupsafe",
+      "record_sha256": "e4b9ef2a396d23539ec5695a589216366d63053a5f3971325a8fa6881f49c91f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.0.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "bea8a4672bbe4f26b7a4fe5bc5e5023a08c4fb7069cc951f39eef26a403c7ea6",
+      "name": "matplotlib",
+      "record_sha256": "98d3f8040cc6e809a8b720de58f97db26171aad66328f68f0b224d229de9d72e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.10.9"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "fedb3d587ec2d3fa4b0a81fd5353df697d2534c8ee714dbf050009afc60bcab7",
+      "name": "matplotlib-inline",
+      "record_sha256": "30dea88f28cd3aa083b1975b7517e319e54d283e6cbc8c4c12408f1e1ab6c746",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.2.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "0655c262ad851c4ac26b84a0830dc0ab38a302f58c9bf86fe0d31ee2ab03d650",
+      "name": "mistune",
+      "record_sha256": "aba503659547d02a422e179648c6ee2289d3437b3d9ea237a49451156412a20e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.3.4"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "44b66ea444b9c0d19ae94815d356bf047ae6b680c19268b5c265687cd6a81406",
+      "name": "mpmath",
+      "record_sha256": "205c72eaa5058bc221713222d6533b28218df8104321e6fb945137b639a06527",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "97b199c27c838caf67939deb40ea5432a3cc0ce2b68deb5bb20043dd7e295191",
+      "name": "nbclient",
+      "record_sha256": "8c0737f9830b09b1bf253cfbf2c7ef81ce8555447c509d0735cd6e499eb785cd",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.11.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "ff2b5c1e1f14cc033f39305cc753cc53f5c5735c127a5c3289f68c63a490202e",
+      "name": "nbconvert",
+      "record_sha256": "ad6d5d3712e0719157867cb4ef34c8cdcc5a0f272e1d2ac99a49a7a2ea384f53",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "7.17.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "180d6033b33b65c5420029599f669d7f59097c0da09b649ef3074bdb0ddfbeb4",
+      "name": "nbformat",
+      "record_sha256": "55a4dccf8902eec59bd03b7c8d675ca0c9cac8ad49d0c9009c60479d51de4bf2",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "5.11.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "09dd3589c8a7c0f614695ac0847d6607ec287517a63822de02baebe96a4eb9dc",
+      "name": "nest-asyncio2",
+      "record_sha256": "f9fe6de3455d55a9b19ff2c9c1dce178c5138964b166bf70f8c91c29367c6f86",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.7.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2e5265dda876ef3c44fefa9e9553499bc564c89a16c95e38bdaf9babc556d1d7",
+      "name": "networkx",
+      "record_sha256": "441c9c9d2aeac36e6e07f100f389b7b266d885482602bdda189ea2463353299f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.4.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2eb0313d82c04428a5606bf2b3c79987fa778bf6c28bfe315072e607c264eb57",
+      "name": "notebook-shim",
+      "record_sha256": "9ba3138a69bc8ac46a4ca4eca0136c018f3c98522a0afa81064b89065ee3fe8d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.2.4"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "22d648f53848429464ca643b40d73b49a920d47876fc77c395d4dca4e834904a",
+      "name": "numpy",
+      "record_sha256": "8cc141d1a6b9c6a526d0bd63ecc841695073581906762f61697118c3f6c490a0",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.2.6"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "16d750be6566aeaccef55a7b55b36d6d0594c57178e5aaccb271a7c1876566e7",
+      "name": "nvidia-cublas-cu12",
+      "record_sha256": "02427d18e24f26adbe0fa6f9a8af9d96475d68cd489ade580c3550ed5d503b67",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.4.5.8"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "5225d83c3e61739e6d41248d89836ae40aa40faf23ab5287342b46f8f26f3ddb",
+      "name": "nvidia-cuda-cupti-cu12",
+      "record_sha256": "f71def494afd170cb9bbb49501e2ddef506b40b177106658653966ebd465ec84",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.4.127"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "6459fbd8d5e0baf4450e9ccb46825b711e05f735331efa241fc5d2b7795db8db",
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "record_sha256": "9c10ad721e76d4ceb4b044dc51e106fe59db27b3b1a91618d088ed2fa61b370f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.4.127"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "01c028e64eed5a383ec20915882ae7bfa275bfe424c2e562c0d914cbc3df93fd",
+      "name": "nvidia-cuda-runtime-cu12",
+      "record_sha256": "81ce131c5ac2e496f60da230e8dbc46d1366a33d36d78523a2ab6e00d7f5589c",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.4.127"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "575bc4ecda950190d417aa63b4ee6e85bf5ab8805ef6a7d18bfb51deb6082b71",
+      "name": "nvidia-cudnn-cu12",
+      "record_sha256": "ee612ae4ce09ab6b6796e577ab8ce406c6af28ff92886817da8c9aef83478bc0",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "9.1.0.70"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "7b773c251d614c1008958f7a95f4a26c89e6146924c0d7183ba084c46b9743ac",
+      "name": "nvidia-cufft-cu12",
+      "record_sha256": "16715aa9ce40267be47d764da5d6024586ccc7d8e89b107c2b28747f3d4aec3e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "11.2.1.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "7496b9fab16dd2d6d9a874d2712ca70e8c622711d390505506d962bfb6e10f3d",
+      "name": "nvidia-curand-cu12",
+      "record_sha256": "888458e4af5e47800c953c3399e983ee58266dde7dca914815645e71b7d07592",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "10.3.5.147"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "1b216c4ff7bac84406a18c07c361199a06411174c5e0ad3babc75850e43e536f",
+      "name": "nvidia-cusolver-cu12",
+      "record_sha256": "7eaa11e5e10246814915a4a54840e877d9328429373c1dde3305232a06bb45aa",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "11.6.1.9"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "8af59357366ff3ee1bc72deed427b6c1ddea5197862778d3b87dfef2eec020b3",
+      "name": "nvidia-cusparse-cu12",
+      "record_sha256": "ecee92856785ed7227784e0ab361ee4777810207ed4f30c27c1d6d01388cd4a2",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.3.1.170"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c537492b74e9bea86617888510cb01cf71fbc235e15ca346a48692e5f2516049",
+      "name": "nvidia-nccl-cu12",
+      "record_sha256": "83fef63acaf9d857aedd63fadfb365d38ab11e6212118d6d9b18ccf2ea1b1852",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.21.5"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "4e49bdcf1ebd893e301d334163188f8b7d36ef56b0941a5c522020d62b576e7d",
+      "name": "nvidia-nvjitlink-cu12",
+      "record_sha256": "e0b84ebb15a9cef7a493dbe999c2e5af19c2bab32f58382ee1b4dcc13876f1ea",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.4.127"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "f512d79b78518ff5ae28b10fe5e6314c086c2c601e16ddcba07ca68d5aab23b2",
+      "name": "nvidia-nvtx-cu12",
+      "record_sha256": "f0677411bb2777422009b1a6d20c795fb8499f6f7839b1e89c66ec96f8357b4a",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.4.127"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "61d68bbcd7b0d28bd9f8b818cd6f1fcc4e437dd6c54ae603ad4db3f986c28245",
+      "name": "overrides",
+      "record_sha256": "6a2acc63b03391d2adf56b81f87e601feba52ab95ada3c446f3bedf965a43297",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "7.7.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+      "name": "packaging",
+      "record_sha256": "7baca0e0efaf39249a489df533dc050bf24ce413f4f56efceeb4e5b3cb209741",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "26.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "40ee953dc7ca155840b639a1881ff84578075187fce0ac20eeda55a7fa0d9a90",
+      "name": "pandas",
+      "record_sha256": "8fdcb789f7b3d9ca8a3f2d5e237e2648568070918f1238348541b9af05577365",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.3.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c3ef8768dba260dd46311e1acc3a67863a0e5671a9d23fcd2e1a7b7256aab52e",
+      "name": "pandocfilters",
+      "record_sha256": "4131ced0f18dc768ec9442383dc5f9280c4bd45e24e38838e82fa9c3d078609f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.5.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2fd8c9f8209218163a6c086ba8075d177122430645fea770cc02c53cd426119d",
+      "name": "parso",
+      "record_sha256": "a9fc9efbc52dbb6fda9472ed8f72b59aaf4b51279c7b311772d246811f2df7c4",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.8.7"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c095d948f15b9bd16f13d0a52749da67031aad53bd0565295c5302f193e4cbaf",
+      "name": "patsy",
+      "record_sha256": "2abe2b0b724333a9afdc1aa54edfc2095c0d8a71e116f62e730974d3d999d9a4",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.0.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "2d7c5ac5fdefde4a0194ec522fbcc0ca70e99e1a2a956eea444168f8591650aa",
+      "name": "pexpect",
+      "record_sha256": "2092ca7580cc6f18a8d049cf01472c7f65a3080d161a335c965a0e11178e92c6",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.9.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "8fc07146cab33ef7582361dab6eac596d340b03ec648f18217da7894f73838c8",
+      "name": "pillow",
+      "record_sha256": "e4e4433c0c0f298745e85ce970d183c7d41e3a4607e24039bb39d8a01988a429",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "12.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "3a561005822841f2c45f442f6c7a7505172c8c376c9fe274d876c8ac912968cb",
+      "name": "pip",
+      "record_sha256": "eb233e91a47ea2a21b8bcc8aeb07c00fc556d9d296c36ef75d694d03c77467bb",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "26.2.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "5607d730c0017ca0afb8a2264079d3734eb48e74f33f1a2762c32a66138d0244",
+      "name": "platformdirs",
+      "record_sha256": "bd5d03616974a7f7a617cb1b6b173c94b8ab19811a2b48d38a65b44a608f37b2",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.11.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
+      "name": "pluggy",
+      "record_sha256": "d8cbdfdb62e9a732feab9b1f9737a8ce772fd782e313c30de50e15af1107bc83",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.6.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "ea4a4f111b1723da4c588baa002fe7b7886f0e8f653c4dd3d05738686ea85004",
+      "name": "prometheus-client",
+      "record_sha256": "a3140431e4042fdc47c718dd2ac63338b12284d03984c6782bf347cc05e029c5",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.26.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "d04994e4401b88abf884ca54fb3b85e50a8b4fb1fde1ed7eb3ece9d8bf5459a9",
+      "name": "prompt-toolkit",
+      "record_sha256": "1dd9abeaa697aa5cea54318ea63e3ad6ee65bc2b3e4e4c5874b31a0cd065e475",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.0.53"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "fd8e32d1c9f9389730bee1c5a1c5abee197312ddd097c98e52965b3e1bf25eab",
+      "name": "protobuf",
+      "record_sha256": "93b65b6f114cdfda0e70cb78c6ac5b079b1e1a49c45874b178e2e85736eddb12",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "5.29.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "525f8ba78523cf7bc3759d62a105e7c57fd679ea702402b9449fb0746aa0217f",
+      "name": "psutil",
+      "record_sha256": "304523ec043f959a86c96becff15cc70949114e462e23e1847c7bacd11b9cd87",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "7.2.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c3c2b96b5d9a55da5958c34d08c18a0849f56609026cc46d5c95b8b77fcf3e0c",
+      "name": "ptyprocess",
+      "record_sha256": "e7863a967aa86fd4a9c9f59882bd562f67918f7fc3b48e5cf8a52901e38d9fc3",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.7.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "97cdad3355bf3083668e8a5e98ad2a958cd68839b369a35b171e372ab48ee986",
+      "name": "pure-eval",
+      "record_sha256": "30bd80c67f455e212b43da375403fec75a24797a484d5c5d9caf8a14c566555a",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.2.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93",
+      "name": "pycparser",
+      "record_sha256": "dc3f1caa39925d83b379720eff04f4c41257bc162d112924f4edce666984b891",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "e0528f51b30427fae94723662ba622f8d8db2a4d8d3f1365698d67a52450a845",
+      "name": "pygments",
+      "record_sha256": "9d7cba205f33738b44a470ce1303f56825403dcbc02af21cb9625035a4e5801c",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.20.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "3311a8b949d70f71a2b9788a9327f11d9d5a6a8012d6c046ca254ad2de877f45",
+      "name": "pyparsing",
+      "record_sha256": "2fe4f51753672db483d3b2246d113b5f53111e8fa8de59edb2334da2465b8df5",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.3.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
+      "name": "pytest",
+      "record_sha256": "ceeb9ee3e425f79e56b643fa71721fa372d61d9ad081c20a05879b6ad2aec77d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "9.1.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "a9d436da322be808332f98d88325998e87cb693a678a9969feb4cfad729a6e93",
+      "name": "python-dateutil",
+      "record_sha256": "1876f5982b4e1f1137988181f354b10fe2f28886dbe4ee638a96f5ed0e02a70e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.9.0.post0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "de6d91e73621b20a6b9d0908e495b4547425ec1dabde669262319e7a064b235d",
+      "name": "python-json-logger",
+      "record_sha256": "5d1d898a8b295eb0f1f097f8bb08d3cfb69c1a7f60e08c80326112bc3fec8ce7",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "25ef8a562377a28d8c6bd8c5c9e80d761d0e22ac4a7bed24e512f589644ed33d",
+      "name": "pytz",
+      "record_sha256": "0430574a7072e5fd39c81bed38e3b290769713ea0d41d9a07426fabc3e82f40a",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2026.3.post1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "03c3b415ed38d09faedc49360e930769b40c58f68585e6de00e2e4916a858d34",
+      "name": "pyyaml",
+      "record_sha256": "cb890276e02f3e482232f5c91a958e43830ffe7d7f9c26109ce7d6249607c735",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "6.0.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "7e05c41b7e28dddfe8617d63b5691aff02b4cf737092842df9f4b2d59d9aef55",
+      "name": "pyzmq",
+      "record_sha256": "30023587ef880428ff39913cb1172602829ec04db8c1e79e63f4548407c70445",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "27.1.0"
+    },
+    {
+      "direct_url_record_sha256": "52e8180abcce6dee3dcad762c1d3853edd3c012c4de05b6215b713ecac980168",
+      "editable": true,
+      "metadata_sha256": "352d1b1fc79ffd2272021d958447d178ffa4c0383c40fde2e1dcdf2092408bc3",
+      "name": "rankcloak",
+      "record_sha256": "ffcb20c792edcf2e0588d94cc4041ee6f6d81ea2a58c87c68a75a61285713229",
+      "source_kind": "editable_local_directory",
+      "vcs_commit": null,
+      "version": "0.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+      "name": "referencing",
+      "record_sha256": "5c7759a0c5ec1e2c4adcc6012b2b7a93bd3d906aff399bb0ac7951660f808002",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.37.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "fd895ec7522cd0bbab71ee4826442162f3f408a5f8d92e759f4ddf1be60dcf73",
+      "name": "regex",
+      "record_sha256": "aba21e4eb960299f50d4f821b4e1d072db447dc281b350b8891f35f1e822dc08",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2026.7.19"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "8c384ba3e979480faae2859d3c5e6c1276dd2c3616e322e124d52c8cfc556f27",
+      "name": "requests",
+      "record_sha256": "c06e539e4fdb12944e90cc028ffa9cea878c2effa696c8ccfa7926c052b2976f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.34.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "ac4dc2cdea6a8b61c16babbf35c0e9fa6e22e45f1c0338e66e089108dde872d2",
+      "name": "rfc3339-validator",
+      "record_sha256": "959ff7b6e97bf5820bf9551086c81b366844f0bd76352d2bea59c60068eeb9b2",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.1.4"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "feddd8265433ba7be465e1649b486ec83c4c78f593f36284e7ae6d655cae163c",
+      "name": "rfc3986-validator",
+      "record_sha256": "db792400dfceafa4606181f5e2503214e0025ddce14ccac8bd29ba338925efcb",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.1.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "7a518ae5bb5685568b537061e8207a4dbba766ae785b16ad26d930ad3853cb0d",
+      "name": "rfc3987-syntax",
+      "record_sha256": "9fd8c24bf82af64dd5f302aa978e844f686066dab99d53eaed6c7bc1b2be7d58",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "cc01d097ddb9c7e07a29c9553ee8dd35cf920e85fb574f7b0c23d68138a716bf",
+      "name": "rpds-py",
+      "record_sha256": "6ac791cb1976ae91b74863101553c954ba8915205195920459b6f7d90221f5d8",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.30.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "645be7b8d55e91534f991d144dc9e279581ea8dbea1a8c5b0be14e529d01e345",
+      "name": "safetensors",
+      "record_sha256": "0bd272a413cbb8dcfb68ba3a42ef97f73e98dcc9a70785dcbb366036ead31c4c",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.8.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "a301770d816e5ef5e2a262886115f1e6002637324f3bfe73f92378897dea8c63",
+      "name": "scikit-learn",
+      "record_sha256": "d828aa1a18234869cc52e2cf5879b4a05cea15b2e98abf4f389a5eb995c3fb1d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.7.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "c75caf32b67a13a9fc16aacf993a8bb883b7a69744ffe77cbbd4f3bfbad28f3d",
+      "name": "scipy",
+      "record_sha256": "e5372c6fe03595e9d3dd6960d3fa23f0db13dfd6c26713f99e1c03ccb7fa1e68",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.15.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "04ea43f17e94fa7c08678432c37d5f608a4ca4384b868c8f53d25ec42da44533",
+      "name": "send2trash",
+      "record_sha256": "9288c7835d8a9babc9a5db52bb2678619de9836d899d7ae26f619bb41926f1d6",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "a8a8c4f673d7d88e5c9949e4bb441059b1f620d6283a74a2036be09071a9a7b3",
+      "name": "sentencepiece",
+      "record_sha256": "d1e248289a90c1b9ec090a597fbea396e93aefb73744ffb10123a7a3e88a1c8b",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.2.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "80c7a3b78ea0dff1f57855ee795e7d33842a0827aa1ef4ee17ec97172a80c892",
+      "name": "setuptools",
+      "record_sha256": "cebd9639e6923a470e818350691053c3cc846a72426a9bfcb70f092868fa0d5b",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "65.5.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "562042078c2752549f6d8a7c86dbc5dd708088a7be6d80672ec7b07100b72468",
+      "name": "six",
+      "record_sha256": "5fa0bbc20b0426d59bd09f011e1c92cdc63216baa92ca252550d3518a6ce4f2d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.17.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "25ade6580817381657a42b7c18aaa903223eb696401be3eea9850d3d4a1af182",
+      "name": "soupsieve",
+      "record_sha256": "7aca6fe34cce6a1b629f1eecc8dbd620faab65260e47a34d754d984ec0915cbc",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.9.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "f28a66f2adde54e7031355e09a166e437bc0d023a31c10c973ac494288ca4c6f",
+      "name": "stack-data",
+      "record_sha256": "6d92455fc3d319f15c1f7923b6143b7a97820881a64b7e47b3aaa57a4cb0595a",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.6.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "1f93f27342fb62aef002c7f9ef6bf7f85a94bf7b99459176d156223c33238aaa",
+      "name": "statsmodels",
+      "record_sha256": "302bdd5b7247619b7cdcdfdcf69f7b6d6b5a95c84c5577d962d78ddbbf8d748f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.14.4"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "d1dbbf156ee3ac2102086ee84196d252330153dc5ba5b290d49918c6ae5b8b1c",
+      "name": "sympy",
+      "record_sha256": "302d174d04a014eba427aa241f1aa760a0d75482fabefd94fd66304c4bdc8b9f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.13.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b8fbc894ff0bdf734736edc53bdac8456eb8a8f251762bcfde4ab89fb4d5ba65",
+      "name": "terminado",
+      "record_sha256": "540bee2405d1cef59bc39722524f4108a1e31cb74bc74e0dcab945a41b6887ec",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.18.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "a45df8d07ea1883d772183a501d7d526076aa70dfcfddb276a2cbdc04def5341",
+      "name": "threadpoolctl",
+      "record_sha256": "38f78c8d9f49840473c93f576560012e2be1487dad80ecd393e95207f698b3cb",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.6.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "97a184ce0b479d613e7bb4bbc693067ae4c04e5665fd78e8381252f855bcab59",
+      "name": "tinycss2",
+      "record_sha256": "994b5d49f0b74ea46112d5dcb2d1297c79a4d5ffbb138e95beb3ce023fa7fd9e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.5.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "d6e2927bc0a81c0a318e2e14d9a8f54dffb5fc5aba0055982784c231eb3f6d28",
+      "name": "tokenizers",
+      "record_sha256": "ec209ee1e88420b790938128fcc9956ea7fc7b8bf91856b0caf85f12b2fe76da",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.20.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b2b3fdf2566bba313106abf4a806f9c217f8f814587f1017c494d49079a0a683",
+      "name": "tomli",
+      "record_sha256": "552eae197ff5b5c3fefeda8271a768013cc14ac1c0a26fd1bef1d3adcce827a5",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.4.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b135cb282b3243f18dc1cb8aa629cb24aacdb4ff9568ba0509738f62b0356973",
+      "name": "torch",
+      "record_sha256": "bd6a7e23dcff033851bf865964b25364e128875c16a0918968ac5fda026ca7e7",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.5.1+cu124"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "176a022d70bcf6c631265ecaa40548b9e0a0c1c9f21be858ac994b510b16e9da",
+      "name": "tornado",
+      "record_sha256": "043401400c37469b390e50f0e9d40650d3de4465ec411f46a2f852df784cd49e",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "6.5.8"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "0d95b85b90428f8776afc4a92b17c5094f78ee98d150b3255acbcdf4e9d57941",
+      "name": "tqdm",
+      "record_sha256": "b2dc93c2ee381d86be9fdf6dc8d915f287edd65be27d306c5efdf6d170830706",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.70.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "e42b503240c058625ffb30c390818d72933117840cb25060614cb24f0be9e587",
+      "name": "traitlets",
+      "record_sha256": "aa4c02c1e9b8c9e326ce103138a886e432593a711c3aea313af56a5abb6c9f68",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "5.16.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "dc9f165315eabd5a0af0cadd6bd6b466661fe1bbda50afcdf48da4ee659cf227",
+      "name": "transformers",
+      "record_sha256": "3e52245bb6062c2eca7e497ef577bb4f2aec9e7a9a1fe8e05019edcbc5cce659",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.46.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "8deccdccfccec3b437662f38eb4ffe3a902ad90ee6c120958807684bb85bb51e",
+      "name": "triton",
+      "record_sha256": "1f7d5e44c0d746be53fb2ff9dfaff1c0a2a792e360a352e440a46b208b8e2f2f",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "3.1.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+      "name": "typing-extensions",
+      "record_sha256": "64951562feccc6ed53bc5bab5a8a471e7bff2fa704eb84308e1bcb5255f4121d",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "4.16.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "511c019df477939fe7f4c38e32ad74a570c4ebb05b13fd2fffd0f0f2dbe6f7b1",
+      "name": "tzdata",
+      "record_sha256": "3ba5907e9e6fad60b112916cd744043a104e57fb36afe7f023473af61d9d2b61",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2026.3"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "3a8c53a915e5755c13b09faa29a4211fcff0c6ee188a169fc02cc092d89f46bc",
+      "name": "uri-template",
+      "record_sha256": "349c5f83979029e65b4b62ad8b2713f3c99790f82bbbd9e892c56e0e0dd8fe65",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.3.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "66147856d30bbb6bed01c6ce3326d0f48d84ed5f286ac177633a1486b82eace5",
+      "name": "urllib3",
+      "record_sha256": "dbfebeaf1d2b8fbf3d3a40786291748642caf553c1b926da4782365c2bd3cd79",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "2.7.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "9a1f2d41c9dd637fc963f641c73978c7cb9a6f1ef85515f65b93b07d820187b3",
+      "name": "wcwidth",
+      "record_sha256": "d6cbe70cd61cdc88630a77eb3e45c221b5e179a726e8d7c58faddb085dd58d59",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.8.2"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "53b0da874b2e90dd8f1ccaa9c75c41e8db9107eb2568fc7a4e605b71c955d099",
+      "name": "webcolors",
+      "record_sha256": "53cb6603f408120d21f5cb56d9742c458820a1accb325cf4a321dea046ca2045",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "25.10.0"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "290ec583c2efe3f9db5006f3012dbd426897cc6ec79d62c85e9176a0de0fdaee",
+      "name": "webencodings",
+      "record_sha256": "3e4aa6d9caefd8c7425c8c79ba606387cedc86e3b6c8dd5a1a59661ec87ccf55",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "0.5.1"
+    },
+    {
+      "direct_url_record_sha256": null,
+      "editable": false,
+      "metadata_sha256": "29cfc4c6cba2dcfd8757128f893d69ea13fe7598153c4854232c20405a493bb1",
+      "name": "websocket-client",
+      "record_sha256": "824bb960ea90c6ceec8fdda612457feb466d17980281718861ad858c72c3ea6c",
+      "source_kind": "index_or_unspecified",
+      "vcs_commit": null,
+      "version": "1.9.0"
+    }
+  ],
+  "packages_sha256": "a868c7621e7cce6ea4a69f850bb142f138b0bc5e69b0b3552575182e27f0e618",
+  "pip_version": "26.2.1",
+  "python_compiler": "GCC 13.3.0",
+  "python_executable_role": "environment_used_to_build_snapshot",
+  "python_implementation": "CPython",
+  "python_version": "3.10.13",
+  "requirements_lock_sha256": "2e1b694449698ee6251b52718dceee56e11e48c71e3b89f586b0806aa44729a2",
+  "schema_version": "1.0",
+  "virtual_environment_active": true,
+  "wheel_artifacts_vendored": false
+}

@@ -1,0 +1,21 @@
+{
+  "analysis_unit": "source_payload_trial_or_control_view",
+  "confirmatory_pooling_eligible": false,
+  "continuous_quality_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+  "continuous_quality_sha256": "62819f60b49dec1493a118beed9935bbb7f6e3d87fcb5c53dc1585ede068f141",
+  "evidence_partition": "exploratory_smoke_v3_payload_fidelity_v2_no_confirmatory_pooling",
+  "evidence_statuses": [
+    "exploratory_smoke_v3_payload_fidelity_v2_not_for_confirmatory_pooling"
+  ],
+  "manifest_type": "heldout_evaluator_feature_table",
+  "nested_segments_are_not_independent": true,
+  "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v3/llama3_8b_instruct_q4_k_m/features.jsonl",
+  "row_count": 29,
+  "schema_version": "2.0",
+  "sha256": "546f6e6084c6489f4f115dadbb2fdc82f16235b63a0fd52cc0d14bd0463d7428",
+  "statistics_ingestion": {
+    "continuous_quality": "--trials continuous_quality.jsonl",
+    "features": "--features features.jsonl",
+    "policy": "exploratory_only_do_not_pool_with_confirmatory"
+  }
+}

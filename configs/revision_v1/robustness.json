@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_replay_and_transmission",
+  "source_subset": {
+    "same_as": "ablations.json#/subset",
+    "paired_blocks": 144
+  },
+  "failure_record_required_fields": [
+    "trial_id",
+    "transformation_id",
+    "replay_mode",
+    "failure_category",
+    "first_differing_position",
+    "expected_token_id",
+    "recovered_token_id",
+    "expected_rank",
+    "recovered_rank",
+    "context_sha256",
+    "boundary_start_offset",
+    "boundary_end_offset"
+  ],
+  "replay_modes": {
+    "source_condition": "leadin_tokens_8",
+    "levels": [
+      "saved_token_ids",
+      "detokenized_text_retokenized",
+      "greedy_leadin_regeneration"
+    ],
+    "outcome_rows": 432,
+    "additional_decode_only_runs": 288
+  },
+  "transformation_position_rule": {
+    "algorithm": "sha256_modulo_eligible_positions_v1",
+    "seed_material": "trial_id || transformation_id",
+    "never_modify_prompt_or_hidden_payload_manifest": true
+  },
+  "transformations": [
+    {"transformation_id": "unmodified", "operation": "identity"},
+    {"transformation_id": "line_endings", "operation": "LF_to_CRLF"},
+    {"transformation_id": "whitespace_trim", "operation": "trim_leading_trailing_whitespace_per_message"},
+    {"transformation_id": "whitespace_collapse", "operation": "collapse_each_nonempty_whitespace_run_to_ASCII_space"},
+    {"transformation_id": "unicode_normalization", "operation": "Unicode_NFKC"},
+    {"transformation_id": "quote_conversion", "operation": "straight_quotes_to_directional_smart_quotes"},
+    {"transformation_id": "markdown_copy_paste", "operation": "normalize_line_endings_trim_trailing_space_and_prefix_blockquote"},
+    {"transformation_id": "character_insertion", "operation": "insert_ASCII_x_at_deterministic_character_position"},
+    {"transformation_id": "character_deletion", "operation": "delete_at_deterministic_nonwhitespace_character_position"},
+    {"transformation_id": "character_substitution", "operation": "substitute_deterministic_alphanumeric_character_with_x_or_y"},
+    {"transformation_id": "token_deletion", "operation": "delete_at_deterministic_nonboundary_token_position"},
+    {"transformation_id": "truncation", "operation": "remove_final_10_percent_of_tokens_ceil"},
+    {
+      "transformation_id": "paraphrase",
+      "operation": "greedy_deterministic_rewrite",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "prompt": "Rewrite the following passage while preserving its overt meaning but changing its wording and sentence structure. Return only the rewrite.\n\n{text}"
+    }
+  ],
+  "raw_transmission": {
+    "transformation_count": 13,
+    "outcome_rows": 1872,
+    "additional_decode_only_runs": 1728
+  },
+  "limited_mitigation": {
+    "source_condition": "roundtrip_stable_filter_v1",
+    "pipeline": [
+      "Unicode_NFKC",
+      "canonical_line_endings",
+      "canonical_outer_whitespace",
+      "segment_boundary_framing_v1",
+      "segment_checksum_detection_v1"
+    ],
+    "claim_scope": "formatting preservation and failure detection, not general error correction",
+    "transformation_ids": [
+      "unmodified",
+      "line_endings",
+      "whitespace_trim",
+      "whitespace_collapse",
+      "unicode_normalization",
+      "quote_conversion",
+      "markdown_copy_paste"
+    ],
+    "outcome_rows": 1008,
+    "additional_decode_only_runs": 864
+  },
+  "cross_model_mismatch": {
+    "decoders_per_source_cover": 2,
+    "outcome_rows": 288,
+    "additional_decode_only_runs": 288
+  },
+  "expected_counts": {
+    "robustness_outcome_rows": 3600,
+    "additional_decode_only_runs": 3168,
+    "additional_generated_rankcloak_texts": 0
+  }
+}

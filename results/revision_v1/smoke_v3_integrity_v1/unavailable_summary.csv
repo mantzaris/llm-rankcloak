@@ -1,0 +1,3 @@
+model_id,record_type,reason_code,n_work_units,safe_count,stable_count,vocabulary_size,all_excluded_from_estimands
+mistral_7b_instruct_v0_3_q4_k_m,condition_unavailable,empty_isolated_roundtrip_vocabulary,1,31464,0,32768,True
+mistral_7b_instruct_v0_3_q4_k_m,dependent_unavailable,source_condition_unavailable,2,31464,0,32768,True

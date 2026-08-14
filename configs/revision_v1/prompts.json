@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_english_prompts",
+  "language": "en",
+  "category_count": 6,
+  "templates_per_category": 3,
+  "template_count": 18,
+  "categories": [
+    {
+      "category_id": "casual_conversation",
+      "templates": [
+        {
+          "prompt_id": "casual_weekend_chat",
+          "text": "Write a friendly message to a friend about making relaxed plans for the weekend. Use ordinary conversational English and complete thoughts."
+        },
+        {
+          "prompt_id": "casual_hobby_chat",
+          "text": "Write a casual message to a friend describing a hobby you have been enjoying lately. Keep the tone natural, warm, and specific."
+        },
+        {
+          "prompt_id": "casual_neighborhood_chat",
+          "text": "Write an informal message to a neighbor about something pleasant noticed nearby. Use clear everyday language and finish the message naturally."
+        }
+      ]
+    },
+    {
+      "category_id": "professional_communication",
+      "templates": [
+        {
+          "prompt_id": "professional_project_update",
+          "text": "Write a concise professional project update for colleagues, explaining recent progress, the next step, and one practical consideration."
+        },
+        {
+          "prompt_id": "professional_schedule_note",
+          "text": "Write a polite workplace message proposing a meeting time and briefly explaining what the discussion should accomplish."
+        },
+        {
+          "prompt_id": "professional_process_email",
+          "text": "Write a short professional email clarifying a routine process and inviting colleagues to raise questions. Use complete, neutral prose."
+        }
+      ]
+    },
+    {
+      "category_id": "forum_question_answer",
+      "templates": [
+        {
+          "prompt_id": "forum_practical_answer",
+          "text": "Write a helpful answer to an online forum question about solving a common household problem. Explain the reasoning in plain English."
+        },
+        {
+          "prompt_id": "forum_purchase_advice",
+          "text": "Write a balanced forum reply to someone comparing two everyday purchases. Mention useful tradeoffs without sounding promotional."
+        },
+        {
+          "prompt_id": "forum_learning_answer",
+          "text": "Write a supportive question-and-answer style response to a beginner learning a practical skill. Give concrete, cautious advice."
+        }
+      ]
+    },
+    {
+      "category_id": "recipe_procedure",
+      "templates": [
+        {
+          "prompt_id": "procedure_simple_meal",
+          "text": "Write clear prose instructions for preparing a simple weeknight meal. Explain the order of the steps and how to tell when it is ready."
+        },
+        {
+          "prompt_id": "procedure_home_task",
+          "text": "Write an easy-to-follow explanation of a routine home maintenance task. Include preparation, the main steps, and a sensible final check."
+        },
+        {
+          "prompt_id": "procedure_garden_task",
+          "text": "Write practical instructions for a basic gardening task. Use natural sentences, explain why the steps matter, and end cleanly."
+        }
+      ]
+    },
+    {
+      "category_id": "personal_narrative_blog",
+      "templates": [
+        {
+          "prompt_id": "narrative_small_discovery",
+          "text": "Write a short personal blog passage about discovering something useful during an ordinary day. Keep the reflection concrete and understated."
+        },
+        {
+          "prompt_id": "narrative_local_walk",
+          "text": "Write a first-person narrative about a walk through a familiar place and one detail that changed the writer's perspective."
+        },
+        {
+          "prompt_id": "narrative_learning_moment",
+          "text": "Write a brief personal story about learning from a minor mistake. Use coherent, natural prose and a restrained conclusion."
+        }
+      ]
+    },
+    {
+      "category_id": "factual_explanatory",
+      "templates": [
+        {
+          "prompt_id": "explain_weather_pattern",
+          "text": "Explain a familiar weather pattern to a general audience. Connect cause and effect clearly without using equations or specialist jargon."
+        },
+        {
+          "prompt_id": "explain_everyday_system",
+          "text": "Explain how an everyday public system works for a curious reader. Use accurate, neutral language and a logically complete explanation."
+        },
+        {
+          "prompt_id": "explain_biological_process",
+          "text": "Explain a basic biological process in accessible prose. Define the central idea, describe the sequence, and avoid unsupported claims."
+        }
+      ]
+    }
+  ]
+}

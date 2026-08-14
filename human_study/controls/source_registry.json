@@ -1,0 +1,87 @@
+{
+  "schema_version": "rankcloak-human-control-sources-v1",
+  "as_of_date": "2026-08-08",
+  "policy": {
+    "allow_only_registered_content_hashes": true,
+    "allowed_license_identifiers": [
+      "CC-BY-SA-3.0",
+      "CC0-1.0",
+      "PDM-1.0"
+    ],
+    "individual_author_required_when_source_supplies_one": true,
+    "network_access_during_import_selection_or_validation": false,
+    "final_manual_topic_pii_and_safety_review_required": true
+  },
+  "sources": [
+    {
+      "source_id": "databricks_dolly_15k_v1_pinned",
+      "status": "approved_for_candidate_screening_not_final_selection",
+      "adapter": "dolly_jsonl_v1",
+      "dataset_title": "databricks-dolly-15k",
+      "dataset_version": "1.0",
+      "dataset_revision": "bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a",
+      "source_file_name": "databricks-dolly-15k.jsonl",
+      "source_file_sha256": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+      "source_file_size_bytes": 13085339,
+      "source_record_count": 15011,
+      "source_url": "https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a/databricks-dolly-15k.jsonl",
+      "landing_page_url": "https://huggingface.co/datasets/databricks/databricks-dolly-15k/blob/bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a/README.md",
+      "copyright_notice": "Copyright (2023) Databricks, Inc.",
+      "attribution_name": "Databricks, Inc.",
+      "individual_author_field": null,
+      "individual_author_note": "The official dataset does not supply per-record employee identities; attribute the dataset to Databricks, Inc.",
+      "license_identifier": "CC-BY-SA-3.0",
+      "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "redistribution_terms": "Credit Databricks, retain the source and license URLs, identify technical or substantive changes, and distribute adapted text under CC BY-SA 3.0 or a permitted compatible license.",
+      "human_authorship_evidence": "The pinned official dataset card states that Databricks employees generated the instruction-response records and were explicitly instructed not to use generative AI.",
+      "language": "en-US",
+      "allowed_source_categories": [
+        "creative_writing",
+        "general_qa",
+        "open_qa"
+      ],
+      "excluded_source_categories": [
+        "brainstorming",
+        "classification",
+        "closed_qa",
+        "information_extraction",
+        "summarization"
+      ],
+      "exclude_nonempty_context": true,
+      "exclusion_rationale": "Context-bearing and Wikipedia-dependent categories are excluded because record-level upstream page attribution is unavailable; list-oriented and classification categories are poor style matches.",
+      "known_limitations": [
+        "Databricks employees are not representative of the general population.",
+        "The dataset card reports possible typos and factual errors.",
+        "The dataset card reports no known private-person identifiers, but every candidate still requires automated flags and manual review.",
+        "Open licensing does not eliminate privacy, publicity, moral-rights, or research-design obligations."
+      ]
+    }
+  ],
+  "deferred_sources": [
+    {
+      "source_id": "openassistant_oasst1",
+      "license_observed": "Apache-2.0",
+      "decision": "defer",
+      "rationale": "The official corpus is human-generated and openly licensed, but broad volunteer dialogue requires a substantially heavier privacy, unsafe-content, and conversational-context audit than this revision can complete before recruitment."
+    },
+    {
+      "source_id": "stack_exchange_data_dump",
+      "license_observed": "CC-BY-SA-4.0 for current contributions, with date-dependent historical licensing",
+      "decision": "defer",
+      "rationale": "Fair reuse requires post-level author, URL, revision-date, and license-version attribution. That complexity is avoidable while a single-license candidate source is assessed."
+    },
+    {
+      "source_id": "project_gutenberg",
+      "license_observed": "work-specific public-domain status with Project Gutenberg trademark and jurisdiction notices",
+      "decision": "defer",
+      "rationale": "Work-by-work jurisdiction checks and markedly historical prose make it a poor primary match for the contemporary prompt styles."
+    },
+    {
+      "source_id": "enron_email_corpus",
+      "license_observed": "no sufficiently clear blanket open-content license located",
+      "decision": "reject",
+      "rationale": "Public availability and prior research use are not a redistribution license, and the corpus creates avoidable personal-data risks."
+    }
+  ]
+}

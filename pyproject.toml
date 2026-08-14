@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "Research utilities for LLM rank-transcoding steganography over synthetic cryptographic artifacts."
 requires-python = ">=3.8"
 dependencies = [
+    "cryptography>=41,<47",
     "huggingface_hub>=0.22",
     "numpy>=1.22",
     "pandas>=1.3",

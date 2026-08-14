@@ -1,0 +1,74 @@
+{
+  "input_manifest_sha256": "8fae60be058a347b7ba37760c27f4d398208a12461f715f3211a8f5c1e5b7af6",
+  "invariants": {
+    "detector_grouping_unit": "payload_name",
+    "detector_pair_count": 58,
+    "missing_values_imputed": false,
+    "segment_rows_nested": true,
+    "trial_unit": "one payload-condition/replay/transformation row",
+    "unavailable_rows_are_not_recovery_failures": true,
+    "unavailable_rows_excluded_from_estimands": true
+  },
+  "manifest_type": "revision_preprocessing_outputs",
+  "outputs": [
+    {
+      "path": "trials.csv",
+      "role": "trials",
+      "row_count": 105,
+      "sha256": "75bebb34639fb8be63e2b866898c86a7f04fbd8a3e655116552a3963c84b8445",
+      "size_bytes": 72155
+    },
+    {
+      "path": "features.csv",
+      "role": "features",
+      "row_count": 302,
+      "sha256": "f8c900fe79d0b36a5d8c4761dce78374aa94afe3ed05c38a20682827f809a5b0",
+      "size_bytes": 503244
+    },
+    {
+      "path": "runtime.csv",
+      "role": "runtime",
+      "row_count": 102,
+      "sha256": "7c77c5d72f61b7ccef3211457c630dec6573270a7c636201296a80330a4c6b60",
+      "size_bytes": 71389
+    },
+    {
+      "path": "failures.csv",
+      "role": "failures",
+      "row_count": 13,
+      "sha256": "f97a8aae51d1e4f83c78b48fe05f149e25d6fa7ab102510b0cc5e5a1d6243972",
+      "size_bytes": 7929
+    },
+    {
+      "path": "detector_corpus.jsonl",
+      "role": "detector",
+      "row_count": 116,
+      "sha256": "8a554c752cb14444b7c40e049cbdf4a1badf692e365d6cf4d7788ccc3472464d",
+      "size_bytes": 135968
+    },
+    {
+      "path": "unavailable.csv",
+      "role": "unavailable",
+      "row_count": 3,
+      "sha256": "ce2758af3d0830d7e2109d6ab52331328224097fb2e7ac637f351516e98cee75",
+      "size_bytes": 4216
+    },
+    {
+      "path": "preprocessing_input_manifest.json",
+      "role": "input_manifest",
+      "row_count": null,
+      "sha256": "8fae60be058a347b7ba37760c27f4d398208a12461f715f3211a8f5c1e5b7af6",
+      "size_bytes": 11466
+    }
+  ],
+  "outputs_sha256": "a2e7e73d4afee8c17d3e7b6c8d15878485ad828be1b2cb9ca4b5dd50ebee90e8",
+  "row_counts": {
+    "detector": 116,
+    "failures": 13,
+    "features": 302,
+    "runtime": 102,
+    "trials": 105,
+    "unavailable": 3
+  },
+  "schema_version": "1.0"
+}

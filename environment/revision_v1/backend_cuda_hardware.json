@@ -1,0 +1,167 @@
+{
+  "cpu": {
+    "available": true,
+    "fields": {
+      "Architecture": "x86_64",
+      "CPU(s)": "12",
+      "Core(s) per socket": "6",
+      "L1d cache": "192 KiB (6 instances)",
+      "L1i cache": "192 KiB (6 instances)",
+      "L2 cache": "1.5 MiB (6 instances)",
+      "L3 cache": "12 MiB (1 instance)",
+      "Model name": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+      "NUMA node(s)": "1",
+      "On-line CPU(s) list": "0-11",
+      "Socket(s)": "1",
+      "Thread(s) per core": "2",
+      "Vendor ID": "GenuineIntel"
+    }
+  },
+  "gpu_inventory": [
+    {
+      "driver_version": "590.48.01",
+      "memory_total_mib": 4096,
+      "name": "Quadro T2000",
+      "pci_bus_id": "00000000:01:00.0",
+      "uuid": "GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04"
+    },
+    {
+      "driver_version": "590.48.01",
+      "memory_total_mib": 32760,
+      "name": "NVIDIA RTX 5000 Ada Generation",
+      "pci_bus_id": "00000000:2F:00.0",
+      "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+    }
+  ],
+  "host_driver_advertised_cuda_version": "13.1",
+  "llama_cpp_backend": {
+    "available": true,
+    "gpu_offload_supported": true,
+    "native_libraries": [
+      {
+        "path_within_python_package": "lib/libggml-base.so",
+        "sha256": "d7fadcef23b3b97e6e313254c5656caaf96b92c6785060ff2db1677e134c8aa6",
+        "size_bytes": 789160
+      },
+      {
+        "path_within_python_package": "lib/libggml-cpu.so",
+        "sha256": "19be8814e6190554e4c1d3f72123da3717413cefb3c347903285ed63dd2a980f",
+        "size_bytes": 1046256
+      },
+      {
+        "path_within_python_package": "lib/libggml-cuda.so",
+        "sha256": "89d5798bdf1bfd679d8a155f1ba02c40008d708b8cafba62f5f5e21a8d7b958d",
+        "size_bytes": 814592384
+      },
+      {
+        "path_within_python_package": "lib/libggml.so",
+        "sha256": "c908ca5f8ae463d5d5c6d4c380326390a84be3b899cb01ad41bc117b91a887b8",
+        "size_bytes": 47840
+      },
+      {
+        "path_within_python_package": "lib/libllama.so",
+        "sha256": "ed7dbeb62742a4a2d42fb35f5c26f48139121c7faa7715673ab5c01bb603267f",
+        "size_bytes": 2952832
+      },
+      {
+        "path_within_python_package": "lib/libmtmd.so",
+        "sha256": "408f42232538e4bc9f4ae5273e2e94dbbeda4c963a62c693a9e80e709d9055d6",
+        "size_bytes": 1100080
+      }
+    ],
+    "preloaded_pip_cuda_libraries": [
+      {
+        "basename": "libcublas.so.12",
+        "sha256": "4cc45526449a95d3985389785e985b7832460ea3db178bc9e9963be2111fbee8",
+        "size_bytes": 109604768
+      },
+      {
+        "basename": "libcublasLt.so.12",
+        "sha256": "44a813aa2da08830f9083f81d0eb73f1ae4052a4d9b0b0de480a8f6cd9eb3078",
+        "size_bytes": 441938896
+      },
+      {
+        "basename": "libcudart.so.12",
+        "sha256": "8774224f5b11a73b15d074a3fcce7327322c5c4cfdfd924d6a826779eec968fe",
+        "size_bytes": 707904
+      }
+    ],
+    "python_package_version": "0.3.23",
+    "system_info": "CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | "
+  },
+  "memory": {
+    "available": true,
+    "total_bytes": 100890906624
+  },
+  "operating_system": {
+    "kernel_release": "6.17.0-22-generic",
+    "kernel_version": "#22~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Mar 26 15:25:54 UTC 2",
+    "machine": "x86_64",
+    "release": {
+      "ID": "ubuntu",
+      "PRETTY_NAME": "Ubuntu 24.04.1 LTS",
+      "VERSION_ID": "24.04"
+    }
+  },
+  "schema_version": "1.0",
+  "selected_execution_gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "selected_gpu_resolves_exactly_once": true,
+  "tool_versions": [
+    {
+      "available": true,
+      "name": "Rscript",
+      "version_line": "Rscript (R) version 4.4.2 (2024-10-31)"
+    },
+    {
+      "available": false,
+      "name": "cmake",
+      "version_line": null
+    },
+    {
+      "available": true,
+      "name": "g++",
+      "version_line": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+    },
+    {
+      "available": true,
+      "name": "gcc",
+      "version_line": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+    },
+    {
+      "available": true,
+      "name": "git",
+      "version_line": "git version 2.43.0"
+    },
+    {
+      "available": false,
+      "name": "nvcc",
+      "version_line": null
+    },
+    {
+      "available": true,
+      "name": "nvidia-smi",
+      "version_line": "NVIDIA-SMI version  : 590.48.01"
+    }
+  ],
+  "torch_cuda": {
+    "available": true,
+    "cuda_runtime_available": true,
+    "cudnn_version": 90100,
+    "runtime_devices": [
+      {
+        "compute_capability": "8.9",
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "runtime_index": 0,
+        "total_memory_bytes": 33796456448
+      },
+      {
+        "compute_capability": "7.5",
+        "name": "Quadro T2000",
+        "runtime_index": 1,
+        "total_memory_bytes": 3896180736
+      }
+    ],
+    "torch_compiled_cuda_version": "12.4",
+    "torch_version": "2.5.1+cu124"
+  }
+}

@@ -1,5 +1,6 @@
 # Python environments and caches
 .venv/
+.r_libs/
 venv/
 env/
 __pycache__/
@@ -23,6 +24,8 @@ models/**/*.pth
 models/**/*.onnx
 models/**/*.tflite
 models/**/.cache/
+models/detectors/
+external_sources/lm-steganography/
 
 # Hugging Face local cache metadata that should not be committed
 .cache/

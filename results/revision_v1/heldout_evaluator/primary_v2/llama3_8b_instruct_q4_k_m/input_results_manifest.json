@@ -1,0 +1,94 @@
+{
+  "evaluator_model_id": "llama3_8b_instruct_q4_k_m",
+  "generator_artifact_opened_by_evaluator": false,
+  "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+  "inputs_sha256": "75b811e2e3c0139554866926fad37807eb98e53f67de6ce4baf7ea28eb85ba9f",
+  "manifest_type": "heldout_evaluator_inputs",
+  "protocol_contract_revision": "payload_fidelity_v2",
+  "result_schema_revision": "payload_aware_result_v2",
+  "runner_shards": [
+    {
+      "confirmatory_pooling_eligible": true,
+      "evidence_partition": "confirmatory_primary_v2_payload_fidelity_v2",
+      "files": [
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/checkpoint.json",
+          "role": "checkpoint",
+          "sha256": "befa27f6b7689bef6c654ec0195dbd7082df2364665b9356cc96a2bf4c59d1da",
+          "size_bytes": 706168
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/hardware_manifest.json",
+          "role": "hardware_manifest",
+          "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+          "size_bytes": 634
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/model_manifest.json",
+          "role": "model_manifest",
+          "sha256": "fd8afaa086a49fcc83c2269f6613c3e1f8b0ced714bf71dbd923e4a60d47494f",
+          "size_bytes": 1597
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/payload_manifest.json",
+          "role": "payload_manifest",
+          "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+          "size_bytes": 643935
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/plan.jsonl",
+          "role": "plan",
+          "sha256": "4b65917038965533b4e944402dedb3509d3a5199f31d70f53bafb2b703967b8c",
+          "size_bytes": 6270341
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+          "role": "records",
+          "sha256": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+          "size_bytes": 75466438
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/run_identity.json",
+          "role": "run_identity",
+          "sha256": "1e4a5fe0be8cc774e3a7535711bc4e6f85fab646698846acb4da59380f8c059d",
+          "size_bytes": 3212
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/runtime_manifest.json",
+          "role": "runtime_manifest",
+          "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+          "size_bytes": 1084
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/source_manifest.json",
+          "role": "source_manifest",
+          "sha256": "2263a64989b188ed8af88b72fec4a753bc007f60b5ac88fd899c7b44a17a9f64",
+          "size_bytes": 2409
+        }
+      ],
+      "files_sha256": "3d0cfcdea1d78fbea623ff8b7c7bec3f4a3f3e5c6d357ec24f899dfa415a760e",
+      "generator_artifact_opened_by_evaluator": false,
+      "generator_artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "generator_artifact_verification": {
+        "actual_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "actual_size_bytes": 4372812000,
+        "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "expected_size_bytes": 4372812000,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      },
+      "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "manifest_type": "heldout_evaluator_verified_runner_input",
+      "protocol_contract_revision": "payload_fidelity_v2",
+      "result_schema_revision": "payload_aware_result_v2",
+      "runner_planned_count": 4800,
+      "schema_version": "2.0",
+      "selected_score_record_count": 4800,
+      "stage": "primary_v2"
+    }
+  ],
+  "same_model_evaluation": false,
+  "schema_version": "2.0"
+}

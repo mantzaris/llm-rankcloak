@@ -1,0 +1,1264 @@
+{
+  "auxiliary_timing_inputs": [],
+  "budget_gpu_hours": 150.0,
+  "config_manifest_sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+  "decision": {
+    "go": false,
+    "reason": "The conservative upper projection exceeds the approved ceiling.",
+    "status": "no_go_over_budget"
+  },
+  "evidence_policy": {
+    "accepted_runner_label": "exploratory_smoke_not_for_confirmatory_pooling",
+    "confirmatory_pooling_permitted": false,
+    "gate_is_compute_only": true,
+    "smoke_is_exploratory_only": true
+  },
+  "frozen_plan": {
+    "ablation": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 624,
+        "mistral_7b_instruct_v0_3_q4_k_m": 624,
+        "qwen2_5_7b_instruct_q4_k_m": 624
+      },
+      "plan_sha256": "eb93d94306c72d3f2ce77f3cdef093a6a38f9d416952a7b3a5ff0670c41af4db",
+      "work_kind_counts": {
+        "rankcloak": 1728,
+        "reference": 144
+      },
+      "work_units": 1872
+    },
+    "multilingual": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 384,
+        "mistral_7b_instruct_v0_3_q4_k_m": 384,
+        "qwen2_5_7b_instruct_q4_k_m": 384
+      },
+      "plan_sha256": "2994ff6004b7e23e2d666460324768c19c9000f600fc589e8f800bf241188238",
+      "work_kind_counts": {
+        "control": 576,
+        "rankcloak": 576
+      },
+      "work_units": 1152
+    },
+    "primary": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 4800,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4800,
+        "qwen2_5_7b_instruct_q4_k_m": 4800
+      },
+      "plan_sha256": "2584796d7ab1021f7797b8329834712ef6beea21bf953ced8e20d682962d20ba",
+      "work_kind_counts": {
+        "control": 7920,
+        "rankcloak": 6480
+      },
+      "work_units": 14400
+    },
+    "robustness": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 1200,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1200,
+        "qwen2_5_7b_instruct_q4_k_m": 1344
+      },
+      "plan_sha256": "c57a8f6a1589f2fc5d76ee751d89e706e382826e01f7264df7bee326ceed8c91",
+      "work_kind_counts": {
+        "reference": 432,
+        "robustness_decode": 3168,
+        "robustness_transform": 144
+      },
+      "work_units": 3744
+    },
+    "smoke_v2": {
+      "model_counts": {
+        "llama3_8b_instruct_q4_k_m": 32,
+        "mistral_7b_instruct_v0_3_q4_k_m": 32,
+        "qwen2_5_7b_instruct_q4_k_m": 32
+      },
+      "plan_sha256": "3e874252c4d508498f088bdf47a35d4733c0289dc9a90e10816df76989325403",
+      "work_kind_counts": {
+        "control": 60,
+        "rankcloak": 36
+      },
+      "work_units": 96
+    }
+  },
+  "incomplete_reasons": [],
+  "input_status": "complete",
+  "projection_rows": [
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "point_gpu_hours": 0.094355647774161,
+      "point_seconds": 339.6803319869796,
+      "resource_class": "gpu",
+      "stage": "smoke_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_completed_smoke_including_all_replays_and_loads",
+      "upper_gpu_hours": 0.094355647774161,
+      "upper_seconds": 339.6803319869796
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "point_gpu_hours": 0.08655556444499476,
+      "point_seconds": 311.60003200198116,
+      "resource_class": "gpu",
+      "stage": "smoke_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_completed_smoke_including_all_replays_and_loads",
+      "upper_gpu_hours": 0.08655556444499476,
+      "upper_seconds": 311.60003200198116
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "point_gpu_hours": 0.0682615425836088,
+      "point_seconds": 245.74155330099165,
+      "resource_class": "gpu",
+      "stage": "smoke_observed",
+      "target_work_units": 32,
+      "timing_source": "observed_completed_smoke_including_all_replays_and_loads",
+      "upper_gpu_hours": 0.0682615425836088,
+      "upper_seconds": 245.74155330099165
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5305025609995937,
+        "observed_min_seconds": 2.5305025609995937,
+        "point_seconds_per_unit": 2.5305025609995937,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.061005121999187
+      },
+      "point_gpu_hours": 9.090955361676974,
+      "point_seconds": 32727.439302037106,
+      "resource_class": "gpu",
+      "stage": "primary",
+      "strata": [
+        {
+          "observed_max_seconds": 2.6020683579990873,
+          "observed_min_seconds": 1.2587630369962426,
+          "point_seconds": 750.3357547230553,
+          "point_seconds_per_unit": 1.5631994890063652,
+          "sample_size": 8,
+          "stratum": "control:forced_span",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1686.1402959834088,
+          "upper_seconds_per_unit": 3.512792283298768
+        },
+        {
+          "observed_max_seconds": 13.350189331991714,
+          "observed_min_seconds": 1.6199652779905591,
+          "point_seconds": 10303.625754353707,
+          "point_seconds_per_unit": 4.7701971084970864,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 2160,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 38929.15209208784,
+          "upper_seconds_per_unit": 18.022755598188816
+        },
+        {
+          "observed_max_seconds": 8.178084608982317,
+          "observed_min_seconds": 8.178084608982317,
+          "point_seconds": 3925.4806123115122,
+          "point_seconds_per_unit": 8.178084608982317,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 7850.9612246230245,
+          "upper_seconds_per_unit": 16.356169217964634
+        },
+        {
+          "observed_max_seconds": 10.543686359000276,
+          "observed_min_seconds": 10.543686359000276,
+          "point_seconds": 5060.969452320132,
+          "point_seconds_per_unit": 10.543686359000276,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 10121.938904640265,
+          "upper_seconds_per_unit": 21.08737271800055
+        },
+        {
+          "observed_max_seconds": 8.159662573001697,
+          "observed_min_seconds": 8.159662573001697,
+          "point_seconds": 3916.6380350408144,
+          "point_seconds_per_unit": 8.159662573001697,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b8",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 7833.276070081629,
+          "upper_seconds_per_unit": 16.319325146003393
+        },
+        {
+          "observed_max_seconds": 5.939799957006471,
+          "observed_min_seconds": 5.939799957006471,
+          "point_seconds": 1425.551989681553,
+          "point_seconds_per_unit": 5.939799957006471,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_hex_nibble_b16",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 2851.103979363106,
+          "upper_seconds_per_unit": 11.879599914012942
+        },
+        {
+          "observed_max_seconds": 22.538912103977054,
+          "observed_min_seconds": 6.229310616996372,
+          "point_seconds": 3043.1886316789314,
+          "point_seconds_per_unit": 12.679952631995548,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 7302.6075216885665,
+          "upper_seconds_per_unit": 30.427531340369026
+        },
+        {
+          "observed_max_seconds": 17.91299403902667,
+          "observed_min_seconds": 17.91299403902667,
+          "point_seconds": 4299.118569366401,
+          "point_seconds_per_unit": 17.91299403902667,
+          "sample_size": 1,
+          "stratum": "rankcloak:segmented_hex_single_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 8598.237138732802,
+          "upper_seconds_per_unit": 35.82598807805334
+        }
+      ],
+      "target_work_units": 4800,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 23.6606883978674,
+      "upper_seconds": 85178.47823232264,
+      "work_kind_counts": {
+        "control": 2640,
+        "rankcloak": 2160
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.4347082159947604,
+        "observed_min_seconds": 2.4347082159947604,
+        "point_seconds_per_unit": 2.4347082159947604,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.869416431989521
+      },
+      "point_gpu_hours": 9.584393598269154,
+      "point_seconds": 34503.816953768954,
+      "resource_class": "gpu",
+      "stage": "primary",
+      "strata": [
+        {
+          "observed_max_seconds": 2.747372922996874,
+          "observed_min_seconds": 1.191852881005616,
+          "point_seconds": 679.1193398390897,
+          "point_seconds_per_unit": 1.4148319579981035,
+          "sample_size": 8,
+          "stratum": "control:forced_span",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1780.2976541019743,
+          "upper_seconds_per_unit": 3.70895344604578
+        },
+        {
+          "observed_max_seconds": 18.470022356996196,
+          "observed_min_seconds": 1.5810352499975124,
+          "point_seconds": 9478.19682251662,
+          "point_seconds_per_unit": 4.388054084498435,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 2160,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 53858.58519300091,
+          "upper_seconds_per_unit": 24.934530181944865
+        },
+        {
+          "observed_max_seconds": 9.78260036901338,
+          "observed_min_seconds": 9.78260036901338,
+          "point_seconds": 4695.6481771264225,
+          "point_seconds_per_unit": 9.78260036901338,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 9391.296354252845,
+          "upper_seconds_per_unit": 19.56520073802676
+        },
+        {
+          "observed_max_seconds": 11.269147644008626,
+          "observed_min_seconds": 11.269147644008626,
+          "point_seconds": 5409.190869124141,
+          "point_seconds_per_unit": 11.269147644008626,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 10818.381738248281,
+          "upper_seconds_per_unit": 22.538295288017252
+        },
+        {
+          "observed_max_seconds": 9.37882963498123,
+          "observed_min_seconds": 9.37882963498123,
+          "point_seconds": 4501.83822479099,
+          "point_seconds_per_unit": 9.37882963498123,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b8",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 9003.67644958198,
+          "upper_seconds_per_unit": 18.75765926996246
+        },
+        {
+          "observed_max_seconds": 3.6273263659968507,
+          "observed_min_seconds": 3.6273263659968507,
+          "point_seconds": 870.5583278392442,
+          "point_seconds_per_unit": 3.6273263659968507,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_hex_nibble_b16",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1741.1166556784883,
+          "upper_seconds_per_unit": 7.254652731993701
+        },
+        {
+          "observed_max_seconds": 16.88070725198486,
+          "observed_min_seconds": 7.316518790030386,
+          "point_seconds": 2177.7656947192736,
+          "point_seconds_per_unit": 9.074023727996973,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 5469.349149643094,
+          "upper_seconds_per_unit": 22.78895479017956
+        },
+        {
+          "observed_max_seconds": 27.87110328998824,
+          "observed_min_seconds": 27.87110328998824,
+          "point_seconds": 6689.064789597178,
+          "point_seconds_per_unit": 27.87110328998824,
+          "sample_size": 1,
+          "stratum": "rankcloak:segmented_hex_single_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 13378.129579194356,
+          "upper_seconds_per_unit": 55.74220657997648
+        }
+      ],
+      "target_work_units": 4800,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 29.290472830592755,
+      "upper_seconds": 105445.70219013392,
+      "work_kind_counts": {
+        "control": 2640,
+        "rankcloak": 2160
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0245647150004515,
+        "observed_min_seconds": 2.0245647150004515,
+        "point_seconds_per_unit": 2.0245647150004515,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.049129430000903
+      },
+      "point_gpu_hours": 6.126537688020524,
+      "point_seconds": 22055.535676873886,
+      "resource_class": "gpu",
+      "stage": "primary",
+      "strata": [
+        {
+          "observed_max_seconds": 1.94469620900054,
+          "observed_min_seconds": 1.0183474420045968,
+          "point_seconds": 583.5504864016548,
+          "point_seconds_per_unit": 1.2157301800034475,
+          "sample_size": 7,
+          "stratum": "control:forced_span",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1260.1631434323501,
+          "upper_seconds_per_unit": 2.625339882150729
+        },
+        {
+          "observed_max_seconds": 16.992761526009417,
+          "observed_min_seconds": 1.0405929810076486,
+          "point_seconds": 7817.521356000798,
+          "point_seconds_per_unit": 3.6192228500003694,
+          "sample_size": 11,
+          "stratum": "control:full_message",
+          "target_units": 2160,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 49550.89260984347,
+          "upper_seconds_per_unit": 22.940228060112716
+        },
+        {
+          "observed_max_seconds": 7.348990850005066,
+          "observed_min_seconds": 7.348990850005066,
+          "point_seconds": 3527.5156080024317,
+          "point_seconds_per_unit": 7.348990850005066,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 7055.031216004863,
+          "upper_seconds_per_unit": 14.697981700010132
+        },
+        {
+          "observed_max_seconds": 6.982512292001047,
+          "observed_min_seconds": 6.982512292001047,
+          "point_seconds": 3351.6059001605026,
+          "point_seconds_per_unit": 6.982512292001047,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 6703.211800321005,
+          "upper_seconds_per_unit": 13.965024584002094
+        },
+        {
+          "observed_max_seconds": 5.434264682990033,
+          "observed_min_seconds": 5.434264682990033,
+          "point_seconds": 2608.447047835216,
+          "point_seconds_per_unit": 5.434264682990033,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b8",
+          "target_units": 480,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 5216.894095670432,
+          "upper_seconds_per_unit": 10.868529365980066
+        },
+        {
+          "observed_max_seconds": 2.057052541000303,
+          "observed_min_seconds": 2.057052541000303,
+          "point_seconds": 493.6926098400727,
+          "point_seconds_per_unit": 2.057052541000303,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_hex_nibble_b16",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 987.3852196801454,
+          "upper_seconds_per_unit": 4.114105082000606
+        },
+        {
+          "observed_max_seconds": 26.923172187016462,
+          "observed_min_seconds": 5.2963952730060555,
+          "point_seconds": 1692.1416767989285,
+          "point_seconds_per_unit": 7.0505903199955355,
+          "sample_size": 6,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 8723.107788593334,
+          "upper_seconds_per_unit": 36.346282452472224
+        },
+        {
+          "observed_max_seconds": 8.245985112997005,
+          "observed_min_seconds": 8.245985112997005,
+          "point_seconds": 1979.0364271192811,
+          "point_seconds_per_unit": 8.245985112997005,
+          "sample_size": 1,
+          "stratum": "rankcloak:segmented_hex_single_topic",
+          "target_units": 240,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 3958.0728542385623,
+          "upper_seconds_per_unit": 16.49197022599401
+        }
+      ],
+      "target_work_units": 4800,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 23.183002182559488,
+      "upper_seconds": 83458.80785721415,
+      "work_kind_counts": {
+        "control": 2640,
+        "rankcloak": 2160
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5305025609995937,
+        "observed_min_seconds": 2.5305025609995937,
+        "point_seconds_per_unit": 2.5305025609995937,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.061005121999187
+      },
+      "point_gpu_hours": 2.029495338497343,
+      "point_seconds": 7306.183218590435,
+      "resource_class": "gpu",
+      "stage": "ablation",
+      "strata": [
+        {
+          "observed_max_seconds": 22.538912103977054,
+          "observed_min_seconds": 6.229310616996372,
+          "point_seconds": 7303.652716029435,
+          "point_seconds_per_unit": 12.679952631995548,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 576,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 17526.25805205256,
+          "upper_seconds_per_unit": 30.427531340369026
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 48,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        }
+      ],
+      "target_work_units": 624,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 4.869810849215155,
+      "upper_seconds": 17531.319057174558,
+      "work_kind_counts": {
+        "rankcloak": 576,
+        "reference": 48
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.4347082159947604,
+        "observed_min_seconds": 2.4347082159947604,
+        "point_seconds_per_unit": 2.4347082159947604,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.869416431989521
+      },
+      "point_gpu_hours": 1.452520104317292,
+      "point_seconds": 5229.072375542251,
+      "resource_class": "gpu",
+      "stage": "ablation",
+      "strata": [
+        {
+          "observed_max_seconds": 16.88070725198486,
+          "observed_min_seconds": 7.316518790030386,
+          "point_seconds": 5226.637667326257,
+          "point_seconds_per_unit": 9.074023727996973,
+          "sample_size": 7,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 576,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 13126.437959143426,
+          "upper_seconds_per_unit": 22.78895479017956
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 48,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        }
+      ],
+      "target_work_units": 624,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 3.6475853821042823,
+      "upper_seconds": 13131.307375575416,
+      "work_kind_counts": {
+        "rankcloak": 576,
+        "reference": 48
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0245647150004515,
+        "observed_min_seconds": 2.0245647150004515,
+        "point_seconds_per_unit": 2.0245647150004515,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.049129430000903
+      },
+      "point_gpu_hours": 1.1286568302867859,
+      "point_seconds": 4063.164589032429,
+      "resource_class": "gpu",
+      "stage": "ablation",
+      "strata": [
+        {
+          "observed_max_seconds": 26.923172187016462,
+          "observed_min_seconds": 5.2963952730060555,
+          "point_seconds": 4061.1400243174285,
+          "point_seconds_per_unit": 7.0505903199955355,
+          "sample_size": 6,
+          "stratum": "rankcloak:segmented_hex_multi_topic",
+          "target_units": 576,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 20935.458692624,
+          "upper_seconds_per_unit": 36.346282452472224
+        },
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 48,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        }
+      ],
+      "target_work_units": 624,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 5.816529950570556,
+      "upper_seconds": 20939.507822054,
+      "work_kind_counts": {
+        "rankcloak": 576,
+        "reference": 48
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5305025609995937,
+        "observed_min_seconds": 2.5305025609995937,
+        "point_seconds_per_unit": 2.5305025609995937,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.061005121999187
+      },
+      "point_gpu_hours": 0.7543606556441025,
+      "point_seconds": 2715.698360318769,
+      "resource_class": "gpu",
+      "stage": "multilingual",
+      "strata": [
+        {
+          "observed_max_seconds": 13.350189331991714,
+          "observed_min_seconds": 1.6199652779905591,
+          "point_seconds": 915.8778448314406,
+          "point_seconds_per_unit": 4.7701971084970864,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 192,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 3460.3690748522527,
+          "upper_seconds_per_unit": 18.022755598188816
+        },
+        {
+          "observed_max_seconds": 8.178084608982317,
+          "observed_min_seconds": 8.178084608982317,
+          "point_seconds": 785.0961224623024,
+          "point_seconds_per_unit": 8.178084608982317,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1570.192244924605,
+          "upper_seconds_per_unit": 16.356169217964634
+        },
+        {
+          "observed_max_seconds": 10.543686359000276,
+          "observed_min_seconds": 10.543686359000276,
+          "point_seconds": 1012.1938904640265,
+          "point_seconds_per_unit": 10.543686359000276,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 2024.387780928053,
+          "upper_seconds_per_unit": 21.08737271800055
+        }
+      ],
+      "target_work_units": 384,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 1.9611139182852528,
+      "upper_seconds": 7060.01010582691,
+      "work_kind_counts": {
+        "control": 192,
+        "rankcloak": 192
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.4347082159947604,
+        "observed_min_seconds": 2.4347082159947604,
+        "point_seconds_per_unit": 2.4347082159947604,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.869416431989521
+      },
+      "point_gpu_hours": 0.7960858060249464,
+      "point_seconds": 2865.908901689807,
+      "resource_class": "gpu",
+      "stage": "multilingual",
+      "strata": [
+        {
+          "observed_max_seconds": 18.470022356996196,
+          "observed_min_seconds": 1.5810352499975124,
+          "point_seconds": 842.5063842236996,
+          "point_seconds_per_unit": 4.388054084498435,
+          "sample_size": 12,
+          "stratum": "control:full_message",
+          "target_units": 192,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 4787.429794933414,
+          "upper_seconds_per_unit": 24.934530181944865
+        },
+        {
+          "observed_max_seconds": 9.78260036901338,
+          "observed_min_seconds": 9.78260036901338,
+          "point_seconds": 939.1296354252845,
+          "point_seconds_per_unit": 9.78260036901338,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1878.259270850569,
+          "upper_seconds_per_unit": 19.56520073802676
+        },
+        {
+          "observed_max_seconds": 11.269147644008626,
+          "observed_min_seconds": 11.269147644008626,
+          "point_seconds": 1081.8381738248281,
+          "point_seconds_per_unit": 11.269147644008626,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 2163.6763476496562,
+          "upper_seconds_per_unit": 22.538295288017252
+        }
+      ],
+      "target_work_units": 384,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 2.4539541194071193,
+      "upper_seconds": 8834.234829865629,
+      "work_kind_counts": {
+        "control": 192,
+        "rankcloak": 192
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0245647150004515,
+        "observed_min_seconds": 2.0245647150004515,
+        "point_seconds_per_unit": 2.0245647150004515,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.049129430000903
+      },
+      "point_gpu_hours": 0.5757610148743495,
+      "point_seconds": 2072.7396535476582,
+      "resource_class": "gpu",
+      "stage": "multilingual",
+      "strata": [
+        {
+          "observed_max_seconds": 16.992761526009417,
+          "observed_min_seconds": 1.0405929810076486,
+          "point_seconds": 694.8907872000709,
+          "point_seconds_per_unit": 3.6192228500003694,
+          "sample_size": 11,
+          "stratum": "control:full_message",
+          "target_units": 192,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 4404.5237875416415,
+          "upper_seconds_per_unit": 22.940228060112716
+        },
+        {
+          "observed_max_seconds": 7.348990850005066,
+          "observed_min_seconds": 7.348990850005066,
+          "point_seconds": 705.5031216004863,
+          "point_seconds_per_unit": 7.348990850005066,
+          "sample_size": 1,
+          "stratum": "rankcloak:direct_subword_calgacus",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1411.0062432009727,
+          "upper_seconds_per_unit": 14.697981700010132
+        },
+        {
+          "observed_max_seconds": 6.982512292001047,
+          "observed_min_seconds": 6.982512292001047,
+          "point_seconds": 670.3211800321005,
+          "point_seconds_per_unit": 6.982512292001047,
+          "sample_size": 1,
+          "stratum": "rankcloak:nonseg_ascii_b16",
+          "target_units": 96,
+          "upper_method": "observed_max_times_fixed_small_n_multiplier",
+          "upper_multiplier": 2.0,
+          "upper_seconds": 1340.642360064201,
+          "upper_seconds_per_unit": 13.965024584002094
+        }
+      ],
+      "target_work_units": 384,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 1.9889504222880046,
+      "upper_seconds": 7160.221520236816,
+      "work_kind_counts": {
+        "control": 192,
+        "rankcloak": 192
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5305025609995937,
+        "observed_min_seconds": 2.5305025609995937,
+        "point_seconds_per_unit": 2.5305025609995937,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.061005121999187
+      },
+      "point_gpu_hours": 0.8095092970297062,
+      "point_seconds": 2914.2334693069424,
+      "resource_class": "gpu",
+      "stage": "robustness",
+      "strata": [
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 144,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 9.048465517014847,
+          "observed_min_seconds": 3.292378352009109,
+          "point_seconds": 227.65398369566537,
+          "point_seconds_per_unit": 4.742791326993029,
+          "sample_size": 7,
+          "stratum": "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic",
+          "target_units": 48,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 879.5108482538433,
+          "upper_seconds_per_unit": 18.32314267195507
+        },
+        {
+          "observed_max_seconds": 5.24143627200101,
+          "observed_min_seconds": 1.9020359010028187,
+          "point_seconds": 2684.0489830502775,
+          "point_seconds_per_unit": 2.662747006994323,
+          "sample_size": 7,
+          "stratum": "robustness_decode:text_retokenized:segmented_hex_multi_topic",
+          "target_units": 1008,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 10698.819718408464,
+          "upper_seconds_per_unit": 10.613908450802047
+        }
+      ],
+      "target_work_units": 1200,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 3.2176087699400853,
+      "upper_seconds": 11583.391571784307,
+      "work_kind_counts": {
+        "reference": 144,
+        "robustness_decode": 1056
+      }
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.4347082159947604,
+        "observed_min_seconds": 2.4347082159947604,
+        "point_seconds_per_unit": 2.4347082159947604,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.869416431989521
+      },
+      "point_gpu_hours": 1.0886005594003816,
+      "point_seconds": 3918.962013841374,
+      "resource_class": "gpu",
+      "stage": "robustness",
+      "strata": [
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 144,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 8.366934838995803,
+          "observed_min_seconds": 2.8417646489833714,
+          "point_seconds": 271.08781939186156,
+          "point_seconds_per_unit": 5.647662903997116,
+          "sample_size": 7,
+          "stratum": "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic",
+          "target_units": 48,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 813.2660663503921,
+          "upper_seconds_per_unit": 16.9430430489665
+        },
+        {
+          "observed_max_seconds": 4.887878025008831,
+          "observed_min_seconds": 1.6796514770103386,
+          "point_seconds": 2697.6198039818555,
+          "point_seconds_per_unit": 2.6762101229978725,
+          "sample_size": 7,
+          "stratum": "robustness_decode:text_retokenized:segmented_hex_multi_topic",
+          "target_units": 1008,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 9977.136624648027,
+          "upper_seconds_per_unit": 9.897953000642884
+        },
+        {
+          "observed_max_seconds": 18.470022356996196,
+          "observed_min_seconds": 1.5810352499975124,
+          "point_seconds": 947.819682251662,
+          "point_seconds_per_unit": 6.582081126747653,
+          "sample_size": 12,
+          "stratum": "robustness_transform",
+          "target_units": 144,
+          "upper_method": "full_control_proxy_with_twofold_paraphrase_upper",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 7181.144692400121,
+          "upper_seconds_per_unit": 49.86906036388973
+        }
+      ],
+      "target_work_units": 1344,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 4.993449111064035,
+      "upper_seconds": 17976.416799830527,
+      "work_kind_counts": {
+        "reference": 144,
+        "robustness_decode": 1056,
+        "robustness_transform": 144
+      }
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0245647150004515,
+        "observed_min_seconds": 2.0245647150004515,
+        "point_seconds_per_unit": 2.0245647150004515,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.049129430000903
+      },
+      "point_gpu_hours": 0.822861711899657,
+      "point_seconds": 2962.302162838765,
+      "resource_class": "gpu",
+      "stage": "robustness",
+      "strata": [
+        {
+          "point_seconds": 0.0,
+          "point_seconds_per_unit": 0.0,
+          "sample_size": 0,
+          "stratum": "reference",
+          "target_units": 144,
+          "upper_method": "noncomputational_reference",
+          "upper_seconds": 0.0,
+          "upper_seconds_per_unit": 0.0
+        },
+        {
+          "observed_max_seconds": 11.762935067992657,
+          "observed_min_seconds": 3.4156628899945645,
+          "point_seconds": 231.3037071840372,
+          "point_seconds_per_unit": 4.818827233000775,
+          "sample_size": 6,
+          "stratum": "robustness_decode:greedy_leadin_regeneration:segmented_hex_multi_topic",
+          "target_units": 48,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 1143.3572886088864,
+          "upper_seconds_per_unit": 23.819943512685132
+        },
+        {
+          "observed_max_seconds": 6.432587061979575,
+          "observed_min_seconds": 1.9403495770093286,
+          "point_seconds": 2728.9738909397274,
+          "point_seconds_per_unit": 2.7073153679957613,
+          "sample_size": 6,
+          "stratum": "robustness_decode:text_retokenized:segmented_hex_multi_topic",
+          "target_units": 1008,
+          "upper_method": "diagnostic_replay_proxy_with_transform_overhead",
+          "upper_multiplier": 1.35,
+          "upper_seconds": 13130.196710912709,
+          "upper_seconds_per_unit": 13.02598880050864
+        }
+      ],
+      "target_work_units": 1200,
+      "timing_source": "completed_exploratory_smoke_runner_shard",
+      "upper_gpu_hours": 3.966000869153221,
+      "upper_seconds": 14277.603128951596,
+      "work_kind_counts": {
+        "reference": 144,
+        "robustness_decode": 1056
+      }
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.5305025609995937,
+        "observed_min_seconds": 2.5305025609995937,
+        "point_seconds_per_unit": 2.5305025609995937,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 5.061005121999187
+      },
+      "point_gpu_hours": 7.633018290973394,
+      "point_seconds": 27478.865847504218,
+      "rate": {
+        "gpu_count": 1,
+        "observed_max_seconds": 13.350189331991714,
+        "observed_min_seconds": 1.6199652779905591,
+        "point_seconds_per_unit": 4.7701971084970864,
+        "sample_size": 12,
+        "upper_method": "runner_full_control_proxy_with_evaluator_margin",
+        "upper_multiplier": 1.35,
+        "upper_seconds_per_unit": 27.034133397283224
+      },
+      "resource_class": "gpu",
+      "stage": "heldout_evaluator",
+      "target_work_units": 5760,
+      "timing_source": "runner_smoke_proxy_no_optional_evaluator_timing",
+      "upper_gpu_hours": 43.25601927040927,
+      "upper_seconds": 155721.66937347336
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.4347082159947604,
+        "observed_min_seconds": 2.4347082159947604,
+        "point_seconds_per_unit": 2.4347082159947604,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.869416431989521
+      },
+      "point_gpu_hours": 7.021562843035273,
+      "point_seconds": 25277.626234926982,
+      "rate": {
+        "gpu_count": 1,
+        "observed_max_seconds": 18.470022356996196,
+        "observed_min_seconds": 1.5810352499975124,
+        "point_seconds_per_unit": 4.388054084498435,
+        "sample_size": 12,
+        "upper_method": "runner_full_control_proxy_with_evaluator_margin",
+        "upper_multiplier": 1.35,
+        "upper_seconds_per_unit": 37.4017952729173
+      },
+      "resource_class": "gpu",
+      "stage": "heldout_evaluator",
+      "target_work_units": 5760,
+      "timing_source": "runner_smoke_proxy_no_optional_evaluator_timing",
+      "upper_gpu_hours": 59.844225052343226,
+      "upper_seconds": 215439.21018843562
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load": {
+        "observed_max_seconds": 2.0245647150004515,
+        "observed_min_seconds": 2.0245647150004515,
+        "point_seconds_per_unit": 2.0245647150004515,
+        "sample_size": 1,
+        "upper_method": "observed_max_times_fixed_small_n_multiplier",
+        "upper_multiplier": 2.0,
+        "upper_seconds_per_unit": 4.049129430000903
+      },
+      "point_gpu_hours": 5.791318939088091,
+      "point_seconds": 20848.748180717128,
+      "rate": {
+        "gpu_count": 1,
+        "observed_max_seconds": 16.992761526009417,
+        "observed_min_seconds": 1.0405929810076486,
+        "point_seconds_per_unit": 3.6192228500003694,
+        "sample_size": 11,
+        "upper_method": "runner_full_control_proxy_with_evaluator_margin",
+        "upper_multiplier": 1.35,
+        "upper_seconds_per_unit": 34.410342090169074
+      },
+      "resource_class": "gpu",
+      "stage": "heldout_evaluator",
+      "target_work_units": 5760,
+      "timing_source": "runner_smoke_proxy_no_optional_evaluator_timing",
+      "upper_gpu_hours": 55.05767210244552,
+      "upper_seconds": 198207.61956880387
+    },
+    {
+      "epochs_per_fit": 10,
+      "gpu_budget_note": "CPU-configured detector contributes zero GPU-hours; wall time is unknown until optional timing is supplied.",
+      "model_id": "published_textcnn_equivalent",
+      "point_gpu_hours": 0.0,
+      "point_seconds": null,
+      "rate": null,
+      "resource_class": "cpu",
+      "stage": "neural_detector",
+      "target_work_units": 28,
+      "timing_source": "configured_cpu_optional_wall_timing_not_supplied",
+      "upper_gpu_hours": 0.0,
+      "upper_seconds": null
+    },
+    {
+      "epochs_per_fit": 3,
+      "gpu_budget_note": "CPU-configured detector contributes zero GPU-hours; wall time is unknown until optional timing is supplied.",
+      "model_id": "deberta_v3_base_classifier",
+      "point_gpu_hours": 0.0,
+      "point_seconds": null,
+      "rate": null,
+      "resource_class": "cpu",
+      "stage": "neural_detector",
+      "target_work_units": 28,
+      "timing_source": "configured_cpu_optional_wall_timing_not_supplied",
+      "upper_gpu_hours": 0.0,
+      "upper_seconds": null
+    }
+  ],
+  "projection_sha256": "b16db48c1127f2c5527d9e259724386229769ab9f1b1c82a080415ce5d7f9b01",
+  "schema_version": "rankcloak-revision-compute-projection-v1",
+  "stage_totals": [
+    {
+      "point_gpu_hours": 4.610672273101421,
+      "stage": "ablation",
+      "target_work_units": 1872,
+      "upper_gpu_hours": 14.333926181889993
+    },
+    {
+      "point_gpu_hours": 20.44590007309676,
+      "stage": "heldout_evaluator",
+      "target_work_units": 17280,
+      "upper_gpu_hours": 158.15791642519804
+    },
+    {
+      "point_gpu_hours": 2.1262074765433985,
+      "stage": "multilingual",
+      "target_work_units": 1152,
+      "upper_gpu_hours": 6.404018459980376
+    },
+    {
+      "point_gpu_hours": 0.0,
+      "stage": "neural_detector",
+      "target_work_units": 56,
+      "upper_gpu_hours": 0.0
+    },
+    {
+      "point_gpu_hours": 24.80188664796665,
+      "stage": "primary",
+      "target_work_units": 14400,
+      "upper_gpu_hours": 76.13416341101964
+    },
+    {
+      "point_gpu_hours": 2.7209715683297446,
+      "stage": "robustness",
+      "target_work_units": 3744,
+      "upper_gpu_hours": 12.177058750157341
+    },
+    {
+      "point_gpu_hours": 0.24917275480276457,
+      "stage": "smoke_observed",
+      "target_work_units": 96,
+      "upper_gpu_hours": 0.24917275480276457
+    }
+  ],
+  "totals": {
+    "budget_gpu_hours": 150.0,
+    "point_gpu_hours": 54.95481079384074,
+    "upper_gpu_hours": 267.45625598304815,
+    "upper_headroom_gpu_hours": -117.45625598304815
+  },
+  "verified_smoke_shards": [
+    {
+      "actual_gpu_seconds": 339.6803319869796,
+      "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+      "load_seconds": [
+        2.5305025609995937
+      ],
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/llama3_8b_instruct_q4_k_m",
+      "plan_sha256": "9176d193a5d737a08de1b6cf77097613dcc8f4641ddcf75191980522bcff016e",
+      "records_sha256": "24120110e1bfd8157dec84699398449055e02c87ca54221f04b0afa92510adc7",
+      "run_identity_sha256": "4f3a9aa7782ecec7f3c9cfe49e8687a8a838def89ffd037934e35eba37a18f96",
+      "work_units": 32
+    },
+    {
+      "actual_gpu_seconds": 311.60003200198116,
+      "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+      "load_seconds": [
+        2.4347082159947604
+      ],
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/qwen2_5_7b_instruct_q4_k_m",
+      "plan_sha256": "286dc38aeae169c8419d921fed9818671dab6e02920bda460598549fb3610ecb",
+      "records_sha256": "1c52e6ba5963e1bf5b22df1126624848850bf8e3cdf540a504de42b1020c96d5",
+      "run_identity_sha256": "75a88c8822e7f61236e9fd6a873f2c9b4f7937a76616cb3c059c598962c715d9",
+      "work_units": 32
+    },
+    {
+      "actual_gpu_seconds": 245.74155330099165,
+      "hardware_manifest_sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+      "load_seconds": [
+        2.0245647150004515
+      ],
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m",
+      "plan_sha256": "fba5013253e9d65d8276024427704c99453d8af28056f0d4f7348f14b93750f5",
+      "records_sha256": "bd9d54b90bc22518e3d848bc090c583af27f525c8beec06d07a02f14f321a2ff",
+      "run_identity_sha256": "1f1e1b4c6d9496d13394c494218a2355d92a997551c247042cc8948690d77705",
+      "work_units": 32
+    }
+  ]
+}

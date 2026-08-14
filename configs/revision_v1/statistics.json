@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "config_id": "revision_v1_statistical_analysis",
+  "confirmatory_freeze_required": true,
+  "experimental_unit": "payload_model_prompt_cover",
+  "nonindependence": {
+    "payload_identifier": "random_intercept",
+    "prompt_template": "random_intercept",
+    "segment": "nested_within_payload_cover_and_never_counted_as_independent_payload"
+  },
+  "payload_split": {
+    "train_indices": [0, 35],
+    "validation_indices": [36, 47],
+    "test_indices": [48, 59],
+    "payloads_per_class": {"train": 36, "validation": 12, "test": 12},
+    "payload_counts": {"train": 288, "validation": 96, "test": 96},
+    "primary_rankcloak_rows": {"train": 3888, "validation": 1296, "test": 1296}
+  },
+  "primary_outcomes": [
+    "exact_recovery",
+    "human_naturalness",
+    "human_suspiciousness",
+    "heldout_evaluator_log_probability",
+    "effective_payload_rate",
+    "neural_detector_roc_auc",
+    "encoding_tokens_per_second",
+    "decoding_tokens_per_second",
+    "payload_bits_per_second"
+  ],
+  "models": {
+    "exact_recovery": {
+      "family": "binomial_logistic_mixed_effects",
+      "fixed_effects": ["codec", "model", "prompt_category", "payload_class"],
+      "interactions": ["codec:model"],
+      "zero_event_fallback": "exact_binomial_intervals_and_weakly_regularized_or_Firth_model"
+    },
+    "human_ratings": {
+      "family": "cumulative_link_mixed_effects",
+      "fixed_effects": ["source_condition", "model", "prompt_category"],
+      "random_effects": ["rater_id", "source_message_id", "payload_id"]
+    },
+    "continuous_quality": {
+      "family": "robust_linear_mixed_effects",
+      "fixed_effects": ["codec", "model", "prompt_category", "payload_class"],
+      "random_effects": ["payload_id", "prompt_template"]
+    },
+    "artifact_counts": {
+      "family": "negative_binomial_mixed_effects",
+      "poisson_allowed_only_if_overdispersion_check_passes": true
+    },
+    "detector_metrics": {
+      "family": "grouped_bootstrap",
+      "group": "payload_id",
+      "resamples": 2000,
+      "confidence_level": 0.95
+    }
+  },
+  "intervals": {
+    "confidence_level": 0.95,
+    "bootstrap_seed": 2026080801,
+    "bootstrap_resamples": 2000
+  },
+  "multiplicity": {
+    "primary_family": "Holm",
+    "exploratory_supplementary": "Benjamini-Hochberg",
+    "unadjusted_estimates_also_reported": true
+  },
+  "reporting": {
+    "effect_sizes_required": true,
+    "confidence_intervals_required": true,
+    "segments_as_independent_observations_forbidden": true,
+    "complete_coefficient_tables_in_supplement": true
+  }
+}

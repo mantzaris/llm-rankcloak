@@ -1,0 +1,22 @@
+{
+  "gpu_inventory": [
+    {
+      "driver_version": "590.48.01",
+      "memory_total_mib": 4096,
+      "name": "Quadro T2000",
+      "pci_bus_id": "00000000:01:00.0",
+      "uuid": "GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04"
+    },
+    {
+      "driver_version": "590.48.01",
+      "memory_total_mib": 32760,
+      "name": "NVIDIA RTX 5000 Ada Generation",
+      "pci_bus_id": "00000000:2F:00.0",
+      "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+    }
+  ],
+  "logical_cpu_count": 12,
+  "machine": "x86_64",
+  "schema_version": "2.0",
+  "selected_gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+}

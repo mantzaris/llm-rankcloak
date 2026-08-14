@@ -1,0 +1,10 @@
+{
+  "external_publication_performed": false,
+  "installation_performed": false,
+  "model_weights_copied": false,
+  "network_access_used": false,
+  "offline_observation_only": true,
+  "schema_version": "1.0",
+  "snapshot_id": "rankcloak_scientific_reports_revision_v1_environment",
+  "status": "complete"
+}

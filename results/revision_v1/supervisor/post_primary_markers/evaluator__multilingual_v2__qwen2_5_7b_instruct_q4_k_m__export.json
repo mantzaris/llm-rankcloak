@@ -1,0 +1,28 @@
+{
+  "action_id": "evaluator:multilingual_v2:qwen2_5_7b_instruct_q4_k_m:export",
+  "argv": [
+    "/home/meow/Documents/repos/llm-rankcloak/.venv/bin/python",
+    "scripts/run_revision_evaluator.py",
+    "--evaluator-model",
+    "qwen2_5_7b_instruct_q4_k_m",
+    "--source-stage",
+    "multilingual_v2",
+    "--source-results-root",
+    "results/revision_v1",
+    "--gpu-uuid",
+    "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "--context",
+    "4096",
+    "--n-gpu-layers",
+    "-1",
+    "--output-dir",
+    "results/revision_v1/heldout_evaluator/multilingual_v2/qwen2_5_7b_instruct_q4_k_m",
+    "--resume"
+  ],
+  "argv_sha256": "de77f9b9ac314ab826a360b81a6bcdc814d8bee77b59a0ee850f373e4b25bb51",
+  "completed_at": "2026-08-12T01:31:33.753363+00:00",
+  "features_manifest_sha256": "9bbe0d443c81fb440a10295731edc5af57dd6f912ec1db36acc34f6d527b67e7",
+  "marker_sha256": "71a37cb7f4f74d0e9f83fe86453d289b9c23a9a3faa7c811befd48a4020d4e86",
+  "schema_version": "rankcloak-confirmatory-v2-action-marker-v1",
+  "semantics": "identical_resume_export_pass_completed_without_pending_trials"
+}

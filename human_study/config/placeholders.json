@@ -1,0 +1,31 @@
+{
+  "status": "DRAFT_PLACEHOLDER_INVENTORY",
+  "required_before_irb_submission": [
+    "PI_NAME",
+    "PI_EMAIL",
+    "UCF_DEPARTMENT",
+    "UCF_IRB_PROTOCOL_NUMBER",
+    "FACULTY_ADVISOR_IF_APPLICABLE",
+    "STUDY_CONTACT_NAME",
+    "STUDY_CONTACT_EMAIL",
+    "CURRENT_UCF_IRB_CONTACT_TEXT",
+    "ESTIMATED_DURATION_MINUTES",
+    "AUTHORIZED_STUDY_TEAM",
+    "POST_DEBRIEF_DATA_WITHDRAWAL_CHOICE",
+    "RECRUITMENT_PLATFORM",
+    "COMPENSATION_AMOUNT_AND_BASIS",
+    "FUNDING_SOURCE",
+    "DATA_RETENTION_YEARS",
+    "SURVEY_PLATFORM",
+    "SURVEY_PLATFORM_PRIVACY_SETTINGS",
+    "APPROVED_RECRUITMENT_DATES",
+    "APPROVED_SAMPLE_SIZE_WITH_ATTRITION",
+    "PLACEHOLDER",
+    "UPPER_SNAKE_CASE"
+  ],
+  "documentation_only_sentinels": [
+    "PLACEHOLDER",
+    "UPPER_SNAKE_CASE"
+  ],
+  "notes": "Resolve every substantive marker against current UCF requirements. PLACEHOLDER and UPPER_SNAKE_CASE are documentation-only examples, not author fields. Do not infer or auto-fill institutional facts."
+}

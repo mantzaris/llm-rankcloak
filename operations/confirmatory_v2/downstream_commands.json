@@ -1,0 +1,397 @@
+{
+  "schema_version": "rankcloak-confirmatory-v2-downstream-command-contract-v1",
+  "operational_notice": "Mutable command wiring only. This file does not alter the frozen scientific design, plans, identities, or result schemas.",
+  "operations": [
+    {
+      "operation_id": "primary_evaluator_join",
+      "stage": "analysis_preparation",
+      "output_dir": "{evaluator_join_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "scripts/join_revision_evaluator_features.py",
+        "--preprocessing-manifest",
+        "{primary_preprocessing_manifest}",
+        "--evaluator-feature-manifest",
+        "{evaluator_primary_v2_llama3_8b_instruct_q4_k_m_feature_manifest}",
+        "--evaluator-feature-manifest",
+        "{evaluator_primary_v2_qwen2_5_7b_instruct_q4_k_m_feature_manifest}",
+        "--evaluator-feature-manifest",
+        "{evaluator_primary_v2_mistral_7b_instruct_v0_3_q4_k_m_feature_manifest}",
+        "--output-dir",
+        "{evaluator_join_dir}"
+      ],
+      "interface": {
+        "path": "scripts/join_revision_evaluator_features.py",
+        "probe_argv": [
+          "{project_root}/.venv/bin/python",
+          "scripts/join_revision_evaluator_features.py",
+          "--help"
+        ],
+        "required_help_tokens": [
+          "--preprocessing-manifest",
+          "--evaluator-feature-manifest",
+          "--output-dir"
+        ]
+      },
+      "completion": {
+        "kind": "evaluator_join_v1",
+        "path": "{evaluator_join_manifest}"
+      }
+    },
+    {
+      "operation_id": "detector",
+      "stage": "neural_detector",
+      "output_dir": "{detector_output_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "scripts/run_revision_detectors.py",
+        "--input",
+        "{primary_detector_corpus}",
+        "--preprocessing-manifest",
+        "{primary_preprocessing_manifest}",
+        "--output-dir",
+        "{detector_output_dir}",
+        "--execution-policy",
+        "{detector_execution_policy}",
+        "--resume",
+        "--overwrite",
+        "--device",
+        "cuda:0",
+        "--gpu-uuid",
+        "{gpu_uuid}",
+        "--workers",
+        "1",
+        "--checkpoint-dir",
+        "{detector_checkpoint_dir}",
+        "--status-file",
+        "{detector_status_file}",
+        "--fit-permit-file",
+        "{detector_fit_permit_file}",
+        "--fit-permit-receipt-dir",
+        "{detector_fit_permit_receipt_dir}",
+        "--equivalence-required-report",
+        "{detector_equivalence_report_0}",
+        "--equivalence-required-report",
+        "{detector_equivalence_report_1}"
+      ],
+      "interface": {
+        "path": "scripts/run_revision_detectors.py",
+        "probe_argv": [
+          "{project_root}/.venv/bin/python",
+          "scripts/run_revision_detectors.py",
+          "--help"
+        ],
+        "required_help_tokens": [
+          "--input",
+          "--preprocessing-manifest",
+          "--output-dir",
+          "--confirmatory-plan",
+          "--execution-policy",
+          "--resume",
+          "--overwrite",
+          "--device",
+          "--gpu-uuid",
+          "--workers",
+          "--checkpoint-dir",
+          "--status-file",
+          "--fit-permit-file",
+          "--fit-permit-receipt-dir",
+          "--equivalence-role",
+          "--equivalence-task-index",
+          "--equivalence-artifact",
+          "--equivalence-report-output",
+          "--equivalence-cpu-artifact",
+          "--equivalence-cuda-artifact",
+          "--equivalence-cuda-repeat-artifact",
+          "--equivalence-required-report",
+          "--benchmark-one-fit",
+          "--benchmark-task-index",
+          "--benchmark-output"
+        ]
+      },
+      "gpu": true,
+      "execution": {
+        "kind": "checkpointed_detector_gpu_v1",
+        "device": "cuda:0",
+        "gpu_uuid": "{gpu_uuid}",
+        "workers": 1,
+        "total_fits": 56,
+        "checkpoint_dir": "{detector_checkpoint_dir}",
+        "status_file": "{detector_status_file}",
+        "fit_permit_file": "{detector_fit_permit_file}",
+        "fit_permit_receipt_dir": "{detector_fit_permit_receipt_dir}",
+        "required_equivalence_reports": [
+          "{detector_equivalence_report_0}",
+          "{detector_equivalence_report_1}"
+        ],
+        "gpu_accounting_ledger": "{detector_gpu_ledger}",
+        "execution_policy": "{detector_execution_policy}",
+        "execution_policy_sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
+        "execution_policy_content_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+        "next_fit_upper_seconds_by_detector": {
+          "published_textcnn_equivalent": 14400.0,
+          "deberta_v3_base_classifier": 108000.0
+        },
+        "ceiling_gate": "signed_single_use_per_fit_v1"
+      },
+      "completion": {
+        "kind": "detector_v2",
+        "path": "{detector_manifest}"
+      }
+    },
+    {
+      "operation_id": "statistics",
+      "stage": "statistical_analysis",
+      "output_dir": "{statistics_output_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "scripts/run_revision_statistics.py",
+        "--trials",
+        "{primary_trials}",
+        "{ablation_trials}",
+        "{multilingual_trials}",
+        "{robustness_trials}",
+        "{evaluator_primary_v2_llama3_8b_instruct_q4_k_m_continuous}",
+        "{evaluator_primary_v2_qwen2_5_7b_instruct_q4_k_m_continuous}",
+        "{evaluator_primary_v2_mistral_7b_instruct_v0_3_q4_k_m_continuous}",
+        "{evaluator_ablation_v2_llama3_8b_instruct_q4_k_m_continuous}",
+        "{evaluator_ablation_v2_qwen2_5_7b_instruct_q4_k_m_continuous}",
+        "{evaluator_ablation_v2_mistral_7b_instruct_v0_3_q4_k_m_continuous}",
+        "{evaluator_multilingual_v2_llama3_8b_instruct_q4_k_m_continuous}",
+        "{evaluator_multilingual_v2_qwen2_5_7b_instruct_q4_k_m_continuous}",
+        "{evaluator_multilingual_v2_mistral_7b_instruct_v0_3_q4_k_m_continuous}",
+        "--features",
+        "{primary_features}",
+        "{ablation_features}",
+        "{multilingual_features}",
+        "{robustness_features}",
+        "--detectors",
+        "{detector_predictions}",
+        "--runtime",
+        "{primary_runtime}",
+        "{ablation_runtime}",
+        "{multilingual_runtime}",
+        "{robustness_runtime}",
+        "--output-dir",
+        "{statistics_output_dir}",
+        "--overwrite"
+      ],
+      "interface": {
+        "path": "scripts/run_revision_statistics.py",
+        "probe_argv": [
+          "{project_root}/.venv/bin/python",
+          "scripts/run_revision_statistics.py",
+          "--help"
+        ],
+        "required_help_tokens": [
+          "--trials",
+          "--features",
+          "--detectors",
+          "--runtime",
+          "--output-dir",
+          "--overwrite"
+        ]
+      },
+      "completion": {
+        "kind": "statistics_v1",
+        "path": "{statistics_manifest}"
+      }
+    },
+    {
+      "operation_id": "mixed_models_r",
+      "stage": "statistical_analysis",
+      "output_dir": "{mixed_models_output_dir}",
+      "argv": [
+        "analysis/revision_v1/run_with_locked_r.sh",
+        "scripts/run_revision_mixed_models.R",
+        "--plan",
+        "analysis/revision_v1/confirmatory_model_plan.json",
+        "--environment-lock",
+        "analysis/revision_v1/r_environment.lock.json",
+        "--trials",
+        "{primary_trials}",
+        "--features",
+        "{evaluator_join_features}",
+        "--feature-join-manifest",
+        "{evaluator_join_manifest}",
+        "--runtime",
+        "{primary_runtime}",
+        "--detectors",
+        "{detector_metrics}",
+        "--output-dir",
+        "{mixed_models_output_dir}"
+      ],
+      "interface": {
+        "path": "scripts/run_revision_mixed_models.R",
+        "required_source_tokens": [
+          "--feature-join-manifest",
+          "mixed_model_run_manifest.json",
+          "fixed_effects_fallback = FALSE"
+        ]
+      },
+      "completion": {
+        "kind": "mixed_models_v1",
+        "path": "{mixed_models_manifest}"
+      }
+    },
+    {
+      "operation_id": "theory",
+      "stage": "statistical_analysis",
+      "output_dir": "{theory_output_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "scripts/build_revision_theory.py",
+        "--trials",
+        "{primary_trials}",
+        "{ablation_trials}",
+        "{multilingual_trials}",
+        "{robustness_trials}",
+        "--output-dir",
+        "{theory_output_dir}",
+        "--overwrite"
+      ],
+      "interface": {
+        "path": "scripts/build_revision_theory.py",
+        "probe_argv": [
+          "{project_root}/.venv/bin/python",
+          "scripts/build_revision_theory.py",
+          "--help"
+        ],
+        "required_help_tokens": [
+          "--trials",
+          "--output-dir",
+          "--overwrite"
+        ]
+      },
+      "completion": {
+        "kind": "theory_v1",
+        "path": "{theory_manifest}"
+      }
+    },
+    {
+      "operation_id": "reports",
+      "stage": "report_generation",
+      "output_dir": "{report_output_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "scripts/build_revision_reports.py",
+        "--statistics-manifest",
+        "{statistics_manifest}",
+        "--theory-manifest",
+        "{theory_manifest}",
+        "--detector-manifest",
+        "{detector_manifest}",
+        "--mixed-model-manifest",
+        "{mixed_models_manifest}",
+        "--evaluator-unavailability-manifest",
+        "{evaluator_unavailability_manifest}",
+        "--preprocessing-manifest",
+        "{primary_preprocessing_manifest}",
+        "--preprocessing-manifest",
+        "{ablation_preprocessing_manifest}",
+        "--preprocessing-manifest",
+        "{multilingual_preprocessing_manifest}",
+        "--preprocessing-manifest",
+        "{robustness_preprocessing_manifest}",
+        "--output-dir",
+        "{report_output_dir}"
+      ],
+      "interface": {
+        "path": "scripts/build_revision_reports.py",
+        "probe_argv": [
+          "{project_root}/.venv/bin/python",
+          "scripts/build_revision_reports.py",
+          "--help"
+        ],
+        "required_help_tokens": [
+          "--statistics-manifest",
+          "--theory-manifest",
+          "--detector-manifest",
+          "--mixed-model-manifest",
+          "--evaluator-unavailability-manifest",
+          "--preprocessing-manifest",
+          "--output-dir"
+        ]
+      },
+      "completion": {
+        "kind": "report_v1",
+        "path": "{report_manifest}"
+      }
+    },
+    {
+      "operation_id": "figures",
+      "stage": "figure_generation",
+      "output_dir": "{figures_output_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "{report_output_dir}/plots/plot_revision_figures.py",
+        "--output-dir",
+        "{figures_output_dir}",
+        "--format",
+        "pdf"
+      ],
+      "interface": {
+        "path": "{report_output_dir}/plots/plot_revision_figures.py",
+        "required_source_tokens": [
+          "--output-dir",
+          "--format",
+          "--only"
+        ]
+      },
+      "completion": {
+        "kind": "figures_v1",
+        "path": "{figures_manifest}",
+        "registry": "{report_output_dir}/plots/plot_registry.csv",
+        "output_dir": "{figures_output_dir}",
+        "format": "pdf"
+      }
+    },
+    {
+      "operation_id": "manuscript_revision",
+      "stage": "manuscript_revision",
+      "output_dir": "{manuscript_output_dir}",
+      "argv": [
+        "{project_root}/.venv/bin/python",
+        "scripts/revise_revision_manuscripts.py",
+        "--report-manifest",
+        "{report_manifest}",
+        "--figures-dir",
+        "{figures_output_dir}",
+        "--statistics-manifest",
+        "{statistics_manifest}",
+        "--mixed-model-manifest",
+        "{mixed_models_manifest}",
+        "--progress-manifest",
+        "{progress_manifest}",
+        "--evaluator-unavailability-manifest",
+        "{evaluator_unavailability_manifest}",
+        "--manuscript-root",
+        "{project_root}/.paper/scientific_reports",
+        "--output-dir",
+        "{manuscript_output_dir}"
+      ],
+      "interface": {
+        "path": "scripts/revise_revision_manuscripts.py",
+        "probe_argv": [
+          "{project_root}/.venv/bin/python",
+          "scripts/revise_revision_manuscripts.py",
+          "--help"
+        ],
+        "required_help_tokens": [
+          "--report-manifest",
+          "--figures-dir",
+          "--statistics-manifest",
+          "--mixed-model-manifest",
+          "--progress-manifest",
+          "--evaluator-unavailability-manifest",
+          "--manuscript-root",
+          "--output-dir"
+        ]
+      },
+      "completion": {
+        "kind": "manuscript_revision_v1",
+        "path": "{manuscript_manifest}"
+      }
+    }
+  ]
+}

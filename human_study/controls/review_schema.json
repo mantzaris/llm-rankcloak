@@ -1,0 +1,28 @@
+{
+  "schema_version": "rankcloak-human-control-review-schema-v1",
+  "status": "DRAFT_PRE_RECRUITMENT",
+  "format": "JSON Lines; one object per candidate; candidate_id unique",
+  "required_fields": {
+    "candidate_id": "Exact content-addressed ID from human_control_candidates.jsonl",
+    "template_id": "Exact assigned 72-stratum template ID",
+    "topic_review_status": "approved_exact_prompt_match or rejected",
+    "pii_review_status": "approved_no_personal_data or rejected",
+    "safety_review_status": "approved_safe_neutral or rejected",
+    "reviewer_id": "Non-public study reviewer code; never a participant identifier",
+    "reviewed_at": "ISO date YYYY-MM-DD"
+  },
+  "selection_approval_values": {
+    "topic_review_status": "approved_exact_prompt_match",
+    "pii_review_status": "approved_no_personal_data",
+    "safety_review_status": "approved_safe_neutral"
+  },
+  "review_requirements": [
+    "Read the complete source instruction and response.",
+    "Confirm the response is a fair style and topic match to the exact revision prompt, not merely a keyword hit.",
+    "Reject direct or indirect identifiers, contact details, private-person allegations, or unusually specific personal circumstances.",
+    "Reject dangerous, hateful, sexual, medical-crisis, illegal, operational-security, or otherwise inappropriate content.",
+    "Reject factual claims that are clearly wrong or cannot safely be presented as ordinary neutral prose.",
+    "Do not edit a text to make it eligible; source-preserving technical normalization is the only implemented change.",
+    "Reviewer approval is a pre-recruitment material check, not IRB approval and not authorization to expose participants."
+  ]
+}

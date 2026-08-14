@@ -1,0 +1,168 @@
+{
+  "schema_version": "rankcloak-human-control-topic-profiles-v1",
+  "assignment_rule": "highest weighted anchor score above threshold with a one-point margin; final human review remains mandatory",
+  "templates": [
+    {
+      "prompt_category": "casual_conversation",
+      "template_id": "casual_conversation_template_1",
+      "revision_prompt_id": "casual_weekend_chat",
+      "topic_label": "friendly weekend plans",
+      "anchor_terms": ["weekend", "friend", "get together", "plans", "hang out"],
+      "style": "friendly_message",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "casual_conversation",
+      "template_id": "casual_conversation_template_2",
+      "revision_prompt_id": "casual_hobby_chat",
+      "topic_label": "casual hobby message",
+      "anchor_terms": ["hobby", "free time", "for fun", "enjoy doing", "lately"],
+      "style": "friendly_message",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "casual_conversation",
+      "template_id": "casual_conversation_template_3",
+      "revision_prompt_id": "casual_neighborhood_chat",
+      "topic_label": "pleasant neighborhood observation",
+      "anchor_terms": ["neighbor", "neighbour", "neighborhood", "nearby", "local area"],
+      "style": "friendly_message",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "professional_communication",
+      "template_id": "professional_communication_template_1",
+      "revision_prompt_id": "professional_project_update",
+      "topic_label": "professional project update",
+      "anchor_terms": ["project update", "project", "progress", "status update", "next step", "team"],
+      "style": "professional_message",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "professional_communication",
+      "template_id": "professional_communication_template_2",
+      "revision_prompt_id": "professional_schedule_note",
+      "topic_label": "workplace meeting proposal",
+      "anchor_terms": ["schedule a meeting", "meeting", "availability", "calendar", "propose a time", "appointment"],
+      "style": "professional_message",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "professional_communication",
+      "template_id": "professional_communication_template_3",
+      "revision_prompt_id": "professional_process_email",
+      "topic_label": "professional process clarification",
+      "anchor_terms": ["process", "workflow", "clarify", "procedure", "colleague", "questions"],
+      "style": "professional_message",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "forum_question_answer",
+      "template_id": "forum_question_answer_template_1",
+      "revision_prompt_id": "forum_practical_answer",
+      "topic_label": "household problem answer",
+      "anchor_terms": ["household", "at home", "clean", "remove", "fix", "repair", "stain", "appliance"],
+      "style": "helpful_answer",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "forum_question_answer",
+      "template_id": "forum_question_answer_template_2",
+      "revision_prompt_id": "forum_purchase_advice",
+      "topic_label": "everyday purchase comparison",
+      "anchor_terms": ["compare", "comparison", "buy", "purchase", "which is better", "tradeoff", "recommend"],
+      "style": "helpful_answer",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "forum_question_answer",
+      "template_id": "forum_question_answer_template_3",
+      "revision_prompt_id": "forum_learning_answer",
+      "topic_label": "beginner practical-skill advice",
+      "anchor_terms": ["beginner", "learning", "learn", "skill", "starting", "advice", "tips"],
+      "style": "helpful_answer",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "procedural_instructions",
+      "template_id": "procedural_instructions_template_1",
+      "revision_prompt_id": "procedure_simple_meal",
+      "topic_label": "simple meal preparation",
+      "anchor_terms": ["recipe", "cook", "prepare", "meal", "dish", "bake", "ingredients"],
+      "style": "procedure",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "procedural_instructions",
+      "template_id": "procedural_instructions_template_2",
+      "revision_prompt_id": "procedure_home_task",
+      "topic_label": "routine home maintenance",
+      "anchor_terms": ["home maintenance", "maintenance", "repair", "replace", "install", "cleaning", "house"],
+      "style": "procedure",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "procedural_instructions",
+      "template_id": "procedural_instructions_template_3",
+      "revision_prompt_id": "procedure_garden_task",
+      "topic_label": "basic gardening task",
+      "anchor_terms": ["garden", "gardening", "plant", "soil", "lawn", "flower", "vegetable", "prune"],
+      "style": "procedure",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "personal_narrative_blog",
+      "template_id": "personal_narrative_blog_template_1",
+      "revision_prompt_id": "narrative_small_discovery",
+      "topic_label": "ordinary-day discovery",
+      "anchor_terms": ["discovered", "found out", "ordinary day", "useful", "realized", "noticed"],
+      "style": "first_person_narrative",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "personal_narrative_blog",
+      "template_id": "personal_narrative_blog_template_2",
+      "revision_prompt_id": "narrative_local_walk",
+      "topic_label": "reflective local walk",
+      "anchor_terms": ["walk", "walking", "hike", "stroll", "familiar place", "neighborhood"],
+      "style": "first_person_narrative",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "personal_narrative_blog",
+      "template_id": "personal_narrative_blog_template_3",
+      "revision_prompt_id": "narrative_learning_moment",
+      "topic_label": "lesson from a minor mistake",
+      "anchor_terms": ["mistake", "learned", "lesson", "failed", "went wrong", "error"],
+      "style": "first_person_narrative",
+      "minimum_score": 5
+    },
+    {
+      "prompt_category": "factual_explanatory_prose",
+      "template_id": "factual_explanatory_prose_template_1",
+      "revision_prompt_id": "explain_weather_pattern",
+      "topic_label": "familiar weather pattern",
+      "anchor_terms": ["weather", "rain", "cloud", "storm", "snow", "wind", "fog", "hail"],
+      "style": "explanation",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "factual_explanatory_prose",
+      "template_id": "factual_explanatory_prose_template_2",
+      "revision_prompt_id": "explain_everyday_system",
+      "topic_label": "everyday public system",
+      "anchor_terms": ["public system", "public transit", "transport", "postal", "mail system", "library", "recycling", "water system", "electric grid"],
+      "style": "explanation",
+      "minimum_score": 4
+    },
+    {
+      "prompt_category": "factual_explanatory_prose",
+      "template_id": "factual_explanatory_prose_template_3",
+      "revision_prompt_id": "explain_biological_process",
+      "topic_label": "basic biological process",
+      "anchor_terms": ["biological", "biology", "cell", "photosynthesis", "digestion", "respiration", "immune", "blood", "plant growth", "reproduction"],
+      "style": "explanation",
+      "minimum_score": 4
+    }
+  ]
+}

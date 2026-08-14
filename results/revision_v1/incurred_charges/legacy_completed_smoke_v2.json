@@ -1,0 +1,551 @@
+{
+  "artifact_role": "charge_only_not_rate_evidence",
+  "charge_only_not_rate_evidence": true,
+  "created_at": "2026-08-09T03:24:33+00:00",
+  "entries": [
+    {
+      "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/llama3_8b_instruct_q4_k_m",
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "memory_profile_wall_span_v1",
+      "component": "legacy_smoke_v2",
+      "directory_manifest": {
+        "file_count": 12,
+        "files": [
+          {
+            "path": "checkpoint.json",
+            "sha256": "9f0759fdccc1f0fc06880897907a3ae7c1680abd3b7acef33adaad9aedee06cb",
+            "size_bytes": 3854
+          },
+          {
+            "path": "events.jsonl",
+            "sha256": "623780d8732f8ac26c0e4a099d8b34c2f15e60c8bab7ee99828b43072ab6d3ac",
+            "size_bytes": 1307
+          },
+          {
+            "path": "filter_masks/llama3_8b_instruct_q4_k_m__roundtrip_stable_filter_v1.json",
+            "sha256": "a395d44d26ca558d804e06a67ec04626ebb5aa70ba66b2879b93114cbe89fb43",
+            "size_bytes": 1376234
+          },
+          {
+            "path": "filter_masks/llama3_8b_instruct_q4_k_m__safe_text_filter_v1.json",
+            "sha256": "d27b50f8c807890ac6779ee718b18c29c676a75a4cba14f8bd546896e15da882",
+            "size_bytes": 1376227
+          },
+          {
+            "path": "hardware_manifest.json",
+            "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+            "size_bytes": 634
+          },
+          {
+            "path": "model_manifest.json",
+            "sha256": "1ed72381c8118a57d779adf03096774b66bbaa9a1e813c67d9d8c598b68c0b49",
+            "size_bytes": 1384
+          },
+          {
+            "path": "payload_manifest.json",
+            "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+            "size_bytes": 643935
+          },
+          {
+            "path": "plan.jsonl",
+            "sha256": "6c380e671fafa58da8da56d28cdd50ce6419d6ed1e6d6a1cd28a30c5cc54b677",
+            "size_bytes": 32493
+          },
+          {
+            "path": "records.jsonl",
+            "sha256": "24120110e1bfd8157dec84699398449055e02c87ca54221f04b0afa92510adc7",
+            "size_bytes": 513125
+          },
+          {
+            "path": "run_identity.json",
+            "sha256": "d9653057e10964528e1021f1687ad3d6320d04d18a55b560442db169702eab94",
+            "size_bytes": 2735
+          },
+          {
+            "path": "runtime_manifest.json",
+            "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+            "size_bytes": 1084
+          },
+          {
+            "path": "source_manifest.json",
+            "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+            "size_bytes": 2377
+          }
+        ],
+        "files_sha256": "3a2d9bb4625de53cd528cb3f69d91c95563970e7d3d9e67e4a74e0187ca14018",
+        "manifest_type": "sha256_file_set",
+        "schema_version": "1.0"
+      },
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "incurred_gpu_seconds": 341.925859,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "occupancy_ended_at": "2026-08-09T00:53:49.996672+00:00",
+      "occupancy_started_at": "2026-08-09T00:48:08.070813+00:00",
+      "plan_sha256": "9176d193a5d737a08de1b6cf77097613dcc8f4641ddcf75191980522bcff016e",
+      "rate_evidence_allowed": false,
+      "run_identity_sha256": "4f3a9aa7782ecec7f3c9cfe49e8687a8a838def89ffd037934e35eba37a18f96",
+      "scientific_evidence_allowed": false,
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence"
+    },
+    {
+      "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/qwen2_5_7b_instruct_q4_k_m",
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "memory_profile_wall_span_v1",
+      "component": "legacy_smoke_v2",
+      "directory_manifest": {
+        "file_count": 12,
+        "files": [
+          {
+            "path": "checkpoint.json",
+            "sha256": "a7fa26fdc46b8c08208341f2f9326be91fd9deb1d35e1fe9b46517304bfd1a52",
+            "size_bytes": 3855
+          },
+          {
+            "path": "events.jsonl",
+            "sha256": "9eee4002650fc8cbefcf7ed4d2ba35dc3bb346101690cf56f8e5b9f9a71fc74e",
+            "size_bytes": 1310
+          },
+          {
+            "path": "filter_masks/qwen2_5_7b_instruct_q4_k_m__roundtrip_stable_filter_v1.json",
+            "sha256": "f758f94defc4c32411801ffe2dd8b599136e46e0a85aa6dc980c2e0ade5a751c",
+            "size_bytes": 1639147
+          },
+          {
+            "path": "filter_masks/qwen2_5_7b_instruct_q4_k_m__safe_text_filter_v1.json",
+            "sha256": "9db69dce4900fb96f304e1ee64a5ab14541128a21a38e31cac6685eacb10d2a8",
+            "size_bytes": 1658866
+          },
+          {
+            "path": "hardware_manifest.json",
+            "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+            "size_bytes": 634
+          },
+          {
+            "path": "model_manifest.json",
+            "sha256": "39d6e15f359878ba2e80ba4492bec304741dd93c7cce1bf744238392b3bac8d9",
+            "size_bytes": 1545
+          },
+          {
+            "path": "payload_manifest.json",
+            "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+            "size_bytes": 643935
+          },
+          {
+            "path": "plan.jsonl",
+            "sha256": "61902a80ca9f467e34c3cdfc5b311e9380e4f3b5ffa72e2009acb768a1690047",
+            "size_bytes": 32518
+          },
+          {
+            "path": "records.jsonl",
+            "sha256": "1c52e6ba5963e1bf5b22df1126624848850bf8e3cdf540a504de42b1020c96d5",
+            "size_bytes": 455672
+          },
+          {
+            "path": "run_identity.json",
+            "sha256": "f3d8d28873cc880b461716f1bf829ebf50f5d48e56c64051f0ed0c39371cc377",
+            "size_bytes": 2910
+          },
+          {
+            "path": "runtime_manifest.json",
+            "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+            "size_bytes": 1084
+          },
+          {
+            "path": "source_manifest.json",
+            "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+            "size_bytes": 2377
+          }
+        ],
+        "files_sha256": "4a3f4a96d9f242df4db72f928de18364e69d25a309cf181abd8217572348905a",
+        "manifest_type": "sha256_file_set",
+        "schema_version": "1.0"
+      },
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "incurred_gpu_seconds": 313.765465,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "occupancy_ended_at": "2026-08-09T00:43:06.633328+00:00",
+      "occupancy_started_at": "2026-08-09T00:37:52.867863+00:00",
+      "plan_sha256": "286dc38aeae169c8419d921fed9818671dab6e02920bda460598549fb3610ecb",
+      "rate_evidence_allowed": false,
+      "run_identity_sha256": "75a88c8822e7f61236e9fd6a873f2c9b4f7937a76616cb3c059c598962c715d9",
+      "scientific_evidence_allowed": false,
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence"
+    },
+    {
+      "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m",
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "memory_profile_wall_span_v1",
+      "component": "legacy_smoke_v2",
+      "directory_manifest": {
+        "file_count": 11,
+        "files": [
+          {
+            "path": "checkpoint.json",
+            "sha256": "616514a0fa61a15b62e14dca4f88cc18eda937e4873fd526493cf807ea3da1f6",
+            "size_bytes": 3860
+          },
+          {
+            "path": "events.jsonl",
+            "sha256": "6aff732aecfaedabb4a5d4fde65ebacc3d013241371dcdf9f7e0ec969c06a727",
+            "size_bytes": 1325
+          },
+          {
+            "path": "filter_masks/mistral_7b_instruct_v0_3_q4_k_m__safe_text_filter_v1.json",
+            "sha256": "080c8a36cd70f43574184e617b2738523e96fcc62972ca3d0743f52e85946d45",
+            "size_bytes": 337432
+          },
+          {
+            "path": "hardware_manifest.json",
+            "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+            "size_bytes": 634
+          },
+          {
+            "path": "model_manifest.json",
+            "sha256": "fd8afaa086a49fcc83c2269f6613c3e1f8b0ced714bf71dbd923e4a60d47494f",
+            "size_bytes": 1597
+          },
+          {
+            "path": "payload_manifest.json",
+            "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+            "size_bytes": 643935
+          },
+          {
+            "path": "plan.jsonl",
+            "sha256": "6c146f4c2ff3a90db2f0434f0cf692551c70642691b3c7293b502a2ba81d7699",
+            "size_bytes": 32852
+          },
+          {
+            "path": "records.jsonl",
+            "sha256": "bd9d54b90bc22518e3d848bc090c583af27f525c8beec06d07a02f14f321a2ff",
+            "size_bytes": 472922
+          },
+          {
+            "path": "run_identity.json",
+            "sha256": "c8ce198060b012f93e25a38245b55f2e8f6346f4deb76e6519f36d91de67d738",
+            "size_bytes": 2972
+          },
+          {
+            "path": "runtime_manifest.json",
+            "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+            "size_bytes": 1084
+          },
+          {
+            "path": "source_manifest.json",
+            "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+            "size_bytes": 2377
+          }
+        ],
+        "files_sha256": "eac130cf0fe0c2482dc9838fcc1b9cc01f6409ab62313af15cbfc6b708d1fd1e",
+        "manifest_type": "sha256_file_set",
+        "schema_version": "1.0"
+      },
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "incurred_gpu_seconds": 249.206562,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "occupancy_ended_at": "2026-08-09T00:47:34.125606+00:00",
+      "occupancy_started_at": "2026-08-09T00:43:24.919044+00:00",
+      "plan_sha256": "fba5013253e9d65d8276024427704c99453d8af28056f0d4f7348f14b93750f5",
+      "rate_evidence_allowed": false,
+      "run_identity_sha256": "1f1e1b4c6d9496d13394c494218a2355d92a997551c247042cc8948690d77705",
+      "scientific_evidence_allowed": false,
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence"
+    },
+    {
+      "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v2/llama3_8b_instruct_q4_k_m",
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "durable_task_elapsed_plus_model_load_v1",
+      "component": "legacy_heldout_evaluator_smoke_v2",
+      "directory_manifest": {
+        "file_count": 14,
+        "files": [
+          {
+            "path": "auxiliary_timing.json",
+            "sha256": "ab2feb632e69e1ee824c20258c6293188d85e644aa1c297af90070adfcad76bc",
+            "size_bytes": 1553
+          },
+          {
+            "path": "checkpoint.json",
+            "sha256": "09d2122252d80df765552dd70929e695f44f2714a3a959e3562f96fcef22183f",
+            "size_bytes": 3860
+          },
+          {
+            "path": "continuous_quality.jsonl",
+            "sha256": "14873c02b482702c4aecd367f3d6013c692745685b889f858f91c7919931466d",
+            "size_bytes": 78748
+          },
+          {
+            "path": "evaluator_model_manifest.json",
+            "sha256": "5f924ba59464c008742aeadb84ddab6c78631d81d6325678213f6def65aae1b3",
+            "size_bytes": 1123
+          },
+          {
+            "path": "events.jsonl",
+            "sha256": "49c02b9857428b4557cb674e9a690b1b4047ad6fe00692e79c549487f53606e1",
+            "size_bytes": 1616
+          },
+          {
+            "path": "features.jsonl",
+            "sha256": "94438ff071bcef6851566abc9a8bc485748949b21c52a9e0cc2d2134df4b00aa",
+            "size_bytes": 99802
+          },
+          {
+            "path": "features_manifest.json",
+            "sha256": "2590768470a47227f4f16e2a9c6b713e6dd3f872f5571d922565908f419b74a7",
+            "size_bytes": 1102
+          },
+          {
+            "path": "hardware_manifest.json",
+            "sha256": "d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df",
+            "size_bytes": 609
+          },
+          {
+            "path": "input_results_manifest.json",
+            "sha256": "744cb4993f8f077ef6bc933d19912ca0b129fa5799491d91003dfe39441ea0cd",
+            "size_bytes": 4415
+          },
+          {
+            "path": "plan.jsonl",
+            "sha256": "9cb290637bfb87a46d3e93de046b030b1b136dfdad5f7f5918cbcd6f8c119f7f",
+            "size_bytes": 110023
+          },
+          {
+            "path": "records.jsonl",
+            "sha256": "70e06fbc4c3c56fe35fa07006ff1493cd9447f890d039cbc9a927e8f8fdac496",
+            "size_bytes": 135921
+          },
+          {
+            "path": "run_identity.json",
+            "sha256": "0b398f61d07e5e492f038c2af9bd125e8ef5df98c1798efd21cb77f412f7f850",
+            "size_bytes": 2503
+          },
+          {
+            "path": "runtime_manifest.json",
+            "sha256": "73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+            "size_bytes": 1046
+          },
+          {
+            "path": "source_manifest.json",
+            "sha256": "db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+            "size_bytes": 1570
+          }
+        ],
+        "files_sha256": "461fdcb7ec7f76ba7d39520158983603eee7b1be23352eed3b702fd0446429ef",
+        "manifest_type": "sha256_file_set",
+        "schema_version": "1.0"
+      },
+      "durable_task_elapsed_seconds": 100.32964382701903,
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "incurred_gpu_seconds": 102.79948773702199,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "model_load_seconds": 2.4698439100029645,
+      "occupancy_ended_at": "2026-08-09T01:31:04.986269+00:00",
+      "occupancy_started_at": "2026-08-09T01:29:20.120322+00:00",
+      "rate_evidence_allowed": false,
+      "run_identity_sha256": "03da551d2770f223956939912866f37ed7c593a6211aa1e2a61d6b516517e10a",
+      "scientific_evidence_allowed": false,
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "timing_manifest_sha256": "3f0d925f368d3883a722d3e77a0125b638f7f7044a5d11a9abd362e70fd984ea"
+    },
+    {
+      "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v2/qwen2_5_7b_instruct_q4_k_m",
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "durable_task_elapsed_plus_model_load_v1",
+      "component": "legacy_heldout_evaluator_smoke_v2",
+      "directory_manifest": {
+        "file_count": 14,
+        "files": [
+          {
+            "path": "auxiliary_timing.json",
+            "sha256": "5e8403d20ab332b6cf66455dbdb03d2392f2a004bebfc985a5696178da984d99",
+            "size_bytes": 1544
+          },
+          {
+            "path": "checkpoint.json",
+            "sha256": "425100b769ca6782a0e82e59170bd21c7c9bfbbc3a137bbac648c13513c9a33b",
+            "size_bytes": 4200
+          },
+          {
+            "path": "continuous_quality.jsonl",
+            "sha256": "021d4458bb2f8d96199147952b115fdfcfcee0221fbd4ec97a3c28104986ba30",
+            "size_bytes": 86496
+          },
+          {
+            "path": "evaluator_model_manifest.json",
+            "sha256": "65d8088502292919f6378ae931e4afca8309b680cf5a0a5f383421aa99733d47",
+            "size_bytes": 1284
+          },
+          {
+            "path": "events.jsonl",
+            "sha256": "1b8473dd410b99ab62bbaa2ad26dbc980f50ce4c27b8682863c1cbdcd835e334",
+            "size_bytes": 1614
+          },
+          {
+            "path": "features.jsonl",
+            "sha256": "668d2f30d1a83a923b452a9977f855b885e1b0011ec396ad686ed451daf6675a",
+            "size_bytes": 114128
+          },
+          {
+            "path": "features_manifest.json",
+            "sha256": "3e0bd61b321ab3398dc050659558d9fccb573f11f8833f3ab061c37a2bceb209",
+            "size_bytes": 1104
+          },
+          {
+            "path": "hardware_manifest.json",
+            "sha256": "d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df",
+            "size_bytes": 609
+          },
+          {
+            "path": "input_results_manifest.json",
+            "sha256": "d11b24aec27a2d7f67aa3ea3cb747f0f8aa66b72d79499cc2388f9b47595e06d",
+            "size_bytes": 4329
+          },
+          {
+            "path": "plan.jsonl",
+            "sha256": "4bafaa0fee4a25eaf3ad404c969c50a4a9fed2a6a1c4776da878f216a1d0338b",
+            "size_bytes": 131001
+          },
+          {
+            "path": "records.jsonl",
+            "sha256": "c3d9f761f05352ab2c55002266c8ecb9ba1b5a33aba1a490ee8b519f33a44bcf",
+            "size_bytes": 156069
+          },
+          {
+            "path": "run_identity.json",
+            "sha256": "d604532680e31affb6177f4edf6415cd881108cd4fae49ae8557f23bd2fb7ade",
+            "size_bytes": 2672
+          },
+          {
+            "path": "runtime_manifest.json",
+            "sha256": "73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+            "size_bytes": 1046
+          },
+          {
+            "path": "source_manifest.json",
+            "sha256": "db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+            "size_bytes": 1570
+          }
+        ],
+        "files_sha256": "89c8d39266ebe4343014a6794fd15e594ed8c9f2c991a1d6b1ed321c0a9dc203",
+        "manifest_type": "sha256_file_set",
+        "schema_version": "1.0"
+      },
+      "durable_task_elapsed_seconds": 121.75209248602914,
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "incurred_gpu_seconds": 124.10965169202245,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "model_load_seconds": 2.3575592059933115,
+      "occupancy_ended_at": "2026-08-09T01:25:33.115775+00:00",
+      "occupancy_started_at": "2026-08-09T01:23:26.614628+00:00",
+      "rate_evidence_allowed": false,
+      "run_identity_sha256": "707225b2e0a1192d08fb981f1827a54086e2b8c0fbefd15dc8d1b3cf31f73386",
+      "scientific_evidence_allowed": false,
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "timing_manifest_sha256": "0783e1bab9a6f8a8887a49e52fd4677c37348c38d27a323f7fdf3116b4cb345f"
+    },
+    {
+      "absolute_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/heldout_evaluator/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m",
+      "charge_only_not_rate_evidence": true,
+      "charge_policy": "durable_task_elapsed_plus_model_load_v1",
+      "component": "legacy_heldout_evaluator_smoke_v2",
+      "directory_manifest": {
+        "file_count": 14,
+        "files": [
+          {
+            "path": "auxiliary_timing.json",
+            "sha256": "e088e6c46ef890ba1b130c07d1deaa2cb244204863f6d5ecaa7b0a11559dface",
+            "size_bytes": 1555
+          },
+          {
+            "path": "checkpoint.json",
+            "sha256": "c999898e9dc893e713b24052cafc881ed29768c64231ee158dcb2def624e11cd",
+            "size_bytes": 4205
+          },
+          {
+            "path": "continuous_quality.jsonl",
+            "sha256": "4feb222a5c0cfca8d5fd401904fc74538f1bb0105d9f0494f281c870e78c46b9",
+            "size_bytes": 86717
+          },
+          {
+            "path": "evaluator_model_manifest.json",
+            "sha256": "db38609254f69733452e21e2ff82f0c5cb1356a5148c6c178eecfa8848b865c8",
+            "size_bytes": 1336
+          },
+          {
+            "path": "events.jsonl",
+            "sha256": "4312f4fe555844b2a86bcfd45b10abf7a5bdb88f8a6c787aaadcdb98881963ff",
+            "size_bytes": 1634
+          },
+          {
+            "path": "features.jsonl",
+            "sha256": "6bec89fa773960545671a62a9233fced7978a0ef2893f229f6215a7877e9a685",
+            "size_bytes": 109810
+          },
+          {
+            "path": "features_manifest.json",
+            "sha256": "ccaabc9b4dc6aa66838fab50406ff6ee0899d34700de81965c4fd947b34f2b36",
+            "size_bytes": 1114
+          },
+          {
+            "path": "hardware_manifest.json",
+            "sha256": "d4660fe2f99c09c0e02354d78bb3acc62145ac073c662b21be1f64ad278fa3df",
+            "size_bytes": 609
+          },
+          {
+            "path": "input_results_manifest.json",
+            "sha256": "8874a0914a48e4bc158bb6a60fe76cccb0d0e9da7e113a8bdc847554f0995e17",
+            "size_bytes": 4351
+          },
+          {
+            "path": "plan.jsonl",
+            "sha256": "8459fe9002bcc22a3ccdef72fc67a8bbd383637c84db15dcdf386ae1937b933a",
+            "size_bytes": 121955
+          },
+          {
+            "path": "records.jsonl",
+            "sha256": "c62b8cc2af8d728156cd0e50d64da5993a66642093fa1aac1fe5b170c71a13d7",
+            "size_bytes": 151636
+          },
+          {
+            "path": "run_identity.json",
+            "sha256": "8e55caf94ecfec93a12c85adcff13b64e90335f90a2784d90461dff46d104376",
+            "size_bytes": 2735
+          },
+          {
+            "path": "runtime_manifest.json",
+            "sha256": "73bb2bc1933671429c4264420e5f52a5ce7a3433556607c464316a7e8abb2d4d",
+            "size_bytes": 1046
+          },
+          {
+            "path": "source_manifest.json",
+            "sha256": "db3c67ff7afefd5dc5ff670c6b9a841d963ac40d205cd8d1977aff4b32eb2f05",
+            "size_bytes": 1570
+          }
+        ],
+        "files_sha256": "85128efa203ae4bbdc24191073931def163d9e539b93c15d07147ce2c3366318",
+        "manifest_type": "sha256_file_set",
+        "schema_version": "1.0"
+      },
+      "durable_task_elapsed_seconds": 113.94286934104457,
+      "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "incurred_gpu_seconds": 116.02912564804137,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "model_load_seconds": 2.086256306996802,
+      "occupancy_ended_at": "2026-08-09T01:28:33.687410+00:00",
+      "occupancy_started_at": "2026-08-09T01:26:35.757815+00:00",
+      "rate_evidence_allowed": false,
+      "run_identity_sha256": "6b917d16cd20a2dc6f4c32fc18ce103b7cf8ab9c4152e922be8c863a56639014",
+      "scientific_evidence_allowed": false,
+      "scientific_use": "incurred_gpu_charge_only_never_rate_evidence",
+      "timing_manifest_sha256": "f8d00bfe74ddb84a2ac52d19c6ef0b6269e3698128cb744cf45de221e6ded800"
+    }
+  ],
+  "entry_count": 6,
+  "legacy_incurred_ledger_sha256": "df91692c7e3018b6add60a41c94f5847714154081aff61c3c3a29fd40b77c57e",
+  "manifest_type": "legacy_incurred_gpu_charge_ledger",
+  "rate_evidence_allowed": false,
+  "schema_version": "rankcloak-revision-legacy-incurred-gpu-ledger-v1",
+  "scientific_evidence_allowed": false,
+  "scientific_use": "incurred_charge_only_never_timing_rate_or_evidence",
+  "total_hours": 0.3466211530769683,
+  "total_incurred_gpu_seconds": 1247.8361510770858
+}

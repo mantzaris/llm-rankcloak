@@ -1,0 +1,92 @@
+{
+  "artifact_type": "smoke_v3_exploratory_integrity_output_manifest",
+  "confirmatory_pooling_eligible": false,
+  "files": [
+    {
+      "bytes": 3357,
+      "path": "direct_rank_vs_payload.csv",
+      "row_count": 9,
+      "sha256": "f007ce76c417097fbd9a08b900b9b46ad6f8a029fc640ed0a00c9a55b4ef2454"
+    },
+    {
+      "bytes": 9393,
+      "path": "failure_diagnostics.csv",
+      "row_count": 14,
+      "sha256": "e37e6196d36edf32e20bd7bbc309698989034a440687345d9ff388dab62504f9"
+    },
+    {
+      "bytes": 1184,
+      "path": "failure_summary.csv",
+      "row_count": 9,
+      "sha256": "525f6d693f21a1fe3878102e724d8eda6d0d8c517850c4bb92dc0a41036cbda2"
+    },
+    {
+      "bytes": 36770,
+      "path": "heldout_evaluator_join_audit.csv",
+      "row_count": 93,
+      "sha256": "d0a5397ddeb5ffaac75456d4dae0084628cc4eba0499d555a21430e020ebfa1e"
+    },
+    {
+      "bytes": 1455,
+      "path": "heldout_evaluator_summary.csv",
+      "row_count": 6,
+      "sha256": "e37a409209cbabac9ed8224f9ab69094e7572344cb1437b51f6df548397d0ecf"
+    },
+    {
+      "bytes": 5247,
+      "path": "integrity_summary.json",
+      "row_count": 1,
+      "sha256": "6858c16180d5d73a0c6ffb8b1470c9e730ae9fbf06b71646ff3d1528e9ac6b7d"
+    },
+    {
+      "bytes": 12408,
+      "path": "quality_summary.csv",
+      "row_count": 42,
+      "sha256": "71a8a4883b71fc6f9775fccc6c04f17453476beafbb086c5f39560990c8a14d3"
+    },
+    {
+      "bytes": 9079,
+      "path": "recovery_by_model_protocol_replay.csv",
+      "row_count": 54,
+      "sha256": "eff9b7e7f1465669d8524d848332e40cd31ad3d20326f7c909581c796b178310"
+    },
+    {
+      "bytes": 500,
+      "path": "recovery_by_replay.csv",
+      "row_count": 3,
+      "sha256": "2f2edb5116fdb85c50bc38cbcb5deaa36ea18732d3676252f995c84067f6526e"
+    },
+    {
+      "bytes": 1664,
+      "path": "runtime_overview.csv",
+      "row_count": 14,
+      "sha256": "e69b3281f270127107e0799b7066dfaffc4f5232550499ddbb5ca1d490ab9530"
+    },
+    {
+      "bytes": 3723,
+      "path": "runtime_trial_summary.csv",
+      "row_count": 18,
+      "sha256": "acdbbf2285f67c7ef7369a7968b428d553dc7e5636ec3b0b501bb6909a389b20"
+    },
+    {
+      "bytes": 506,
+      "path": "theory_endpoint_summary.csv",
+      "row_count": 1,
+      "sha256": "2dab7548c7fc4915f1a17c41d753fca768b219a2aa0bdd6612ebc6a142eb6ae7"
+    },
+    {
+      "bytes": 4623,
+      "path": "unavailable_records.csv",
+      "row_count": 3,
+      "sha256": "11b5f9fedba539870bae7c88986298df2b2402955a47447148a8a3b388a6c996"
+    },
+    {
+      "bytes": 329,
+      "path": "unavailable_summary.csv",
+      "row_count": 2,
+      "sha256": "8fbb1210d7ae1707aa5e88d2e4b505b284a5f42c7f2a11bb3a8b46f058759995"
+    }
+  ],
+  "no_overwrite": true,
+  "schema_version": "1.0"
+}

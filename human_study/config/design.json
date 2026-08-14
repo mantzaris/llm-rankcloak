@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "status": "DRAFT_NOT_APPROVED_NO_HUMAN_ACTIVITY",
+  "language": "English",
+  "random_seed": 20260808,
+  "conditions": [
+    "human_written_control",
+    "ordinary_llm_control",
+    "direct_subword_calgacus",
+    "rankcloak_ascii_b8",
+    "rankcloak_ascii_b16",
+    "rankcloak_hex_nibble",
+    "rankcloak_segmented_forced_span",
+    "rankcloak_segmented_full_message"
+  ],
+  "prompt_categories": [
+    "casual_conversation",
+    "professional_communication",
+    "forum_question_answer",
+    "procedural_instructions",
+    "personal_narrative_blog",
+    "factual_explanatory_prose"
+  ],
+  "templates_per_category": 3,
+  "eligible_payload_classes": [
+    "sha256_hex",
+    "hmac_sha256_hex",
+    "nonce_96_bit_hex",
+    "token_128_bit_hex"
+  ],
+  "model_families": [
+    "llama_3_1_8b_instruct",
+    "qwen_2_5_7b_instruct",
+    "mistral_7b_instruct_v0_3"
+  ],
+  "candidate_replicates_per_stratum": 2,
+  "selected_per_condition_category_template_payload_class": 1,
+  "stimuli_per_condition": 72,
+  "ratings_per_stimulus": 3,
+  "panel_slots": 72,
+  "experimental_items_per_panel_slot": 24,
+  "items_per_condition_per_panel_slot": 3,
+  "attention_checks_per_panel_slot": 2,
+  "rating_scale_min": 1,
+  "rating_scale_max": 7,
+  "co_primary_scales": [
+    "overall_naturalness",
+    "suspiciousness"
+  ],
+  "selection_constraints": {
+    "stimuli_per_category_within_condition": 12,
+    "stimuli_per_template_within_condition": 4,
+    "stimuli_per_payload_class_within_condition": 18,
+    "generated_stimuli_per_model_family_within_condition": 24,
+    "same_stimulus_twice_within_panel_slot": false
+  }
+}

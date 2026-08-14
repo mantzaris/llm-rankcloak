@@ -1,0 +1,90 @@
+{
+  "evaluator_model_id": "llama3_8b_instruct_q4_k_m",
+  "generator_artifact_opened_by_evaluator": false,
+  "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+  "inputs_sha256": "2787ab44104aa7d6b4f61db7c98e606ca7e13ae2ee74dcc8278fc1e0e6bc8ef3",
+  "manifest_type": "heldout_evaluator_inputs",
+  "runner_shards": [
+    {
+      "confirmatory_pooling_eligible": false,
+      "evidence_partition": "exploratory_smoke_v2_no_confirmatory_pooling",
+      "files": [
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/checkpoint.json",
+          "role": "checkpoint",
+          "sha256": "616514a0fa61a15b62e14dca4f88cc18eda937e4873fd526493cf807ea3da1f6",
+          "size_bytes": 3860
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/hardware_manifest.json",
+          "role": "hardware_manifest",
+          "sha256": "3f59f33f69daa2d5d71531968a409162229266db785361637834e166a903522a",
+          "size_bytes": 634
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/model_manifest.json",
+          "role": "model_manifest",
+          "sha256": "fd8afaa086a49fcc83c2269f6613c3e1f8b0ced714bf71dbd923e4a60d47494f",
+          "size_bytes": 1597
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/payload_manifest.json",
+          "role": "payload_manifest",
+          "sha256": "852f4c15ca2db22c9687f205df6f373e0455f4e63f2956fa6a22aba66bde5691",
+          "size_bytes": 643935
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/plan.jsonl",
+          "role": "plan",
+          "sha256": "6c146f4c2ff3a90db2f0434f0cf692551c70642691b3c7293b502a2ba81d7699",
+          "size_bytes": 32852
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+          "role": "records",
+          "sha256": "bd9d54b90bc22518e3d848bc090c583af27f525c8beec06d07a02f14f321a2ff",
+          "size_bytes": 472922
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/run_identity.json",
+          "role": "run_identity",
+          "sha256": "c8ce198060b012f93e25a38245b55f2e8f6346f4deb76e6519f36d91de67d738",
+          "size_bytes": 2972
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/runtime_manifest.json",
+          "role": "runtime_manifest",
+          "sha256": "c206a1cbfbbb4781d87fd120a3fe45400a505dd2fa2bfb346278c84e56776664",
+          "size_bytes": 1084
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/smoke_v2/mistral_7b_instruct_v0_3_q4_k_m/source_manifest.json",
+          "role": "source_manifest",
+          "sha256": "94d9d7c0b06733e9dfdce8f39141066002374b73dad454a0a00c0e92b50c8322",
+          "size_bytes": 2377
+        }
+      ],
+      "files_sha256": "15b09dd28274e7dca4233cc22d3d8bfffaee9c879da6b4f6a95e049b126d8f9f",
+      "generator_artifact_opened_by_evaluator": false,
+      "generator_artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "generator_artifact_verification": {
+        "actual_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "actual_size_bytes": 4372812000,
+        "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "expected_size_bytes": 4372812000,
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "relative_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "sha256_checked": true,
+        "status": "ok"
+      },
+      "generator_model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "manifest_type": "heldout_evaluator_verified_runner_input",
+      "runner_planned_count": 32,
+      "schema_version": "1.0",
+      "selected_score_record_count": 29,
+      "stage": "smoke_v2"
+    }
+  ],
+  "same_model_evaluation": false,
+  "schema_version": "1.0"
+}

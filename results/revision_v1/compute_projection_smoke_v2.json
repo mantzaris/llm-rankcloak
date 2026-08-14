@@ -1,0 +1,23 @@
+{
+  "budget_gpu_hours": 150.0,
+  "decision": {
+    "go": false,
+    "reason": "A go decision is forbidden until every required input verifies.",
+    "status": "no_go_incomplete_inputs"
+  },
+  "evidence_policy": {
+    "accepted_runner_label": "exploratory_smoke_not_for_confirmatory_pooling",
+    "confirmatory_pooling_permitted": false,
+    "gate_is_compute_only": true,
+    "smoke_is_exploratory_only": true
+  },
+  "incomplete_reasons": [
+    "RevisionComputeError: Completed record type does not match its plan task"
+  ],
+  "input_status": "incomplete_or_invalid",
+  "projection_rows": [],
+  "projection_sha256": "eb6a35b45456f0038ef7bb59bceb5d74dc96e764311d9544ff7049d7b58cbd0b",
+  "schema_version": "rankcloak-revision-compute-projection-v1",
+  "stage_totals": [],
+  "totals": null
+}

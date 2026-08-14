@@ -1,0 +1,46 @@
+{
+  "schema_version": "rankcloak-detector-live-readonly-audit-addendum-v1",
+  "observed_at": "2026-08-13T01:51:00+00:00",
+  "base_audit": {
+    "path": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+    "sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7"
+  },
+  "additional_read_only_evidence": {
+    "process_rchar_bytes": 843674074,
+    "pinned_transformer_artifact_bytes": 373611460,
+    "minimum_rchar_after_second_transformer_preload_verification_bytes": 1217285534,
+    "second_transformer_preload_verification_completed": false,
+    "second_transformer_fit_started_inference": false,
+    "derivation": "The confirmatory preflight hashes the complete pinned transformer artifact set once, and every DeBERTa fit hashes it again immediately before loading. Adding another full artifact pass to the observed first-fit boundary would raise rchar to at least the declared threshold. The counter remained fixed during an active user-CPU sample, so it was not in another artifact pass; the exact phase remains an inference.",
+    "tokenizer_threads_first_observed_seconds_after_launch": 939,
+    "resident_memory_before_boundary_kib": 8693324,
+    "resident_memory_after_boundary_kib": 4444160,
+    "cpu_remained_saturated_across_memory_boundary": true,
+    "detector_output_directory_remained_empty": true,
+    "phase_inference": "The first matched TextCNN and first matched DeBERTa fit had completed; the process was in post-fit bootstrap or the next TextCNN phase. Exact current fit was not directly observable."
+  },
+  "runtime_projection": {
+    "matched_split_training_rows": 11880,
+    "all_split_training_rows": 336510,
+    "all_to_matched_training_row_ratio": 28.3257575758,
+    "remaining_to_first_deberta_training_row_ratio": 27.3257575758,
+    "observed_first_deberta_hours_approximate": 22.8,
+    "remaining_deberta_hours_row_scaled_approximate": 623.0,
+    "remaining_wall_time_interpretation": "Approximately 26 days for the remaining serial CPU DeBERTa work before TextCNN, bootstrap, and I/O overhead. This is a planning estimate, not a scientific result or a guaranteed completion bound.",
+    "credible_completion_within_four_additional_hours": false
+  },
+  "safe_stop": {
+    "event_path": "results/revision_v1/supervisor/confirmatory_v2_events.jsonl",
+    "event_at": "2026-08-13T01:59:19.202640+00:00",
+    "event": "detector_atomic_run_stopped_for_checkpointed_replacement",
+    "old_detector_pid": 3353725,
+    "old_supervisor_pid": 3347410,
+    "preceding_completed_units": 38448,
+    "cumulative_actual_gpu_hours": 61.549997679508685,
+    "scientific_retry_charged": false,
+    "detector_output_directory_was_empty": true,
+    "preceding_results_preserved": true
+  },
+  "evidence_role": "operational_diagnostic_not_scientific_evidence",
+  "confirmatory_pooling_permitted": false
+}
