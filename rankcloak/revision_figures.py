@@ -17,13 +17,46 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
-from matplotlib import transforms as mtransforms  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FULL_WIDTH_INCHES = 180.0 / 25.4
 PNG_DPI = 300
+
+FIGURE_TITLES = {
+    "robustness_compact": "Exact-copy fragility",
+    "robustness_full": "Exact-copy fragility",
+    "detector_compact": "Neural detectability",
+    "detector_full": "Neural detectability",
+    "capacity_tail": "Capacity and tail overhead",
+    "readability": "Automated readability diagnostics",
+    "overhead_compact": "Computational overhead",
+    "overhead_full": "Computational overhead",
+    "ablation": "Exploratory ablation contrasts",
+}
+
+FIGURE_HEIGHT_INCHES = {
+    "robustness_compact": 4.10,
+    "robustness_full": 6.10,
+    "detector_compact": 3.45,
+    "detector_full": 5.85,
+    "capacity_tail": 4.55,
+    "readability": 3.75,
+    "overhead_compact": 3.55,
+    "overhead_full": 5.15,
+    "ablation": 3.55,
+}
+
+PROHIBITED_PLOT_PHRASES = (
+    "compact view",
+    "complete view",
+    "points and 95% intervals",
+    "no pooled recovery estimate",
+    "higher detection means weaker concealment",
+    "similar surface scores do not establish naturalness",
+    "tail tokens are not forced payload positions",
+)
 
 # Okabe-Ito-derived colors plus grayscale-distinguishable marker shapes.
 PALETTE = {
@@ -366,6 +399,64 @@ def _configure_style() -> None:
     )
 
 
+def _set_figure_header(
+    figure: plt.Figure, figure_id: str, *, note: str | None = None
+) -> None:
+    title = FIGURE_TITLES[figure_id]
+    figure.suptitle(
+        title,
+        x=0.01,
+        ha="left",
+        fontweight="semibold",
+    )
+    if note:
+        figure.text(
+            0.99,
+            0.992,
+            note,
+            ha="right",
+            va="top",
+            fontsize=7.0,
+            color=PALETTE["gray"],
+            fontweight="normal",
+        )
+
+
+def _validate_figure_presentation(
+    figures: Mapping[str, plt.Figure],
+) -> None:
+    figure_ids = {
+        "robustness_compact": "robustness_compact",
+        "robustness": "robustness_full",
+        "theory": "capacity_tail",
+        "readability": "readability",
+        "overhead_compact": "overhead_compact",
+        "overhead": "overhead_full",
+        "detector_compact": "detector_compact",
+        "detector": "detector_full",
+        "ablation": "ablation",
+    }
+    if set(figures) != set(figure_ids):
+        raise FigureEvidenceError("figure presentation validation set is incomplete")
+    for render_key, figure in figures.items():
+        figure_id = figure_ids[render_key]
+        title = figure._suptitle
+        if title is None or title.get_text() != FIGURE_TITLES[figure_id]:
+            raise FigureEvidenceError(
+                f"figure {figure_id} does not use its concise frozen title"
+            )
+        visible_text = "\n".join(
+            artist.get_text()
+            for artist in figure.findobj()
+            if hasattr(artist, "get_text")
+        ).lower()
+        for phrase in PROHIBITED_PLOT_PHRASES:
+            if phrase in visible_text:
+                raise FigureEvidenceError(
+                    f"figure {figure_id} contains prohibited plot phrase: {phrase}"
+                )
+
+
 def _portable_path(path: str | Path, project_root: Path) -> str:
     resolved = Path(path).resolve()
     try:
@@ -574,7 +665,8 @@ def _draw_robustness_axis(
 
 def _plot_robustness(source: pd.DataFrame) -> plt.Figure:
     fig = plt.figure(
-        figsize=(FULL_WIDTH_INCHES, 7.15), constrained_layout=True
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["robustness_full"]),
+        constrained_layout=True,
     )
     grid = fig.add_gridspec(
         3, 2, width_ratios=(0.92, 1.35), height_ratios=(1.25, 2.55, 0.9)
@@ -598,23 +690,17 @@ def _plot_robustness(source: pd.DataFrame) -> plt.Figure:
             title=ROBUSTNESS_FAMILY_LABELS[family],
             panel=panels[family],
         )
-    axes["raw_transmission"].set_xlabel(
-        "Exact recovery probability (Wilson 95% CI)"
-    )
+    axes["raw_transmission"].set_xlabel("Exact recovery probability")
     axes["cross_model_mismatch"].set_xlabel("Exact recovery probability")
-    fig.suptitle(
-        "Exact-copy fragility across frozen replay channels\n"
-        "Each condition is separate; no replay or transformation channels are pooled\n"
-        "Tail-only truncation does not test arbitrary payload-bearing truncation",
-        fontweight="bold",
-    )
+    _set_figure_header(fig, "robustness_full")
     return fig
 
 
 def _plot_robustness_compact(source: pd.DataFrame) -> plt.Figure:
     ordered = source.sort_values("compact_order")
     fig, axis = plt.subplots(
-        figsize=(FULL_WIDTH_INCHES, 4.85), constrained_layout=True
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["robustness_compact"]),
+        constrained_layout=True,
     )
     y = np.arange(len(ordered))
     for position, (_, row) in enumerate(ordered.iterrows()):
@@ -648,19 +734,14 @@ def _plot_robustness_compact(source: pd.DataFrame) -> plt.Figure:
     axis.set_xticks(np.linspace(0, 1, 6))
     axis.axvline(0.0, color=PALETTE["gray"], linewidth=0.6)
     axis.grid(axis="x", color=PALETTE["light_gray"], linewidth=0.6)
-    axis.set_xlabel("Exact payload recovery probability (Wilson 95% CI)")
+    axis.set_xlabel("Exact payload recovery probability")
     handles = [
-        Line2D([0], [0], marker="o", color="none", markerfacecolor="white", markeredgecolor=PALETTE["black"], label="Unchanged/exact baseline"),
+        Line2D([0], [0], marker="o", color="none", markerfacecolor="white", markeredgecolor=PALETTE["black"], label="Exact/unchanged"),
         Line2D([0], [0], marker="X", color="none", markerfacecolor=PALETTE["vermillion"], markeredgecolor=PALETTE["vermillion"], label="Modified transmission"),
         Line2D([0], [0], marker="s", color="none", markerfacecolor=PALETTE["black"], markeredgecolor=PALETTE["black"], label="Model mismatch"),
     ]
-    axis.legend(handles=handles, frameon=False, loc="lower right")
-    fig.suptitle(
-        "Exact-copy fragility: compact evidence view\n"
-        "Separate replay channels; no pooled recovery estimate\n"
-        "Tail-only truncation does not test arbitrary payload-bearing truncation",
-        fontweight="bold",
-    )
+    axis.legend(handles=handles, frameon=False, loc="lower right", fontsize=6.8)
+    _set_figure_header(fig, "robustness_compact")
     return fig
 
 
@@ -769,14 +850,18 @@ def _theory_source(path: Path) -> pd.DataFrame:
     )
     base["display_tail_label"] = base.apply(
         lambda row: (
-            f"{row['display_stage']} · {row['display_protocol']}"
+            f"{row['display_stage']} · "
+            + {
+                "segmented_hex_multi_topic": "Multi-topic",
+                "segmented_hex_single_topic": "Single-topic",
+            }.get(row["protocol_variant"], row["display_protocol"])
             + (
                 ""
                 if row["tail_policy"] == "none"
                 else (
                     " · Dynamic"
                     if row["tail_policy"] == "dynamic_completion_v1"
-                    else " · Fixed sentence"
+                    else " · Fixed"
                 )
             )
         ),
@@ -799,7 +884,8 @@ def _plot_theory(source: pd.DataFrame) -> plt.Figure:
     if len(capacity) != 9 or len(tail) != 9:
         raise FigureEvidenceError("theory figure requires 9 capacity and 9 tail rows")
     fig = plt.figure(
-        figsize=(FULL_WIDTH_INCHES, 5.65), constrained_layout=True
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["capacity_tail"]),
+        constrained_layout=True,
     )
     grid = fig.add_gridspec(
         2,
@@ -817,37 +903,32 @@ def _plot_theory(source: pd.DataFrame) -> plt.Figure:
         "ablation_v2": (PALETTE["vermillion"], "s"),
         "multilingual_v2": (PALETTE["green"], "^"),
     }
-    offsets: dict[tuple[float, float], list[int]] = {}
-    for index, row in capacity.reset_index(drop=True).iterrows():
-        key = (
-            float(row["mean_theoretical_n_B"]),
-            float(row["mean_observed_n_forced"]),
+    grouped_capacity = capacity.groupby(
+        ["mean_theoretical_n_B", "mean_observed_n_forced"],
+        sort=True,
+        dropna=False,
+    )
+    for _, coincident in grouped_capacity:
+        ordered = coincident.sort_values(
+            ["source_stage", "protocol_variant", "tail_policy"]
         )
-        offsets.setdefault(key, []).append(index)
-    display_offsets: dict[int, float] = {}
-    for indices in offsets.values():
-        centered = np.arange(len(indices), dtype=float) - (len(indices) - 1) / 2.0
-        for index, offset in zip(indices, centered * 3.0):
-            display_offsets[index] = float(offset)
-    for index, row in capacity.reset_index(drop=True).iterrows():
-        color, marker = stage_styles[str(row["source_stage"])]
-        translation = mtransforms.ScaledTranslation(
-            display_offsets[index] / 72.0,
-            -display_offsets[index] / 72.0,
-            fig.dpi_scale_trans,
-        )
-        axes[0].plot(
-            [float(row["mean_theoretical_n_B"])],
-            [float(row["mean_observed_n_forced"])],
-            marker=marker,
-            markersize=5.2,
-            markerfacecolor="white",
-            markeredgewidth=1.1,
-            markeredgecolor=color,
-            linestyle="none",
-            transform=axes[0].transData + translation,
-            zorder=3,
-        )
+        marker_sizes = np.linspace(9.4, 4.6, len(ordered))
+        for layer, ((_, row), marker_size) in enumerate(
+            zip(ordered.iterrows(), marker_sizes)
+        ):
+            color, marker = stage_styles[str(row["source_stage"])]
+            axes[0].plot(
+                [float(row["mean_theoretical_n_B"])],
+                [float(row["mean_observed_n_forced"])],
+                marker=marker,
+                markersize=float(marker_size),
+                markerfacecolor="white",
+                markeredgewidth=1.0,
+                markeredgecolor=color,
+                linestyle="none",
+                alpha=0.92,
+                zorder=3 + layer * 0.01,
+            )
     maximum = max(
         capacity["mean_theoretical_n_B"].max(),
         capacity["mean_observed_n_forced"].max(),
@@ -865,7 +946,7 @@ def _plot_theory(source: pd.DataFrame) -> plt.Figure:
     axes[0].set_aspect("equal", adjustable="box")
     axes[0].set_xlabel("Theoretical minimum forced positions")
     axes[0].set_ylabel("Observed forced positions")
-    axes[0].set_title("A  Capacity-position validation", loc="left", fontweight="bold")
+    axes[0].set_title("A  Capacity validation", loc="left", fontweight="bold")
     axes[0].grid(color=PALETTE["light_gray"], linewidth=0.6)
     stage_handles = [
         Line2D(
@@ -882,15 +963,26 @@ def _plot_theory(source: pd.DataFrame) -> plt.Figure:
         )
     ]
     axes[0].legend(
-        handles=stage_handles,
+        handles=[
+            *stage_handles,
+            Line2D(
+                [0],
+                [0],
+                color=PALETTE["black"],
+                linestyle="--",
+                linewidth=0.9,
+                label="Identity",
+            ),
+        ],
         frameon=False,
         loc="lower right",
-        fontsize=6.6,
+        fontsize=6.4,
+        ncol=2,
     )
     axes[0].text(
         0.02,
         0.95,
-        "All aggregate cells coincide with theory\n(max |residual| = 0)",
+        "All cells on identity line",
         transform=axes[0].transAxes,
         va="top",
         fontsize=6.8,
@@ -912,8 +1004,8 @@ def _plot_theory(source: pd.DataFrame) -> plt.Figure:
     axes[1].invert_yaxis()
     axes[1].set_xlim(-0.12, 0.45)
     axes[1].set_xticks([0], ["0"])
-    axes[1].set_xlabel("Tail tokens per message")
-    axes[1].set_title("B1  Zero overhead", loc="left", fontweight="bold")
+    axes[1].set_xlabel("Tail-overhead tokens")
+    axes[1].set_title("B1  Zero tail overhead", loc="left", fontweight="bold")
     axes[1].grid(axis="x", color=PALETTE["light_gray"], linewidth=0.6)
 
     positive_y = np.arange(len(positive))
@@ -937,17 +1029,12 @@ def _plot_theory(source: pd.DataFrame) -> plt.Figure:
     )
     axes[2].invert_yaxis()
     axes[2].set_xlim(max(10.0, float(low.min()) * 0.72), float(high.max()) * 1.25)
-    axes[2].set_xlabel("Tail tokens per message (log scale)")
+    axes[2].set_xlabel("Tail-overhead tokens (log scale)")
     axes[2].set_title(
-        "B2  Positive overhead", loc="left", fontweight="bold"
+        "B2  Positive tail overhead", loc="left", fontweight="bold"
     )
     axes[2].grid(axis="x", color=PALETTE["light_gray"], linewidth=0.6)
-    fig.suptitle(
-        "Capacity prediction and tail-token cover overhead\n"
-        "Tail tokens extend cover length; they are not forced payload positions\n"
-        "Tail points are medians; bars are 5th–95th percentile ranges",
-        fontweight="bold",
-    )
+    _set_figure_header(fig, "capacity_tail")
     return fig
 
 
@@ -1021,7 +1108,7 @@ def _plot_readability(source: pd.DataFrame) -> plt.Figure:
     fig, axes = plt.subplots(
         1,
         3,
-        figsize=(FULL_WIDTH_INCHES, 4.15),
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["readability"]),
         sharey=True,
         constrained_layout=True,
     )
@@ -1077,14 +1164,13 @@ def _plot_readability(source: pd.DataFrame) -> plt.Figure:
     fig.legend(
         handles=handles,
         frameon=False,
-        ncol=2,
+        ncol=4,
         loc="outside lower center",
     )
-    fig.suptitle(
-        "Automated surface diagnostics — not human ratings\n"
-        "Points and 95% prompt-template-cluster bootstrap intervals\n"
-        "Similar surface scores do not establish naturalness",
-        fontweight="bold",
+    _set_figure_header(
+        fig,
+        "readability",
+        note="Not human ratings",
     )
     return fig
 
@@ -1263,15 +1349,15 @@ def _overhead_legend_handles() -> list[Line2D]:
 
 def _plot_overhead(source: pd.DataFrame) -> plt.Figure:
     titles = {
-        "generation_seconds": "A  Generation time (s)",
-        "encoding_overhead_seconds": "B  Encoding setup overhead (s)",
-        "decoding_overhead_seconds": "C  Decoding wrapper (s)",
-        "payload_bits_per_second": "D  Payload throughput (bit/s)",
+        "generation_seconds": "A  Generation time",
+        "encoding_overhead_seconds": "B  Encoding setup",
+        "decoding_overhead_seconds": "C  Decoding wrapper",
+        "payload_bits_per_second": "D  Payload throughput",
     }
     fig, axes = plt.subplots(
         2,
         2,
-        figsize=(FULL_WIDTH_INCHES, 5.45),
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["overhead_full"]),
         constrained_layout=True,
     )
     for index, (axis, outcome) in enumerate(zip(axes.flat, OVERHEAD_OUTCOMES)):
@@ -1288,10 +1374,10 @@ def _plot_overhead(source: pd.DataFrame) -> plt.Figure:
         ncol=3,
         loc="outside lower center",
     )
-    fig.suptitle(
-        "Primary-run computational overhead: complete view\n"
-        "Inclusive wrapper measurements; 95% payload-group bootstrap intervals",
-        fontweight="bold",
+    _set_figure_header(
+        fig,
+        "overhead_full",
+        note="Inclusive wrapper timing",
     )
     return fig
 
@@ -1310,7 +1396,7 @@ def _plot_overhead_compact(source: pd.DataFrame) -> plt.Figure:
     fig, axes = plt.subplots(
         1,
         3,
-        figsize=(FULL_WIDTH_INCHES, 3.85),
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["overhead_compact"]),
         constrained_layout=True,
     )
     for index, (axis, outcome) in enumerate(zip(axes, outcomes)):
@@ -1327,10 +1413,10 @@ def _plot_overhead_compact(source: pd.DataFrame) -> plt.Figure:
         ncol=3,
         loc="outside lower center",
     )
-    fig.suptitle(
-        "Primary-run computational overhead: compact view\n"
-        "Inclusive wrapper measurements; 95% payload-group bootstrap intervals",
-        fontweight="bold",
+    _set_figure_header(
+        fig,
+        "overhead_compact",
+        note="Inclusive wrapper timing",
     )
     return fig
 
@@ -1591,10 +1677,10 @@ def _draw_detector_panel(
     axis.set_xticks(
         x,
         [
-            "Matched\n(95% CI)",
+            "Matched",
             "Held-out\ntemplate",
-            "Leave-one\nmodel",
-            "Leave-one\ncodec",
+            "Leave-one-\nmodel",
+            "Leave-one-\ncodec",
         ],
     )
     axis.tick_params(axis="x", labelsize=6.8)
@@ -1604,8 +1690,8 @@ def _detector_legend_handles() -> list[Line2D]:
     return [
         Line2D([0], [0], marker="o", color=PALETTE["blue"], markerfacecolor="white", linestyle="none", label="TextCNN"),
         Line2D([0], [0], marker="s", color=PALETTE["vermillion"], markerfacecolor="white", linestyle="none", label="DeBERTa-v3-base"),
-        Line2D([0], [0], color=PALETTE["black"], linewidth=1.5, marker="|", markersize=8, label="Matched: payload-group 95% CI"),
-        Line2D([0], [0], color=PALETTE["black"], linewidth=1.0, linestyle=(0, (2.0, 1.7)), label="Held-out: split minimum–maximum range"),
+        Line2D([0], [0], color=PALETTE["black"], linewidth=1.5, marker="|", markersize=8, label="Matched: 95% CI"),
+        Line2D([0], [0], color=PALETTE["black"], linewidth=1.0, linestyle=(0, (2.0, 1.7)), label="Held-out: min–max"),
     ]
 
 
@@ -1615,13 +1701,13 @@ def _plot_detectors(source: pd.DataFrame) -> plt.Figure:
         "pr_auc": "B  PR–AUC",
         "balanced_accuracy": "C  Balanced accuracy",
         "precision": "D  Precision at 0.5",
-        "brier_score": "E  Brier score (lower is better)",
+        "brier_score": "E  Brier score: lower is better",
         "tpr_at_fpr_0.01": "F  TPR at FPR ≤ 1%",
     }
     fig, axes = plt.subplots(
         2,
         3,
-        figsize=(FULL_WIDTH_INCHES, 6.05),
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["detector_full"]),
         constrained_layout=True,
     )
     for axis, outcome in zip(axes.flat, DETECTOR_OUTCOMES):
@@ -1629,13 +1715,13 @@ def _plot_detectors(source: pd.DataFrame) -> plt.Figure:
     fig.legend(
         handles=_detector_legend_handles(),
         frameon=False,
-        ncol=2,
+        ncol=4,
         loc="outside lower center",
     )
-    fig.suptitle(
-        "Neural detection of RankCloak covers: complete view\n"
-        "Higher detection means weaker concealment; panels D–F are exploratory post-freeze",
-        fontweight="bold",
+    _set_figure_header(
+        fig,
+        "detector_full",
+        note="Higher = easier detection · D–F exploratory",
     )
     return fig
 
@@ -1649,7 +1735,7 @@ def _plot_detectors_compact(source: pd.DataFrame) -> plt.Figure:
     fig, axes = plt.subplots(
         1,
         3,
-        figsize=(FULL_WIDTH_INCHES, 3.45),
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["detector_compact"]),
         constrained_layout=True,
     )
     for axis, outcome in zip(axes, DETECTOR_COMPACT_OUTCOMES):
@@ -1657,13 +1743,13 @@ def _plot_detectors_compact(source: pd.DataFrame) -> plt.Figure:
     fig.legend(
         handles=_detector_legend_handles(),
         frameon=False,
-        ncol=2,
+        ncol=4,
         loc="outside lower center",
     )
-    fig.suptitle(
-        "Neural detection of RankCloak covers: compact view\n"
-        "Higher detection means weaker concealment; panel C is exploratory post-freeze",
-        fontweight="bold",
+    _set_figure_header(
+        fig,
+        "detector_compact",
+        note="Higher = easier detection · C exploratory",
     )
     return fig
 
@@ -1804,13 +1890,13 @@ def _plot_ablation(source: pd.DataFrame) -> plt.Figure:
     fig, axes = plt.subplots(
         1,
         3,
-        figsize=(FULL_WIDTH_INCHES, 4.2),
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["ablation"]),
         constrained_layout=True,
     )
     for axis, outcome in zip(axes, outcomes):
         cell = source.loc[source["outcome"].eq(outcome)].sort_values("panel_order")
-        y = np.arange(len(cell))
-        for position, (_, row) in enumerate(cell.iterrows()):
+        y = (4.0 - len(cell)) / 2.0 + np.arange(len(cell), dtype=float)
+        for position, (_, row) in zip(y, cell.iterrows()):
             color, marker = factor_styles[str(row["factor"])]
             point = np.asarray([float(row["level_minus_canonical"])])
             low = np.asarray([float(row["ci_low"])])
@@ -1831,12 +1917,8 @@ def _plot_ablation(source: pd.DataFrame) -> plt.Figure:
                 markeredgecolor=color,
                 zorder=3,
             )
-        tick_labels = [
-            f"{row.display_label}\n{row.holm_label}"
-            for row in cell.itertuples(index=False)
-        ]
-        axis.set_yticks(y, tick_labels, fontsize=6.7)
-        axis.invert_yaxis()
+        axis.set_yticks(y, cell["display_label"], fontsize=6.9)
+        axis.set_ylim(3.5, -0.5)
         axis.axvline(0.0, color=PALETTE["black"], linestyle="--", linewidth=0.9)
         axis.grid(axis="x", color=PALETTE["light_gray"], linewidth=0.6)
         minimum = min(float(cell["ci_low"].min()), 0.0)
@@ -1866,22 +1948,47 @@ def _plot_ablation(source: pd.DataFrame) -> plt.Figure:
         ncol=4,
         loc="outside lower center",
     )
-    fig.suptitle(
-        "Exploratory ablation contrasts (post-outcome)\n"
-        "Level minus canonical; points and 95% payload-bootstrap intervals\n"
-        "Null filter results retained; unavailable Mistral filter cells noted separately",
-        fontweight="bold",
+    _set_figure_header(
+        fig,
+        "ablation",
+        note="Post-outcome",
     )
     return fig
 
 
-def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
+def _ablation_pvalue_note_lines(source: pd.DataFrame) -> list[str]:
+    outcome_labels = {
+        "mean_log_probability": "Token log probability",
+        "effective_artifact_bits_per_full_token": "Payload rate",
+        "full_token_count": "Message length",
+    }
+    lines = [
+        "",
+        "## Holm-adjusted p-values for plotted rows",
+        "",
+        "| Outcome | Contrast | Holm-adjusted p-value |",
+        "|---|---|---:|",
+    ]
+    for row in source.sort_values(["outcome_order", "panel_order"]).itertuples(
+        index=False
+    ):
+        lines.append(
+            f"| {outcome_labels[str(row.outcome)]} | {row.display_label} | "
+            f"`{float(row.p_value_holm):.17g}` |"
+        )
+    return lines
+
+
+def _technical_notes(
+    upstream_paths: Mapping[str, str], ablation_source: pd.DataFrame
+) -> dict[str, str]:
     return {
         "robustness_note": "\n".join(
             [
                 "# Robustness figure technical note",
                 "",
                 f"- Authoritative source: `{upstream_paths['robustness']}`.",
+                "- Evidence classification: secondary evidence with diagnostic scope; 11 rows in the compact core candidate and 24 rows in the full supporting candidate.",
                 "- Analysis unit: source cover; intervals: Wilson 95% confidence intervals.",
                 "- Replay, raw-transmission, limited-canonicalization, and cross-model channels remain separate; no pooled recovery estimate is plotted.",
                 "- `Final 10% tail-only truncation` removes `ceil(10%)` of final token IDs. It does not test arbitrary truncation of payload-bearing positions.",
@@ -1898,6 +2005,7 @@ def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
                 "",
                 f"- Regime source: `{upstream_paths['detector_plot']}`.",
                 f"- Matched confidence-interval source: `{upstream_paths['detector_metrics']}`.",
+                "- Evidence classification: confirmatory frozen endpoints plus explicitly exploratory post-freeze endpoints; 24 rows in the compact candidate and 48 rows in the full supporting candidate.",
                 "- Matched bars are payload-group bootstrap 95% confidence intervals.",
                 "- Held-out bars are minimum-to-maximum ranges across heterogeneous prespecified splits; they are not confidence intervals.",
                 "- ROC-AUC, PR-AUC, and balanced accuracy retain confirmatory frozen-upstream status.",
@@ -1912,6 +2020,7 @@ def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
                 "# Automated-readability figure technical note",
                 "",
                 f"- Authoritative source: `{upstream_paths['readability']}`.",
+                "- Evidence classification: supporting automated surface diagnostics, not human evaluation; 21 plotted rows (seven conditions by three outcomes).",
                 "- All plotted rows have `human_rating_substitute=false`.",
                 "- Intervals are 95% prompt-template-cluster percentile-bootstrap intervals (18 prompt-template units; 72 stimuli per condition).",
                 "- `Surface-flag count` sums unmatched brackets, double-quote imbalance, repeated punctuation, whitespace flags, lowercase sentence starts, sentences longer than 40 words, missing terminal punctuation, and long hexadecimal/base64-like fragments.",
@@ -1926,9 +2035,10 @@ def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
                 "# Capacity and tail-overhead technical note",
                 "",
                 f"- Authoritative source: `{upstream_paths['theory']}`.",
+                "- Evidence classification: supporting evidence; nine aggregate cells appear in both the capacity and tail panels (18 plotted-source rows).",
                 "- Capacity relationship: the theoretical forced-position requirement is the saved `theoretical_n_B` value derived from payload bits and the declared rank alphabet; it is compared directly with `observed_n_forced`.",
                 "- All nine aggregate capacity cells lie on the identity relation; maximum absolute forced-position residual is zero.",
-                "- Small screen-space offsets separate coincident aggregate markers only. Source values and axis coordinates remain recorded without jitter in the plotted-source CSV.",
+                "- Every capacity marker is plotted at its true data coordinates. Coincident cells are shown with concentric marker sizes, stage-specific shapes, transparent fills, and controlled z-order; no x, y, screen-space, pixel, point, or transform displacement is applied.",
                 "- Tail overhead is `tail_overhead_tokens`: cover-extension tokens beyond forced payload positions.",
                 "- Exact-zero tail cells are displayed on a separate linear panel. Positive medians and 5th-95th percentile ranges use a logarithmic axis.",
                 "- Points are medians; bars are 5th-95th percentile ranges, not confidence intervals.",
@@ -1940,6 +2050,7 @@ def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
                 "# Computational-overhead figure technical note",
                 "",
                 f"- Authoritative source: `{upstream_paths['overhead']}`.",
+                "- Evidence classification: supporting computational evidence; 54 rows in the compact candidate and 72 rows in the full supporting candidate (18 model-protocol cells per panel).",
                 "- Plotted cells are primary-stage, trial-scope, payload-group summaries with 95% payload-bootstrap intervals.",
                 "- Timing fields are inclusive wrapper measurements; encoding, generation, and supported decoding are not asserted to be perfectly isolated.",
                 "- Encoding setup uses a log axis only in the complete figure because values span several orders of magnitude.",
@@ -1953,13 +2064,14 @@ def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
                 "# Ablation-summary technical note",
                 "",
                 f"- Authoritative 60-row source: `{upstream_paths['ablation']}`.",
-                "- Figure status: exploratory post-outcome evidence extraction; `primary_inference=false`.",
+                "- Evidence classification: exploratory post-outcome evidence extraction; `primary_inference=false`. Nine prespecified compact rows are plotted from the full 60-row table.",
                 "- The nine plotted rows are the compact contrasts already identified in the evidence records: 32-token lead-in, 32-rank segments, no filter, no tail, and fixed sentence tail for the stated outcomes.",
                 "- Every plotted estimand is a raw level-minus-canonical difference with a zero reference line. Hedges g is retained upstream but is not mixed onto the plotted scales; no ratio estimand is plotted.",
-                "- Bars are 95% payload-group bootstrap intervals (2,000 resamples); Holm-adjusted p-values are shown without significance stars.",
+                "- Bars are 95% payload-group bootstrap intervals (2,000 resamples). Exact Holm-adjusted p-values are retained below and in the plotted-source CSV; significance stars are not used.",
                 "- Null token-filter results are retained. The round-trip-stable filter cell was unavailable for 48 Mistral work units and is not treated as a recovery failure.",
-                "",
             ]
+            + _ablation_pvalue_note_lines(ablation_source)
+            + [""]
         ),
     }
 
@@ -1967,7 +2079,7 @@ def _technical_notes(upstream_paths: Mapping[str, str]) -> dict[str, str]:
 def _figure_specs() -> dict[str, dict[str, Any]]:
     return {
         "robustness_compact": {
-            "title": "Exact-copy fragility, compact",
+            "title": FIGURE_TITLES["robustness_compact"],
             "classification": "Core compact candidate",
             "evidence_status": "secondary_with_diagnostic_scope",
             "panel_count": 1,
@@ -1979,7 +2091,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "source-cover Wilson 95% confidence intervals",
         },
         "robustness_full": {
-            "title": "Exact-copy fragility, complete",
+            "title": FIGURE_TITLES["robustness_full"],
             "classification": "Full supporting candidate",
             "evidence_status": "secondary_with_diagnostic_scope",
             "panel_count": 4,
@@ -1991,7 +2103,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "source-cover Wilson 95% confidence intervals",
         },
         "detector_compact": {
-            "title": "Neural detection, compact",
+            "title": FIGURE_TITLES["detector_compact"],
             "classification": "Core compact candidate",
             "evidence_status": "confirmatory_endpoints_plus_exploratory_low_fpr_metric",
             "panel_count": 3,
@@ -2003,7 +2115,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges",
         },
         "detector_full": {
-            "title": "Neural detection, complete",
+            "title": FIGURE_TITLES["detector_full"],
             "classification": "Full supporting candidate",
             "evidence_status": "confirmatory_and_exploratory_panels_separated",
             "panel_count": 6,
@@ -2015,7 +2127,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges",
         },
         "capacity_tail": {
-            "title": "Capacity and tail overhead",
+            "title": FIGURE_TITLES["capacity_tail"],
             "classification": "Core compact candidate",
             "evidence_status": "supporting",
             "panel_count": 3,
@@ -2027,7 +2139,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "tail medians with 5th-95th percentile ranges",
         },
         "readability": {
-            "title": "Automated surface diagnostics",
+            "title": FIGURE_TITLES["readability"],
             "classification": "Full supporting candidate",
             "evidence_status": "automated_not_human_rating",
             "panel_count": 3,
@@ -2039,7 +2151,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "prompt-template-cluster bootstrap 95% confidence intervals",
         },
         "overhead_compact": {
-            "title": "Computational overhead, compact",
+            "title": FIGURE_TITLES["overhead_compact"],
             "classification": "Full supporting candidate",
             "evidence_status": "supporting",
             "panel_count": 3,
@@ -2051,7 +2163,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "payload-group bootstrap 95% confidence intervals",
         },
         "overhead_full": {
-            "title": "Computational overhead, complete",
+            "title": FIGURE_TITLES["overhead_full"],
             "classification": "Full supporting candidate",
             "evidence_status": "supporting",
             "panel_count": 4,
@@ -2063,7 +2175,7 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "payload-group bootstrap 95% confidence intervals",
         },
         "ablation": {
-            "title": "Ablation summary",
+            "title": FIGURE_TITLES["ablation"],
             "classification": "Full supporting candidate",
             "evidence_status": "exploratory_post_outcome",
             "panel_count": 3,
@@ -2090,6 +2202,8 @@ def _figure_inventory(
                 "evidence_status": spec["evidence_status"],
                 "panel_count": spec["panel_count"],
                 "plotted_row_count": spec["plotted_row_count"],
+                "width_mm": 180.0,
+                "height_mm": round(FIGURE_HEIGHT_INCHES[figure_id] * 25.4, 2),
                 "primary_pdf": _portable_path(targets[spec["pdf_key"]], project_root),
                 "inspection_png_300dpi": _portable_path(
                     targets[spec["png_key"]], project_root
@@ -2409,6 +2523,7 @@ def build_core_figures(
         "detector": _plot_detectors(sources["detector_source"]),
         "ablation": _plot_ablation(sources["ablation_source"]),
     }
+    _validate_figure_presentation(figures)
     try:
         for name, figure in figures.items():
             _atomic_save_figure(figure, targets[f"{name}_pdf"])
@@ -2427,7 +2542,7 @@ def build_core_figures(
         "detector_metrics": _portable_path(detector_metrics_path, root),
         "ablation": _portable_path(ablation_path, root),
     }
-    notes = _technical_notes(upstream_paths)
+    notes = _technical_notes(upstream_paths, sources["ablation_source"])
     for key, value in notes.items():
         _atomic_write_text(value, targets[key])
     inventory = _figure_inventory(targets, root)
@@ -2457,8 +2572,13 @@ def build_core_figures(
         },
         "figures": {
             figure_id: {
+                "title": spec["title"],
                 "panel_count": spec["panel_count"],
                 "plotted_row_count": spec["plotted_row_count"],
+                "width_mm": 180.0,
+                "height_mm": round(
+                    FIGURE_HEIGHT_INCHES[figure_id] * 25.4, 2
+                ),
                 "evidence_status": spec["evidence_status"],
                 "classification": spec["classification"],
                 "uncertainty": spec["uncertainty"],
@@ -2471,6 +2591,10 @@ def build_core_figures(
             "confidence_intervals_and_ranges_distinguished": True,
             "automated_readability_not_human_rating": True,
             "ablation_exploratory_status_preserved": True,
+            "concise_plot_titles_validated": True,
+            "prohibited_plot_phrases_absent": True,
+            "capacity_markers_use_true_data_coordinates": True,
+            "capacity_marker_displacement_applied": False,
             "absolute_local_paths_emitted": False,
             "pdf_primary_png_300dpi_secondary": True,
         },
@@ -2562,6 +2686,8 @@ def build_core_figures(
             "evidence_status": spec["evidence_status"],
             "panel_count": spec["panel_count"],
             "plotted_row_count": spec["plotted_row_count"],
+            "width_mm": 180.0,
+            "height_mm": round(FIGURE_HEIGHT_INCHES[figure_id] * 25.4, 2),
             "uncertainty": spec["uncertainty"],
             "primary_pdf": _portable_path(targets[spec["pdf_key"]], root),
             "inspection_png_300dpi": _portable_path(

@@ -1,6 +1,7 @@
 # Computational-overhead figure technical note
 
 - Authoritative source: `results/revision_v1/final_experiment_package/overhead/overhead_plot_source.csv`.
+- Evidence classification: supporting computational evidence; 54 rows in the compact candidate and 72 rows in the full supporting candidate (18 model-protocol cells per panel).
 - Plotted cells are primary-stage, trial-scope, payload-group summaries with 95% payload-bootstrap intervals.
 - Timing fields are inclusive wrapper measurements; encoding, generation, and supported decoding are not asserted to be perfectly isolated.
 - Encoding setup uses a log axis only in the complete figure because values span several orders of magnitude.

@@ -210,30 +210,30 @@
       "label": "figures",
       "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/figure_manifest.json",
       "schema_version": "rankcloak-computational-figure-evidence-v2",
-      "sha256": "869a69439c5cbdad4e09cb948213729f2a7867d20e8ee04d6cee42d8b91ee815",
-      "size_bytes": 19583,
+      "sha256": "97919135a28700461e8d73924a1e25fa97714d2b343c5769be4ba0c0a066a3e7",
+      "size_bytes": 20020,
       "status": "passed",
       "validated_outputs": [
         {
           "label": "ablation_note",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/ablation_technical_note.md",
           "row_count": null,
-          "sha256": "e69c23a7547a9c8a1d09f5467615ed60b5aa497f3cf04c42689786f75170e45c",
-          "size_bytes": 951
+          "sha256": "235353782f1dc031fbe7e9a06582fd17a8e55b9401ca12fdb1ccd8c6fd7a8fe5",
+          "size_bytes": 1759
         },
         {
           "label": "ablation_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/ablation_summary.pdf",
           "row_count": null,
-          "sha256": "ab8b7ab7f89d12d3f86639e1b2add147fe0a6b0b106cb910c5f399710bcb54ab",
-          "size_bytes": 26326
+          "sha256": "ed234d911f8d2b5a772cebd58613e971692535c65bcc10db862277e42081cbc7",
+          "size_bytes": 22852
         },
         {
           "label": "ablation_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/ablation_summary.png",
           "row_count": null,
-          "sha256": "130c97a363f67d100c9c474cfa75f1a30901717aa48519d1398e6ca63e72e09a",
-          "size_bytes": 192736
+          "sha256": "ba422340505e0b154867cdd71c98377112123fca2e57583504b62f4165bf21ef",
+          "size_bytes": 128891
         },
         {
           "label": "ablation_source",
@@ -253,15 +253,15 @@
           "label": "detector_compact_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.pdf",
           "row_count": null,
-          "sha256": "e9cf81473b42f7cbb7837847b52cc1777458fbbde52066d6ae711128ad237eb2",
-          "size_bytes": 29731
+          "sha256": "41b97f51b6efeca45848862ca01803866825464937dd8931d5045cb32db34ae7",
+          "size_bytes": 26199
         },
         {
           "label": "detector_compact_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.png",
           "row_count": null,
-          "sha256": "141e66964cf99a22a1792dc9cb242d35b3339d2ae6b69a087667b2e8bee2be2b",
-          "size_bytes": 138073
+          "sha256": "25add588f443ada778c9c99a023a22420ee746f76925a7a57cd3500929dba828",
+          "size_bytes": 104025
         },
         {
           "label": "detector_compact_source",
@@ -274,22 +274,22 @@
           "label": "detector_note",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_technical_note.md",
           "row_count": null,
-          "sha256": "ec485b5ff4bfadfefe00fb282a1b43caf62407af65b37f9e3d1ed2b12d5af6bc",
-          "size_bytes": 916
+          "sha256": "99f684547f255f886458b840e1ee3c9d5b42459c29d31ca25057470be08f8035",
+          "size_bytes": 1103
         },
         {
           "label": "detector_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
           "row_count": null,
-          "sha256": "2788686179e04eaf8794f9817ffccc20b44a38e69da48cf23cc98c5abce3b093",
-          "size_bytes": 34872
+          "sha256": "5abfff283fad532f22be033c86eb49dc3a1b11d5e7bf2315fb4c27ad972ec6f4",
+          "size_bytes": 32073
         },
         {
           "label": "detector_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
           "row_count": null,
-          "sha256": "b8d600eeb4ca0dd314cb9dedb067af1893f691741ffb91cd3a1710a31fe9b80e",
-          "size_bytes": 210482
+          "sha256": "072eaaf49b83a3122c5f32a308ffb5e8ffd1b3d38770003b0e6fc100f657ad60",
+          "size_bytes": 168222
         },
         {
           "label": "detector_source",
@@ -302,22 +302,22 @@
           "label": "inventory",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/figure_inventory.csv",
           "row_count": 9,
-          "sha256": "72bb5d1a54806a73ecbbf054d527e636949a7b39a97b4bdfd3004575ecf6647d",
-          "size_bytes": 4518
+          "sha256": "0d8b8f37f2698fe4c5d330ba2593006584dda175335abde76ae445ee74bc83fc",
+          "size_bytes": 4607
         },
         {
           "label": "overhead_compact_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead_compact.pdf",
           "row_count": null,
-          "sha256": "86ee5da521fe9cd0559c93994dd5a3009bb33b0b6f1407faab342b7623e11d1e",
-          "size_bytes": 28438
+          "sha256": "f48b61f8d17ba5fbcef0b4826d6cc947b8548d1e9404495c8908ff8312736f2b",
+          "size_bytes": 27334
         },
         {
           "label": "overhead_compact_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead_compact.png",
           "row_count": null,
-          "sha256": "ed8940be825018fe983e9b2e341b3e044e090904c3d356bd715cda58280af5f8",
-          "size_bytes": 156617
+          "sha256": "9c1636cec28e7aa258bcd2f4a78792f152549b9dc097d87ee37f5712353a7896",
+          "size_bytes": 129460
         },
         {
           "label": "overhead_compact_source",
@@ -330,22 +330,22 @@
           "label": "overhead_note",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead_technical_note.md",
           "row_count": null,
-          "sha256": "1fa7b93ac0622251f4694e30d56e59e1338a55e285733ee2f79ad55c05437398",
-          "size_bytes": 699
+          "sha256": "e655a84c8efc1a63b8900cd6df303670c586ad01139aa000cb94af6a8ddef384",
+          "size_bytes": 876
         },
         {
           "label": "overhead_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
           "row_count": null,
-          "sha256": "a581556f7aa25cdef4e6e4aa19eecd09ad2a9312e8b344f608ca30fd0f0da70e",
-          "size_bytes": 32425
+          "sha256": "d9ff4346189b3084da36dda3f75ccbe5779d45740c26e9357cbb69a58117d800",
+          "size_bytes": 31335
         },
         {
           "label": "overhead_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.png",
           "row_count": null,
-          "sha256": "be713a5eb122fa6a195e47511991f4821cc434d3c8e63b01d258829c415c38b2",
-          "size_bytes": 247789
+          "sha256": "53168ec13bba65f86c0f7e7be832fb43f11d39c8febfe487be0579253035f4e6",
+          "size_bytes": 210711
         },
         {
           "label": "overhead_source",
@@ -358,22 +358,22 @@
           "label": "readability_note",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability_technical_note.md",
           "row_count": null,
-          "sha256": "1d3137fa2233afcaa7b5e680edd47a7c1bc8f07140ec662f93d9f269fbcd5758",
-          "size_bytes": 880
+          "sha256": "c69b1f242d48da40c7bb6ef89f482d17565ee5a7a5f5e403179510a78c7a0b97",
+          "size_bytes": 1025
         },
         {
           "label": "readability_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
           "row_count": null,
-          "sha256": "bb2a9dc5637f7639e8ff130cb3f5d5f9dcaffaee83efee38c657f4e754babf06",
-          "size_bytes": 28575
+          "sha256": "a6b85f79f9bc4964cf4d77cab23242ed18effe772b54d8a445824ac3045b18a1",
+          "size_bytes": 27627
         },
         {
           "label": "readability_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.png",
           "row_count": null,
-          "sha256": "8a3ac2d3b670d16b9fc22d048730032c1a8c8cc66de597a330bd6275a859ed19",
-          "size_bytes": 181895
+          "sha256": "94f8c024b76dda0c277699f5c3d289b80b865f1543e6f3b38bdfb3b59c4fca75",
+          "size_bytes": 145548
         },
         {
           "label": "readability_source",
@@ -386,15 +386,15 @@
           "label": "robustness_compact_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.pdf",
           "row_count": null,
-          "sha256": "b3451614c393d2ba538e40ef631fc72e45beb19568bbb09a8ce2d25ed76db899",
-          "size_bytes": 26922
+          "sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797",
+          "size_bytes": 24316
         },
         {
           "label": "robustness_compact_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.png",
           "row_count": null,
-          "sha256": "49987cde58f1f4172b47d2047d7a3640f87f52d6fc7b5a53f72203833ce1f6c1",
-          "size_bytes": 200398
+          "sha256": "674361247db55fbca9b00b2ba8439bbfe64ecb119812d081c4ad09c113f11f4d",
+          "size_bytes": 145199
         },
         {
           "label": "robustness_compact_source",
@@ -407,22 +407,22 @@
           "label": "robustness_note",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_technical_note.md",
           "row_count": null,
-          "sha256": "90ece0ecbc617af5bfd544c49f882b41f0fe69ca654a199b1f54b6a861bd2eae",
-          "size_bytes": 1040
+          "sha256": "676f30ec49b741757ec94107b3271692bf04930f1cea93391053cdf4c3484b99",
+          "size_bytes": 1193
         },
         {
           "label": "robustness_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
           "row_count": null,
-          "sha256": "25faad6fe2f602ed188316f88fc1d0adda66379ffca65fe67b28574aad716e81",
-          "size_bytes": 29798
+          "sha256": "fe47daa66d07aa6173e45bf757dd1d81a07b5d459f4b1556c868d68004f785fc",
+          "size_bytes": 28938
         },
         {
           "label": "robustness_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
           "row_count": null,
-          "sha256": "38038e7dc7f58332dae605f7a4b1d7908ecfd80e52c7f9c8d3957ffec0c71e63",
-          "size_bytes": 302531
+          "sha256": "1287ea50404fbab830bd779ffb23a75a2e015f81c4f0cf0d6a0d0a69a0707934",
+          "size_bytes": 245899
         },
         {
           "label": "robustness_source",
@@ -435,36 +435,36 @@
           "label": "theory_note",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_technical_note.md",
           "row_count": null,
-          "sha256": "5ef868f619bbb60482ab0299cef5b7fa7cd94fb73cb10e71a0e57e0d80d17cca",
-          "size_bytes": 975
+          "sha256": "78c0cc5c1491136426e8a39e49cdb2a554ec239731219280cb587f0e31cb7279",
+          "size_bytes": 1211
         },
         {
           "label": "theory_pdf",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
           "row_count": null,
-          "sha256": "039f85d8090253ba70339d2afc402988d75598570afd049a3e367a1c1f6f378b",
-          "size_bytes": 27929
+          "sha256": "8a145258b0b29902d552e896406c97e7fae641f1b51933b90cff75d5fbe3a6ce",
+          "size_bytes": 25042
         },
         {
           "label": "theory_png",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
           "row_count": null,
-          "sha256": "7b8ff84fd0a77e550ff9387a1e45bb02b2c551cbbfd0e31b58727fa6480dd3a8",
-          "size_bytes": 277161
+          "sha256": "207ee7402a269ef20895bd3d5bc663926b4675867426c205825e84a4e3930650",
+          "size_bytes": 204618
         },
         {
           "label": "theory_source",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
           "row_count": 18,
-          "sha256": "7bb944fd7a12709569246fb0f21e53e7444272bf38d456fb8d6d114f2141d52c",
-          "size_bytes": 4237
+          "sha256": "f06c16a4811c2aff368f896edf8a093f91968179149382f12aedd546f02d511d",
+          "size_bytes": 4119
         },
         {
           "label": "validation",
           "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/figure_validation.json",
           "row_count": null,
-          "sha256": "032d966dee553b062114051723e4d028c0da7d5a713c60829cf0832a543bc7f8",
-          "size_bytes": 7930
+          "sha256": "76fedcbf4018b19dd7e144f102dcafa53ad43649884cdfdd1615c65e9bf9a6ea",
+          "size_bytes": 8972
         }
       ]
     },
@@ -951,7 +951,7 @@
     {
       "label": "evidence_summary_manifest",
       "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/evidence_summary_manifest.json",
-      "sha256": "e25eb41ac8cdd06f96c926a161d10239fb75914e91f29dd2b44772ccaa0e7932",
+      "sha256": "aa18f16df8f72535c69a4a1f244b099fd0ad9a30ad7749b9a8d8c7e1280604c6",
       "size_bytes": 26139
     },
     {
@@ -1006,7 +1006,7 @@
   ],
   "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_package_index.py --package-root /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package --component-manifest primary_recovery=results/revision_v1/final_experiment_package/tables/primary_recovery/primary_recovery_endpoint_manifest.json --component-manifest multilingual_recovery=results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoint_manifest.json --component-manifest robustness_analysis=results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json --component-manifest robustness_coverage=results/revision_v1/final_experiment_package/robustness/perturbation_coverage_manifest.json --component-manifest readability=results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json --component-manifest theory_empirical=results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json --component-manifest overhead=results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json --component-manifest detector_benchmark=results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_manifest.json --component-manifest detector_references=results/revision_v1/final_experiment_package/detectors/detector_reference_manifest.json --component-manifest detector_leakage_audit=results/revision_v1/final_experiment_package/detectors/leakage_audit/detector_leakage_audit_manifest.json --component-manifest detector_analysis=results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json --component-manifest detector_leakage_sensitivity=results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_manifest.json --component-manifest mixed_models=results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json --component-manifest topic_effects=results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json --component-manifest ablation=results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json --component-manifest figures=results/revision_v1/final_experiment_package/figures/figure_manifest.json --component-manifest computational_tests=results/revision_v1/final_experiment_package/statistics/test_suite/test_suite_manifest.json --component-manifest python_statistics=results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json --component-manifest change_inventory=results/revision_v1/final_experiment_package/changed_and_generated_files_manifest.json --external-reference evidence_spec=analysis/revision_v1/evidence_specs/final_evidence_records.json --external-reference frozen_config_manifest=configs/revision_v1/config_manifest.json --external-reference frozen_environment_manifest=environment/revision_v1/environment_manifest.json --external-reference requirements_lock=environment/revision_v1/requirements-lock.txt --external-reference payload_manifest=release_inputs/revision_v1/PAYLOAD_MANIFEST.json --external-reference payload_corpus=release_inputs/revision_v1/revision_payloads.jsonl --external-reference final_progress=results/revision_v1/final_progress_snapshot_v1.json --external-reference detector_run_manifest=results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json --external-reference detector_predictions=results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv --external-reference detector_split_manifest=results/revision_v1/neural_detector/confirmatory_v2/detector_split_manifest.json --external-reference detector_dataset_manifest=results/revision_v1/neural_detector/confirmatory_v2/detector_dataset_manifest.csv --external-reference heldout_join_v5=results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json --external-reference theory_validation=results/revision_v1/final_experiment_package/theory/theory_validation_manifest.json --external-reference cpu_feasibility_audit=results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json --external-reference cpu_feasibility_addendum=results/revision_v1/supervisor/detector_live_readonly_audit_addendum_20260813T0151Z.json --external-reference detector_gpu_ledger=results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json --external-reference detector_packaging_failure=results/revision_v1/detector_cuda_reproducibility_v2/failed_attempts/task_0_packaging_failure.json --external-reference evidence_summary_manifest=results/revision_v1/final_experiment_package/evidence_summary_manifest.json --require-relative-path STATUS.md --require-relative-path gpu_budget.json --require-relative-path reviewer_evidence_matrix.md --require-relative-path verified_findings.md --require-relative-path limitations_and_unresolved_items.md --require-relative-path artifact_priority_index.md --require-relative-path changed_and_generated_files.txt --require-relative-path resource_and_process_audit.json --require-relative-path evidence_summary_manifest.json --require-relative-path evidence_summary_prefinal_failure_20260816T1736Z.json --require-relative-path package_index_prefinal_failure_20260816T1746Z.json --require-relative-path figures/figure_manifest.json --require-relative-path statistics/python/statistics_run_manifest.json --require-relative-path statistics/test_suite/test_suite_manifest.json --require-relative-path detectors/detector_reference_manifest.json --require-relative-path robustness/robustness_analysis_manifest.json --require-relative-path readability/readability_and_stimulus_manifest.json --require-relative-path theory/theory_empirical_manifest.json --require-relative-path overhead/overhead_analysis_manifest.json --require-relative-path tables/stage_counts.csv --overwrite",
   "large_external_artifacts_copied": false,
-  "manifest_sha256": "359cd0f6853c5ddf198374ebdc4d82adc089db31f1cb992156f8a21db28173b0",
+  "manifest_sha256": "1d3e585922f3c15f8a03fd03d83323baad32a6a1a4680fd58ad0a9880add8471",
   "package_files": [
     {
       "path": "STATUS.md",
@@ -1109,7 +1109,7 @@
     },
     {
       "path": "evidence_summary_manifest.json",
-      "sha256": "e25eb41ac8cdd06f96c926a161d10239fb75914e91f29dd2b44772ccaa0e7932",
+      "sha256": "aa18f16df8f72535c69a4a1f244b099fd0ad9a30ad7749b9a8d8c7e1280604c6",
       "size_bytes": 26139
     },
     {
@@ -1410,73 +1410,73 @@
     },
     {
       "path": "figures/ablation_summary.pdf",
-      "sha256": "ab8b7ab7f89d12d3f86639e1b2add147fe0a6b0b106cb910c5f399710bcb54ab",
-      "size_bytes": 26326
+      "sha256": "ed234d911f8d2b5a772cebd58613e971692535c65bcc10db862277e42081cbc7",
+      "size_bytes": 22852
     },
     {
       "path": "figures/ablation_summary.png",
-      "sha256": "130c97a363f67d100c9c474cfa75f1a30901717aa48519d1398e6ca63e72e09a",
-      "size_bytes": 192736
+      "sha256": "ba422340505e0b154867cdd71c98377112123fca2e57583504b62f4165bf21ef",
+      "size_bytes": 128891
     },
     {
       "path": "figures/ablation_technical_note.md",
-      "sha256": "e69c23a7547a9c8a1d09f5467615ed60b5aa497f3cf04c42689786f75170e45c",
-      "size_bytes": 951
+      "sha256": "235353782f1dc031fbe7e9a06582fd17a8e55b9401ca12fdb1ccd8c6fd7a8fe5",
+      "size_bytes": 1759
     },
     {
       "path": "figures/automated_readability.pdf",
-      "sha256": "bb2a9dc5637f7639e8ff130cb3f5d5f9dcaffaee83efee38c657f4e754babf06",
-      "size_bytes": 28575
+      "sha256": "a6b85f79f9bc4964cf4d77cab23242ed18effe772b54d8a445824ac3045b18a1",
+      "size_bytes": 27627
     },
     {
       "path": "figures/automated_readability.png",
-      "sha256": "8a3ac2d3b670d16b9fc22d048730032c1a8c8cc66de597a330bd6275a859ed19",
-      "size_bytes": 181895
+      "sha256": "94f8c024b76dda0c277699f5c3d289b80b865f1543e6f3b38bdfb3b59c4fca75",
+      "size_bytes": 145548
     },
     {
       "path": "figures/automated_readability_technical_note.md",
-      "sha256": "1d3137fa2233afcaa7b5e680edd47a7c1bc8f07140ec662f93d9f269fbcd5758",
-      "size_bytes": 880
+      "sha256": "c69b1f242d48da40c7bb6ef89f482d17565ee5a7a5f5e403179510a78c7a0b97",
+      "size_bytes": 1025
     },
     {
       "path": "figures/capacity_tail_technical_note.md",
-      "sha256": "5ef868f619bbb60482ab0299cef5b7fa7cd94fb73cb10e71a0e57e0d80d17cca",
-      "size_bytes": 975
+      "sha256": "78c0cc5c1491136426e8a39e49cdb2a554ec239731219280cb587f0e31cb7279",
+      "size_bytes": 1211
     },
     {
       "path": "figures/capacity_tail_validation.pdf",
-      "sha256": "039f85d8090253ba70339d2afc402988d75598570afd049a3e367a1c1f6f378b",
-      "size_bytes": 27929
+      "sha256": "8a145258b0b29902d552e896406c97e7fae641f1b51933b90cff75d5fbe3a6ce",
+      "size_bytes": 25042
     },
     {
       "path": "figures/capacity_tail_validation.png",
-      "sha256": "7b8ff84fd0a77e550ff9387a1e45bb02b2c551cbbfd0e31b58727fa6480dd3a8",
-      "size_bytes": 277161
+      "sha256": "207ee7402a269ef20895bd3d5bc663926b4675867426c205825e84a4e3930650",
+      "size_bytes": 204618
     },
     {
       "path": "figures/computational_overhead.pdf",
-      "sha256": "a581556f7aa25cdef4e6e4aa19eecd09ad2a9312e8b344f608ca30fd0f0da70e",
-      "size_bytes": 32425
+      "sha256": "d9ff4346189b3084da36dda3f75ccbe5779d45740c26e9357cbb69a58117d800",
+      "size_bytes": 31335
     },
     {
       "path": "figures/computational_overhead.png",
-      "sha256": "be713a5eb122fa6a195e47511991f4821cc434d3c8e63b01d258829c415c38b2",
-      "size_bytes": 247789
+      "sha256": "53168ec13bba65f86c0f7e7be832fb43f11d39c8febfe487be0579253035f4e6",
+      "size_bytes": 210711
     },
     {
       "path": "figures/computational_overhead_compact.pdf",
-      "sha256": "86ee5da521fe9cd0559c93994dd5a3009bb33b0b6f1407faab342b7623e11d1e",
-      "size_bytes": 28438
+      "sha256": "f48b61f8d17ba5fbcef0b4826d6cc947b8548d1e9404495c8908ff8312736f2b",
+      "size_bytes": 27334
     },
     {
       "path": "figures/computational_overhead_compact.png",
-      "sha256": "ed8940be825018fe983e9b2e341b3e044e090904c3d356bd715cda58280af5f8",
-      "size_bytes": 156617
+      "sha256": "9c1636cec28e7aa258bcd2f4a78792f152549b9dc097d87ee37f5712353a7896",
+      "size_bytes": 129460
     },
     {
       "path": "figures/computational_overhead_technical_note.md",
-      "sha256": "1fa7b93ac0622251f4694e30d56e59e1338a55e285733ee2f79ad55c05437398",
-      "size_bytes": 699
+      "sha256": "e655a84c8efc1a63b8900cd6df303670c586ad01139aa000cb94af6a8ddef384",
+      "size_bytes": 876
     },
     {
       "path": "figures/detector_compact_source.csv",
@@ -1493,18 +1493,18 @@
     {
       "path": "figures/figure_inventory.csv",
       "row_count": 9,
-      "sha256": "72bb5d1a54806a73ecbbf054d527e636949a7b39a97b4bdfd3004575ecf6647d",
-      "size_bytes": 4518
+      "sha256": "0d8b8f37f2698fe4c5d330ba2593006584dda175335abde76ae445ee74bc83fc",
+      "size_bytes": 4607
     },
     {
       "path": "figures/figure_manifest.json",
-      "sha256": "869a69439c5cbdad4e09cb948213729f2a7867d20e8ee04d6cee42d8b91ee815",
-      "size_bytes": 19583
+      "sha256": "97919135a28700461e8d73924a1e25fa97714d2b343c5769be4ba0c0a066a3e7",
+      "size_bytes": 20020
     },
     {
       "path": "figures/figure_validation.json",
-      "sha256": "032d966dee553b062114051723e4d028c0da7d5a713c60829cf0832a543bc7f8",
-      "size_bytes": 7930
+      "sha256": "76fedcbf4018b19dd7e144f102dcafa53ad43649884cdfdd1615c65e9bf9a6ea",
+      "size_bytes": 8972
     },
     {
       "path": "figures/generation_commands.txt",
@@ -1513,28 +1513,28 @@
     },
     {
       "path": "figures/neural_detector_performance.pdf",
-      "sha256": "2788686179e04eaf8794f9817ffccc20b44a38e69da48cf23cc98c5abce3b093",
-      "size_bytes": 34872
+      "sha256": "5abfff283fad532f22be033c86eb49dc3a1b11d5e7bf2315fb4c27ad972ec6f4",
+      "size_bytes": 32073
     },
     {
       "path": "figures/neural_detector_performance.png",
-      "sha256": "b8d600eeb4ca0dd314cb9dedb067af1893f691741ffb91cd3a1710a31fe9b80e",
-      "size_bytes": 210482
+      "sha256": "072eaaf49b83a3122c5f32a308ffb5e8ffd1b3d38770003b0e6fc100f657ad60",
+      "size_bytes": 168222
     },
     {
       "path": "figures/neural_detector_performance_compact.pdf",
-      "sha256": "e9cf81473b42f7cbb7837847b52cc1777458fbbde52066d6ae711128ad237eb2",
-      "size_bytes": 29731
+      "sha256": "41b97f51b6efeca45848862ca01803866825464937dd8931d5045cb32db34ae7",
+      "size_bytes": 26199
     },
     {
       "path": "figures/neural_detector_performance_compact.png",
-      "sha256": "141e66964cf99a22a1792dc9cb242d35b3339d2ae6b69a087667b2e8bee2be2b",
-      "size_bytes": 138073
+      "sha256": "25add588f443ada778c9c99a023a22420ee746f76925a7a57cd3500929dba828",
+      "size_bytes": 104025
     },
     {
       "path": "figures/neural_detector_technical_note.md",
-      "sha256": "ec485b5ff4bfadfefe00fb282a1b43caf62407af65b37f9e3d1ed2b12d5af6bc",
-      "size_bytes": 916
+      "sha256": "99f684547f255f886458b840e1ee3c9d5b42459c29d31ca25057470be08f8035",
+      "size_bytes": 1103
     },
     {
       "path": "figures/overhead_compact_source.csv",
@@ -1568,34 +1568,34 @@
     },
     {
       "path": "figures/robustness_recovery.pdf",
-      "sha256": "25faad6fe2f602ed188316f88fc1d0adda66379ffca65fe67b28574aad716e81",
-      "size_bytes": 29798
+      "sha256": "fe47daa66d07aa6173e45bf757dd1d81a07b5d459f4b1556c868d68004f785fc",
+      "size_bytes": 28938
     },
     {
       "path": "figures/robustness_recovery.png",
-      "sha256": "38038e7dc7f58332dae605f7a4b1d7908ecfd80e52c7f9c8d3957ffec0c71e63",
-      "size_bytes": 302531
+      "sha256": "1287ea50404fbab830bd779ffb23a75a2e015f81c4f0cf0d6a0d0a69a0707934",
+      "size_bytes": 245899
     },
     {
       "path": "figures/robustness_recovery_compact.pdf",
-      "sha256": "b3451614c393d2ba538e40ef631fc72e45beb19568bbb09a8ce2d25ed76db899",
-      "size_bytes": 26922
+      "sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797",
+      "size_bytes": 24316
     },
     {
       "path": "figures/robustness_recovery_compact.png",
-      "sha256": "49987cde58f1f4172b47d2047d7a3640f87f52d6fc7b5a53f72203833ce1f6c1",
-      "size_bytes": 200398
+      "sha256": "674361247db55fbca9b00b2ba8439bbfe64ecb119812d081c4ad09c113f11f4d",
+      "size_bytes": 145199
     },
     {
       "path": "figures/robustness_technical_note.md",
-      "sha256": "90ece0ecbc617af5bfd544c49f882b41f0fe69ca654a199b1f54b6a861bd2eae",
-      "size_bytes": 1040
+      "sha256": "676f30ec49b741757ec94107b3271692bf04930f1cea93391053cdf4c3484b99",
+      "size_bytes": 1193
     },
     {
       "path": "figures/theory_figure_source.csv",
       "row_count": 18,
-      "sha256": "7bb944fd7a12709569246fb0f21e53e7444272bf38d456fb8d6d114f2141d52c",
-      "size_bytes": 4237
+      "sha256": "f06c16a4811c2aff368f896edf8a093f91968179149382f12aedd546f02d511d",
+      "size_bytes": 4119
     },
     {
       "path": "gpu_budget.json",
@@ -1973,7 +1973,7 @@
     {
       "path": "tables/evidence_artifact_references.csv",
       "row_count": 73,
-      "sha256": "9ae5143c5c07508fa208ff7a28c33e5c0b7338eade0450849107e2f6c58f6882",
+      "sha256": "4fd6a21b21cc176bfe98aed8b30e4324494def5fa8e9fcd1253c06bfef45eed1",
       "size_bytes": 11479
     },
     {
@@ -2136,7 +2136,7 @@
   "summary": {
     "component_manifest_count": 19,
     "external_reference_count": 18,
-    "package_bytes": 120566885,
+    "package_bytes": 120125632,
     "package_file_count": 203,
     "validated_declared_output_count": 100
   }

@@ -33,74 +33,105 @@
     "ablation_exploratory_status_preserved": true,
     "absolute_local_paths_emitted": false,
     "automated_readability_not_human_rating": true,
+    "capacity_marker_displacement_applied": false,
+    "capacity_markers_use_true_data_coordinates": true,
+    "concise_plot_titles_validated": true,
     "confidence_intervals_and_ranges_distinguished": true,
     "intervals_contain_estimates": true,
     "no_nan_or_infinite_plotted_values": true,
-    "pdf_primary_png_300dpi_secondary": true
+    "pdf_primary_png_300dpi_secondary": true,
+    "prohibited_plot_phrases_absent": true
   },
   "figures": {
     "ablation": {
       "classification": "Full supporting candidate",
       "evidence_status": "exploratory_post_outcome",
+      "height_mm": 90.17,
       "panel_count": 3,
       "plotted_row_count": 9,
-      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+      "title": "Exploratory ablation contrasts",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
     },
     "capacity_tail": {
       "classification": "Core compact candidate",
       "evidence_status": "supporting",
+      "height_mm": 115.57,
       "panel_count": 3,
       "plotted_row_count": 18,
-      "uncertainty": "tail medians with 5th-95th percentile ranges"
+      "title": "Capacity and tail overhead",
+      "uncertainty": "tail medians with 5th-95th percentile ranges",
+      "width_mm": 180.0
     },
     "detector_compact": {
       "classification": "Core compact candidate",
       "evidence_status": "confirmatory_endpoints_plus_exploratory_low_fpr_metric",
+      "height_mm": 87.63,
       "panel_count": 3,
       "plotted_row_count": 24,
-      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges"
+      "title": "Neural detectability",
+      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges",
+      "width_mm": 180.0
     },
     "detector_full": {
       "classification": "Full supporting candidate",
       "evidence_status": "confirmatory_and_exploratory_panels_separated",
+      "height_mm": 148.59,
       "panel_count": 6,
       "plotted_row_count": 48,
-      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges"
+      "title": "Neural detectability",
+      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges",
+      "width_mm": 180.0
     },
     "overhead_compact": {
       "classification": "Full supporting candidate",
       "evidence_status": "supporting",
+      "height_mm": 90.17,
       "panel_count": 3,
       "plotted_row_count": 54,
-      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+      "title": "Computational overhead",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
     },
     "overhead_full": {
       "classification": "Full supporting candidate",
       "evidence_status": "supporting",
+      "height_mm": 130.81,
       "panel_count": 4,
       "plotted_row_count": 72,
-      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+      "title": "Computational overhead",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
     },
     "readability": {
       "classification": "Full supporting candidate",
       "evidence_status": "automated_not_human_rating",
+      "height_mm": 95.25,
       "panel_count": 3,
       "plotted_row_count": 21,
-      "uncertainty": "prompt-template-cluster bootstrap 95% confidence intervals"
+      "title": "Automated readability diagnostics",
+      "uncertainty": "prompt-template-cluster bootstrap 95% confidence intervals",
+      "width_mm": 180.0
     },
     "robustness_compact": {
       "classification": "Core compact candidate",
       "evidence_status": "secondary_with_diagnostic_scope",
+      "height_mm": 104.14,
       "panel_count": 1,
       "plotted_row_count": 11,
-      "uncertainty": "source-cover Wilson 95% confidence intervals"
+      "title": "Exact-copy fragility",
+      "uncertainty": "source-cover Wilson 95% confidence intervals",
+      "width_mm": 180.0
     },
     "robustness_full": {
       "classification": "Full supporting candidate",
       "evidence_status": "secondary_with_diagnostic_scope",
+      "height_mm": 154.94,
       "panel_count": 4,
       "plotted_row_count": 24,
-      "uncertainty": "source-cover Wilson 95% confidence intervals"
+      "title": "Exact-copy fragility",
+      "uncertainty": "source-cover Wilson 95% confidence intervals",
+      "width_mm": 180.0
     }
   },
   "schema_version": "rankcloak-computational-figure-validation-v2",
@@ -174,7 +205,7 @@
       "interval_order_validated": true,
       "path": "results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
       "row_count": 18,
-      "sha256": "7bb944fd7a12709569246fb0f21e53e7444272bf38d456fb8d6d114f2141d52c",
+      "sha256": "f06c16a4811c2aff368f896edf8a093f91968179149382f12aedd546f02d511d",
       "validated_derivation_from_hash_validated_upstream": true
     }
   },

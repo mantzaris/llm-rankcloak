@@ -1,6 +1,7 @@
 # Robustness figure technical note
 
 - Authoritative source: `results/revision_v1/final_experiment_package/robustness/robustness_recovery_plot_source.csv`.
+- Evidence classification: secondary evidence with diagnostic scope; 11 rows in the compact core candidate and 24 rows in the full supporting candidate.
 - Analysis unit: source cover; intervals: Wilson 95% confidence intervals.
 - Replay, raw-transmission, limited-canonicalization, and cross-model channels remain separate; no pooled recovery estimate is plotted.
 - `Final 10% tail-only truncation` removes `ceil(10%)` of final token IDs. It does not test arbitrary truncation of payload-bearing positions.

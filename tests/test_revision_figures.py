@@ -7,10 +7,16 @@ from typing import Any, Mapping
 import numpy as np
 import pandas as pd
 import pytest
+from matplotlib import pyplot as plt
 
 from rankcloak.revision_figures import (
+    FIGURE_HEIGHT_INCHES,
+    FIGURE_TITLES,
     OUTPUT_FILENAMES,
+    PROHIBITED_PLOT_PHRASES,
     FigureEvidenceError,
+    _plot_theory,
+    _theory_source,
     build_core_figures,
     canonical_json_sha256,
     file_sha256,
@@ -28,6 +34,10 @@ EXPECTED_FIGURES = {
     "overhead_compact": (3, 54),
     "overhead_full": (4, 72),
     "ablation": (3, 9),
+}
+
+EXPECTED_TITLES = {
+    figure_id: FIGURE_TITLES[figure_id] for figure_id in EXPECTED_FIGURES
 }
 
 
@@ -472,6 +482,10 @@ def test_builder_emits_validated_portable_figure_package(tmp_path: Path):
     assert validation["checks"]["confidence_intervals_and_ranges_distinguished"]
     assert validation["checks"]["automated_readability_not_human_rating"]
     assert validation["checks"]["ablation_exploratory_status_preserved"]
+    assert validation["checks"]["concise_plot_titles_validated"]
+    assert validation["checks"]["prohibited_plot_phrases_absent"]
+    assert validation["checks"]["capacity_markers_use_true_data_coordinates"]
+    assert not validation["checks"]["capacity_marker_displacement_applied"]
     _assert_portable_paths(manifest, tmp_path)
     assert str(tmp_path) not in json.dumps(manifest)
     assert str(tmp_path) not in (output / OUTPUT_FILENAMES["commands"]).read_text()
@@ -480,6 +494,17 @@ def test_builder_emits_validated_portable_figure_package(tmp_path: Path):
     assert set(inventory["figure_id"]) == set(EXPECTED_FIGURES)
     for figure_id, (panels, rows) in EXPECTED_FIGURES.items():
         figure = manifest["figures"][figure_id]
+        assert figure["title"] == EXPECTED_TITLES[figure_id]
+        assert "\n" not in figure["title"]
+        assert len(figure["title"].split()) <= 4
+        assert figure["width_mm"] == 180.0
+        assert figure["height_mm"] == round(
+            FIGURE_HEIGHT_INCHES[figure_id] * 25.4, 2
+        )
+        assert not any(
+            phrase in figure["title"].lower()
+            for phrase in PROHIBITED_PLOT_PHRASES
+        )
         assert figure["panel_count"] == panels
         assert figure["plotted_row_count"] == rows
         inventory_row = inventory.loc[inventory["figure_id"].eq(figure_id)].iloc[0]
@@ -524,6 +549,40 @@ def test_builder_emits_validated_portable_figure_package(tmp_path: Path):
         frame = pd.read_csv(tmp_path / manifest["outputs"][key]["path"])
         assert (frame[low_column] <= frame[point_column]).all(), key
         assert (frame[point_column] <= frame[high_column]).all(), key
+
+    ablation = pd.read_csv(
+        tmp_path / manifest["outputs"]["ablation_source"]["path"]
+    )
+    ablation_note = (
+        tmp_path / manifest["outputs"]["ablation_note"]["path"]
+    ).read_text(encoding="utf-8")
+    for value in ablation["p_value_holm"]:
+        assert f"`{float(value):.17g}`" in ablation_note
+
+
+def test_capacity_markers_use_unshifted_data_coordinates(tmp_path: Path):
+    _fixture(tmp_path)
+    source = _theory_source(tmp_path / "theory.csv")
+    figure = _plot_theory(source)
+    try:
+        axis = figure.axes[0]
+        marker_lines = [
+            line
+            for line in axis.lines
+            if len(line.get_xdata()) == 1
+            and line.get_marker() not in {None, "", "None", "none"}
+        ]
+        assert len(marker_lines) == 9
+        for line in marker_lines:
+            np.testing.assert_allclose(
+                np.asarray(line.get_xdata(), dtype=float),
+                np.asarray(line.get_ydata(), dtype=float),
+                rtol=0.0,
+                atol=0.0,
+            )
+            assert line.get_transform() is axis.transData
+    finally:
+        plt.close(figure)
 
 
 def test_builder_rejects_tampered_declared_source(tmp_path: Path):
