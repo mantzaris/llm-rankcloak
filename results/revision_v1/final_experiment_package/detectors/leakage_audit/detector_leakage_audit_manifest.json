@@ -1,0 +1,74 @@
+{
+  "analysis_role": "diagnostic_split_leakage_audit_frozen_splits_unchanged",
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_detector_leakage_audit.py --detector-corpus /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl --detector-config /home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/default.json --execution-plan /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/execution_plan.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit",
+  "inputs": {
+    "detector_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/default.json",
+      "sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+      "size_bytes": 2021
+    },
+    "detector_corpus": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+      "row_count": 15840,
+      "sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+      "size_bytes": 21444549
+    },
+    "execution_plan": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/execution_plan.json",
+      "sha256": "adb9fa3c321acca5f06db097f113cd36289d3f50f329971f6ecbac095ebae8a3",
+      "size_bytes": 118050
+    }
+  },
+  "limitations": [
+    "The 0.95 threshold is a declared lexical diagnostic, not a universal semantic-near-duplicate definition.",
+    "The frozen confirmatory detector splits and completed or active fits were not changed by this audit.",
+    "Detector outcomes from affected splits require an explicit leakage limitation and sensitivity analysis."
+  ],
+  "manifest_sha256": "33af85090b2267710e012596fbab7bbdee8cb6f55e585c0836363c4542f27b0c",
+  "near_duplicate_definition": {
+    "cosine_similarity_threshold": 0.95,
+    "neighbor_search": "exhaustive_radius_brute_single_cpu_worker",
+    "normalization": "Unicode_NFKC_casefold_whitespace_collapse",
+    "semantic_equivalence_claimed": false,
+    "vectorizer": "character_word_boundary_tfidf_ngrams_3_5_min_df_2_l2_float32"
+  },
+  "outputs": {
+    "affected_test_rows": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/affected_test_rows.csv",
+      "row_count": 34,
+      "sha256": "7ef7016cda8d96439d79733e173c9a75a1686ca3e9e3e963a66d81ad0daa4fc0",
+      "size_bytes": 10188
+    },
+    "near_duplicate_pairs": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/near_duplicate_pairs.csv",
+      "row_count": 53,
+      "sha256": "d4af06250ff1b42f36da928b471f91ae753adf78c2baf9f5d1d708023553be10",
+      "size_bytes": 33998
+    },
+    "split_summary": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/split_leakage_summary.csv",
+      "row_count": 28,
+      "sha256": "7a2674e260f29cb922cc64c9b1bdab38a9ca04aec7db5c0b6bf3e489536bd3c6",
+      "size_bytes": 4236
+    }
+  },
+  "schema_version": "rankcloak-detector-leakage-audit-v1",
+  "status": "adverse_near_duplicate_overlap_detected",
+  "summary": {
+    "affected_split_count": 16,
+    "affected_test_payload_group_count_across_splits": 32,
+    "affected_test_row_occurrences_across_splits": 34,
+    "corpus_rows": 15840,
+    "cross_partition_pair_occurrences_across_splits": 79,
+    "cross_payload_near_duplicate_pair_count": 44,
+    "exact_leakage_failed_split_count": 0,
+    "execution_plan_fit_count": 56,
+    "near_duplicate_pair_count": 53,
+    "normalized_exact_pair_count": 1,
+    "pair_ids": 7920,
+    "payload_groups": 480,
+    "split_count": 28,
+    "tfidf_vocabulary_features": 130495,
+    "within_payload_near_duplicate_pair_count": 9
+  }
+}

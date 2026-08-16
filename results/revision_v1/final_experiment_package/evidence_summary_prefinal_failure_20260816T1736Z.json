@@ -1,0 +1,39 @@
+{
+  "schema_version": "rankcloak-evidence-summary-prefinal-diagnostic-v1",
+  "event_type": "excluded_prefinal_evidence_summary_packaging_failure",
+  "observed_at_utc": "2026-08-16T17:36:00Z",
+  "status": "resolved_non_scientific_packaging_diagnostic",
+  "scientific_result": false,
+  "failure": {
+    "exception": "EvidenceSummaryError",
+    "message": "Source-table columns differ: evidence_artifact_references.csv",
+    "stage": "write_reference_source_table"
+  },
+  "cause": "Reference identities conditionally included row_count for CSV, TSV, JSONL, and NDJSON artifacts, so a table containing both tabular and non-tabular artifacts had heterogeneous dictionary columns.",
+  "publication_state": {
+    "atomic_per_file_writes": true,
+    "partial_known_outputs_before_failure": true,
+    "partial_outputs_were_final_results": false,
+    "resolution": "All declared evidence-summary outputs were regenerated with --overwrite after the schema correction."
+  },
+  "corrective_action": {
+    "description": "Construct the reference table with explicit path, sha256, size_bytes, and row_count columns for every artifact; use a blank row_count for non-tabular artifacts.",
+    "source_path": "rankcloak/revision_evidence_summary.py",
+    "source_sha256": "658b23bf5e8d107df904fbc615b48e812b95d60b98dde7eaa66ec6bb266c3559",
+    "test_path": "tests/test_revision_evidence_summary.py",
+    "test_sha256": "b22472bf7dcafa576a87329c3efe704586d91c7449da191aadad703914ea1cdb"
+  },
+  "validation": {
+    "focused_tests": "10 passed in 0.15 seconds",
+    "scoped_computational_suite": "597 passed, 1 prohibited CPU-neural test deselected in 139.34 seconds",
+    "verification_rerun_manifest_path": "results/revision_v1/final_experiment_package/evidence_summary_manifest.json",
+    "verification_rerun_manifest_sha256_before_diagnostic_registration": "ed458e1d1448ffab563500f03606e37526b97324861186b5ce8091b5aac8b175",
+    "verification_rerun_output_count": 14,
+    "verification_rerun_status": "completed"
+  },
+  "preservation": {
+    "diagnostic_retained": true,
+    "files_deleted": 0,
+    "files_moved": 0
+  }
+}

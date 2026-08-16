@@ -1,0 +1,127 @@
+{
+  "benchmark_sha256": "fe9c4e020f78c09c25816efc48fc001f71a786853bc70d373271ab2cb14d689a",
+  "benchmark_task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "detector_position": 1,
+    "effective_detector_config": {
+      "allow_downloads": false,
+      "batch_size": 8,
+      "device": "cuda:0",
+      "enabled": true,
+      "epochs": 3,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "kind": "pretrained_transformer",
+      "learning_rate": 2e-05,
+      "maximum_length": 256,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "name": "deberta_v3_base_classifier",
+      "offline_only": true,
+      "torch_num_threads": 1,
+      "weight_decay": 0.01
+    },
+    "effective_detector_config_sha256": "dcc73bd841cebdbb1e2c39136fcedfb5e8f43fcbb34c7cc2dd92779d0cf65cf6",
+    "excluded_held_out_rows": 0,
+    "held_out_column": null,
+    "held_out_value": null,
+    "ordinal": 1,
+    "partition_policy": "full_held_out_condition",
+    "purged_train_rows": 0,
+    "regime": "matched",
+    "scientific_detector_config_sha256": "47d45a5010b771e8dfadc31ec75a6941b35d1f292ab3d62bf76c8a11ce971a5e",
+    "seed": 2544512008,
+    "split_id": "matched",
+    "split_position": 0,
+    "test_indices_sha256": "b55b372bef0b9dbf824919a6b14f046e653736baa3e28da17c4b7b681b705d9d",
+    "test_row_count": 3960,
+    "test_row_ids_ordered_sha256": "3ca85a56dfb6e75d2388c5f5cbfa1a1ab7d2bf8a102b873f55487dcb6098622c",
+    "train_indices_sha256": "af6d297128b0a2e6c63d637bda065c885df0dc5c2d3482c6f34ace4b107990f4",
+    "train_row_count": 11880,
+    "train_row_ids_ordered_sha256": "b33dfcce847834337bdaf2797501c20500a01467d4480a131a3f2e6f7a1eedd4"
+  },
+  "benchmark_task_index": 1,
+  "checkpoint_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints",
+  "checkpoint_durations_seconds": [
+    0.4433700379995571
+  ],
+  "checkpoint_seconds": 0.4433700379995571,
+  "completed_fit_count": 2,
+  "created_at_utc": "2026-08-16T03:11:15.942524+00:00",
+  "device": "cuda:0",
+  "execution_completed_at_utc": "2026-08-16T03:11:20.935357+00:00",
+  "execution_plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "finalization_candidate": {
+    "candidate_sha256": "dddc400c1373b4c7221a7f563f278526bd5d23e4db549c9cfdce2ecc7417e778",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/finalization_candidates/benchmark_artifact-task1-benchmark-f4bd22d28789d6f5.json",
+    "sha256": "6b514dff7e7eb0534e68e5e32c3286fc057c141900eb9f67450a71e99dbdd8f5",
+    "size_bytes": 5588
+  },
+  "fit_durations_seconds": [
+    34.2467086329998,
+    1480.098760932
+  ],
+  "fit_elapsed_seconds": 1480.098760932,
+  "fit_non_model_analysis_seconds": 19.943696090998856,
+  "gpu_accounting": {
+    "cumulative_elapsed_seconds": 1634.976486,
+    "derivation_policy": "nonoverlapping_detector_process_wall_intervals_v1",
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "intervals": [
+      {
+        "completed_at_utc": "2026-08-16T02:43:26.380333+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 94.793096,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T02:43:26.380333+00:00",
+        "pid": 225782,
+        "process_start_ticks": 809536,
+        "started_at_utc": "2026-08-16T02:41:51.587237+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T03:11:20.935357+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 1540.18339,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T03:11:20.935357+00:00",
+        "pid": 231631,
+        "process_start_ticks": 832403,
+        "started_at_utc": "2026-08-16T02:45:40.751967+00:00"
+      }
+    ]
+  },
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "invocation_overhead_seconds": 56.11877877900042,
+  "last_completed_checkpoint": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0001/manifest.json",
+    "sha256": "a1ae856e9456b323a0429f90a7a45e5f0da7c034cec0de36df1ff8b34dc73c30",
+    "task_ordinal": 1
+  },
+  "new_fit_count": 1,
+  "peak_rss_bytes": 2489909248,
+  "peak_vram_bytes": 6380851200,
+  "phase_timings_seconds": {
+    "evaluation": 17.06669296399923,
+    "initialization_and_preprocessing": 15.748689836000267,
+    "total": 1460.1550648410011,
+    "trained_state_hashing": 2.2762567800000397,
+    "training": 1425.063413547001
+  },
+  "pre_final_gpu_accounting_ledger": null,
+  "resumed_fit_count": 1,
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-benchmark-v1",
+  "status_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.status.json",
+  "terminal_accounting_status_sha256": "95edd5785a1021bc15a0525df826da4cd8971d36d5d73c5acff58bce88c489df",
+  "total_fit_count": 56,
+  "wall_seconds": 1536.660909749,
+  "workers": 1
+}

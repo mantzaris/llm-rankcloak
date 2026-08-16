@@ -1,0 +1,49 @@
+{
+  "schema_version": "rankcloak-topic-effect-extraction-config-v1",
+  "analysis_status": "exploratory_post_outcome_locked_contrast_extraction",
+  "outcomes_were_available_before_extraction_specification": true,
+  "locked_mixed_models_unchanged": true,
+  "expected_row_count": 15,
+  "stratum_model_ids": [
+    "llama3_8b_instruct_q4_k_m",
+    "mistral_7b_instruct_v0_3_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m"
+  ],
+  "selections": [
+    {
+      "model_id": "primary_artifact_counts",
+      "multiplicity_family": "artifact_protocol_within_model",
+      "contrast": "segmented_hex_multi_topic / segmented_hex_single_topic",
+      "scale": "response",
+      "effect_semantics": "multi_topic_divided_by_single_topic_expected_artifact_count_rate"
+    },
+    {
+      "model_id": "primary_effective_artifact_rate",
+      "multiplicity_family": "continuous_protocol_within_model",
+      "contrast": "segmented_hex_multi_topic - segmented_hex_single_topic",
+      "scale": "model",
+      "effect_semantics": "multi_topic_minus_single_topic_effective_artifact_bits_per_full_token"
+    },
+    {
+      "model_id": "primary_cover_log_probability",
+      "multiplicity_family": "continuous_protocol_within_model",
+      "contrast": "segmented_hex_multi_topic - segmented_hex_single_topic",
+      "scale": "model",
+      "effect_semantics": "multi_topic_minus_single_topic_cover_mean_log_probability"
+    },
+    {
+      "model_id": "primary_heldout_evaluator_log_probability",
+      "multiplicity_family": "continuous_protocol_within_model",
+      "contrast": "segmented_hex_multi_topic - segmented_hex_single_topic",
+      "scale": "model",
+      "effect_semantics": "multi_topic_minus_single_topic_heldout_evaluator_log_probability"
+    },
+    {
+      "model_id": "primary_payload_throughput",
+      "multiplicity_family": "continuous_protocol_within_model",
+      "contrast": "segmented_hex_multi_topic - segmented_hex_single_topic",
+      "scale": "model",
+      "effect_semantics": "multi_topic_minus_single_topic_log_payload_bits_per_second"
+    }
+  ]
+}

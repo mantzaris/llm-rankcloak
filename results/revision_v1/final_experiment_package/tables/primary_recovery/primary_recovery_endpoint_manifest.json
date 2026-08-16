@@ -1,0 +1,66 @@
+{
+  "analysis_status": "post_audit_payload_group_sensitivity_not_prespecified_replacement",
+  "frozen_generation_design_unchanged": true,
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_primary_endpoint.py --primary-trials /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/trials.csv --confirmatory-plan /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/confirmatory_model_plan.json --endpoint-config /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/primary_recovery_endpoint.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/primary_recovery --overwrite",
+  "inputs": {
+    "confirmatory_plan": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/confirmatory_model_plan.json",
+      "sha256": "f0df095f5dd33c5056bbec5db696e7f5f2e80a8d8556ee985dc1416f6ddd8616",
+      "size_bytes": 7552
+    },
+    "endpoint_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/primary_recovery_endpoint.json",
+      "sha256": "4f23e10c4d1e2c491026b606e1ed11df292070c03b88bc15fb4e9ad62309857d",
+      "size_bytes": 782
+    },
+    "primary_trials": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/trials.csv",
+      "row_count": 6480,
+      "sha256": "12b11bad2c7b6468d7f8e4ed12fde2a0ab29996cda8594d0cbcaa6b06797ae7b",
+      "size_bytes": 5056076
+    }
+  },
+  "limitations": [
+    "The strict payload-group sensitivity was added after partial outcomes were available.",
+    "It does not replace the frozen payload-trial endpoint.",
+    "Wilson intervals summarize binary grouped outcomes without modeling cross-configuration heterogeneity."
+  ],
+  "manifest_sha256": "406c86b845fa7cb954ddc495c6a7acbb876030e269f58e6fb910e3988c4bfd0d",
+  "observed_design": {
+    "model_families": 3,
+    "payload_classes": 8,
+    "payloads": 480,
+    "primary_trial_rows": 6480,
+    "prompt_categories": 6,
+    "prompt_templates": 18,
+    "protocol_variants": 6
+  },
+  "outputs": {
+    "endpoints": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/primary_recovery/primary_recovery_endpoints.csv",
+      "row_count": 3,
+      "sha256": "b653430544daf331e0b396515a87136a09d0c590d4f55c67b1e5fd3d14246b9f",
+      "size_bytes": 1245
+    },
+    "payload_group_outcomes": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/primary_recovery/primary_payload_group_outcomes.csv",
+      "row_count": 480,
+      "sha256": "fb6518c2642a0748d623fbc941d0f21926e198fb21eca8a7c0dc071abbda1cb6",
+      "size_bytes": 30393
+    }
+  },
+  "partial_outcomes_seen_before_addition": true,
+  "payload_trial_count_distribution": {
+    "18": 240,
+    "9": 240
+  },
+  "schema_version": "rankcloak-primary-recovery-endpoint-v1",
+  "status": "passed",
+  "summary": {
+    "endpoint_rows": 3,
+    "payload_rows": 480,
+    "primary_trial_successes": 6480,
+    "strict_model_payload_successes": 1440,
+    "strict_payload_successes": 480
+  }
+}

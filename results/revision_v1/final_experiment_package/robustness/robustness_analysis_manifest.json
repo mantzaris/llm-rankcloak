@@ -1,0 +1,93 @@
+{
+  "failure_taxonomy_scope": "descriptive_first_divergence_not_causal_proof",
+  "inference": {
+    "analysis_unit": "source_trial_id",
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 2026080801,
+    "confidence_level": 0.95,
+    "unavailable_rows_counted_as_failures": false
+  },
+  "inputs": {
+    "failures": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/robustness_v2/failures.csv",
+      "sha256": "8b6ee80d8a30229109fd340885f8ffcf4af19244e0a6f57b5be1afef0b55fd26",
+      "size_bytes": 1675463
+    },
+    "robustness_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/robustness.json",
+      "sha256": "08a1db08015da4cfcefe918b272e73a157b5ede1919284b90567efb5e8a2c1ea",
+      "size_bytes": 3639
+    },
+    "statistics_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/statistics.json",
+      "sha256": "62029282f69e6ec50235b92a5bd63e04b37191c9154f11493220453d64311b9e",
+      "size_bytes": 2570
+    },
+    "trials": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/robustness_v2/trials.csv",
+      "sha256": "693cd325d7679fe30a990bc0253edf29888c9a0b5514b51ed805651fab3baec7",
+      "size_bytes": 3545092
+    },
+    "unavailable": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/robustness_v2/unavailable.csv",
+      "sha256": "9b370c669284587d99ae2543fea915cca028c5ecf5ed00441f0561e23bc1d002",
+      "size_bytes": 486695
+    }
+  },
+  "outputs": {
+    "conditions": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/recovery_by_condition.csv",
+      "row_count": 24,
+      "sha256": "bacd0e260ca9eb24638f9970a86a5d54ee51b77e48e43760a0abf940b296dd84",
+      "size_bytes": 5390
+    },
+    "failure_summary": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/failure_mechanism_summary.csv",
+      "row_count": 19,
+      "sha256": "62f85f4640200a8afaebe165689907a2e0318f30dc05b08ef044e3a45ede8531",
+      "size_bytes": 3907
+    },
+    "failure_taxonomy": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/failure_taxonomy.csv",
+      "row_count": 2215,
+      "sha256": "a85a393a1df20de10a347c37deeba432b01c48f9de8b9e3cc14471fbf97824f8",
+      "size_bytes": 1329369
+    },
+    "models": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/recovery_by_model_condition.csv",
+      "row_count": 75,
+      "sha256": "e67b1ef0106a344f609eab70fde7c07fe919af3ffa1801d172585f672e6f56f6",
+      "size_bytes": 18645
+    },
+    "plot_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_recovery_plot_source.csv",
+      "row_count": 24,
+      "sha256": "98afef4bd516c46351994946417a1fe5c8515b9747fa004ae3ee078acea1ebe4",
+      "size_bytes": 3291
+    },
+    "unavailable": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/unavailable_summary.csv",
+      "row_count": 7,
+      "sha256": "9bc22a0fe16237636993b199b3396f6b3fb8d5019f0205bca7bea243fa44bf48",
+      "size_bytes": 2042
+    }
+  },
+  "schema_version": "rankcloak-revision-robustness-analysis-v1",
+  "status": "passed",
+  "summary": {
+    "execution_failure_rows": 0,
+    "failure_rows": 2215,
+    "family_counts": {
+      "cross_model_mismatch": 288,
+      "limited_mitigation": 1008,
+      "raw_transmission": 1872,
+      "replay_modes": 432
+    },
+    "observed_rows": 3264,
+    "planned_rows": 3600,
+    "recovery_failure_rows": 2215,
+    "success_rows": 1049,
+    "unavailable_rows": 336,
+    "unavailable_rows_are_not_recovery_failures": true
+  }
+}

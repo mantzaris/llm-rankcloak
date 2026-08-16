@@ -1,0 +1,74 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "752e22a328af83c90563352a822b5e55b0bf3560fe4b2fdf236a40dd4a8d7047",
+      "size_bytes": 3281
+    },
+    "predictions.json": {
+      "row_count": 880,
+      "sha256": "65053f4ea5f5e840d6e0a452d1a5c62312bf6ab8b408ad22ccb1da5c0e33a614",
+      "size_bytes": 400263
+    }
+  },
+  "children_sha256": "711e13a91c3b2484f1e8c00fa604abbc9e9dab013525da2fe5f0d410718463f3",
+  "completed_at_utc": "2026-08-16T09:00:52.166970+00:00",
+  "elapsed_seconds": 14.664131162000558,
+  "manifest_sha256": "e1ed649e48cef6031c75f4262b330db5ef68199e6eed5b2e8322e42f558e7175",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T09:00:37.502848+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "text_cnn",
+    "detector_name": "published_textcnn_equivalent",
+    "detector_position": 0,
+    "effective_detector_config": {
+      "batch_size": 64,
+      "device": "cuda:0",
+      "dropout": 0.5,
+      "embedding_dimension": 300,
+      "enabled": true,
+      "epochs": 10,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "filter_sizes": [
+        3,
+        5
+      ],
+      "filters_per_width": 100,
+      "kind": "text_cnn",
+      "learning_rate": 0.001,
+      "lowercase": true,
+      "maximum_length": 256,
+      "maximum_vocabulary_size": 30000,
+      "minimum_token_frequency": 1,
+      "name": "published_textcnn_equivalent",
+      "torch_num_threads": 1,
+      "weight_decay": 1e-06
+    },
+    "effective_detector_config_sha256": "91382ac313009ec933da15d23b8ff4f49c4c32472d378a66d077cf4bf7251d97",
+    "excluded_held_out_rows": 0,
+    "held_out_column": "prompt_template_id",
+    "held_out_value": "narrative_local_walk",
+    "ordinal": 22,
+    "partition_policy": "full_held_out_condition",
+    "purged_train_rows": 1760,
+    "regime": "held_out_template",
+    "scientific_detector_config_sha256": "32a329fca7f37234612393dfd9c488b88ffb0e91127b1d86231cc519f860cf56",
+    "seed": 3190119402,
+    "split_id": "held_out_template:narrative_local_walk",
+    "split_position": 11,
+    "test_indices_sha256": "2ec8a26f39a820332c57e90de79bc7f1c04b22931018d04b9d7cd3d659e52456",
+    "test_row_count": 880,
+    "test_row_ids_ordered_sha256": "169912c9ffd97bce353bb2d1c6af96f8513ab30ec165ab5d63944fc44acc1bf3",
+    "train_indices_sha256": "38379bab2cebb4e788150e5b6f47ea770da83a2d72a425a420fe3b4b1418a4b5",
+    "train_row_count": 13200,
+    "train_row_ids_ordered_sha256": "83cb1b13033d9a29a503048c0b8cd230d794d84f98a7f0b0f55ae00483eb51cd"
+  },
+  "task_identity_sha256": "1b472a9c26d04ac7034ee57ea8c65a5513c21acd0dd7a03efed325151b9ae89e"
+}

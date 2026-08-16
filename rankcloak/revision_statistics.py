@@ -16,6 +16,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import warnings
 from dataclasses import dataclass
 from pathlib import Path
 from statistics import NormalDist
@@ -79,6 +80,18 @@ RECOVERY_GROUP_CANDIDATES = (
     "protocol_variant",
     "prompt_category",
     "payload_class",
+    "language",
+    "representation_name",
+    "codec_id",
+    "alphabet_size_B",
+    "segmented",
+    "token_filter",
+    "tail_policy",
+    "leadin_tokens",
+    "topic_schedule",
+    "ablation_factor",
+    "ablation_level",
+    "segment_size_ranks",
     "replay_mode",
     "transformation_id",
     "mitigation_id",
@@ -94,11 +107,39 @@ EFFECT_STRATUM_COLUMNS = INFERENCE_CONDITION_COLUMNS + (
     "view",
     "text_view",
     "span_type",
+    "language",
+    "representation_name",
+    "codec_id",
+    "alphabet_size_B",
+    "segmented",
+    "token_filter",
+    "tail_policy",
+    "leadin_tokens",
+    "topic_schedule",
+    "ablation_factor",
+    "ablation_level",
+    "segment_size_ranks",
     "evidence_status",
     "study_phase",
     "protocol_contract_revision",
     "result_schema_revision",
 )
+PROTOCOL_DESCRIPTOR_COLUMNS = (
+    "representation_name",
+    "codec_id",
+    "alphabet_size_B",
+    "segmented",
+    "token_filter",
+    "tail_policy",
+    "leadin_tokens",
+    "topic_schedule",
+    "segment_size_ranks",
+)
+PRIMARY_EFFECT_COMPARISON_STRATA = {
+    "protocol_variant": ("model_id", "prompt_category", "payload_class"),
+    "model_id": ("protocol_variant", "prompt_category"),
+    "prompt_category": ("protocol_variant", "model_id"),
+}
 PRIMARY_EFFECT_CONDITIONS = {
     "replay_mode": "saved_token_ids",
     "transformation_id": "unmodified",
@@ -141,6 +182,60 @@ QUALITY_EFFECT_OUTCOMES = (
     "surface_flag_total",
     "tfidf_prompt_similarity",
 )
+HELDOUT_CONTINUOUS_OUTCOME_CANDIDATES = (
+    "heldout_evaluator_log_probability",
+    "heldout_evaluator_mean_nll",
+    "evaluator_tokens_per_second",
+    "scoring_seconds",
+    "wall_seconds",
+)
+CONTINUOUS_QUALITY_GROUP_CANDIDATES = RECOVERY_GROUP_CANDIDATES + (
+    "source_stage",
+    "source_evidence_status",
+    "evaluator_model_id",
+    "same_model_evaluation",
+    "text_view",
+    "quality_estimand",
+)
+SOURCE_TRIAL_CONDITION_COLUMNS = (
+    "representation_name",
+    "codec_id",
+    "alphabet_size_B",
+    "segmented",
+    "token_filter",
+    "tail_policy",
+    "leadin_tokens",
+    "topic_schedule",
+    "ablation_factor",
+    "ablation_level",
+    "segment_size_ranks",
+)
+
+RUNTIME_TRIAL_CONDITION_COLUMNS = (
+    "model_id",
+    "payload_name",
+    "payload_class",
+    "payload_split",
+    "prompt_id",
+    "prompt_category",
+    "language",
+    "protocol_variant",
+    *SOURCE_TRIAL_CONDITION_COLUMNS,
+    "segment_count",
+    "robustness_family",
+    "replay_mode",
+    "transformation_id",
+    "mitigation_id",
+    "H_bits",
+    "artifact_bit_length",
+    "serialized_payload_bits",
+    "forced_token_count",
+    "tail_token_count",
+    "full_token_count",
+    "effective_representation_bits_per_full_token",
+    "effective_artifact_bits_per_full_token",
+    "effective_serialized_bits_per_full_token",
+)
 
 OUTPUT_FILENAMES = {
     "recovery": "recovery_summary.csv",
@@ -157,6 +252,8 @@ OUTPUT_FILENAMES = {
 _WORD_RE = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 _SENTENCE_RE = re.compile(r"[^.!?]+[.!?]+|[^.!?]+$")
 _VOWEL_GROUP_RE = re.compile(r"[aeiouy]+")
+_UNICODE_WORD_RE = re.compile(r"[^\W\d_]+(?:['’][^\W\d_]+)?", re.UNICODE)
+_HAN_CHARACTER_RE = re.compile(r"[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]")
 
 
 class RevisionStatisticsError(ValueError):
@@ -192,7 +289,7 @@ def read_saved_table(path: str | Path) -> pd.DataFrame:
         raise RevisionStatisticsError(f"Input file does not exist: {source}")
     suffix = source.suffix.lower()
     if suffix == ".csv":
-        return pd.read_csv(source)
+        return pd.read_csv(source, low_memory=False)
     if suffix in {".jsonl", ".ndjson"}:
         return pd.read_json(source, lines=True)
     raise RevisionStatisticsError(
@@ -570,6 +667,15 @@ def _assert_effect_condition_not_pooled(
     for column in EFFECT_STRATUM_COLUMNS:
         levels = _condition_levels(relevant, column)
         if len(levels) > 1 and factor != column:
+            if factor == "protocol_variant" and column in PROTOCOL_DESCRIPTOR_COLUMNS:
+                mapping_counts = relevant.groupby(
+                    factor, dropna=False
+                )[column].nunique(dropna=False)
+                if not mapping_counts.empty and int(mapping_counts.max()) == 1:
+                    scopes[f"{column}_scope"] = (
+                        "deterministically_defined_by_protocol_variant"
+                    )
+                    continue
             raise RevisionStatisticsError(
                 f"Pairwise {outcome} effects would pool {column} levels "
                 f"{levels}; filter to one level or compare {column} directly"
@@ -577,6 +683,27 @@ def _assert_effect_condition_not_pooled(
         if len(levels) == 1:
             scopes[f"{column}_scope"] = levels[0]
     return scopes
+
+
+def _iter_primary_effect_cells(
+    frame: pd.DataFrame, factor: str
+) -> Iterable[tuple[dict[str, str], pd.DataFrame]]:
+    """Yield primary descriptive comparisons within declared design strata."""
+
+    candidates = PRIMARY_EFFECT_COMPARISON_STRATA.get(factor)
+    if candidates is None:
+        raise RevisionStatisticsError(
+            f"Primary descriptive effect factor is not declared: {factor}"
+        )
+    strata = _group_columns(frame, candidates)
+    for keys, cell in _iter_groups(frame, strata):
+        scopes = {
+            f"{column}_scope": (
+                "<missing>" if pd.isna(value) else str(value)
+            )
+            for column, value in zip(strata, keys)
+        }
+        yield scopes, cell
 
 
 def _condition_identity_columns(frame: pd.DataFrame) -> list[str]:
@@ -696,6 +823,158 @@ def validate_runtime_results(frame: pd.DataFrame) -> tuple[pd.DataFrame, str]:
     return frame.copy(), payload_column
 
 
+def validate_continuous_quality_results(
+    frame: pd.DataFrame,
+) -> tuple[pd.DataFrame, str]:
+    """Validate held-out evaluator outcomes without weakening trial checks."""
+
+    if frame.empty:
+        return frame.copy(), "payload_name"
+    payload_column = first_present_column(
+        frame, PAYLOAD_COLUMN_CANDIDATES, required=True
+    )
+    assert payload_column is not None
+    _require_nonempty(
+        frame,
+        ["source_trial_id", payload_column, "evaluator_model_id"],
+        label="continuous quality results",
+    )
+    if "record_type" in frame.columns:
+        record_types = frame["record_type"].astype(str)
+        if not record_types.eq("heldout_evaluator_feature").all():
+            raise RevisionStatisticsError(
+                "Continuous-quality inputs contain non-evaluator record types"
+            )
+    outcomes = [
+        column
+        for column in HELDOUT_CONTINUOUS_OUTCOME_CANDIDATES
+        if column in frame.columns
+    ]
+    if not outcomes:
+        raise RevisionStatisticsError(
+            "Continuous-quality inputs lack a declared held-out evaluator outcome"
+        )
+    for outcome in outcomes:
+        numeric = pd.to_numeric(frame[outcome], errors="coerce")
+        if numeric.isna().any() or not np.isfinite(numeric).all():
+            raise RevisionStatisticsError(
+                f"Continuous-quality outcome {outcome} contains missing/nonfinite values"
+            )
+    if "human_rating_substitute" in frame.columns and _binary_series(
+        frame["human_rating_substitute"], label="human_rating_substitute"
+    ).any():
+        raise RevisionStatisticsError(
+            "Held-out evaluator rows cannot be labeled as human-rating substitutes"
+        )
+    if "same_model_evaluation" in frame.columns and _binary_series(
+        frame["same_model_evaluation"], label="same_model_evaluation"
+    ).any():
+        raise RevisionStatisticsError(
+            "Continuous-quality channel requires held-out, not same-model, evaluation"
+        )
+    _assert_metadata_consistency(
+        frame,
+        key="source_trial_id",
+        columns=(
+            payload_column,
+            "model_id",
+            "protocol_variant",
+            "prompt_id",
+            "prompt_category",
+            "payload_class",
+            "language",
+        ),
+        label="continuous quality results",
+    )
+    identity = ["source_trial_id", "evaluator_model_id"]
+    for column in ("text_view", "quality_estimand"):
+        if column in frame.columns:
+            identity.append(column)
+    if frame.duplicated(identity, keep=False).any():
+        raise RevisionStatisticsError(
+            f"Duplicate continuous-quality analysis units for identity {identity}"
+        )
+    return frame.copy(), payload_column
+
+
+def enrich_continuous_quality_conditions(
+    frame: pd.DataFrame,
+    trials: pd.DataFrame,
+) -> pd.DataFrame:
+    """Attach frozen source-trial condition fields where source rows exist."""
+
+    result = frame.copy()
+    if result.empty:
+        result["source_trial_metadata_matched"] = pd.Series(dtype=bool)
+        return result
+    if trials.empty:
+        result["source_trial_metadata_matched"] = False
+        return result
+    if trials["trial_id"].duplicated().any():
+        raise RevisionStatisticsError(
+            "Source trials are not unique for continuous-quality metadata join"
+        )
+    available_columns = [
+        column for column in SOURCE_TRIAL_CONDITION_COLUMNS if column in trials.columns
+    ]
+    lookup = trials.set_index("trial_id")
+    matched = result["source_trial_id"].isin(lookup.index)
+    result["source_trial_metadata_matched"] = matched
+    for column in available_columns:
+        mapped = result["source_trial_id"].map(lookup[column])
+        if column in result.columns:
+            present = result[column].notna() & mapped.notna()
+            conflict = present & result[column].astype(str).ne(mapped.astype(str))
+            if conflict.any():
+                raise RevisionStatisticsError(
+                    f"Continuous-quality {column} conflicts with source trial metadata"
+                )
+            result[column] = result[column].where(result[column].notna(), mapped)
+        else:
+            result[column] = mapped
+    return result
+
+
+def enrich_runtime_conditions(
+    frame: pd.DataFrame,
+    trials: pd.DataFrame,
+) -> pd.DataFrame:
+    """Attach trial conditions while retaining unmatched session-level events."""
+
+    result = frame.copy()
+    if result.empty:
+        result["runtime_trial_metadata_matched"] = pd.Series(dtype=bool)
+        return result
+    if trials.empty:
+        result["runtime_trial_metadata_matched"] = False
+        return result
+    if trials["trial_id"].duplicated().any():
+        raise RevisionStatisticsError(
+            "Source trials are not unique for runtime metadata join"
+        )
+    available_columns = [
+        column
+        for column in RUNTIME_TRIAL_CONDITION_COLUMNS
+        if column in trials.columns
+    ]
+    lookup = trials.set_index("trial_id")
+    matched = result["trial_id"].isin(lookup.index)
+    result["runtime_trial_metadata_matched"] = matched
+    for column in available_columns:
+        mapped = result["trial_id"].map(lookup[column])
+        if column in result.columns:
+            present = matched & result[column].notna() & mapped.notna()
+            conflict = present & result[column].astype(str).ne(mapped.astype(str))
+            if conflict.any():
+                raise RevisionStatisticsError(
+                    f"Runtime {column} conflicts with source trial metadata"
+                )
+            result[column] = result[column].where(result[column].notna(), mapped)
+        else:
+            result[column] = mapped
+    return result
+
+
 def _text_sha256(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
@@ -729,18 +1008,34 @@ def validate_feature_rows(frame: pd.DataFrame) -> tuple[pd.DataFrame, str]:
 
     result = frame.copy()
     text_column = first_present_column(result, TEXT_COLUMN_CANDIDATES)
+    result["cross_payload_duplicate_text"] = False
+    duplicate_hashes: list[str] = []
     if text_column:
-        hashes = result[text_column].fillna("").astype(str).map(_text_sha256)
+        text_values = result[text_column].fillna("").astype(str)
+        nonempty = text_values.str.len().gt(0)
+        hashes = text_values.map(_text_sha256)
         audit = pd.DataFrame(
-            {"hash": hashes, "payload": result[payload_column].astype(str)}
+            {
+                "hash": hashes[nonempty],
+                "payload": result.loc[nonempty, payload_column].astype(str),
+            }
         )
         duplicated_across_payloads = audit.groupby("hash")["payload"].nunique()
-        bad = duplicated_across_payloads[duplicated_across_payloads > 1]
-        if not bad.empty:
-            raise RevisionStatisticsError(
-                "Identical cover text assigned to multiple payload groups; hashes: "
-                + ", ".join(bad.index[:3])
-            )
+        duplicate_hashes = sorted(
+            duplicated_across_payloads[duplicated_across_payloads > 1].index
+        )
+        result["cross_payload_duplicate_text"] = nonempty & hashes.isin(
+            duplicate_hashes
+        )
+    duplicate_rows = result["cross_payload_duplicate_text"]
+    result.attrs["cross_payload_duplicate_text_hash_count"] = len(duplicate_hashes)
+    result.attrs["cross_payload_duplicate_text_row_count"] = int(
+        duplicate_rows.sum()
+    )
+    result.attrs["cross_payload_duplicate_text_payload_count"] = int(
+        result.loc[duplicate_rows, payload_column].nunique()
+    )
+    result.attrs["cross_payload_duplicate_text_hash_examples"] = duplicate_hashes[:20]
     return result, payload_column
 
 
@@ -826,16 +1121,137 @@ def _prompt_similarity(text: str, prompt: str) -> float:
     return float((matrix[0] @ matrix[1].T).toarray()[0, 0])
 
 
-def automated_text_quality_metrics(text: str, prompt: str = "") -> dict[str, Any]:
+def _language_specific_surface_metrics(
+    text: str,
+    language: str,
+) -> dict[str, Any]:
+    """Return transparent language-scoped diagnostics, never universal scores."""
+
+    missing = float("nan")
+    metrics: dict[str, Any] = {
+        "spanish_unicode_word_count": missing,
+        "spanish_sentence_count": missing,
+        "spanish_words_per_sentence": missing,
+        "spanish_mean_letters_per_word": missing,
+        "spanish_unique_word_fraction": missing,
+        "spanish_repeated_bigram_fraction": missing,
+        "spanish_repeated_trigram_fraction": missing,
+        "chinese_han_character_count": missing,
+        "chinese_sentence_count": missing,
+        "chinese_han_characters_per_sentence": missing,
+        "chinese_unique_han_character_fraction": missing,
+        "chinese_repeated_han_bigram_fraction": missing,
+        "chinese_repeated_han_trigram_fraction": missing,
+        "language_specific_diagnostic_scope": (
+            "not_applicable_english_unspecified_or_unsupported"
+        ),
+    }
+    spanish = (
+        language in {"es", "spa", "spanish"} or language.startswith("es_")
+    )
+    chinese = (
+        language in {"zh", "zho", "chi", "chinese"}
+        or language.startswith("zh_")
+    )
+    if spanish:
+        words = [word.lower() for word in _UNICODE_WORD_RE.findall(text)]
+        sentences = [
+            part.strip()
+            for part in _SENTENCE_RE.findall(text)
+            if _UNICODE_WORD_RE.search(part)
+        ]
+        sentence_count = len(sentences) if words else 0
+        letter_count = sum(
+            sum(character.isalpha() for character in word) for word in words
+        )
+        metrics.update(
+            {
+                "spanish_unicode_word_count": len(words),
+                "spanish_sentence_count": sentence_count,
+                "spanish_words_per_sentence": (
+                    len(words) / max(1, sentence_count) if words else missing
+                ),
+                "spanish_mean_letters_per_word": (
+                    letter_count / len(words) if words else missing
+                ),
+                "spanish_unique_word_fraction": (
+                    len(set(words)) / len(words) if words else missing
+                ),
+                "spanish_repeated_bigram_fraction": (
+                    _repeated_ngram_fraction(words, 2) if words else missing
+                ),
+                "spanish_repeated_trigram_fraction": (
+                    _repeated_ngram_fraction(words, 3) if words else missing
+                ),
+                "language_specific_diagnostic_scope": (
+                    "spanish_unicode_word_surface_diagnostics"
+                ),
+            }
+        )
+    elif chinese:
+        characters = _HAN_CHARACTER_RE.findall(text)
+        sentences = [
+            part.strip()
+            for part in re.split(r"[。！？!?]+", text)
+            if _HAN_CHARACTER_RE.search(part)
+        ]
+        sentence_count = len(sentences) if characters else 0
+        metrics.update(
+            {
+                "chinese_han_character_count": len(characters),
+                "chinese_sentence_count": sentence_count,
+                "chinese_han_characters_per_sentence": (
+                    len(characters) / max(1, sentence_count)
+                    if characters
+                    else missing
+                ),
+                "chinese_unique_han_character_fraction": (
+                    len(set(characters)) / len(characters)
+                    if characters
+                    else missing
+                ),
+                "chinese_repeated_han_bigram_fraction": (
+                    _repeated_ngram_fraction(characters, 2)
+                    if characters
+                    else missing
+                ),
+                "chinese_repeated_han_trigram_fraction": (
+                    _repeated_ngram_fraction(characters, 3)
+                    if characters
+                    else missing
+                ),
+                "language_specific_diagnostic_scope": (
+                    "chinese_han_character_surface_diagnostics"
+                ),
+            }
+        )
+    return metrics
+
+
+def automated_text_quality_metrics(
+    text: str,
+    prompt: str = "",
+    *,
+    language: str | None = None,
+) -> dict[str, Any]:
     """Compute deterministic, offline surface diagnostics for one cover text.
 
-    Flesch measures use a documented English syllable heuristic; they are not
-    validated for multilingual text.  Grammar-like counts flag surface forms
-    only and are not a grammar checker or substitutes for human judgements.
+    Flesch measures use a documented English syllable heuristic and are left
+    unavailable for explicitly non-English text.  Grammar-like counts flag
+    surface forms only and are not a grammar checker or substitutes for human
+    judgements.
     """
 
     text = "" if text is None else str(text)
     prompt = "" if prompt is None else str(prompt)
+    normalized_language = (
+        "" if language is None else str(language).strip().lower().replace("-", "_")
+    )
+    english_readability = (
+        not normalized_language
+        or normalized_language in {"en", "eng", "english"}
+        or normalized_language.startswith("en_")
+    )
     raw_words = _WORD_RE.findall(text)
     words = [word.lower() for word in raw_words]
     sentences = [part.strip() for part in _SENTENCE_RE.findall(text) if part.strip()]
@@ -844,7 +1260,7 @@ def automated_text_quality_metrics(text: str, prompt: str = "") -> dict[str, Any
     syllables = sum(_syllable_count(word) for word in raw_words)
     characters = sum(len(re.sub(r"[^A-Za-z0-9]", "", word)) for word in raw_words)
 
-    if word_count:
+    if word_count and english_readability:
         sentence_denominator = max(1, sentence_count)
         words_per_sentence = word_count / sentence_denominator
         syllables_per_word = syllables / word_count
@@ -904,7 +1320,13 @@ def automated_text_quality_metrics(text: str, prompt: str = "") -> dict[str, Any
         ),
         "tfidf_prompt_similarity": _prompt_similarity(text, prompt),
         "human_rating_substitute": False,
-        "readability_scope": "english_surface_heuristic",
+        "readability_scope": (
+            "english_surface_heuristic"
+            if english_readability
+            else "not_computed_non_english"
+        ),
+        "readability_language": normalized_language or "unspecified_assumed_english",
+        **_language_specific_surface_metrics(text, normalized_language),
     }
 
 
@@ -1117,7 +1539,7 @@ def summarize_recovery(
         if (counts > 1).any():
             raise RevisionStatisticsError(
                 "Repeated payload observations within a recovery condition; "
-                "stratify replay/transformation/replicate conditions before inference"
+                "stratify replay/transformation/replicate/design conditions before inference"
             )
         successes = int(cell["exact_recovery"].sum())
         total = int(cell[payload_column].nunique())
@@ -1220,11 +1642,29 @@ def build_trial_quality_table(features: pd.DataFrame) -> pd.DataFrame:
         for column in (
             payload_column,
             "model_id",
+            "source_model_id",
             "protocol_variant",
             "prompt_id",
             "prompt_category",
             "payload_class",
             "language",
+            "source_type",
+            "representation_name",
+            "codec_id",
+            "alphabet_size_B",
+            "segmented",
+            "token_filter",
+            "tail_policy",
+            "leadin_tokens",
+            "topic_schedule",
+            "ablation_factor",
+            "ablation_level",
+            "segment_size_ranks",
+            "control_view",
+            "replay_mode",
+            "transformation_id",
+            "mitigation_id",
+            "robustness_family",
             "evidence_status",
             "study_phase",
             "protocol_contract_revision",
@@ -1238,7 +1678,16 @@ def build_trial_quality_table(features: pd.DataFrame) -> pd.DataFrame:
                 "nested_segment_count": int(len(ordered)),
                 "text_available": bool(text_column and text),
                 "text_sha256": _text_sha256(text) if text else None,
-                **automated_text_quality_metrics(text, prompt),
+                "cross_payload_duplicate_text_artifact": bool(
+                    ordered["cross_payload_duplicate_text"].any()
+                )
+                if "cross_payload_duplicate_text" in ordered.columns
+                else False,
+                **automated_text_quality_metrics(
+                    text,
+                    prompt,
+                    language=row.get("language"),
+                ),
             }
         )
         for column in SOURCE_NUMERIC_QUALITY_COLUMNS:
@@ -1309,6 +1758,19 @@ def summarize_continuous_outcomes(
                     "repeated_bigram_fraction",
                     "surface_flag_total",
                     "tfidf_prompt_similarity",
+                    "spanish_unicode_word_count",
+                    "spanish_sentence_count",
+                    "spanish_words_per_sentence",
+                    "spanish_mean_letters_per_word",
+                    "spanish_unique_word_fraction",
+                    "spanish_repeated_bigram_fraction",
+                    "spanish_repeated_trigram_fraction",
+                    "chinese_han_character_count",
+                    "chinese_sentence_count",
+                    "chinese_han_characters_per_sentence",
+                    "chinese_unique_han_character_fraction",
+                    "chinese_repeated_han_bigram_fraction",
+                    "chinese_repeated_han_trigram_fraction",
                 ),
             )
             if column in frame.columns
@@ -1522,6 +1984,46 @@ def _hedges_g(
         else 1.0
     )
     return correction * uncorrected
+
+
+def _continuous_pairwise_test(
+    stats_module: Any,
+    first: np.ndarray,
+    second: np.ndarray,
+    *,
+    paired: bool,
+) -> tuple[float, str, bool]:
+    """Run a t-test while failing closed on numerical degeneracy.
+
+    Descriptive means and payload-bootstrap intervals remain available when
+    SciPy reports precision loss or an undefined p-value.  Such rows are
+    explicitly marked unsupported instead of emitting an unbounded warning
+    stream or labeling a missing p-value as valid inference.
+    """
+
+    test_name = "paired_t" if paired else "welch_t"
+    with warnings.catch_warnings(record=True) as captured:
+        warnings.simplefilter("always", RuntimeWarning)
+        if paired:
+            result = stats_module.ttest_rel(first, second, nan_policy="raise")
+        else:
+            result = stats_module.ttest_ind(
+                first,
+                second,
+                equal_var=False,
+                nan_policy="raise",
+            )
+    runtime_warning = any(
+        issubclass(item.category, RuntimeWarning) for item in captured
+    )
+    p_value = float(result.pvalue)
+    if runtime_warning or not math.isfinite(p_value):
+        return (
+            float("nan"),
+            f"unsupported_{test_name}_numerical_degeneracy",
+            False,
+        )
+    return p_value, test_name, True
 
 
 def pairwise_effect_sizes(
@@ -1738,22 +2240,27 @@ def pairwise_effect_sizes(
                 row["p_value_raw"] = np.nan
                 row["test"] = "unsupported_partial_payload_overlap"
             elif same_payload_set:
-                row["p_value_raw"] = float(
-                    stats.ttest_rel(
-                        first_array, second_array, nan_policy="raise"
-                    ).pvalue
+                (
+                    row["p_value_raw"],
+                    row["test"],
+                    row["inferential_p_value_supported"],
+                ) = _continuous_pairwise_test(
+                    stats,
+                    first_array,
+                    second_array,
+                    paired=True,
                 )
-                row["test"] = "paired_t"
             else:
-                row["p_value_raw"] = float(
-                    stats.ttest_ind(
-                        first_array,
-                        second_array,
-                        equal_var=False,
-                        nan_policy="raise",
-                    ).pvalue
+                (
+                    row["p_value_raw"],
+                    row["test"],
+                    row["inferential_p_value_supported"],
+                ) = _continuous_pairwise_test(
+                    stats,
+                    first_array,
+                    second_array,
+                    paired=False,
                 )
-                row["test"] = "welch_t"
         rows.append(row)
     result = pd.DataFrame(rows)
     if not result.empty:
@@ -2185,6 +2692,7 @@ def synthetic_smoke_frames(
     return {
         "trials": pd.DataFrame(trial_rows),
         "features": pd.DataFrame(feature_rows),
+        "continuous_quality": pd.DataFrame(),
         "runtime": pd.DataFrame(runtime_rows),
         "detectors": pd.DataFrame(detector_rows),
     }
@@ -2233,6 +2741,7 @@ def run_statistics_analysis(
     output_dir: str | Path,
     trial_paths: Sequence[str | Path] = (),
     feature_paths: Sequence[str | Path] = (),
+    continuous_quality_paths: Sequence[str | Path] = (),
     detector_paths: Sequence[str | Path] = (),
     runtime_paths: Sequence[str | Path] = (),
     statistics_config: str | Path | None = None,
@@ -2268,6 +2777,7 @@ def run_statistics_analysis(
     categorized = {
         "trials": list(trial_paths),
         "features": list(feature_paths),
+        "continuous_quality": list(continuous_quality_paths),
         "detectors": list(detector_paths),
         "runtime": list(runtime_paths),
     }
@@ -2308,11 +2818,33 @@ def run_statistics_analysis(
         )
     )
     features, feature_payload = validate_feature_rows(sources["features"])
+    feature_duplicate_text_audit = {
+        "hash_count": int(
+            features.attrs.get("cross_payload_duplicate_text_hash_count", 0)
+        ),
+        "row_count": int(
+            features.attrs.get("cross_payload_duplicate_text_row_count", 0)
+        ),
+        "payload_count": int(
+            features.attrs.get("cross_payload_duplicate_text_payload_count", 0)
+        ),
+        "hash_examples": list(
+            features.attrs.get("cross_payload_duplicate_text_hash_examples", [])
+        ),
+    }
+    continuous_quality, continuous_quality_payload = (
+        validate_continuous_quality_results(sources["continuous_quality"])
+    )
+    continuous_quality = enrich_continuous_quality_conditions(
+        continuous_quality, trials
+    )
     runtime, runtime_payload = validate_runtime_results(sources["runtime"])
+    runtime = enrich_runtime_conditions(runtime, trials)
     detectors, _ = validate_detector_rows(sources["detectors"])
     sources = {
         "trials": trials,
         "features": features,
+        "continuous_quality": continuous_quality,
         "runtime": runtime,
         "detectors": detectors,
     }
@@ -2339,6 +2871,24 @@ def run_statistics_analysis(
             summarize_continuous_outcomes(
                 quality,
                 payload_column=feature_payload,
+                confidence_level=confidence_level,
+                n_resamples=n_resamples,
+                seed=seed,
+            )
+        )
+    if not continuous_quality.empty:
+        continuous_frames.append(
+            summarize_continuous_outcomes(
+                continuous_quality,
+                outcomes=[
+                    outcome
+                    for outcome in HELDOUT_CONTINUOUS_OUTCOME_CANDIDATES
+                    if outcome in continuous_quality.columns
+                ],
+                payload_column=continuous_quality_payload,
+                group_columns=_group_columns(
+                    continuous_quality, CONTINUOUS_QUALITY_GROUP_CANDIDATES
+                ),
                 confidence_level=confidence_level,
                 n_resamples=n_resamples,
                 seed=seed,
@@ -2404,33 +2954,50 @@ def run_statistics_analysis(
             ]
 
     effect_frames: list[pd.DataFrame] = []
+    primary_effect_cell_counts: dict[str, int] = {}
     for factor in ("protocol_variant", "model_id", "prompt_category"):
         if not effect_trials.empty and factor in effect_trials:
-            effect_frames.append(
-                pairwise_effect_sizes(
-                    effect_trials,
+            primary_effect_cell_counts[factor] = 0
+            for scopes, trial_cell in _iter_primary_effect_cells(
+                effect_trials, factor
+            ):
+                if trial_cell[factor].dropna().astype(str).nunique() < 2:
+                    continue
+                primary_effect_cell_counts[factor] += 1
+                cell_seed = _stable_seed(
+                    seed,
+                    "primary_descriptive_effect",
+                    factor,
+                    *sorted(scopes.items()),
+                )
+                recovery_effect = pairwise_effect_sizes(
+                    trial_cell,
                     outcome="exact_recovery",
                     factor=factor,
                     payload_column=trial_payload,
                     binary=True,
                     confidence_level=confidence_level,
                     n_resamples=n_resamples,
-                    seed=seed,
+                    seed=cell_seed,
                 )
-            )
-            for outcome in CONTINUOUS_OUTCOME_CANDIDATES:
-                if outcome in effect_trials:
-                    effect_frames.append(
-                        pairwise_effect_sizes(
-                            effect_trials,
-                            outcome=outcome,
-                            factor=factor,
-                            payload_column=trial_payload,
-                            confidence_level=confidence_level,
-                            n_resamples=n_resamples,
-                            seed=seed,
-                        )
+                for column, value in scopes.items():
+                    recovery_effect[column] = value
+                effect_frames.append(recovery_effect)
+                for outcome in CONTINUOUS_OUTCOME_CANDIDATES:
+                    if outcome not in trial_cell:
+                        continue
+                    continuous_effect = pairwise_effect_sizes(
+                        trial_cell,
+                        outcome=outcome,
+                        factor=factor,
+                        payload_column=trial_payload,
+                        confidence_level=confidence_level,
+                        n_resamples=n_resamples,
+                        seed=_stable_seed(cell_seed, outcome),
                     )
+                    for column, value in scopes.items():
+                        continuous_effect[column] = value
+                    effect_frames.append(continuous_effect)
         for view_level, quality_cell in quality_effect_cells:
             if factor not in quality_cell:
                 continue
@@ -2527,6 +3094,11 @@ def run_statistics_analysis(
             "eligible_trial_rows": int(len(effect_trials)),
             "diagnostic_replay_fallback": False,
             "pairwise_effects_are_primary_inference": False,
+            "comparison_strata": {
+                factor: list(columns)
+                for factor, columns in PRIMARY_EFFECT_COMPARISON_STRATA.items()
+            },
+            "evaluated_stratum_cells": primary_effect_cell_counts,
         },
         "quality_effect_scope": {
             "view_column": quality_view_column,
@@ -2536,12 +3108,77 @@ def run_statistics_analysis(
             "unscoped_effect_rows": unscoped_quality_effect_row_count,
             "exclusion_reason": quality_effect_exclusion_reason,
         },
+        "cross_payload_duplicate_text": {
+            **feature_duplicate_text_audit,
+            "status": (
+                "observed_adverse_artifact"
+                if feature_duplicate_text_audit["hash_count"]
+                else "not_observed"
+            ),
+            "rows_rejected": 0,
+            "detector_leakage_guard_separate": True,
+        },
+        "continuous_quality_source_metadata": {
+            "matched_rows": int(
+                continuous_quality.get(
+                    "source_trial_metadata_matched", pd.Series(dtype=bool)
+                ).sum()
+            ),
+            "unmatched_rows": int(
+                len(continuous_quality)
+                - continuous_quality.get(
+                    "source_trial_metadata_matched", pd.Series(dtype=bool)
+                ).sum()
+            ),
+            "unmatched_role": "ordinary_controls_or_unjoined_sources",
+        },
+        "runtime_source_metadata": {
+            "matched_trial_rows": int(
+                runtime.get(
+                    "runtime_trial_metadata_matched", pd.Series(dtype=bool)
+                ).sum()
+            ),
+            "unmatched_nontrial_rows": int(
+                len(runtime)
+                - runtime.get(
+                    "runtime_trial_metadata_matched", pd.Series(dtype=bool)
+                ).sum()
+            ),
+            "unmatched_runtime_scope_counts": {
+                str(key): int(value)
+                for key, value in (
+                    runtime.loc[
+                        ~runtime["runtime_trial_metadata_matched"],
+                        "runtime_scope",
+                    ]
+                    if "runtime_scope" in runtime.columns
+                    else pd.Series(
+                        "unspecified",
+                        index=runtime.index[
+                            ~runtime["runtime_trial_metadata_matched"]
+                        ],
+                    )
+                )
+                .fillna("unspecified")
+                .value_counts()
+                .items()
+            },
+            "unmatched_roles": (
+                "ordinary controls, transformation jobs, unavailable/no-execution "
+                "records, model-load events, or memory-profile events"
+            ),
+        },
         "independent_payloads": {
             "trials": int(trials[trial_payload].nunique())
             if not trials.empty
             else 0,
             "features": int(features[feature_payload].nunique())
             if not features.empty
+            else 0,
+            "continuous_quality": int(
+                continuous_quality[continuous_quality_payload].nunique()
+            )
+            if not continuous_quality.empty
             else 0,
             "runtime": int(runtime[runtime_payload].nunique())
             if not runtime.empty

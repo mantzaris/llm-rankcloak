@@ -68,6 +68,15 @@ def build_argument_parser() -> argparse.ArgumentParser:
         help="One or more saved text/quality-feature CSV or JSONL files.",
     )
     parser.add_argument(
+        "--continuous-quality",
+        type=Path,
+        nargs="+",
+        action="append",
+        help=(
+            "One or more held-out evaluator continuous-quality CSV or JSONL files."
+        ),
+    )
+    parser.add_argument(
         "--detectors",
         type=Path,
         nargs="+",
@@ -117,10 +126,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
     trial_paths = _flatten(args.trials)
     feature_paths = _flatten(args.features)
+    continuous_quality_paths = _flatten(args.continuous_quality)
     detector_paths = _flatten(args.detectors)
     runtime_paths = _flatten(args.runtime)
     if not args.smoke and not any(
-        (trial_paths, feature_paths, detector_paths, runtime_paths)
+        (
+            trial_paths,
+            feature_paths,
+            continuous_quality_paths,
+            detector_paths,
+            runtime_paths,
+        )
     ):
         parser.error(
             "provide at least one saved input, or pass --smoke for the synthetic fixture"
@@ -130,6 +146,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             output_dir=args.output_dir,
             trial_paths=trial_paths,
             feature_paths=feature_paths,
+            continuous_quality_paths=continuous_quality_paths,
             detector_paths=detector_paths,
             runtime_paths=runtime_paths,
             statistics_config=args.statistics_config,

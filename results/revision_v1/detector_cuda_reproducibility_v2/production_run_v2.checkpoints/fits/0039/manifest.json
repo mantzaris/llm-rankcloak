@@ -1,0 +1,68 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "0db2690c0a9514a11f2031e0cc208f98e27c367952b9d62d3eaaae3708120bf8",
+      "size_bytes": 4764
+    },
+    "predictions.json": {
+      "row_count": 1320,
+      "sha256": "ae6eba02ea60474b4258a37e139df84f1c7a6e7b16c5d1867848c90f26c62010",
+      "size_bytes": 647972
+    }
+  },
+  "children_sha256": "709321f99dafc847564d7feb2c0f043b9c9cec1d18b750680b99a280b99251a5",
+  "completed_at_utc": "2026-08-16T13:12:05.663144+00:00",
+  "elapsed_seconds": 989.4205152529976,
+  "manifest_sha256": "7c94071554f0a7700f278cf6c3daf86f1d7c312c472f854cafd26f841fdf4e89",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T12:55:36.242633+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "detector_position": 1,
+    "effective_detector_config": {
+      "allow_downloads": false,
+      "batch_size": 8,
+      "device": "cuda:0",
+      "enabled": true,
+      "epochs": 3,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "kind": "pretrained_transformer",
+      "learning_rate": 2e-05,
+      "maximum_length": 256,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "name": "deberta_v3_base_classifier",
+      "offline_only": true,
+      "torch_num_threads": 1,
+      "weight_decay": 0.01
+    },
+    "effective_detector_config_sha256": "dcc73bd841cebdbb1e2c39136fcedfb5e8f43fcbb34c7cc2dd92779d0cf65cf6",
+    "excluded_held_out_rows": 3960,
+    "held_out_column": "model_id",
+    "held_out_value": "llama3_8b_instruct_q4_k_m",
+    "ordinal": 39,
+    "partition_policy": "deterministic_disjoint_payload_partition_v1",
+    "purged_train_rows": 2640,
+    "regime": "leave_one_model",
+    "scientific_detector_config_sha256": "47d45a5010b771e8dfadc31ec75a6941b35d1f292ab3d62bf76c8a11ce971a5e",
+    "seed": 3827307938,
+    "split_id": "leave_one_model:llama3_8b_instruct_q4_k_m",
+    "split_position": 19,
+    "test_indices_sha256": "245f5bba2efda5093c55ef15747e2e7e0a32fc8c9dd7a3f85481be2e28c2eb43",
+    "test_row_count": 1320,
+    "test_row_ids_ordered_sha256": "f4a01421b97ea91ad82725d708134859f2434d98ce3b913c0bb97bfd97aab5ef",
+    "train_indices_sha256": "51bd7e4369f9b14d2a3c1885132c973f5cf5a79b1bab8edfeb23f97ee424683c",
+    "train_row_count": 7920,
+    "train_row_ids_ordered_sha256": "683d500fce781a664187c4171ac54f3fd4f6b286ff6552f8b4f1576557f08eec"
+  },
+  "task_identity_sha256": "dc05a72043e024adfaab6ec32bc3587ab7554255942c949a69b042662686b71a"
+}

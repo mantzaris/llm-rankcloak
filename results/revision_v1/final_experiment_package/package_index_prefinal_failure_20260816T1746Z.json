@@ -1,0 +1,19 @@
+{
+  "schema_version": "rankcloak-package-index-prefinal-diagnostic-v1",
+  "event_type": "excluded_prefinal_package_index_invocation_failure",
+  "observed_at_utc": "2026-08-16T17:46:27Z",
+  "status": "resolved_non_scientific_packaging_diagnostic",
+  "scientific_result": false,
+  "failure": {
+    "message": "Missing or unsafe required package file manifest.json",
+    "stage": "validate_required_package_paths",
+    "manifest_written": false
+  },
+  "cause": "The output manifest was incorrectly listed as an input that had to exist before the atomic package-index build.",
+  "corrective_action": "Remove manifest.json from the preexisting required-path list; keep it as the atomic output target and validate its self-hash after publication.",
+  "preservation": {
+    "diagnostic_retained": true,
+    "files_deleted": 0,
+    "files_moved": 0
+  }
+}

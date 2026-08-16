@@ -1,0 +1,1613 @@
+{
+  "component_manifests": [
+    {
+      "label": "ablation",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json",
+      "schema_version": "rankcloak-revision-ablation-evidence-manifest-v1",
+      "sha256": "296b78d0e538e3f2efea3bbd7ee9c389d5b8848de7a46719c3c262def277d3f2",
+      "size_bytes": 3744,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "configurations",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_configuration_summary.csv",
+          "row_count": 16,
+          "sha256": "18ff6f82c267a6417e9af7f324c69fdcc48380150ef900001971f82ee762f781",
+          "size_bytes": 1966
+        },
+        {
+          "label": "continuous",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_continuous_summary.csv",
+          "row_count": 80,
+          "sha256": "c6ef0280090b6df2705718e2bb3e5c818033571bb03e276172e79624ba40be60",
+          "size_bytes": 17371
+        },
+        {
+          "label": "contrasts",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_canonical_contrasts.csv",
+          "row_count": 60,
+          "sha256": "ab7b54b0b9778595d7ec5613a6db86c8b1570f0edd050c954b01c33c59f399f4",
+          "size_bytes": 22896
+        },
+        {
+          "label": "unavailable",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_unavailable_summary.csv",
+          "row_count": 1,
+          "sha256": "1f22e130aba6edc05a34737a11bdc6d8922af1e651f62d5428f016de32094aa9",
+          "size_bytes": 267
+        }
+      ]
+    },
+    {
+      "label": "change_inventory",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/changed_and_generated_files_manifest.json",
+      "schema_version": "rankcloak-revision-change-inventory-v1",
+      "sha256": "a87f8d33b3990b7daa34058ddc02eb6ce8e8b6e254c131c84d375fb45729fb20",
+      "size_bytes": 10735,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "inventory",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/changed_and_generated_files.txt",
+          "row_count": null,
+          "sha256": "b06e706546b8e1c940ece03192cef2b07cb049096d98597b8c6737115dc7fe21",
+          "size_bytes": 1578625
+        }
+      ]
+    },
+    {
+      "label": "computational_tests",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/test_suite/test_suite_manifest.json",
+      "schema_version": "rankcloak-computational-test-audit-v1",
+      "sha256": "59268bd25636233467a38b6f5f4bdb8f1357c11d45b8e53a5824c3c121742556",
+      "size_bytes": 2579,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "full_suite_prefinal_diagnostic",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/test_suite/full_suite_prefinal_diagnostic.json",
+          "row_count": null,
+          "sha256": "38623258c1515217477dcfabd3b217742f377eb551e4460e5a30ea6f53093b81",
+          "size_bytes": 1360
+        },
+        {
+          "label": "junit_xml",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/test_suite/junit.xml",
+          "row_count": null,
+          "sha256": "dc36096b15c3db044b6b2ada17abd5bc30669e17905fc97d6a89fba066355c76",
+          "size_bytes": 84423
+        }
+      ]
+    },
+    {
+      "label": "detector_analysis",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json",
+      "schema_version": "rankcloak-detector-supplementary-analysis-v1",
+      "sha256": "cf94cd4f1698f9c339629e787c2b1d691fee0a0d2839a7e88059e8f3ab79d9f1",
+      "size_bytes": 3012,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "metrics",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_extended_metrics.csv",
+          "row_count": 560,
+          "sha256": "256307b2951e46cf3d7ad4263dc3c9bf6490749e5004f92957811e349477598a",
+          "size_bytes": 184228
+        },
+        {
+          "label": "plot_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_plot_source.csv",
+          "row_count": 48,
+          "sha256": "4f010e4bd9b6fc21df2fbf398c844e38d0d4eecfc01229d7e64c9d4c70031e4d",
+          "size_bytes": 10106
+        },
+        {
+          "label": "regimes",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_regime_summary.csv",
+          "row_count": 80,
+          "sha256": "2b7dae24775959e7b7f2b33ac5f9f9df5bd2839d222bf31587a9f559160a1cc2",
+          "size_bytes": 16370
+        }
+      ]
+    },
+    {
+      "label": "detector_benchmark",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_manifest.json",
+      "schema_version": "rankcloak-detector-benchmark-evidence-v1",
+      "sha256": "fafbb16b0794f35dfb00c741ffcfecf553af9ad2362d645ab3d79e9b22cc45c7",
+      "size_bytes": 2953,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "detector_cuda_benchmark_summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_summary.csv",
+          "row_count": 2,
+          "sha256": "93352bc51f5799cedf0ef3b2ec8895991bd6b35a72cf0f839505475d16419dfd",
+          "size_bytes": 1250
+        }
+      ]
+    },
+    {
+      "label": "detector_leakage_audit",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/detector_leakage_audit_manifest.json",
+      "schema_version": "rankcloak-detector-leakage-audit-v1",
+      "sha256": "53d3beea481765ab94ac7d39edc76246bcba614aafb9e868c6b8d61cca0fcf56",
+      "size_bytes": 4058,
+      "status": "adverse_near_duplicate_overlap_detected",
+      "validated_outputs": [
+        {
+          "label": "affected_test_rows",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/affected_test_rows.csv",
+          "row_count": 34,
+          "sha256": "7ef7016cda8d96439d79733e173c9a75a1686ca3e9e3e963a66d81ad0daa4fc0",
+          "size_bytes": 10188
+        },
+        {
+          "label": "near_duplicate_pairs",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/near_duplicate_pairs.csv",
+          "row_count": 53,
+          "sha256": "d4af06250ff1b42f36da928b471f91ae753adf78c2baf9f5d1d708023553be10",
+          "size_bytes": 33998
+        },
+        {
+          "label": "split_summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/split_leakage_summary.csv",
+          "row_count": 28,
+          "sha256": "7a2674e260f29cb922cc64c9b1bdab38a9ca04aec7db5c0b6bf3e489536bd3c6",
+          "size_bytes": 4236
+        }
+      ]
+    },
+    {
+      "label": "detector_leakage_sensitivity",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_manifest.json",
+      "schema_version": "rankcloak-detector-leakage-sensitivity-v1",
+      "sha256": "5177b85da6cdd6d6521a5def6d043e8f43f6b1f16087cc0c9011fa63ea3d7c33",
+      "size_bytes": 4071,
+      "status": "completed_exploratory_leakage_sensitivity",
+      "validated_outputs": [
+        {
+          "label": "metrics",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_metrics.csv",
+          "row_count": 560,
+          "sha256": "2764115736e1bdc8aca54b65628e48126956ab218accaf6e75efba98e173f6da",
+          "size_bytes": 196820
+        },
+        {
+          "label": "summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_summary.csv",
+          "row_count": 80,
+          "sha256": "505916e5cba94aa1cd24bbbcb6ddcd5df0029a34eaafd704f25a0ee77c807dfc",
+          "size_bytes": 14415
+        }
+      ]
+    },
+    {
+      "label": "detector_references",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/detector_reference_manifest.json",
+      "schema_version": "rankcloak-revision-detector-reference-index-v1",
+      "sha256": "0aaa2bbe9740a595888376bcee5ff64e002804bf1137e6ca6a32281165ea7342",
+      "size_bytes": 1433,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "fit_index",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/detector_fit_reference_index.csv",
+          "row_count": 56,
+          "sha256": "3383e4b341731d0d9d2c67738919c8d1e17b7d65f8197a9b4a1781cd332507dc",
+          "size_bytes": 51762
+        },
+        {
+          "label": "references",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/detector_output_references.json",
+          "row_count": null,
+          "sha256": "6409419b133868cfbd6b6f78595eaa8e7120991466894abbe7cb2a4ecf03774e",
+          "size_bytes": 59656
+        }
+      ]
+    },
+    {
+      "label": "figures",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/figure_manifest.json",
+      "schema_version": "rankcloak-computational-figure-evidence-v1",
+      "sha256": "806ae438554255fb375e3bf9b1b101962c904566eaf5001d2e9a118914c8fe72",
+      "size_bytes": 6464,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "commands",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/generation_commands.txt",
+          "row_count": null,
+          "sha256": "cc0b9594216dd73f6cceb8c8d322b3bde8313a86323c18a34d7211d90df387ee",
+          "size_bytes": 953
+        },
+        {
+          "label": "detector_pdf",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
+          "row_count": null,
+          "sha256": "8dd62fcf6d6d2e95ae555e002ce3e680bb86be891ee249fdb302167b5cfe7c38",
+          "size_bytes": 35829
+        },
+        {
+          "label": "detector_png",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+          "row_count": null,
+          "sha256": "0bd0b30f3cec6fb2505571eb73562ba8916bfec30ff3b5e748aaf2f7f8ac5e33",
+          "size_bytes": 230075
+        },
+        {
+          "label": "detector_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
+          "row_count": 48,
+          "sha256": "f3bfd86e26fc709a546b98c54cd22785dcfe7fea156c03076194b97162fdf4de",
+          "size_bytes": 10980
+        },
+        {
+          "label": "overhead_pdf",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
+          "row_count": null,
+          "sha256": "1c00dbc0e0470885a69f098b26fc605bae340c071ff62b0cd0398198dd43efbf",
+          "size_bytes": 37210
+        },
+        {
+          "label": "overhead_png",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+          "row_count": null,
+          "sha256": "cbcc0d5a9f1b12e58aadab4a86bb2872d556dfaa974d6122b7980df917f165ac",
+          "size_bytes": 396573
+        },
+        {
+          "label": "overhead_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
+          "row_count": 72,
+          "sha256": "1ecfa6194cdf45d6ba9541773d6004366511cdca358d11ec6583829ff3faa479",
+          "size_bytes": 21607
+        },
+        {
+          "label": "readability_pdf",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
+          "row_count": null,
+          "sha256": "5bd0eabb366656cce77da5ce560d765fdc40d1077838d98044734d955b4c9ec4",
+          "size_bytes": 20893
+        },
+        {
+          "label": "readability_png",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.png",
+          "row_count": null,
+          "sha256": "48a7b899544e928d364bf8511aa143c5379ca21a12aa9d4c3dd3177434faf2b3",
+          "size_bytes": 171771
+        },
+        {
+          "label": "readability_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
+          "row_count": 21,
+          "sha256": "bcff7be1982eb8aef8ff0e413764959bab8c22ac453ec6a7e1c711a4845d80c7",
+          "size_bytes": 6631
+        },
+        {
+          "label": "robustness_pdf",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
+          "row_count": null,
+          "sha256": "cb1d3f32ee5200f95f7f99413debb7da0d6242c7fca9921d80d73c43dbe408f4",
+          "size_bytes": 27578
+        },
+        {
+          "label": "robustness_png",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+          "row_count": null,
+          "sha256": "ccdeb6498eeb4fc930a954655bd22670196511a01ec1acbd80b9088ab21e1797",
+          "size_bytes": 428969
+        },
+        {
+          "label": "robustness_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
+          "row_count": 24,
+          "sha256": "0929f35bc80fa720016dbe663362d99dd1ce415f6a9869aaac1d548ad74c240a",
+          "size_bytes": 4451
+        },
+        {
+          "label": "theory_pdf",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
+          "row_count": null,
+          "sha256": "81c21430626f06c3c42837927d5d9124099f0ba5a2e1a50e2b6dc31811b16298",
+          "size_bytes": 27740
+        },
+        {
+          "label": "theory_png",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+          "row_count": null,
+          "sha256": "6c8159adee541a0ee08a8468f33b34bcb2eeac4175c8b55b3925dd9e27b5f4a1",
+          "size_bytes": 303633
+        },
+        {
+          "label": "theory_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
+          "row_count": 9,
+          "sha256": "dde73fa720829071f3388d488a88691b6930e92bf62da25c7c1e01227d306063",
+          "size_bytes": 1419
+        }
+      ]
+    },
+    {
+      "label": "mixed_models",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json",
+      "schema_version": "1.0",
+      "sha256": "12dbf66996cf164eb7c7ef208ded3ffce370ee6e3a7d58e5db193d0979861abc",
+      "size_bytes": 5724,
+      "status": null,
+      "validated_outputs": [
+        {
+          "label": "coefficients",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_coefficients.csv",
+          "row_count": 325,
+          "sha256": "1d78f32faee65189f4bc41daadbba67ca72c8c9d77a785da9b8eb7e9676c3af7",
+          "size_bytes": 134240
+        },
+        {
+          "label": "contrasts",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_contrasts.csv",
+          "row_count": 225,
+          "sha256": "c4dfb443d3c3d0913836b9718eb94f4eed7212f2a120c1845b6a8587fcad5ffb",
+          "size_bytes": 62852
+        },
+        {
+          "label": "diagnostics",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_diagnostics.json",
+          "row_count": null,
+          "sha256": "d2407431b95be88a464117345b6cca22e46bab738edf1e1180add393450d1f18",
+          "size_bytes": 3627
+        },
+        {
+          "label": "dispersion",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/poisson_dispersion_check.csv",
+          "row_count": 1,
+          "sha256": "15baec34cf5b61f785fe596a5761da8a7c463d3170d03b080f6c23af18021791",
+          "size_bytes": 220
+        },
+        {
+          "label": "status",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/model_status.json",
+          "row_count": null,
+          "sha256": "c96b4bda5f52cc3171753ec7f56b1431bdc11302db288227792408f0b36c5136",
+          "size_bytes": 1731
+        },
+        {
+          "label": "wilson",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/recovery_wilson_sensitivity.csv",
+          "row_count": 24,
+          "sha256": "09f827f2315a2b68e557cff51fc2d5aec3f62e0a0207a89781d95c9ac0fe8ee0",
+          "size_bytes": 3975
+        }
+      ]
+    },
+    {
+      "label": "multilingual_recovery",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoint_manifest.json",
+      "schema_version": "rankcloak-multilingual-recovery-endpoint-v1",
+      "sha256": "2bd69372d36d937b4c9677d41ae87c31869ff47cc86d3950169e4ad5203589f3",
+      "size_bytes": 2947,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "endpoints",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoints.csv",
+          "row_count": 6,
+          "sha256": "e305b46f4e614e023606c0d759be4538691158268a498c5759b0b24b3d88bd25",
+          "size_bytes": 2260
+        },
+        {
+          "label": "language_payload_outcomes",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_language_payload_outcomes.csv",
+          "row_count": 96,
+          "sha256": "a47bfda10f67c2afc23a4c5093d051db7875e3910a9fdc7af6b09315d851f860",
+          "size_bytes": 6682
+        }
+      ]
+    },
+    {
+      "label": "overhead",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json",
+      "schema_version": "rankcloak-revision-overhead-analysis-v1",
+      "sha256": "f5e10d7730b25f022948c37be373d34888e05e2cbc52bc11b6e742564df3ecdb",
+      "size_bytes": 5263,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "initialization",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/model_initialization.csv",
+          "row_count": 12,
+          "sha256": "cdea1b03f1984ae9830684e177e44fb111da914d42b71785dc06300d84fb60e2",
+          "size_bytes": 3080
+        },
+        {
+          "label": "inventory",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/runtime_scope_inventory.csv",
+          "row_count": 19,
+          "sha256": "21c2cabaf13ec756de067ea479508b2a97e00e34af086e099ce1163e70957b2e",
+          "size_bytes": 4079
+        },
+        {
+          "label": "limitations",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/measurement_limitations.json",
+          "row_count": null,
+          "sha256": "504870c6bb3ea68fa9bf680c590ae94e17539c33a8a2170fa2cc9739b9500888",
+          "size_bytes": 1298
+        },
+        {
+          "label": "memory",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/memory_profiles.csv",
+          "row_count": 12,
+          "sha256": "9b3a53e70dafee5758374fe5b035043a13bf41d77ebb8938767e05738b104641",
+          "size_bytes": 4148
+        },
+        {
+          "label": "plot_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/overhead_plot_source.csv",
+          "row_count": 188,
+          "sha256": "d7fbe5ee21fc2b6733525a55c803ec94ad3f1189a3c7c6214cf550f0128fcd00",
+          "size_bytes": 49145
+        },
+        {
+          "label": "scaling",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/overhead_scaling_summary.csv",
+          "row_count": 8220,
+          "sha256": "9ef42c1725aacdb99e44bd66fb6da6d5409ed08a7dc2c450a3e14dc5f11c1444",
+          "size_bytes": 3201472
+        },
+        {
+          "label": "summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/overhead_summary.csv",
+          "row_count": 579,
+          "sha256": "40e3de0868ad4997c7c4465444da123f220116fbe9abcfb3a454eb358cc960ef",
+          "size_bytes": 148844
+        }
+      ]
+    },
+    {
+      "label": "primary_recovery",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/primary_recovery/primary_recovery_endpoint_manifest.json",
+      "schema_version": "rankcloak-primary-recovery-endpoint-v1",
+      "sha256": "3760ce52ed87d348050d19071da1324f2d46ee74f556b46ca3297584b19de93d",
+      "size_bytes": 3209,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "endpoints",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/primary_recovery/primary_recovery_endpoints.csv",
+          "row_count": 3,
+          "sha256": "b653430544daf331e0b396515a87136a09d0c590d4f55c67b1e5fd3d14246b9f",
+          "size_bytes": 1245
+        },
+        {
+          "label": "payload_group_outcomes",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/primary_recovery/primary_payload_group_outcomes.csv",
+          "row_count": 480,
+          "sha256": "fb6518c2642a0748d623fbc941d0f21926e198fb21eca8a7c0dc071abbda1cb6",
+          "size_bytes": 30393
+        }
+      ]
+    },
+    {
+      "label": "python_statistics",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json",
+      "schema_version": "1.0",
+      "sha256": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381",
+      "size_bytes": 8983,
+      "status": null,
+      "validated_outputs": [
+        {
+          "label": "continuous",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/continuous_summary.csv",
+          "row_count": 78088,
+          "sha256": "80341192af4d1104e9dfdd7a4c7369c46dda6cc30f9414f995067aab702ee2ec",
+          "size_bytes": 38523190
+        },
+        {
+          "label": "detectors",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/detector_summary.csv",
+          "row_count": 56,
+          "sha256": "d48e7995d9243b690b35f467097a840275fd1c1c9d63ce27a9a818d767106ce5",
+          "size_bytes": 31316
+        },
+        {
+          "label": "effects",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/effect_sizes.csv",
+          "row_count": 8446,
+          "sha256": "2582ce3e9edd5424023d01d8ed549725a60c025e1ce88c90d92a2974a3f7bf2c",
+          "size_bytes": 6695523
+        },
+        {
+          "label": "integrity",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/statistics_integrity_report.json",
+          "row_count": null,
+          "sha256": "ee8cf1f8fb7593dff33676e5a40ae594bd88939ee6dbf204ca9e4ec5b0133ae9",
+          "size_bytes": 3814
+        },
+        {
+          "label": "mixed",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/mixed_effects_coefficients.csv",
+          "row_count": 0,
+          "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c",
+          "size_bytes": 7
+        },
+        {
+          "label": "mixed_status",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/mixed_effects_status.json",
+          "row_count": null,
+          "sha256": "716986a306f85b8de0df6716fb8145690e983ab5a51e07f172c554f7b052c46e",
+          "size_bytes": 79
+        },
+        {
+          "label": "quality",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/quality_trial_metrics.csv",
+          "row_count": 29520,
+          "sha256": "3a863a9a0bfe6fcc29f5cd5214904017ea9ef31f79dee2ed9d7656820c332709",
+          "size_bytes": 23910815
+        },
+        {
+          "label": "recovery",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/python/recovery_summary.csv",
+          "row_count": 3696,
+          "sha256": "56cb672f99df9b581d9b10ae30d2546b79849413da7ffb08a4d402c04cd20578",
+          "size_bytes": 2012228
+        }
+      ]
+    },
+    {
+      "label": "readability",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json",
+      "schema_version": "rankcloak-readability-and-stimulus-evidence-v1",
+      "sha256": "5d2167a9ca39d2432b541f11c14f3198da0c13c89284b41ba9b6d401aba2be28",
+      "size_bytes": 5644,
+      "status": "computational_complete_human_evaluation_uncollected",
+      "validated_outputs": [
+        {
+          "label": "candidate_pool",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/computational_candidate_pool.csv",
+          "row_count": 1008,
+          "sha256": "0789ea57315fde78e5593d84df6b9d005c3a92ab0ea23876fc15002270980912",
+          "size_bytes": 748374
+        },
+        {
+          "label": "inventory",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/planned_stimulus_inventory.csv",
+          "row_count": 576,
+          "sha256": "4eb78c038152a606fc5b84fee86599bed887b75ef03a867b78cea0091abed55b",
+          "size_bytes": 295637
+        },
+        {
+          "label": "metrics",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_metrics.csv",
+          "row_count": 504,
+          "sha256": "f022cb4d34466a9fb938e9b2d04cc2143992f827b6576b0dea566df11888ce27",
+          "size_bytes": 238656
+        },
+        {
+          "label": "provenance",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/selected_stimulus_provenance.csv",
+          "row_count": 504,
+          "sha256": "4a9593d7e40be1a4040bf6d2749b8a633ba69fb58c2e6184138c81b2a2e08d0d",
+          "size_bytes": 350068
+        },
+        {
+          "label": "randomization",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/randomization_metadata.json",
+          "row_count": null,
+          "sha256": "464e1f2afad57236bef954a9a79023bd470c8817f5c97c263b7e591ff431df3b",
+          "size_bytes": 3016
+        },
+        {
+          "label": "status",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/human_evaluation_status.json",
+          "row_count": null,
+          "sha256": "a5312d78217251ded74dcda35ef0c8179540230bceb6cdf187a4698852fc4ccb",
+          "size_bytes": 1080
+        },
+        {
+          "label": "summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_summary.csv",
+          "row_count": 98,
+          "sha256": "16b09e609655baa781440213599cdb9d41ca31dd5c43071f25544e8c69558751",
+          "size_bytes": 26117
+        },
+        {
+          "label": "unavailable",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/unavailable_human_control_strata.csv",
+          "row_count": 72,
+          "sha256": "962b5f179d64409f654ee2056e668f88c95b3dd7c6591f53c7492717ae52a839",
+          "size_bytes": 13338
+        }
+      ]
+    },
+    {
+      "label": "robustness_analysis",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
+      "schema_version": "rankcloak-revision-robustness-analysis-v1",
+      "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177",
+      "size_bytes": 3917,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "conditions",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/recovery_by_condition.csv",
+          "row_count": 24,
+          "sha256": "bacd0e260ca9eb24638f9970a86a5d54ee51b77e48e43760a0abf940b296dd84",
+          "size_bytes": 5390
+        },
+        {
+          "label": "failure_summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/failure_mechanism_summary.csv",
+          "row_count": 19,
+          "sha256": "62f85f4640200a8afaebe165689907a2e0318f30dc05b08ef044e3a45ede8531",
+          "size_bytes": 3907
+        },
+        {
+          "label": "failure_taxonomy",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/failure_taxonomy.csv",
+          "row_count": 2215,
+          "sha256": "a85a393a1df20de10a347c37deeba432b01c48f9de8b9e3cc14471fbf97824f8",
+          "size_bytes": 1329369
+        },
+        {
+          "label": "models",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/recovery_by_model_condition.csv",
+          "row_count": 75,
+          "sha256": "e67b1ef0106a344f609eab70fde7c07fe919af3ffa1801d172585f672e6f56f6",
+          "size_bytes": 18645
+        },
+        {
+          "label": "plot_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_recovery_plot_source.csv",
+          "row_count": 24,
+          "sha256": "98afef4bd516c46351994946417a1fe5c8515b9747fa004ae3ee078acea1ebe4",
+          "size_bytes": 3291
+        },
+        {
+          "label": "unavailable",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/unavailable_summary.csv",
+          "row_count": 7,
+          "sha256": "9bc22a0fe16237636993b199b3396f6b3fb8d5019f0205bca7bea243fa44bf48",
+          "size_bytes": 2042
+        }
+      ]
+    },
+    {
+      "label": "robustness_coverage",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/perturbation_coverage_manifest.json",
+      "schema_version": "rankcloak-robustness-coverage-inventory-v1",
+      "sha256": "84ac8e86c4dcfdc315ede2ca45c7b166ff67b1560d053ba9738b56cf0b860aa7",
+      "size_bytes": 2659,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "perturbation_coverage_inventory",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/perturbation_coverage_inventory.csv",
+          "row_count": 11,
+          "sha256": "6d086de67c981cf314fcde9ce2e895916fb579d284ddde82bd38e46283081e43",
+          "size_bytes": 3258
+        }
+      ]
+    },
+    {
+      "label": "theory_empirical",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json",
+      "schema_version": "rankcloak-empirical-theory-evidence-v1",
+      "sha256": "e2449de3aafca211fd2c7b644400c6225b56bc969743a2682d1105da99b0ac4d",
+      "size_bytes": 5100,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "assumptions",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_assumptions.json",
+          "row_count": null,
+          "sha256": "0fd5811c9bef0dec00872f7fefe0a93c5dcfdf1d982c1814b5b93093a83aeeab",
+          "size_bytes": 1775
+        },
+        {
+          "label": "plot_source",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_residual_plot_source.csv",
+          "row_count": 7008,
+          "sha256": "14533c2236f8cd72393ca6b09f8ead860dab1b5c576a72191176003022efd780",
+          "size_bytes": 2504043
+        },
+        {
+          "label": "summary",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_empirical_summary.csv",
+          "row_count": 686,
+          "sha256": "19b32a52ee415c9361c6c2eb7e838babf682222dd64b59ecf3810bb8f67ed853",
+          "size_bytes": 260568
+        },
+        {
+          "label": "technical_note",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/TECHNICAL_NOTE.md",
+          "row_count": null,
+          "sha256": "282824f893ea746067b05f888ee89b5f8046fdea140baedff659423bb3510964",
+          "size_bytes": 1952
+        },
+        {
+          "label": "validation",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_empirical_validation.csv",
+          "row_count": 17424,
+          "sha256": "89523e3381137d21a7d6291ed7ce50cefeb8ac424ac14709e4ad60af75cfd95c",
+          "size_bytes": 10352110
+        }
+      ]
+    },
+    {
+      "label": "topic_effects",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json",
+      "schema_version": "rankcloak-topic-effect-extraction-v1",
+      "sha256": "c01494cf3fac9ff8e26b6fde65d6cea2e47e11a3fe70988ecaa0b0f2814f02f0",
+      "size_bytes": 2631,
+      "status": "passed",
+      "validated_outputs": [
+        {
+          "label": "topic_schedule_contrasts",
+          "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/topic_effects/topic_schedule_contrasts.csv",
+          "row_count": 15,
+          "sha256": "30e941e11f6c71b475a2fc0aff9edf2999585c7132eec1a138804681ed51f459",
+          "size_bytes": 6293
+        }
+      ]
+    }
+  ],
+  "external_references": [
+    {
+      "label": "cpu_feasibility_addendum",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/supervisor/detector_live_readonly_audit_addendum_20260813T0151Z.json",
+      "sha256": "3944929bde41f4c8aed6a3f8e6bc8098f435fa97868336d75e8831248314044d",
+      "size_bytes": 2867
+    },
+    {
+      "label": "cpu_feasibility_audit",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+      "sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7",
+      "size_bytes": 4996
+    },
+    {
+      "label": "detector_dataset_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_dataset_manifest.csv",
+      "row_count": 15840,
+      "sha256": "14ebcff12aaf44839a777b37b8b0f1c895a08ddd0a1d74d1bc4e6cbdc7729764",
+      "size_bytes": 3609119
+    },
+    {
+      "label": "detector_gpu_ledger",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json",
+      "sha256": "f82dc4049d8ce2ab8b2d11465842dfb789f4c7f7f83e89fc9f0f9f2084c537f3",
+      "size_bytes": 7588
+    },
+    {
+      "label": "detector_packaging_failure",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/failed_attempts/task_0_packaging_failure.json",
+      "sha256": "3118e37efc3ea63b9045dbf5fec786fb98ff903b5959412eb1e13bdac1db2b28",
+      "size_bytes": 2727
+    },
+    {
+      "label": "detector_predictions",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv",
+      "row_count": 55440,
+      "sha256": "c3e64b1c379d0b80c6a01742c3ca8e8a2f3a5503c222d31400784463890f2595",
+      "size_bytes": 18098714
+    },
+    {
+      "label": "detector_run_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+      "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+      "size_bytes": 58221
+    },
+    {
+      "label": "detector_split_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_split_manifest.json",
+      "sha256": "30f4ea9173ef402ff49bce168d70c3f2fdf70c71637cb99c0b46887a49c7ef12",
+      "size_bytes": 24832
+    },
+    {
+      "label": "evidence_spec",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/final_evidence_records.json",
+      "sha256": "0853e7cd55d3f2cfef90f258786eaf9abf9db93cacd4fa9ed36452334bad554d",
+      "size_bytes": 72039
+    },
+    {
+      "label": "evidence_summary_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/evidence_summary_manifest.json",
+      "sha256": "0706feaef543c02bec62bbd06418dfd7b09fa69ea3086e1286d71885edc1add1",
+      "size_bytes": 24984
+    },
+    {
+      "label": "final_progress",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_progress_snapshot_v1.json",
+      "sha256": "12aa17fe6cb4264637d82f100191d1961391bff5378e52f53113c5307dd3ba36",
+      "size_bytes": 2268658
+    },
+    {
+      "label": "frozen_config_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/config_manifest.json",
+      "sha256": "dc0e7e022036e2681c87ad06446cbebd56d676faf81a0544a55d56375d4eadcd",
+      "size_bytes": 1747
+    },
+    {
+      "label": "frozen_environment_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/environment_manifest.json",
+      "sha256": "a7b57556892752aa7131bddd625960c48aad23267a14648608246a1cdf5bd374",
+      "size_bytes": 1900
+    },
+    {
+      "label": "heldout_join_v5",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json",
+      "sha256": "15151b9698c2d71d791a65ceb1dfac615e49294fa02d71ae5602b1e29f2df7ec",
+      "size_bytes": 6778
+    },
+    {
+      "label": "payload_corpus",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/release_inputs/revision_v1/revision_payloads.jsonl",
+      "row_count": 480,
+      "sha256": "6e45aafbc639f49c8fb07fc3055aa2d25e47025a2e945c4ffd2f5ac017322fd2",
+      "size_bytes": 534460
+    },
+    {
+      "label": "payload_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/release_inputs/revision_v1/PAYLOAD_MANIFEST.json",
+      "sha256": "1a3217c4e4a3dc0bbb5e35e65c60f5dc00270724bf618de25e332d43d25a843a",
+      "size_bytes": 1638
+    },
+    {
+      "label": "requirements_lock",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/requirements-lock.txt",
+      "sha256": "2e1b694449698ee6251b52718dceee56e11e48c71e3b89f586b0806aa44729a2",
+      "size_bytes": 2951
+    },
+    {
+      "label": "theory_validation",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_validation_manifest.json",
+      "sha256": "df33b6f5950dc1d13cdb92870bf1fda73f0811637f0fc97caf0f18bfd3ad86e8",
+      "size_bytes": 4478
+    }
+  ],
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_package_index.py --package-root /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package --component-manifest primary_recovery=results/revision_v1/final_experiment_package/tables/primary_recovery/primary_recovery_endpoint_manifest.json --component-manifest multilingual_recovery=results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoint_manifest.json --component-manifest robustness_analysis=results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json --component-manifest robustness_coverage=results/revision_v1/final_experiment_package/robustness/perturbation_coverage_manifest.json --component-manifest readability=results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json --component-manifest theory_empirical=results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json --component-manifest overhead=results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json --component-manifest detector_benchmark=results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_manifest.json --component-manifest detector_references=results/revision_v1/final_experiment_package/detectors/detector_reference_manifest.json --component-manifest detector_leakage_audit=results/revision_v1/final_experiment_package/detectors/leakage_audit/detector_leakage_audit_manifest.json --component-manifest detector_analysis=results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json --component-manifest detector_leakage_sensitivity=results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_manifest.json --component-manifest mixed_models=results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json --component-manifest topic_effects=results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json --component-manifest ablation=results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json --component-manifest figures=results/revision_v1/final_experiment_package/figures/figure_manifest.json --component-manifest computational_tests=results/revision_v1/final_experiment_package/statistics/test_suite/test_suite_manifest.json --component-manifest python_statistics=results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json --component-manifest change_inventory=results/revision_v1/final_experiment_package/changed_and_generated_files_manifest.json --external-reference evidence_spec=analysis/revision_v1/evidence_specs/final_evidence_records.json --external-reference frozen_config_manifest=configs/revision_v1/config_manifest.json --external-reference frozen_environment_manifest=environment/revision_v1/environment_manifest.json --external-reference requirements_lock=environment/revision_v1/requirements-lock.txt --external-reference payload_manifest=release_inputs/revision_v1/PAYLOAD_MANIFEST.json --external-reference payload_corpus=release_inputs/revision_v1/revision_payloads.jsonl --external-reference final_progress=results/revision_v1/final_progress_snapshot_v1.json --external-reference detector_run_manifest=results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json --external-reference detector_predictions=results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv --external-reference detector_split_manifest=results/revision_v1/neural_detector/confirmatory_v2/detector_split_manifest.json --external-reference detector_dataset_manifest=results/revision_v1/neural_detector/confirmatory_v2/detector_dataset_manifest.csv --external-reference heldout_join_v5=results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json --external-reference theory_validation=results/revision_v1/final_experiment_package/theory/theory_validation_manifest.json --external-reference cpu_feasibility_audit=results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json --external-reference cpu_feasibility_addendum=results/revision_v1/supervisor/detector_live_readonly_audit_addendum_20260813T0151Z.json --external-reference detector_gpu_ledger=results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json --external-reference detector_packaging_failure=results/revision_v1/detector_cuda_reproducibility_v2/failed_attempts/task_0_packaging_failure.json --external-reference evidence_summary_manifest=results/revision_v1/final_experiment_package/evidence_summary_manifest.json --require-relative-path STATUS.md --require-relative-path gpu_budget.json --require-relative-path reviewer_evidence_matrix.md --require-relative-path verified_findings.md --require-relative-path limitations_and_unresolved_items.md --require-relative-path artifact_priority_index.md --require-relative-path changed_and_generated_files.txt --require-relative-path resource_and_process_audit.json --require-relative-path evidence_summary_manifest.json --require-relative-path evidence_summary_prefinal_failure_20260816T1736Z.json --require-relative-path package_index_prefinal_failure_20260816T1746Z.json --require-relative-path figures/figure_manifest.json --require-relative-path statistics/python/statistics_run_manifest.json --require-relative-path statistics/test_suite/test_suite_manifest.json --require-relative-path detectors/detector_reference_manifest.json --require-relative-path robustness/robustness_analysis_manifest.json --require-relative-path readability/readability_and_stimulus_manifest.json --require-relative-path theory/theory_empirical_manifest.json --require-relative-path overhead/overhead_analysis_manifest.json --require-relative-path tables/stage_counts.csv --overwrite",
+  "large_external_artifacts_copied": false,
+  "manifest_sha256": "5b5d07c9462eb364540454421deaa2a398a397224402e8de89b53d37804d2b90",
+  "package_files": [
+    {
+      "path": "STATUS.md",
+      "sha256": "4e8cfefd0ee87670fbfdfe99f74d15451cddb90fd93459995242998a9357d040",
+      "size_bytes": 9785
+    },
+    {
+      "path": "artifact_priority_index.md",
+      "sha256": "3c189a720ed35f3e1cf631af882c3f331a11bf0b65668bb379139a0913224e7c",
+      "size_bytes": 5767
+    },
+    {
+      "path": "changed_and_generated_files.txt",
+      "sha256": "b06e706546b8e1c940ece03192cef2b07cb049096d98597b8c6737115dc7fe21",
+      "size_bytes": 1578625
+    },
+    {
+      "path": "changed_and_generated_files_manifest.json",
+      "sha256": "a87f8d33b3990b7daa34058ddc02eb6ce8e8b6e254c131c84d375fb45729fb20",
+      "size_bytes": 10735
+    },
+    {
+      "path": "detectors/analysis/detector_analysis_manifest.json",
+      "sha256": "cf94cd4f1698f9c339629e787c2b1d691fee0a0d2839a7e88059e8f3ab79d9f1",
+      "size_bytes": 3012
+    },
+    {
+      "path": "detectors/analysis/detector_extended_metrics.csv",
+      "row_count": 560,
+      "sha256": "256307b2951e46cf3d7ad4263dc3c9bf6490749e5004f92957811e349477598a",
+      "size_bytes": 184228
+    },
+    {
+      "path": "detectors/analysis/detector_plot_source.csv",
+      "row_count": 48,
+      "sha256": "4f010e4bd9b6fc21df2fbf398c844e38d0d4eecfc01229d7e64c9d4c70031e4d",
+      "size_bytes": 10106
+    },
+    {
+      "path": "detectors/analysis/detector_regime_summary.csv",
+      "row_count": 80,
+      "sha256": "2b7dae24775959e7b7f2b33ac5f9f9df5bd2839d222bf31587a9f559160a1cc2",
+      "size_bytes": 16370
+    },
+    {
+      "path": "detectors/detector_fit_reference_index.csv",
+      "row_count": 56,
+      "sha256": "3383e4b341731d0d9d2c67738919c8d1e17b7d65f8197a9b4a1781cd332507dc",
+      "size_bytes": 51762
+    },
+    {
+      "path": "detectors/detector_output_references.json",
+      "sha256": "6409419b133868cfbd6b6f78595eaa8e7120991466894abbe7cb2a4ecf03774e",
+      "size_bytes": 59656
+    },
+    {
+      "path": "detectors/detector_reference_manifest.json",
+      "sha256": "0aaa2bbe9740a595888376bcee5ff64e002804bf1137e6ca6a32281165ea7342",
+      "size_bytes": 1433
+    },
+    {
+      "path": "detectors/leakage_audit/affected_test_rows.csv",
+      "row_count": 34,
+      "sha256": "7ef7016cda8d96439d79733e173c9a75a1686ca3e9e3e963a66d81ad0daa4fc0",
+      "size_bytes": 10188
+    },
+    {
+      "path": "detectors/leakage_audit/detector_leakage_audit_manifest.json",
+      "sha256": "53d3beea481765ab94ac7d39edc76246bcba614aafb9e868c6b8d61cca0fcf56",
+      "size_bytes": 4058
+    },
+    {
+      "path": "detectors/leakage_audit/near_duplicate_pairs.csv",
+      "row_count": 53,
+      "sha256": "d4af06250ff1b42f36da928b471f91ae753adf78c2baf9f5d1d708023553be10",
+      "size_bytes": 33998
+    },
+    {
+      "path": "detectors/leakage_audit/split_leakage_summary.csv",
+      "row_count": 28,
+      "sha256": "7a2674e260f29cb922cc64c9b1bdab38a9ca04aec7db5c0b6bf3e489536bd3c6",
+      "size_bytes": 4236
+    },
+    {
+      "path": "detectors/leakage_sensitivity/detector_leakage_sensitivity_manifest.json",
+      "sha256": "5177b85da6cdd6d6521a5def6d043e8f43f6b1f16087cc0c9011fa63ea3d7c33",
+      "size_bytes": 4071
+    },
+    {
+      "path": "detectors/leakage_sensitivity/detector_leakage_sensitivity_metrics.csv",
+      "row_count": 560,
+      "sha256": "2764115736e1bdc8aca54b65628e48126956ab218accaf6e75efba98e173f6da",
+      "size_bytes": 196820
+    },
+    {
+      "path": "detectors/leakage_sensitivity/detector_leakage_sensitivity_summary.csv",
+      "row_count": 80,
+      "sha256": "505916e5cba94aa1cd24bbbcb6ddcd5df0029a34eaafd704f25a0ee77c807dfc",
+      "size_bytes": 14415
+    },
+    {
+      "path": "evidence_summary_manifest.json",
+      "sha256": "0706feaef543c02bec62bbd06418dfd7b09fa69ea3086e1286d71885edc1add1",
+      "size_bytes": 24984
+    },
+    {
+      "path": "evidence_summary_prefinal_failure_20260816T1736Z.json",
+      "sha256": "8da043f8a685f9aecc59757054e02d1870d835dfd7cfaf5d861ee11314fbd72a",
+      "size_bytes": 2104
+    },
+    {
+      "path": "figures/automated_readability.pdf",
+      "sha256": "5bd0eabb366656cce77da5ce560d765fdc40d1077838d98044734d955b4c9ec4",
+      "size_bytes": 20893
+    },
+    {
+      "path": "figures/automated_readability.png",
+      "sha256": "48a7b899544e928d364bf8511aa143c5379ca21a12aa9d4c3dd3177434faf2b3",
+      "size_bytes": 171771
+    },
+    {
+      "path": "figures/capacity_tail_validation.pdf",
+      "sha256": "81c21430626f06c3c42837927d5d9124099f0ba5a2e1a50e2b6dc31811b16298",
+      "size_bytes": 27740
+    },
+    {
+      "path": "figures/capacity_tail_validation.png",
+      "sha256": "6c8159adee541a0ee08a8468f33b34bcb2eeac4175c8b55b3925dd9e27b5f4a1",
+      "size_bytes": 303633
+    },
+    {
+      "path": "figures/computational_overhead.pdf",
+      "sha256": "1c00dbc0e0470885a69f098b26fc605bae340c071ff62b0cd0398198dd43efbf",
+      "size_bytes": 37210
+    },
+    {
+      "path": "figures/computational_overhead.png",
+      "sha256": "cbcc0d5a9f1b12e58aadab4a86bb2872d556dfaa974d6122b7980df917f165ac",
+      "size_bytes": 396573
+    },
+    {
+      "path": "figures/detector_figure_source.csv",
+      "row_count": 48,
+      "sha256": "f3bfd86e26fc709a546b98c54cd22785dcfe7fea156c03076194b97162fdf4de",
+      "size_bytes": 10980
+    },
+    {
+      "path": "figures/figure_manifest.json",
+      "sha256": "806ae438554255fb375e3bf9b1b101962c904566eaf5001d2e9a118914c8fe72",
+      "size_bytes": 6464
+    },
+    {
+      "path": "figures/generation_commands.txt",
+      "sha256": "cc0b9594216dd73f6cceb8c8d322b3bde8313a86323c18a34d7211d90df387ee",
+      "size_bytes": 953
+    },
+    {
+      "path": "figures/neural_detector_performance.pdf",
+      "sha256": "8dd62fcf6d6d2e95ae555e002ce3e680bb86be891ee249fdb302167b5cfe7c38",
+      "size_bytes": 35829
+    },
+    {
+      "path": "figures/neural_detector_performance.png",
+      "sha256": "0bd0b30f3cec6fb2505571eb73562ba8916bfec30ff3b5e748aaf2f7f8ac5e33",
+      "size_bytes": 230075
+    },
+    {
+      "path": "figures/overhead_figure_source.csv",
+      "row_count": 72,
+      "sha256": "1ecfa6194cdf45d6ba9541773d6004366511cdca358d11ec6583829ff3faa479",
+      "size_bytes": 21607
+    },
+    {
+      "path": "figures/readability_figure_source.csv",
+      "row_count": 21,
+      "sha256": "bcff7be1982eb8aef8ff0e413764959bab8c22ac453ec6a7e1c711a4845d80c7",
+      "size_bytes": 6631
+    },
+    {
+      "path": "figures/robustness_figure_source.csv",
+      "row_count": 24,
+      "sha256": "0929f35bc80fa720016dbe663362d99dd1ce415f6a9869aaac1d548ad74c240a",
+      "size_bytes": 4451
+    },
+    {
+      "path": "figures/robustness_recovery.pdf",
+      "sha256": "cb1d3f32ee5200f95f7f99413debb7da0d6242c7fca9921d80d73c43dbe408f4",
+      "size_bytes": 27578
+    },
+    {
+      "path": "figures/robustness_recovery.png",
+      "sha256": "ccdeb6498eeb4fc930a954655bd22670196511a01ec1acbd80b9088ab21e1797",
+      "size_bytes": 428969
+    },
+    {
+      "path": "figures/theory_figure_source.csv",
+      "row_count": 9,
+      "sha256": "dde73fa720829071f3388d488a88691b6930e92bf62da25c7c1e01227d306063",
+      "size_bytes": 1419
+    },
+    {
+      "path": "gpu_budget.json",
+      "sha256": "32bb492c7257f123c998973fbc7e6dd6aaeef9df4ffb2102b80ca844af6c56e3",
+      "size_bytes": 1160
+    },
+    {
+      "path": "limitations_and_unresolved_items.md",
+      "sha256": "e72681c5958bd97e48a135160094f9b61066183608ef64137b970f2013cc04d5",
+      "size_bytes": 7045
+    },
+    {
+      "path": "overhead/detector_cuda_benchmark_manifest.json",
+      "sha256": "fafbb16b0794f35dfb00c741ffcfecf553af9ad2362d645ab3d79e9b22cc45c7",
+      "size_bytes": 2953
+    },
+    {
+      "path": "overhead/detector_cuda_benchmark_summary.csv",
+      "row_count": 2,
+      "sha256": "93352bc51f5799cedf0ef3b2ec8895991bd6b35a72cf0f839505475d16419dfd",
+      "size_bytes": 1250
+    },
+    {
+      "path": "overhead/measurement_limitations.json",
+      "sha256": "504870c6bb3ea68fa9bf680c590ae94e17539c33a8a2170fa2cc9739b9500888",
+      "size_bytes": 1298
+    },
+    {
+      "path": "overhead/memory_profiles.csv",
+      "row_count": 12,
+      "sha256": "9b3a53e70dafee5758374fe5b035043a13bf41d77ebb8938767e05738b104641",
+      "size_bytes": 4148
+    },
+    {
+      "path": "overhead/model_initialization.csv",
+      "row_count": 12,
+      "sha256": "cdea1b03f1984ae9830684e177e44fb111da914d42b71785dc06300d84fb60e2",
+      "size_bytes": 3080
+    },
+    {
+      "path": "overhead/overhead_analysis_manifest.json",
+      "sha256": "f5e10d7730b25f022948c37be373d34888e05e2cbc52bc11b6e742564df3ecdb",
+      "size_bytes": 5263
+    },
+    {
+      "path": "overhead/overhead_plot_source.csv",
+      "row_count": 188,
+      "sha256": "d7fbe5ee21fc2b6733525a55c803ec94ad3f1189a3c7c6214cf550f0128fcd00",
+      "size_bytes": 49145
+    },
+    {
+      "path": "overhead/overhead_scaling_summary.csv",
+      "row_count": 8220,
+      "sha256": "9ef42c1725aacdb99e44bd66fb6da6d5409ed08a7dc2c450a3e14dc5f11c1444",
+      "size_bytes": 3201472
+    },
+    {
+      "path": "overhead/overhead_summary.csv",
+      "row_count": 579,
+      "sha256": "40e3de0868ad4997c7c4465444da123f220116fbe9abcfb3a454eb358cc960ef",
+      "size_bytes": 148844
+    },
+    {
+      "path": "overhead/runtime_scope_inventory.csv",
+      "row_count": 19,
+      "sha256": "21c2cabaf13ec756de067ea479508b2a97e00e34af086e099ce1163e70957b2e",
+      "size_bytes": 4079
+    },
+    {
+      "path": "package_index_prefinal_failure_20260816T1746Z.json",
+      "sha256": "12bd9cc42eb30cfe704da046c5aac34b0ecfe00cfd0103a99e175933e3ff18c5",
+      "size_bytes": 847
+    },
+    {
+      "path": "readability/computational_candidate_pool.csv",
+      "row_count": 1008,
+      "sha256": "0789ea57315fde78e5593d84df6b9d005c3a92ab0ea23876fc15002270980912",
+      "size_bytes": 748374
+    },
+    {
+      "path": "readability/human_evaluation_status.json",
+      "sha256": "a5312d78217251ded74dcda35ef0c8179540230bceb6cdf187a4698852fc4ccb",
+      "size_bytes": 1080
+    },
+    {
+      "path": "readability/planned_stimulus_inventory.csv",
+      "row_count": 576,
+      "sha256": "4eb78c038152a606fc5b84fee86599bed887b75ef03a867b78cea0091abed55b",
+      "size_bytes": 295637
+    },
+    {
+      "path": "readability/randomization_metadata.json",
+      "sha256": "464e1f2afad57236bef954a9a79023bd470c8817f5c97c263b7e591ff431df3b",
+      "size_bytes": 3016
+    },
+    {
+      "path": "readability/readability_and_stimulus_manifest.json",
+      "sha256": "5d2167a9ca39d2432b541f11c14f3198da0c13c89284b41ba9b6d401aba2be28",
+      "size_bytes": 5644
+    },
+    {
+      "path": "readability/selected_stimulus_provenance.csv",
+      "row_count": 504,
+      "sha256": "4a9593d7e40be1a4040bf6d2749b8a633ba69fb58c2e6184138c81b2a2e08d0d",
+      "size_bytes": 350068
+    },
+    {
+      "path": "readability/selected_stimulus_readability_metrics.csv",
+      "row_count": 504,
+      "sha256": "f022cb4d34466a9fb938e9b2d04cc2143992f827b6576b0dea566df11888ce27",
+      "size_bytes": 238656
+    },
+    {
+      "path": "readability/selected_stimulus_readability_summary.csv",
+      "row_count": 98,
+      "sha256": "16b09e609655baa781440213599cdb9d41ca31dd5c43071f25544e8c69558751",
+      "size_bytes": 26117
+    },
+    {
+      "path": "readability/unavailable_human_control_strata.csv",
+      "row_count": 72,
+      "sha256": "962b5f179d64409f654ee2056e668f88c95b3dd7c6591f53c7492717ae52a839",
+      "size_bytes": 13338
+    },
+    {
+      "path": "resource_and_process_audit.json",
+      "sha256": "47b0212a262dd0779b2a0f421a0553cde28f0c78148439558d4aff7e2d16e6de",
+      "size_bytes": 3661
+    },
+    {
+      "path": "reviewer_evidence_matrix.md",
+      "sha256": "5f21c74a5e58f71e51594584e743ef7cd3be40d8bbe8d80e556c07c4ee39503f",
+      "size_bytes": 9634
+    },
+    {
+      "path": "robustness/failure_mechanism_summary.csv",
+      "row_count": 19,
+      "sha256": "62f85f4640200a8afaebe165689907a2e0318f30dc05b08ef044e3a45ede8531",
+      "size_bytes": 3907
+    },
+    {
+      "path": "robustness/failure_taxonomy.csv",
+      "row_count": 2215,
+      "sha256": "a85a393a1df20de10a347c37deeba432b01c48f9de8b9e3cc14471fbf97824f8",
+      "size_bytes": 1329369
+    },
+    {
+      "path": "robustness/perturbation_coverage_inventory.csv",
+      "row_count": 11,
+      "sha256": "6d086de67c981cf314fcde9ce2e895916fb579d284ddde82bd38e46283081e43",
+      "size_bytes": 3258
+    },
+    {
+      "path": "robustness/perturbation_coverage_manifest.json",
+      "sha256": "84ac8e86c4dcfdc315ede2ca45c7b166ff67b1560d053ba9738b56cf0b860aa7",
+      "size_bytes": 2659
+    },
+    {
+      "path": "robustness/recovery_by_condition.csv",
+      "row_count": 24,
+      "sha256": "bacd0e260ca9eb24638f9970a86a5d54ee51b77e48e43760a0abf940b296dd84",
+      "size_bytes": 5390
+    },
+    {
+      "path": "robustness/recovery_by_model_condition.csv",
+      "row_count": 75,
+      "sha256": "e67b1ef0106a344f609eab70fde7c07fe919af3ffa1801d172585f672e6f56f6",
+      "size_bytes": 18645
+    },
+    {
+      "path": "robustness/robustness_analysis_manifest.json",
+      "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177",
+      "size_bytes": 3917
+    },
+    {
+      "path": "robustness/robustness_recovery_plot_source.csv",
+      "row_count": 24,
+      "sha256": "98afef4bd516c46351994946417a1fe5c8515b9747fa004ae3ee078acea1ebe4",
+      "size_bytes": 3291
+    },
+    {
+      "path": "robustness/unavailable_summary.csv",
+      "row_count": 7,
+      "sha256": "9bc22a0fe16237636993b199b3396f6b3fb8d5019f0205bca7bea243fa44bf48",
+      "size_bytes": 2042
+    },
+    {
+      "path": "statistics/ablation_analysis/ablation_canonical_contrasts.csv",
+      "row_count": 60,
+      "sha256": "ab7b54b0b9778595d7ec5613a6db86c8b1570f0edd050c954b01c33c59f399f4",
+      "size_bytes": 22896
+    },
+    {
+      "path": "statistics/ablation_analysis/ablation_configuration_summary.csv",
+      "row_count": 16,
+      "sha256": "18ff6f82c267a6417e9af7f324c69fdcc48380150ef900001971f82ee762f781",
+      "size_bytes": 1966
+    },
+    {
+      "path": "statistics/ablation_analysis/ablation_continuous_summary.csv",
+      "row_count": 80,
+      "sha256": "c6ef0280090b6df2705718e2bb3e5c818033571bb03e276172e79624ba40be60",
+      "size_bytes": 17371
+    },
+    {
+      "path": "statistics/ablation_analysis/ablation_evidence_manifest.json",
+      "sha256": "296b78d0e538e3f2efea3bbd7ee9c389d5b8848de7a46719c3c262def277d3f2",
+      "size_bytes": 3744
+    },
+    {
+      "path": "statistics/ablation_analysis/ablation_unavailable_summary.csv",
+      "row_count": 1,
+      "sha256": "1f22e130aba6edc05a34737a11bdc6d8922af1e651f62d5428f016de32094aa9",
+      "size_bytes": 267
+    },
+    {
+      "path": "statistics/mixed_models/mixed_model_coefficients.csv",
+      "row_count": 325,
+      "sha256": "1d78f32faee65189f4bc41daadbba67ca72c8c9d77a785da9b8eb7e9676c3af7",
+      "size_bytes": 134240
+    },
+    {
+      "path": "statistics/mixed_models/mixed_model_contrasts.csv",
+      "row_count": 225,
+      "sha256": "c4dfb443d3c3d0913836b9718eb94f4eed7212f2a120c1845b6a8587fcad5ffb",
+      "size_bytes": 62852
+    },
+    {
+      "path": "statistics/mixed_models/mixed_model_diagnostics.json",
+      "sha256": "d2407431b95be88a464117345b6cca22e46bab738edf1e1180add393450d1f18",
+      "size_bytes": 3627
+    },
+    {
+      "path": "statistics/mixed_models/mixed_model_run_manifest.json",
+      "sha256": "12dbf66996cf164eb7c7ef208ded3ffce370ee6e3a7d58e5db193d0979861abc",
+      "size_bytes": 5724
+    },
+    {
+      "path": "statistics/mixed_models/model_status.json",
+      "sha256": "c96b4bda5f52cc3171753ec7f56b1431bdc11302db288227792408f0b36c5136",
+      "size_bytes": 1731
+    },
+    {
+      "path": "statistics/mixed_models/poisson_dispersion_check.csv",
+      "row_count": 1,
+      "sha256": "15baec34cf5b61f785fe596a5761da8a7c463d3170d03b080f6c23af18021791",
+      "size_bytes": 220
+    },
+    {
+      "path": "statistics/mixed_models/recovery_wilson_sensitivity.csv",
+      "row_count": 24,
+      "sha256": "09f827f2315a2b68e557cff51fc2d5aec3f62e0a0207a89781d95c9ac0fe8ee0",
+      "size_bytes": 3975
+    },
+    {
+      "path": "statistics/mixed_models_prefinal_failure_20260816T0855Z.json",
+      "sha256": "773e0615399d1157a68bbe707989374317d8932f96d9e9bfc9a0521153a57728",
+      "size_bytes": 1077
+    },
+    {
+      "path": "statistics/mixed_models_prefinal_v3_correction_audit.json",
+      "sha256": "1be58ea1af4ce3eee6e3a11db223a570a328846b816cdb92126ee07261fe3c45",
+      "size_bytes": 5491
+    },
+    {
+      "path": "statistics/python/continuous_summary.csv",
+      "row_count": 78088,
+      "sha256": "80341192af4d1104e9dfdd7a4c7369c46dda6cc30f9414f995067aab702ee2ec",
+      "size_bytes": 38523190
+    },
+    {
+      "path": "statistics/python/detector_summary.csv",
+      "row_count": 56,
+      "sha256": "d48e7995d9243b690b35f467097a840275fd1c1c9d63ce27a9a818d767106ce5",
+      "size_bytes": 31316
+    },
+    {
+      "path": "statistics/python/effect_sizes.csv",
+      "row_count": 8446,
+      "sha256": "2582ce3e9edd5424023d01d8ed549725a60c025e1ce88c90d92a2974a3f7bf2c",
+      "size_bytes": 6695523
+    },
+    {
+      "path": "statistics/python/mixed_effects_coefficients.csv",
+      "row_count": 0,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c",
+      "size_bytes": 7
+    },
+    {
+      "path": "statistics/python/mixed_effects_status.json",
+      "sha256": "716986a306f85b8de0df6716fb8145690e983ab5a51e07f172c554f7b052c46e",
+      "size_bytes": 79
+    },
+    {
+      "path": "statistics/python/quality_trial_metrics.csv",
+      "row_count": 29520,
+      "sha256": "3a863a9a0bfe6fcc29f5cd5214904017ea9ef31f79dee2ed9d7656820c332709",
+      "size_bytes": 23910815
+    },
+    {
+      "path": "statistics/python/recovery_summary.csv",
+      "row_count": 3696,
+      "sha256": "56cb672f99df9b581d9b10ae30d2546b79849413da7ffb08a4d402c04cd20578",
+      "size_bytes": 2012228
+    },
+    {
+      "path": "statistics/python/statistics_execution_audit.json",
+      "sha256": "f38930b808e1ddd2af03fe546577dc70e918833e9d5f9593c322d11a14b5c5e7",
+      "size_bytes": 4294
+    },
+    {
+      "path": "statistics/python/statistics_integrity_report.json",
+      "sha256": "ee8cf1f8fb7593dff33676e5a40ae594bd88939ee6dbf204ca9e4ec5b0133ae9",
+      "size_bytes": 3814
+    },
+    {
+      "path": "statistics/python/statistics_run_manifest.json",
+      "sha256": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381",
+      "size_bytes": 8983
+    },
+    {
+      "path": "statistics/r_environment_restore_provenance.json",
+      "sha256": "bb8b83704c062b31ef8f8ad6431f00b429cfc4ba00f8441949ea30ccdaa686d0",
+      "size_bytes": 6871
+    },
+    {
+      "path": "statistics/statistics_predetector_failure_20260816T0950Z.json",
+      "sha256": "096b210e02a78c0214b45ffcb16c8fabec717250c9041513052edd2baf9b2d40",
+      "size_bytes": 1565
+    },
+    {
+      "path": "statistics/test_suite/full_suite_prefinal_diagnostic.json",
+      "sha256": "38623258c1515217477dcfabd3b217742f377eb551e4460e5a30ea6f53093b81",
+      "size_bytes": 1360
+    },
+    {
+      "path": "statistics/test_suite/junit.xml",
+      "sha256": "dc36096b15c3db044b6b2ada17abd5bc30669e17905fc97d6a89fba066355c76",
+      "size_bytes": 84423
+    },
+    {
+      "path": "statistics/test_suite/test_suite_manifest.json",
+      "sha256": "59268bd25636233467a38b6f5f4bdb8f1357c11d45b8e53a5824c3c121742556",
+      "size_bytes": 2579
+    },
+    {
+      "path": "statistics/topic_effects/topic_effect_extraction_manifest.json",
+      "sha256": "c01494cf3fac9ff8e26b6fde65d6cea2e47e11a3fe70988ecaa0b0f2814f02f0",
+      "size_bytes": 2631
+    },
+    {
+      "path": "statistics/topic_effects/topic_schedule_contrasts.csv",
+      "row_count": 15,
+      "sha256": "30e941e11f6c71b475a2fc0aff9edf2999585c7132eec1a138804681ed51f459",
+      "size_bytes": 6293
+    },
+    {
+      "path": "tables/artifact_priority_index.csv",
+      "row_count": 19,
+      "sha256": "e2ba40a7128ea9d47e3b6961e4baca7ccd787f7c2b59cf2f81742f3cd442f8ce",
+      "size_bytes": 5804
+    },
+    {
+      "path": "tables/corpus_counts.csv",
+      "row_count": 8,
+      "sha256": "8d2421839d074beeebd534e0bccf613a646cd16d52456ebaef921fb67d9abec0",
+      "size_bytes": 511
+    },
+    {
+      "path": "tables/design_counts.csv",
+      "row_count": 6,
+      "sha256": "1d784fa1091b89c00afac656aeee302e4b497a0da2f6e119b31e5adcdf719089",
+      "size_bytes": 149
+    },
+    {
+      "path": "tables/evidence_artifact_references.csv",
+      "row_count": 73,
+      "sha256": "4b4275fe080462213d5487b45c02cff96ba64549a6556d5f7256d7404abf5a41",
+      "size_bytes": 11478
+    },
+    {
+      "path": "tables/multilingual_recovery/multilingual_language_payload_outcomes.csv",
+      "row_count": 96,
+      "sha256": "a47bfda10f67c2afc23a4c5093d051db7875e3910a9fdc7af6b09315d851f860",
+      "size_bytes": 6682
+    },
+    {
+      "path": "tables/multilingual_recovery/multilingual_recovery_endpoint_manifest.json",
+      "sha256": "2bd69372d36d937b4c9677d41ae87c31869ff47cc86d3950169e4ad5203589f3",
+      "size_bytes": 2947
+    },
+    {
+      "path": "tables/multilingual_recovery/multilingual_recovery_endpoints.csv",
+      "row_count": 6,
+      "sha256": "e305b46f4e614e023606c0d759be4538691158268a498c5759b0b24b3d88bd25",
+      "size_bytes": 2260
+    },
+    {
+      "path": "tables/primary_recovery/primary_payload_group_outcomes.csv",
+      "row_count": 480,
+      "sha256": "fb6518c2642a0748d623fbc941d0f21926e198fb21eca8a7c0dc071abbda1cb6",
+      "size_bytes": 30393
+    },
+    {
+      "path": "tables/primary_recovery/primary_recovery_endpoint_manifest.json",
+      "sha256": "3760ce52ed87d348050d19071da1324f2d46ee74f556b46ca3297584b19de93d",
+      "size_bytes": 3209
+    },
+    {
+      "path": "tables/primary_recovery/primary_recovery_endpoints.csv",
+      "row_count": 3,
+      "sha256": "b653430544daf331e0b396515a87136a09d0c590d4f55c67b1e5fd3d14246b9f",
+      "size_bytes": 1245
+    },
+    {
+      "path": "tables/reviewer_evidence_matrix.csv",
+      "row_count": 14,
+      "sha256": "d1dfeaeed0843091375b7a1b725009d5eb614f289420117a41d65004eb3288f1",
+      "size_bytes": 9220
+    },
+    {
+      "path": "tables/stage_counts.csv",
+      "row_count": 6,
+      "sha256": "2dc48a2c7fb899d5e8bf3ab9312a815048f1f4d7aa322dc6771984b5ad3b364e",
+      "size_bytes": 280
+    },
+    {
+      "path": "tables/verified_findings.csv",
+      "row_count": 26,
+      "sha256": "aa14f0f72e2b21461869d8dbd35f9acd143a112086489901a0e9754433b16c73",
+      "size_bytes": 20477
+    },
+    {
+      "path": "theory/TECHNICAL_NOTE.md",
+      "sha256": "282824f893ea746067b05f888ee89b5f8046fdea140baedff659423bb3510964",
+      "size_bytes": 1952
+    },
+    {
+      "path": "theory/theory_assumptions.json",
+      "sha256": "0fd5811c9bef0dec00872f7fefe0a93c5dcfdf1d982c1814b5b93093a83aeeab",
+      "size_bytes": 1775
+    },
+    {
+      "path": "theory/theory_capacity_plot_source.csv",
+      "row_count": 7008,
+      "sha256": "6253a18d5caa85e112534adadfd9a82d90f5651505a30a6a1b15f1ce8c5ac73f",
+      "size_bytes": 1477761
+    },
+    {
+      "path": "theory/theory_capacity_validation.csv",
+      "row_count": 17424,
+      "sha256": "1139180aceac20662af6fef910cf8bbaf76ab5d74737c57526cb7bf716f64e6d",
+      "size_bytes": 5505851
+    },
+    {
+      "path": "theory/theory_cascade_diagnostics.csv",
+      "row_count": 0,
+      "sha256": "193c652a8e82149a4ce4cc1e47ef0337706042870b8a73f6202aed9ffe7a18b4",
+      "size_bytes": 383
+    },
+    {
+      "path": "theory/theory_empirical_manifest.json",
+      "sha256": "e2449de3aafca211fd2c7b644400c6225b56bc969743a2682d1105da99b0ac4d",
+      "size_bytes": 5100
+    },
+    {
+      "path": "theory/theory_empirical_summary.csv",
+      "row_count": 686,
+      "sha256": "19b32a52ee415c9361c6c2eb7e838babf682222dd64b59ecf3810bb8f67ed853",
+      "size_bytes": 260568
+    },
+    {
+      "path": "theory/theory_empirical_validation.csv",
+      "row_count": 17424,
+      "sha256": "89523e3381137d21a7d6291ed7ce50cefeb8ac424ac14709e4ad60af75cfd95c",
+      "size_bytes": 10352110
+    },
+    {
+      "path": "theory/theory_exact_recovery_validation.csv",
+      "row_count": 17424,
+      "sha256": "38fb198697b751b64755349a74b13a69f0cd78bbb44c70c868d3b30ccd028aa2",
+      "size_bytes": 5260352
+    },
+    {
+      "path": "theory/theory_quality_plot_source.csv",
+      "row_count": 8736,
+      "sha256": "4691e523e8fc19790068eb364c82a0d681ded03e60799353591a14184f9bb250",
+      "size_bytes": 2158347
+    },
+    {
+      "path": "theory/theory_quality_validation.csv",
+      "row_count": 17424,
+      "sha256": "a80d0a3b923c95d48c3a9eef12173434fe3f01573cc4220dd499531414088f6d",
+      "size_bytes": 5771197
+    },
+    {
+      "path": "theory/theory_residual_plot_source.csv",
+      "row_count": 7008,
+      "sha256": "14533c2236f8cd72393ca6b09f8ead860dab1b5c576a72191176003022efd780",
+      "size_bytes": 2504043
+    },
+    {
+      "path": "theory/theory_validation_manifest.json",
+      "sha256": "df33b6f5950dc1d13cdb92870bf1fda73f0811637f0fc97caf0f18bfd3ad86e8",
+      "size_bytes": 4478
+    },
+    {
+      "path": "verified_findings.md",
+      "sha256": "03c6daf731fbfbbf294a40ac316f565fc8d77205f4db2c0d2ebe1c3498d9c1a0",
+      "size_bytes": 21131
+    }
+  ],
+  "package_root": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package",
+  "required_relative_paths": [
+    "STATUS.md",
+    "artifact_priority_index.md",
+    "changed_and_generated_files.txt",
+    "detectors/detector_reference_manifest.json",
+    "evidence_summary_manifest.json",
+    "evidence_summary_prefinal_failure_20260816T1736Z.json",
+    "figures/figure_manifest.json",
+    "gpu_budget.json",
+    "limitations_and_unresolved_items.md",
+    "overhead/overhead_analysis_manifest.json",
+    "package_index_prefinal_failure_20260816T1746Z.json",
+    "readability/readability_and_stimulus_manifest.json",
+    "resource_and_process_audit.json",
+    "reviewer_evidence_matrix.md",
+    "robustness/robustness_analysis_manifest.json",
+    "statistics/python/statistics_run_manifest.json",
+    "statistics/test_suite/test_suite_manifest.json",
+    "tables/stage_counts.csv",
+    "theory/theory_empirical_manifest.json",
+    "verified_findings.md"
+  ],
+  "schema_version": "rankcloak-final-experiment-package-index-v1",
+  "status": "passed",
+  "summary": {
+    "component_manifest_count": 19,
+    "external_reference_count": 18,
+    "package_bytes": 115438271,
+    "package_file_count": 128,
+    "validated_declared_output_count": 80
+  }
+}

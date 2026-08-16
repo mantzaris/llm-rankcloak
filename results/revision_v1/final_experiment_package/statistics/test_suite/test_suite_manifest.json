@@ -1,0 +1,62 @@
+{
+  "collection_reconciliation": {
+    "deselected_prohibited_cpu_neural_tests": 1,
+    "executed_computational_tests": 597,
+    "ignored_publication_scope_tests": 31,
+    "total_collected_without_scope_filters": 629
+  },
+  "command": ".venv/bin/python -m pytest -q --ignore=tests/test_revision_manuscripts.py --ignore=tests/test_revision_references.py --ignore=tests/test_revision_release.py -k 'not textcnn_reports_reproducible_post_training_state_hash' --junitxml=results/revision_v1/final_experiment_package/statistics/test_suite/junit.xml",
+  "environment": {
+    "python_version": "3.10.13",
+    "pytest_version": "9.1.1"
+  },
+  "git_head": "223a06f649494eb1fefeca8832cf89a069d92cdc",
+  "ignored_test_modules": [
+    {
+      "path": "tests/test_revision_manuscripts.py",
+      "reason": "Manuscript and publication work is outside the authorized computational scope.",
+      "sha256": "b1e8f1f21a279c39da3f89eb641e0101da09b309e6f4c331527161700310e73c",
+      "test_count": 3
+    },
+    {
+      "path": "tests/test_revision_references.py",
+      "reason": "Bibliography and publication work is outside the authorized computational scope.",
+      "sha256": "620b453264b72b4834f79a503e5be377ffc18b8d99cbdfb07d0bbdec4edac20f",
+      "test_count": 7
+    },
+    {
+      "path": "tests/test_revision_release.py",
+      "reason": "Release, deposit, Code Availability, and publication work is outside the authorized computational scope.",
+      "sha256": "64aba51132df1f6c1eb62829c6f39a655d3589e0b29399050895039d04aa4f0b",
+      "test_count": 21
+    }
+  ],
+  "outputs": {
+    "full_suite_prefinal_diagnostic": {
+      "path": "full_suite_prefinal_diagnostic.json",
+      "sha256": "38623258c1515217477dcfabd3b217742f377eb551e4460e5a30ea6f53093b81",
+      "size_bytes": 1360
+    },
+    "junit_xml": {
+      "path": "junit.xml",
+      "sha256": "dc36096b15c3db044b6b2ada17abd5bc30669e17905fc97d6a89fba066355c76",
+      "size_bytes": 84423
+    }
+  },
+  "prohibited_test": {
+    "node_id": "tests/test_revision_detection.py::test_textcnn_reports_reproducible_post_training_state_hash",
+    "reason": "The frozen CPU detector decision prohibits CPU neural training and smaller CPU neural-training reproductions.",
+    "source_path": "tests/test_revision_detection.py",
+    "source_sha256": "42655407e63ae91b3b90ff04675fcdc00cc11af7c82ea8ce7a82194adb702ba3"
+  },
+  "results": {
+    "errors": 0,
+    "executed": 597,
+    "failures": 0,
+    "passed": 597,
+    "skipped": 0,
+    "wall_seconds": 139.34
+  },
+  "schema_version": "rankcloak-computational-test-audit-v1",
+  "status": "passed"
+}

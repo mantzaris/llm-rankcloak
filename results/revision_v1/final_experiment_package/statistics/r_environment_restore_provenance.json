@@ -1,0 +1,182 @@
+{
+  "audit_date": "2026-08-16",
+  "automatic_network_install_during_analysis": false,
+  "build_tool": {
+    "actual_binary_sha256": "4cce72587f1437bdbde61e4da8988f88f4d9bbcbbe0b043a48a52f0d8c724c13",
+    "installation_scope": "isolated_temporary_python_target",
+    "path": "/tmp/rankcloak_cmake_4_4_2",
+    "source": "official_pypi_binary_wheel",
+    "version": "4.4.2"
+  },
+  "description_hash_policy": "Installed DESCRIPTION bytes are recorded but are not required to match a prior build because R writes a new Built timestamp. Exact package versions and declared library roles are required by the launcher.",
+  "frozen_inputs": {
+    "environment_record": {
+      "path": "environment/revision_v1/r_environment.json",
+      "sha256": "b80a0a633f16413d2ffa2cf97b27bf3e0f90b0fdddb2f5282310ba92c07ed233"
+    },
+    "launcher": {
+      "path": "analysis/revision_v1/run_with_locked_r.sh",
+      "sha256": "7a4069696eabfc422d6fc1911f5934b2f50a567e865a026eac9767db35242ab0"
+    },
+    "lock": {
+      "path": "analysis/revision_v1/r_environment.lock.json",
+      "sha256": "96ec333d847d845280e1aba5197ee298d46eeeedcd72e88e8ec1aa9d22cf368b"
+    }
+  },
+  "installation_attempts": [
+    {
+      "completed_packages": [
+        "Rcpp",
+        "rbibutils",
+        "Rdpack"
+      ],
+      "failed_package": "nloptr",
+      "failure": "cmake_not_found_and_system_nlopt_not_discoverable",
+      "stale_lock_after_exit": false,
+      "status": "failed_dependency_diagnostic"
+    },
+    {
+      "build_priority": "nice_10_make_jobs_1",
+      "completed_packages": [
+        "nloptr",
+        "reformulas",
+        "ucminf",
+        "lme4",
+        "ordinal"
+      ],
+      "isolated_cmake_used": true,
+      "status": "passed"
+    }
+  ],
+  "launcher_probe": {
+    "library_roles_match": true,
+    "required_package_versions_match": true,
+    "r_version": "4.4.2",
+    "status": "passed"
+  },
+  "network_access": {
+    "official_cran_source_downloads": true,
+    "official_pypi_cmake_wheel_download": true,
+    "used_during_model_fitting": false
+  },
+  "project_library": {
+    "package_count": 8,
+    "packages": [
+      {
+        "historical_description_sha256": "b8a4d18d07900065e0e3cc3506db67c69cae4c593923f1aa0dd2c1777277407e",
+        "installed_description_sha256": "29e91440b3eac971382ccbc53f7337403cea74b058e7e65721ee7f5636e8d968",
+        "name": "Rcpp",
+        "version": "1.1.2"
+      },
+      {
+        "historical_description_sha256": "6d0cb0b84b2dc6177e701d0a278eb0f05a951eb25c6aacc8060b29b8c11fc090",
+        "installed_description_sha256": "884bed93ab3d4763908e8e990ec2152ceb21d2f166c0162271f42b5eefcbe110",
+        "name": "Rdpack",
+        "version": "2.6.6"
+      },
+      {
+        "historical_description_sha256": "29b0097432ba0ed5e5fc315c0d6f6c9288395274578cec9538df88ace76e023f",
+        "installed_description_sha256": "f9c756933cdccda881a8e63f1ae1721e9270feac65502c4931dbfbcf4dea2828",
+        "name": "lme4",
+        "version": "2.0-6"
+      },
+      {
+        "historical_description_sha256": "78a3007c12cbb71375f0b6a017b79bfc35c3c6c1288504c7f0c089b99820ba86",
+        "installed_description_sha256": "f7a7f3e2a3a3dc863de9c4fce48ef1c3710647539c888ff69f589c3f83eb7279",
+        "name": "nloptr",
+        "version": "2.2.1"
+      },
+      {
+        "historical_description_sha256": "32cea7509310591ef643e8cfc0a97b463118c69fc51577a588ad96db2c6b3d2b",
+        "installed_description_sha256": "86c2f5d42dfb6a1e9f3fccdbaf140a8f7fc24b7a8e81e366b8c3b10ef9414d14",
+        "name": "ordinal",
+        "version": "2026.7-26"
+      },
+      {
+        "historical_description_sha256": "80020078a64d182d57c73bdd882f6a8fb383f2c223df2e8f1c99dbce5d1cf4c0",
+        "installed_description_sha256": "dfad57e2a8fe07b23fbd62405d097f4cbd3c800b1487f9ac1e69ed01f39b2c35",
+        "name": "rbibutils",
+        "version": "2.4.1"
+      },
+      {
+        "historical_description_sha256": "fd3ba71719d309c47cd6353e442bb567f7cdb6728c5558e745552722697f7363",
+        "installed_description_sha256": "194b63ca33a72dbd66fbc0386c21031373e5128defb9ba62e438de879e34b25e",
+        "name": "reformulas",
+        "version": "0.4.4"
+      },
+      {
+        "historical_description_sha256": "400609726ada91214a626366cce6c4ec94a38fe1c3bab9d87ee2dae898af418f",
+        "installed_description_sha256": "5eb9654f31b888ba4cdbc8d3f0d0a78db3f79af889bd8666c6d11ca88568e694",
+        "name": "ucminf",
+        "version": "1.2.3"
+      }
+    ],
+    "path": ".r_libs/revision_v1",
+    "stale_lock_present": false
+  },
+  "schema_version": "rankcloak-r-environment-restore-provenance-v1",
+  "source_cache": {
+    "copied_into_evidence_package": false,
+    "path": "/tmp/rankcloak_r_sources_20260816_BPN4x4",
+    "preserved": true,
+    "tarballs": [
+      {
+        "name": "Rcpp",
+        "sha256": "2746cf2fb188e5f0a84dbf5c8f68915b54564ed33e5754572f174e7b32e7f4f3",
+        "size_bytes": 1892159,
+        "url": "https://cran.r-project.org/src/contrib/Rcpp_1.1.2.tar.gz",
+        "version": "1.1.2"
+      },
+      {
+        "name": "rbibutils",
+        "sha256": "da313d920a0f35ffdf30a54929ba8904b2b5a0d7f11a519db8674148129c8f32",
+        "size_bytes": 1191704,
+        "url": "https://cran.r-project.org/src/contrib/rbibutils_2.4.1.tar.gz",
+        "version": "2.4.1"
+      },
+      {
+        "name": "Rdpack",
+        "sha256": "b4e19d22bd5a2ec79cdb08ba209e79c66ea16dbc2fd2e7db8bca46412651cbdb",
+        "size_bytes": 378731,
+        "url": "https://cran.r-project.org/src/contrib/Rdpack_2.6.6.tar.gz",
+        "version": "2.6.6"
+      },
+      {
+        "name": "nloptr",
+        "sha256": "76ba40750b475c8b1ad6a86c9e05f0c1746af16d965235ff9293953920aed7f4",
+        "size_bytes": 2253853,
+        "url": "https://cran.r-project.org/src/contrib/nloptr_2.2.1.tar.gz",
+        "version": "2.2.1"
+      },
+      {
+        "name": "reformulas",
+        "sha256": "6a76d85eb4e19325aef87510180175f8cd7b5904a7075c89aff073765529e2f7",
+        "size_bytes": 85205,
+        "url": "https://cran.r-project.org/src/contrib/reformulas_0.4.4.tar.gz",
+        "version": "0.4.4"
+      },
+      {
+        "name": "ucminf",
+        "sha256": "4dcfc0e97a9e66f640d8f7a2c22a59e608d04dc49dadbf23aad5fb4e425a9015",
+        "size_bytes": 17196,
+        "url": "https://cran.r-project.org/src/contrib/ucminf_1.2.3.tar.gz",
+        "version": "1.2.3"
+      },
+      {
+        "name": "lme4",
+        "sha256": "3e503bc10626ad62804c80a82237147b1296d93c18d88946554c29075af917f7",
+        "size_bytes": 4266192,
+        "url": "https://cran.r-project.org/src/contrib/lme4_2.0-6.tar.gz",
+        "version": "2.0-6"
+      },
+      {
+        "name": "ordinal",
+        "sha256": "8b5210c33fd20a877c92310a56a3a77812ed250f645e3ff9a20cec3ac81fc02f",
+        "size_bytes": 765246,
+        "url": "https://cran.r-project.org/src/contrib/ordinal_2026.7-26.tar.gz",
+        "version": "2026.7-26"
+      }
+    ]
+  },
+  "status": "passed"
+}

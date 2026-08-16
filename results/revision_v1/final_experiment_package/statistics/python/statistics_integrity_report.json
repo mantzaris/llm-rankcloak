@@ -1,0 +1,126 @@
+{
+  "analysis_unit": "payload",
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 2026080801,
+  "bootstrap_unit": "payload",
+  "confidence_level": 0.95,
+  "continuous_quality_source_metadata": {
+    "matched_rows": 8736,
+    "unmatched_role": "ordinary_controls_or_unjoined_sources",
+    "unmatched_rows": 8496
+  },
+  "cross_payload_duplicate_text": {
+    "detector_leakage_guard_separate": true,
+    "hash_count": 1,
+    "hash_examples": [
+      "009390f8469393ed13208d2bf74c9eb414832d1661a9adf1bc2f060df6480bfc"
+    ],
+    "payload_count": 2,
+    "row_count": 2,
+    "rows_rejected": 0,
+    "status": "observed_adverse_artifact"
+  },
+  "estimand_exclusions": {
+    "unavailable_rows_counted": false,
+    "unavailable_trial_rows": 0
+  },
+  "independent_payloads": {
+    "continuous_quality": 480,
+    "features": 480,
+    "runtime": 482,
+    "trials": 480
+  },
+  "input_rows": {
+    "continuous_quality": 17232,
+    "detectors": 55440,
+    "features": 75672,
+    "runtime": 21192,
+    "trials": 12144
+  },
+  "mixed_effects": [
+    {
+      "fixed_effects_fallback": false,
+      "status": "not_requested"
+    }
+  ],
+  "nested_segments_collapsed_before_quality_inference": true,
+  "payload_fidelity_contract": {
+    "alias_equality_validated": true,
+    "compatibility_alias": "exact_recovery",
+    "contract_version": "payload_fidelity_v2",
+    "direct_rows": 1728,
+    "direct_rows_contract_verified": 1728,
+    "exact_rank_replay_role": "diagnostic_only",
+    "primary_outcome": "exact_payload_recovery",
+    "result_schema_revision": "payload_aware_result_v2",
+    "semantics": "original_serialized_payload_bytes_sha256_v1"
+  },
+  "primary_effect_scope": {
+    "comparison_strata": {
+      "model_id": [
+        "protocol_variant",
+        "prompt_category"
+      ],
+      "prompt_category": [
+        "protocol_variant",
+        "model_id"
+      ],
+      "protocol_variant": [
+        "model_id",
+        "prompt_category",
+        "payload_class"
+      ]
+    },
+    "diagnostic_replay_fallback": false,
+    "eligible_trial_rows": 6480,
+    "evaluated_stratum_cells": {
+      "model_id": 36,
+      "prompt_category": 18,
+      "protocol_variant": 144
+    },
+    "evidence_status": "confirmatory_primary_v2_payload_fidelity_after_manifest_freeze",
+    "mitigation_id": "none",
+    "pairwise_effects_are_primary_inference": false,
+    "protocol_contract_revision": "payload_fidelity_v2",
+    "replay_mode": "saved_token_ids",
+    "result_schema_revision": "payload_aware_result_v2",
+    "study_phase": "primary_v2_confirmatory",
+    "transformation_id": "unmodified"
+  },
+  "quality_effect_scope": {
+    "effect_rows": 3424,
+    "exclusion_reason": null,
+    "unscoped_effect_rows": 0,
+    "view_column": "view",
+    "view_levels": [
+      "forced_span",
+      "full_message",
+      "transformed_full_message"
+    ],
+    "view_stratified": true
+  },
+  "quality_metric_notice": "Readability, repetition, surface flags, and TF-IDF similarity are deterministic diagnostics and not substitutes for human ratings.",
+  "raw_input_rows": {
+    "continuous_quality": 17232,
+    "detectors": 55440,
+    "features": 75672,
+    "runtime": 21192,
+    "trials": 12144
+  },
+  "runtime_source_metadata": {
+    "matched_trial_rows": 12144,
+    "unmatched_nontrial_rows": 9048,
+    "unmatched_roles": "ordinary controls, transformation jobs, unavailable/no-execution records, model-load events, or memory-profile events",
+    "unmatched_runtime_scope_counts": {
+      "condition_unavailable_no_execution": 48,
+      "dependent_unavailable_no_execution": 336,
+      "model_load_session": 12,
+      "model_shard_memory_profile": 12,
+      "ordinary_control_generation": 8496,
+      "robustness_transform_generation": 144
+    }
+  },
+  "segments_as_independent_observations": false,
+  "smoke_fixture": false,
+  "status": "passed"
+}

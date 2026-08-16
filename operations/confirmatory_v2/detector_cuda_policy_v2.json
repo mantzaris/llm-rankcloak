@@ -1,0 +1,52 @@
+{
+  "audit": {
+    "cpu_diagnostics_status": "preserved_feasibility_evidence_only",
+    "cpu_neural_training_authorized": false,
+    "derivation": "revision_takeover_2026-08-15_cuda_only_v2",
+    "diagnostic_path": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+    "diagnostic_sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7"
+  },
+  "authorized_ceiling": {
+    "gpu_hours": 165,
+    "historical_actual_gpu_hours_floor": 62.4783840698,
+    "projection_path": "results/revision_v1/compute_projection_165h_v2.json",
+    "projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3"
+  },
+  "benchmark": {
+    "task_indices": [
+      0,
+      1
+    ],
+    "checkpoint_reuse": true,
+    "cuda_reproducibility_fit_count_per_architecture": 2,
+    "allowed_failed_fit_retry_count_per_architecture": 1,
+    "projection_safety_multiplier": 1.5,
+    "full_matrix_budget_gate_required": true
+  },
+  "ceiling": {
+    "next_fit_upper_seconds_by_detector": {
+      "published_textcnn_equivalent": 900,
+      "deberta_v3_base_classifier": 7200
+    },
+    "post_benchmark_tighter_gate_required": true
+  },
+  "equivalence": {
+    "same_device_cuda": {
+      "task_design_exact": true,
+      "row_identity_order_labels_exact": true,
+      "model_state_sha256_exact": true,
+      "scores_exact": true,
+      "metrics_exact": true,
+      "predictions_exact": true
+    }
+  },
+  "execution": {
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "workers": 1,
+    "torch_num_threads": 1
+  },
+  "policy_status": "cuda_only_predeclared_before_new_benchmarks",
+  "schema_version": "rankcloak-revision-detector-cuda-policy-v2",
+  "policy_sha256": "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d"
+}

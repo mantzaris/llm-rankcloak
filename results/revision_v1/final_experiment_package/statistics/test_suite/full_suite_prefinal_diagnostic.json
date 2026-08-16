@@ -1,0 +1,35 @@
+{
+  "corrective_action": {
+    "post_freeze_specs_moved_from": "configs/revision_v1/",
+    "post_freeze_specs_moved_to": "analysis/revision_v1/evidence_specs/",
+    "post_freeze_spec_count": 8,
+    "targeted_registry_checks_after_move": {
+      "failed": 0,
+      "passed": 5
+    }
+  },
+  "failure_classification": {
+    "corrected_computational_registry_failures": 5,
+    "out_of_scope_publication_failures": 11,
+    "out_of_scope_publication_modules": {
+      "tests/test_revision_manuscripts.py": 3,
+      "tests/test_revision_references.py": 7,
+      "tests/test_revision_release.py::test_real_release_template_allowlists_verified_environment_bundle": 1
+    }
+  },
+  "junit_preservation": {
+    "original_prefinal_junit_retained": false,
+    "reason": "The prefinal JUnit path was overwritten by the authoritative scoped computational rerun before this compact diagnostic was written.",
+    "replacement_final_junit": "results/revision_v1/final_experiment_package/statistics/test_suite/junit.xml"
+  },
+  "observed_prefinal_results": {
+    "deselected": 1,
+    "failed": 16,
+    "passed": 612,
+    "wall_seconds": 146.263
+  },
+  "publication_scope_was_not_repaired_or_materialized": true,
+  "schema_version": "rankcloak-prefinal-full-suite-diagnostic-v1",
+  "scientific_result": false,
+  "status": "preserved_compact_diagnostic_superseded_by_scoped_pass"
+}

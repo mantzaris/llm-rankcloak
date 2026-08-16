@@ -33,6 +33,7 @@ from rankcloak.revision_detection import (  # noqa: E402
     prepare_revision_detector_suite,
     split_manifest_rows,
 )
+from scripts.build_detector_cuda_budget_gate import read_gate  # noqa: E402
 from rankcloak.revision_artifacts import canonical_json_sha256  # noqa: E402
 from rankcloak.revision_detector_execution import (  # noqa: E402
     DetectorExecutionContext,
@@ -41,12 +42,11 @@ from rankcloak.revision_detector_execution import (  # noqa: E402
     build_validated_checkpoint_equivalence_payload,
     detector_finalization_paths,
     execute_checkpointed_detector_suite,
-    export_validated_checkpoint_equivalence_artifact,
     mark_detector_awaiting_supervisor_finalization,
     read_detector_gpu_accounting_ledger,
-    read_detector_device_equivalence_report,
+    read_detector_cuda_reproducibility_report,
     verify_status_file,
-    write_detector_device_equivalence_report,
+    write_detector_cuda_reproducibility_report,
     write_detector_finalization_candidate,
 )
 
@@ -59,19 +59,22 @@ DEFAULT_EXECUTION_POLICY = (
     PROJECT_ROOT
     / "operations"
     / "confirmatory_v2"
-    / "detector_acceleration_policy_v1.json"
+    / "detector_cuda_policy_v2.json"
 )
 ENVIRONMENT_ROOT = PROJECT_ROOT / "environment" / "revision_v1"
 DEFAULT_EQUIVALENCE_ROOT = (
-    PROJECT_ROOT / "results" / "revision_v1" / "detector_equivalence_v1"
+    PROJECT_ROOT / "results" / "revision_v1" / "detector_cuda_reproducibility_v2"
 )
 DEFAULT_EQUIVALENCE_REPORTS = tuple(
-    DEFAULT_EQUIVALENCE_ROOT / "task_{}".format(index) / "equivalence_report.json"
+    DEFAULT_EQUIVALENCE_ROOT
+    / "task_{}".format(index)
+    / "cuda_reproducibility_report.json"
     for index in (0, 1)
 )
 DEFAULT_GPU_ACCOUNTING_LEDGER = (
     DEFAULT_EQUIVALENCE_ROOT / "gpu_accounting_ledger.json"
 )
+DEFAULT_CUDA_BUDGET_GATE = DEFAULT_EQUIVALENCE_ROOT / "cuda_budget_gate.json"
 PRIMARY_CONFIG = PROJECT_ROOT / "configs" / "revision_v1" / "primary.json"
 PROMPT_CONFIG = PROJECT_ROOT / "configs" / "revision_v1" / "prompts.json"
 MODEL_CONFIG = PROJECT_ROOT / "configs" / "revision_v1" / "models.json"
@@ -207,7 +210,7 @@ def _verify_execution_environment() -> dict:
 
 
 def _verify_execution_policy(path: Path) -> dict:
-    """Validate the closed pre-benchmark acceleration policy exactly."""
+    """Validate the closed CUDA-only pre-benchmark policy exactly."""
 
     declared_path = Path(path)
     if declared_path.is_symlink() or not declared_path.is_file():
@@ -233,9 +236,9 @@ def _verify_execution_policy(path: Path) -> dict:
     }
     if set(policy) != expected_keys or (
         policy.get("schema_version")
-        != "rankcloak-revision-detector-acceleration-policy-v1"
+        != "rankcloak-revision-detector-cuda-policy-v2"
         or policy.get("policy_status")
-        != "predeclared_before_acceleration_benchmarks"
+        != "cuda_only_predeclared_before_new_benchmarks"
     ):
         raise RevisionDetectionError("Detector acceleration policy schema differs.")
     projection = policy.get("authorized_ceiling")
@@ -246,6 +249,7 @@ def _verify_execution_policy(path: Path) -> dict:
     audit = policy.get("audit")
     if projection != {
         "gpu_hours": 165.0,
+        "historical_actual_gpu_hours_floor": 62.4783840698,
         "projection_path": "results/revision_v1/compute_projection_165h_v2.json",
         "projection_sha256": (
             "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3"
@@ -268,7 +272,14 @@ def _verify_execution_policy(path: Path) -> dict:
         "torch_num_threads": 1,
     }:
         raise RevisionDetectionError("Detector policy execution contract differs.")
-    if benchmark != {"task_indices": [0, 1], "checkpoint_reuse": True}:
+    if benchmark != {
+        "task_indices": [0, 1],
+        "checkpoint_reuse": True,
+        "cuda_reproducibility_fit_count_per_architecture": 2,
+        "allowed_failed_fit_retry_count_per_architecture": 1,
+        "projection_safety_multiplier": 1.5,
+        "full_matrix_budget_gate_required": True,
+    }:
         raise RevisionDetectionError("Detector policy benchmark contract differs.")
     expected_equivalence = {
         "same_device_cuda": {
@@ -278,39 +289,29 @@ def _verify_execution_policy(path: Path) -> dict:
             "scores_exact": True,
             "metrics_exact": True,
             "predictions_exact": True,
-        },
-        "cpu_cuda": {
-            "task_design_exact": True,
-            "row_identity_order_labels_exact": True,
-            "score_mae_max": 0.005,
-            "score_max_abs_max": 0.05,
-            "score_pearson_min": 0.999,
-            "prediction_agreement_min": 0.995,
-            "metric_max_abs_max": 0.02,
-            "model_state_tensor_schema_exact": True,
-            "model_state_hash_policy": "device_specific",
-        },
+        }
     }
     if equivalence != expected_equivalence:
         raise RevisionDetectionError("Detector policy equivalence contract differs.")
     if ceiling != {
         "next_fit_upper_seconds_by_detector": {
-            "published_textcnn_equivalent": 14400.0,
-            "deberta_v3_base_classifier": 108000.0,
-        }
+            "published_textcnn_equivalent": 900.0,
+            "deberta_v3_base_classifier": 7200.0,
+        },
+        "post_benchmark_tighter_gate_required": True,
     }:
         raise RevisionDetectionError("Detector policy next-fit bounds differ.")
     if not isinstance(audit, dict) or set(audit) != {
         "diagnostic_path",
         "diagnostic_sha256",
-        "cpu_textcnn_upper_seconds",
-        "cpu_deberta_upper_seconds",
+        "cpu_diagnostics_status",
+        "cpu_neural_training_authorized",
         "derivation",
-    } or audit.get("cpu_textcnn_upper_seconds") != 14400.0 or audit.get(
-        "cpu_deberta_upper_seconds"
-    ) != 108000.0 or audit.get("derivation") != (
-        "read_only_2026-08-12_detector_audit_with_conservative_margin_v1"
-    ):
+    } or audit.get("cpu_diagnostics_status") != (
+        "preserved_feasibility_evidence_only"
+    ) or audit.get("cpu_neural_training_authorized") is not False or audit.get(
+        "derivation"
+    ) != "revision_takeover_2026-08-15_cuda_only_v2":
         raise RevisionDetectionError("Detector policy audit provenance differs.")
     audit_path = PROJECT_ROOT / str(audit["diagnostic_path"])
     if (
@@ -574,6 +575,37 @@ def _read_json_object(path: Path, label: str) -> dict:
     if not isinstance(value, dict):
         raise RevisionDetectionError("{} must be a JSON object.".format(label))
     return value
+
+
+def _read_single_checkpoint_metric(path: Path) -> dict:
+    """Read one validated columnar metric row from an atomic fit checkpoint."""
+
+    payload = _read_json_object(path, "detector fit metric checkpoint")
+    columns = payload.get("columns")
+    rows = payload.get("rows")
+    if (
+        set(payload) != {"schema_version", "columns", "rows"}
+        or payload.get("schema_version")
+        != "rankcloak-revision-detector-fit-rows-v1"
+        or not isinstance(columns, list)
+        or not columns
+        or any(not isinstance(column, str) or not column for column in columns)
+        or len(columns) != len(set(columns))
+        or not isinstance(rows, list)
+        or len(rows) != 1
+        or not isinstance(rows[0], list)
+        or len(rows[0]) != len(columns)
+    ):
+        raise RevisionDetectionError(
+            "Detector fit metric checkpoint row payload is malformed."
+        )
+    metric = dict(zip(columns, rows[0]))
+    metadata = metric.get("implementation_metadata_json")
+    if not isinstance(metadata, str) or not metadata:
+        raise RevisionDetectionError(
+            "Detector fit metric checkpoint lacks implementation metadata."
+        )
+    return metric
 
 
 def _resolve_preprocessing_output(
@@ -885,6 +917,15 @@ def build_argument_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--cuda-budget-gate",
+        type=Path,
+        default=DEFAULT_CUDA_BUDGET_GATE,
+        help=(
+            "Signed benchmark-derived post-reproducibility budget gate; "
+            "required before the full confirmatory matrix."
+        ),
+    )
+    parser.add_argument(
         "--smoke",
         action="store_true",
         help=(
@@ -989,10 +1030,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--equivalence-role",
-        choices=("cpu", "cuda", "cuda_repeat"),
+        choices=("cuda", "cuda_repeat"),
         help=(
             "Run/export one full frozen representative fit as a signed "
-            "equivalence artifact; never publishes final detector products."
+            "CUDA reproducibility artifact; never publishes final detector products."
         ),
     )
     parser.add_argument(
@@ -1040,13 +1081,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             value is None
             for value in (
                 args.equivalence_task_index,
-                args.equivalence_cpu_artifact,
                 args.equivalence_cuda_artifact,
                 args.equivalence_cuda_repeat_artifact,
             )
         ):
             raise RevisionDetectionError(
-                "Equivalence report mode requires task index and all three artifacts."
+                "CUDA reproducibility report mode requires task index and both CUDA artifacts."
+            )
+        if equivalence_report_mode and args.equivalence_cpu_artifact is not None:
+            raise RevisionDetectionError(
+                "CPU artifacts are prohibited by the CUDA-only reproducibility gate."
             )
         if equivalence_fit_mode and equivalence_report_mode:
             raise RevisionDetectionError(
@@ -1139,6 +1183,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         equivalence_policy_identity = None
         required_equivalence_reports = []
         required_gpu_accounting_ledger = None
+        required_cuda_budget_gate = None
         confirmatory_plan_path = args.confirmatory_plan.resolve()
         if not args.smoke:
             if args.allow_model_downloads:
@@ -1156,27 +1201,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             equivalence_policy_identity = _equivalence_policy_identity(
                 execution_policy_binding, environment_binding
             )
-            cpu_reference_mode = (
-                equivalence_fit_mode and args.equivalence_role == "cpu"
-            )
             runtime_matches_policy = (
                 device == policy_execution["device"]
                 and gpu_uuid == policy_execution["gpu_uuid"]
                 and workers == int(policy_execution["workers"])
             )
-            if not equivalence_report_mode and not runtime_matches_policy and not (
-                cpu_reference_mode
-                and device == "cpu"
-                and gpu_uuid is None
-                and workers == 1
-            ):
+            if not equivalence_report_mode and not runtime_matches_policy:
                 raise RevisionDetectionError(
-                    "Detector runtime overrides differ from the acceleration policy."
+                    "Confirmatory neural training is CUDA-only and must match the pinned policy."
                 )
             if equivalence_report_mode:
-                report = write_detector_device_equivalence_report(
+                report = write_detector_cuda_reproducibility_report(
                     args.equivalence_report_output.resolve(),
-                    cpu_artifact_path=args.equivalence_cpu_artifact.resolve(),
                     cuda_artifact_path=args.equivalence_cuda_artifact.resolve(),
                     cuda_repeat_artifact_path=(
                         args.equivalence_cuda_repeat_artifact.resolve()
@@ -1186,16 +1222,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     ],
                     policy_identity=equivalence_policy_identity,
                 )
-                if report["decision"].get("equivalent") is not True:
+                if report["decision"].get("reproducible") is not True:
                     print(
-                        "methodological halt: detector device equivalence failed; "
+                        "methodological halt: detector CUDA reproducibility failed; "
                         "signed report preserved at {}".format(
                             args.equivalence_report_output.resolve()
                         ),
                         file=sys.stderr,
                     )
                     return 4
-                read_detector_device_equivalence_report(
+                read_detector_cuda_reproducibility_report(
                     args.equivalence_report_output.resolve(),
                     expected_task_index=args.equivalence_task_index,
                     expected_policy_identity=equivalence_policy_identity,
@@ -1214,11 +1250,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 if len(report_paths) != 2:
                     raise RevisionDetectionError(
                         "Normal CUDA production requires exactly task0 and task1 "
-                        "equivalence reports."
+                        "CUDA reproducibility reports."
                     )
                 for task_index, report_path in enumerate(report_paths):
                     required_equivalence_reports.append(
-                        read_detector_device_equivalence_report(
+                        read_detector_cuda_reproducibility_report(
                             report_path,
                             expected_task_index=task_index,
                             expected_policy_identity=equivalence_policy_identity,
@@ -1251,6 +1287,42 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     "cumulative_elapsed_seconds": ledger[
                         "cumulative_elapsed_seconds"
                     ],
+                }
+                budget_gate_path = args.cuda_budget_gate.resolve()
+                budget_gate = read_gate(
+                    budget_gate_path,
+                    expected_stage="post_reproducibility_preproduction",
+                )
+                gate_inputs = budget_gate.get("inputs", {})
+                gate_policy = gate_inputs.get("policy", {})
+                gate_ledger = gate_inputs.get("gpu_ledger", {})
+                if (
+                    Path(str(gate_policy.get("path", ""))).resolve()
+                    != Path(execution_policy_binding["path"]).resolve()
+                    or gate_policy.get("sha256")
+                    != execution_policy_binding["sha256"]
+                    or gate_policy.get("policy_sha256")
+                    != execution_policy_binding["policy_sha256"]
+                    or Path(str(gate_ledger.get("path", ""))).resolve()
+                    != DEFAULT_GPU_ACCOUNTING_LEDGER.resolve()
+                    or gate_ledger.get("sha256")
+                    != required_gpu_accounting_ledger["sha256"]
+                    or gate_ledger.get("ledger_sha256")
+                    != required_gpu_accounting_ledger["ledger_sha256"]
+                ):
+                    raise RevisionDetectionError(
+                        "CUDA budget gate does not bind the active policy and ledger."
+                    )
+                required_cuda_budget_gate = {
+                    "path": str(budget_gate_path),
+                    "sha256": _sha256_file(budget_gate_path),
+                    "size_bytes": int(budget_gate_path.stat().st_size),
+                    "gate_sha256": budget_gate["gate_sha256"],
+                    "gate_stage": budget_gate["gate_stage"],
+                    "projection_sha256": budget_gate["projection_sha256"],
+                    "projected_cumulative_gpu_hours": budget_gate[
+                        "projection"
+                    ]["projected_cumulative_gpu_hours"],
                 }
             detector_dataset_contract = _primary_detector_contract()
             if args.preprocessing_manifest is None:
@@ -1324,6 +1396,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 else str(DEFAULT_GPU_ACCOUNTING_LEDGER.resolve())
             ),
             "pre_final_gpu_accounting_ledger": required_gpu_accounting_ledger,
+            "cuda_budget_gate": required_cuda_budget_gate,
         }
         source_paths = [
             PROJECT_ROOT / "rankcloak" / "revision_detection.py",
@@ -1371,7 +1444,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             fit_permit_file=fit_permit_file,
             fit_permit_receipt_dir=fit_permit_receipt_dir,
             require_fit_permit=(
-                not args.smoke and args.equivalence_role != "cpu"
+                not args.smoke
             ),
         )
         benchmark_started = time.monotonic()
@@ -1404,9 +1477,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     "workers": int(workers),
                     "peak_rss_bytes": int(status["peak_rss_bytes"]),
                     "peak_vram_bytes": int(status["peak_vram_bytes"]),
-                    "gpu_accounting": (
-                        None if device == "cpu" else "supervisor_closes_after_exit"
-                    ),
+                    "gpu_accounting": "supervisor_closes_after_exit",
                     "status_file": str(status_file),
                     "status_sha256": status["status_sha256"],
                     "execution_policy_path": execution_policy_binding["path"],
@@ -1414,17 +1485,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     "policy_identity": equivalence_policy_identity,
                     "equivalence_role": args.equivalence_role,
             }
-            if device == "cpu":
-                artifact = export_validated_checkpoint_equivalence_artifact(
-                    prepared,
-                    execution_context,
-                    task_index=args.equivalence_task_index,
-                    role=args.equivalence_role,
-                    output_path=args.equivalence_artifact.resolve(),
-                    provenance=provenance,
-                )
-                print(json.dumps(artifact, sort_keys=True))
-                return 0
             payload = build_validated_checkpoint_equivalence_payload(
                 prepared,
                 execution_context,
@@ -1502,6 +1562,35 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     )["elapsed_seconds"]
                 )
             )
+            metric_record = (
+                None
+                if benchmark_index is None
+                else _read_single_checkpoint_metric(
+                    checkpoint_dir
+                    / "fits"
+                    / "{:04d}".format(int(benchmark_index))
+                    / "metric.json"
+                )
+            )
+            try:
+                implementation_metadata = (
+                    {}
+                    if metric_record is None
+                    else json.loads(metric_record["implementation_metadata_json"])
+                )
+            except json.JSONDecodeError as exc:
+                raise RevisionDetectionError(
+                    "Detector fit metric implementation metadata is invalid JSON."
+                ) from exc
+            if not isinstance(implementation_metadata, dict):
+                raise RevisionDetectionError(
+                    "Detector fit metric implementation metadata is not an object."
+                )
+            phase_timings = implementation_metadata.get(
+                "phase_timings_seconds", {}
+            )
+            checkpoint_seconds = float(sum(outcome.checkpoint_durations_seconds))
+            model_total_seconds = float(phase_timings.get("total", 0.0))
             benchmark_record = {
                 "schema_version": "rankcloak-revision-detector-benchmark-v1",
                 "created_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -1519,6 +1608,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 "wall_seconds": benchmark_seconds,
                 "fit_durations_seconds": outcome.fit_durations_seconds,
                 "fit_elapsed_seconds": actual_fit_seconds,
+                "phase_timings_seconds": phase_timings,
+                "fit_non_model_analysis_seconds": (
+                    None
+                    if actual_fit_seconds is None
+                    else max(0.0, actual_fit_seconds - model_total_seconds)
+                ),
+                "checkpoint_durations_seconds": outcome.checkpoint_durations_seconds,
+                "checkpoint_seconds": checkpoint_seconds,
+                "invocation_overhead_seconds": (
+                    None
+                    if actual_fit_seconds is None
+                    else max(
+                        0.0,
+                        benchmark_seconds - actual_fit_seconds - checkpoint_seconds,
+                    )
+                ),
                 "peak_rss_bytes": benchmark_status["peak_rss_bytes"],
                 "peak_vram_bytes": benchmark_status["peak_vram_bytes"],
                 "gpu_accounting": (
@@ -1713,6 +1818,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "pre_final_gpu_accounting_ledger": lineage[
             "pre_final_gpu_accounting_ledger"
         ],
+        "cuda_budget_gate": lineage["cuda_budget_gate"],
         "smoke": bool(args.smoke),
         "allow_model_downloads_cli": bool(args.allow_model_downloads),
         "accept_smoke_fallback": bool(args.accept_smoke_fallback),

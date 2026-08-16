@@ -1,0 +1,124 @@
+{
+  "automated_metrics_scope": "surface_diagnostics_not_human_judgements",
+  "bootstrap_resamples": 2000,
+  "confidence_level": 0.95,
+  "inputs": {
+    "design": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/human_study/config/design.json",
+      "sha256": "d0e0f844465904278c2fc48b3b9187304c1aa30431107a20fdaa2b8616750859",
+      "size_bytes": 1630
+    },
+    "human_control_audit": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/human_study/controls/dolly_coverage_audit.json",
+      "sha256": "4b2b81f54e8dd2b0ff485a8979738077e26e077e257fd56069a7c158918397a5",
+      "size_bytes": 4051
+    },
+    "power_planning": [
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/human_study/power/planning_power_design_grid.csv",
+        "sha256": "88c02ab24c66c128404a4dd3d710644c614859b5997d14da20798eb118fa3832",
+        "size_bytes": 2203
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/human_study/power/PLANNING_RESULTS.md",
+        "sha256": "228c11c01deaefc4bcbeef17fd2815527bc0b7e944f76d1474da0fa9229eaccd",
+        "size_bytes": 2982
+      }
+    ],
+    "prompt_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/prompts.json",
+      "sha256": "e638d7fe3451f4779d192977f818544857df3b9ad87c2d8a92b2b9809b09d4c5",
+      "size_bytes": 4730
+    },
+    "rating_instrument": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/human_study/survey/instrument.json",
+      "sha256": "a788324bf34fc2e4cd0de695c1dfa135a37e8dc7bdf6a2d1c5eb0b50cb9bcc7b",
+      "size_bytes": 3474
+    },
+    "records": [
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl",
+        "record_count": 4800,
+        "sha256": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+        "size_bytes": 75133856
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+        "record_count": 4800,
+        "sha256": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a",
+        "size_bytes": 69701371
+      },
+      {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+        "record_count": 4800,
+        "sha256": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+        "size_bytes": 75466438
+      }
+    ]
+  },
+  "large_raw_artifacts_copied": false,
+  "outputs": {
+    "candidate_pool": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/computational_candidate_pool.csv",
+      "row_count": 1008,
+      "sha256": "0789ea57315fde78e5593d84df6b9d005c3a92ab0ea23876fc15002270980912",
+      "size_bytes": 748374
+    },
+    "inventory": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/planned_stimulus_inventory.csv",
+      "row_count": 576,
+      "sha256": "4eb78c038152a606fc5b84fee86599bed887b75ef03a867b78cea0091abed55b",
+      "size_bytes": 295637
+    },
+    "metrics": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_metrics.csv",
+      "row_count": 504,
+      "sha256": "f022cb4d34466a9fb938e9b2d04cc2143992f827b6576b0dea566df11888ce27",
+      "size_bytes": 238656
+    },
+    "provenance": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/selected_stimulus_provenance.csv",
+      "row_count": 504,
+      "sha256": "4a9593d7e40be1a4040bf6d2749b8a633ba69fb58c2e6184138c81b2a2e08d0d",
+      "size_bytes": 350068
+    },
+    "randomization": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/randomization_metadata.json",
+      "sha256": "464e1f2afad57236bef954a9a79023bd470c8817f5c97c263b7e591ff431df3b",
+      "size_bytes": 3016
+    },
+    "status": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/human_evaluation_status.json",
+      "sha256": "a5312d78217251ded74dcda35ef0c8179540230bceb6cdf187a4698852fc4ccb",
+      "size_bytes": 1080
+    },
+    "summary": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_summary.csv",
+      "row_count": 98,
+      "sha256": "16b09e609655baa781440213599cdb9d41ca31dd5c43071f25544e8c69558751",
+      "size_bytes": 26117
+    },
+    "unavailable": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/unavailable_human_control_strata.csv",
+      "row_count": 72,
+      "sha256": "962b5f179d64409f654ee2056e668f88c95b3dd7c6591f53c7492717ae52a839",
+      "size_bytes": 13338
+    }
+  },
+  "readability_interval_unit": "prompt_template",
+  "schema_version": "rankcloak-readability-and-stimulus-evidence-v1",
+  "selection_unit": "one_complete_message_not_individual_segment",
+  "status": "computational_complete_human_evaluation_uncollected",
+  "summary": {
+    "candidate_pool_rows": 1008,
+    "eligible_candidate_records_before_balancing": 11520,
+    "human_participant_rows": 0,
+    "human_rating_rows": 0,
+    "planned_inventory_rows": 576,
+    "raw_input_records": 14400,
+    "readability_metric_rows": 504,
+    "readability_summary_rows": 98,
+    "selected_computational_stimuli": 504,
+    "unavailable_human_control_strata": 72
+  }
+}

@@ -1,0 +1,25 @@
+robustness_family,replay_mode,transformation_id,observed_outcome_rows,unavailable_rows,source_cover_units,recovery_rate,ci_low,ci_high,status,family_order,within_family_order,display_label
+replay_modes,detokenized_text_retokenized,unmodified,144,0,144,0.6111111111111112,0.5295890683279645,0.6868590123069163,observed,0,0,detokenized text retokenized
+replay_modes,greedy_leadin_regeneration,unmodified,144,0,144,1.0,0.9740163628569632,0.9999999999999998,observed,0,1,greedy leadin regeneration
+replay_modes,saved_token_ids,unmodified,144,0,144,1.0,0.9740163628569632,0.9999999999999998,observed,0,2,saved token ids
+raw_transmission,transformed_text_retokenized,character_deletion,144,0,144,0.125,0.0805506614325741,0.1889370664247034,observed,1,0,character deletion | transformed text retokenized
+raw_transmission,transformed_text_retokenized,character_insertion,144,0,144,0.125,0.0805506614325741,0.1889370664247034,observed,1,1,character insertion | transformed text retokenized
+raw_transmission,transformed_text_retokenized,character_substitution,144,0,144,0.1111111111111111,0.0695593871009681,0.1728723306769493,observed,1,2,character substitution | transformed text retokenized
+raw_transmission,transformed_text_retokenized,line_endings,144,0,144,0.1111111111111111,0.0695593871009681,0.1728723306769493,observed,1,3,line endings | transformed text retokenized
+raw_transmission,transformed_text_retokenized,markdown_copy_paste,144,0,144,0.0,0.0,0.0259836371430367,observed,1,4,markdown copy paste | transformed text retokenized
+raw_transmission,transformed_text_retokenized,paraphrase,144,0,144,0.0,0.0,0.0259836371430367,observed,1,5,paraphrase | transformed text retokenized
+raw_transmission,transformed_text_retokenized,quote_conversion,144,0,144,0.3888888888888889,0.3131409876930837,0.4704109316720355,observed,1,6,quote conversion | transformed text retokenized
+raw_transmission,transformed_text_retokenized,token_deletion,144,0,144,0.2361111111111111,0.1741675163392711,0.3117682921528871,observed,1,7,token deletion | transformed text retokenized
+raw_transmission,transformed_text_retokenized,truncation,144,0,144,1.0,0.9740163628569632,0.9999999999999998,observed,1,8,truncation | transformed text retokenized
+raw_transmission,transformed_text_retokenized,unicode_normalization,144,0,144,0.5694444444444444,0.4878035778670699,0.6474764725297305,observed,1,9,unicode normalization | transformed text retokenized
+raw_transmission,transformed_text_retokenized,unmodified,144,0,144,1.0,0.9740163628569632,0.9999999999999998,observed,1,10,transformed text retokenized
+raw_transmission,transformed_text_retokenized,whitespace_collapse,144,0,144,0.1458333333333333,0.0974045975903624,0.2126671453859553,observed,1,11,whitespace collapse | transformed text retokenized
+raw_transmission,transformed_text_retokenized,whitespace_trim,144,0,144,0.1944444444444444,0.1380954559774095,0.2666723222766685,observed,1,12,whitespace trim | transformed text retokenized
+limited_mitigation,canonicalized_text_retokenized,line_endings,96,48,96,0.0,0.0,0.0384755878576756,observed_with_partial_unavailability,2,0,line endings | canonicalized text retokenized
+limited_mitigation,canonicalized_text_retokenized,markdown_copy_paste,96,48,96,0.0,0.0,0.0384755878576756,observed_with_partial_unavailability,2,1,markdown copy paste | canonicalized text retokenized
+limited_mitigation,canonicalized_text_retokenized,quote_conversion,96,48,96,0.0,0.0,0.0384755878576756,observed_with_partial_unavailability,2,2,quote conversion | canonicalized text retokenized
+limited_mitigation,canonicalized_text_retokenized,unicode_normalization,96,48,96,0.0,0.0,0.0384755878576756,observed_with_partial_unavailability,2,3,unicode normalization | canonicalized text retokenized
+limited_mitigation,canonicalized_text_retokenized,unmodified,96,48,96,1.0,0.9615244121423244,1.0,observed_with_partial_unavailability,2,4,canonicalized text retokenized
+limited_mitigation,canonicalized_text_retokenized,whitespace_collapse,96,48,96,0.0,0.0,0.0384755878576756,observed_with_partial_unavailability,2,5,whitespace collapse | canonicalized text retokenized
+limited_mitigation,canonicalized_text_retokenized,whitespace_trim,96,48,96,0.0,0.0,0.0384755878576756,observed_with_partial_unavailability,2,6,whitespace trim | canonicalized text retokenized
+cross_model_mismatch,cross_model_text_retokenized,unmodified,288,0,144,0.0,0.0,0.0259836371430367,observed,3,0,cross model text retokenized

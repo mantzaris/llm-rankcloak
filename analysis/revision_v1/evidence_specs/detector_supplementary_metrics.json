@@ -1,0 +1,36 @@
+{
+  "schema_version": "rankcloak-detector-supplementary-metrics-v1",
+  "analysis_id": "reviewer_requested_detector_calibration_low_fpr_v1",
+  "analysis_status": "supplementary_exploratory_post_confirmatory_freeze",
+  "partial_checkpoint_outcomes_seen_before_extension": true,
+  "frozen_training_design_unchanged": true,
+  "expected_fit_count": 56,
+  "decision_threshold": 0.5,
+  "precision_zero_division": 0,
+  "low_false_positive_rates": [
+    0.01,
+    0.05
+  ],
+  "supplementary_metrics": [
+    "precision",
+    "brier_score",
+    "tpr_at_fpr_0.01",
+    "tpr_at_fpr_0.05"
+  ],
+  "upstream_confirmatory_metrics_reused": [
+    "roc_auc",
+    "pr_auc",
+    "balanced_accuracy",
+    "f1",
+    "sensitivity_as_recall",
+    "specificity"
+  ],
+  "bootstrap": {
+    "unit": "payload_group_id",
+    "resamples": 2000,
+    "seed": 2026081601,
+    "confidence_level": 0.95
+  },
+  "low_fpr_interpretation": "descriptive_test_set_roc_curve_summary_not_a_deployed_operating_threshold",
+  "regime_summary": "median_and_range_across_prespecified_splits_without_cross_split_confidence_interval"
+}

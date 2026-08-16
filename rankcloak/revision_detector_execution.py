@@ -51,6 +51,9 @@ EQUIVALENCE_ARTIFACT_SCHEMA = (
     "rankcloak-revision-detector-equivalence-fit-artifact-v1"
 )
 EQUIVALENCE_REPORT_SCHEMA = "rankcloak-revision-detector-device-equivalence-v1"
+CUDA_REPRODUCIBILITY_REPORT_SCHEMA = (
+    "rankcloak-revision-detector-cuda-reproducibility-v1"
+)
 FINALIZATION_CANDIDATE_SCHEMA = (
     "rankcloak-revision-detector-finalization-candidate-v1"
 )
@@ -707,6 +710,94 @@ def _validate_terminal_receipt(path: Path) -> dict:
             "Supervisor-published detector output differs from its candidate."
         )
     return receipt
+
+
+def read_detector_failed_benchmark_attempt(
+    path: Path, *, expected_gpu_uuid: Optional[str] = None
+) -> dict:
+    """Verify the signed diagnostic-only failed benchmark and its receipt."""
+
+    artifact_path = Path(path)
+    value = _read_json(artifact_path, "failed detector benchmark attempt")
+    if value.get("schema_version") != (
+        "rankcloak-revision-detector-failed-benchmark-attempt-v1"
+    ):
+        raise RevisionDetectionError(
+            "Failed detector benchmark attempt schema differs."
+        )
+    _verify_signed_document(
+        value, "benchmark_sha256", "Failed detector benchmark attempt"
+    )
+    expected_keys = {
+        "schema_version",
+        "created_at_utc",
+        "task_index",
+        "detector_name",
+        "result_status",
+        "failure_stage",
+        "exception_type",
+        "exception_message",
+        "failed_invocation_count",
+        "checkpoint_fit_count",
+        "checkpoint_scientific_result_status",
+        "gpu_accounting_policy",
+        "corrective_action",
+        "gpu_accounting",
+        "pre_final_gpu_accounting_ledger",
+        "terminal_accounting_status_sha256",
+        "finalization_candidate",
+        "execution_completed_at_utc",
+        "benchmark_sha256",
+    }
+    accounting = value.get("gpu_accounting")
+    candidate_identity = value.get("finalization_candidate")
+    if (
+        set(value) != expected_keys
+        or int(value.get("task_index", -1)) != 0
+        or value.get("detector_name")
+        != "published_textcnn_equivalent"
+        or value.get("result_status")
+        != "diagnostic_only_no_published_benchmark_result"
+        or value.get("failure_stage") != "post_fit_benchmark_packaging"
+        or value.get("exception_type") != "KeyError"
+        or value.get("exception_message") != "implementation_metadata_json"
+        or int(value.get("failed_invocation_count", -1)) != 2
+        or int(value.get("checkpoint_fit_count", -1)) != 1
+        or value.get("pre_final_gpu_accounting_ledger") is not None
+        or not isinstance(accounting, dict)
+        or not isinstance(candidate_identity, dict)
+    ):
+        raise RevisionDetectionError(
+            "Failed detector benchmark attempt identity differs."
+        )
+    if (
+        expected_gpu_uuid is not None
+        and accounting.get("gpu_uuid") != expected_gpu_uuid
+    ):
+        raise RevisionDetectionError(
+            "Failed detector benchmark attempt GPU UUID differs."
+        )
+    candidate_path = Path(str(candidate_identity.get("path", "")))
+    receipt_path = candidate_path.with_name(
+        candidate_path.stem + ".terminal_receipt.json"
+    )
+    receipt = _validate_terminal_receipt(receipt_path)
+    candidate = read_detector_finalization_candidate(candidate_path)
+    if (
+        candidate.get("kind") != "benchmark_artifact"
+        or candidate.get("payload", {}).get("schema_version")
+        != "rankcloak-revision-detector-failed-benchmark-attempt-v1"
+        or receipt.get("candidate") != candidate_identity
+        or receipt.get("gpu_accounting") != accounting
+        or Path(str(receipt.get("published_output", {}).get("path", ""))).resolve()
+        != artifact_path.resolve()
+        or receipt.get("published_output", {}).get("sha256")
+        != file_sha256(artifact_path)
+    ):
+        raise RevisionDetectionError(
+            "Failed detector benchmark attempt receipt identity differs."
+        )
+    return value
 
 
 def update_detector_gpu_accounting_ledger(
@@ -1479,6 +1570,7 @@ class DetectorExecutionOutcome:
     resumed_fit_count: int
     recovered_errors: List[dict]
     fit_durations_seconds: List[float]
+    checkpoint_durations_seconds: List[float]
     run_identity: dict
     run_identity_sha256: str
     plan_sha256: str
@@ -1933,6 +2025,7 @@ def _build_run_identity(
         "required_equivalence_reports",
         "pre_final_gpu_accounting_ledger_path",
         "pre_final_gpu_accounting_ledger",
+        "cuda_budget_gate",
     }
     checkpoint_lineage = {
         str(name): value
@@ -2426,6 +2519,7 @@ class _StatusTracker:
         self.current: Optional[DetectorFitTask] = None
         self.current_started_at: Optional[datetime] = None
         self.current_started_monotonic: Optional[float] = None
+        self.current_fit_progress: Optional[dict] = None
         self.next_fit: Optional[DetectorFitTask] = None
         self.next_fit_upper_seconds: Optional[float] = None
         self.fit_gate_nonce: Optional[str] = None
@@ -2552,6 +2646,7 @@ class _StatusTracker:
             "completed_fit_count": int(self.completed),
             "total_fit_count": int(self.total),
             "current_fit": current,
+            "current_fit_progress": self.current_fit_progress,
             "next_fit": next_fit,
             "next_fit_upper_seconds": self.next_fit_upper_seconds,
             "fit_gate_nonce": self.fit_gate_nonce,
@@ -2618,6 +2713,71 @@ class _StatusTracker:
 
         with self._lock:
             return self._snapshot()
+
+    def update_current_fit_progress(self, value: Mapping[str, object]) -> None:
+        """Record validated internal progress for the next atomic heartbeat."""
+
+        progress = dict(value)
+        phase = str(progress.get("phase", ""))
+        allowed_phases = {
+            "initialization_and_preprocessing",
+            "training",
+            "trained_state_hashing",
+            "evaluation",
+            "complete",
+        }
+        base_keys = {"phase", "completed_units", "total_units"}
+        training_keys = base_keys | {
+            "epoch",
+            "epochs",
+            "batch",
+            "batches_per_epoch",
+        }
+        expected_keys = training_keys if phase == "training" else base_keys
+        if phase not in allowed_phases or set(progress) != expected_keys:
+            raise RevisionDetectionError(
+                "Detector internal progress shape is invalid."
+            )
+        completed = int(progress["completed_units"])
+        total_raw = progress["total_units"]
+        total = None if total_raw is None else int(total_raw)
+        if completed < 0 or (total is not None and (total < 0 or completed > total)):
+            raise RevisionDetectionError(
+                "Detector internal progress counters are invalid."
+            )
+        progress["completed_units"] = completed
+        progress["total_units"] = total
+        if phase == "training":
+            epoch = int(progress["epoch"])
+            epochs = int(progress["epochs"])
+            batch = int(progress["batch"])
+            batches_per_epoch = int(progress["batches_per_epoch"])
+            if (
+                epochs <= 0
+                or batches_per_epoch <= 0
+                or epoch < 0
+                or epoch > epochs
+                or batch < 0
+                or batch > batches_per_epoch
+            ):
+                raise RevisionDetectionError(
+                    "Detector epoch/batch progress counters are invalid."
+                )
+            progress.update(
+                {
+                    "epoch": epoch,
+                    "epochs": epochs,
+                    "batch": batch,
+                    "batches_per_epoch": batches_per_epoch,
+                }
+            )
+        progress["updated_at_utc"] = _utc_text(_utc_now())
+        with self._lock:
+            if self.current is None:
+                raise RevisionDetectionError(
+                    "Detector progress arrived without an active fit."
+                )
+            self.current_fit_progress = progress
 
     def transition(self, **values: object) -> None:
         """Atomically update a multi-field state transition and publish it."""
@@ -3084,6 +3244,312 @@ def evaluate_detector_device_equivalence(
             "measurements": cross_measurements,
         },
     }
+
+
+def _metric_without_phase_timings(
+    metric: Mapping[str, object],
+) -> Tuple[dict, Optional[dict]]:
+    """Return a scientific metric identity plus separately measured timings."""
+
+    value = dict(metric)
+    metadata = _implementation_metadata(metric)
+    raw_timings = metadata.pop("phase_timings_seconds", None)
+    timings = dict(raw_timings) if isinstance(raw_timings, Mapping) else None
+    value["implementation_metadata_json"] = json.dumps(
+        metadata, ensure_ascii=False, sort_keys=True, default=str
+    )
+    return value, timings
+
+
+def evaluate_detector_cuda_reproducibility(
+    cuda_metric: Mapping[str, object],
+    cuda_predictions: Sequence[Mapping[str, object]],
+    cuda_repeat_metric: Mapping[str, object],
+    cuda_repeat_predictions: Sequence[Mapping[str, object]],
+    equivalence_policy: Mapping[str, object],
+) -> dict:
+    """Apply the predeclared fixed-seed, same-CUDA reproducibility criteria."""
+
+    same_policy = equivalence_policy.get("same_device_cuda")
+    if not isinstance(same_policy, Mapping):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility policy is malformed."
+        )
+    cuda_rows = [dict(row) for row in cuda_predictions]
+    repeat_rows = [dict(row) for row in cuda_repeat_predictions]
+    cuda_scores = np.asarray(
+        [float(row["score"]) for row in cuda_rows], dtype=np.float64
+    )
+    repeat_scores = np.asarray(
+        [float(row["score"]) for row in repeat_rows], dtype=np.float64
+    )
+    cuda_metadata = _implementation_metadata(cuda_metric)
+    repeat_metadata = _implementation_metadata(cuda_repeat_metric)
+    cuda_scientific_metric, cuda_timings = _metric_without_phase_timings(
+        cuda_metric
+    )
+    repeat_scientific_metric, repeat_timings = _metric_without_phase_timings(
+        cuda_repeat_metric
+    )
+    task_fields = (
+        "split_id",
+        "regime",
+        "held_out_column",
+        "held_out_value",
+        "detector_name",
+        "requested_kind",
+        "implementation_kind",
+        "implementation_status",
+        "train_rows",
+        "test_rows",
+        "train_payload_groups",
+        "purged_train_rows",
+        "decision_threshold",
+        "seed",
+        "bootstrap_unit",
+        "bootstrap_resamples_requested",
+        "test_payload_groups",
+    )
+    row_identity_fields = (
+        "split_id",
+        "regime",
+        "held_out_value",
+        "detector_name",
+        "requested_kind",
+        "implementation_kind",
+        "implementation_status",
+        "row_id",
+        "payload_group_id",
+        "prompt_template_id",
+        "model_id",
+        "codec_id",
+        "label",
+    )
+    checks = {
+        "task_design_exact": all(
+            cuda_metric.get(name) == cuda_repeat_metric.get(name)
+            for name in task_fields
+        ),
+        "row_identity_order_labels_exact": bool(
+            len(cuda_rows) == len(repeat_rows)
+            and all(
+                all(first.get(name) == second.get(name) for name in row_identity_fields)
+                for first, second in zip(cuda_rows, repeat_rows)
+            )
+        ),
+        "model_state_sha256_exact": bool(
+            cuda_metadata.get("model_state_sha256")
+            and cuda_metadata.get("model_state_sha256")
+            == repeat_metadata.get("model_state_sha256")
+        ),
+        "scores_exact": bool(
+            cuda_scores.shape == repeat_scores.shape
+            and np.isfinite(cuda_scores).all()
+            and np.isfinite(repeat_scores).all()
+            and np.array_equal(cuda_scores, repeat_scores)
+        ),
+        "metrics_exact": cuda_scientific_metric == repeat_scientific_metric,
+        "predictions_exact": cuda_rows == repeat_rows,
+    }
+    same_pass = bool(
+        set(same_policy) == set(checks)
+        and all(
+            checks[name] is bool(required)
+            for name, required in same_policy.items()
+        )
+    )
+    return {
+        "schema_version": CUDA_REPRODUCIBILITY_REPORT_SCHEMA,
+        "reproducible": same_pass,
+        "same_device_cuda": {
+            "passed": same_pass,
+            "predeclared_policy": dict(same_policy),
+            "checks": checks,
+            "measurements": {
+                "prediction_row_count": int(len(cuda_rows)),
+                "maximum_score_absolute_difference": (
+                    None
+                    if cuda_scores.shape != repeat_scores.shape or not len(cuda_scores)
+                    else float(np.max(np.abs(cuda_scores - repeat_scores)))
+                ),
+                "cuda_phase_timings_seconds": cuda_timings,
+                "cuda_repeat_phase_timings_seconds": repeat_timings,
+                "timings_excluded_from_scientific_equality": True,
+            },
+        },
+    }
+
+
+def write_detector_cuda_reproducibility_report(
+    output_path: Path,
+    *,
+    cuda_artifact_path: Path,
+    cuda_repeat_artifact_path: Path,
+    equivalence_policy: Mapping[str, object],
+    policy_identity: Mapping[str, object],
+) -> dict:
+    """Verify two signed CUDA fits and persist a signed repeatability decision."""
+
+    cuda = read_detector_equivalence_fit_artifact(cuda_artifact_path)
+    repeat = read_detector_equivalence_fit_artifact(cuda_repeat_artifact_path)
+    if (cuda["role"], repeat["role"]) != ("cuda", "cuda_repeat"):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility artifact roles differ."
+        )
+    scientific_fields = (
+        "ordinal",
+        "split_position",
+        "detector_position",
+        "split_id",
+        "regime",
+        "held_out_column",
+        "held_out_value",
+        "partition_policy",
+        "purged_train_rows",
+        "excluded_held_out_rows",
+        "train_row_count",
+        "test_row_count",
+        "train_indices_sha256",
+        "test_indices_sha256",
+        "train_row_ids_ordered_sha256",
+        "test_row_ids_ordered_sha256",
+        "detector_name",
+        "detector_kind",
+        "scientific_detector_config_sha256",
+        "seed",
+        "bootstrap_resamples",
+        "decision_threshold",
+    )
+    identities = [value["task_identity"] for value in (cuda, repeat)]
+    scientific_task_identity_exact = all(
+        identity.get(field_name) == identities[0].get(field_name)
+        for identity in identities[1:]
+        for field_name in scientific_fields
+    )
+    if any(
+        value["provenance"].get("policy_identity") != dict(policy_identity)
+        for value in (cuda, repeat)
+    ):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility policy/environment identity differs."
+        )
+    decision = evaluate_detector_cuda_reproducibility(
+        cuda["metric"],
+        cuda["predictions"],
+        repeat["metric"],
+        repeat["predictions"],
+        equivalence_policy,
+    )
+    decision["scientific_task_identity_exact"] = scientific_task_identity_exact
+    decision["reproducible"] = bool(
+        decision["reproducible"] and scientific_task_identity_exact
+    )
+    inputs = {
+        role: {
+            "path": str(Path(path).resolve()),
+            "sha256": file_sha256(Path(path)),
+            "size_bytes": int(Path(path).stat().st_size),
+            "artifact_sha256": value["artifact_sha256"],
+        }
+        for role, path, value in (
+            ("cuda", cuda_artifact_path, cuda),
+            ("cuda_repeat", cuda_repeat_artifact_path, repeat),
+        )
+    }
+    report = {
+        "schema_version": CUDA_REPRODUCIBILITY_REPORT_SCHEMA,
+        "created_at_utc": _utc_text(_utc_now()),
+        "predeclared_policy": dict(equivalence_policy),
+        "policy_identity": dict(policy_identity),
+        "policy_identity_sha256": canonical_json_sha256(policy_identity),
+        "input_artifacts": inputs,
+        "input_artifacts_sha256": canonical_json_sha256(inputs),
+        "decision": decision,
+    }
+    signed = _signed_document(report, "report_sha256")
+    atomic_write_json(Path(output_path), signed)
+    return signed
+
+
+def read_detector_cuda_reproducibility_report(
+    path: Path,
+    *,
+    expected_task_index: Optional[int] = None,
+    expected_policy_identity: Optional[Mapping[str, object]] = None,
+    expected_equivalence_policy: Optional[Mapping[str, object]] = None,
+) -> dict:
+    """Strictly verify a signed passing same-CUDA reproducibility decision."""
+
+    value = _read_json(Path(path), "detector CUDA reproducibility report")
+    if value.get("schema_version") != CUDA_REPRODUCIBILITY_REPORT_SCHEMA:
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility report schema differs."
+        )
+    _verify_signed_document(
+        value, "report_sha256", "Detector CUDA reproducibility report"
+    )
+    if (
+        not isinstance(value.get("input_artifacts"), dict)
+        or value.get("input_artifacts_sha256")
+        != canonical_json_sha256(value["input_artifacts"])
+        or not isinstance(value.get("policy_identity"), dict)
+        or value.get("policy_identity_sha256")
+        != canonical_json_sha256(value["policy_identity"])
+        or not isinstance(value.get("decision"), dict)
+        or value["decision"].get("reproducible") is not True
+        or value["decision"].get("scientific_task_identity_exact") is not True
+    ):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility report is malformed or did not pass."
+        )
+    if expected_policy_identity is not None and value["policy_identity"] != dict(
+        expected_policy_identity
+    ):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility policy identity differs."
+        )
+    if expected_equivalence_policy is not None and value.get(
+        "predeclared_policy"
+    ) != dict(expected_equivalence_policy):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility criteria differ from policy."
+        )
+    observed_task_indices = set()
+    for role in ("cuda", "cuda_repeat"):
+        identity = value["input_artifacts"].get(role)
+        if not isinstance(identity, dict):
+            raise RevisionDetectionError(
+                "Detector CUDA reproducibility input identity is missing."
+            )
+        artifact_path = Path(str(identity.get("path", "")))
+        if (
+            artifact_path.is_symlink()
+            or not artifact_path.is_file()
+            or file_sha256(artifact_path) != identity.get("sha256")
+            or int(artifact_path.stat().st_size)
+            != int(identity.get("size_bytes", -1))
+        ):
+            raise RevisionDetectionError(
+                "Detector CUDA reproducibility input bytes differ."
+            )
+        artifact = read_detector_equivalence_fit_artifact(artifact_path)
+        if (
+            artifact.get("role") != role
+            or artifact.get("artifact_sha256")
+            != identity.get("artifact_sha256")
+        ):
+            raise RevisionDetectionError(
+                "Detector CUDA reproducibility input identity differs."
+            )
+        observed_task_indices.add(int(artifact["task_index"]))
+    if len(observed_task_indices) != 1 or (
+        expected_task_index is not None
+        and observed_task_indices != {int(expected_task_index)}
+    ):
+        raise RevisionDetectionError(
+            "Detector CUDA reproducibility task index differs."
+        )
+    return value
 
 
 def write_detector_equivalence_fit_artifact(
@@ -3585,6 +4051,7 @@ def _execute_checkpointed_detector_suite_locked(
     metrics: List[dict] = []
     predictions: List[dict] = []
     durations: List[float] = []
+    checkpoint_durations: List[float] = []
     resumed_count = 0
     last_checkpoint: Optional[dict] = None
     boundary_stop = threading.Event()
@@ -3636,6 +4103,7 @@ def _execute_checkpointed_detector_suite_locked(
                         resumed_fit_count=resumed_count,
                         recovered_errors=list(recovered_errors),
                         fit_durations_seconds=durations,
+                        checkpoint_durations_seconds=checkpoint_durations,
                         run_identity=run_identity,
                         run_identity_sha256=run_identity_sha256,
                         plan_sha256=plan_sha256,
@@ -3670,6 +4138,7 @@ def _execute_checkpointed_detector_suite_locked(
                     resumed_fit_count=resumed_count,
                     recovered_errors=list(recovered_errors),
                     fit_durations_seconds=durations,
+                    checkpoint_durations_seconds=checkpoint_durations,
                     run_identity=run_identity,
                     run_identity_sha256=run_identity_sha256,
                     plan_sha256=plan_sha256,
@@ -3723,6 +4192,7 @@ def _execute_checkpointed_detector_suite_locked(
                         resumed_fit_count=resumed_count,
                         recovered_errors=list(recovered_errors),
                         fit_durations_seconds=durations,
+                        checkpoint_durations_seconds=checkpoint_durations,
                         run_identity=run_identity,
                         run_identity_sha256=run_identity_sha256,
                         plan_sha256=plan_sha256,
@@ -3740,6 +4210,7 @@ def _execute_checkpointed_detector_suite_locked(
                 current=task,
                 current_started_at=fit_started_at,
                 current_started_monotonic=fit_started_monotonic,
+                current_fit_progress=None,
                 next_fit=None,
                 next_fit_upper_seconds=None,
                 fit_gate_nonce=None,
@@ -3748,14 +4219,23 @@ def _execute_checkpointed_detector_suite_locked(
             )
             if permit_receipt is not None:
                 _retire_consumed_fit_permit(context, permit_receipt)
-            metric, fit_predictions = fit_runner(
-                prepared, task.split, task.detector_config
-            )
+            if fit_runner is run_prepared_detector_fit:
+                metric, fit_predictions = fit_runner(
+                    prepared,
+                    task.split,
+                    task.detector_config,
+                    progress_callback=tracker.update_current_fit_progress,
+                )
+            else:
+                metric, fit_predictions = fit_runner(
+                    prepared, task.split, task.detector_config
+                )
             _validate_checkpoint_semantics(
                 prepared, task, [metric], fit_predictions
             )
             fit_completed_at = _utc_now()
             elapsed = max(0.0, time.monotonic() - fit_started_monotonic)
+            checkpoint_started_monotonic = time.monotonic()
             checkpoint = _write_fit_checkpoint(
                 context,
                 task,
@@ -3780,6 +4260,9 @@ def _execute_checkpointed_detector_suite_locked(
                 raise RevisionDetectionError(
                     "Committed detector checkpoint could not be reloaded."
                 )
+            checkpoint_durations.append(
+                max(0.0, time.monotonic() - checkpoint_started_monotonic)
+            )
             metric, fit_predictions, elapsed, checkpoint = loaded
             metrics.append(metric)
             predictions.extend(fit_predictions)
@@ -3799,6 +4282,7 @@ def _execute_checkpointed_detector_suite_locked(
                 current=None,
                 current_started_at=None,
                 current_started_monotonic=None,
+                current_fit_progress=None,
                 state="fit_checkpointed",
             )
             if boundary_stop.is_set() or (
@@ -3817,6 +4301,7 @@ def _execute_checkpointed_detector_suite_locked(
                     resumed_fit_count=resumed_count,
                     recovered_errors=list(recovered_errors),
                     fit_durations_seconds=durations,
+                    checkpoint_durations_seconds=checkpoint_durations,
                     run_identity=run_identity,
                     run_identity_sha256=run_identity_sha256,
                     plan_sha256=plan_sha256,
@@ -3850,6 +4335,7 @@ def _execute_checkpointed_detector_suite_locked(
             resumed_fit_count=resumed_count,
             recovered_errors=list(recovered_errors),
             fit_durations_seconds=durations,
+            checkpoint_durations_seconds=checkpoint_durations,
             run_identity=run_identity,
             run_identity_sha256=run_identity_sha256,
             plan_sha256=plan_sha256,

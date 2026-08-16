@@ -1,0 +1,74 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "6d9abd11e081ce735c7e7250a764b35f05772d5be6b103fb74f6d0960edac2cc",
+      "size_bytes": 3285
+    },
+    "predictions.json": {
+      "row_count": 880,
+      "sha256": "5090c4fc1995fa1bafb8833ad402f5fa0e046fb2da3d117b67b52ef6cf140f19",
+      "size_bytes": 401847
+    }
+  },
+  "children_sha256": "35701b45e351dd3be2bebc3cb1d867f64f4f47147531aea0cf8113f95abdb89f",
+  "completed_at_utc": "2026-08-16T08:03:32.977742+00:00",
+  "elapsed_seconds": 14.941729078000208,
+  "manifest_sha256": "1d52593e8d2761bcae24d1ded254c74c808ccf17a051891872bffdef45032f6d",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T08:03:18.036021+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "text_cnn",
+    "detector_name": "published_textcnn_equivalent",
+    "detector_position": 0,
+    "effective_detector_config": {
+      "batch_size": 64,
+      "device": "cuda:0",
+      "dropout": 0.5,
+      "embedding_dimension": 300,
+      "enabled": true,
+      "epochs": 10,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "filter_sizes": [
+        3,
+        5
+      ],
+      "filters_per_width": 100,
+      "kind": "text_cnn",
+      "learning_rate": 0.001,
+      "lowercase": true,
+      "maximum_length": 256,
+      "maximum_vocabulary_size": 30000,
+      "minimum_token_frequency": 1,
+      "name": "published_textcnn_equivalent",
+      "torch_num_threads": 1,
+      "weight_decay": 1e-06
+    },
+    "effective_detector_config_sha256": "91382ac313009ec933da15d23b8ff4f49c4c32472d378a66d077cf4bf7251d97",
+    "excluded_held_out_rows": 0,
+    "held_out_column": "prompt_template_id",
+    "held_out_value": "forum_purchase_advice",
+    "ordinal": 18,
+    "partition_policy": "full_held_out_condition",
+    "purged_train_rows": 1760,
+    "regime": "held_out_template",
+    "scientific_detector_config_sha256": "32a329fca7f37234612393dfd9c488b88ffb0e91127b1d86231cc519f860cf56",
+    "seed": 3208305796,
+    "split_id": "held_out_template:forum_purchase_advice",
+    "split_position": 9,
+    "test_indices_sha256": "a0866446870e57cdd5dd118981625e8cb5823297c3b43a32d0182c5a4025b1c8",
+    "test_row_count": 880,
+    "test_row_ids_ordered_sha256": "468a615e146d1c644138e6788a43b001606271b324345bf725e360f186183463",
+    "train_indices_sha256": "3b7bc6b5d31f9a0e60e5193d378c6bdf368c7d15d2403dbed1de9797ffb1b106",
+    "train_row_count": 13200,
+    "train_row_ids_ordered_sha256": "15dc47822ee99955bbf0e085d84fbe9237ab17ef4348f4dbe101cd358d4460f2"
+  },
+  "task_identity_sha256": "6fccb83c9aff5c16a89d34694da241bea4d25051885a6b0ff248df195f64e3aa"
+}

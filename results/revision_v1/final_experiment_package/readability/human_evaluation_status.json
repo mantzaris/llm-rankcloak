@@ -1,0 +1,28 @@
+{
+  "automated_metrics_are_human_rating_substitutes": false,
+  "computational_stimulus_rows_available": 504,
+  "design_model_family_labels": [
+    "llama_3_1_8b_instruct",
+    "qwen_2_5_7b_instruct",
+    "mistral_7b_instruct_v0_3"
+  ],
+  "human_control_gate": "BLOCKED_INSUFFICIENT_AUTOMATED_COVERAGE_AND_PENDING_MANUAL_REVIEW",
+  "human_control_manual_review_status": "not_completed",
+  "human_control_rows_available": 0,
+  "human_control_rows_unavailable": 72,
+  "human_outcomes_estimated": false,
+  "human_participant_rows": 0,
+  "human_rating_rows": 0,
+  "model_identity_alignment_status": "draft_design_llama_version_label_mismatch",
+  "observed_computational_model_ids": [
+    "llama3_8b_instruct_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m",
+    "mistral_7b_instruct_v0_3_q4_k_m"
+  ],
+  "participant_schedule_emitted": false,
+  "power_results_scope": "planning_only_not_an_observed_result",
+  "recruitment_authorized": false,
+  "schema_version": "rankcloak-human-evaluation-status-v1",
+  "status": "UNCOLLECTED_BLOCKED_NO_HUMAN_PARTICIPANT_DATA",
+  "survey_deployed": false
+}

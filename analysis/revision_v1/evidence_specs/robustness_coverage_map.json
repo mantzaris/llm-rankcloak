@@ -1,0 +1,96 @@
+{
+  "schema_version": "rankcloak-robustness-coverage-map-v1",
+  "analysis_status": "supporting_post_audit_coverage_inventory",
+  "frozen_robustness_results_unchanged": true,
+  "expected_request_count": 11,
+  "requests": [
+    {
+      "request_id": "whitespace_changes",
+      "requested_transformation": "Whitespace changes",
+      "coverage_status": "directly_tested",
+      "transformation_ids": ["line_endings", "whitespace_trim", "whitespace_collapse"],
+      "scope_note": "Three separately controlled whitespace operations were tested.",
+      "limitation": "The aggregate spans distinct conditions and is not a pooled recovery estimand."
+    },
+    {
+      "request_id": "line_wrapping",
+      "requested_transformation": "Line wrapping",
+      "coverage_status": "partially_represented",
+      "transformation_ids": ["line_endings"],
+      "scope_note": "LF-to-CRLF line-ending conversion was tested.",
+      "limitation": "No controlled insertion or reflow of visual line wraps was tested."
+    },
+    {
+      "request_id": "leading_trailing_whitespace",
+      "requested_transformation": "Leading or trailing whitespace",
+      "coverage_status": "directly_tested",
+      "transformation_ids": ["whitespace_trim"],
+      "scope_note": "Leading and trailing whitespace removal per message was tested.",
+      "limitation": "Whitespace addition was not separately tested."
+    },
+    {
+      "request_id": "unicode_normalization",
+      "requested_transformation": "Unicode normalization",
+      "coverage_status": "directly_tested",
+      "transformation_ids": ["unicode_normalization"],
+      "scope_note": "Unicode NFKC normalization was tested.",
+      "limitation": "Other normalization forms were not separately tested."
+    },
+    {
+      "request_id": "quotation_marks",
+      "requested_transformation": "Smart versus straight quotation marks",
+      "coverage_status": "directly_tested",
+      "transformation_ids": ["quote_conversion"],
+      "scope_note": "Straight quotes were deterministically converted to directional smart quotes.",
+      "limitation": "The reverse direction and locale-specific quotation systems were not separately tested."
+    },
+    {
+      "request_id": "punctuation_changes",
+      "requested_transformation": "Punctuation changes",
+      "coverage_status": "not_tested",
+      "transformation_ids": [],
+      "scope_note": "No isolated punctuation-edit condition exists in the frozen design.",
+      "limitation": "Character substitution targeted alphanumeric characters and cannot establish punctuation robustness."
+    },
+    {
+      "request_id": "prefix_suffix",
+      "requested_transformation": "Added prefixes or suffixes",
+      "coverage_status": "not_tested",
+      "transformation_ids": [],
+      "scope_note": "No arbitrary prefix or suffix condition exists in the frozen design.",
+      "limitation": "Markdown blockquote markup is not a general prefix/suffix test."
+    },
+    {
+      "request_id": "markdown_email_quoting",
+      "requested_transformation": "Markdown or email quoting",
+      "coverage_status": "partially_represented",
+      "transformation_ids": ["markdown_copy_paste"],
+      "scope_note": "A Markdown-style blockquote copy/paste transformation was tested.",
+      "limitation": "Email-client quoting, headers, nesting, and client-specific reflow were not tested."
+    },
+    {
+      "request_id": "case_changes",
+      "requested_transformation": "Case changes where relevant",
+      "coverage_status": "not_tested",
+      "transformation_ids": [],
+      "scope_note": "No controlled case transformation exists in the frozen design.",
+      "limitation": "No recovery estimate is available for case conversion."
+    },
+    {
+      "request_id": "sentence_boundaries",
+      "requested_transformation": "Sentence boundary changes",
+      "coverage_status": "partially_represented",
+      "transformation_ids": ["paraphrase"],
+      "scope_note": "A deterministic broad paraphrase condition could alter sentence structure.",
+      "limitation": "Sentence-boundary edits were not isolated from wording and semantic-rewrite changes."
+    },
+    {
+      "request_id": "copy_paste",
+      "requested_transformation": "Copy/paste transformations",
+      "coverage_status": "directly_tested",
+      "transformation_ids": ["markdown_copy_paste"],
+      "scope_note": "A fixed copy/paste pipeline normalized line endings, trimmed trailing space, and prefixed blockquote markup.",
+      "limitation": "This is one deterministic pipeline, not a survey of applications or operating systems."
+    }
+  ]
+}

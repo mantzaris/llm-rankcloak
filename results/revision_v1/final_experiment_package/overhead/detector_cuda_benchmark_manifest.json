@@ -1,0 +1,45 @@
+{
+  "architecture_count": 2,
+  "cpu_gpu_equivalence_tested": false,
+  "device": "cuda:0",
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_detector_benchmarks.py --benchmark /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/benchmarks/task_0_cuda.json --benchmark /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/benchmarks/task_1_cuda.json --reproducibility-report /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/task_0/cuda_reproducibility_report.json --reproducibility-report /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/task_1/cuda_reproducibility_report.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead",
+  "inputs": {
+    "benchmark_task_0": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/benchmarks/task_0_cuda.json",
+      "sha256": "0afff2a88cb1bfc7195d773dc359f0043ed870ee36540d984f20f6fefe1fcbc2",
+      "size_bytes": 5161
+    },
+    "benchmark_task_1": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/benchmarks/task_1_cuda.json",
+      "sha256": "6ac760403a02f48b15c565fc5c38e6d07b3d891e39f784bb7c0e59d1de17b1d6",
+      "size_bytes": 5570
+    },
+    "reproducibility_task_0": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/task_0/cuda_reproducibility_report.json",
+      "sha256": "c74a28178050ff56324762efcaa05d40ccf0cfd74185acb0191d2edb012e6216",
+      "size_bytes": 5105
+    },
+    "reproducibility_task_1": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/task_1/cuda_reproducibility_report.json",
+      "sha256": "3f2e1dc59d88f35ef2d4a126a66b7870c441189fdaec0f945d4d68972b0f3991",
+      "size_bytes": 5105
+    }
+  },
+  "manifest_sha256": "c66b9eda74f0b5fa20d58d459cb3e30e1846a239acefc30b4479c8c1d249c75f",
+  "outputs": {
+    "detector_cuda_benchmark_summary": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_summary.csv",
+      "row_count": 2,
+      "sha256": "93352bc51f5799cedf0ef3b2ec8895991bd6b35a72cf0f839505475d16419dfd",
+      "size_bytes": 1250
+    }
+  },
+  "same_device_cuda_reproducibility_passed": true,
+  "schema_version": "rankcloak-detector-benchmark-evidence-v1",
+  "status": "passed",
+  "timing_scope": {
+    "fit_elapsed_seconds": "model phases plus post-fit metric and bootstrap analysis",
+    "phase_timer_residual_seconds": "outer phase timer minus the sum of individually instrumented phases",
+    "wall_seconds": "fit plus atomic checkpoint publication and invocation overhead"
+  }
+}

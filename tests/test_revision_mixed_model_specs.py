@@ -82,6 +82,10 @@ def test_r_driver_requires_hash_checked_evaluator_join_and_emits_contrast_interv
     assert 'source_full_message_replicated_across_nested_segment_rows_v1' in source
     assert 'evaluator_artifact_pins_verified' in source
     assert 'models_config_sha256' in source
+    assert 'artifact_diagnostics$algorithm_source_sha256' in source
+    assert 'Derived artifact-outcome algorithm provenance is inconsistent' in source
+    assert 'stratum_model_id = NA_character_' in source
+    assert '"stratum_model_id"' in source
     assert 'ci_low = if ("lower.CL" %in% names(pairs))' in source
     assert 'ci_high = if ("upper.CL" %in% names(pairs))' in source
 
@@ -269,6 +273,55 @@ cat('separation-paths-ok\\n')
     )
     assert completed.returncode == 0, completed.stderr
     assert "separation-paths-ok" in completed.stdout
+
+
+@pytest.mark.skipif(shutil.which("Rscript") is None, reason="Rscript is unavailable")
+def test_contrasts_preserve_analysis_model_id_and_separate_model_stratum():
+    if not (ROOT / ".r_libs" / "revision_v1").is_dir():
+        pytest.skip("project revision R library is unavailable")
+    code = """
+Sys.setenv(RANKCLOAK_MIXED_MODELS_SOURCE_ONLY='1')
+source('scripts/run_revision_mixed_models.R')
+plan <- read_json('analysis/revision_v1/confirmatory_model_plan.json')
+values <- expand.grid(
+  model_id = c('llama3_8b_instruct_q4_k_m', 'qwen2_5_7b_instruct_q4_k_m'),
+  protocol_variant = c(
+    'nonseg_ascii_b16', 'direct_subword_calgacus', 'nonseg_ascii_b8'
+  ),
+  payload_name = paste0('payload-', seq_len(4)),
+  prompt_id = paste0('prompt-', seq_len(3)),
+  KEEP.OUT.ATTRS = FALSE,
+  stringsAsFactors = FALSE
+)
+values$outcome <- (
+  seq_len(nrow(values)) / 100 +
+  as.numeric(factor(values$model_id)) / 10 +
+  as.numeric(factor(values$protocol_variant)) / 20
+)
+fit <- lme4::lmer(
+  outcome ~ model_id * protocol_variant +
+    (1 | payload_name) + (1 | prompt_id),
+  data = values
+)
+rows <- fit_contrasts(
+  fit, 'primary_effective_artifact_rate', plan, 'model'
+)
+stopifnot(nrow(rows) > 0)
+stopifnot(all(rows$model_id == 'primary_effective_artifact_rate'))
+stopifnot(setequal(unique(rows$stratum_model_id), unique(values$model_id)))
+cat('contrast-identity-ok\\n')
+"""
+    environment = dict(os.environ)
+    environment["RANKCLOAK_MIXED_MODELS_SOURCE_ONLY"] = "1"
+    completed = subprocess.run(
+        [str(LAUNCHER), "-e", code],
+        cwd=ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "contrast-identity-ok" in completed.stdout
 
 
 @pytest.mark.skipif(shutil.which("Rscript") is None, reason="Rscript is unavailable")

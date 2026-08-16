@@ -35,13 +35,18 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from scripts.build_detector_cuda_budget_gate import (
+    read_gate,
+    verify_ledger_sources_for_stage,
+)
 from rankcloak.revision_artifacts import canonical_json_sha256, file_sha256
 from rankcloak.revision_detection import RevisionDetectionError
 from rankcloak.revision_detector_execution import (
     detector_finalization_paths,
     detector_gpu_ledger_incorporation_path,
     finalize_detector_candidate_from_closed_status,
-    read_detector_device_equivalence_report,
+    read_detector_cuda_reproducibility_report,
+    read_detector_failed_benchmark_attempt,
     read_detector_equivalence_fit_artifact,
     read_detector_finalization_candidate,
     read_detector_gpu_accounting_ledger,
@@ -58,6 +63,7 @@ PROJECTION_SHA256 = "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e
 PROTOCOL_REVISION = "payload_fidelity_v2"
 RESULT_REVISION = "payload_aware_result_v2"
 BUDGET_GPU_HOURS = 165.0
+DETECTOR_HISTORICAL_GPU_HOURS_FLOOR = 62.4783840698
 DETECTOR_DEVICE = "cuda:0"
 DETECTOR_WORKERS = 1
 DETECTOR_TOTAL_FITS = 56
@@ -71,28 +77,34 @@ DETECTOR_GPU_COLLECTION_DERIVATION = (
     "nonoverlapping_detector_process_wall_intervals_v1"
 )
 DETECTOR_STATUS_STALE_SECONDS = 15 * 60.0
+DETECTOR_INTERNAL_PROGRESS_STALE_SECONDS = 15 * 60.0
 DETECTOR_GRACEFUL_STOP_SECONDS = 30.0
 DETECTOR_MONITOR_MAX_POLL_SECONDS = 5.0
 DETECTOR_CPU_MONITOR_MAX_POLL_SECONDS = 30.0
 DETECTOR_EXECUTION_POLICY_RELATIVE = Path(
-    "operations/confirmatory_v2/detector_acceleration_policy_v1.json"
+    "operations/confirmatory_v2/detector_cuda_policy_v2.json"
 )
 DETECTOR_EXECUTION_POLICY_SHA256 = (
-    "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9"
+    "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7"
 )
 DETECTOR_EXECUTION_POLICY_CONTENT_SHA256 = (
-    "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6"
+    "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d"
 )
 DETECTOR_NEXT_FIT_UPPER_SECONDS = {
-    "published_textcnn_equivalent": 14_400.0,
-    "deberta_v3_base_classifier": 108_000.0,
+    "published_textcnn_equivalent": 900.0,
+    "deberta_v3_base_classifier": 7_200.0,
 }
 DETECTOR_BENCHMARK_TASKS = {
     0: "published_textcnn_equivalent",
     1: "deberta_v3_base_classifier",
 }
 DETECTOR_EQUIVALENCE_ROOT = (
-    Path("results/revision_v1/detector_equivalence_v1")
+    Path("results/revision_v1/detector_cuda_reproducibility_v2")
+)
+DETECTOR_FAILED_BENCHMARK_ATTEMPT = (
+    DETECTOR_EQUIVALENCE_ROOT
+    / "failed_attempts"
+    / "task_0_packaging_failure.json"
 )
 DETECTOR_GPU_LEDGER_SCHEMA = (
     "rankcloak-revision-detector-gpu-accounting-ledger-v1"
@@ -989,6 +1001,32 @@ def operational_projection_adjustment_seconds(
     return adjustment
 
 
+def detector_failed_benchmark_gpu_seconds() -> float:
+    """Return signed failed-attempt process-wall charge outside canonical progress."""
+
+    path = PROJECT_ROOT / DETECTOR_FAILED_BENCHMARK_ATTEMPT
+    if not path.exists():
+        return 0.0
+    try:
+        artifact = read_detector_failed_benchmark_attempt(
+            path, expected_gpu_uuid=GPU_UUID
+        )
+    except RevisionDetectionError as exc:
+        raise MethodologicalHalt(
+            "failed detector benchmark accounting artifact is invalid: {}".format(
+                exc
+            )
+        ) from exc
+    seconds = float(
+        artifact["gpu_accounting"]["cumulative_elapsed_seconds"]
+    )
+    if not math.isfinite(seconds) or seconds <= 0.0:
+        raise MethodologicalHalt(
+            "failed detector benchmark accounting seconds are invalid"
+        )
+    return seconds
+
+
 def calculate_budget(
     projection: Mapping[str, Any],
     progress: Mapping[str, Any],
@@ -1005,14 +1043,19 @@ def calculate_budget(
     canonical_actual_confirmatory = float(
         gpu.get("monitored_confirmatory_gpu_hours", -1.0)
     )
-    canonical_cumulative_actual = float(
+    canonical_cumulative_reported = float(
         gpu.get("cumulative_actual_gpu_hours", -1.0)
     )
+    canonical_cumulative_actual = max(
+        canonical_cumulative_reported,
+        DETECTOR_HISTORICAL_GPU_HOURS_FLOOR,
+    )
+    failed_detector_seconds = detector_failed_benchmark_gpu_seconds()
     live_detector_seconds = float(live_detector_gpu_seconds)
     remaining_detector_seconds = float(live_detector_remaining_seconds)
     if (
         canonical_actual_confirmatory < 0
-        or canonical_cumulative_actual < 0
+        or canonical_cumulative_reported < 0
         or not math.isfinite(live_detector_seconds)
         or live_detector_seconds < 0
         or not math.isfinite(remaining_detector_seconds)
@@ -1024,21 +1067,31 @@ def calculate_budget(
     # coarse "any detector interval exists" rejection is invalid once the
     # append-only pre-final ledger is canonical while a later benchmark,
     # repeat, or production process is live.
+    failed_detector_hours = failed_detector_seconds / 3600.0
     live_detector_hours = live_detector_seconds / 3600.0
     remaining_detector_hours = remaining_detector_seconds / 3600.0
-    actual_confirmatory = canonical_actual_confirmatory + live_detector_hours
-    cumulative_actual = canonical_cumulative_actual + live_detector_hours
+    actual_confirmatory = (
+        canonical_actual_confirmatory
+        + failed_detector_hours
+        + live_detector_hours
+    )
+    cumulative_actual = (
+        canonical_cumulative_actual
+        + failed_detector_hours
+        + live_detector_hours
+    )
     authorized_baseline = float(projection["totals"]["upper_gpu_hours"])
     operational_adjustment = operational_projection_adjustment_seconds(
         projection
     ) / 3600.0
     baseline = authorized_baseline + operational_adjustment
     consumed_hours = float(consumption["seconds"]) / 3600.0
-    revised = (
+    revised = max(
         baseline
         - consumed_hours
         + actual_confirmatory
-        + remaining_detector_hours
+        + remaining_detector_hours,
+        cumulative_actual + remaining_detector_hours,
     )
     return {
         "hard_ceiling_gpu_hours": BUDGET_GPU_HOURS,
@@ -1047,6 +1100,10 @@ def calculate_budget(
         "baseline_upper_gpu_hours": baseline,
         "projected_upper_consumed_gpu_hours": consumed_hours,
         "canonical_actual_confirmatory_gpu_hours": canonical_actual_confirmatory,
+        "canonical_cumulative_reported_gpu_hours": canonical_cumulative_reported,
+        "historical_actual_gpu_hours_floor": DETECTOR_HISTORICAL_GPU_HOURS_FLOOR,
+        "failed_detector_benchmark_gpu_seconds": failed_detector_seconds,
+        "failed_detector_benchmark_gpu_hours": failed_detector_hours,
         "canonical_cumulative_actual_gpu_hours": canonical_cumulative_actual,
         "live_detector_gpu_seconds": live_detector_seconds,
         "live_detector_gpu_hours": live_detector_hours,
@@ -2034,23 +2091,39 @@ def _ensure_finalized_detector_ledger(action: Action) -> None:
 
 
 def verify_detector_execution_policy() -> dict[str, Any]:
-    """Verify the immutable, pre-benchmark operational acceleration policy."""
+    """Verify the immutable CUDA-only pre-benchmark operational policy."""
 
     path = _detector_execution_policy_path()
     if not path.is_file() or path.is_symlink():
-        raise MethodologicalHalt("detector acceleration policy is absent or unsafe")
+        raise MethodologicalHalt("detector CUDA policy is absent or unsafe")
     if file_sha256(path) != DETECTOR_EXECUTION_POLICY_SHA256:
-        raise MethodologicalHalt("detector acceleration policy byte hash differs")
-    policy = read_json(path, label="detector acceleration policy")
+        raise MethodologicalHalt("detector CUDA policy byte hash differs")
+    policy = read_json(path, label="detector CUDA policy")
     unsigned = dict(policy)
     claimed = unsigned.pop("policy_sha256", None)
+    audit = policy.get("audit")
+    diagnostic = (
+        None
+        if not isinstance(audit, dict)
+        else PROJECT_ROOT / str(audit.get("diagnostic_path", ""))
+    )
+    expected_same_cuda = {
+        "same_device_cuda": {
+            "task_design_exact": True,
+            "row_identity_order_labels_exact": True,
+            "model_state_sha256_exact": True,
+            "scores_exact": True,
+            "metrics_exact": True,
+            "predictions_exact": True,
+        }
+    }
     if (
         claimed != DETECTOR_EXECUTION_POLICY_CONTENT_SHA256
         or canonical_json_sha256(unsigned) != claimed
         or policy.get("schema_version")
-        != "rankcloak-revision-detector-acceleration-policy-v1"
+        != "rankcloak-revision-detector-cuda-policy-v2"
         or policy.get("policy_status")
-        != "predeclared_before_acceleration_benchmarks"
+        != "cuda_only_predeclared_before_new_benchmarks"
         or policy.get("execution")
         != {
             "device": DETECTOR_DEVICE,
@@ -2062,19 +2135,180 @@ def verify_detector_execution_policy() -> dict[str, Any]:
         != {
             "next_fit_upper_seconds_by_detector": (
                 DETECTOR_NEXT_FIT_UPPER_SECONDS
-            )
+            ),
+            "post_benchmark_tighter_gate_required": True,
         }
         or policy.get("authorized_ceiling")
         != {
             "gpu_hours": BUDGET_GPU_HOURS,
+            "historical_actual_gpu_hours_floor": (
+                DETECTOR_HISTORICAL_GPU_HOURS_FLOOR
+            ),
             "projection_path": str(PROJECTION_PATH),
             "projection_sha256": PROJECTION_SHA256,
         }
+        or policy.get("benchmark")
+        != {
+            "task_indices": [0, 1],
+            "checkpoint_reuse": True,
+            "cuda_reproducibility_fit_count_per_architecture": 2,
+            "allowed_failed_fit_retry_count_per_architecture": 1,
+            "projection_safety_multiplier": 1.5,
+            "full_matrix_budget_gate_required": True,
+        }
+        or policy.get("equivalence") != expected_same_cuda
+        or not isinstance(audit, dict)
+        or audit.get("cpu_diagnostics_status")
+        != "preserved_feasibility_evidence_only"
+        or audit.get("cpu_neural_training_authorized") is not False
+        or audit.get("derivation")
+        != "revision_takeover_2026-08-15_cuda_only_v2"
+        or diagnostic is None
+        or diagnostic.is_symlink()
+        or not diagnostic.is_file()
+        or file_sha256(diagnostic) != audit.get("diagnostic_sha256")
     ):
         raise MethodologicalHalt(
-            "detector acceleration policy violates the authorized runtime contract"
+            "detector CUDA policy violates the authorized runtime contract"
         )
     return policy
+
+
+def _detector_cuda_budget_gate_path() -> Path:
+    return Path(_format_values()["detector_cuda_budget_gate"]).resolve()
+
+
+def require_detector_cuda_budget_gate(
+    *, expected_stage: str
+) -> dict[str, Any]:
+    path = _detector_cuda_budget_gate_path()
+    try:
+        gate = read_gate(path, expected_stage=expected_stage)
+    except RevisionDetectionError as exc:
+        raise MethodologicalHalt(
+            "detector CUDA budget gate is absent, stale, or not approved: {}".format(
+                exc
+            )
+        ) from exc
+    inputs = gate.get("inputs")
+    policy_identity = None if not isinstance(inputs, dict) else inputs.get("policy")
+    ledger_identity = None if not isinstance(inputs, dict) else inputs.get("gpu_ledger")
+    ledger_path = _detector_gpu_ledger_path()
+    if (
+        not isinstance(policy_identity, dict)
+        or Path(str(policy_identity.get("path", ""))).resolve()
+        != _detector_execution_policy_path()
+        or policy_identity.get("sha256") != DETECTOR_EXECUTION_POLICY_SHA256
+        or policy_identity.get("policy_sha256")
+        != DETECTOR_EXECUTION_POLICY_CONTENT_SHA256
+        or not isinstance(ledger_identity, dict)
+        or Path(str(ledger_identity.get("path", ""))).resolve() != ledger_path
+    ):
+        raise MethodologicalHalt(
+            "detector CUDA budget gate input identity differs"
+        )
+    ledger = read_detector_gpu_accounting_ledger(ledger_path)
+    try:
+        verify_ledger_sources_for_stage(
+            stage=expected_stage, sources=ledger["sources"]
+        )
+    except RevisionDetectionError as exc:
+        raise MethodologicalHalt(
+            "detector CUDA budget gate ledger sources differ"
+        ) from exc
+    if (
+        ledger_identity.get("sha256") != file_sha256(ledger_path)
+        or ledger_identity.get("ledger_sha256") != ledger["ledger_sha256"]
+    ):
+        raise MethodologicalHalt(
+            "detector CUDA budget gate ledger identity differs"
+        )
+    projection = gate["projection"]
+    if (
+        float(projection["starting_cumulative_actual_gpu_hours"])
+        < DETECTOR_HISTORICAL_GPU_HOURS_FLOOR
+        or float(projection["projected_cumulative_gpu_hours"])
+        > BUDGET_GPU_HOURS
+        or float(projection["projected_remaining_headroom_gpu_hours"]) < 0.0
+    ):
+        raise BudgetHalt(
+            "benchmark-derived detector projection exceeds the GPU ceiling"
+        )
+    return gate
+
+
+def _detector_fit_watchdog_seconds(action: Action, detector_name: str) -> float | None:
+    policy_upper = DETECTOR_NEXT_FIT_UPPER_SECONDS.get(detector_name)
+    if policy_upper is None:
+        return None
+    if _arg_value(action.argv, "--benchmark-task-index") is not None:
+        return policy_upper
+    stage = (
+        "post_benchmark_pre_reproducibility"
+        if _arg_value(action.argv, "--equivalence-role") is not None
+        else "post_reproducibility_preproduction"
+    )
+    gate = require_detector_cuda_budget_gate(expected_stage=stage)
+    measured = gate["projection"]["benchmark_derived_fit_watchdog_seconds"]
+    derived = float(measured[detector_name])
+    if not math.isfinite(derived) or derived <= 0.0 or derived > policy_upper:
+        raise MethodologicalHalt(
+            "benchmark-derived detector watchdog is invalid"
+        )
+    return derived
+
+
+def build_detector_cuda_budget_gate(*, stage: str) -> dict[str, Any]:
+    argv = (
+        str(PROJECT_ROOT / ".venv/bin/python"),
+        "scripts/build_detector_cuda_budget_gate.py",
+        "--stage",
+        stage,
+        "--output",
+        str(_detector_cuda_budget_gate_path()),
+    )
+    completed = subprocess.run(
+        argv,
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+        env=_detector_cpu_environment(),
+    )
+    action = Action(
+        action_id="downstream:detector:cuda_budget_gate:{}".format(stage),
+        stage="neural_detector",
+        kind="downstream",
+        argv=argv,
+        output_dir=_detector_cuda_budget_gate_path().parent,
+        gpu=False,
+    )
+    atomic_write_bytes(
+        _log_path(action),
+        (completed.stdout + "\n" + completed.stderr).encode(
+            "utf-8", "replace"
+        ),
+    )
+    if completed.returncode != 0:
+        path = _detector_cuda_budget_gate_path()
+        if path.is_file() and not path.is_symlink():
+            value = read_json(path, label="failed detector CUDA budget gate")
+            projected = float(
+                value.get("projection", {}).get(
+                    "projected_cumulative_gpu_hours", math.inf
+                )
+            )
+            if projected > BUDGET_GPU_HOURS:
+                raise BudgetHalt(
+                    "benchmark-derived detector projection is {:.6f} GPU-hours"
+                    .format(projected)
+                )
+        raise MethodologicalHalt(
+            "detector CUDA budget gate construction failed: {}".format(
+                (completed.stderr or completed.stdout)[-4000:]
+            )
+        )
+    return require_detector_cuda_budget_gate(expected_stage=stage)
 
 
 def _detector_checkpoint_state_exists(action: Action) -> bool:
@@ -2108,6 +2342,8 @@ def validate_detector_action(
         values["detector_output_dir"],
         "--execution-policy",
         values["detector_execution_policy"],
+        "--cuda-budget-gate",
+        values["detector_cuda_budget_gate"],
         "--resume",
         "--overwrite",
         "--device",
@@ -2195,6 +2431,61 @@ def _parse_aware_time(value: Any, label: str) -> datetime:
     if parsed.tzinfo is None:
         raise MethodologicalHalt("{} lacks a timezone".format(label))
     return parsed.astimezone(timezone.utc)
+
+
+def _validate_detector_internal_progress(value: Any) -> datetime:
+    if not isinstance(value, dict):
+        raise MethodologicalHalt("detector internal progress is malformed")
+    phase = str(value.get("phase", ""))
+    base_keys = {"phase", "completed_units", "total_units", "updated_at_utc"}
+    training_keys = base_keys | {
+        "epoch",
+        "epochs",
+        "batch",
+        "batches_per_epoch",
+    }
+    expected_keys = training_keys if phase == "training" else base_keys
+    if (
+        phase
+        not in {
+            "initialization_and_preprocessing",
+            "training",
+            "trained_state_hashing",
+            "evaluation",
+            "complete",
+        }
+        or set(value) != expected_keys
+    ):
+        raise MethodologicalHalt("detector internal progress shape differs")
+    completed = int(value.get("completed_units", -1))
+    total_raw = value.get("total_units")
+    total = None if total_raw is None else int(total_raw)
+    if completed < 0 or (total is not None and (total < 0 or completed > total)):
+        raise MethodologicalHalt("detector internal progress counters are invalid")
+    if phase == "training":
+        epoch = int(value.get("epoch", -1))
+        epochs = int(value.get("epochs", -1))
+        batch = int(value.get("batch", -1))
+        batches = int(value.get("batches_per_epoch", -1))
+        if (
+            epochs <= 0
+            or batches <= 0
+            or epoch < 0
+            or epoch > epochs
+            or batch < 0
+            or batch > batches
+        ):
+            raise MethodologicalHalt(
+                "detector internal epoch/batch counters are invalid"
+            )
+    updated = _parse_aware_time(
+        value.get("updated_at_utc"), "detector internal progress updated_at_utc"
+    )
+    if updated > datetime.now(timezone.utc) + timedelta(minutes=5):
+        raise MethodologicalHalt(
+            "detector internal progress timestamp is implausibly in the future"
+        )
+    return updated
 
 
 def read_detector_status(
@@ -2289,6 +2580,19 @@ def read_detector_status(
         or not str(current.get("task_identity_sha256", ""))
     ):
         raise MethodologicalHalt("detector status current_fit is malformed")
+    internal_progress = status.get("current_fit_progress")
+    if internal_progress is not None:
+        _validate_detector_internal_progress(internal_progress)
+    if (
+        (current is None and internal_progress is not None)
+        or (
+            status.get("state") in {"running_fit", "stop_requested_finishing_current_fit"}
+            and current is None
+        )
+    ):
+        raise MethodologicalHalt(
+            "detector current fit and internal progress identity differ"
+        )
     next_fit = status.get("next_fit")
     next_upper = status.get("next_fit_upper_seconds")
     gate_nonce = status.get("fit_gate_nonce")
@@ -3992,6 +4296,61 @@ def run_checkpointed_detector_process(
                     "{:.1f} seconds; exact process stopped for checkpoint resume"
                 ).format(status_age)
 
+            if status_matches_process and status is not None and status.get(
+                "state"
+            ) in {"running_fit", "stop_requested_finishing_current_fit"}:
+                current_fit = status.get("current_fit")
+                assert isinstance(current_fit, dict)
+                detector_name = str(current_fit.get("detector_name", ""))
+                fit_upper = _detector_fit_watchdog_seconds(
+                    action, detector_name
+                )
+                fit_elapsed = float(status.get("current_fit_elapsed_seconds", 0.0))
+                if fit_upper is None or fit_elapsed > fit_upper:
+                    status = _stop_detector_and_close_interval(
+                        action,
+                        pid=pid,
+                        start_ticks=start_ticks,
+                        status=status,
+                        immediate=False,
+                    )
+                    return 75, (
+                        "detector fit {} exceeded its {:.1f}-second watchdog at "
+                        "{:.1f} seconds; process stopped for diagnosis"
+                    ).format(detector_name, float(fit_upper or 0.0), fit_elapsed)
+                internal = status.get("current_fit_progress")
+                if internal is None and fit_elapsed > 60.0:
+                    status = _stop_detector_and_close_interval(
+                        action,
+                        pid=pid,
+                        start_ticks=start_ticks,
+                        status=status,
+                        immediate=False,
+                    )
+                    return 75, (
+                        "detector fit produced no epoch/batch progress within "
+                        "{:.1f} seconds; process stopped for diagnosis"
+                    ).format(fit_elapsed)
+                if internal is not None:
+                    progress_updated = _validate_detector_internal_progress(
+                        internal
+                    )
+                    internal_age = (
+                        datetime.now(timezone.utc) - progress_updated
+                    ).total_seconds()
+                    if internal_age > DETECTOR_INTERNAL_PROGRESS_STALE_SECONDS:
+                        status = _stop_detector_and_close_interval(
+                            action,
+                            pid=pid,
+                            start_ticks=start_ticks,
+                            status=status,
+                            immediate=False,
+                        )
+                        return 75, (
+                            "detector epoch/batch progress was unchanged for "
+                            "{:.1f} seconds; process stopped for diagnosis"
+                        ).format(internal_age)
+
             progress_deferral: DeferrableProgressRefresh | None = None
             try:
                 progress = refresh_progress()
@@ -4425,59 +4784,16 @@ def _detector_equivalence_action(
     contract: Mapping[str, Any], *, task_index: int, role: str
 ) -> Action:
     if task_index not in DETECTOR_BENCHMARK_TASKS or role not in {
-        "cpu",
         "cuda",
         "cuda_repeat",
     }:
-        raise MethodologicalHalt("detector equivalence action identity is invalid")
+        raise MethodologicalHalt(
+            "detector CUDA reproducibility action identity is invalid"
+        )
     values = _format_values()
     prefix = "detector_equivalence_{}_{}".format(task_index, role)
-    if role == "cuda":
-        base, _spec = next(
-            item
-            for item in downstream_actions(contract)
-            if item[1].get("operation_id") == "detector"
-        )
-        argv = base.argv
-    else:
-        argv = (
-            str(PROJECT_ROOT / ".venv/bin/python"),
-            "scripts/run_revision_detectors.py",
-            "--input",
-            values["primary_detector_corpus"],
-            "--preprocessing-manifest",
-            values["primary_preprocessing_manifest"],
-            "--output-dir",
-            values[prefix + "_output_dir"],
-            "--execution-policy",
-            values["detector_execution_policy"],
-            "--resume",
-            "--overwrite",
-            "--device",
-            ("cpu" if role == "cpu" else DETECTOR_DEVICE),
-            "--workers",
-            str(DETECTOR_WORKERS),
-            "--checkpoint-dir",
-            values[prefix + "_checkpoint_dir"],
-            "--status-file",
-            values[prefix + "_status_file"],
-        )
-        if role != "cpu":
-            argv += (
-                "--gpu-uuid",
-                GPU_UUID,
-                "--fit-permit-file",
-                values[prefix + "_fit_permit_file"],
-                "--fit-permit-receipt-dir",
-                values[prefix + "_fit_permit_receipt_dir"],
-            )
-    argv += (
-        "--equivalence-role",
-        role,
-        "--equivalence-task-index",
-        str(task_index),
-        "--equivalence-artifact",
-        values[prefix + "_artifact"],
+    argv = _detector_equivalence_action_argv(
+        contract, task_index=task_index, role=role
     )
     action = Action(
         action_id="downstream:detector:equivalence:{}:{}".format(
@@ -4487,7 +4803,7 @@ def _detector_equivalence_action(
         kind="downstream",
         argv=argv,
         output_dir=Path(values[prefix + "_output_dir"]),
-        gpu=role != "cpu",
+        gpu=True,
     )
     validate_detector_equivalence_action(
         action, task_index=task_index, role=role, contract=contract
@@ -4512,32 +4828,38 @@ def validate_detector_equivalence_action(
         != "downstream:detector:equivalence:{}:{}".format(task_index, role)
         or action.stage != "neural_detector"
         or action.kind != "downstream"
-        or action.gpu is not (role != "cpu")
+        or action.gpu is not True
         or action.argv != expected
         or action.output_dir is None
         or action.output_dir.resolve()
         != Path(values[prefix + "_output_dir"]).resolve()
     ):
         raise MethodologicalHalt(
-            "detector equivalence action differs from the exact isolated contract"
+            "detector CUDA reproducibility action differs from its isolated contract"
         )
-    if role != "cpu":
-        paths = {
-            _detector_checkpoint_dir(action),
-            _detector_status_path(action),
-            _detector_fit_permit_path(action),
-            _detector_fit_permit_receipt_dir(action),
-            Path(values[prefix + "_artifact"]).resolve(),
-        }
-        if len(paths) != 5:
-            raise MethodologicalHalt(
-                "detector equivalence checkpoint/status/artifact paths overlap"
-            )
+    paths = {
+        _detector_checkpoint_dir(action),
+        _detector_status_path(action),
+        _detector_fit_permit_path(action),
+        _detector_fit_permit_receipt_dir(action),
+        Path(values[prefix + "_artifact"]).resolve(),
+    }
+    if len(paths) != 5:
+        raise MethodologicalHalt(
+            "detector CUDA reproducibility paths overlap"
+        )
 
 
 def _detector_equivalence_action_argv(
     contract: Mapping[str, Any], *, task_index: int, role: str
 ) -> tuple[str, ...]:
+    if task_index not in DETECTOR_BENCHMARK_TASKS or role not in {
+        "cuda",
+        "cuda_repeat",
+    }:
+        raise MethodologicalHalt(
+            "detector CUDA reproducibility action identity is invalid"
+        )
     values = _format_values()
     prefix = "detector_equivalence_{}_{}".format(task_index, role)
     if role == "cuda":
@@ -4562,23 +4884,20 @@ def _detector_equivalence_action_argv(
             "--resume",
             "--overwrite",
             "--device",
-            ("cpu" if role == "cpu" else DETECTOR_DEVICE),
+            DETECTOR_DEVICE,
             "--workers",
             str(DETECTOR_WORKERS),
             "--checkpoint-dir",
             values[prefix + "_checkpoint_dir"],
             "--status-file",
             values[prefix + "_status_file"],
+            "--gpu-uuid",
+            GPU_UUID,
+            "--fit-permit-file",
+            values[prefix + "_fit_permit_file"],
+            "--fit-permit-receipt-dir",
+            values[prefix + "_fit_permit_receipt_dir"],
         )
-        if role != "cpu":
-            argv += (
-                "--gpu-uuid",
-                GPU_UUID,
-                "--fit-permit-file",
-                values[prefix + "_fit_permit_file"],
-                "--fit-permit-receipt-dir",
-                values[prefix + "_fit_permit_receipt_dir"],
-            )
     return argv + (
         "--equivalence-role",
         role,
@@ -4755,32 +5074,26 @@ def _verify_detector_equivalence_artifact(
     _verify_detector_equivalence_policy_identity(
         provenance.get("policy_identity")
     )
-    if role == "cpu":
-        if (
-            provenance.get("device") != "cpu"
-            or provenance.get("gpu_uuid") is not None
-            or provenance.get("gpu_accounting") is not None
-        ):
-            raise MethodologicalHalt(
-                "CPU detector equivalence artifact is not zero-GPU"
-            )
-    else:
-        if (
-            provenance.get("device") != DETECTOR_DEVICE
-            or provenance.get("gpu_uuid") != GPU_UUID
-        ):
-            raise MethodologicalHalt(
-                "CUDA detector equivalence artifact GPU identity differs"
-            )
-        _validate_detector_gpu_accounting(
-            provenance.get("gpu_accounting"), live=False
+    if role not in {"cuda", "cuda_repeat"}:
+        raise MethodologicalHalt(
+            "CPU neural artifacts are prohibited by the CUDA-only gate"
         )
-        contract = _detector_equivalence_action(
-            load_command_contract(DEFAULT_COMMAND_CONTRACT),
-            task_index=task_index,
-            role=role,
+    if (
+        provenance.get("device") != DETECTOR_DEVICE
+        or provenance.get("gpu_uuid") != GPU_UUID
+    ):
+        raise MethodologicalHalt(
+            "CUDA detector reproducibility artifact GPU identity differs"
         )
-        _ensure_finalized_detector_ledger(contract)
+    _validate_detector_gpu_accounting(
+        provenance.get("gpu_accounting"), live=False
+    )
+    contract = _detector_equivalence_action(
+        load_command_contract(DEFAULT_COMMAND_CONTRACT),
+        task_index=task_index,
+        role=role,
+    )
+    _ensure_finalized_detector_ledger(contract)
     return artifact
 
 
@@ -4790,21 +5103,21 @@ def _verify_detector_equivalence_report(task_index: int) -> dict[str, Any]:
         role: _verify_detector_equivalence_artifact(
             task_index=task_index, role=role
         )
-        for role in ("cpu", "cuda", "cuda_repeat")
+        for role in ("cuda", "cuda_repeat")
     }
-    policy_identity = artifacts["cpu"]["provenance"]["policy_identity"]
+    policy_identity = artifacts["cuda"]["provenance"]["policy_identity"]
     if any(
         artifact["provenance"].get("policy_identity") != policy_identity
         for artifact in artifacts.values()
     ):
         raise MethodologicalHalt(
-            "detector equivalence artifacts do not share one frozen policy identity"
+            "detector CUDA artifacts do not share one frozen policy identity"
         )
     report_path = Path(
         values["detector_equivalence_report_{}".format(task_index)]
     ).resolve()
     try:
-        report = read_detector_device_equivalence_report(
+        report = read_detector_cuda_reproducibility_report(
             report_path,
             expected_task_index=task_index,
             expected_policy_identity=policy_identity,
@@ -4814,9 +5127,8 @@ def _verify_detector_equivalence_report(task_index: int) -> dict[str, Any]:
         )
     except RevisionDetectionError as exc:
         raise MethodologicalHalt(
-            "detector task {} equivalence report is absent, tampered, or failed: {}".format(
-                task_index, exc
-            )
+            "detector task {} CUDA reproducibility report is absent, tampered, "
+            "or failed: {}".format(task_index, exc)
         ) from exc
     expected_paths = {
         role: Path(
@@ -4835,10 +5147,10 @@ def _verify_detector_equivalence_report(task_index: int) -> dict[str, Any]:
             != expected_paths[role]
             for role in expected_paths
         )
-        or report.get("decision", {}).get("equivalent") is not True
+        or report.get("decision", {}).get("reproducible") is not True
     ):
         raise MethodologicalHalt(
-            "detector equivalence report paths/decision differ from the exact gate"
+            "detector CUDA reproducibility paths/decision differ from the gate"
         )
     return report
 
@@ -5109,10 +5421,6 @@ def _detector_equivalence_report_argv(task_index: int) -> tuple[str, ...]:
         str(task_index),
         "--equivalence-report-output",
         values["detector_equivalence_report_{}".format(task_index)],
-        "--equivalence-cpu-artifact",
-        values[
-            "detector_equivalence_{}_cpu_artifact".format(task_index)
-        ],
         "--equivalence-cuda-artifact",
         values[
             "detector_equivalence_{}_cuda_artifact".format(task_index)
@@ -5464,6 +5772,9 @@ def run_detector_equivalence_role(
     action = _detector_equivalence_action(
         contract, task_index=task_index, role=role
     )
+    build_detector_cuda_budget_gate(
+        stage="post_benchmark_pre_reproducibility"
+    )
     artifact_path = Path(
         _format_values()[
             "detector_equivalence_{}_{}_artifact".format(task_index, role)
@@ -5474,56 +5785,6 @@ def run_detector_equivalence_role(
             task_index=task_index, role=role
         )
         return 0
-    if role == "cpu":
-        probe_tokens = (
-            "--equivalence-role",
-            "--equivalence-task-index",
-            "--equivalence-artifact",
-        )
-        _probe_python_cli(
-            PROJECT_ROOT / "scripts/run_revision_detectors.py",
-            str(PROJECT_ROOT / ".venv/bin/python"),
-            probe_tokens,
-        )
-        retries = load_retry_counts()
-        while True:
-            code, detail = run_checkpointed_cpu_detector_process(
-                action,
-                projection=projection,
-                retries=retries,
-                poll_seconds=args.poll_seconds,
-            )
-            if code == 0:
-                _verify_detector_equivalence_artifact(
-                    task_index=task_index, role=role
-                )
-                retry_count = retries.get(action.action_id, 0)
-                if retry_count:
-                    emit_event(
-                        "action_recovery_succeeded",
-                        action_id=action.action_id,
-                        retry_count=retry_count,
-                        recovery="valid_cpu_detector_checkpoint_resumed",
-                    )
-                return 0
-            if _nonrecoverable_output(detail):
-                raise MethodologicalHalt(
-                    "nonrecoverable CPU detector equivalence failure: {}".format(
-                        detail[-4000:]
-                    )
-                )
-            retries[action.action_id] = retries.get(action.action_id, 0) + 1
-            record_recoverable_error(
-                action,
-                retries[action.action_id],
-                "checkpointed_cpu_detector_equivalence_incomplete",
-                detail,
-            )
-            if retries[action.action_id] > args.max_retries_per_action:
-                raise OrchestratorError(
-                    "CPU detector equivalence retry ceiling exceeded"
-                )
-            time.sleep(args.poll_seconds)
     retries = load_retry_counts()
     while True:
         code, detail = run_checkpointed_detector_process(
@@ -5572,7 +5833,7 @@ def run_detector_equivalence_report(
     )
     if path.exists() or path.is_symlink():
         return _verify_detector_equivalence_report(task_index)
-    for role in ("cpu", "cuda", "cuda_repeat"):
+    for role in ("cuda", "cuda_repeat"):
         _verify_detector_equivalence_artifact(
             task_index=task_index, role=role
         )
@@ -5617,21 +5878,16 @@ def ensure_detector_equivalence_gate(
     projection: Mapping[str, Any],
     contract: Mapping[str, Any],
 ) -> None:
-    """Complete both representative triples/reports, then open production."""
+    """Benchmark both architectures, then complete same-CUDA repeatability."""
 
     for task_index in sorted(DETECTOR_BENCHMARK_TASKS):
-        run_detector_equivalence_role(
-            args,
-            projection,
-            contract,
-            task_index=task_index,
-            role="cpu",
-        )
         benchmark_args = argparse.Namespace(**vars(args))
         benchmark_args.detector_benchmark_task_index = task_index
-        run_detector_benchmark(
-            benchmark_args, projection, contract
-        )
+        run_detector_benchmark(benchmark_args, projection, contract)
+    build_detector_cuda_budget_gate(
+        stage="post_benchmark_pre_reproducibility"
+    )
+    for task_index in sorted(DETECTOR_BENCHMARK_TASKS):
         run_detector_equivalence_role(
             args,
             projection,
@@ -5648,12 +5904,18 @@ def ensure_detector_equivalence_gate(
         )
         report = run_detector_equivalence_report(task_index=task_index)
         emit_event(
-            "detector_equivalence_report_passed",
+            "detector_cuda_reproducibility_report_passed",
             task_index=task_index,
             detector_name=DETECTOR_BENCHMARK_TASKS[task_index],
             report_sha256=report["report_sha256"],
         )
     require_detector_equivalence_gate()
+    build_detector_cuda_budget_gate(
+        stage="post_reproducibility_preproduction"
+    )
+    require_detector_cuda_budget_gate(
+        expected_stage="post_reproducibility_preproduction"
+    )
 
 
 def run_cpu_process(action: Action, argv: Sequence[str]) -> tuple[int, str]:
@@ -5971,18 +6233,21 @@ def _format_values() -> dict[str, str]:
         "detector_manifest": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2" / "detector_run_manifest.json"),
         "detector_metrics": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2" / "detector_metrics.csv"),
         "detector_predictions": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2" / "detector_predictions.csv"),
-        "detector_checkpoint_dir": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2.checkpoints"),
-        "detector_status_file": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2.status.json"),
-        "detector_fit_permit_file": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2.fit_permit.json"),
-        "detector_fit_permit_receipt_dir": str(PROJECT_ROOT / RESULTS_ROOT / "neural_detector" / "confirmatory_v2.checkpoints" / "fit_permit_receipts"),
+        "detector_checkpoint_dir": str(PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "production_run_v2.checkpoints"),
+        "detector_status_file": str(PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "production_run_v2.status.json"),
+        "detector_fit_permit_file": str(PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "production_run_v2.fit_permit.json"),
+        "detector_fit_permit_receipt_dir": str(PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "production_run_v2.checkpoints" / "fit_permit_receipts"),
         "detector_execution_policy": str(
             PROJECT_ROOT / DETECTOR_EXECUTION_POLICY_RELATIVE
         ),
+        "detector_cuda_budget_gate": str(
+            PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "cuda_budget_gate.json"
+        ),
         "detector_benchmark_output_0": str(
-            PROJECT_ROOT / SUPERVISOR_ROOT / "detector_benchmark_task_0_cuda.json"
+            PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "benchmarks" / "task_0_cuda.json"
         ),
         "detector_benchmark_output_1": str(
-            PROJECT_ROOT / SUPERVISOR_ROOT / "detector_benchmark_task_1_cuda.json"
+            PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "benchmarks" / "task_1_cuda.json"
         ),
         "detector_equivalence_root": str(
             PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT
@@ -5991,13 +6256,13 @@ def _format_values() -> dict[str, str]:
             PROJECT_ROOT
             / DETECTOR_EQUIVALENCE_ROOT
             / "task_0"
-            / "equivalence_report.json"
+            / "cuda_reproducibility_report.json"
         ),
         "detector_equivalence_report_1": str(
             PROJECT_ROOT
             / DETECTOR_EQUIVALENCE_ROOT
             / "task_1"
-            / "equivalence_report.json"
+            / "cuda_reproducibility_report.json"
         ),
         "detector_gpu_ledger": str(
             PROJECT_ROOT / DETECTOR_EQUIVALENCE_ROOT / "gpu_accounting_ledger.json"
@@ -6026,7 +6291,7 @@ def _format_values() -> dict[str, str]:
             / DETECTOR_EQUIVALENCE_ROOT
             / "task_{}".format(task_index)
         )
-        for role in ("cpu", "cuda", "cuda_repeat"):
+        for role in ("cuda", "cuda_repeat"):
             prefix = "detector_equivalence_{}_{}".format(task_index, role)
             values[prefix + "_artifact"] = str(
                 task_root / (role + "_artifact.json")
@@ -6108,6 +6373,7 @@ def load_command_contract(path: Path) -> dict[str, Any]:
         ],
         "gpu_accounting_ledger": "{detector_gpu_ledger}",
         "execution_policy": "{detector_execution_policy}",
+        "cuda_budget_gate": "{detector_cuda_budget_gate}",
         "execution_policy_sha256": DETECTOR_EXECUTION_POLICY_SHA256,
         "execution_policy_content_sha256": (
             DETECTOR_EXECUTION_POLICY_CONTENT_SHA256
@@ -6329,6 +6595,17 @@ def verify_detector_final_publication(
     lineage = None if not isinstance(run_identity, dict) else run_identity.get(
         "lineage"
     )
+    excluded_operational_fields = (
+        None
+        if not isinstance(run_identity, dict)
+        else run_identity.get("excluded_operational_gate_fields")
+    )
+    expected_excluded_operational_fields = {
+        "cuda_budget_gate",
+        "pre_final_gpu_accounting_ledger",
+        "pre_final_gpu_accounting_ledger_path",
+        "required_equivalence_reports",
+    }
     expected_report_paths = [
         Path(
             _format_values()["detector_equivalence_report_{}".format(index)]
@@ -6339,9 +6616,12 @@ def verify_detector_final_publication(
         not isinstance(reports, list)
         or len(reports) != 2
         or not isinstance(lineage, dict)
-        or lineage.get("required_equivalence_reports") != reports
+        or not isinstance(excluded_operational_fields, list)
+        or set(excluded_operational_fields)
+        != expected_excluded_operational_fields
+        or any(field in lineage for field in expected_excluded_operational_fields)
         or Path(
-            str(lineage.get("pre_final_gpu_accounting_ledger_path", ""))
+            str(manifest.get("pre_final_gpu_accounting_ledger_path", ""))
         ).resolve()
         != ledger_path.resolve()
     ):
@@ -7651,10 +7931,18 @@ def build_argument_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--detector-equivalence-role",
-        choices=("cpu", "cuda", "cuda_repeat", "report"),
+        choices=("cuda", "cuda_repeat", "report"),
         help=(
-            "Select the bounded CPU reference, production CUDA export, "
-            "independent CUDA repeat, or signed comparison report."
+            "Select the benchmark-checkpoint CUDA export, independent CUDA "
+            "repeat, or signed same-CUDA reproducibility report."
+        ),
+    )
+    parser.add_argument(
+        "--detector-production-only",
+        action="store_true",
+        help=(
+            "After both signed reproducibility reports and the final budget gate, "
+            "run only the frozen 56-fit detector matrix and exit."
         ),
     )
     parser.add_argument(
@@ -7683,7 +7971,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         or args.detector_equivalence_role is not None
     )
     if args.detector_benchmark_task_index is not None and (
-        args.once or args.dry_run or equivalence_mode
+        args.once or args.dry_run or equivalence_mode or args.detector_production_only
     ):
         raise OrchestratorError(
             "detector benchmark mode cannot be combined with other special modes"
@@ -7693,10 +7981,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         or args.detector_equivalence_role is None
         or args.once
         or args.dry_run
+        or args.detector_production_only
     ):
         raise OrchestratorError(
             "detector equivalence mode requires both task index and role and "
             "cannot be combined with --once/--dry-run"
+        )
+    if args.detector_production_only and (args.once or args.dry_run):
+        raise OrchestratorError(
+            "detector production-only mode cannot be combined with --once/--dry-run"
         )
     if args.dry_run:
         print(
@@ -7744,6 +8037,25 @@ def main(argv: Sequence[str] | None = None) -> int:
                     task_index=task_index,
                     role=role,
                 )
+            if args.detector_production_only:
+                require_detector_equivalence_gate()
+                require_detector_cuda_budget_gate(
+                    expected_stage="post_reproducibility_preproduction"
+                )
+                action, spec = next(
+                    item
+                    for item in downstream_actions(contract)
+                    if item[1].get("operation_id") == "detector"
+                )
+                execute_checkpointed_detector_action(
+                    action,
+                    spec,
+                    projection=projection,
+                    retries=load_retry_counts(),
+                    max_retries=args.max_retries_per_action,
+                    poll_seconds=args.poll_seconds,
+                )
+                return 0
             return run_orchestrator(args)
         except BaseException as exc:
             detector = None

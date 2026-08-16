@@ -1,0 +1,46 @@
+{
+  "aggregation_warning": "Counts spanning multiple mapped conditions are descriptive row sums, not pooled recovery estimands.",
+  "analysis_status": "supporting_post_audit_coverage_inventory",
+  "frozen_robustness_results_unchanged": true,
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_robustness_coverage.py --coverage-config /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/robustness_coverage_map.json --robustness-config /home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/robustness.json --robustness-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness --overwrite",
+  "inputs": {
+    "coverage_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/robustness_coverage_map.json",
+      "sha256": "96477664daaf630f009e5383978cf88bf09456035798ad593a8d548e8e95fc76",
+      "size_bytes": 4575
+    },
+    "recovery_by_condition": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/recovery_by_condition.csv",
+      "row_count": 24,
+      "sha256": "bacd0e260ca9eb24638f9970a86a5d54ee51b77e48e43760a0abf940b296dd84",
+      "size_bytes": 5390
+    },
+    "robustness_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/robustness.json",
+      "sha256": "08a1db08015da4cfcefe918b272e73a157b5ede1919284b90567efb5e8a2c1ea",
+      "size_bytes": 3639
+    },
+    "robustness_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
+      "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177",
+      "size_bytes": 3917
+    }
+  },
+  "manifest_sha256": "39cc0d07cfd8d7ffcf0e003563a3028bb9f084604ace149fefaf45904c086aec",
+  "outputs": {
+    "perturbation_coverage_inventory": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/perturbation_coverage_inventory.csv",
+      "row_count": 11,
+      "sha256": "6d086de67c981cf314fcde9ce2e895916fb579d284ddde82bd38e46283081e43",
+      "size_bytes": 3258
+    }
+  },
+  "schema_version": "rankcloak-robustness-coverage-inventory-v1",
+  "status": "passed",
+  "summary": {
+    "directly_tested_count": 5,
+    "not_tested_count": 3,
+    "partially_represented_count": 3,
+    "requested_transformation_count": 11
+  }
+}

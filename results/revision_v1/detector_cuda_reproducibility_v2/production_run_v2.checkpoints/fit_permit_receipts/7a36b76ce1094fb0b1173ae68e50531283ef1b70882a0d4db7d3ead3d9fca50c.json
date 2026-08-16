@@ -1,0 +1,14 @@
+{
+  "consumed_at_utc": "2026-08-16T10:29:57.366314+00:00",
+  "fit_gate_nonce": "7a36b76ce1094fb0b1173ae68e50531283ef1b70882a0d4db7d3ead3d9fca50c",
+  "invocation_pid": 372011,
+  "invocation_start_ticks": 1348115,
+  "issued_permit_file_sha256": "efcdf5522691021b9a32b4145f86d238b066681f9217a38493c402eebd7c468c",
+  "issued_permit_sha256": "1e9d764e09431005629c9d4db13f42e354e73339b3941f12ee47241eb8e5773b",
+  "issued_permit_size_bytes": 586,
+  "next_fit_upper_seconds": 7200.0,
+  "receipt_sha256": "859b0ce4ac6a1fa3b18540d02171c65a395f8437c673a98b1e93eb6ea0e827c0",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-permit-receipt-v1",
+  "task_identity_sha256": "8ca65d9fb6bce34e96b9b01c56f023a6992850be40419577334cb9f8022e5da6"
+}

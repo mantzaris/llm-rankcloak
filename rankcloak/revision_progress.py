@@ -19,12 +19,12 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Set, Tuple
 
-from .revision_artifacts import canonical_json_sha256
+from .revision_artifacts import canonical_json_sha256, file_sha256
 from .revision_detection import RevisionDetectionError
 from .revision_detector_execution import (
     detector_finalization_paths,
     detector_gpu_ledger_incorporation_path,
-    read_detector_device_equivalence_report,
+    read_detector_cuda_reproducibility_report,
     read_detector_equivalence_fit_artifact,
     read_detector_finalization_candidate,
     read_detector_gpu_accounting_ledger,
@@ -54,23 +54,32 @@ EVALUATOR_FROZEN_TARGET_UNITS = 17_280
 EVALUATOR_UNAVAILABLE_SOURCE_MODEL = "mistral_7b_instruct_v0_3_q4_k_m"
 EVALUATOR_UNAVAILABLE_EVALUATOR_MODEL = "llama3_8b_instruct_q4_k_m"
 AUTHORIZED_GPU_UUID = "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+HISTORICAL_ACTUAL_GPU_HOURS_FLOOR = 62.4783840698
 DETECTOR_TOTAL_FITS = 56
 DETECTOR_GPU_INTERVAL_POLICY = "detector_process_wall_span_v1"
 DETECTOR_GPU_COLLECTION_POLICY = (
     "nonoverlapping_detector_process_wall_intervals_v1"
 )
 DETECTOR_EXECUTION_POLICY_SHA256 = (
-    "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9"
+    "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7"
 )
 DETECTOR_EXECUTION_POLICY_CONTENT_SHA256 = (
-    "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6"
+    "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d"
 )
 DETECTOR_EXECUTION_POLICY_SUFFIX = Path(
-    "operations/confirmatory_v2/detector_acceleration_policy_v1.json"
+    "operations/confirmatory_v2/detector_cuda_policy_v2.json"
 )
-DETECTOR_EQUIVALENCE_RELATIVE_ROOT = Path("detector_equivalence_v1")
+DETECTOR_EQUIVALENCE_RELATIVE_ROOT = Path(
+    "detector_cuda_reproducibility_v2"
+)
 DETECTOR_GPU_LEDGER_RELATIVE_PATH = (
     DETECTOR_EQUIVALENCE_RELATIVE_ROOT / "gpu_accounting_ledger.json"
+)
+DETECTOR_FIT_PERMIT_RELATIVE_PATH = (
+    DETECTOR_EQUIVALENCE_RELATIVE_ROOT / "production_run_v2.fit_permit.json"
+)
+DETECTOR_PRODUCTION_CHECKPOINT_RELATIVE_PATH = (
+    DETECTOR_EQUIVALENCE_RELATIVE_ROOT / "production_run_v2.checkpoints"
 )
 DETECTOR_GPU_LEDGER_DERIVATION_POLICY = (
     "terminal_receipt_interval_union_deduplicated_v1"
@@ -748,6 +757,9 @@ def _verified_baseline(results_root: Path) -> Dict[str, object]:
     return {
         "verified_prior_seconds": prior_seconds,
         "prior_components": prior_components,
+        "historical_actual_gpu_hours_floor": (
+            HISTORICAL_ACTUAL_GPU_HOURS_FLOOR
+        ),
         "targets": targets,
         "projection_sha256": supplied_hash,
         "projection_decision": report.get("decision"),
@@ -795,8 +807,8 @@ def _detector_gpu_intervals(
     expected_policy_path = (
         manifest_path.parents[4] / DETECTOR_EXECUTION_POLICY_SUFFIX
     ).resolve()
-    expected_permit_path = manifest_path.parent.with_name(
-        manifest_path.parent.name + ".fit_permit.json"
+    expected_permit_path = (
+        manifest_path.parents[2] / DETECTOR_FIT_PERMIT_RELATIVE_PATH
     ).resolve()
     run_identity = manifest.get("run_identity")
     if (
@@ -1002,6 +1014,10 @@ def _detector_policy_identity_artifacts(
         or value.get("equivalence_policy") != policy.get("equivalence")
         or value.get("equivalence_policy_sha256")
         != canonical_json_sha256(policy.get("equivalence"))
+        or policy.get("authorized_ceiling", {}).get(
+            "historical_actual_gpu_hours_floor"
+        )
+        != HISTORICAL_ACTUAL_GPU_HOURS_FLOOR
     ):
         raise RevisionProgressError(
             "Detector accounting acceleration policy differs"
@@ -1228,8 +1244,9 @@ def _detector_ledger_expected_output(
     if kind == "benchmark_artifact":
         return (
             results_root
-            / "supervisor"
-            / "detector_benchmark_task_{}_cuda.json".format(task_index)
+            / DETECTOR_EQUIVALENCE_RELATIVE_ROOT
+            / "benchmarks"
+            / "task_{}_cuda.json".format(task_index)
         ).resolve()
     return (
         results_root
@@ -1244,11 +1261,7 @@ def _detector_ledger_expected_checkpoint(
 ) -> Path:
     kind, task_index, role = DETECTOR_EXPECTED_LEDGER_SOURCES[source_id]
     if kind == "benchmark_artifact" or role == "cuda":
-        return (
-            results_root
-            / DETECTOR_STAGE
-            / "confirmatory_v2.checkpoints"
-        ).resolve()
+        return (results_root / DETECTOR_PRODUCTION_CHECKPOINT_RELATIVE_PATH).resolve()
     return (
         results_root
         / DETECTOR_EQUIVALENCE_RELATIVE_ROOT
@@ -1589,7 +1602,7 @@ def _validate_detector_report_for_progress(
         results_root
         / DETECTOR_EQUIVALENCE_RELATIVE_ROOT
         / "task_{}".format(task_index)
-        / "equivalence_report.json"
+        / "cuda_reproducibility_report.json"
     ).resolve()
     report_content = _stable_bytes(
         report_path, results_root, "detector equivalence report"
@@ -1619,7 +1632,7 @@ def _validate_detector_report_for_progress(
         "detector equivalence policy",
     )
     try:
-        report = read_detector_device_equivalence_report(
+        report = read_detector_cuda_reproducibility_report(
             report_path,
             expected_task_index=task_index,
             expected_policy_identity=policy_identity,
@@ -1629,23 +1642,29 @@ def _validate_detector_report_for_progress(
         raise RevisionProgressError(
             "Detector equivalence report failed strict validation: {}".format(exc)
         ) from exc
-    if report != parsed or report.get("decision", {}).get("equivalent") is not True:
+    if (
+        report != parsed
+        or report.get("decision", {}).get("reproducible") is not True
+        or not isinstance(
+            report.get("decision", {}).get("same_device_cuda"), dict
+        )
+        or report["decision"]["same_device_cuda"].get("passed") is not True
+    ):
         raise RevisionProgressError(
-            "Detector equivalence report is not an exact passing decision"
+            "Detector CUDA reproducibility report is not an exact passing decision"
         )
     _unique_detector_artifact(artifacts, report_path, report_content)
     for artifact in policy_artifacts:
         artifacts[str(artifact["path"])] = artifact
     declarations = report.get("input_artifacts")
     if not isinstance(declarations, dict) or set(declarations) != {
-        "cpu",
         "cuda",
         "cuda_repeat",
     }:
         raise RevisionProgressError(
-            "Detector equivalence report input declaration differs"
+            "Detector CUDA reproducibility report input declaration differs"
         )
-    for role in ("cpu", "cuda", "cuda_repeat"):
+    for role in ("cuda", "cuda_repeat"):
         artifact_path = (
             results_root
             / DETECTOR_EQUIVALENCE_RELATIVE_ROOT
@@ -1689,16 +1708,7 @@ def _validate_detector_report_for_progress(
             raise RevisionProgressError(
                 "Detector equivalence report scientific/runtime identity differs"
             )
-        if role == "cpu":
-            if (
-                provenance.get("device") != "cpu"
-                or provenance.get("gpu_uuid") is not None
-                or provenance.get("gpu_accounting") is not None
-            ):
-                raise RevisionProgressError(
-                    "Detector CPU equivalence reference is not zero-GPU"
-                )
-        elif (
+        if (
             provenance.get("device") != "cuda:0"
             or provenance.get("gpu_uuid") != AUTHORIZED_GPU_UUID
             or int(provenance.get("workers", -1)) != 1
@@ -1866,12 +1876,25 @@ def _validate_detector_final_triad(
     lineage = None if not isinstance(run_identity, dict) else run_identity.get(
         "lineage"
     )
+    excluded = (
+        None
+        if not isinstance(run_identity, dict)
+        else run_identity.get("excluded_operational_gate_fields")
+    )
+    expected_excluded = {
+        "cuda_budget_gate",
+        "pre_final_gpu_accounting_ledger",
+        "pre_final_gpu_accounting_ledger_path",
+        "required_equivalence_reports",
+    }
     if (
         not isinstance(reports, list)
         or len(reports) != 2
         or not isinstance(lineage, dict)
-        or lineage.get("required_equivalence_reports") != reports
-        or Path(str(lineage.get("pre_final_gpu_accounting_ledger_path", ""))).resolve()
+        or not isinstance(excluded, list)
+        or set(excluded) != expected_excluded
+        or any(field in lineage for field in expected_excluded)
+        or Path(str(manifest.get("pre_final_gpu_accounting_ledger_path", ""))).resolve()
         != ledger_path.resolve()
     ):
         raise RevisionProgressError(
@@ -2419,9 +2442,41 @@ def build_progress_snapshot(
         }
 
     monitored_seconds = sum(float(row["seconds"]) for row in intervals)
-    verified_prior_seconds = _finite_nonnegative(
+    base_verified_prior_seconds = _finite_nonnegative(
         baseline["verified_prior_seconds"], "verified prior seconds"
     )
+    historical_floor_hours = _finite_nonnegative(
+        baseline.get("historical_actual_gpu_hours_floor", 0.0),
+        "historical actual GPU-hour floor",
+    )
+    historical_floor_seconds = historical_floor_hours * 3600.0
+    pre_detector_monitored_seconds = sum(
+        float(row["seconds"])
+        for row in intervals
+        if row.get("component") != DETECTOR_STAGE
+    )
+    accounted_before_reconciliation = (
+        base_verified_prior_seconds + pre_detector_monitored_seconds
+    )
+    historical_floor_reconciliation_seconds = max(
+        0.0, historical_floor_seconds - accounted_before_reconciliation
+    )
+    verified_prior_seconds = (
+        base_verified_prior_seconds + historical_floor_reconciliation_seconds
+    )
+    prior_components = [dict(row) for row in baseline["prior_components"]]
+    if historical_floor_reconciliation_seconds > 0.0:
+        prior_components.append(
+            {
+                "component": "external_historical_actual_floor_reconciliation",
+                "seconds": historical_floor_reconciliation_seconds,
+                "gpu_hours": historical_floor_reconciliation_seconds / 3600.0,
+                "verification": "detector_cuda_policy_v2_external_floor",
+                "charge_only_not_rate_evidence": True,
+                "scientific_result_evidence_allowed": False,
+                "rate_evidence_allowed": False,
+            }
+        )
     cumulative_seconds = verified_prior_seconds + monitored_seconds
     completion_times = sorted(
         _timestamp(value, "terminal completion time")
@@ -2508,7 +2563,14 @@ def build_progress_snapshot(
         "gpu": {
             "verified_prior_seconds": verified_prior_seconds,
             "verified_prior_gpu_hours": verified_prior_seconds / 3600.0,
-            "prior_components": baseline["prior_components"],
+            "prior_components": prior_components,
+            "historical_actual_gpu_hours_floor": historical_floor_hours,
+            "historical_floor_accounted_before_reconciliation_seconds": (
+                accounted_before_reconciliation
+            ),
+            "historical_floor_reconciliation_seconds": (
+                historical_floor_reconciliation_seconds
+            ),
             "monitored_confirmatory_seconds": monitored_seconds,
             "monitored_confirmatory_gpu_hours": monitored_seconds / 3600.0,
             "cumulative_actual_seconds": cumulative_seconds,
@@ -2790,6 +2852,68 @@ def verify_progress_snapshot(path: Path) -> Dict[str, object]:
         for row in intervals
         if isinstance(row, dict) and row.get("component") == DETECTOR_STAGE
     ]
+    historical_floor_hours = _finite_nonnegative(
+        gpu.get("historical_actual_gpu_hours_floor"),
+        "historical actual GPU-hour floor",
+    )
+    floor_reconciliation = _finite_nonnegative(
+        gpu.get("historical_floor_reconciliation_seconds"),
+        "historical floor reconciliation seconds",
+    )
+    prior_components = gpu.get("prior_components")
+    reconciliation_rows = (
+        []
+        if not isinstance(prior_components, list)
+        else [
+            row
+            for row in prior_components
+            if isinstance(row, dict)
+            and row.get("component")
+            == "external_historical_actual_floor_reconciliation"
+        ]
+    )
+    permitted_historical_floors = {HISTORICAL_ACTUAL_GPU_HOURS_FLOOR}
+    if int(detector_row.get("completed", -1)) != DETECTOR_TOTAL_FITS:
+        permitted_historical_floors.add(0.0)
+    if (
+        not isinstance(prior_components, list)
+        or any(not isinstance(row, dict) for row in prior_components)
+        or abs(sum(float(row.get("seconds", -1.0)) for row in prior_components) - prior)
+        > 1e-6
+        or historical_floor_hours not in permitted_historical_floors
+        or len(reconciliation_rows) != (1 if floor_reconciliation > 0.0 else 0)
+        or (
+            reconciliation_rows
+            and float(reconciliation_rows[0].get("seconds", -1.0))
+            != floor_reconciliation
+        )
+    ):
+        raise RevisionProgressError(
+            "Progress historical GPU-floor reconciliation is malformed"
+        )
+    non_detector_monitored = monitored - sum(
+        float(row["seconds"]) for row in stored_detector_intervals
+    )
+    base_prior = prior - floor_reconciliation
+    expected_accounted_before = base_prior + non_detector_monitored
+    expected_reconciliation = max(
+        0.0,
+        historical_floor_hours * 3600.0 - expected_accounted_before,
+    )
+    if (
+        abs(
+            _finite_nonnegative(
+                gpu.get("historical_floor_accounted_before_reconciliation_seconds"),
+                "historical floor pre-reconciliation seconds",
+            )
+            - expected_accounted_before
+        )
+        > 1e-6
+        or abs(floor_reconciliation - expected_reconciliation) > 1e-6
+    ):
+        raise RevisionProgressError(
+            "Progress historical GPU-floor reconciliation differs"
+        )
     if stored_detector_intervals != current_detector_intervals:
         raise RevisionProgressError(
             "Progress detector GPU provenance differs from the final manifest"

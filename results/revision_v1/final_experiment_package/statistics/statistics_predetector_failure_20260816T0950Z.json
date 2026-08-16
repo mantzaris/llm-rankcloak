@@ -1,0 +1,39 @@
+{
+  "diagnosis": {
+    "fail_closed_guard_worked": true,
+    "representation_levels_observed": [
+      "ascii_b16",
+      "ascii_b8",
+      "direct_subword",
+      "hex_nibble"
+    ],
+    "root_cause": "The automatic primary descriptive-effect loop passed the complete six-protocol primary frame to a pairwise comparison without first declaring protocol descriptor variation or stratifying non-protocol factors by protocol.",
+    "scientific_design_change_required": false
+  },
+  "error": {
+    "exit_code": 2,
+    "message": "Pairwise exact_recovery effects would pool representation_name levels ['ascii_b16', 'ascii_b8', 'direct_subword', 'hex_nibble']; filter to one level or compare representation_name directly",
+    "type": "RevisionStatisticsError"
+  },
+  "execution": {
+    "approximate_elapsed_seconds": 3051,
+    "detector_predictions_included": false,
+    "output_directory": "/tmp/rankcloak_statistics_predetector_20260816T0845Z",
+    "published_output_files": [],
+    "source_files": [
+      {
+        "path": "rankcloak/revision_statistics.py",
+        "sha256": "feec31f3d2a74fdc81b2dbc864d2972f7feff8db31051f50e754ebe94dd0508d"
+      },
+      {
+        "path": "scripts/run_revision_statistics.py",
+        "sha256": "7b7785161da368c1f00efc477d6b62bb4f9960d95d5a7bfae09b50d08eb5bee2"
+      }
+    ]
+  },
+  "observed_at_utc": "2026-08-16T09:50:59Z",
+  "partial_outputs_published": false,
+  "schema_version": "rankcloak-statistics-failed-preflight-diagnostic-v1",
+  "scientific_result": false,
+  "status": "preserved_failed_computational_diagnostic"
+}

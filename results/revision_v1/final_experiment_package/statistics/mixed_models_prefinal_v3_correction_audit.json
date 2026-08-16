@@ -1,0 +1,114 @@
+{
+  "schema_version": "rankcloak-mixed-model-prefinal-correction-audit-v1",
+  "status": "prefinal_excluded_final_corrected_rerun_validated",
+  "evidence_role": "diagnostic_only_not_inferential",
+  "recorded_at_utc": "2026-08-16T12:50:18Z",
+  "final_validated_at_utc": "2026-08-16T16:35:48Z",
+  "prefinal_v3": {
+    "preserved_output_directory": "/tmp/rankcloak_mixed_models_prefinal_v3_20260816T0902Z",
+    "manifest_path": "/tmp/rankcloak_mixed_models_prefinal_v3_20260816T0902Z/mixed_model_run_manifest.json",
+    "manifest_sha256": "c0bd03adf57bba79c9a8020533f26a782596783d4cbec1ef96de6532022c43f3",
+    "input_identity_checks_passed": true,
+    "output_identity_and_row_count_checks_passed": true,
+    "output_rows": {
+      "coefficients": 325,
+      "contrasts": 225,
+      "dispersion": 1,
+      "wilson": 24
+    },
+    "model_status_count": 7,
+    "diagnostic_count": 6,
+    "fixed_effects_fallback_detected": false,
+    "coefficient_p_values_structurally_unavailable_from_lme4": 260,
+    "holm_chunk_maximum_absolute_recomputation_difference": 9.992007221626409e-16,
+    "wilson_maximum_absolute_recomputation_difference": 4.440892098500626e-16,
+    "singular_fit_diagnostic_models": [
+      "primary_effective_artifact_rate",
+      "primary_cover_log_probability",
+      "primary_heldout_evaluator_log_probability"
+    ]
+  },
+  "exclusion_reasons": [
+    {
+      "id": "contrast_analysis_model_identity_overwritten",
+      "result": "failed",
+      "details": "The by-stratum column named model_id overwrote the analysis model ID in all contrast rows.",
+      "observed_contrast_model_id_values": [
+        "llama3_8b_instruct_q4_k_m",
+        "mistral_7b_instruct_v0_3_q4_k_m",
+        "qwen2_5_7b_instruct_q4_k_m"
+      ]
+    },
+    {
+      "id": "v3_join_algorithm_source_provenance_stale",
+      "result": "failed",
+      "join_manifest_path": "results/revision_v1/analysis_inputs/primary_heldout_join_v3/heldout_feature_join_manifest.json",
+      "join_manifest_sha256": "f3826ee932550e59e0390ed06f2a48d9089a70b585130d61ceb18f9116e01afe"
+    }
+  ],
+  "corrections": {
+    "r_source_path": "scripts/run_revision_mixed_models.R",
+    "r_source_sha256": "6ff857647ef9c594a823a4786af1b441e0ff7274ed97f3201a7384e005dde0f9",
+    "artifact_outcome_gate": "validates manifest-declared source or derivation, required columns, row count, current algorithm source hash, and nonnegative integer outcomes",
+    "contrast_identity_schema": {
+      "model_id": "preserved analysis model identifier",
+      "stratum_model_id": "language-model by-stratum identifier"
+    }
+  },
+  "provenance_rebuild": {
+    "v4_validation_status": "failed_closed_after_later_statistics_source_change",
+    "v4_manifest_path": "results/revision_v1/analysis_inputs/primary_heldout_join_v4/heldout_feature_join_manifest.json",
+    "v4_manifest_sha256": "c8c90318416522333084bd82c08614ce176498ae957e3b275f7e6af308c00cf9",
+    "v4_declared_algorithm_source_sha256": "a0c75685efa489bd3692823b81ad0dae98162e02b542ece4a43987ea34a0516d",
+    "v5_manifest_path": "results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json",
+    "v5_manifest_sha256": "15151b9698c2d71d791a65ceb1dfac615e49294fa02d71ae5602b1e29f2df7ec",
+    "v5_declared_algorithm_source_sha256": "ab80a687e38780f5662c7bdf5deb28bc61051b71011566bcbb74610be5940b23",
+    "current_algorithm_source_sha256": "ab80a687e38780f5662c7bdf5deb28bc61051b71011566bcbb74610be5940b23",
+    "v3_v4_v5_feature_tables_byte_identical": true,
+    "feature_table_sha256": "e48ce95cd239437a038f7d18940ffc202fee8e5fe201e5e5e132ac34192e3121",
+    "feature_row_count": 13320,
+    "primary_trial_count": 6480
+  },
+  "validation_gates": {
+    "v5_full_input_validation_only": {
+      "status": "passed",
+      "manifest_path": "/tmp/rankcloak_mixed_models_validate_v5_20260816T1252Z/mixed_model_run_manifest.json",
+      "manifest_sha256": "1eb2757c46ff81ca9152820ed7bb753784d6566c57d3b4729e5aeaa854eeac89"
+    },
+    "locked_r_regression_tests": {
+      "status": "passed",
+      "tests": 9,
+      "junit_path": "/tmp/rankcloak_mixed_model_patch_tests_v2_20260816.xml",
+      "junit_sha256": "f1ad2e334f4f26e9e31aad25eab5faf81ff2842c16c29a7abc58a9ed19ad5ad9",
+      "includes_real_synthetic_contrast_identity_fit": true
+    }
+  },
+  "final_run": {
+    "output_directory": "results/revision_v1/final_experiment_package/statistics/mixed_models",
+    "input_join_version": "v5",
+    "state_at_final_validation": "completed",
+    "atomic_output_file_count": 7,
+    "manifest_path": "results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json",
+    "manifest_sha256": "12dbf66996cf164eb7c7ef208ded3ffce370ee6e3a7d58e5db193d0979861abc",
+    "driver_source_sha256": "6ff857647ef9c594a823a4786af1b441e0ff7274ed97f3201a7384e005dde0f9",
+    "output_rows": {
+      "coefficients": 325,
+      "contrasts": 225,
+      "dispersion": 1,
+      "wilson": 24
+    },
+    "model_status_count": 7,
+    "diagnostic_count": 6,
+    "fixed_effects_fallback_detected": false,
+    "contrast_analysis_model_count": 5,
+    "contrast_stratum_model_count": 3,
+    "contrast_identity_duplicates": 0,
+    "singular_fit_diagnostic_models": [
+      "primary_effective_artifact_rate",
+      "primary_cover_log_probability",
+      "primary_heldout_evaluator_log_probability"
+    ],
+    "recovery_glmm_status": "not_fitted_complete_outcome_separation_all_success",
+    "human_model_status": "external_until_irb_approved_ratings_exist"
+  }
+}

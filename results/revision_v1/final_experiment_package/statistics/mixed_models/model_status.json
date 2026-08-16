@@ -1,0 +1,54 @@
+[
+  {
+    "model_id": "primary_exact_recovery",
+    "status": "not_fitted_complete_outcome_separation_all_success",
+    "reason": "The binomial likelihood has no outcome variation; fixed effects and random-effect variances are unidentified.",
+    "all_success_or_zero_policy": "skip_unidentified_glmm_and_report_wilson_intervals",
+    "coefficient_rows": 0,
+    "recovery_outcome": "exact_payload_recovery",
+    "recovery_outcome_semantics": "original_serialized_payload_bytes_sha256_v1",
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_artifact_counts",
+    "status": "completed",
+    "coefficient_rows": 65,
+    "excluded_incomplete_rows": 0,
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_effective_artifact_rate",
+    "status": "completed_with_diagnostic_warning",
+    "coefficient_rows": 65,
+    "excluded_incomplete_rows": 0,
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_cover_log_probability",
+    "status": "completed_with_diagnostic_warning",
+    "coefficient_rows": 65,
+    "excluded_incomplete_rows": 0,
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_heldout_evaluator_log_probability",
+    "status": "completed_with_diagnostic_warning",
+    "coefficient_rows": 65,
+    "excluded_incomplete_rows": 0,
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_payload_throughput",
+    "status": "completed",
+    "coefficient_rows": 65,
+    "excluded_incomplete_rows": 0,
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "human_naturalness_and_suspiciousness_clmm",
+    "status": "external_until_irb_approved_ratings_exist",
+    "recruitment_authorized": false,
+    "fixed_effects_fallback": false
+  }
+]
+

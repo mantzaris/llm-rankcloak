@@ -1,0 +1,123 @@
+{
+  "cleanup": {
+    "deletion_performed": false,
+    "move_performed": false,
+    "quarantine_performed": false,
+    "reason_left_in_place": "Adequate disk headroom remained and preservation was preferred."
+  },
+  "disk": {
+    "available_bytes": 53935910912,
+    "filesystem_bytes": 501809635328,
+    "mount_point": "/",
+    "used_bytes": 422307921920,
+    "used_percent": 89
+  },
+  "git": {
+    "head": "223a06f649494eb1fefeca8832cf89a069d92cdc",
+    "staged_path_count": 0
+  },
+  "gpu": {
+    "compute_applications": [],
+    "devices": [
+      {
+        "index": 0,
+        "memory_total_mib": 4096,
+        "memory_used_mib": 79,
+        "name": "Quadro T2000",
+        "temperature_c": 44,
+        "utilization_percent": 33,
+        "uuid": "GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04"
+      },
+      {
+        "index": 1,
+        "memory_total_mib": 32760,
+        "memory_used_mib": 11,
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "temperature_c": 34,
+        "utilization_percent": 0,
+        "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+      }
+    ],
+    "no_compute_applications_observed": true
+  },
+  "locks": {
+    "active_owner_count": 0,
+    "records": [
+      {
+        "bytes": 170,
+        "path": "results/revision_v1/detector_cuda_reproducibility_v2/production_run.checkpoints/.execution.lock",
+        "pid": 184498,
+        "pid_active": false
+      },
+      {
+        "bytes": 171,
+        "path": "results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/.execution.lock",
+        "pid": 372011,
+        "pid_active": false
+      },
+      {
+        "bytes": 171,
+        "path": "results/revision_v1/detector_cuda_reproducibility_v2/task_0/cuda_repeat_run.checkpoints/.execution.lock",
+        "pid": 303615,
+        "pid_active": false
+      },
+      {
+        "bytes": 171,
+        "path": "results/revision_v1/detector_cuda_reproducibility_v2/task_1/cuda_repeat_run.checkpoints/.execution.lock",
+        "pid": 317248,
+        "pid_active": false
+      },
+      {
+        "bytes": 173,
+        "path": "results/revision_v1/detector_equivalence_v1/task_0/cpu_run.checkpoints/.execution.lock",
+        "pid": 2430876,
+        "pid_active": false
+      },
+      {
+        "bytes": 173,
+        "path": "results/revision_v1/detector_equivalence_v1/task_0/cuda_repeat_run.checkpoints/.execution.lock",
+        "pid": 2470252,
+        "pid_active": false
+      },
+      {
+        "bytes": 173,
+        "path": "results/revision_v1/detector_equivalence_v1/task_1/cpu_run.checkpoints/.execution.lock",
+        "pid": 2499445,
+        "pid_active": false
+      },
+      {
+        "bytes": 173,
+        "path": "results/revision_v1/neural_detector/confirmatory_v2.checkpoints/.execution.lock",
+        "pid": 2466998,
+        "pid_active": false
+      },
+      {
+        "bytes": 0,
+        "path": "results/revision_v1/supervisor/confirmatory_v2_orchestrator.lock",
+        "pid": null,
+        "pid_active": false
+      }
+    ],
+    "total_lock_files": 9
+  },
+  "observed_at_utc": "2026-08-16T17:35:08Z",
+  "processes": {
+    "relevant_patterns": [
+      "run_revision_detectors",
+      "run_revision_statistics",
+      "supervise_confirmatory_v2",
+      "revision_detector_execution"
+    ],
+    "relevant_process_count": 0,
+    "self_matching_audit_process_excluded": true
+  },
+  "schema_version": "rankcloak-final-resource-process-audit-v1",
+  "status": "passed",
+  "temporary_diagnostics": {
+    "cleanup_or_quarantine_performed": false,
+    "discovery_pattern": "/tmp/rankcloak*",
+    "regular_file_bytes": 466367788,
+    "root_count": 75,
+    "will_be_referenced_without_copying": true
+  }
+}

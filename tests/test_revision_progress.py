@@ -71,11 +71,11 @@ def _write_jsonl(path: Path, values: list[dict]) -> None:
 def _fixture_root(tmp_path: Path) -> Path:
     policy_source = (
         PROJECT_ROOT
-        / "operations/confirmatory_v2/detector_acceleration_policy_v1.json"
+        / "operations/confirmatory_v2/detector_cuda_policy_v2.json"
     )
     policy_target = (
         tmp_path
-        / "operations/confirmatory_v2/detector_acceleration_policy_v1.json"
+        / "operations/confirmatory_v2/detector_cuda_policy_v2.json"
     )
     policy_target.parent.mkdir(parents=True)
     policy_target.write_bytes(policy_source.read_bytes())
@@ -198,10 +198,11 @@ def _add_detector_manifest(
         project_root = root.parents[1]
         policy_path = (
             project_root
-            / "operations/confirmatory_v2/detector_acceleration_policy_v1.json"
+            / "operations/confirmatory_v2/detector_cuda_policy_v2.json"
         ).resolve()
-        permit_path = output.with_name(
-            output.name + ".fit_permit.json"
+        permit_path = (
+            root
+            / "detector_cuda_reproducibility_v2/production_run_v2.fit_permit.json"
         ).resolve()
         run_identity = {
             "execution_policy_path": str(policy_path),
@@ -494,7 +495,7 @@ def _pre_final_ledger(
         ),
     }
     ledger["ledger_sha256"] = canonical_json_sha256(ledger)
-    path = root / "detector_equivalence_v1/gpu_accounting_ledger.json"
+    path = root / "detector_cuda_reproducibility_v2/gpu_accounting_ledger.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     _write_json(path, ledger)
     return path, ledger

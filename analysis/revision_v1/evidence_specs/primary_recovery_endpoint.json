@@ -1,0 +1,23 @@
+{
+  "schema_version": "rankcloak-primary-recovery-endpoint-config-v1",
+  "analysis_id": "primary_recovery_trial_and_strict_payload_sensitivity_v1",
+  "analysis_status": "post_audit_payload_group_sensitivity_not_prespecified_replacement",
+  "partial_outcomes_seen_before_addition": true,
+  "frozen_generation_design_unchanged": true,
+  "strict_payload_success_rule": "all_observed_primary_trials_for_payload_must_recover",
+  "confidence_level": 0.95,
+  "expected_design": {
+    "primary_trial_rows": 6480,
+    "payloads": 480,
+    "model_payload_groups": 1440,
+    "model_families": 3,
+    "prompt_templates": 18,
+    "prompt_categories": 6,
+    "payload_classes": 8,
+    "protocol_variants": 6
+  },
+  "expected_payload_trial_count_distribution": {
+    "9": 240,
+    "18": 240
+  }
+}

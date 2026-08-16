@@ -1,0 +1,1168 @@
+{
+  "checkpoint_references": [
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0000/manifest.json",
+        "sha256": "ab26079361e97e6b4b35865a2a9f0b4da5a7f1f9b0eb2124132f6487641648ee",
+        "size_bytes": 2899
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0000/metric.json",
+        "row_count": 1,
+        "sha256": "c87392a87e8aa51138fba5d2f053db9869455accf7d6a0f87524247d24735069",
+        "size_bytes": 3198
+      },
+      "ordinal": 0,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0000/predictions.json",
+        "row_count": 3960,
+        "sha256": "7916a6358c5ec6997b463bd0fcd8e7e6ce3db48d63a0b721a2d2a00fd90fc603",
+        "size_bytes": 1582175
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0001/manifest.json",
+        "sha256": "a1ae856e9456b323a0429f90a7a45e5f0da7c034cec0de36df1ff8b34dc73c30",
+        "size_bytes": 2822
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0001/metric.json",
+        "row_count": 1,
+        "sha256": "e6fdf37f1f1b0fc6bb4d6d4629c0aa61cd4af975b50d496962ab68259b050867",
+        "size_bytes": 4686
+      },
+      "ordinal": 1,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0001/predictions.json",
+        "row_count": 3960,
+        "sha256": "88768ff4ae31db1db3e8e5dc75ce3f76014c1806e15434b3977722b30e83759f",
+        "size_bytes": 1693765
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0002/manifest.json",
+        "sha256": "939fb844ed53196a58ec4a0ee11f8c76b2e2b17f96f5c1ed6b878b7d45a6817a",
+        "size_bytes": 2969
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0002/metric.json",
+        "row_count": 1,
+        "sha256": "2b32e0e6fdee52d6ab177f39470d0f7f480a34b4329e6b522a536e7177ae4d67",
+        "size_bytes": 3262
+      },
+      "ordinal": 2,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0002/predictions.json",
+        "row_count": 880,
+        "sha256": "c9912640548b21cdb25ec985498a7b063965ea404e11368585111b7d27070392",
+        "size_bytes": 393293
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0003/manifest.json",
+        "sha256": "0dff71b54f21fbc7d6651d58f5dff48ce24a057e2f464a3024cc69bd9119a42c",
+        "size_bytes": 2895
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0003/metric.json",
+        "row_count": 1,
+        "sha256": "000f680934bc7717194047944e8c2272b304f1a14132a4e1e247a97a92226bf6",
+        "size_bytes": 4760
+      },
+      "ordinal": 3,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0003/predictions.json",
+        "row_count": 880,
+        "sha256": "445103bad48709daf7735f999083876e303678ad6aca3ecc8b8d25ec9ed3a4cc",
+        "size_bytes": 418144
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0004/manifest.json",
+        "sha256": "577e4e83c91758283fab64dcfcf1c476cf04e9e3844da84ef8a3ed1e2567c25a",
+        "size_bytes": 2983
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0004/metric.json",
+        "row_count": 1,
+        "sha256": "6a9c985001ab247442cfa63ca503858fc989fc079bb5f199c9d6a5f3503ed76f",
+        "size_bytes": 3286
+      },
+      "ordinal": 4,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0004/predictions.json",
+        "row_count": 880,
+        "sha256": "aaf97122da202788c3df77552cb4f327894e7a6b37b06af82ddcccafb1fc4f11",
+        "size_bytes": 409689
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0005/manifest.json",
+        "sha256": "4328cd7faf60eccbccd19b3eeb00981ca65a94d891cdbb41e4e4ba62f14dd131",
+        "size_bytes": 2909
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0005/metric.json",
+        "row_count": 1,
+        "sha256": "6b786c0ff857e42bb2b6fbde074b9c94f26bfd2bb52eeb04e9f6c6b2bb35aa4a",
+        "size_bytes": 4780
+      },
+      "ordinal": 5,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0005/predictions.json",
+        "row_count": 880,
+        "sha256": "9f2696612087b16a84748a95b23df8e56a6e0c0fb22939330faa20aec1bd97c7",
+        "size_bytes": 436906
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0006/manifest.json",
+        "sha256": "c0f1a811afae745b88d2c06dfca56070ef3dac59de235fc537ee15403b4eb989",
+        "size_bytes": 2972
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0006/metric.json",
+        "row_count": 1,
+        "sha256": "08913467f9c4f8046104cfe8290c9eb001999c73fd686c24b2b3bc2937860836",
+        "size_bytes": 3273
+      },
+      "ordinal": 6,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0006/predictions.json",
+        "row_count": 880,
+        "sha256": "05bdfed0fe850f4eabab73bd2670ddbc187d920d9a8941c63cfcd320575f1dd3",
+        "size_bytes": 396746
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0007/manifest.json",
+        "sha256": "7f11349d8c6df8d88b737b0ff370d1f36b4fb4a55ae946b25232fd6d9ab80769",
+        "size_bytes": 2898
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0007/metric.json",
+        "row_count": 1,
+        "sha256": "64037c11417bb942f59821150931e5f340ddfcc1b0ef5e7b46045bf1edb0a2ef",
+        "size_bytes": 4735
+      },
+      "ordinal": 7,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0007/predictions.json",
+        "row_count": 880,
+        "sha256": "e33ad75a2841c1b1a05b374063a20c26bdb8f96151c029fd83cd6a07d539648c",
+        "size_bytes": 423605
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0008/manifest.json",
+        "sha256": "d3004309260b32ab392018ef3ce79d9efa70255fca8e442a07b166bc538d39ee",
+        "size_bytes": 2988
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0008/metric.json",
+        "row_count": 1,
+        "sha256": "8e2f693fc508f9ead14e68b2f2fe2273d6629379eecd0602e71ef9a9ec5a5296",
+        "size_bytes": 3279
+      },
+      "ordinal": 8,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0008/predictions.json",
+        "row_count": 880,
+        "sha256": "d94458aa565fdecf1671ac0e192f76806ebebcd8db10f1becec407c7943c66b9",
+        "size_bytes": 412185
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0009/manifest.json",
+        "sha256": "162b43e18783d3c54d1d89bf16d20e156d20bb5093068149e2f357144a37faa3",
+        "size_bytes": 2912
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0009/metric.json",
+        "row_count": 1,
+        "sha256": "d9bf0517d1581c6101eecd5cbc524e04089afbf25e4b95bf6f3f208c85f13144",
+        "size_bytes": 4757
+      },
+      "ordinal": 9,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0009/predictions.json",
+        "row_count": 880,
+        "sha256": "1b6b6a030a5eba6c63f4a425e8da94c261f9ecc5ba34376829a8367064a66d59",
+        "size_bytes": 442065
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0010/manifest.json",
+        "sha256": "9289ed638160013512b8a7ab335b6ab631f8f0e668ac5c68bf24d93a01346c42",
+        "size_bytes": 2983
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0010/metric.json",
+        "row_count": 1,
+        "sha256": "fcab23a2018274f72869c8ad93a7df08c74dbca03497422a254b97b4e5e3ad2a",
+        "size_bytes": 3287
+      },
+      "ordinal": 10,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0010/predictions.json",
+        "row_count": 880,
+        "sha256": "105484d9e97113539de8331e9d93b2b3c013f0faa2cbfa3e0e7febf51ed6578f",
+        "size_bytes": 407276
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0011/manifest.json",
+        "sha256": "304d3c70354da2598ccfa273087ca4daca4610c7fb49bd4d7cecbc8cdb615c1e",
+        "size_bytes": 2908
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0011/metric.json",
+        "row_count": 1,
+        "sha256": "da8658138bc018749a8f30f0ef8be398959cc98d368ca94860f843797f3e45c7",
+        "size_bytes": 4723
+      },
+      "ordinal": 11,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0011/predictions.json",
+        "row_count": 880,
+        "sha256": "5aac23cf8a865ea94d2418afe19ba2691f817ace53928f8d87a8948be4d376c4",
+        "size_bytes": 434000
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0012/manifest.json",
+        "sha256": "7522ab643de1dded7bd79101cec7c6533503c650e44cea3aff23188c83382561",
+        "size_bytes": 2983
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0012/metric.json",
+        "row_count": 1,
+        "sha256": "e46154e09956fee9d27b5f88ae75b88b0eff1b67056083d66d21eb3a84967053",
+        "size_bytes": 3274
+      },
+      "ordinal": 12,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0012/predictions.json",
+        "row_count": 880,
+        "sha256": "ff9561b2a33932acac8390844e6f85c008d871970264d6c6607009e93bd2e7d5",
+        "size_bytes": 407666
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0013/manifest.json",
+        "sha256": "a313ba43c1607cbd7bc5279442e9eb775fe63d404def293c56e50b0cf6955323",
+        "size_bytes": 2908
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0013/metric.json",
+        "row_count": 1,
+        "sha256": "802710e9f371aef320f6ff2b436be85e2681716b7ff5c32d494ace72cb8911ed",
+        "size_bytes": 4721
+      },
+      "ordinal": 13,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0013/predictions.json",
+        "row_count": 880,
+        "sha256": "4326bf6c47b74891407d1aa0bd07bce0f48d749c836f62036155ca19e860bda6",
+        "size_bytes": 434133
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0014/manifest.json",
+        "sha256": "5a6634ec188613f5f2a0b3931b407e53d03bf7fe2e0a490589596b65e3518d98",
+        "size_bytes": 2979
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0014/metric.json",
+        "row_count": 1,
+        "sha256": "7473b3a0c13b4b9159005518abdb98aeed19df047f8eee85c2b6b6f966fb69a6",
+        "size_bytes": 3269
+      },
+      "ordinal": 14,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0014/predictions.json",
+        "row_count": 880,
+        "sha256": "66d19983f8e763fbc1d72fe71b5a7f4a31e92e77e41e724fff345f92f43da1a1",
+        "size_bytes": 402853
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0015/manifest.json",
+        "sha256": "11008a90fd7ad9ba6bbfc6c8bb22acbfa5dad700c82f67832c0b1cb6c83bfea0",
+        "size_bytes": 2904
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0015/metric.json",
+        "row_count": 1,
+        "sha256": "c7ab9f4e9117f9ee0b92666c0645591c741652cca31c2853ab405d82c0337921",
+        "size_bytes": 4745
+      },
+      "ordinal": 15,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0015/predictions.json",
+        "row_count": 880,
+        "sha256": "64e34593d95230e2333e030929b22143ddd4e68588da1f8e711c7d96edf4c05c",
+        "size_bytes": 429030
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0016/manifest.json",
+        "sha256": "806bbd0e8fa9e6db64d5493a93d9507aa6c62939b9a8b1f4b5d94f5c2d3ba353",
+        "size_bytes": 2980
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0016/metric.json",
+        "row_count": 1,
+        "sha256": "ea5f36d65608072e102f5ff6d9b6bd93f7e3a093ce723327d62a2307573a2763",
+        "size_bytes": 3284
+      },
+      "ordinal": 16,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0016/predictions.json",
+        "row_count": 880,
+        "sha256": "f14da5a8722f725bea5b62e3b9c74b44f8aa3f3970ecdd349b6ec51d9c993a59",
+        "size_bytes": 405441
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0017/manifest.json",
+        "sha256": "90b6d4fc1a7abd36cb6c9a726caa7961c872520b6f7644a1c4eec385d5845f6b",
+        "size_bytes": 2906
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0017/metric.json",
+        "row_count": 1,
+        "sha256": "0d4a5603f055f3718a85c9bd51fcd20967236fad3c5af75dbd8d520b0f482bee",
+        "size_bytes": 4717
+      },
+      "ordinal": 17,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0017/predictions.json",
+        "row_count": 880,
+        "sha256": "fcff69668cc4bfe7c69a92514b3b5ed2456533535b722c87c88f11e00a5a936f",
+        "size_bytes": 431522
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0018/manifest.json",
+        "sha256": "670af59863b1ce0a5bb9b725e14ce7baaf07725546f66c1c234b2b427a8a7bc0",
+        "size_bytes": 2979
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0018/metric.json",
+        "row_count": 1,
+        "sha256": "6d9abd11e081ce735c7e7250a764b35f05772d5be6b103fb74f6d0960edac2cc",
+        "size_bytes": 3285
+      },
+      "ordinal": 18,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0018/predictions.json",
+        "row_count": 880,
+        "sha256": "5090c4fc1995fa1bafb8833ad402f5fa0e046fb2da3d117b67b52ef6cf140f19",
+        "size_bytes": 401847
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0019/manifest.json",
+        "sha256": "414dc1acb13c25b7ce7e94c2d6cbee87631778e465fde4b52e96db6f9d122a87",
+        "size_bytes": 2904
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0019/metric.json",
+        "row_count": 1,
+        "sha256": "e3f53cb5e58688661868ef0836163cdc0163748d25027f286b3c95cdc6f41708",
+        "size_bytes": 4774
+      },
+      "ordinal": 19,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0019/predictions.json",
+        "row_count": 880,
+        "sha256": "e1ccd27b004a3c1da56ff9a69547ffb266d4eae809c34823e7677b63ffe2c8d5",
+        "size_bytes": 428247
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0020/manifest.json",
+        "sha256": "6b91cd118b5354c2cdcd1f5e8b15717c4809a396633a39a3925f12a8c2f70501",
+        "size_bytes": 2987
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0020/metric.json",
+        "row_count": 1,
+        "sha256": "05ce2bfbea40edfbc1361e057c319b957a2a76cf4c4c1c44bf71d279c8446317",
+        "size_bytes": 3288
+      },
+      "ordinal": 20,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0020/predictions.json",
+        "row_count": 880,
+        "sha256": "bcb37845596a562f805f459fbf4f8e0e1a8068977f1f0b65dfd2e7667e78e5ff",
+        "size_bytes": 413348
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0021/manifest.json",
+        "sha256": "993c592247625c65236f180e86b9cb2336e5800343f76776e2177bbcce5502e9",
+        "size_bytes": 2913
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0021/metric.json",
+        "row_count": 1,
+        "sha256": "414c96caa318a14242819d344a32c51aff8396e930946ac5ad436b3fb393ffa6",
+        "size_bytes": 4752
+      },
+      "ordinal": 21,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0021/predictions.json",
+        "row_count": 880,
+        "sha256": "e8fdb6d439eb2b5da9c63d97cf0d67c9820b76e74f1331f67bb3795a01d505cf",
+        "size_bytes": 439630
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0022/manifest.json",
+        "sha256": "7335c6450727a3095e97ebf60d6ac172e2e5cc83a66aafe1bd8385dbe8bee5fa",
+        "size_bytes": 2978
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0022/metric.json",
+        "row_count": 1,
+        "sha256": "752e22a328af83c90563352a822b5e55b0bf3560fe4b2fdf236a40dd4a8d7047",
+        "size_bytes": 3281
+      },
+      "ordinal": 22,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0022/predictions.json",
+        "row_count": 880,
+        "sha256": "65053f4ea5f5e840d6e0a452d1a5c62312bf6ab8b408ad22ccb1da5c0e33a614",
+        "size_bytes": 400263
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0023/manifest.json",
+        "sha256": "f54cbcec5210b7990ee118769c38ac9240924990d878552c6a097e97b3882da1",
+        "size_bytes": 2903
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0023/metric.json",
+        "row_count": 1,
+        "sha256": "b52472bffa811608740857a65c4e11b1cdfa76c682ad0cd37c5a2d77f8c14eba",
+        "size_bytes": 4766
+      },
+      "ordinal": 23,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0023/predictions.json",
+        "row_count": 880,
+        "sha256": "7312e1b7cd44fd2930f5c2e553b444b772545456856ea8cb9f359e4d6422626a",
+        "size_bytes": 426144
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0024/manifest.json",
+        "sha256": "0c7f2a6165df9e3a63a237d21182c6cf6cc037709d5d2cd76136f7be413303e6",
+        "size_bytes": 2987
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0024/metric.json",
+        "row_count": 1,
+        "sha256": "9eb6031423dcf5fe4649dd6daa1472981eec3dec2c1c2fea6a3b0c97de40a37d",
+        "size_bytes": 3289
+      },
+      "ordinal": 24,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0024/predictions.json",
+        "row_count": 880,
+        "sha256": "43e1ceb4d2a0d2959a88b3e4e05b3d0bee53e9297473d14549ff5b0a7007cdcc",
+        "size_bytes": 413989
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0025/manifest.json",
+        "sha256": "c198c2826307652bc37d3d1277d0f55f1c1acc0a0e31a4df2f794832a680ffbe",
+        "size_bytes": 2913
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0025/metric.json",
+        "row_count": 1,
+        "sha256": "e082874f30d3385e652b928af7e74567d04556bffb05376d21a15f941a019ba3",
+        "size_bytes": 4781
+      },
+      "ordinal": 25,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0025/predictions.json",
+        "row_count": 880,
+        "sha256": "139a65ac26a9c2123f9368faf6a25c03cf7a4d11c22a5d576f84c3b4a734b0bb",
+        "size_bytes": 439412
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0026/manifest.json",
+        "sha256": "2fac1f0f488e80f7bfbe2f05b3333ce3eaf3d734f7562e147e188193c8f047b4",
+        "size_bytes": 2978
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0026/metric.json",
+        "row_count": 1,
+        "sha256": "08d6c6b4062aac8b637e096789e08c86e0a74613ed20791e8b29daa2e11daad0",
+        "size_bytes": 3282
+      },
+      "ordinal": 26,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0026/predictions.json",
+        "row_count": 880,
+        "sha256": "31de90e7110afd3680ba0a829d39aaa023f05555a8fedf73b5f6795c395d7372",
+        "size_bytes": 403287
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0027/manifest.json",
+        "sha256": "08840c5857be916b4c54df0c23b7e08ee99d26d48646ee1428774658ae47fe10",
+        "size_bytes": 2904
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0027/metric.json",
+        "row_count": 1,
+        "sha256": "004c491df248cbcef012aa1fcf1752b1152af8258827cda01cf900e3e899a3b5",
+        "size_bytes": 4741
+      },
+      "ordinal": 27,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0027/predictions.json",
+        "row_count": 880,
+        "sha256": "e98d1e1c595578f721a01ba04ee5b89ea2922229731a26e52a0c1bfa0d15c043",
+        "size_bytes": 428848
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0028/manifest.json",
+        "sha256": "db6ab622a6edbb4e083db26fbc1e2267320380f1ad34910517a6c76dd7ddc9f2",
+        "size_bytes": 2975
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0028/metric.json",
+        "row_count": 1,
+        "sha256": "488f8bfebcf41911afc16edd8a6c15665c75211e3170c4e2786c0d1c2ec05667",
+        "size_bytes": 3281
+      },
+      "ordinal": 28,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0028/predictions.json",
+        "row_count": 880,
+        "sha256": "e1dab65ec3656f9a05b2516ccbb7c793ec8a026a9519f8df611702c797c8edef",
+        "size_bytes": 397090
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0029/manifest.json",
+        "sha256": "026c95f8e652c612d00cb78a11d044dbbd0ab0b379c55fc64d3d68a033ee69ad",
+        "size_bytes": 2901
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0029/metric.json",
+        "row_count": 1,
+        "sha256": "d9beb0b89f84e3ad36c80f9fdc3edd4778193dd79930ee1a0af27d5338b222d8",
+        "size_bytes": 4726
+      },
+      "ordinal": 29,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0029/predictions.json",
+        "row_count": 880,
+        "sha256": "c2bac97ab15b0eeb2c4bc61bbf2edfeb2c38991df16d433e8148a8cc3e30dd5e",
+        "size_bytes": 423578
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0030/manifest.json",
+        "sha256": "59334459951b6baaf36372341e879017469fdac5fffa85fb21745fd7e637486f",
+        "size_bytes": 2979
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0030/metric.json",
+        "row_count": 1,
+        "sha256": "6be531badb15247cb22ba80be0346766db0f8646ccbad78a70aecfea0c0b3f4b",
+        "size_bytes": 3285
+      },
+      "ordinal": 30,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0030/predictions.json",
+        "row_count": 880,
+        "sha256": "61f0208bfb15cc1e365295147dd69e0cefea3fa2d547760b2aa920a2714a550a",
+        "size_bytes": 402092
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0031/manifest.json",
+        "sha256": "ea6af486aac47125edf5b530c1dca85ffd67b6fd817e661f87904d1965161f67",
+        "size_bytes": 2903
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0031/metric.json",
+        "row_count": 1,
+        "sha256": "27d2e4e2c10cd1ed4b59596f65cfcbbf085628eec8592c054aa676938c91f7cd",
+        "size_bytes": 4714
+      },
+      "ordinal": 31,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0031/predictions.json",
+        "row_count": 880,
+        "sha256": "7a1fb598dab26dfe818ed36f06e4c0c9567b20c5ee20d8dec5f5beb22c060da8",
+        "size_bytes": 428951
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0032/manifest.json",
+        "sha256": "838b6dd8df2f3ff9ab2f04707c44fbcde43c507b9d1b5cfca25c4f76c9d58bd3",
+        "size_bytes": 2990
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0032/metric.json",
+        "row_count": 1,
+        "sha256": "c30e56c564ba74f3d274bbb5b1b50f90e01f6ebabe3c1bc898619f3089a94673",
+        "size_bytes": 3293
+      },
+      "ordinal": 32,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0032/predictions.json",
+        "row_count": 880,
+        "sha256": "b41bfab79e5e8facd1e3f05af3838e55ef2a4be91c928b17e9187201872c20f2",
+        "size_bytes": 415420
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0033/manifest.json",
+        "sha256": "d99dee4ae69109f18f2bad1690fcf0749c988126c3aedc23149230079419f49e",
+        "size_bytes": 2915
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0033/metric.json",
+        "row_count": 1,
+        "sha256": "6f083b1d9172fa410fa897a82e9aea855bf6ad5416f9f954b64a474afd1a7fe5",
+        "size_bytes": 4725
+      },
+      "ordinal": 33,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0033/predictions.json",
+        "row_count": 880,
+        "sha256": "a3729ad14653a980e7656a6187b13c655dfd219669922132873904c723278035",
+        "size_bytes": 442197
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0034/manifest.json",
+        "sha256": "6dfc93c2db7b5b489a9c81c65e516bf6dc3e4f947d641142885468967f18d122",
+        "size_bytes": 2992
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0034/metric.json",
+        "row_count": 1,
+        "sha256": "2cd5da9c3faabb490fdc357325cc1eda6e776f4cae7eb0bae0ff2dd4e243d98c",
+        "size_bytes": 3295
+      },
+      "ordinal": 34,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0034/predictions.json",
+        "row_count": 880,
+        "sha256": "6872e8bb94ee4d88faf5e2a781a668ab5f08a21ba47485cfb908eb43a6bea948",
+        "size_bytes": 417203
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0035/manifest.json",
+        "sha256": "2375a98d7c6ea39f8ca070874a6de057c81bf1b8f71268a7a7202b31632f438b",
+        "size_bytes": 2916
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0035/metric.json",
+        "row_count": 1,
+        "sha256": "36988fdc330d7417639ae5c6656918ed5735c350fef4250f4961ef48acff7ff2",
+        "size_bytes": 4743
+      },
+      "ordinal": 35,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0035/predictions.json",
+        "row_count": 880,
+        "sha256": "339c270c75aac62ea8572be1f972f464ff5176ed1059f1b9e8fca07005318a10",
+        "size_bytes": 444582
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0036/manifest.json",
+        "sha256": "8cc92273544bf85043850351ee753a66e97016219f06860dffbb13107900fa38",
+        "size_bytes": 2990
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0036/metric.json",
+        "row_count": 1,
+        "sha256": "9373d8f3812b16ec69fed0470c4e5684680e4e93f8f2bd8bd5ce8ba4f9e790de",
+        "size_bytes": 3294
+      },
+      "ordinal": 36,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0036/predictions.json",
+        "row_count": 880,
+        "sha256": "e84d1ff741139567b1332a0d722cdf67db0ce86fa04263a2f5cf6ebff2199c09",
+        "size_bytes": 416774
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0037/manifest.json",
+        "sha256": "45b02ff57abbfd6b7d8384dfe96956cc06f231e6c30bd42b0eaae7ec141d183a",
+        "size_bytes": 2915
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0037/metric.json",
+        "row_count": 1,
+        "sha256": "a3a1302475c4d58b2d17ce708166ec2842e4c74fc91e870933f63959de25268f",
+        "size_bytes": 4726
+      },
+      "ordinal": 37,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0037/predictions.json",
+        "row_count": 880,
+        "sha256": "627280f1e20163beb93dd12aa520d3db7a89bcc1ef06ea9a9918c07bdaa509f6",
+        "size_bytes": 442194
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0038/manifest.json",
+        "sha256": "dd35ddda24cc8f4a19a8f2a77f044ca5ed38c2f1ed82accb1368411bccc3b756",
+        "size_bytes": 2998
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0038/metric.json",
+        "row_count": 1,
+        "sha256": "c0251fd92beaf37d7f43399b8ae4fefe0347b7cb68896e429bc8713fb55b0325",
+        "size_bytes": 3275
+      },
+      "ordinal": 38,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0038/predictions.json",
+        "row_count": 1320,
+        "sha256": "24d65f0770dc3d0250ddb6e6dffa7356e2a90e077aca6411722329cb6171aa1b",
+        "size_bytes": 611908
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0039/manifest.json",
+        "sha256": "c6eb8b668626da005875c2745e5ecbb1baba642f2d14afb41fecba6b0e7038ae",
+        "size_bytes": 2922
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0039/metric.json",
+        "row_count": 1,
+        "sha256": "0db2690c0a9514a11f2031e0cc208f98e27c367952b9d62d3eaaae3708120bf8",
+        "size_bytes": 4764
+      },
+      "ordinal": 39,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0039/predictions.json",
+        "row_count": 1320,
+        "sha256": "ae6eba02ea60474b4258a37e139df84f1c7a6e7b16c5d1867848c90f26c62010",
+        "size_bytes": 647972
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0040/manifest.json",
+        "sha256": "78d11eb8c7918206c63606e1353bd5a3ae64b8c62b05c51171c0a349f072e05f",
+        "size_bytes": 3010
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0040/metric.json",
+        "row_count": 1,
+        "sha256": "2ae9409a602c5c353f05cb9591bbfde9ffcba4414cae8c5ed69553092929ba85",
+        "size_bytes": 3288
+      },
+      "ordinal": 40,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0040/predictions.json",
+        "row_count": 1320,
+        "sha256": "9b08b71841b1d57cebe8d5db821c9bf4c602f43d9bde14da501c80c4b752f5d4",
+        "size_bytes": 634361
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0041/manifest.json",
+        "sha256": "4168dc6aa046a8774dd6802aa0575b9b7b2aa459c4541519f2b4f3c8cfc93750",
+        "size_bytes": 2934
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0041/metric.json",
+        "row_count": 1,
+        "sha256": "7457e4cd96239816512c5c56232601bc61db65ae44daa4f370003d8d36292c30",
+        "size_bytes": 4689
+      },
+      "ordinal": 41,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0041/predictions.json",
+        "row_count": 1320,
+        "sha256": "d5d82d7dfb5b5c13661abe1c5bf4a8a911e225b8dcdc14739ea9d8a4e1b5eaf7",
+        "size_bytes": 670798
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0042/manifest.json",
+        "sha256": "a2708bb6f0d2f6a635fe50f6a1b1d970dc37f8aa2e91ae59183eca2a7ddb281a",
+        "size_bytes": 2999
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0042/metric.json",
+        "row_count": 1,
+        "sha256": "b1af5593e3d8626eac63d442cfa96961b6da19159bb1abb19f4952afb3b5fdc1",
+        "size_bytes": 3253
+      },
+      "ordinal": 42,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0042/predictions.json",
+        "row_count": 1320,
+        "sha256": "1163f6ca9c09e4496c7859e3fa670a3316c2a57aa6e6b29162a84865286ec679",
+        "size_bytes": 616807
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0043/manifest.json",
+        "sha256": "39a458e998db85016578004bdf0324a88d790a548f0ff8ca1e82fbc8f4b665ad",
+        "size_bytes": 2923
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0043/metric.json",
+        "row_count": 1,
+        "sha256": "5c713bfb5314db25d3d7e120b563bd1cc74d1b83d2f0b7d3e16890b7028d4bcb",
+        "size_bytes": 4735
+      },
+      "ordinal": 43,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0043/predictions.json",
+        "row_count": 1320,
+        "sha256": "1b3ba87fc073a556bbf7f7fe762437c0b9444487c6bfadf48d25c6cac3b9ab0b",
+        "size_bytes": 652124
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0044/manifest.json",
+        "sha256": "70a15dd73213cff319d7f6e0b38696dde52c278450581edcb17de264e2287175",
+        "size_bytes": 2992
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0044/metric.json",
+        "row_count": 1,
+        "sha256": "d7723014f1d3a8541edcb53ff4cd87ab91d5c29cc4e09308d09b7bd6795d981e",
+        "size_bytes": 3272
+      },
+      "ordinal": 44,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0044/predictions.json",
+        "row_count": 720,
+        "sha256": "10d605eff8e3c6197c66cf72a0a2c6db4a5db299a1b32e199ae331a2ad5f8920",
+        "size_bytes": 334950
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0045/manifest.json",
+        "sha256": "a85ebb19f4c64dd4846f8856453ef9cb59639f2e762224438890881046ebce8b",
+        "size_bytes": 2917
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0045/metric.json",
+        "row_count": 1,
+        "sha256": "c080a983aad24f202e6e8e09fcbfd66b5a0eb8d4bd24e22cf279ece630091ac9",
+        "size_bytes": 4612
+      },
+      "ordinal": 45,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0045/predictions.json",
+        "row_count": 720,
+        "sha256": "dc2b9315b8147189e04bb945139c02ba99ee06f9f4f54a42e88f7a476b85ea6b",
+        "size_bytes": 353948
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0046/manifest.json",
+        "sha256": "0c444ef97947a90c1b8610e75f6667268b39022f5af79b12d0bf11259c1165a5",
+        "size_bytes": 2978
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0046/metric.json",
+        "row_count": 1,
+        "sha256": "4b4fd0bff3f10d76109c683d913fcefa3d23a6a6ce2f82488721a85bce898359",
+        "size_bytes": 3258
+      },
+      "ordinal": 46,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0046/predictions.json",
+        "row_count": 720,
+        "sha256": "1bd41f9bce9e753f46cde01f9027d9a2f7ea6c43f9e87a7f9eb1682bca994dc1",
+        "size_bytes": 319170
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0047/manifest.json",
+        "sha256": "f969527064cc647bb53aab791f5e9911d1cc98dda05d724e2d0cacc6144a9778",
+        "size_bytes": 2902
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0047/metric.json",
+        "row_count": 1,
+        "sha256": "384562795c115317ceb0d63cc3780ca262af5aaa25b4afb18cd1819f3a954a0f",
+        "size_bytes": 4722
+      },
+      "ordinal": 47,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0047/predictions.json",
+        "row_count": 720,
+        "sha256": "95061b450795fdef8a1484e99a4c3073879aaa7beb8bae0d6d544bf8dc55da79",
+        "size_bytes": 338973
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0048/manifest.json",
+        "sha256": "bbd17654ad245571dc9e7341502734dab4255230872b93ecb93b74aae7e0edcc",
+        "size_bytes": 2977
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0048/metric.json",
+        "row_count": 1,
+        "sha256": "6ddff8b992d5ea29629c6b00518f77e4c6e2de29091fb64d12d09b9a517ffba3",
+        "size_bytes": 3227
+      },
+      "ordinal": 48,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0048/predictions.json",
+        "row_count": 720,
+        "sha256": "23661a4ac3fd1aaabbd111a282bfce688726d800996d684be127709035d40f60",
+        "size_bytes": 317281
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0049/manifest.json",
+        "sha256": "560b9348b27d6789e59b716553d901fca71d27d147e3fea1d0743f70cbdc1952",
+        "size_bytes": 2902
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0049/metric.json",
+        "row_count": 1,
+        "sha256": "d906d51b98e16bc07b5a0b03fd25551bc0bae55f4f3bf7637802bfa77cf57187",
+        "size_bytes": 4694
+      },
+      "ordinal": 49,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0049/predictions.json",
+        "row_count": 720,
+        "sha256": "292785bad5734b1a432dae2d7fcfa7ceb15c1fad70a0012598359ba3128688a4",
+        "size_bytes": 336868
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0050/manifest.json",
+        "sha256": "542a249b0bc38dc904b1c9071352e496f236f290ab18585e146f2c4d5454a909",
+        "size_bytes": 2989
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0050/metric.json",
+        "row_count": 1,
+        "sha256": "0a0b8505e6fbdc7737f86790a2e520c9e222078342b37d8459abf8857ca023fb",
+        "size_bytes": 3254
+      },
+      "ordinal": 50,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0050/predictions.json",
+        "row_count": 360,
+        "sha256": "902f2d9c5823410a63994d74e7ee371fdbc1ce3b44d95a3cd89e92da6a4c5364",
+        "size_bytes": 164441
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0051/manifest.json",
+        "sha256": "93f0db1adb464cf02237a20905818ee2ae93359a35036fc2eec9aac091da9015",
+        "size_bytes": 2913
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0051/metric.json",
+        "row_count": 1,
+        "sha256": "9d5521cb09ef328905d4d23a7eda50dd7e215c24897e8b389dcd09b64b8b26e6",
+        "size_bytes": 4612
+      },
+      "ordinal": 51,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0051/predictions.json",
+        "row_count": 360,
+        "sha256": "c88f95e012165ae418567235ca432cd7e0c4f1822449a9840129c70a48ec5a89",
+        "size_bytes": 174393
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0052/manifest.json",
+        "sha256": "6d41eeb2a5da98dde20a97eae6bcf14a4ee64bf0aa3caf90083ccbe070a46ac1",
+        "size_bytes": 2997
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0052/metric.json",
+        "row_count": 1,
+        "sha256": "ca04122a169a0c1821f70284047c15721967ec9698ba62cdb47d08cc5ed3678c",
+        "size_bytes": 3264
+      },
+      "ordinal": 52,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0052/predictions.json",
+        "row_count": 720,
+        "sha256": "bd6e641826b87c22d0ae16f654649a8daa74348c324667612d73e297fb244dd8",
+        "size_bytes": 337875
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0053/manifest.json",
+        "sha256": "c9f211df685e068114b39261f0287e7d11210eda1941c8d638d9c415a542399e",
+        "size_bytes": 2917
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0053/metric.json",
+        "row_count": 1,
+        "sha256": "746188da3feba3b38c60211ad73dc4ba72a3295332376158a652d54637ecff1a",
+        "size_bytes": 4740
+      },
+      "ordinal": 53,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0053/predictions.json",
+        "row_count": 720,
+        "sha256": "b9e4e80c9b00ea11609c7195f8dffa7c1b4857875ee8222a698fb01612c6277c",
+        "size_bytes": 357790
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0054/manifest.json",
+        "sha256": "9577e3ed771cd044dfdbfecf2e8e32748c844cb648228df9bdf38230d959ab4f",
+        "size_bytes": 2998
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0054/metric.json",
+        "row_count": 1,
+        "sha256": "79140febd815504b7c0e3be2c148b2345e6f166fd989a425fb826662f5ea13c3",
+        "size_bytes": 3250
+      },
+      "ordinal": 54,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0054/predictions.json",
+        "row_count": 720,
+        "sha256": "2abe08a27bb3abae749103612b2dbf123323385270292665e9b0a19c45395851",
+        "size_bytes": 339119
+      }
+    },
+    {
+      "checkpoint_manifest": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0055/manifest.json",
+        "sha256": "c8af21e3f2fd71955369a63061a76f3185de2cf0004487a42df6ffba0df8081a",
+        "size_bytes": 2922
+      },
+      "metric": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0055/metric.json",
+        "row_count": 1,
+        "sha256": "01d1e30559512e3b89b7a0fe2685cdf2857a59b84d727b59e317840f8e0a9f40",
+        "size_bytes": 4753
+      },
+      "ordinal": 55,
+      "predictions": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0055/predictions.json",
+        "row_count": 720,
+        "sha256": "50aa7fcea90b88fdeea16e0cd678173f5e6b8ed6ef3be03cbf250ad800ee4b9a",
+        "size_bytes": 358992
+      }
+    }
+  ],
+  "checkpoint_root": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints",
+  "detector_run_manifest": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+    "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+    "size_bytes": 58221
+  },
+  "final_outputs": {
+    "detector_dataset_manifest.csv": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_dataset_manifest.csv",
+      "row_count": 15840,
+      "sha256": "14ebcff12aaf44839a777b37b8b0f1c895a08ddd0a1d74d1bc4e6cbdc7729764",
+      "size_bytes": 3609119
+    },
+    "detector_failures.json": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_failures.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "size_bytes": 3
+    },
+    "detector_metrics.csv": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_metrics.csv",
+      "row_count": 56,
+      "sha256": "0b7d9111dfba33b77fde6d53b6ab7e4f71ad8c5f46f489d4da21d5ddd37562be",
+      "size_bytes": 134127
+    },
+    "detector_predictions.csv": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv",
+      "row_count": 55440,
+      "sha256": "c3e64b1c379d0b80c6a01742c3ca8e8a2f3a5503c222d31400784463890f2595",
+      "size_bytes": 18098714
+    },
+    "detector_split_manifest.json": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_split_manifest.json",
+      "sha256": "30f4ea9173ef402ff49bce168d70c3f2fdf70c71637cb99c0b46887a49c7ef12",
+      "size_bytes": 24832
+    }
+  },
+  "large_detector_artifacts_copied": false,
+  "schema_version": "rankcloak-revision-detector-reference-index-v1",
+  "status": "passed",
+  "summary": {
+    "checkpoint_file_reference_count": 168,
+    "final_output_reference_count": 5,
+    "fit_count": 56
+  }
+}

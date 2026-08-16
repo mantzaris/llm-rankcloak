@@ -1,0 +1,10 @@
+source_stage,protocol_variant,tail_policy,n,mean_theoretical_n_B,mean_observed_n_forced,forced_residual_max_abs,tail_median,tail_q05,tail_q95,tail_max,display_label
+ablation_v2,segmented_hex_multi_topic,dynamic_completion_v1,1392,46.0,46.0,0.0,181.0,27.0,643.45,1830.0,ablation v2 | segmented hex multi topic | dynamic completion v1
+ablation_v2,segmented_hex_multi_topic,none,144,46.0,46.0,0.0,0.0,0.0,0.0,0.0,ablation v2 | segmented hex multi topic | none
+ablation_v2,segmented_hex_multi_topic,sentence_tail_min20_max60,144,46.0,46.0,0.0,202.0,84.0,302.85,325.0,ablation v2 | segmented hex multi topic | sentence tail min20 max60
+multilingual_v2,nonseg_ascii_b16,none,288,109.0,109.0,0.0,0.0,0.0,0.0,0.0,multilingual v2 | nonseg ascii b16 | none
+primary_v2,nonseg_ascii_b16,none,1440,109.0,109.0,0.0,0.0,0.0,0.0,0.0,primary v2 | nonseg ascii b16 | none
+primary_v2,nonseg_ascii_b8,none,1440,145.625,145.625,0.0,0.0,0.0,0.0,0.0,primary v2 | nonseg ascii b8 | none
+primary_v2,nonseg_hex_nibble_b16,none,720,46.0,46.0,0.0,0.0,0.0,0.0,0.0,primary v2 | nonseg hex nibble b16 | none
+primary_v2,segmented_hex_multi_topic,dynamic_completion_v1,720,46.0,46.0,0.0,197.5,46.0,657.3499999999997,1315.0,primary v2 | segmented hex multi topic | dynamic completion v1
+primary_v2,segmented_hex_single_topic,dynamic_completion_v1,720,46.0,46.0,0.0,189.0,44.0,671.0,1193.0,primary v2 | segmented hex single topic | dynamic completion v1

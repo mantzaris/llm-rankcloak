@@ -1,0 +1,575 @@
+{
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_evidence_summary.py --package-root /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package --evidence-spec /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/final_evidence_records.json --progress-ledger /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_progress_snapshot_v1.json --payload-corpus /home/meow/Documents/repos/llm-rankcloak/release_inputs/revision_v1/revision_payloads.jsonl --payload-manifest /home/meow/Documents/repos/llm-rankcloak/release_inputs/revision_v1/PAYLOAD_MANIFEST.json --prompts-config /home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/prompts.json --models-config /home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/models.json --detector-run-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json --human-evaluation-status /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/human_evaluation_status.json --overwrite",
+  "git_head": "223a06f649494eb1fefeca8832cf89a069d92cdc",
+  "inputs": {
+    "detector_run_manifest": {
+      "path": "results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+      "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+      "size_bytes": 58221
+    },
+    "evidence_spec": {
+      "path": "analysis/revision_v1/evidence_specs/final_evidence_records.json",
+      "sha256": "0853e7cd55d3f2cfef90f258786eaf9abf9db93cacd4fa9ed36452334bad554d",
+      "size_bytes": 72039
+    },
+    "human_evaluation_status": {
+      "path": "results/revision_v1/final_experiment_package/readability/human_evaluation_status.json",
+      "sha256": "a5312d78217251ded74dcda35ef0c8179540230bceb6cdf187a4698852fc4ccb",
+      "size_bytes": 1080
+    },
+    "models_config": {
+      "path": "configs/revision_v1/models.json",
+      "sha256": "ddeeabbb94c843f2ebc685d354d22891fee83471525e94486816d85aab403e7d",
+      "size_bytes": 2611
+    },
+    "payload_corpus": {
+      "path": "release_inputs/revision_v1/revision_payloads.jsonl",
+      "row_count": 480,
+      "sha256": "6e45aafbc639f49c8fb07fc3055aa2d25e47025a2e945c4ffd2f5ac017322fd2",
+      "size_bytes": 534460
+    },
+    "payload_manifest": {
+      "path": "release_inputs/revision_v1/PAYLOAD_MANIFEST.json",
+      "sha256": "1a3217c4e4a3dc0bbb5e35e65c60f5dc00270724bf618de25e332d43d25a843a",
+      "size_bytes": 1638
+    },
+    "progress_ledger": {
+      "path": "results/revision_v1/final_progress_snapshot_v1.json",
+      "sha256": "12aa17fe6cb4264637d82f100191d1961391bff5378e52f53113c5307dd3ba36",
+      "size_bytes": 2268658
+    },
+    "prompts_config": {
+      "path": "configs/revision_v1/prompts.json",
+      "sha256": "e638d7fe3451f4779d192977f818544857df3b9ad87c2d8a92b2b9809b09d4c5",
+      "size_bytes": 4730
+    }
+  },
+  "manifest_sha256": "3a344e2b6ab04a985c68607e2d70b038c759029f19763574dcc0dcbc8995b581",
+  "outputs": {
+    "STATUS.md": {
+      "path": "results/revision_v1/final_experiment_package/STATUS.md",
+      "sha256": "4e8cfefd0ee87670fbfdfe99f74d15451cddb90fd93459995242998a9357d040",
+      "size_bytes": 9785
+    },
+    "artifact_priority_index.md": {
+      "path": "results/revision_v1/final_experiment_package/artifact_priority_index.md",
+      "sha256": "3c189a720ed35f3e1cf631af882c3f331a11bf0b65668bb379139a0913224e7c",
+      "size_bytes": 5767
+    },
+    "gpu_budget.json": {
+      "path": "results/revision_v1/final_experiment_package/gpu_budget.json",
+      "sha256": "32bb492c7257f123c998973fbc7e6dd6aaeef9df4ffb2102b80ca844af6c56e3",
+      "size_bytes": 1160
+    },
+    "limitations_and_unresolved_items.md": {
+      "path": "results/revision_v1/final_experiment_package/limitations_and_unresolved_items.md",
+      "sha256": "e72681c5958bd97e48a135160094f9b61066183608ef64137b970f2013cc04d5",
+      "size_bytes": 7045
+    },
+    "reviewer_evidence_matrix.md": {
+      "path": "results/revision_v1/final_experiment_package/reviewer_evidence_matrix.md",
+      "sha256": "5f21c74a5e58f71e51594584e743ef7cd3be40d8bbe8d80e556c07c4ee39503f",
+      "size_bytes": 9634
+    },
+    "tables/artifact_priority_index.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/artifact_priority_index.csv",
+      "row_count": 19,
+      "sha256": "e2ba40a7128ea9d47e3b6961e4baca7ccd787f7c2b59cf2f81742f3cd442f8ce",
+      "size_bytes": 5804
+    },
+    "tables/corpus_counts.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/corpus_counts.csv",
+      "row_count": 8,
+      "sha256": "8d2421839d074beeebd534e0bccf613a646cd16d52456ebaef921fb67d9abec0",
+      "size_bytes": 511
+    },
+    "tables/design_counts.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/design_counts.csv",
+      "row_count": 6,
+      "sha256": "1d784fa1091b89c00afac656aeee302e4b497a0da2f6e119b31e5adcdf719089",
+      "size_bytes": 149
+    },
+    "tables/evidence_artifact_references.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/evidence_artifact_references.csv",
+      "row_count": 73,
+      "sha256": "4b4275fe080462213d5487b45c02cff96ba64549a6556d5f7256d7404abf5a41",
+      "size_bytes": 11478
+    },
+    "tables/reviewer_evidence_matrix.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/reviewer_evidence_matrix.csv",
+      "row_count": 14,
+      "sha256": "d1dfeaeed0843091375b7a1b725009d5eb614f289420117a41d65004eb3288f1",
+      "size_bytes": 9220
+    },
+    "tables/stage_counts.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/stage_counts.csv",
+      "row_count": 6,
+      "sha256": "2dc48a2c7fb899d5e8bf3ab9312a815048f1f4d7aa322dc6771984b5ad3b364e",
+      "size_bytes": 280
+    },
+    "tables/verified_findings.csv": {
+      "path": "results/revision_v1/final_experiment_package/tables/verified_findings.csv",
+      "row_count": 26,
+      "sha256": "aa14f0f72e2b21461869d8dbd35f9acd143a112086489901a0e9754433b16c73",
+      "size_bytes": 20477
+    },
+    "verified_findings.md": {
+      "path": "results/revision_v1/final_experiment_package/verified_findings.md",
+      "sha256": "03c6daf731fbfbbf294a40ac316f565fc8d77205f4db2c0d2ebe1c3498d9c1a0",
+      "size_bytes": 21131
+    }
+  },
+  "referenced_artifacts": [
+    {
+      "path": "analysis/revision_v1/evidence_specs/final_evidence_records.json",
+      "row_count": null,
+      "sha256": "0853e7cd55d3f2cfef90f258786eaf9abf9db93cacd4fa9ed36452334bad554d",
+      "size_bytes": 72039
+    },
+    {
+      "path": "configs/revision_v1/models.json",
+      "row_count": null,
+      "sha256": "ddeeabbb94c843f2ebc685d354d22891fee83471525e94486816d85aab403e7d",
+      "size_bytes": 2611
+    },
+    {
+      "path": "configs/revision_v1/prompts.json",
+      "row_count": null,
+      "sha256": "e638d7fe3451f4779d192977f818544857df3b9ad87c2d8a92b2b9809b09d4c5",
+      "size_bytes": 4730
+    },
+    {
+      "path": "human_study/power/planning_power_design_grid.csv",
+      "row_count": 15,
+      "sha256": "88c02ab24c66c128404a4dd3d710644c614859b5997d14da20798eb118fa3832",
+      "size_bytes": 2203
+    },
+    {
+      "path": "human_study/survey/instrument.json",
+      "row_count": null,
+      "sha256": "a788324bf34fc2e4cd0de695c1dfa135a37e8dc7bdf6a2d1c5eb0b50cb9bcc7b",
+      "size_bytes": 3474
+    },
+    {
+      "path": "operations/confirmatory_v2/detector_cuda_policy_v2.json",
+      "row_count": null,
+      "sha256": "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7",
+      "size_bytes": 1814
+    },
+    {
+      "path": "release_inputs/revision_v1/PAYLOAD_MANIFEST.json",
+      "row_count": null,
+      "sha256": "1a3217c4e4a3dc0bbb5e35e65c60f5dc00270724bf618de25e332d43d25a843a",
+      "size_bytes": 1638
+    },
+    {
+      "path": "results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json",
+      "row_count": null,
+      "sha256": "15151b9698c2d71d791a65ceb1dfac615e49294fa02d71ae5602b1e29f2df7ec",
+      "size_bytes": 6778
+    },
+    {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+      "row_count": null,
+      "sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+      "size_bytes": 2730
+    },
+    {
+      "path": "results/revision_v1/detector_cuda_reproducibility_v2/failed_attempts/task_0_packaging_failure.json",
+      "row_count": null,
+      "sha256": "3118e37efc3ea63b9045dbf5fec786fb98ff903b5959412eb1e13bdac1db2b28",
+      "size_bytes": 2727
+    },
+    {
+      "path": "results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json",
+      "row_count": null,
+      "sha256": "f82dc4049d8ce2ab8b2d11465842dfb789f4c7f7f83e89fc9f0f9f2084c537f3",
+      "size_bytes": 7588
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json",
+      "row_count": null,
+      "sha256": "cf94cd4f1698f9c339629e787c2b1d691fee0a0d2839a7e88059e8f3ab79d9f1",
+      "size_bytes": 3012
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/detectors/analysis/detector_extended_metrics.csv",
+      "row_count": 560,
+      "sha256": "256307b2951e46cf3d7ad4263dc3c9bf6490749e5004f92957811e349477598a",
+      "size_bytes": 184228
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/detectors/detector_reference_manifest.json",
+      "row_count": null,
+      "sha256": "0aaa2bbe9740a595888376bcee5ff64e002804bf1137e6ca6a32281165ea7342",
+      "size_bytes": 1433
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/detectors/leakage_audit/detector_leakage_audit_manifest.json",
+      "row_count": null,
+      "sha256": "53d3beea481765ab94ac7d39edc76246bcba614aafb9e868c6b8d61cca0fcf56",
+      "size_bytes": 4058
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_manifest.json",
+      "row_count": null,
+      "sha256": "5177b85da6cdd6d6521a5def6d043e8f43f6b1f16087cc0c9011fa63ea3d7c33",
+      "size_bytes": 4071
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/evidence_summary_prefinal_failure_20260816T1736Z.json",
+      "row_count": null,
+      "sha256": "8da043f8a685f9aecc59757054e02d1870d835dfd7cfaf5d861ee11314fbd72a",
+      "size_bytes": 2104
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
+      "row_count": null,
+      "sha256": "5bd0eabb366656cce77da5ce560d765fdc40d1077838d98044734d955b4c9ec4",
+      "size_bytes": 20893
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/automated_readability.png",
+      "row_count": null,
+      "sha256": "48a7b899544e928d364bf8511aa143c5379ca21a12aa9d4c3dd3177434faf2b3",
+      "size_bytes": 171771
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
+      "row_count": null,
+      "sha256": "81c21430626f06c3c42837927d5d9124099f0ba5a2e1a50e2b6dc31811b16298",
+      "size_bytes": 27740
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+      "row_count": null,
+      "sha256": "6c8159adee541a0ee08a8468f33b34bcb2eeac4175c8b55b3925dd9e27b5f4a1",
+      "size_bytes": 303633
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
+      "row_count": null,
+      "sha256": "1c00dbc0e0470885a69f098b26fc605bae340c071ff62b0cd0398198dd43efbf",
+      "size_bytes": 37210
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+      "row_count": null,
+      "sha256": "cbcc0d5a9f1b12e58aadab4a86bb2872d556dfaa974d6122b7980df917f165ac",
+      "size_bytes": 396573
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
+      "row_count": 48,
+      "sha256": "f3bfd86e26fc709a546b98c54cd22785dcfe7fea156c03076194b97162fdf4de",
+      "size_bytes": 10980
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
+      "row_count": null,
+      "sha256": "8dd62fcf6d6d2e95ae555e002ce3e680bb86be891ee249fdb302167b5cfe7c38",
+      "size_bytes": 35829
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+      "row_count": null,
+      "sha256": "0bd0b30f3cec6fb2505571eb73562ba8916bfec30ff3b5e748aaf2f7f8ac5e33",
+      "size_bytes": 230075
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
+      "row_count": 72,
+      "sha256": "1ecfa6194cdf45d6ba9541773d6004366511cdca358d11ec6583829ff3faa479",
+      "size_bytes": 21607
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
+      "row_count": 21,
+      "sha256": "bcff7be1982eb8aef8ff0e413764959bab8c22ac453ec6a7e1c711a4845d80c7",
+      "size_bytes": 6631
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
+      "row_count": 24,
+      "sha256": "0929f35bc80fa720016dbe663362d99dd1ce415f6a9869aaac1d548ad74c240a",
+      "size_bytes": 4451
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
+      "row_count": null,
+      "sha256": "cb1d3f32ee5200f95f7f99413debb7da0d6242c7fca9921d80d73c43dbe408f4",
+      "size_bytes": 27578
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+      "row_count": null,
+      "sha256": "ccdeb6498eeb4fc930a954655bd22670196511a01ec1acbd80b9088ab21e1797",
+      "size_bytes": 428969
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
+      "row_count": 9,
+      "sha256": "dde73fa720829071f3388d488a88691b6930e92bf62da25c7c1e01227d306063",
+      "size_bytes": 1419
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_manifest.json",
+      "row_count": null,
+      "sha256": "fafbb16b0794f35dfb00c741ffcfecf553af9ad2362d645ab3d79e9b22cc45c7",
+      "size_bytes": 2953
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_summary.csv",
+      "row_count": 2,
+      "sha256": "93352bc51f5799cedf0ef3b2ec8895991bd6b35a72cf0f839505475d16419dfd",
+      "size_bytes": 1250
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/overhead/measurement_limitations.json",
+      "row_count": null,
+      "sha256": "504870c6bb3ea68fa9bf680c590ae94e17539c33a8a2170fa2cc9739b9500888",
+      "size_bytes": 1298
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json",
+      "row_count": null,
+      "sha256": "f5e10d7730b25f022948c37be373d34888e05e2cbc52bc11b6e742564df3ecdb",
+      "size_bytes": 5263
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/overhead/overhead_summary.csv",
+      "row_count": 579,
+      "sha256": "40e3de0868ad4997c7c4465444da123f220116fbe9abcfb3a454eb358cc960ef",
+      "size_bytes": 148844
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/package_index_prefinal_failure_20260816T1746Z.json",
+      "row_count": null,
+      "sha256": "12bd9cc42eb30cfe704da046c5aac34b0ecfe00cfd0103a99e175933e3ff18c5",
+      "size_bytes": 847
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/readability/human_evaluation_status.json",
+      "row_count": null,
+      "sha256": "a5312d78217251ded74dcda35ef0c8179540230bceb6cdf187a4698852fc4ccb",
+      "size_bytes": 1080
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/readability/randomization_metadata.json",
+      "row_count": null,
+      "sha256": "464e1f2afad57236bef954a9a79023bd470c8817f5c97c263b7e591ff431df3b",
+      "size_bytes": 3016
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json",
+      "row_count": null,
+      "sha256": "5d2167a9ca39d2432b541f11c14f3198da0c13c89284b41ba9b6d401aba2be28",
+      "size_bytes": 5644
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_summary.csv",
+      "row_count": 98,
+      "sha256": "16b09e609655baa781440213599cdb9d41ca31dd5c43071f25544e8c69558751",
+      "size_bytes": 26117
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/resource_and_process_audit.json",
+      "row_count": null,
+      "sha256": "47b0212a262dd0779b2a0f421a0553cde28f0c78148439558d4aff7e2d16e6de",
+      "size_bytes": 3661
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/robustness/failure_mechanism_summary.csv",
+      "row_count": 19,
+      "sha256": "62f85f4640200a8afaebe165689907a2e0318f30dc05b08ef044e3a45ede8531",
+      "size_bytes": 3907
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/robustness/failure_taxonomy.csv",
+      "row_count": 2215,
+      "sha256": "a85a393a1df20de10a347c37deeba432b01c48f9de8b9e3cc14471fbf97824f8",
+      "size_bytes": 1329369
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/robustness/perturbation_coverage_inventory.csv",
+      "row_count": 11,
+      "sha256": "6d086de67c981cf314fcde9ce2e895916fb579d284ddde82bd38e46283081e43",
+      "size_bytes": 3258
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/robustness/recovery_by_condition.csv",
+      "row_count": 24,
+      "sha256": "bacd0e260ca9eb24638f9970a86a5d54ee51b77e48e43760a0abf940b296dd84",
+      "size_bytes": 5390
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
+      "row_count": null,
+      "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177",
+      "size_bytes": 3917
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/robustness/unavailable_summary.csv",
+      "row_count": 7,
+      "sha256": "9bc22a0fe16237636993b199b3396f6b3fb8d5019f0205bca7bea243fa44bf48",
+      "size_bytes": 2042
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_canonical_contrasts.csv",
+      "row_count": 60,
+      "sha256": "ab7b54b0b9778595d7ec5613a6db86c8b1570f0edd050c954b01c33c59f399f4",
+      "size_bytes": 22896
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json",
+      "row_count": null,
+      "sha256": "296b78d0e538e3f2efea3bbd7ee9c389d5b8848de7a46719c3c262def277d3f2",
+      "size_bytes": 3744
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_unavailable_summary.csv",
+      "row_count": 1,
+      "sha256": "1f22e130aba6edc05a34737a11bdc6d8922af1e651f62d5428f016de32094aa9",
+      "size_bytes": 267
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_contrasts.csv",
+      "row_count": 225,
+      "sha256": "c4dfb443d3c3d0913836b9718eb94f4eed7212f2a120c1845b6a8587fcad5ffb",
+      "size_bytes": 62852
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json",
+      "row_count": null,
+      "sha256": "12dbf66996cf164eb7c7ef208ded3ffce370ee6e3a7d58e5db193d0979861abc",
+      "size_bytes": 5724
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/mixed_models_prefinal_v3_correction_audit.json",
+      "row_count": null,
+      "sha256": "1be58ea1af4ce3eee6e3a11db223a570a328846b816cdb92126ee07261fe3c45",
+      "size_bytes": 5491
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/python/statistics_execution_audit.json",
+      "row_count": null,
+      "sha256": "f38930b808e1ddd2af03fe546577dc70e918833e9d5f9593c322d11a14b5c5e7",
+      "size_bytes": 4294
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/python/statistics_integrity_report.json",
+      "row_count": null,
+      "sha256": "ee8cf1f8fb7593dff33676e5a40ae594bd88939ee6dbf204ca9e4ec5b0133ae9",
+      "size_bytes": 3814
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json",
+      "row_count": null,
+      "sha256": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381",
+      "size_bytes": 8983
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/statistics_predetector_failure_20260816T0950Z.json",
+      "row_count": null,
+      "sha256": "096b210e02a78c0214b45ffcb16c8fabec717250c9041513052edd2baf9b2d40",
+      "size_bytes": 1565
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/test_suite/junit.xml",
+      "row_count": null,
+      "sha256": "dc36096b15c3db044b6b2ada17abd5bc30669e17905fc97d6a89fba066355c76",
+      "size_bytes": 84423
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/test_suite/test_suite_manifest.json",
+      "row_count": null,
+      "sha256": "59268bd25636233467a38b6f5f4bdb8f1357c11d45b8e53a5824c3c121742556",
+      "size_bytes": 2579
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json",
+      "row_count": null,
+      "sha256": "c01494cf3fac9ff8e26b6fde65d6cea2e47e11a3fe70988ecaa0b0f2814f02f0",
+      "size_bytes": 2631
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoint_manifest.json",
+      "row_count": null,
+      "sha256": "2bd69372d36d937b4c9677d41ae87c31869ff47cc86d3950169e4ad5203589f3",
+      "size_bytes": 2947
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoints.csv",
+      "row_count": 6,
+      "sha256": "e305b46f4e614e023606c0d759be4538691158268a498c5759b0b24b3d88bd25",
+      "size_bytes": 2260
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/tables/primary_recovery/primary_recovery_endpoints.csv",
+      "row_count": 3,
+      "sha256": "b653430544daf331e0b396515a87136a09d0c590d4f55c67b1e5fd3d14246b9f",
+      "size_bytes": 1245
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/theory/TECHNICAL_NOTE.md",
+      "row_count": null,
+      "sha256": "282824f893ea746067b05f888ee89b5f8046fdea140baedff659423bb3510964",
+      "size_bytes": 1952
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json",
+      "row_count": null,
+      "sha256": "e2449de3aafca211fd2c7b644400c6225b56bc969743a2682d1105da99b0ac4d",
+      "size_bytes": 5100
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/theory/theory_empirical_summary.csv",
+      "row_count": 686,
+      "sha256": "19b32a52ee415c9361c6c2eb7e838babf682222dd64b59ecf3810bb8f67ed853",
+      "size_bytes": 260568
+    },
+    {
+      "path": "results/revision_v1/final_experiment_package/theory/theory_validation_manifest.json",
+      "row_count": null,
+      "sha256": "df33b6f5950dc1d13cdb92870bf1fda73f0811637f0fc97caf0f18bfd3ad86e8",
+      "size_bytes": 4478
+    },
+    {
+      "path": "results/revision_v1/final_progress_snapshot_v1.json",
+      "row_count": null,
+      "sha256": "12aa17fe6cb4264637d82f100191d1961391bff5378e52f53113c5307dd3ba36",
+      "size_bytes": 2268658
+    },
+    {
+      "path": "results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+      "row_count": null,
+      "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+      "size_bytes": 58221
+    },
+    {
+      "path": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+      "row_count": null,
+      "sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7",
+      "size_bytes": 4996
+    },
+    {
+      "path": "results/revision_v1/supervisor/detector_live_readonly_audit_addendum_20260813T0151Z.json",
+      "row_count": null,
+      "sha256": "3944929bde41f4c8aed6a3f8e6bc8098f435fa97868336d75e8831248314044d",
+      "size_bytes": 2867
+    }
+  ],
+  "schema_version": "rankcloak-revision-evidence-summary-v1",
+  "scope": "computational_evidence_only_no_manuscript_or_response_text",
+  "status": "passed",
+  "summary": {
+    "artifact_priority_count": 19,
+    "audit_item_count": 19,
+    "cumulative_gpu_hours": 75.40638017063333,
+    "finding_count": 26,
+    "limitation_count": 19,
+    "payload_count": 480,
+    "reviewer_concern_count": 14,
+    "stage_count": 6
+  }
+}

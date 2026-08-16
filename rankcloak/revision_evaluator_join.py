@@ -22,6 +22,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Sequence, Tuple
 from .revision_artifacts import canonical_json_bytes, canonical_json_sha256, file_sha256
 from .revision_evaluator import EVALUATOR_BY_GENERATOR
 from .revision_runner import PROTOCOL_CONTRACT_REVISION, RESULT_SCHEMA_REVISION
+from .revision_statistics import automated_text_quality_metrics
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,15 @@ PRIMARY_EVALUATOR_EVIDENCE_STATUS = (
 )
 PRIMARY_STUDY_PHASE = "primary_v2_confirmatory"
 EXPECTED_PRIMARY_TRIALS = 6480
+ARTIFACT_OUTCOME_CANDIDATES = (
+    "artifact_count",
+    "surface_flag_total",
+    "artifact_like_fragment_count",
+)
+DERIVED_ARTIFACT_COLUMNS = (
+    "surface_flag_total",
+    "artifact_like_fragment_count",
+)
 
 
 class EvaluatorFeatureJoinError(ValueError):
@@ -382,7 +392,7 @@ def _join_rows(
     columns: Sequence[str],
     features: Sequence[Mapping[str, str]],
     evaluator_rows: Sequence[Mapping[str, Any]],
-) -> Tuple[List[str], List[Dict[str, Any]], int]:
+) -> Tuple[List[str], List[Dict[str, Any]], int, Dict[str, Any]]:
     added = [
         "heldout_evaluator_log_probability",
         "heldout_evaluator_token_count",
@@ -417,6 +427,41 @@ def _join_rows(
         and row.get("result_schema_revision") == RESULT_SCHEMA_REVISION
         and row.get("transformation_id") == "unmodified"
     ]
+    available_artifact_columns = [
+        column for column in ARTIFACT_OUTCOME_CANDIDATES if column in columns
+    ]
+    if available_artifact_columns:
+        artifact_diagnostics = {
+            "status": "source_feature_column_preserved",
+            "selected_source_column": available_artifact_columns[0],
+            "outcome_candidates": list(ARTIFACT_OUTCOME_CANDIDATES),
+            "derived_columns": [],
+            "row_count": len(selected),
+        }
+    else:
+        for feature in selected:
+            metrics = automated_text_quality_metrics(
+                str(feature.get("text", "")),
+                str(feature.get("prompt_text", "")),
+                language=str(feature.get("language", "")),
+            )
+            for column in DERIVED_ARTIFACT_COLUMNS:
+                feature[column] = int(metrics[column])
+        artifact_diagnostics = {
+            "status": "derived_from_hash_bound_text_rows",
+            "selected_source_column": "surface_flag_total",
+            "outcome_candidates": list(ARTIFACT_OUTCOME_CANDIDATES),
+            "derived_columns": list(DERIVED_ARTIFACT_COLUMNS),
+            "algorithm_module": "rankcloak.revision_statistics",
+            "algorithm_function": "automated_text_quality_metrics",
+            "algorithm_source_path": str(
+                (PROJECT_ROOT / "rankcloak" / "revision_statistics.py").resolve()
+            ),
+            "algorithm_source_sha256": file_sha256(
+                PROJECT_ROOT / "rankcloak" / "revision_statistics.py"
+            ),
+            "row_count": len(selected),
+        }
     feature_trials = {str(row.get("trial_id", "")) for row in selected}
     if "" in feature_trials or feature_trials != set(score_by_trial):
         missing = sorted(feature_trials - set(score_by_trial))[:5]
@@ -467,7 +512,15 @@ def _join_rows(
             }
         )
         joined.append(feature)
-    return list(columns) + [column for column in added if column not in columns], joined, len(feature_trials)
+    output_columns = list(columns)
+    output_columns.extend(
+        column
+        for column in DERIVED_ARTIFACT_COLUMNS
+        if column in artifact_diagnostics["derived_columns"]
+        and column not in output_columns
+    )
+    output_columns.extend(column for column in added if column not in output_columns)
+    return output_columns, joined, len(feature_trials), artifact_diagnostics
 
 
 def _write_csv(path: Path, columns: Sequence[str], rows: Iterable[Mapping[str, Any]]) -> None:
@@ -512,7 +565,9 @@ def join_primary_heldout_evaluator_features(
         EVALUATOR_BY_GENERATOR.values()
     ):
         raise EvaluatorFeatureJoinError("Evaluator rows do not cover all three frozen model families")
-    output_columns, joined, trial_count = _join_rows(columns, features, evaluator_rows)
+    output_columns, joined, trial_count, artifact_diagnostics = _join_rows(
+        columns, features, evaluator_rows
+    )
     if trial_count != EXPECTED_PRIMARY_TRIALS:
         raise EvaluatorFeatureJoinError(
             "Primary evaluator join requires {} trials, observed {}".format(
@@ -553,6 +608,7 @@ def join_primary_heldout_evaluator_features(
             "models_config_sha256": file_sha256(MODELS_CONFIG),
             "evaluator_artifact_pins": dict(sorted(evaluator_artifact_pins.items())),
             "segments_as_independent_observations": False,
+            "artifact_diagnostics": artifact_diagnostics,
             "score_scope": "source_full_message_replicated_across_nested_segment_rows_v1",
             "protocol_contract_revision": PROTOCOL_CONTRACT_REVISION,
             "result_schema_revision": RESULT_SCHEMA_REVISION,

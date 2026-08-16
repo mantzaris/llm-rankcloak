@@ -20,10 +20,11 @@ import random
 import re
 import stat
 import struct
+import time
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
@@ -1221,12 +1222,20 @@ def _torch_device(torch: Any, config: Mapping[str, object]) -> Any:
     return torch.device(requested)
 
 
+def _synchronize_torch_device(torch: Any, device: Any) -> None:
+    """Close CUDA's asynchronous timing window without affecting CPU tests."""
+
+    if str(device).startswith("cuda"):
+        torch.cuda.synchronize(device)
+
+
 def _run_torch_text_cnn(
     train_texts: Sequence[str],
     train_labels: Sequence[int],
     test_texts: Sequence[str],
     config: Mapping[str, object],
     seed: int,
+    progress_callback: Optional[Callable[[Mapping[str, object]], None]] = None,
 ) -> Tuple[np.ndarray, Dict[str, object]]:
     """Train an independent TS-CNN/TextCNN-equivalent raw-text baseline.
 
@@ -1236,6 +1245,15 @@ def _run_torch_text_cnn(
     by linguistic-steganalysis comparators; this is not copied official code.
     """
 
+    total_started = time.perf_counter()
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "initialization_and_preprocessing",
+                "completed_units": 0,
+                "total_units": None,
+            }
+        )
     try:
         import torch
         from torch import nn
@@ -1312,10 +1330,30 @@ def _run_torch_text_cnn(
     epochs = max(1, int(config.get("epochs", 10)))
     batch_size = max(1, int(config.get("batch_size", 64)))
     rng = np.random.default_rng(int(seed))
+    _synchronize_torch_device(torch, device)
+    initialization_seconds = max(0.0, time.perf_counter() - total_started)
+    training_started = time.perf_counter()
     model.train()
-    for _ in range(epochs):
+    batches_per_epoch = int(math.ceil(len(train_ids) / batch_size))
+    total_training_batches = int(epochs * batches_per_epoch)
+    completed_training_batches = 0
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "training",
+                "epoch": 0,
+                "epochs": epochs,
+                "batch": 0,
+                "batches_per_epoch": batches_per_epoch,
+                "completed_units": 0,
+                "total_units": total_training_batches,
+            }
+        )
+    for epoch_index in range(epochs):
         order = rng.permutation(len(train_ids))
-        for start in range(0, len(order), batch_size):
+        for batch_index, start in enumerate(
+            range(0, len(order), batch_size), start=1
+        ):
             positions = order[start : start + batch_size]
             batch_ids = torch.as_tensor(train_ids[positions], dtype=torch.long, device=device)
             batch_labels = torch.as_tensor(labels[positions], dtype=torch.long, device=device)
@@ -1324,17 +1362,74 @@ def _run_torch_text_cnn(
             loss = criterion(logits, batch_labels)
             loss.backward()
             optimizer.step()
+            completed_training_batches += 1
+            if progress_callback is not None:
+                progress_callback(
+                    {
+                        "phase": "training",
+                        "epoch": int(epoch_index + 1),
+                        "epochs": epochs,
+                        "batch": int(batch_index),
+                        "batches_per_epoch": batches_per_epoch,
+                        "completed_units": completed_training_batches,
+                        "total_units": total_training_batches,
+                    }
+                )
+    _synchronize_torch_device(torch, device)
+    training_seconds = max(0.0, time.perf_counter() - training_started)
+    hashing_started = time.perf_counter()
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "trained_state_hashing",
+                "completed_units": 0,
+                "total_units": 1,
+            }
+        )
     model_state_sha256 = deterministic_model_state_sha256(model)
     model_state_schema_sha256 = deterministic_model_state_schema_sha256(model)
+    _synchronize_torch_device(torch, device)
+    state_hashing_seconds = max(0.0, time.perf_counter() - hashing_started)
+    evaluation_started = time.perf_counter()
     model.eval()
     batches = []
+    evaluation_batches = int(math.ceil(len(test_ids) / batch_size))
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "evaluation",
+                "completed_units": 0,
+                "total_units": evaluation_batches,
+            }
+        )
     with torch.no_grad():
-        for start in range(0, len(test_ids), batch_size):
+        for batch_index, start in enumerate(
+            range(0, len(test_ids), batch_size), start=1
+        ):
             batch_ids = torch.as_tensor(
                 test_ids[start : start + batch_size], dtype=torch.long, device=device
             )
             batches.append(torch.softmax(model(batch_ids), dim=1)[:, 1].cpu().numpy())
+            if progress_callback is not None:
+                progress_callback(
+                    {
+                        "phase": "evaluation",
+                        "completed_units": int(batch_index),
+                        "total_units": evaluation_batches,
+                    }
+                )
+    _synchronize_torch_device(torch, device)
     scores = np.concatenate(batches).astype(np.float64)
+    evaluation_seconds = max(0.0, time.perf_counter() - evaluation_started)
+    total_seconds = max(0.0, time.perf_counter() - total_started)
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "complete",
+                "completed_units": 1,
+                "total_units": 1,
+            }
+        )
     return scores, {
         "torch_version": str(torch.__version__),
         "architecture": "word_embedding_parallel_conv_relu_global_max_pool_dropout",
@@ -1352,6 +1447,13 @@ def _run_torch_text_cnn(
         "model_state_sha256": model_state_sha256,
         "model_state_schema_hash_algorithm": MODEL_STATE_SCHEMA_HASH_ALGORITHM,
         "model_state_schema_sha256": model_state_schema_sha256,
+        "phase_timings_seconds": {
+            "initialization_and_preprocessing": initialization_seconds,
+            "training": training_seconds,
+            "trained_state_hashing": state_hashing_seconds,
+            "evaluation": evaluation_seconds,
+            "total": total_seconds,
+        },
     }
 
 
@@ -1362,9 +1464,19 @@ def _run_pretrained_transformer(
     config: Mapping[str, object],
     seed: int,
     allow_model_downloads: bool,
+    progress_callback: Optional[Callable[[Mapping[str, object]], None]] = None,
 ) -> Tuple[np.ndarray, Dict[str, object]]:
     """Fine-tune the frozen local DeBERTa-v3-base sequence classifier."""
 
+    total_started = time.perf_counter()
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "initialization_and_preprocessing",
+                "completed_units": 0,
+                "total_units": None,
+            }
+        )
     try:
         import torch
         import transformers
@@ -1433,10 +1545,30 @@ def _run_pretrained_transformer(
     epochs = max(1, int(config.get("epochs", 3)))
     batch_size = max(1, int(config.get("batch_size", 8)))
     rng = np.random.default_rng(int(seed))
+    _synchronize_torch_device(torch, device)
+    initialization_seconds = max(0.0, time.perf_counter() - total_started)
+    training_started = time.perf_counter()
     model.train()
-    for _ in range(epochs):
+    batches_per_epoch = int(math.ceil(len(labels) / batch_size))
+    total_training_batches = int(epochs * batches_per_epoch)
+    completed_training_batches = 0
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "training",
+                "epoch": 0,
+                "epochs": epochs,
+                "batch": 0,
+                "batches_per_epoch": batches_per_epoch,
+                "completed_units": 0,
+                "total_units": total_training_batches,
+            }
+        )
+    for epoch_index in range(epochs):
         order = rng.permutation(len(labels))
-        for start in range(0, len(order), batch_size):
+        for batch_index, start in enumerate(
+            range(0, len(order), batch_size), start=1
+        ):
             positions = order[start : start + batch_size]
             batch = {
                 key: value[positions].to(device) for key, value in train_encodings.items()
@@ -1446,19 +1578,76 @@ def _run_pretrained_transformer(
             output = model(**batch, labels=batch_labels)
             output.loss.backward()
             optimizer.step()
+            completed_training_batches += 1
+            if progress_callback is not None:
+                progress_callback(
+                    {
+                        "phase": "training",
+                        "epoch": int(epoch_index + 1),
+                        "epochs": epochs,
+                        "batch": int(batch_index),
+                        "batches_per_epoch": batches_per_epoch,
+                        "completed_units": completed_training_batches,
+                        "total_units": total_training_batches,
+                    }
+                )
+    _synchronize_torch_device(torch, device)
+    training_seconds = max(0.0, time.perf_counter() - training_started)
+    hashing_started = time.perf_counter()
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "trained_state_hashing",
+                "completed_units": 0,
+                "total_units": 1,
+            }
+        )
     model_state_sha256 = deterministic_model_state_sha256(model)
     model_state_schema_sha256 = deterministic_model_state_schema_sha256(model)
+    _synchronize_torch_device(torch, device)
+    state_hashing_seconds = max(0.0, time.perf_counter() - hashing_started)
+    evaluation_started = time.perf_counter()
     model.eval()
     score_batches = []
+    evaluation_batches = int(math.ceil(len(test_texts) / batch_size))
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "evaluation",
+                "completed_units": 0,
+                "total_units": evaluation_batches,
+            }
+        )
     with torch.no_grad():
-        for start in range(0, len(test_texts), batch_size):
+        for batch_index, start in enumerate(
+            range(0, len(test_texts), batch_size), start=1
+        ):
             batch = {
                 key: value[start : start + batch_size].to(device)
                 for key, value in test_encodings.items()
             }
             logits = model(**batch).logits
             score_batches.append(torch.softmax(logits, dim=1)[:, 1].cpu().numpy())
+            if progress_callback is not None:
+                progress_callback(
+                    {
+                        "phase": "evaluation",
+                        "completed_units": int(batch_index),
+                        "total_units": evaluation_batches,
+                    }
+                )
+    _synchronize_torch_device(torch, device)
     scores = np.concatenate(score_batches).astype(np.float64)
+    evaluation_seconds = max(0.0, time.perf_counter() - evaluation_started)
+    total_seconds = max(0.0, time.perf_counter() - total_started)
+    if progress_callback is not None:
+        progress_callback(
+            {
+                "phase": "complete",
+                "completed_units": 1,
+                "total_units": 1,
+            }
+        )
     return scores, {
         "torch_version": str(torch.__version__),
         "transformers_version": str(transformers.__version__),
@@ -1480,6 +1669,13 @@ def _run_pretrained_transformer(
         "model_state_sha256": model_state_sha256,
         "model_state_schema_hash_algorithm": MODEL_STATE_SCHEMA_HASH_ALGORITHM,
         "model_state_schema_sha256": model_state_schema_sha256,
+        "phase_timings_seconds": {
+            "initialization_and_preprocessing": initialization_seconds,
+            "training": training_seconds,
+            "trained_state_hashing": state_hashing_seconds,
+            "evaluation": evaluation_seconds,
+            "total": total_seconds,
+        },
     }
 
 
@@ -1490,6 +1686,7 @@ def run_configured_detector(
     seed: int,
     smoke: bool = False,
     allow_model_downloads: bool = False,
+    progress_callback: Optional[Callable[[Mapping[str, object]], None]] = None,
 ) -> DetectorOutput:
     """Run one configured detector, preserving requested versus actual method."""
 
@@ -1512,7 +1709,12 @@ def run_configured_detector(
             raise RevisionDetectionError("smoke mode requested the dependency-light fallback")
         if requested_kind == "text_cnn":
             scores, metadata = _run_torch_text_cnn(
-                train_texts, train_labels, test_texts, detector_config, seed
+                train_texts,
+                train_labels,
+                test_texts,
+                detector_config,
+                seed,
+                progress_callback=progress_callback,
             )
         elif requested_kind == "pretrained_transformer":
             scores, metadata = _run_pretrained_transformer(
@@ -1522,6 +1724,7 @@ def run_configured_detector(
                 detector_config,
                 seed,
                 allow_model_downloads=allow_model_downloads,
+                progress_callback=progress_callback,
             )
         else:
             scores, metadata = _run_hashed_ngram_logistic(
@@ -1978,6 +2181,7 @@ def run_prepared_detector_fit(
     prepared: PreparedDetectorSuite,
     split: DetectorSplit,
     detector_config: Mapping[str, object],
+    progress_callback: Optional[Callable[[Mapping[str, object]], None]] = None,
 ) -> Tuple[dict, List[dict]]:
     """Fit one detector/split and return the exact legacy row schemas."""
 
@@ -1995,6 +2199,7 @@ def run_prepared_detector_fit(
         seed=detector_seed,
         smoke=prepared.smoke,
         allow_model_downloads=prepared.allow_model_downloads,
+        progress_callback=progress_callback,
     )
     if len(output.scores) != len(test):
         raise RevisionDetectionError(

@@ -1,0 +1,2 @@
+"model_id","poisson_dispersion_ratio","underdispersion_threshold","overdispersion_threshold","classification","negative_binomial_remains_primary"
+"primary_artifact_counts",2.54016533417742,0.75,1.25,"overdispersed",TRUE

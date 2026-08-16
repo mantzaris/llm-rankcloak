@@ -86,6 +86,8 @@ def _detector_action() -> orchestrator.Action:
             values["detector_output_dir"],
             "--execution-policy",
             values["detector_execution_policy"],
+            "--cuda-budget-gate",
+            values["detector_cuda_budget_gate"],
             "--resume",
             "--overwrite",
             "--device",
@@ -216,23 +218,110 @@ def test_detector_equivalence_gate_requires_both_passing_reports_before_producti
         "require_detector_equivalence_gate",
         lambda: calls.append(("require_both",)) or ({}, {}),
     )
+    monkeypatch.setattr(
+        orchestrator,
+        "build_detector_cuda_budget_gate",
+        lambda *, stage: calls.append(("build_budget_gate", stage)) or {},
+    )
+    monkeypatch.setattr(
+        orchestrator,
+        "require_detector_cuda_budget_gate",
+        lambda *, expected_stage: calls.append(
+            ("require_budget_gate", expected_stage)
+        )
+        or {},
+    )
     monkeypatch.setattr(orchestrator, "emit_event", lambda *args, **kwargs: None)
 
     orchestrator.ensure_detector_equivalence_gate(args, {}, {})
 
     assert calls == [
-        ("role", 0, "cpu"),
         ("benchmark", 0),
+        ("benchmark", 1),
+        (
+            "build_budget_gate",
+            "post_benchmark_pre_reproducibility",
+        ),
         ("role", 0, "cuda"),
         ("role", 0, "cuda_repeat"),
         ("report", 0),
-        ("role", 1, "cpu"),
-        ("benchmark", 1),
         ("role", 1, "cuda"),
         ("role", 1, "cuda_repeat"),
         ("report", 1),
         ("require_both",),
+        (
+            "build_budget_gate",
+            "post_reproducibility_preproduction",
+        ),
+        (
+            "require_budget_gate",
+            "post_reproducibility_preproduction",
+        ),
     ]
+
+
+def test_detector_cuda_budget_gate_accepts_valid_partial_equivalence_ledger(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    ledger_path = (tmp_path / "gpu_accounting_ledger.json").resolve()
+    ledger_file_sha256 = "d" * 64
+    ledger_content_sha256 = "e" * 64
+    ledger = {
+        "ledger_sha256": ledger_content_sha256,
+        "sources": [
+            {
+                "source_id": "production_benchmark_task_0",
+                "component": "detector_production_benchmark",
+            },
+            {
+                "source_id": "production_benchmark_task_1",
+                "component": "detector_production_benchmark",
+            },
+            {
+                "source_id": "equivalence_cuda_task_0",
+                "component": "detector_device_equivalence_cuda",
+            },
+        ],
+    }
+    gate = {
+        "inputs": {
+            "policy": {
+                "path": str(orchestrator._detector_execution_policy_path()),
+                "sha256": orchestrator.DETECTOR_EXECUTION_POLICY_SHA256,
+                "policy_sha256": (
+                    orchestrator.DETECTOR_EXECUTION_POLICY_CONTENT_SHA256
+                ),
+            },
+            "gpu_ledger": {
+                "path": str(ledger_path),
+                "sha256": ledger_file_sha256,
+                "ledger_sha256": ledger_content_sha256,
+            },
+        },
+        "projection": {
+            "starting_cumulative_actual_gpu_hours": (
+                orchestrator.DETECTOR_HISTORICAL_GPU_HOURS_FLOOR
+            ),
+            "projected_cumulative_gpu_hours": 100.0,
+            "projected_remaining_headroom_gpu_hours": 65.0,
+        },
+    }
+    monkeypatch.setattr(orchestrator, "read_gate", lambda *_args, **_kwargs: gate)
+    monkeypatch.setattr(
+        orchestrator, "_detector_gpu_ledger_path", lambda: ledger_path
+    )
+    monkeypatch.setattr(
+        orchestrator,
+        "read_detector_gpu_accounting_ledger",
+        lambda _path: ledger,
+    )
+    monkeypatch.setattr(
+        orchestrator, "file_sha256", lambda _path: ledger_file_sha256
+    )
+
+    assert orchestrator.require_detector_cuda_budget_gate(
+        expected_stage="post_benchmark_pre_reproducibility"
+    ) is gate
 
 
 def test_detector_equivalence_false_is_methodological_halt_not_retry(
@@ -264,282 +353,25 @@ def test_detector_equivalence_false_is_methodological_halt_not_retry(
     monkeypatch.setattr(orchestrator, "atomic_write_bytes", lambda *args: None)
     with pytest.raises(orchestrator.MethodologicalHalt, match="did not pass"):
         orchestrator.run_detector_equivalence_report(task_index=0)
-    assert report_path.name == "equivalence_report.json"
+    assert report_path.name == "cuda_reproducibility_report.json"
 
 
-def test_cpu_equivalence_reference_retries_recoverable_exit_from_checkpoint(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    action = orchestrator.Action(
-        action_id="downstream:detector:equivalence:0:cpu",
-        stage="neural_detector",
-        kind="downstream",
-        argv=("python", "cpu-reference"),
-        output_dir=tmp_path / "cpu_run",
-        gpu=False,
+def test_cpu_neural_equivalence_role_is_rejected_before_action_construction() -> None:
+    contract = orchestrator.load_command_contract(
+        PROJECT_ROOT / "operations/confirmatory_v2/downstream_commands.json"
     )
-    artifact = tmp_path / "cpu_artifact.json"
-    values = orchestrator._format_values()
-    values["detector_equivalence_0_cpu_artifact"] = str(artifact)
-    monkeypatch.setattr(orchestrator, "_format_values", lambda: values)
-    monkeypatch.setattr(
-        orchestrator,
-        "_detector_equivalence_action",
-        lambda *args, **kwargs: action,
-    )
-    monkeypatch.setattr(orchestrator, "_probe_python_cli", lambda *args: None)
-    completed = iter(
-        (
-            (1, "temporary"),
-            (0, "ok"),
+    with pytest.raises(orchestrator.MethodologicalHalt, match="CUDA reproducibility"):
+        orchestrator._detector_equivalence_action(
+            contract, task_index=0, role="cpu"
         )
-    )
-    monkeypatch.setattr(
-        orchestrator,
-        "run_checkpointed_cpu_detector_process",
-        lambda *args, **kwargs: next(completed),
-    )
-    monkeypatch.setattr(orchestrator, "load_retry_counts", lambda: {})
-    recorded: list[tuple[object, ...]] = []
-    monkeypatch.setattr(
-        orchestrator,
-        "record_recoverable_error",
-        lambda *args: recorded.append(args),
-    )
-    monkeypatch.setattr(orchestrator.time, "sleep", lambda _seconds: None)
-    monkeypatch.setattr(orchestrator, "emit_event", lambda *args, **kwargs: None)
-    verified: list[tuple[int, str]] = []
-    monkeypatch.setattr(
-        orchestrator,
-        "_verify_detector_equivalence_artifact",
-        lambda *, task_index, role: verified.append((task_index, role)) or {},
-    )
-    args = SimpleNamespace(max_retries_per_action=2, poll_seconds=5.0)
-    assert (
-        orchestrator.run_detector_equivalence_role(
-            args, {}, {}, task_index=0, role="cpu"
-        )
-        == 0
-    )
-    assert len(recorded) == 1
-    assert recorded[0][2] == (
-        "checkpointed_cpu_detector_equivalence_incomplete"
-    )
-    assert verified == [(0, "cpu")]
-
-
-def test_cpu_equivalence_restart_attaches_without_duplicate_and_persists_status(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    artifact = tmp_path / "cpu_artifact.json"
-    _json(artifact, {"complete": True})
-    action = orchestrator.Action(
-        action_id="downstream:detector:equivalence:1:cpu",
-        stage="neural_detector",
-        kind="downstream",
-        argv=(
-            "python",
-            "scripts/run_revision_detectors.py",
-            "--device",
-            "cpu",
-            "--checkpoint-dir",
-            str(tmp_path / "cpu.checkpoints"),
-            "--status-file",
-            str(tmp_path / "cpu.status.json"),
-            "--execution-policy",
-            str(tmp_path / "policy.json"),
-            "--equivalence-role",
-            "cpu",
-            "--equivalence-task-index",
-            "1",
-            "--equivalence-artifact",
-            str(artifact),
-        ),
-        output_dir=tmp_path / "cpu",
-        gpu=False,
-    )
-    pid = 4242
-    ticks = 987654
-    status = {
-        "pid": pid,
-        "process_start_ticks": ticks,
-        "updated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "state": "running_fit",
-        "completed_fit_count": 0,
-        "total_fit_count": orchestrator.DETECTOR_TOTAL_FITS,
-        "current_fit": {"index": 1},
-        "fits_per_hour": 0.0,
-        "rolling_eta_seconds": None,
-    }
-    monkeypatch.setattr(orchestrator, "_exact_detector_pid", lambda _action: pid)
-    monkeypatch.setattr(
-        orchestrator, "_process_start_ticks", lambda observed: ticks
-    )
-    live = iter((True, False))
-    monkeypatch.setattr(
-        orchestrator,
-        "_detector_pid_is_live",
-        lambda *args, **kwargs: next(live),
-    )
-    monkeypatch.setattr(
-        orchestrator,
-        "read_checkpointed_cpu_detector_status",
-        lambda *args, **kwargs: status,
-    )
-    monkeypatch.setattr(orchestrator, "operational_progress", lambda: {})
-    budget = {
-        "cumulative_actual_gpu_hours": 12.0,
-        "revised_upper_gpu_hours": 20.0,
-    }
-    monkeypatch.setattr(
-        orchestrator, "calculate_budget", lambda *args, **kwargs: budget
-    )
-    monkeypatch.setattr(orchestrator, "enforce_budget", lambda _budget: None)
-    monkeypatch.setattr(orchestrator.time, "sleep", lambda _seconds: None)
-    writes: list[dict] = []
-    events: list[tuple[str, dict]] = []
-    monkeypatch.setattr(
-        orchestrator, "write_state", lambda **kwargs: writes.append(kwargs)
-    )
-    monkeypatch.setattr(
-        orchestrator,
-        "emit_event",
-        lambda event, **kwargs: events.append((event, kwargs)),
-    )
-    monkeypatch.setattr(
-        orchestrator.subprocess,
-        "Popen",
-        lambda *args, **kwargs: pytest.fail(
-            "an attached CPU reference must not launch a duplicate"
-        ),
-    )
-
-    assert orchestrator.run_checkpointed_cpu_detector_process(
-        action,
-        projection={},
-        retries={},
-        poll_seconds=30.0,
-    ) == (0, "")
-    assert events[0][0] == "checkpointed_cpu_detector_attached"
-    assert events[0][1]["duplicate_launch_prevented"] is True
-    assert writes[0]["active_pid"] == pid
-    assert writes[0]["detector_status"] == status
-    assert writes[0]["status"] == "attached_checkpointed_cpu_detector"
-
-
-def test_cpu_equivalence_status_is_signed_and_exactly_action_bound(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    output = tmp_path / "cpu_run"
-    checkpoint = tmp_path / "cpu_run.checkpoints"
-    status_path = tmp_path / "cpu_run.status.json"
-    policy = tmp_path / "policy.json"
-    action = orchestrator.Action(
-        action_id="downstream:detector:equivalence:1:cpu",
-        stage="neural_detector",
-        kind="downstream",
-        argv=(
-            "python",
-            "scripts/run_revision_detectors.py",
-            "--device",
-            "cpu",
-            "--checkpoint-dir",
-            str(checkpoint),
-            "--status-file",
-            str(status_path),
-            "--execution-policy",
-            str(policy),
-            "--equivalence-role",
-            "cpu",
-            "--equivalence-task-index",
-            "1",
-            "--equivalence-artifact",
-            str(tmp_path / "artifact.json"),
-        ),
-        output_dir=output,
-        gpu=False,
-    )
-    pid = 4242
-    ticks = 987654
-    permit = output.with_name(output.name + ".fit_permit.json").resolve()
-    receipts = (checkpoint / "fit_permit_receipts").resolve()
-    run_identity = {
-        "device": "cpu",
-        "gpu_uuid": None,
-        "workers": 1,
-        "output_dir": str(output.resolve()),
-        "checkpoint_dir": str(checkpoint.resolve()),
-        "status_file": str(status_path.resolve()),
-        "execution_policy_path": str(policy.resolve()),
-        "execution_policy_sha256": (
-            orchestrator.DETECTOR_EXECUTION_POLICY_SHA256
-        ),
-        "fit_permit_file": str(permit),
-        "fit_permit_receipt_dir": str(receipts),
-        "require_fit_permit": False,
-    }
-    now = datetime.now(timezone.utc)
-    status = {
-        "schema_version": orchestrator.DETECTOR_STATUS_SCHEMA,
-        "updated_at_utc": now.isoformat(),
-        "state": "running_fit",
-        "completed_fit_count": 0,
-        "total_fit_count": orchestrator.DETECTOR_TOTAL_FITS,
-        "current_fit": {
-            "ordinal": 1,
-            "index": 1,
-            "fit_number": 2,
-            "split_id": "split-00",
-            "regime": "leave_one_model_out",
-            "detector_name": "deberta_v3_base_classifier",
-            "detector_kind": "deberta",
-            "seed": 11,
-            "task_identity_sha256": "a" * 64,
-        },
-        "next_fit": None,
-        "next_fit_upper_seconds": None,
-        "fit_gate_nonce": None,
-        "fit_permit_file": str(permit),
-        "fit_permit_receipt_dir": str(receipts),
-        "last_consumed_fit_permit": None,
-        "global_elapsed_seconds": 5.0,
-        "global_elapsed_policy": (
-            "sum_of_valid_fit_intervals_plus_active_fit_v1"
-        ),
-        "process_elapsed_seconds": 5.0,
-        "checkpoint_fit_seconds_at_process_start": 0.0,
-        "checkpoint_cumulative_fit_seconds": 0.0,
-        "last_completed_checkpoint": None,
-        "recovered_errors": [],
-        "device": "cpu",
-        "gpu_uuid": None,
-        "workers": 1,
-        "pid": pid,
-        "process_start_ticks": ticks,
-        "run_identity": run_identity,
-        "run_identity_sha256": orchestrator.canonical_json_sha256(
-            run_identity
-        ),
-        "gpu_accounting": None,
-    }
-    status["status_sha256"] = orchestrator.canonical_json_sha256(status)
-    _json(status_path, status)
-    monkeypatch.setattr(orchestrator, "_process_start_ticks", lambda _pid: ticks)
-
-    assert orchestrator.read_checkpointed_cpu_detector_status(
-        action, expected_pid=pid
-    )["current_fit"]["index"] == 1
-
-    status["run_identity"]["output_dir"] = str(tmp_path / "different")
-    status["run_identity_sha256"] = orchestrator.canonical_json_sha256(
-        status["run_identity"]
-    )
-    status.pop("status_sha256")
-    status["status_sha256"] = orchestrator.canonical_json_sha256(status)
-    _json(status_path, status)
-    with pytest.raises(orchestrator.MethodologicalHalt, match="run identity"):
-        orchestrator.read_checkpointed_cpu_detector_status(
-            action, expected_pid=pid
+    with pytest.raises(SystemExit):
+        orchestrator.build_argument_parser().parse_args(
+            [
+                "--detector-equivalence-task-index",
+                "0",
+                "--detector-equivalence-role",
+                "cpu",
+            ]
         )
 
 
@@ -1046,6 +878,7 @@ def test_downstream_contract_pins_join_detector_r_report_and_manifest() -> None:
         ],
         "gpu_accounting_ledger": "{detector_gpu_ledger}",
         "execution_policy": "{detector_execution_policy}",
+        "cuda_budget_gate": "{detector_cuda_budget_gate}",
         "execution_policy_sha256": (
             orchestrator.DETECTOR_EXECUTION_POLICY_SHA256
         ),
@@ -1061,6 +894,23 @@ def test_downstream_contract_pins_join_detector_r_report_and_manifest() -> None:
     assert "--preprocessing-manifest" in detector["interface"][
         "required_help_tokens"
     ]
+    statistics = by_id["statistics"]
+    assert "--continuous-quality" in statistics["argv"]
+    assert "--continuous-quality" in statistics["interface"][
+        "required_help_tokens"
+    ]
+    evaluator_continuous = [
+        value
+        for value in statistics["argv"]
+        if value.endswith("_continuous}")
+    ]
+    assert len(evaluator_continuous) == 9
+    assert statistics["argv"].index("--continuous-quality") < min(
+        statistics["argv"].index(value) for value in evaluator_continuous
+    )
+    assert max(
+        statistics["argv"].index(value) for value in evaluator_continuous
+    ) < statistics["argv"].index("--features")
     mixed = by_id["mixed_models_r"]["argv"]
     assert "--feature-join-manifest" in mixed
     assert "{evaluator_join_features}" in mixed
@@ -1120,7 +970,13 @@ def test_live_detector_gpu_time_enters_hard_ceiling_exactly_once() -> None:
     with_live = orchestrator.calculate_budget(
         projection, progress, live_detector_gpu_seconds=3600.0
     )
-    assert with_live["cumulative_actual_gpu_hours"] == pytest.approx(13.0)
+    failed_hours = (
+        orchestrator.detector_failed_benchmark_gpu_seconds() / 3600.0
+    )
+    assert with_live["failed_detector_benchmark_gpu_hours"] == failed_hours
+    assert with_live["cumulative_actual_gpu_hours"] == pytest.approx(
+        orchestrator.DETECTOR_HISTORICAL_GPU_HOURS_FLOOR + failed_hours + 1.0
+    )
     assert with_live["revised_upper_gpu_hours"] == pytest.approx(
         without_live["revised_upper_gpu_hours"] + 1.0
     )
@@ -1135,7 +991,9 @@ def test_live_detector_gpu_time_enters_hard_ceiling_exactly_once() -> None:
         projection, progress, live_detector_gpu_seconds=1.0
     )
     assert sequential["cumulative_actual_gpu_hours"] == pytest.approx(
-        12.0 + 1.0 / 3600.0
+        orchestrator.DETECTOR_HISTORICAL_GPU_HOURS_FLOOR
+        + failed_hours
+        + 1.0 / 3600.0
     )
 
 
@@ -1206,7 +1064,7 @@ def test_signed_detector_fit_permit_is_invocation_bound_and_reserved(
                 "seed": 123,
                 "task_identity_sha256": "c" * 64,
             },
-            "next_fit_upper_seconds": 14_400.0,
+            "next_fit_upper_seconds": orchestrator.DETECTOR_NEXT_FIT_UPPER_SECONDS["published_textcnn_equivalent"],
             "fit_gate_nonce": "d" * 64,
         }
     )
@@ -1239,7 +1097,7 @@ def test_signed_detector_fit_permit_is_invocation_bound_and_reserved(
     )
     assert permit["invocation_pid"] == 4321
     assert permit["invocation_start_ticks"] == 987654
-    assert permit["next_fit_upper_seconds"] == 14_400.0
+    assert permit["next_fit_upper_seconds"] == orchestrator.DETECTOR_NEXT_FIT_UPPER_SECONDS["published_textcnn_equivalent"]
     assert permit["permit_sha256"] == orchestrator.canonical_json_sha256(
         {key: value for key, value in permit.items() if key != "permit_sha256"}
     )
@@ -1254,11 +1112,11 @@ def test_signed_detector_fit_permit_is_invocation_bound_and_reserved(
     with pytest.raises(orchestrator.BudgetHalt, match="next detector fit"):
         orchestrator.enforce_detector_next_fit_reserve(
             {
-                "cumulative_actual_gpu_hours": 164.0,
-                "revised_upper_gpu_hours": 164.0,
+                "cumulative_actual_gpu_hours": 164.9,
+                "revised_upper_gpu_hours": 164.9,
                 "live_detector_remaining_gpu_hours": 0.0,
             },
-            14_400.0,
+            orchestrator.DETECTOR_NEXT_FIT_UPPER_SECONDS["published_textcnn_equivalent"],
         )
 
 
@@ -1307,7 +1165,7 @@ def test_consumed_detector_fit_permit_receipt_prevents_reissue(
                 "seed": 123,
                 "task_identity_sha256": "c" * 64,
             },
-            "next_fit_upper_seconds": 14_400.0,
+            "next_fit_upper_seconds": orchestrator.DETECTOR_NEXT_FIT_UPPER_SECONDS["published_textcnn_equivalent"],
             "fit_gate_nonce": "d" * 64,
         }
     )
@@ -1322,7 +1180,7 @@ def test_consumed_detector_fit_permit_receipt_prevents_reissue(
         "fit_gate_nonce": "d" * 64,
         "invocation_pid": 4321,
         "invocation_start_ticks": 987654,
-        "next_fit_upper_seconds": 14_400.0,
+        "next_fit_upper_seconds": orchestrator.DETECTOR_NEXT_FIT_UPPER_SECONDS["published_textcnn_equivalent"],
         "issued_at_utc": datetime.now(timezone.utc).isoformat(),
     }
     permit["permit_sha256"] = orchestrator.canonical_json_sha256(permit)
@@ -1335,7 +1193,7 @@ def test_consumed_detector_fit_permit_receipt_prevents_reissue(
         "fit_gate_nonce": "d" * 64,
         "invocation_pid": 4321,
         "invocation_start_ticks": 987654,
-        "next_fit_upper_seconds": 14_400.0,
+        "next_fit_upper_seconds": orchestrator.DETECTOR_NEXT_FIT_UPPER_SECONDS["published_textcnn_equivalent"],
         "issued_permit_sha256": permit["permit_sha256"],
         "issued_permit_file_sha256": orchestrator.file_sha256(permit_path),
         "issued_permit_size_bytes": permit_path.stat().st_size,
@@ -1920,13 +1778,15 @@ def test_detector_final_publication_requires_ledger_receipt_marker_and_reports(
             ],
         },
         "required_equivalence_reports": reports,
+        "pre_final_gpu_accounting_ledger_path": str(ledger_path.resolve()),
         "run_identity": {
-            "lineage": {
-                "required_equivalence_reports": reports,
-                "pre_final_gpu_accounting_ledger_path": str(
-                    ledger_path.resolve()
-                ),
-            }
+            "lineage": {},
+            "excluded_operational_gate_fields": [
+                "cuda_budget_gate",
+                "pre_final_gpu_accounting_ledger",
+                "pre_final_gpu_accounting_ledger_path",
+                "required_equivalence_reports",
+            ],
         },
     }
     marker = {

@@ -1,0 +1,48 @@
+{
+  "assumptions": [
+    "H is the saved representation-source bit count for the evaluated codec.",
+    "B is the saved admissible rank bound and ranks are one-indexed.",
+    "Tail tokens carry no additional payload bits in the stated effective-rate calculation.",
+    "Quality endpoint inequalities require probabilities evaluated under identical saved contexts.",
+    "Missing endpoint arrays are unavailable and are not reconstructed from aggregate means.",
+    "Confidence intervals resample payload identities, not individual tokens."
+  ],
+  "equations": [
+    {
+      "expression": "n_B = ceil(H / log2(B))",
+      "id": "minimum_forced_positions",
+      "units": "token_positions"
+    },
+    {
+      "expression": "R_B = H / n_B",
+      "id": "nominal_rate",
+      "units": "bits_per_forced_token"
+    },
+    {
+      "expression": "R_effective = H / (n_forced + n_tail)",
+      "id": "effective_rate_with_tail",
+      "units": "bits_per_generated_token"
+    },
+    {
+      "expression": "Q_B = -mean_t(log p(y_t | context_t))",
+      "id": "realized_surprisal",
+      "units": "nats_per_forced_token"
+    },
+    {
+      "expression": "Delta_B = Q_B - Q_greedy",
+      "id": "quality_penalty",
+      "units": "nats_per_forced_token"
+    },
+    {
+      "expression": "Q_greedy <= Q_B <= Q_rank_B",
+      "id": "same_context_rank_bounds",
+      "units": "nats_per_forced_token"
+    }
+  ],
+  "limitations": [
+    "Observed rank replay does not prove the deterministic replay proposition when complete ranked token orders were not saved.",
+    "The empirical summary describes the frozen saved corpus and does not identify causal quality effects."
+  ],
+  "schema_version": "rankcloak-capacity-quality-assumptions-v1",
+  "status": "technical_evidence_not_manuscript_text"
+}

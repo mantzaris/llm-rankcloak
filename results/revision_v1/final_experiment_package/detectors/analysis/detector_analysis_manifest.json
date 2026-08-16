@@ -1,0 +1,68 @@
+{
+  "analysis_status": "supplementary_exploratory_post_confirmatory_freeze",
+  "frozen_training_design_unchanged": true,
+  "inference": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 2026081601,
+    "bootstrap_unit": "payload_group_id",
+    "confidence_level": 0.95,
+    "low_fpr_interpretation": "descriptive_test_set_roc_curve_summary_not_a_deployed_operating_threshold",
+    "precision_zero_division": 0,
+    "regime_summary": "median_and_range_across_prespecified_splits_without_cross_split_confidence_interval"
+  },
+  "inputs": {
+    "analysis_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/detector_supplementary_metrics.json",
+      "sha256": "a064bd98ea2ef1d0cfbc836998166cbe3e82e2722364781a3170263287a1450a",
+      "size_bytes": 1083
+    },
+    "detector_metrics": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_metrics.csv",
+      "sha256": "0b7d9111dfba33b77fde6d53b6ab7e4f71ad8c5f46f489d4da21d5ddd37562be",
+      "size_bytes": 134127
+    },
+    "detector_predictions": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv",
+      "sha256": "c3e64b1c379d0b80c6a01742c3ca8e8a2f3a5503c222d31400784463890f2595",
+      "size_bytes": 18098714
+    },
+    "detector_run_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+      "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+      "size_bytes": 58221
+    }
+  },
+  "outputs": {
+    "metrics": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_extended_metrics.csv",
+      "row_count": 560,
+      "sha256": "256307b2951e46cf3d7ad4263dc3c9bf6490749e5004f92957811e349477598a",
+      "size_bytes": 184228
+    },
+    "plot_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_plot_source.csv",
+      "row_count": 48,
+      "sha256": "4f010e4bd9b6fc21df2fbf398c844e38d0d4eecfc01229d7e64c9d4c70031e4d",
+      "size_bytes": 10106
+    },
+    "regimes": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_regime_summary.csv",
+      "row_count": 80,
+      "sha256": "2b7dae24775959e7b7f2b33ac5f9f9df5bd2839d222bf31587a9f559160a1cc2",
+      "size_bytes": 16370
+    }
+  },
+  "partial_checkpoint_outcomes_seen_before_extension": true,
+  "schema_version": "rankcloak-detector-supplementary-analysis-v1",
+  "status": "passed",
+  "summary": {
+    "detector_count": 2,
+    "fit_count": 56,
+    "metric_count": 10,
+    "metric_rows": 560,
+    "regime_summary_rows": 80,
+    "split_count": 28,
+    "supplementary_metric_rows": 224,
+    "upstream_point_estimate_mismatches": 0
+  }
+}

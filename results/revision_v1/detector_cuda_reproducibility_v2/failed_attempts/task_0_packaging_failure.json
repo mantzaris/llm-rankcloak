@@ -1,0 +1,55 @@
+{
+  "benchmark_sha256": "1b52910830734a5f2b1825a6d1a5ab7c5fa47357f1d354d9c4b482b8a64c7617",
+  "checkpoint_fit_count": 1,
+  "checkpoint_scientific_result_status": "preserved_but_not_reused_after_source_fix",
+  "corrective_action": "strict_columnar_metric_decoder_and_fresh_source_bound_checkpoint_namespace",
+  "created_at_utc": "2026-08-16T02:24:00.499030+00:00",
+  "detector_name": "published_textcnn_equivalent",
+  "exception_message": "implementation_metadata_json",
+  "exception_type": "KeyError",
+  "execution_completed_at_utc": "2026-08-16T02:15:46.335428+00:00",
+  "failed_invocation_count": 2,
+  "failure_stage": "post_fit_benchmark_packaging",
+  "finalization_candidate": {
+    "candidate_sha256": "3fd839ba62f52c3f2cd678b8a7bc61fbb3f2dc50025abacb1f935638c4427074",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run.checkpoints/finalization_candidates/benchmark_artifact-task0-packaging_failure-eb2a6b8d9164d006.json",
+    "sha256": "e2d40a88d13e5e5925ded23631431041d503bd5f6c8c8dd064c8f97b38b302c9",
+    "size_bytes": 3173
+  },
+  "gpu_accounting": {
+    "cumulative_elapsed_seconds": 111.000125,
+    "derivation_policy": "nonoverlapping_detector_process_wall_intervals_v1",
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "intervals": [
+      {
+        "completed_at_utc": "2026-08-16T02:13:54.975452+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 90.380387,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T02:13:54.975452+00:00",
+        "pid": 179387,
+        "process_start_ticks": 632859,
+        "started_at_utc": "2026-08-16T02:12:24.595065+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T02:15:46.335428+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 20.619738,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T02:15:46.335428+00:00",
+        "pid": 184498,
+        "process_start_ticks": 650952,
+        "started_at_utc": "2026-08-16T02:15:25.715690+00:00"
+      }
+    ]
+  },
+  "gpu_accounting_policy": "full_process_wall_time_including_initialization_preprocessing_and_failed_packaging",
+  "pre_final_gpu_accounting_ledger": null,
+  "result_status": "diagnostic_only_no_published_benchmark_result",
+  "schema_version": "rankcloak-revision-detector-failed-benchmark-attempt-v1",
+  "task_index": 0,
+  "terminal_accounting_status_sha256": "cff69b2f777ceb67cf708055faa14bba994f462eea16dae7254b6af3066dfeaa"
+}

@@ -1,0 +1,73 @@
+{
+  "analysis_status": "exploratory_post_outcome_evidence_extraction",
+  "confirmatory_generation_design_unchanged": true,
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_ablation_evidence.py --trials /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/ablation_v2/trials.csv --unavailable /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/ablation_v2/unavailable.csv --config /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/ablation_evidence_analysis.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis --overwrite",
+  "inference": {
+    "analysis_unit": "payload_name",
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 2026081603,
+    "confidence_level": 0.95,
+    "model_policy": "restrict_each_level_contrast_to_models_observed_at_that_level",
+    "multiplicity": "holm_within_outcome_across_all_canonical_contrasts",
+    "primary_inference": false,
+    "secondary_multiplicity": "benjamini_hochberg_within_outcome"
+  },
+  "inputs": {
+    "config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/ablation_evidence_analysis.json",
+      "sha256": "2f7e2f55697f87cb3b6d30c700efedafb190c6cc9e7c1a653669605de6857a98",
+      "size_bytes": 2010
+    },
+    "trials": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/ablation_v2/trials.csv",
+      "row_count": 1824,
+      "sha256": "59b6f3370c7866f986f0bf071e4719a8c6ef77875ce861ec4a99fc64e0505a5f",
+      "size_bytes": 1615979
+    },
+    "unavailable": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/ablation_v2/unavailable.csv",
+      "row_count": 48,
+      "sha256": "79bb171608a27655f97bd3c3788cf75ea5eeb536aa8aec0d90d2dd63578e5063",
+      "size_bytes": 59519
+    }
+  },
+  "outcomes_were_available_before_analysis_specification": true,
+  "outputs": {
+    "configurations": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_configuration_summary.csv",
+      "row_count": 16,
+      "sha256": "18ff6f82c267a6417e9af7f324c69fdcc48380150ef900001971f82ee762f781",
+      "size_bytes": 1966
+    },
+    "continuous": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_continuous_summary.csv",
+      "row_count": 80,
+      "sha256": "c6ef0280090b6df2705718e2bb3e5c818033571bb03e276172e79624ba40be60",
+      "size_bytes": 17371
+    },
+    "contrasts": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_canonical_contrasts.csv",
+      "row_count": 60,
+      "sha256": "ab7b54b0b9778595d7ec5613a6db86c8b1570f0edd050c954b01c33c59f399f4",
+      "size_bytes": 22896
+    },
+    "unavailable": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_unavailable_summary.csv",
+      "row_count": 1,
+      "sha256": "1f22e130aba6edc05a34737a11bdc6d8922af1e651f62d5428f016de32094aa9",
+      "size_bytes": 267
+    }
+  },
+  "primary_inference": false,
+  "schema_version": "rankcloak-revision-ablation-evidence-manifest-v1",
+  "status": "passed",
+  "summary": {
+    "canonical_contrast_rows": 60,
+    "configuration_rows": 16,
+    "continuous_summary_rows": 80,
+    "observed_trial_rows": 1824,
+    "unavailable_summary_rows": 1,
+    "unavailable_work_units": 48,
+    "unsupported_numerical_test_rows": 18
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "analysis_status": "exploratory_post_outcome_locked_contrast_extraction",
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_topic_effects.py --mixed-model-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json --extraction-config /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/topic_effect_extraction.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/topic_effects --overwrite",
+  "inputs": {
+    "extraction_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/topic_effect_extraction.json",
+      "sha256": "43d3003d308c77cc0c4b5e30d5a979ad8ebec4cfec8322443a2443c9a04ce40d",
+      "size_bytes": 2047
+    },
+    "mixed_model_contrasts": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_contrasts.csv",
+      "row_count": 225,
+      "sha256": "c4dfb443d3c3d0913836b9718eb94f4eed7212f2a120c1845b6a8587fcad5ffb",
+      "size_bytes": 62852
+    },
+    "mixed_model_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/mixed_models/mixed_model_run_manifest.json",
+      "sha256": "12dbf66996cf164eb7c7ef208ded3ffce370ee6e3a7d58e5db193d0979861abc",
+      "size_bytes": 5724
+    }
+  },
+  "limitations": [
+    "The compact extraction was specified after saved outcomes were available.",
+    "It preserves locked model estimates and multiplicity adjustments but is not a new confirmatory model.",
+    "Singular-fit warnings in the source mixed-model diagnostics remain applicable."
+  ],
+  "locked_mixed_models_unchanged": true,
+  "manifest_sha256": "c1c18bd5b5fb72c671512f171ea95fc4562c51c4ae79b7d841b2365c012d93f9",
+  "new_model_fit_performed": false,
+  "outcomes_were_available_before_extraction_specification": true,
+  "outputs": {
+    "topic_schedule_contrasts": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/statistics/topic_effects/topic_schedule_contrasts.csv",
+      "row_count": 15,
+      "sha256": "30e941e11f6c71b475a2fc0aff9edf2999585c7132eec1a138804681ed51f459",
+      "size_bytes": 6293
+    }
+  },
+  "schema_version": "rankcloak-topic-effect-extraction-v1",
+  "status": "passed",
+  "summary": {
+    "analysis_model_count": 5,
+    "holm_adjusted_rows": 15,
+    "selected_contrast_rows": 15,
+    "stratum_model_count": 3
+  }
+}

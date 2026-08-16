@@ -1,0 +1,29 @@
+{
+  "created_at_utc": "2026-08-16T16:11:56.426654+00:00",
+  "final_gpu_accounting_sha256": "4758b4c329232ef37cf5c65dc03fb62753f649c514e51fc55ae82108c7f6fb6b",
+  "final_published_manifest": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+    "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+    "size_bytes": 58221
+  },
+  "final_terminal_receipt": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/finalization_candidates/detector_run_manifest-suite-suite-908ac15b2cc70ed1.terminal_receipt.json",
+    "sha256": "71de391b76116728929daa61e978e71c640837ad7f05028af6547f2559da6307",
+    "size_bytes": 20726,
+    "terminal_receipt_sha256": "3f5db114b1ee79457c43fbb036b5b6f590a985916f7d6a178d94c6c61fd4206b"
+  },
+  "incorporated": true,
+  "incorporated_ledger_interval_count": 6,
+  "incorporated_ledger_intervals_sha256": "376cd8ce9dd8e1ee91f981b28e4f7bcc88975e189a37e2a3d6d2315ce5712fc3",
+  "incorporation_policy": "every_ledger_interval_exactly_present_in_final_accounting_v1",
+  "incorporation_sha256": "cdf9b4f09f3f2685f535b7a9ecdb2ab55a19060925e47f8ad9c6be660536d4a4",
+  "ledger": {
+    "cumulative_elapsed_seconds": 3327.3283850000003,
+    "intervals_sha256": "376cd8ce9dd8e1ee91f981b28e4f7bcc88975e189a37e2a3d6d2315ce5712fc3",
+    "ledger_sha256": "4192a1fe8079843f67419c80062ab90f1defecfb61860206d36847e77972b9b4",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json",
+    "sha256": "f82dc4049d8ce2ab8b2d11465842dfb789f4c7f7f83e89fc9f0f9f2084c537f3",
+    "size_bytes": 7588
+  },
+  "schema_version": "rankcloak-revision-detector-gpu-ledger-incorporation-v1"
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "manifest_type": "rankcloak_revision_v1_mixed_model_run",
+  "plan_id": "rankcloak_revision_primary_v2_prespecified_confirmatory_models",
+  "plan_sha256": "f0df095f5dd33c5056bbec5db696e7f5f2e80a8d8556ee985dc1416f6ddd8616",
+  "environment_lock_sha256": "96ec333d847d845280e1aba5197ee298d46eeeedcd72e88e8ec1aa9d22cf368b",
+  "validation_only": false,
+  "analysis_unit": "payload_trial",
+  "segments_as_independent_observations": false,
+  "fixed_effects_fallback": false,
+  "payload_fidelity_contract": {
+    "contract_version": "payload_fidelity_v2",
+    "result_schema_revision": "payload_aware_result_v2",
+    "semantics": "original_serialized_payload_bytes_sha256_v1",
+    "primary_outcome": "exact_payload_recovery",
+    "compatibility_alias": "exact_recovery",
+    "alias_equality_validated": true,
+    "exact_rank_replay_role": "diagnostic_only",
+    "direct_rows": 1440,
+    "direct_rows_contract_verified": 1440
+  },
+  "input_files": [
+    {
+      "role": "driver_source",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/scripts/run_revision_mixed_models.R",
+      "size_bytes": 50166,
+      "sha256": "6ff857647ef9c594a823a4786af1b441e0ff7274ed97f3201a7384e005dde0f9"
+    },
+    {
+      "role": "plan",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/confirmatory_model_plan.json",
+      "size_bytes": 7552,
+      "sha256": "f0df095f5dd33c5056bbec5db696e7f5f2e80a8d8556ee985dc1416f6ddd8616"
+    },
+    {
+      "role": "environment_lock",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/r_environment.lock.json",
+      "size_bytes": 1903,
+      "sha256": "96ec333d847d845280e1aba5197ee298d46eeeedcd72e88e8ec1aa9d22cf368b"
+    },
+    {
+      "role": "trials",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/trials.csv",
+      "size_bytes": 5056076,
+      "sha256": "12b11bad2c7b6468d7f8e4ed12fde2a0ab29996cda8594d0cbcaa6b06797ae7b"
+    },
+    {
+      "role": "features",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_heldout_join_v5/primary_features_with_heldout_evaluator.csv",
+      "size_bytes": 29523141,
+      "sha256": "e48ce95cd239437a038f7d18940ffc202fee8e5fe201e5e5e132ac34192e3121"
+    },
+    {
+      "role": "feature_join_manifest",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json",
+      "size_bytes": 6778,
+      "sha256": "15151b9698c2d71d791a65ceb1dfac615e49294fa02d71ae5602b1e29f2df7ec"
+    },
+    {
+      "role": "runtime",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/runtime.csv",
+      "size_bytes": 11238296,
+      "sha256": "945be8e4b39eb249a6cba6c08665561331a8637c97da9470e71599e1eec1696e"
+    }
+  ],
+  "environment": {
+    "r_version": "4.4.2",
+    "r_version_string": "R version 4.4.2 (2024-10-31)",
+    "ordered_library_roles": {
+      "project_revision_library": "/home/meow/Documents/repos/llm-rankcloak/.r_libs/revision_v1",
+      "existing_user_r_4_4_library": "/home/meow/R/x86_64-pc-linux-gnu-library/4.4"
+    },
+    "resolved_lib_paths": [
+      "/home/meow/Documents/repos/llm-rankcloak/.r_libs/revision_v1",
+      "/home/meow/R/x86_64-pc-linux-gnu-library/4.4",
+      "/usr/local/lib/R/site-library",
+      "/usr/lib/R/site-library",
+      "/usr/lib/R/library"
+    ],
+    "packages": {
+      "lme4": {
+        "version": "2.0.6",
+        "path": "/home/meow/Documents/repos/llm-rankcloak/.r_libs/revision_v1/lme4",
+        "required_library_role": "project_revision_library",
+        "expected_version": "2.0.6"
+      },
+      "ordinal": {
+        "version": "2026.7.26",
+        "path": "/home/meow/Documents/repos/llm-rankcloak/.r_libs/revision_v1/ordinal",
+        "required_library_role": "project_revision_library",
+        "expected_version": "2026.7.26"
+      },
+      "emmeans": {
+        "version": "1.10.5",
+        "path": "/home/meow/R/x86_64-pc-linux-gnu-library/4.4/emmeans",
+        "required_library_role": "existing_user_r_4_4_library",
+        "expected_version": "1.10.5"
+      },
+      "jsonlite": {
+        "version": "1.8.9",
+        "path": "/home/meow/R/x86_64-pc-linux-gnu-library/4.4/jsonlite",
+        "required_library_role": "existing_user_r_4_4_library",
+        "expected_version": "1.8.9"
+      }
+    },
+    "fixed_effects_fallback": false
+  },
+  "outputs": {
+    "coefficients": {
+      "path": "mixed_model_coefficients.csv",
+      "size_bytes": 134240,
+      "sha256": "1d78f32faee65189f4bc41daadbba67ca72c8c9d77a785da9b8eb7e9676c3af7",
+      "row_count": 325
+    },
+    "contrasts": {
+      "path": "mixed_model_contrasts.csv",
+      "size_bytes": 62852,
+      "sha256": "c4dfb443d3c3d0913836b9718eb94f4eed7212f2a120c1845b6a8587fcad5ffb",
+      "row_count": 225
+    },
+    "diagnostics": {
+      "path": "mixed_model_diagnostics.json",
+      "size_bytes": 3627,
+      "sha256": "d2407431b95be88a464117345b6cca22e46bab738edf1e1180add393450d1f18",
+      "row_count": null
+    },
+    "wilson": {
+      "path": "recovery_wilson_sensitivity.csv",
+      "size_bytes": 3975,
+      "sha256": "09f827f2315a2b68e557cff51fc2d5aec3f62e0a0207a89781d95c9ac0fe8ee0",
+      "row_count": 24
+    },
+    "dispersion": {
+      "path": "poisson_dispersion_check.csv",
+      "size_bytes": 220,
+      "sha256": "15baec34cf5b61f785fe596a5761da8a7c463d3170d03b080f6c23af18021791",
+      "row_count": 1
+    },
+    "status": {
+      "path": "model_status.json",
+      "size_bytes": 1731,
+      "sha256": "c96b4bda5f52cc3171753ec7f56b1431bdc11302db288227792408f0b36c5136",
+      "row_count": null
+    }
+  }
+}
+

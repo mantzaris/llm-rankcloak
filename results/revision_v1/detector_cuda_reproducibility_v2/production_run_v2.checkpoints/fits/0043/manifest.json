@@ -1,0 +1,68 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "5c713bfb5314db25d3d7e120b563bd1cc74d1b83d2f0b7d3e16890b7028d4bcb",
+      "size_bytes": 4735
+    },
+    "predictions.json": {
+      "row_count": 1320,
+      "sha256": "1b3ba87fc073a556bbf7f7fe762437c0b9444487c6bfadf48d25c6cac3b9ab0b",
+      "size_bytes": 652124
+    }
+  },
+  "children_sha256": "92fe620275a92a8588b5354a56a1b737f1dba13ded6185ab3df8db2561751d25",
+  "completed_at_utc": "2026-08-16T13:49:21.182866+00:00",
+  "elapsed_seconds": 988.8990394800057,
+  "manifest_sha256": "e8f69c2b6a5d68a92f3e8f07764dd51156b8cb1fb5acc79aad9c561856aa0a8e",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T13:32:52.283855+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "detector_position": 1,
+    "effective_detector_config": {
+      "allow_downloads": false,
+      "batch_size": 8,
+      "device": "cuda:0",
+      "enabled": true,
+      "epochs": 3,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "kind": "pretrained_transformer",
+      "learning_rate": 2e-05,
+      "maximum_length": 256,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "name": "deberta_v3_base_classifier",
+      "offline_only": true,
+      "torch_num_threads": 1,
+      "weight_decay": 0.01
+    },
+    "effective_detector_config_sha256": "dcc73bd841cebdbb1e2c39136fcedfb5e8f43fcbb34c7cc2dd92779d0cf65cf6",
+    "excluded_held_out_rows": 3960,
+    "held_out_column": "model_id",
+    "held_out_value": "qwen2_5_7b_instruct_q4_k_m",
+    "ordinal": 43,
+    "partition_policy": "deterministic_disjoint_payload_partition_v1",
+    "purged_train_rows": 2640,
+    "regime": "leave_one_model",
+    "scientific_detector_config_sha256": "47d45a5010b771e8dfadc31ec75a6941b35d1f292ab3d62bf76c8a11ce971a5e",
+    "seed": 551012658,
+    "split_id": "leave_one_model:qwen2_5_7b_instruct_q4_k_m",
+    "split_position": 21,
+    "test_indices_sha256": "c974456647042082622d4aef26bc55ca83431be13d97a24c00d8caa9d8bd35f2",
+    "test_row_count": 1320,
+    "test_row_ids_ordered_sha256": "65adb83a380cd2061407b4bfd01c4485d7a0c5c89b7c07c9e9e045b9a89044ef",
+    "train_indices_sha256": "d7857240a081600a48cdfe8308f45d1f3836958d900cf58b972feb814cd81799",
+    "train_row_count": 7920,
+    "train_row_ids_ordered_sha256": "29dfc555a81945984a5e9cbf297924b960c4228e55d0410af2c5cce18568ec85"
+  },
+  "task_identity_sha256": "10e051cd4cbf71995a0a66545f33d00b5c725030ac7f09db7f7f89f962bfefe1"
+}

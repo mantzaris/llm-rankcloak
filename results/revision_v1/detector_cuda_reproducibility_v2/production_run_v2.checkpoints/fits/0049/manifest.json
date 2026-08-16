@@ -1,0 +1,68 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "d906d51b98e16bc07b5a0b03fd25551bc0bae55f4f3bf7637802bfa77cf57187",
+      "size_bytes": 4694
+    },
+    "predictions.json": {
+      "row_count": 720,
+      "sha256": "292785bad5734b1a432dae2d7fcfa7ceb15c1fad70a0012598359ba3128688a4",
+      "size_bytes": 336868
+    }
+  },
+  "children_sha256": "aa1c916335613ddfdd3b7b3e2ddf4182496b342f860afc1a2bd56f8988a3a42b",
+  "completed_at_utc": "2026-08-16T14:56:54.946348+00:00",
+  "elapsed_seconds": 1245.5476265760008,
+  "manifest_sha256": "25766cf57ba2c11eb464dc5ed6d8c6e9781aaa39229862e5e24a9b2929cb7d3e",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T14:36:09.398724+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "detector_position": 1,
+    "effective_detector_config": {
+      "allow_downloads": false,
+      "batch_size": 8,
+      "device": "cuda:0",
+      "enabled": true,
+      "epochs": 3,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "kind": "pretrained_transformer",
+      "learning_rate": 2e-05,
+      "maximum_length": 256,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "name": "deberta_v3_base_classifier",
+      "offline_only": true,
+      "torch_num_threads": 1,
+      "weight_decay": 0.01
+    },
+    "effective_detector_config_sha256": "dcc73bd841cebdbb1e2c39136fcedfb5e8f43fcbb34c7cc2dd92779d0cf65cf6",
+    "excluded_held_out_rows": 2160,
+    "held_out_column": "codec_id",
+    "held_out_value": "nonseg_ascii_b8",
+    "ordinal": 49,
+    "partition_policy": "deterministic_disjoint_payload_partition_v1",
+    "purged_train_rows": 2880,
+    "regime": "leave_one_codec",
+    "scientific_detector_config_sha256": "47d45a5010b771e8dfadc31ec75a6941b35d1f292ab3d62bf76c8a11ce971a5e",
+    "seed": 3747447410,
+    "split_id": "leave_one_codec:nonseg_ascii_b8",
+    "split_position": 24,
+    "test_indices_sha256": "56343be4a158e1ff61a43c4b80aa2e3d99fc61ff526013d63c9f35ea95226a18",
+    "test_row_count": 720,
+    "test_row_ids_ordered_sha256": "33bbc802f0d1514ebeec26b18d07a1fb9e978ac9dae080f0ff2e9ef4be6492b9",
+    "train_indices_sha256": "70ab5cf87c96fa33ef853ba13fa1b1c6a4067a54d7b52c7a5771703def35945c",
+    "train_row_count": 10080,
+    "train_row_ids_ordered_sha256": "05183972b9fef109f435b8a7ae600d822781b73f196e695eee9da10bcdc188b6"
+  },
+  "task_identity_sha256": "7c4ee9554b4377acdfe18e4d6e1cd06f90fea61a30836f1f013b2898c45430ee"
+}

@@ -52,3 +52,5 @@ results/**/*.tar.gz
 
 
 .paper
+.agent
+.codex

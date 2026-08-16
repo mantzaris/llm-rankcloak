@@ -33,10 +33,13 @@ from rankcloak.revision_detector_execution import (
     evaluate_detector_device_equivalence,
     file_sha256,
     finalize_detector_candidate_from_closed_status,
+    read_detector_cuda_reproducibility_report,
+    read_detector_failed_benchmark_attempt,
     read_detector_gpu_accounting_ledger,
     read_detector_gpu_ledger_incorporation_marker,
     update_detector_gpu_accounting_ledger,
     verify_status_file,
+    write_detector_cuda_reproducibility_report,
     write_detector_device_equivalence_report,
     write_detector_equivalence_fit_artifact,
     write_detector_finalization_candidate,
@@ -1000,6 +1003,58 @@ def test_signal_while_waiting_for_permit_stops_without_fit(tmp_path):
             os.waitpid(child, 0)
 
 
+def test_internal_fit_progress_is_validated_and_signed(tmp_path):
+    prepared = prepare_revision_detector_suite(
+        detector_frame(), smoke_config(detector_count=1), smoke=True
+    )
+    task = build_fit_tasks(prepared)[0]
+    now = datetime.now(timezone.utc)
+    tracker = detector_execution._StatusTracker(
+        context(tmp_path),
+        {"fixture": "run"},
+        canonical_json_sha256({"fixture": "run"}),
+        total=1,
+        recovered_errors=[],
+        started_at=now,
+        started_monotonic=time.monotonic(),
+    )
+    tracker.current = task
+    tracker.current_started_at = now
+    tracker.current_started_monotonic = time.monotonic()
+    tracker.state = "running_fit"
+    tracker.update_current_fit_progress(
+        {
+            "phase": "training",
+            "completed_units": 3,
+            "total_units": 8,
+            "epoch": 1,
+            "epochs": 2,
+            "batch": 3,
+            "batches_per_epoch": 4,
+        }
+    )
+    status = tracker.snapshot()
+    assert status["current_fit_progress"]["phase"] == "training"
+    assert status["current_fit_progress"]["completed_units"] == 3
+    assert status["status_sha256"] == canonical_json_sha256(
+        {key: value for key, value in status.items() if key != "status_sha256"}
+    )
+
+    with pytest.raises(RevisionDetectionError, match="counters"):
+        tracker.update_current_fit_progress(
+            {
+                "phase": "evaluation",
+                "completed_units": 2,
+                "total_units": 1,
+            }
+        )
+    tracker.current = None
+    with pytest.raises(RevisionDetectionError, match="without an active fit"):
+        tracker.update_current_fit_progress(
+            {"phase": "complete", "completed_units": 1, "total_units": 1}
+        )
+
+
 def test_numeric_equivalence_report_records_tolerance():
     reference_metric = {"split_id": "s", "roc_auc": 0.8, "seed": 3}
     candidate_metric = {"split_id": "s", "roc_auc": 0.8000005, "seed": 3}
@@ -1182,6 +1237,27 @@ def test_signed_predeclared_device_equivalence_report(tmp_path):
     claimed = unsigned.pop("report_sha256")
     assert claimed == canonical_json_sha256(unsigned)
 
+    cuda_policy = {"same_device_cuda": policy["same_device_cuda"]}
+    cuda_report_path = tmp_path / "cuda-reproducibility-report.json"
+    cuda_report = write_detector_cuda_reproducibility_report(
+        cuda_report_path,
+        cuda_artifact_path=paths["cuda"],
+        cuda_repeat_artifact_path=paths["cuda_repeat"],
+        equivalence_policy=cuda_policy,
+        policy_identity=policy_identity,
+    )
+    assert cuda_report["decision"]["reproducible"] is True
+    assert cuda_report["decision"]["same_device_cuda"]["passed"] is True
+    assert read_detector_cuda_reproducibility_report(
+        cuda_report_path,
+        expected_task_index=0,
+        expected_policy_identity=policy_identity,
+        expected_equivalence_policy=cuda_policy,
+    )["report_sha256"] == cuda_report["report_sha256"]
+    paths["cuda_repeat"].write_text("{}\n", encoding="utf-8")
+    with pytest.raises(RevisionDetectionError, match="input bytes differ"):
+        read_detector_cuda_reproducibility_report(cuda_report_path)
+
 
 def test_cpu_equivalence_self_finalizes_but_cuda_requires_supervisor(tmp_path):
     task = {
@@ -1219,6 +1295,80 @@ def test_cpu_equivalence_self_finalizes_but_cuda_requires_supervisor(tmp_path):
                 "gpu_accounting": gpu_accounting(0),
             },
         )
+
+
+def test_signed_failed_benchmark_attempt_reader_binds_terminal_receipt(tmp_path):
+    root = tmp_path / "failed-benchmark"
+    checkpoint = root / "checkpoint.json"
+    atomic_write_json(checkpoint, {"preserved": True})
+    output = root / "failed-attempt.json"
+    status_path = root / "status.json"
+    run_identity_sha256 = canonical_json_sha256({"run": "failed-benchmark"})
+    accounting = gpu_accounting(0, duration_seconds=11.0)
+    status = signed_document(
+        {
+            "schema_version": "rankcloak-revision-detector-status-v1",
+            "updated_at_utc": accounting["intervals"][-1]["completed_at_utc"],
+            "state": "supervisor_observed_process_exit",
+            "device": "cuda:0",
+            "gpu_uuid": "GPU-fixture",
+            "run_identity_sha256": run_identity_sha256,
+            "gpu_accounting": accounting,
+        },
+        "status_sha256",
+    )
+    atomic_write_json(status_path, status)
+    candidate_path, receipt_path = detector_finalization_paths(
+        root / "checkpoints",
+        kind="benchmark_artifact",
+        requested_output_path=output,
+        task_index=0,
+        role="packaging_failure",
+    )
+    payload = {
+        "schema_version": (
+            "rankcloak-revision-detector-failed-benchmark-attempt-v1"
+        ),
+        "created_at_utc": "2026-08-15T00:00:00+00:00",
+        "task_index": 0,
+        "detector_name": "published_textcnn_equivalent",
+        "result_status": "diagnostic_only_no_published_benchmark_result",
+        "failure_stage": "post_fit_benchmark_packaging",
+        "exception_type": "KeyError",
+        "exception_message": "implementation_metadata_json",
+        "failed_invocation_count": 2,
+        "checkpoint_fit_count": 1,
+        "checkpoint_scientific_result_status": "preserved",
+        "gpu_accounting_policy": "full_process_wall_time",
+        "corrective_action": "fresh_source_bound_namespace",
+    }
+    write_detector_finalization_candidate(
+        candidate_path,
+        kind="benchmark_artifact",
+        run_identity_sha256=run_identity_sha256,
+        payload=payload,
+        output_files={
+            "checkpoint": {
+                "path": str(checkpoint.resolve()),
+                "sha256": file_sha256(checkpoint),
+                "size_bytes": checkpoint.stat().st_size,
+            }
+        },
+        requested_output_path=output,
+    )
+    finalize_detector_candidate_from_closed_status(
+        candidate_path,
+        closed_status_file=status_path,
+        terminal_receipt_path=receipt_path,
+    )
+
+    observed = read_detector_failed_benchmark_attempt(
+        output, expected_gpu_uuid="GPU-fixture"
+    )
+    assert observed["gpu_accounting"]["cumulative_elapsed_seconds"] == 11.0
+    output.write_text("{}\n", encoding="utf-8")
+    with pytest.raises(RevisionDetectionError):
+        read_detector_failed_benchmark_attempt(output)
 
 
 def test_supervisor_finalization_is_idempotent_after_complete(tmp_path):

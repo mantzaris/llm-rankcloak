@@ -1,0 +1,13 @@
+{
+  "cause": "The v2 held-out evaluator join preserved preprocessing columns but the saved primary preprocessing feature table did not contain any outcome candidate frozen for primary_artifact_counts.",
+  "corrected_join_manifest": "results/revision_v1/analysis_inputs/primary_heldout_join_v3/heldout_feature_join_manifest.json",
+  "correction": "The existing committed automated_text_quality_metrics surface_flag_total was added only when all prespecified candidates are absent; v2 was preserved and v3 was emitted with algorithm-source provenance.",
+  "error": "Artifact-count model requires one prespecified artifact count column in features",
+  "fixed_effects_fallback_used": false,
+  "input_join": "results/revision_v1/analysis_inputs/primary_heldout_join_v2/heldout_feature_join_manifest.json",
+  "observed_at_utc": "2026-08-16T08:56:00+00:00",
+  "output_directory": "/tmp/rankcloak_mixed_models_prefinal_20260816T0855Z",
+  "schema_version": "rankcloak-mixed-model-preflight-diagnostic-v1",
+  "scientific_result_published": false,
+  "status": "failed_before_model_fit"
+}

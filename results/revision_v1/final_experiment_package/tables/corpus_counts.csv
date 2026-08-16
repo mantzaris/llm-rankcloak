@@ -1,0 +1,9 @@
+payload_class,algorithm,payload_count,minimum_artifact_bits,maximum_artifact_bits
+aes256_gcm_base64,AES-256-GCM,60,384,384
+chacha20_poly1305_base64,ChaCha20-Poly1305,60,384,384
+ed25519_signature_base64,Ed25519,60,512,512
+hmac_sha256_hex,HMAC-SHA-256,60,256,256
+nonce_96_bit_hex,SHAKE-256 deterministic test-vector derivation,60,96,96
+sha256_hex,SHA-256,60,256,256
+token_128_bit_hex,SHAKE-256 deterministic test-vector derivation,60,128,128
+uuid_v4,UUID version 4 bit layout over SHAKE-256 test bytes,60,128,128

@@ -1,0 +1,27 @@
+{
+  "accounting_components": {
+    "duplicate_interval_count": 6,
+    "pre_final_interval_count": 6,
+    "pre_final_seconds": 3327.3283850000003,
+    "terminal_interval_count": 7,
+    "terminal_seconds": 46540.785963,
+    "union_interval_count": 7
+  },
+  "accounting_policy": "nonoverlapping_union_of_pre_final_and_terminal_detector_intervals_v1",
+  "budget_sha256": "596dd627c4f2f7c4be3dcd655cf9688aec76519ac9641fc86e84590c661b8da3",
+  "cumulative_gpu_hours": 75.40638017063333,
+  "detector_run_manifest": {
+    "path": "results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+    "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+    "size_bytes": 58221
+  },
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "hard_ceiling_gpu_hours": 165.0,
+  "historical_external_gpu_hours_floor": 62.4783840698,
+  "historical_floor_was_not_reset": true,
+  "new_detector_accounting_gpu_hours": 12.927996100833333,
+  "new_detector_accounting_seconds": 46540.785963,
+  "remaining_headroom_gpu_hours": 89.59361982936667,
+  "schema_version": "rankcloak-revision-gpu-budget-v1",
+  "status": "within_hard_ceiling"
+}

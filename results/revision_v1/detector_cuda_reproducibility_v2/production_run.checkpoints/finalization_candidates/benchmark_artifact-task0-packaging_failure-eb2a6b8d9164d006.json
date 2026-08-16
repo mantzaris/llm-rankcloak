@@ -1,0 +1,53 @@
+{
+  "candidate_sha256": "3fd839ba62f52c3f2cd678b8a7bc61fbb3f2dc50025abacb1f935638c4427074",
+  "created_at_utc": "2026-08-16T02:24:00.504089+00:00",
+  "finalization_policy": "supervisor_confirms_exact_pid_absence_closes_accounting_then_publishes_v1",
+  "kind": "benchmark_artifact",
+  "output_files": {
+    "attempt_1_log": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/supervisor/post_primary_logs/downstream__detector__benchmark__0.20260816T021128Z.log",
+      "sha256": "671f8f6d0c280eb4837b2ad02364ba036829c3080b7a3b0d8d5ba82c4ef1511d",
+      "size_bytes": 385
+    },
+    "attempt_2_log": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/supervisor/post_primary_logs/downstream__detector__benchmark__0.20260816T021429Z.log",
+      "sha256": "671f8f6d0c280eb4837b2ad02364ba036829c3080b7a3b0d8d5ba82c4ef1511d",
+      "size_bytes": 385
+    },
+    "checkpoint_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run.checkpoints/fits/0000/manifest.json",
+      "sha256": "a8af340323efd6eef0c39dd3aa238f733c2568a385270237baff8026cb12f542",
+      "size_bytes": 2900
+    },
+    "checkpoint_metric": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run.checkpoints/fits/0000/metric.json",
+      "sha256": "d67946b35b5f0946773ca85faed014304d1aaf3c2b2e6b114f99d9135e23ec30",
+      "size_bytes": 3202
+    },
+    "checkpoint_predictions": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run.checkpoints/fits/0000/predictions.json",
+      "sha256": "7916a6358c5ec6997b463bd0fcd8e7e6ce3db48d63a0b721a2d2a00fd90fc603",
+      "size_bytes": 1582175
+    }
+  },
+  "output_files_sha256": "241917ad43f75542da5a821b6f186f4404dd73729a735a3f02e059233a21d2cc",
+  "payload": {
+    "checkpoint_fit_count": 1,
+    "checkpoint_scientific_result_status": "preserved_but_not_reused_after_source_fix",
+    "corrective_action": "strict_columnar_metric_decoder_and_fresh_source_bound_checkpoint_namespace",
+    "created_at_utc": "2026-08-16T02:24:00.499030+00:00",
+    "detector_name": "published_textcnn_equivalent",
+    "exception_message": "implementation_metadata_json",
+    "exception_type": "KeyError",
+    "failed_invocation_count": 2,
+    "failure_stage": "post_fit_benchmark_packaging",
+    "gpu_accounting_policy": "full_process_wall_time_including_initialization_preprocessing_and_failed_packaging",
+    "result_status": "diagnostic_only_no_published_benchmark_result",
+    "schema_version": "rankcloak-revision-detector-failed-benchmark-attempt-v1",
+    "task_index": 0
+  },
+  "payload_sha256": "abdd8ecdadd7b78998acb82b66c03d464fccc8fed164036f4668c6dda64571fb",
+  "requested_output_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/failed_attempts/task_0_packaging_failure.json",
+  "run_identity_sha256": "c90e4420d39ece44c0c203a575dbe5933b68bd09404bc448fb04ed8eabfd9175",
+  "schema_version": "rankcloak-revision-detector-finalization-candidate-v1"
+}

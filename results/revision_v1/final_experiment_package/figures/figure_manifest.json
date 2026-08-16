@@ -1,0 +1,123 @@
+{
+  "detector_cross_split_bars": "minimum_to_maximum_range_not_confidence_interval",
+  "detector_supplementary_panels_status": "exploratory_post_freeze",
+  "human_rating_figures_emitted": false,
+  "inputs": {
+    "detector_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json",
+      "sha256": "cf94cd4f1698f9c339629e787c2b1d691fee0a0d2839a7e88059e8f3ab79d9f1"
+    },
+    "overhead_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json",
+      "sha256": "f5e10d7730b25f022948c37be373d34888e05e2cbc52bc11b6e742564df3ecdb"
+    },
+    "readability_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json",
+      "sha256": "5d2167a9ca39d2432b541f11c14f3198da0c13c89284b41ba9b6d401aba2be28"
+    },
+    "robustness_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
+      "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177"
+    },
+    "theory_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json",
+      "sha256": "e2449de3aafca211fd2c7b644400c6225b56bc969743a2682d1105da99b0ac4d"
+    }
+  },
+  "outputs": {
+    "commands": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/generation_commands.txt",
+      "sha256": "cc0b9594216dd73f6cceb8c8d322b3bde8313a86323c18a34d7211d90df387ee",
+      "size_bytes": 953
+    },
+    "detector_pdf": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
+      "sha256": "8dd62fcf6d6d2e95ae555e002ce3e680bb86be891ee249fdb302167b5cfe7c38",
+      "size_bytes": 35829
+    },
+    "detector_png": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+      "sha256": "0bd0b30f3cec6fb2505571eb73562ba8916bfec30ff3b5e748aaf2f7f8ac5e33",
+      "size_bytes": 230075
+    },
+    "detector_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
+      "row_count": 48,
+      "sha256": "f3bfd86e26fc709a546b98c54cd22785dcfe7fea156c03076194b97162fdf4de",
+      "size_bytes": 10980
+    },
+    "overhead_pdf": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
+      "sha256": "1c00dbc0e0470885a69f098b26fc605bae340c071ff62b0cd0398198dd43efbf",
+      "size_bytes": 37210
+    },
+    "overhead_png": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+      "sha256": "cbcc0d5a9f1b12e58aadab4a86bb2872d556dfaa974d6122b7980df917f165ac",
+      "size_bytes": 396573
+    },
+    "overhead_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
+      "row_count": 72,
+      "sha256": "1ecfa6194cdf45d6ba9541773d6004366511cdca358d11ec6583829ff3faa479",
+      "size_bytes": 21607
+    },
+    "readability_pdf": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
+      "sha256": "5bd0eabb366656cce77da5ce560d765fdc40d1077838d98044734d955b4c9ec4",
+      "size_bytes": 20893
+    },
+    "readability_png": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.png",
+      "sha256": "48a7b899544e928d364bf8511aa143c5379ca21a12aa9d4c3dd3177434faf2b3",
+      "size_bytes": 171771
+    },
+    "readability_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
+      "row_count": 21,
+      "sha256": "bcff7be1982eb8aef8ff0e413764959bab8c22ac453ec6a7e1c711a4845d80c7",
+      "size_bytes": 6631
+    },
+    "robustness_pdf": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
+      "sha256": "cb1d3f32ee5200f95f7f99413debb7da0d6242c7fca9921d80d73c43dbe408f4",
+      "size_bytes": 27578
+    },
+    "robustness_png": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+      "sha256": "ccdeb6498eeb4fc930a954655bd22670196511a01ec1acbd80b9088ab21e1797",
+      "size_bytes": 428969
+    },
+    "robustness_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
+      "row_count": 24,
+      "sha256": "0929f35bc80fa720016dbe663362d99dd1ce415f6a9869aaac1d548ad74c240a",
+      "size_bytes": 4451
+    },
+    "theory_pdf": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
+      "sha256": "81c21430626f06c3c42837927d5d9124099f0ba5a2e1a50e2b6dc31811b16298",
+      "size_bytes": 27740
+    },
+    "theory_png": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+      "sha256": "6c8159adee541a0ee08a8468f33b34bcb2eeac4175c8b55b3925dd9e27b5f4a1",
+      "size_bytes": 303633
+    },
+    "theory_source": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
+      "row_count": 9,
+      "sha256": "dde73fa720829071f3388d488a88691b6930e92bf62da25c7c1e01227d306063",
+      "size_bytes": 1419
+    }
+  },
+  "readability_figure_scope": "automated_surface_diagnostics_not_human_judgements",
+  "schema_version": "rankcloak-computational-figure-evidence-v1",
+  "source_tables_hash_validated_before_plotting": true,
+  "status": "passed",
+  "summary": {
+    "figure_count": 5,
+    "rendered_file_count": 10,
+    "source_table_count": 5
+  }
+}

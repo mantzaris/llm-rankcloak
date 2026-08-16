@@ -135,6 +135,75 @@ verify_feature_join_manifest <- function(manifest_path, features_path, features)
       !identical(as.integer(manifest$primary_trial_count), 6480L)) {
     abort("Joined feature-table dimensions differ from the complete primary contract")
   }
+  artifact_diagnostics <- manifest$artifact_diagnostics
+  expected_artifact_candidates <- c(
+    "artifact_count", "surface_flag_total", "artifact_like_fragment_count"
+  )
+  if (!is.list(artifact_diagnostics) ||
+      !identical(
+        unname(unlist(artifact_diagnostics$outcome_candidates)),
+        expected_artifact_candidates
+      ) ||
+      !identical(
+        as.integer(artifact_diagnostics$row_count),
+        as.integer(nrow(features))
+      )) {
+    abort("Held-out evaluator feature join lacks artifact-outcome provenance")
+  }
+  artifact_status <- artifact_diagnostics$status
+  selected_artifact_column <- artifact_diagnostics$selected_source_column
+  derived_artifact_columns <- unname(
+    unlist(artifact_diagnostics$derived_columns %||% list())
+  )
+  if (identical(artifact_status, "source_feature_column_preserved")) {
+    if (!(selected_artifact_column %in% expected_artifact_candidates) ||
+        length(derived_artifact_columns) != 0L) {
+      abort("Preserved artifact-outcome provenance is inconsistent")
+    }
+  } else if (identical(
+    artifact_status, "derived_from_hash_bound_text_rows"
+  )) {
+    algorithm_path <- artifact_diagnostics$algorithm_source_path
+    if (!identical(selected_artifact_column, "surface_flag_total") ||
+        !identical(
+          derived_artifact_columns,
+          c("surface_flag_total", "artifact_like_fragment_count")
+        ) ||
+        !identical(
+          artifact_diagnostics$algorithm_module,
+          "rankcloak.revision_statistics"
+        ) ||
+        !identical(
+          artifact_diagnostics$algorithm_function,
+          "automated_text_quality_metrics"
+        ) ||
+        is.null(algorithm_path) ||
+        !file.exists(algorithm_path) ||
+        !identical(
+          sha256_file(algorithm_path),
+          artifact_diagnostics$algorithm_source_sha256
+        )) {
+      abort("Derived artifact-outcome algorithm provenance is inconsistent")
+    }
+  } else {
+    abort("Held-out evaluator feature join has an unknown artifact-outcome status")
+  }
+  required_artifact_columns <- unique(c(
+    selected_artifact_column, derived_artifact_columns
+  ))
+  if (any(!(required_artifact_columns %in% names(features)))) {
+    abort("Joined features lack a manifest-declared artifact outcome")
+  }
+  for (column in required_artifact_columns) {
+    values <- suppressWarnings(as.numeric(features[[column]]))
+    if (any(!is.finite(values)) ||
+        any(values < 0) ||
+        any(abs(values - round(values)) > 1e-12)) {
+      abort(sprintf(
+        "Joined artifact outcome %s must contain nonnegative integers", column
+      ))
+    }
+  }
   required <- c(
     "source_type", "text_view", "evidence_status", "study_phase",
     "protocol_contract_revision", "result_schema_revision", "transformation_id",
@@ -661,6 +730,7 @@ fit_contrasts <- function(fit, model_id, plan, default_scale) {
     adjusted[finite] <- stats::p.adjust(raw[finite], method = "holm")
     row <- data.frame(
       model_id = model_id,
+      stratum_model_id = NA_character_,
       multiplicity_family = family$family_id,
       contrast = as.character(pairs$contrast),
       estimate = suppressWarnings(as.numeric(pairs[[estimate_column]])),
@@ -676,7 +746,14 @@ fit_contrasts <- function(fit, model_id, plan, default_scale) {
       stringsAsFactors = FALSE
     )
     for (column in by) {
-      if (column %in% names(pairs)) row[[column]] <- pairs[[column]]
+      if (column %in% names(pairs)) {
+        stratum_column <- if (identical(column, "model_id")) {
+          "stratum_model_id"
+        } else {
+          paste0("stratum_", column)
+        }
+        row[[stratum_column]] <- pairs[[column]]
+      }
     }
     rows[[length(rows) + 1L]] <- row
   }
@@ -1120,7 +1197,7 @@ main <- function(arguments = commandArgs(trailingOnly = TRUE)) {
   )
   contrast_table <- rbind_optional(
     contrasts,
-    c("model_id", "multiplicity_family", "contrast", "estimate", "standard_error", "statistic", "p_value_raw", "p_value_holm", "ci_low", "ci_high", "adjustment", "scale", "fixed_effects_fallback")
+    c("model_id", "stratum_model_id", "multiplicity_family", "contrast", "estimate", "standard_error", "statistic", "p_value_raw", "p_value_holm", "ci_low", "ci_high", "adjustment", "scale", "fixed_effects_fallback")
   )
   dispersion_table <- rbind_optional(
     dispersion,

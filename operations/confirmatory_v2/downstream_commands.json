@@ -53,6 +53,8 @@
         "{detector_output_dir}",
         "--execution-policy",
         "{detector_execution_policy}",
+        "--cuda-budget-gate",
+        "{detector_cuda_budget_gate}",
         "--resume",
         "--overwrite",
         "--device",
@@ -87,6 +89,7 @@
           "--output-dir",
           "--confirmatory-plan",
           "--execution-policy",
+          "--cuda-budget-gate",
           "--resume",
           "--overwrite",
           "--device",
@@ -126,11 +129,12 @@
         ],
         "gpu_accounting_ledger": "{detector_gpu_ledger}",
         "execution_policy": "{detector_execution_policy}",
-        "execution_policy_sha256": "75011cf80bd111e2d1c236aa7799610bf2819a18125d40dbf60d518a206f29e9",
-        "execution_policy_content_sha256": "60152864388a21a37a5a2169145927537e76c7bc437a36e54bfc6bae041785d6",
+        "cuda_budget_gate": "{detector_cuda_budget_gate}",
+        "execution_policy_sha256": "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7",
+        "execution_policy_content_sha256": "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d",
         "next_fit_upper_seconds_by_detector": {
-          "published_textcnn_equivalent": 14400.0,
-          "deberta_v3_base_classifier": 108000.0
+          "published_textcnn_equivalent": 900.0,
+          "deberta_v3_base_classifier": 7200.0
         },
         "ceiling_gate": "signed_single_use_per_fit_v1"
       },
@@ -151,6 +155,7 @@
         "{ablation_trials}",
         "{multilingual_trials}",
         "{robustness_trials}",
+        "--continuous-quality",
         "{evaluator_primary_v2_llama3_8b_instruct_q4_k_m_continuous}",
         "{evaluator_primary_v2_qwen2_5_7b_instruct_q4_k_m_continuous}",
         "{evaluator_primary_v2_mistral_7b_instruct_v0_3_q4_k_m_continuous}",
@@ -186,6 +191,7 @@
         "required_help_tokens": [
           "--trials",
           "--features",
+          "--continuous-quality",
           "--detectors",
           "--runtime",
           "--output-dir",

@@ -1,0 +1,27 @@
+{
+  "fit_count": 56,
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_detector_reference.py --detector-run-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors",
+  "inputs": {
+    "detector_run_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+      "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+      "size_bytes": 58221
+    }
+  },
+  "large_detector_artifacts_copied": false,
+  "outputs": {
+    "fit_index": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/detector_fit_reference_index.csv",
+      "row_count": 56,
+      "sha256": "3383e4b341731d0d9d2c67738919c8d1e17b7d65f8197a9b4a1781cd332507dc",
+      "size_bytes": 51762
+    },
+    "references": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/detector_output_references.json",
+      "sha256": "6409419b133868cfbd6b6f78595eaa8e7120991466894abbe7cb2a4ecf03774e",
+      "size_bytes": 59656
+    }
+  },
+  "schema_version": "rankcloak-revision-detector-reference-index-v1",
+  "status": "passed"
+}

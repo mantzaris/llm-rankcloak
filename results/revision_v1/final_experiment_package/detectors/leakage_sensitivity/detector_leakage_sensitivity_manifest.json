@@ -1,0 +1,69 @@
+{
+  "analysis_status": "exploratory_post_partial_checkpoint_leakage_diagnostic",
+  "exclusion_rule": "exclude_entire_test_payload_group_if_any_test_row_has_declared_near_duplicate_in_training",
+  "exclusion_unit": "test_payload_group_id",
+  "frozen_split_design_unchanged": true,
+  "frozen_training_design_unchanged": true,
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_detector_leakage_sensitivity.py --detector-run-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json --leakage-audit-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/detector_leakage_audit_manifest.json --sensitivity-config /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/detector_leakage_sensitivity.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_sensitivity --overwrite",
+  "inputs": {
+    "affected_test_rows": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/affected_test_rows.csv",
+      "row_count": 34,
+      "sha256": "7ef7016cda8d96439d79733e173c9a75a1686ca3e9e3e963a66d81ad0daa4fc0",
+      "size_bytes": 10188
+    },
+    "detector_predictions": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv",
+      "row_count": 55440,
+      "sha256": "c3e64b1c379d0b80c6a01742c3ca8e8a2f3a5503c222d31400784463890f2595",
+      "size_bytes": 18098714
+    },
+    "detector_run_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json",
+      "sha256": "e7eb9240b1ae58df92ed9903ba89cce7ce6568d96d33986b4aeb59cf5f6a2d4d",
+      "size_bytes": 58221
+    },
+    "leakage_audit_manifest": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_audit/detector_leakage_audit_manifest.json",
+      "sha256": "53d3beea481765ab94ac7d39edc76246bcba614aafb9e868c6b8d61cca0fcf56",
+      "size_bytes": 4058
+    },
+    "sensitivity_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/detector_leakage_sensitivity.json",
+      "sha256": "13b3eb8e1eeadd843105c257448a811a2f21f1a034cd6682759e61924f2cbd9e",
+      "size_bytes": 1015
+    }
+  },
+  "limitations": [
+    "This post-partial-checkpoint sensitivity is exploratory, not a replacement confirmatory estimand.",
+    "Training was not repeated; the sensitivity removes implicated payload groups only from evaluation.",
+    "The lexical threshold does not exhaust all possible semantic near duplicates."
+  ],
+  "manifest_sha256": "da34f5826e962727d63b2770c1f4032f6ae6b71b5c7bbc75d061e23fbb457d80",
+  "outputs": {
+    "metrics": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_metrics.csv",
+      "row_count": 560,
+      "sha256": "2764115736e1bdc8aca54b65628e48126956ab218accaf6e75efba98e173f6da",
+      "size_bytes": 196820
+    },
+    "summary": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/leakage_sensitivity/detector_leakage_sensitivity_summary.csv",
+      "row_count": 80,
+      "sha256": "505916e5cba94aa1cd24bbbcb6ddcd5df0029a34eaafd704f25a0ee77c807dfc",
+      "size_bytes": 14415
+    }
+  },
+  "partial_checkpoint_outcomes_seen_before_extension": true,
+  "schema_version": "rankcloak-detector-leakage-sensitivity-v1",
+  "status": "completed_exploratory_leakage_sensitivity",
+  "summary": {
+    "affected_fit_count": 32,
+    "affected_test_payload_group_occurrences": 32,
+    "bootstrap_resamples": 2000,
+    "fit_count": 56,
+    "metric_row_count": 560,
+    "summary_row_count": 80,
+    "unaffected_fit_count": 24
+  }
+}

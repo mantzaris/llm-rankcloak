@@ -1,0 +1,68 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "01d1e30559512e3b89b7a0fe2685cdf2857a59b84d727b59e317840f8e0a9f40",
+      "size_bytes": 4753
+    },
+    "predictions.json": {
+      "row_count": 720,
+      "sha256": "50aa7fcea90b88fdeea16e0cd678173f5e6b8ed6ef3be03cbf250ad800ee4b9a",
+      "size_bytes": 358992
+    }
+  },
+  "children_sha256": "31705f86f52397f81ed2bad078494efe01b9c38c675eeeef8c8bc43f8db57559",
+  "completed_at_utc": "2026-08-16T16:11:50.257842+00:00",
+  "elapsed_seconds": 1333.348612185997,
+  "manifest_sha256": "8eb2c59173519fb3293f322bb3e009fd8b3f1a6e4c47b5101f95e96d10a75e43",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T15:49:36.909235+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "detector_position": 1,
+    "effective_detector_config": {
+      "allow_downloads": false,
+      "batch_size": 8,
+      "device": "cuda:0",
+      "enabled": true,
+      "epochs": 3,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "kind": "pretrained_transformer",
+      "learning_rate": 2e-05,
+      "maximum_length": 256,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "name": "deberta_v3_base_classifier",
+      "offline_only": true,
+      "torch_num_threads": 1,
+      "weight_decay": 0.01
+    },
+    "effective_detector_config_sha256": "dcc73bd841cebdbb1e2c39136fcedfb5e8f43fcbb34c7cc2dd92779d0cf65cf6",
+    "excluded_held_out_rows": 2160,
+    "held_out_column": "codec_id",
+    "held_out_value": "segmented_hex_single_topic",
+    "ordinal": 55,
+    "partition_policy": "deterministic_disjoint_payload_partition_v1",
+    "purged_train_rows": 2160,
+    "regime": "leave_one_codec",
+    "scientific_detector_config_sha256": "47d45a5010b771e8dfadc31ec75a6941b35d1f292ab3d62bf76c8a11ce971a5e",
+    "seed": 979949788,
+    "split_id": "leave_one_codec:segmented_hex_single_topic",
+    "split_position": 27,
+    "test_indices_sha256": "7d215e5bd5e6a470762f4f9ce48826ae4eaa85e5a0b9cb4225a4e0f883ec5bab",
+    "test_row_count": 720,
+    "test_row_ids_ordered_sha256": "8f025ceedf5f1994db21101ed93326d96af4ac088242ca5b9fc68cd560aff918",
+    "train_indices_sha256": "aceedb93159eafcbc51713eab7f597d6a9ab48ef454ee393e18c19e9302c8866",
+    "train_row_count": 10800,
+    "train_row_ids_ordered_sha256": "ad070d4106f6e140f0cf5250c01e1e8926aa01db96b3959e884796e2649b5784"
+  },
+  "task_identity_sha256": "583058537596a789acd6a63b8ebca3af21f94a2363f3c4b5ee8875adc73287a1"
+}

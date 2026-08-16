@@ -1,0 +1,28 @@
+{
+  "cpu_time": {
+    "status": "unavailable_not_recorded",
+    "wall_clock_substitution": false
+  },
+  "new_generation_runs": 0,
+  "ram": {
+    "limitation": "OS process high-water and sampled current RSS; trial rows are not treated as independent peak-memory measurements",
+    "profile_rows": 12
+  },
+  "schema_version": "rankcloak-revision-overhead-limitations-v1",
+  "timing_scope": "recorded runner components; no claim that wrapper and driver overhead are perfectly isolated from base-model execution",
+  "timing_semantics": {
+    "decoding_overhead_seconds": "same inclusive decoding wrapper",
+    "decoding_seconds": "inclusive saved-token replay + inverse transcode wrapper",
+    "encoding_overhead_seconds": "encoding_seconds minus generation_seconds",
+    "encoding_seconds": "inclusive representation + filter setup + generation wrapper",
+    "inverse_transcode_seconds": "decoding_seconds minus saved-token replay seconds"
+  },
+  "vram": {
+    "limitation": "one-second total selected-device memory.used sample; includes co-tenant processes and is not a kernel-exact allocation peak",
+    "profile_rows": 12
+  },
+  "warmup_repeated_microbenchmark": {
+    "reason": "saved confirmatory executions were validated without rerunning generation",
+    "status": "unavailable_not_run"
+  }
+}

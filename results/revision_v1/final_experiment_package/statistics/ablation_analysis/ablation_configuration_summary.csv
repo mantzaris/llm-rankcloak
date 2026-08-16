@@ -1,0 +1,17 @@
+factor,level,canonical_reference,observed_trial_rows,model_count,payload_groups,strict_payload_successes,strict_payload_recovery_rate,wilson_ci_low,wilson_ci_high,confidence_level,unavailable_work_units,unavailable_not_counted_as_failure,analysis_unit
+leadin_tokens,canonical,True,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+leadin_tokens,16,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+leadin_tokens,2,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+leadin_tokens,32,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+leadin_tokens,4,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+leadin_tokens,8,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+segment_size_ranks,canonical,True,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+segment_size_ranks,16,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+segment_size_ranks,32,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+segment_size_ranks,4,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+tail_policy,canonical,True,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+tail_policy,none,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+tail_policy,sentence_tail_min20_max60,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+token_filter,canonical,True,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+token_filter,none,False,144,3,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,0,True,payload_name
+token_filter,roundtrip_stable_filter_v1,False,96,2,48,48,1.0,0.9258998703338824,0.9999999999999998,0.95,48,True,payload_name

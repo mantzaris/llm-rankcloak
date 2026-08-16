@@ -1,0 +1,7 @@
+total,completed,successes,unavailable,failures,remaining,stage
+14400,14400,14400,0,0,0,primary_v2
+1872,1872,1824,48,0,0,ablation_v2
+3744,3744,3408,336,0,0,robustness_v2
+1152,1152,1152,0,0,0,multilingual_v2
+17280,17280,17232,48,0,0,heldout_evaluator
+56,56,56,0,0,0,neural_detector

@@ -1,0 +1,1219 @@
+{
+  "accept_smoke_fallback": false,
+  "allow_model_downloads_cli": false,
+  "checkpoint_cumulative_fit_seconds": 41815.67041122999,
+  "checkpoint_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints",
+  "completed_fit_count": 56,
+  "config_path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/default.json",
+  "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+  "confirmatory_complete": true,
+  "confirmatory_plan_path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/detector_confirmatory_plan.json",
+  "confirmatory_plan_schema_version": "rankcloak-revision-detector-confirmatory-plan-v1",
+  "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+  "created_at_utc": "2026-08-16T16:11:52.036408+00:00",
+  "cuda_budget_gate": {
+    "gate_sha256": "ef7a16cf303bc1a201b27c2da6cf40264a083e93a2db4661ede34bb2bebbe472",
+    "gate_stage": "post_reproducibility_preproduction",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/cuda_budget_gate.json",
+    "projected_cumulative_gpu_hours": 84.58811783257778,
+    "projection_sha256": "e12f4538d0cf81c42782656f1423f7ef7d249fdccadaedf9c8e29b04067d912b",
+    "sha256": "5963b81668db2cfe4d1627c59e990a4e91c5bb8c1428eb88b95ec0d911e8d672",
+    "size_bytes": 28416
+  },
+  "detector_execution_identities": [
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "bfd7c7779e8406c6d272b1024921f6e934a6eebc5a63f41ede14401de7296dd1",
+      "requested_kind": "text_cnn",
+      "seed": 3996075400,
+      "split_id": "matched"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "19bd4d1fb250dd82d8cffa8c10b2448e5dcd52ffd8a43b15f8acfb1bbdb13c73",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2544512008,
+      "split_id": "matched"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "437f910c65ec4800bb83bf1616fd3e75b5a8a2433c805fb59711f54a4e8dd823",
+      "requested_kind": "text_cnn",
+      "seed": 3108966237,
+      "split_id": "held_out_template:casual_hobby_chat"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "b64e82a020d4ad48d910e3d2d6b468fe111a814f29e317ab3486a796e7ea7ade",
+      "requested_kind": "pretrained_transformer",
+      "seed": 3085940687,
+      "split_id": "held_out_template:casual_hobby_chat"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "a252d46d9d0177040a991222a830eb6ed6d02542333b087f16ce52290da57f14",
+      "requested_kind": "text_cnn",
+      "seed": 4048671338,
+      "split_id": "held_out_template:casual_neighborhood_chat"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "e460d06fe8d8c8d604c7f9933cef1389c2113eae6f67d0107f5cd97af20cf788",
+      "requested_kind": "pretrained_transformer",
+      "seed": 4020980781,
+      "split_id": "held_out_template:casual_neighborhood_chat"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "7102fd263164545e174287fb4c348c19419d1c26bfa592e1e09bed51b8772723",
+      "requested_kind": "text_cnn",
+      "seed": 265756634,
+      "split_id": "held_out_template:casual_weekend_chat"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "e91646b87ce5fa71b9cdf26c3877b3f133c14cf6ce0570445e3e639e020b9dac",
+      "requested_kind": "pretrained_transformer",
+      "seed": 1249760787,
+      "split_id": "held_out_template:casual_weekend_chat"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "3db368959182e8d0bef2ae1f26f27dac4957588116c1f22bab7310e6ed2e3c1f",
+      "requested_kind": "text_cnn",
+      "seed": 1198753280,
+      "split_id": "held_out_template:explain_biological_process"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "3637248d41acb4c86504d32b26520654d6bb135337176e159f6b1ab33640c2e5",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2627840652,
+      "split_id": "held_out_template:explain_biological_process"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "f33692668c55d4ed05161792c6d4046fcb6570ffada70667f43127c40ce670a7",
+      "requested_kind": "text_cnn",
+      "seed": 3341032445,
+      "split_id": "held_out_template:explain_everyday_system"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "1898ce6728bf345029be9ebf7f6a5a2155ba2a143af277b27c9c2b45a7d2dd9e",
+      "requested_kind": "pretrained_transformer",
+      "seed": 3476860659,
+      "split_id": "held_out_template:explain_everyday_system"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "d48cd9e9ff3b6f5e749bb673d1370d4ddae7ccd6d5cb9fc87288360335894c04",
+      "requested_kind": "text_cnn",
+      "seed": 3306278109,
+      "split_id": "held_out_template:explain_weather_pattern"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "69e3c4162d84029af81bc1d82cd01d92925aea5ad131fbabb8e1551102841e35",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2962888595,
+      "split_id": "held_out_template:explain_weather_pattern"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "3d8475be8a4f8497067c449037362c50fc4af416a0127399d7ae5ecc7c439e8e",
+      "requested_kind": "text_cnn",
+      "seed": 2620540310,
+      "split_id": "held_out_template:forum_learning_answer"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "274bb3d38222394bfadff3252b3c0cf65a6dea5e517577e425696a8407666a37",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2674897488,
+      "split_id": "held_out_template:forum_learning_answer"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "fdbb6253818ac9e7cacb62df3b1cbf48f07b5bff4e1de2f81753a6f6ac4b85db",
+      "requested_kind": "text_cnn",
+      "seed": 1521347607,
+      "split_id": "held_out_template:forum_practical_answer"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "a15f0db752bfe9185d6550ca0f818ad280ce5c0b75b0ab1f78fd9aa91f78f24d",
+      "requested_kind": "pretrained_transformer",
+      "seed": 1729382304,
+      "split_id": "held_out_template:forum_practical_answer"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "5d0ace0144cd46d7a2d2e1c8eff4dfd041ec1d1f6ecd61ae177450dcf0dfcd6a",
+      "requested_kind": "text_cnn",
+      "seed": 3208305796,
+      "split_id": "held_out_template:forum_purchase_advice"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "2d129692df617f1204bd3a380d0ae77cb8789692b9f11af6f12bc7228f9e2a79",
+      "requested_kind": "pretrained_transformer",
+      "seed": 1577952545,
+      "split_id": "held_out_template:forum_purchase_advice"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "9c57734c370d290de9a02fc126b746091a0b084868f0442eaef4251b0ee4bbcf",
+      "requested_kind": "text_cnn",
+      "seed": 788644170,
+      "split_id": "held_out_template:narrative_learning_moment"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "58078f4441903c4f25c2e995b63e24b3b09ac4107643522e9cc08449dc8a1fbf",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2904763072,
+      "split_id": "held_out_template:narrative_learning_moment"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "070b0c89cc1fed56fd648b3c2a7553b71e9f2e37a7e689bc2ea97819bf9416da",
+      "requested_kind": "text_cnn",
+      "seed": 3190119402,
+      "split_id": "held_out_template:narrative_local_walk"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "cc253e49707fd7528e38e87b66b02ab3ec4fe9e2bbf3f7299bd39a9d63cc6958",
+      "requested_kind": "pretrained_transformer",
+      "seed": 4016101544,
+      "split_id": "held_out_template:narrative_local_walk"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "cea068b367e23b26ca08d8424d15a148797f79bbbeb230b78745d8b9781ecfd5",
+      "requested_kind": "text_cnn",
+      "seed": 1865719533,
+      "split_id": "held_out_template:narrative_small_discovery"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "e5d2385a30e0398ffdbbcdbd09368ef03e4f042f0ed7eb258137a6697ab59759",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2037237861,
+      "split_id": "held_out_template:narrative_small_discovery"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "9377a46800e74b886cb6d92e6162a17f4068966165dac18a2bd404f9dc1e42b5",
+      "requested_kind": "text_cnn",
+      "seed": 367534290,
+      "split_id": "held_out_template:procedure_garden_task"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "5006d45573d79ec2b20e9cac0955c3ba189def91005da524bf39e81a5dc8a0fd",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2331072973,
+      "split_id": "held_out_template:procedure_garden_task"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "b90d57d7f7990e7fcfdf81a7853c56c4c71150688b57de6f5f66255d66ed5c33",
+      "requested_kind": "text_cnn",
+      "seed": 3750921612,
+      "split_id": "held_out_template:procedure_home_task"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "11dcf56267a16b14b913f3f42376947189dd8ba42adb05a80f782c7e270d24ec",
+      "requested_kind": "pretrained_transformer",
+      "seed": 3883461034,
+      "split_id": "held_out_template:procedure_home_task"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "6795b5c94ae256101b8b1c826a261e6be955d1887c6d57d30de47728988f06ab",
+      "requested_kind": "text_cnn",
+      "seed": 3872825623,
+      "split_id": "held_out_template:procedure_simple_meal"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "3d841d2114c26eea5d874f8538d5df86610f06de1c912ed801e12e8955b0a97d",
+      "requested_kind": "pretrained_transformer",
+      "seed": 603534468,
+      "split_id": "held_out_template:procedure_simple_meal"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "aae210f6886cde8507581651aa344f156d7f8a01c7a522915bdbf1a2faeb013d",
+      "requested_kind": "text_cnn",
+      "seed": 1523533004,
+      "split_id": "held_out_template:professional_process_email"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "096b17c596faddee984b5e2b18ce87f49ec1891a69df9220a5672ff3d0367284",
+      "requested_kind": "pretrained_transformer",
+      "seed": 1666097206,
+      "split_id": "held_out_template:professional_process_email"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "c493f7b6235c0b9c4a98f71f2c2643328a27070efd91b5faf9b91039cb93b9fc",
+      "requested_kind": "text_cnn",
+      "seed": 2838828096,
+      "split_id": "held_out_template:professional_project_update"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "75e4e97fe631df251ae664ab03807d808647a5eaf3e19571b5f17761411ed310",
+      "requested_kind": "pretrained_transformer",
+      "seed": 162983198,
+      "split_id": "held_out_template:professional_project_update"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "8fe7fc53ec5f83cba16e99b8554758767dd0fff226a91befd6c14ad0c0bb4a4e",
+      "requested_kind": "text_cnn",
+      "seed": 1969955507,
+      "split_id": "held_out_template:professional_schedule_note"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "2d52d6d9e653b346c4d7ec2e5131539deb78ed12c677add5f339da23bf93ae82",
+      "requested_kind": "pretrained_transformer",
+      "seed": 1630337985,
+      "split_id": "held_out_template:professional_schedule_note"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "a030d69f08aa9bbf876dcda04cadd90e75711f1a92442f88d1f55f47c3d49002",
+      "requested_kind": "text_cnn",
+      "seed": 4095388447,
+      "split_id": "leave_one_model:llama3_8b_instruct_q4_k_m"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "50d4de1f0b8d7d546e231201c65a5642453a555df0928ada2a4851aef21f8703",
+      "requested_kind": "pretrained_transformer",
+      "seed": 3827307938,
+      "split_id": "leave_one_model:llama3_8b_instruct_q4_k_m"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "c017c156ce6e09e6f0d57a5b86518acb5400328ac7634590b1fc6f35c311142b",
+      "requested_kind": "text_cnn",
+      "seed": 1875134393,
+      "split_id": "leave_one_model:mistral_7b_instruct_v0_3_q4_k_m"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "6a597b14d17c048fa584ec19d6ea26d60b8d49f54024068163a00e1bdd0f1638",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2733923656,
+      "split_id": "leave_one_model:mistral_7b_instruct_v0_3_q4_k_m"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "bb627e850ceb51cc3c24731a23a7a550552c6c7b0911cb78aeaedb703ac05d37",
+      "requested_kind": "text_cnn",
+      "seed": 601810036,
+      "split_id": "leave_one_model:qwen2_5_7b_instruct_q4_k_m"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "f89605c4ae2b1b74a9c0545ad4ee8aaad9d7a7d3355da4eaef2b98d63794bd04",
+      "requested_kind": "pretrained_transformer",
+      "seed": 551012658,
+      "split_id": "leave_one_model:qwen2_5_7b_instruct_q4_k_m"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "d8193b95ec8ae301ac1c83e4219300f6617ee4ee5a5bb7773908e7bbb2e730a1",
+      "requested_kind": "text_cnn",
+      "seed": 1779490388,
+      "split_id": "leave_one_codec:direct_subword_calgacus"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "8590fc259536e100b83b7f7a3d821264929427515f95a10ec96d127ed9bc5cf0",
+      "requested_kind": "pretrained_transformer",
+      "seed": 3777641793,
+      "split_id": "leave_one_codec:direct_subword_calgacus"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "3794ddc7d01341cc25cf34642affa73a824f7dfdbdde4f22395063324368f026",
+      "requested_kind": "text_cnn",
+      "seed": 4082979131,
+      "split_id": "leave_one_codec:nonseg_ascii_b16"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "9a4ad28259f7a91bfb8f32d5a8effa1d13db68e2ee8ddc808fa87984d72c784a",
+      "requested_kind": "pretrained_transformer",
+      "seed": 305872758,
+      "split_id": "leave_one_codec:nonseg_ascii_b16"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "79eae4f58c9c7547751c841eeac7b024e7dde965db21be14955d4ccc8110c58a",
+      "requested_kind": "text_cnn",
+      "seed": 2362485006,
+      "split_id": "leave_one_codec:nonseg_ascii_b8"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "b95d86be4796fc5d94d4cabf026af0e8a54171cbaa9d59b3a8fd51ddb909fb94",
+      "requested_kind": "pretrained_transformer",
+      "seed": 3747447410,
+      "split_id": "leave_one_codec:nonseg_ascii_b8"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "a0c8d7b2c4c918757bd0691991fa8e6f12d5561bc67aeac0017088403c312bd4",
+      "requested_kind": "text_cnn",
+      "seed": 3657163723,
+      "split_id": "leave_one_codec:nonseg_hex_nibble_b16"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "ef9eb6550afe2de9bf2ffd23be72b137154c71fd791108626c989918ef4477f9",
+      "requested_kind": "pretrained_transformer",
+      "seed": 2759931470,
+      "split_id": "leave_one_codec:nonseg_hex_nibble_b16"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "2948804350dadaa46b9c82f6bcc0dfab0a7b0efa889ddf80c4f05439e1b6fbb2",
+      "requested_kind": "text_cnn",
+      "seed": 2702544458,
+      "split_id": "leave_one_codec:segmented_hex_multi_topic"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "27d057a547b7f7c716a257bf7147596b0c53fa7b68595b3b0e938018695c6b7e",
+      "requested_kind": "pretrained_transformer",
+      "seed": 566999374,
+      "split_id": "leave_one_codec:segmented_hex_multi_topic"
+    },
+    {
+      "detector_name": "published_textcnn_equivalent",
+      "implementation_kind": "text_cnn",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": null,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "d2e44f5283de2a1412582435030c7394b5cbe2e0fda25a7464c7b9d92b5674bc",
+      "requested_kind": "text_cnn",
+      "seed": 4007742084,
+      "split_id": "leave_one_codec:segmented_hex_single_topic"
+    },
+    {
+      "detector_name": "deberta_v3_base_classifier",
+      "implementation_kind": "pretrained_transformer",
+      "implementation_status": "complete",
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_sha256": "0fff608e7f2448bc92097470c9408f69a9190859dc8d51e1af354964d18d5a95",
+      "requested_kind": "pretrained_transformer",
+      "seed": 979949788,
+      "split_id": "leave_one_codec:segmented_hex_single_topic"
+    }
+  ],
+  "detector_run_metadata": {
+    "artifact_pin_verification_required": true,
+    "complete_detector_split_executions": 56,
+    "confirmatory_complete": true,
+    "execution_mode": "confirmatory",
+    "expected_detector_split_executions": 56,
+    "smoke_fallback_allowed": false,
+    "split_contract": {
+      "dataset_contract": {
+        "codec_ids": [
+          "direct_subword_calgacus",
+          "nonseg_ascii_b16",
+          "nonseg_ascii_b8",
+          "nonseg_hex_nibble_b16",
+          "segmented_hex_multi_topic",
+          "segmented_hex_single_topic"
+        ],
+        "input_scope": "primary_v2_complete_detector_corpus_only",
+        "model_ids": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "negative_rows": 7920,
+        "payload_groups": 480,
+        "positive_rows": 7920,
+        "preprocessing_binding": {
+          "detector_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+          "detector_row_count": 15840,
+          "detector_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+          "detector_size_bytes": 21444549,
+          "preprocessing_input_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_input_manifest.json",
+          "preprocessing_input_manifest_sha256": "2b52d551a36497aaae754094345af1e89da59885f5df253a117786bc7ed5aee9",
+          "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+          "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+          "primary_model_ids": [
+            "llama3_8b_instruct_q4_k_m",
+            "mistral_7b_instruct_v0_3_q4_k_m",
+            "qwen2_5_7b_instruct_q4_k_m"
+          ],
+          "primary_shard_count": 3,
+          "schema_version": "rankcloak-revision-primary-detector-preprocessing-binding-v1",
+          "strict_complete": true,
+          "verified_input_file_count": 24,
+          "verified_input_files_sha256": "e6c463e1681403b5515d7b25b6ae7f32f314f5ef5870e1681728e3a5afc8c34b"
+        },
+        "prompt_template_ids": [
+          "casual_hobby_chat",
+          "casual_neighborhood_chat",
+          "casual_weekend_chat",
+          "explain_biological_process",
+          "explain_everyday_system",
+          "explain_weather_pattern",
+          "forum_learning_answer",
+          "forum_practical_answer",
+          "forum_purchase_advice",
+          "narrative_learning_moment",
+          "narrative_local_walk",
+          "narrative_small_discovery",
+          "procedure_garden_task",
+          "procedure_home_task",
+          "procedure_simple_meal",
+          "professional_process_email",
+          "professional_project_update",
+          "professional_schedule_note"
+        ],
+        "rows": 15840,
+        "schema_version": "rankcloak-revision-primary-detector-contract-v1",
+        "source_configs": {
+          "models.json": "ddeeabbb94c843f2ebc685d354d22891fee83471525e94486816d85aab403e7d",
+          "primary.json": "bf18474386378658e54357bfb3e92bd87081af03f87a33b04aaa4bc97e63c918",
+          "prompts.json": "e638d7fe3451f4779d192977f818544857df3b9ad87c2d8a92b2b9809b09d4c5"
+        },
+        "split_count": 28
+      },
+      "expected_split_count": 28,
+      "expected_split_ids": [
+        "matched",
+        "held_out_template:casual_hobby_chat",
+        "held_out_template:casual_neighborhood_chat",
+        "held_out_template:casual_weekend_chat",
+        "held_out_template:explain_biological_process",
+        "held_out_template:explain_everyday_system",
+        "held_out_template:explain_weather_pattern",
+        "held_out_template:forum_learning_answer",
+        "held_out_template:forum_practical_answer",
+        "held_out_template:forum_purchase_advice",
+        "held_out_template:narrative_learning_moment",
+        "held_out_template:narrative_local_walk",
+        "held_out_template:narrative_small_discovery",
+        "held_out_template:procedure_garden_task",
+        "held_out_template:procedure_home_task",
+        "held_out_template:procedure_simple_meal",
+        "held_out_template:professional_process_email",
+        "held_out_template:professional_project_update",
+        "held_out_template:professional_schedule_note",
+        "leave_one_model:llama3_8b_instruct_q4_k_m",
+        "leave_one_model:mistral_7b_instruct_v0_3_q4_k_m",
+        "leave_one_model:qwen2_5_7b_instruct_q4_k_m",
+        "leave_one_codec:direct_subword_calgacus",
+        "leave_one_codec:nonseg_ascii_b16",
+        "leave_one_codec:nonseg_ascii_b8",
+        "leave_one_codec:nonseg_hex_nibble_b16",
+        "leave_one_codec:segmented_hex_multi_topic",
+        "leave_one_codec:segmented_hex_single_topic"
+      ],
+      "expected_split_ids_sha256": "d6bca68c4560964a4578cd87f1bd7d6b2ef81788344ac4fbd3a5a9896a6d066c",
+      "input_scope": "primary_full_detector_corpus_only",
+      "missing_split_ids": [],
+      "schema_version": "rankcloak-revision-detector-splits-v2",
+      "unexpected_split_ids": []
+    },
+    "transformer_artifact_verification": {
+      "artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "artifacts": [
+        {
+          "path": "config.json",
+          "sha256": "649f6a1ec33c6bdd9a6486d5c66019d461139e54957073eafe9bbc2d34c75b0b",
+          "size_bytes": 579
+        },
+        {
+          "path": "pytorch_model.bin",
+          "sha256": "691d48a2800b926a19e3051def466fc2cca4f59a15e42ce4a0cf7f1b380b5e33",
+          "size_bytes": 371146213
+        },
+        {
+          "path": "spm.model",
+          "sha256": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+          "size_bytes": 2464616
+        },
+        {
+          "path": "tokenizer_config.json",
+          "sha256": "3f3978e0c036f2c2588cac34a6047cbb0af0b0dc1814254e291028529805496d",
+          "size_bytes": 52
+        }
+      ],
+      "ignored_top_level_entries": [
+        ".cache"
+      ],
+      "model_directory": "/home/meow/Documents/repos/llm-rankcloak/models/detectors/deberta_v3_base",
+      "model_id": "microsoft/deberta-v3-base",
+      "policy": "exact_regular_files_no_symlinks_cache_metadata_ignored",
+      "schema_version": "rankcloak-model-artifact-pin-v1",
+      "upstream_revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+      "verification_status": "verified"
+    }
+  },
+  "device": "cuda:0",
+  "environment": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+    "python": "3.10.13 (main, Feb 26 2026, 22:30:03) [GCC 13.3.0]",
+    "scikit_learn": "1.7.2",
+    "torch": "2.5.1+cu124",
+    "transformers": "4.46.3"
+  },
+  "environment_binding": {
+    "environment_files_sha256": "4aeb0156c2937c4bc2e6b8c5ed6fe8a16b47b568c8129b2f24a83681929a32a4",
+    "required_files": {
+      "CHECKSUMS.sha256": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/CHECKSUMS.sha256",
+        "sha256": "d7610e72d4d8bcd7f50a988e9ac6dc0275dbb29b6d7d17a47de6a9f881a07c34",
+        "size_bytes": 766
+      },
+      "environment_manifest.json": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/environment_manifest.json",
+        "sha256": "a7b57556892752aa7131bddd625960c48aad23267a14648608246a1cdf5bd374",
+        "size_bytes": 1900
+      },
+      "scientific_pins.json": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/scientific_pins.json",
+        "sha256": "cd0ab88e2dba0c3b604da413b10598c11c02f292016868d03d19885dacc7a283",
+        "size_bytes": 34830
+      }
+    },
+    "root": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1",
+    "schema_version": "rankcloak-revision-detector-environment-binding-v1",
+    "verification_status": "ok",
+    "verified_file_count": 10
+  },
+  "execution_completed_at_utc": "2026-08-16T16:11:53.969005+00:00",
+  "execution_mode": "confirmatory",
+  "execution_plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "execution_policy_content_sha256": "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d",
+  "execution_policy_path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_cuda_policy_v2.json",
+  "execution_policy_sha256": "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7",
+  "execution_started_at_utc": "2026-08-16T04:11:40.511427+00:00",
+  "failure_count": 0,
+  "finalization_candidate": {
+    "candidate_sha256": "2c222361699ce2d3b312f94d3fc534babac8557aabb532ad02026a82f8ce37b7",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/finalization_candidates/detector_run_manifest-suite-suite-908ac15b2cc70ed1.json",
+    "sha256": "0718d07e60151fd77d783751d8e2bdb0e24d3357fbd43b887b770b0368421243",
+    "size_bytes": 58617
+  },
+  "fit_durations_seconds": [
+    34.2467086329998,
+    1480.098760932,
+    17.79277627800002,
+    1603.5272388410012,
+    14.61192708300041,
+    1604.3520139409993,
+    14.72420263100139,
+    1604.083242896002,
+    14.854062473998056,
+    1606.496664582999,
+    15.434359587001381,
+    1607.7661226759992,
+    14.798650332999387,
+    1606.6538574419974,
+    14.747028888003115,
+    1606.7317670869998,
+    15.12740563099942,
+    1610.3722843200012,
+    14.941729078000208,
+    1604.2239646630005,
+    14.800062734997482,
+    1611.9147061069998,
+    14.664131162000558,
+    1631.6508159419973,
+    16.35632339899894,
+    1638.0730114900034,
+    16.39886678599578,
+    1635.683344752004,
+    16.03020855000068,
+    1632.5513697289934,
+    15.83927142000175,
+    1629.307780408999,
+    15.936012770005618,
+    1629.2661391180009,
+    15.954214645003958,
+    1632.7429034269953,
+    16.927813626003626,
+    1626.9641032759973,
+    12.847978362995491,
+    989.4205152529976,
+    12.600533128999814,
+    989.4897169460019,
+    12.718630576993746,
+    988.8990394800057,
+    12.150291906000348,
+    1212.7574810750011,
+    12.131844882998848,
+    1228.8495614779968,
+    12.046750260997214,
+    1245.5476265760008,
+    12.955286023003282,
+    1463.995721555999,
+    12.896583369998552,
+    1333.581026549,
+    12.78736427900003,
+    1333.348612185997
+  ],
+  "fit_permit_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.fit_permit.json",
+  "fit_permit_receipt_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fit_permit_receipts",
+  "git": {
+    "commit": "223a06f649494eb1fefeca8832cf89a069d92cdc",
+    "dirty_worktree": true
+  },
+  "gpu_accounting": {
+    "cumulative_elapsed_seconds": 46540.785963,
+    "derivation_policy": "nonoverlapping_detector_process_wall_intervals_v1",
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "intervals": [
+      {
+        "completed_at_utc": "2026-08-16T02:43:26.380333+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 94.793096,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T02:43:26.380333+00:00",
+        "pid": 225782,
+        "process_start_ticks": 809536,
+        "started_at_utc": "2026-08-16T02:41:51.587237+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T03:11:20.935357+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 1540.18339,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T03:11:20.935357+00:00",
+        "pid": 231631,
+        "process_start_ticks": 832403,
+        "started_at_utc": "2026-08-16T02:45:40.751967+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T03:14:06.086042+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 20.09881,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T03:14:06.086042+00:00",
+        "pid": 273186,
+        "process_start_ticks": 1000883,
+        "started_at_utc": "2026-08-16T03:13:45.987232+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T03:32:42.275205+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 90.508655,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T03:32:42.275205+00:00",
+        "pid": 303615,
+        "process_start_ticks": 1105496,
+        "started_at_utc": "2026-08-16T03:31:11.766550+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T03:35:34.298569+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 20.223218,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T03:35:34.298569+00:00",
+        "pid": 312037,
+        "process_start_ticks": 1129691,
+        "started_at_utc": "2026-08-16T03:35:14.075351+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T04:03:48.888772+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 1561.521216,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T04:03:48.888772+00:00",
+        "pid": 317248,
+        "process_start_ticks": 1145137,
+        "started_at_utc": "2026-08-16T03:37:47.367556+00:00"
+      },
+      {
+        "completed_at_utc": "2026-08-16T16:11:53.969005+00:00",
+        "derivation_policy": "detector_process_wall_span_v1",
+        "device": "cuda:0",
+        "elapsed_seconds": 43213.457578,
+        "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "last_observed_at_utc": "2026-08-16T16:11:53.969005+00:00",
+        "pid": 372011,
+        "process_start_ticks": 1348115,
+        "started_at_utc": "2026-08-16T04:11:40.511427+00:00"
+      }
+    ]
+  },
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "input_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+  "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+  "last_completed_checkpoint": {
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fits/0055/manifest.json",
+    "sha256": "c8af21e3f2fd71955369a63061a76f3185de2cf0004487a42df6ffba0df8081a",
+    "task_ordinal": 55
+  },
+  "manifest_sha256": "a7f1847f988bfbad83ed083cbc8e65de00cf54a1c1d1ceac218e30c2c224eb30",
+  "metric_rows": 56,
+  "normalized_rows": 15840,
+  "output_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2",
+  "output_files": {
+    "detector_dataset_manifest.csv": {
+      "sha256": "14ebcff12aaf44839a777b37b8b0f1c895a08ddd0a1d74d1bc4e6cbdc7729764",
+      "size_bytes": 3609119
+    },
+    "detector_failures.json": {
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "size_bytes": 3
+    },
+    "detector_metrics.csv": {
+      "sha256": "0b7d9111dfba33b77fde6d53b6ab7e4f71ad8c5f46f489d4da21d5ddd37562be",
+      "size_bytes": 134127
+    },
+    "detector_predictions.csv": {
+      "sha256": "c3e64b1c379d0b80c6a01742c3ca8e8a2f3a5503c222d31400784463890f2595",
+      "size_bytes": 18098714
+    },
+    "detector_split_manifest.json": {
+      "sha256": "30f4ea9173ef402ff49bce168d70c3f2fdf70c71637cb99c0b46887a49c7ef12",
+      "size_bytes": 24832
+    }
+  },
+  "pre_final_gpu_accounting_ledger": {
+    "cumulative_elapsed_seconds": 3327.3283850000003,
+    "intervals_sha256": "376cd8ce9dd8e1ee91f981b28e4f7bcc88975e189a37e2a3d6d2315ce5712fc3",
+    "ledger_sha256": "4192a1fe8079843f67419c80062ab90f1defecfb61860206d36847e77972b9b4",
+    "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json",
+    "sha256": "f82dc4049d8ce2ab8b2d11465842dfb789f4c7f7f83e89fc9f0f9f2084c537f3",
+    "size_bytes": 7588,
+    "sources_sha256": "f3aa623fe06ab3f8094104a80216b7d851eddbe7274a8a159ce013379c29e41d"
+  },
+  "pre_final_gpu_accounting_ledger_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/gpu_accounting_ledger.json",
+  "prediction_rows": 55440,
+  "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+  "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+  "raw_rows": 15840,
+  "recovered_errors": [],
+  "required_equivalence_reports": [
+    {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/task_0/cuda_reproducibility_report.json",
+      "report_sha256": "1f94268acdd02bfacacbc185962237dd492ec1f11242cb20ba08556d4a382d02",
+      "sha256": "c74a28178050ff56324762efcaa05d40ccf0cfd74185acb0191d2edb012e6216",
+      "size_bytes": 5105
+    },
+    {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/task_1/cuda_reproducibility_report.json",
+      "report_sha256": "6635eb0e3111669c5722284912473a945d0dd52ecbcf2d45b8dfa538d1f3a74a",
+      "sha256": "3f2e1dc59d88f35ef2d4a126a66b7870c441189fdaec0f945d4d68972b0f3991",
+      "size_bytes": 5105
+    }
+  ],
+  "resumed_fit_count": 2,
+  "run_identity": {
+    "checkpoint_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints",
+    "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+    "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+    "device": "cuda:0",
+    "excluded_operational_gate_fields": [
+      "cuda_budget_gate",
+      "pre_final_gpu_accounting_ledger",
+      "pre_final_gpu_accounting_ledger_path",
+      "required_equivalence_reports"
+    ],
+    "execution_policy_path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_cuda_policy_v2.json",
+    "execution_policy_sha256": "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7",
+    "fit_permit_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.fit_permit.json",
+    "fit_permit_receipt_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.checkpoints/fit_permit_receipts",
+    "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+    "lineage": {
+      "config_path": "/home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/detectors/default.json",
+      "config_sha256": "e74d38f8559afb78ec23726626f749184d3ccf4e7d0ab52bfc5d3cfddc86681b",
+      "confirmatory_plan_path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/detector_confirmatory_plan.json",
+      "confirmatory_plan_sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
+      "environment_binding": {
+        "environment_files_sha256": "4aeb0156c2937c4bc2e6b8c5ed6fe8a16b47b568c8129b2f24a83681929a32a4",
+        "required_files": {
+          "CHECKSUMS.sha256": {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/CHECKSUMS.sha256",
+            "sha256": "d7610e72d4d8bcd7f50a988e9ac6dc0275dbb29b6d7d17a47de6a9f881a07c34",
+            "size_bytes": 766
+          },
+          "environment_manifest.json": {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/environment_manifest.json",
+            "sha256": "a7b57556892752aa7131bddd625960c48aad23267a14648608246a1cdf5bd374",
+            "size_bytes": 1900
+          },
+          "scientific_pins.json": {
+            "path": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1/scientific_pins.json",
+            "sha256": "cd0ab88e2dba0c3b604da413b10598c11c02f292016868d03d19885dacc7a283",
+            "size_bytes": 34830
+          }
+        },
+        "root": "/home/meow/Documents/repos/llm-rankcloak/environment/revision_v1",
+        "schema_version": "rankcloak-revision-detector-environment-binding-v1",
+        "verification_status": "ok",
+        "verified_file_count": 10
+      },
+      "execution_policy": {
+        "path": "/home/meow/Documents/repos/llm-rankcloak/operations/confirmatory_v2/detector_cuda_policy_v2.json",
+        "policy": {
+          "audit": {
+            "cpu_diagnostics_status": "preserved_feasibility_evidence_only",
+            "cpu_neural_training_authorized": false,
+            "derivation": "revision_takeover_2026-08-15_cuda_only_v2",
+            "diagnostic_path": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json",
+            "diagnostic_sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7"
+          },
+          "authorized_ceiling": {
+            "gpu_hours": 165,
+            "historical_actual_gpu_hours_floor": 62.4783840698,
+            "projection_path": "results/revision_v1/compute_projection_165h_v2.json",
+            "projection_sha256": "35f063dc168282b40931fe6b15d534c56fb4b7a300b3161471a3afea27e407d3"
+          },
+          "benchmark": {
+            "allowed_failed_fit_retry_count_per_architecture": 1,
+            "checkpoint_reuse": true,
+            "cuda_reproducibility_fit_count_per_architecture": 2,
+            "full_matrix_budget_gate_required": true,
+            "projection_safety_multiplier": 1.5,
+            "task_indices": [
+              0,
+              1
+            ]
+          },
+          "ceiling": {
+            "next_fit_upper_seconds_by_detector": {
+              "deberta_v3_base_classifier": 7200,
+              "published_textcnn_equivalent": 900
+            },
+            "post_benchmark_tighter_gate_required": true
+          },
+          "equivalence": {
+            "same_device_cuda": {
+              "metrics_exact": true,
+              "model_state_sha256_exact": true,
+              "predictions_exact": true,
+              "row_identity_order_labels_exact": true,
+              "scores_exact": true,
+              "task_design_exact": true
+            }
+          },
+          "execution": {
+            "device": "cuda:0",
+            "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+            "torch_num_threads": 1,
+            "workers": 1
+          },
+          "policy_sha256": "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d",
+          "policy_status": "cuda_only_predeclared_before_new_benchmarks",
+          "schema_version": "rankcloak-revision-detector-cuda-policy-v2"
+        },
+        "policy_sha256": "c52a2a6722c84a622727eeb38f2489960b656f91d51fd447dbf2ba40669def1d",
+        "sha256": "48e01759d4f2214047e7ee9e8a19937a9b45dce91300211b014ee067c34238e7",
+        "size_bytes": 1814
+      },
+      "input_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+      "input_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+      "preprocessing_binding": {
+        "detector_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/detector_corpus.jsonl",
+        "detector_row_count": 15840,
+        "detector_sha256": "0688cc5904128582cdfad20bc1dbd9a6153dca4edf1a2e6ef1c54aeeb8fbfb76",
+        "detector_size_bytes": 21444549,
+        "preprocessing_input_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_input_manifest.json",
+        "preprocessing_input_manifest_sha256": "2b52d551a36497aaae754094345af1e89da59885f5df253a117786bc7ed5aee9",
+        "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+        "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+        "primary_model_ids": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "primary_shard_count": 3,
+        "schema_version": "rankcloak-revision-primary-detector-preprocessing-binding-v1",
+        "strict_complete": true,
+        "verified_input_file_count": 24,
+        "verified_input_files_sha256": "e6c463e1681403b5515d7b25b6ae7f32f314f5ef5870e1681728e3a5afc8c34b"
+      },
+      "preprocessing_manifest_path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+      "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+      "runtime_config_sha256": "ef45202cf66699f2a019af1580cc0a49dc8aef778c4773bf7b30ce1db9e03452"
+    },
+    "lineage_sha256": "586ff423c19d5e5fbb249868e6234eed5f21f3e5843fb50202776179a50d0cd1",
+    "output_dir": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2",
+    "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+    "preprocessing_manifest_sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+    "require_fit_permit": true,
+    "schema_version": "rankcloak-revision-detector-run-identity-v1",
+    "source": {
+      "files": [
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_detection.py",
+          "sha256": "f63f49f8f9eabea4e40e3fef224fdc757e95e355ed3713216be2b79010e4f9c6",
+          "size_bytes": 94340
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_detector_execution.py",
+          "sha256": "049abb5cd1ceb6c0f3a9fac5823eb7256c22f3d1cf98a7beed8bc9407403746d",
+          "size_bytes": 182021
+        },
+        {
+          "path": "/home/meow/Documents/repos/llm-rankcloak/scripts/run_revision_detectors.py",
+          "sha256": "cec885ec4bbe6fc8b9a80dd1fc737ee64798c3dfb1f77a39472aff7d5c9804f7",
+          "size_bytes": 77331
+        }
+      ],
+      "files_sha256": "f4cfb376334f8282aa413edb66ee261ebc0d4f40f6bc66167134b7f226db2197"
+    },
+    "source_sha256": "21e5fdc9c4df199aed9efa47e64a74e5863e690fae4e7239455cfbad145105cc",
+    "status_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.status.json",
+    "workers": 1
+  },
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-run-v2",
+  "skipped_split_count": 0,
+  "smoke": false,
+  "smoke_fallback_metric_rows": 0,
+  "split_count": 28,
+  "status_file": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/detector_cuda_reproducibility_v2/production_run_v2.status.json",
+  "terminal_accounting_status_sha256": "26887d416b771f65579efc08b9d360f8fc57f6267f06eff3de0efa2b5ca8f825",
+  "total_fit_count": 56,
+  "workers": 1
+}

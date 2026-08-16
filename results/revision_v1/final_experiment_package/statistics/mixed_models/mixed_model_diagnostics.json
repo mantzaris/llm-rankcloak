@@ -1,0 +1,109 @@
+[
+  {
+    "model_id": "primary_exact_recovery",
+    "complete_outcome_separation": true,
+    "outcome_pattern": "all_success",
+    "glmer_attempted": false,
+    "wilson_sensitivity_reported": true,
+    "recovery_outcome": "exact_payload_recovery",
+    "recovery_outcome_semantics": "original_serialized_payload_bytes_sha256_v1",
+    "exact_rank_replay_role": "diagnostic_only",
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_artifact_counts",
+    "converged": true,
+    "convergence_messages": [],
+    "warnings": [],
+    "singular": false,
+    "singular_tolerance": 0.0001,
+    "maximum_absolute_gradient": null,
+    "gradient_threshold": 0.002,
+    "minimum_hessian_eigenvalue": null,
+    "hessian_threshold": 1e-06,
+    "maximum_absolute_fixed_coefficient": 3.02953333794956,
+    "potential_separation": false,
+    "separation_coefficient_threshold": 10,
+    "rank_deficient_columns": [],
+    "fixed_effects_fallback": false,
+    "negative_binomial_theta": 3.06832942472315,
+    "poisson_dispersion_ratio": 2.54016533417742,
+    "poisson_dispersion_classification": "overdispersed",
+    "poisson_check_is_diagnostic_not_selection": true
+  },
+  {
+    "model_id": "primary_effective_artifact_rate",
+    "converged": false,
+    "convergence_messages": [
+      "boundary (singular) fit: see help('isSingular')"
+    ],
+    "warnings": [],
+    "singular": true,
+    "singular_tolerance": 0.0001,
+    "maximum_absolute_gradient": 0,
+    "gradient_threshold": 0.002,
+    "minimum_hessian_eigenvalue": 7467.64965820312,
+    "hessian_threshold": 1e-06,
+    "maximum_absolute_fixed_coefficient": 5.02068952504235,
+    "potential_separation": false,
+    "separation_coefficient_threshold": 10,
+    "rank_deficient_columns": [],
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_cover_log_probability",
+    "converged": false,
+    "convergence_messages": [
+      "boundary (singular) fit: see help('isSingular')"
+    ],
+    "warnings": [],
+    "singular": true,
+    "singular_tolerance": 0.0001,
+    "maximum_absolute_gradient": 0.00029431248549372,
+    "gradient_threshold": 0.002,
+    "minimum_hessian_eigenvalue": 1095.07177734375,
+    "hessian_threshold": 1e-06,
+    "maximum_absolute_fixed_coefficient": 3.65213456172105,
+    "potential_separation": false,
+    "separation_coefficient_threshold": 10,
+    "rank_deficient_columns": [],
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_heldout_evaluator_log_probability",
+    "converged": false,
+    "convergence_messages": [
+      "boundary (singular) fit: see help('isSingular')"
+    ],
+    "warnings": [],
+    "singular": true,
+    "singular_tolerance": 0.0001,
+    "maximum_absolute_gradient": 0.000304135028272867,
+    "gradient_threshold": 0.002,
+    "minimum_hessian_eigenvalue": 288.80419921875,
+    "hessian_threshold": 1e-06,
+    "maximum_absolute_fixed_coefficient": 5.05166109854828,
+    "potential_separation": false,
+    "separation_coefficient_threshold": 10,
+    "rank_deficient_columns": [],
+    "fixed_effects_fallback": false
+  },
+  {
+    "model_id": "primary_payload_throughput",
+    "converged": true,
+    "convergence_messages": [],
+    "warnings": [],
+    "singular": false,
+    "singular_tolerance": 0.0001,
+    "maximum_absolute_gradient": 0.000215850377571769,
+    "gradient_threshold": 0.002,
+    "minimum_hessian_eigenvalue": 2913.70546159773,
+    "hessian_threshold": 1e-06,
+    "maximum_absolute_fixed_coefficient": 3.46685735680276,
+    "potential_separation": false,
+    "separation_coefficient_threshold": 10,
+    "rank_deficient_columns": [],
+    "fixed_effects_fallback": false
+  }
+]
+

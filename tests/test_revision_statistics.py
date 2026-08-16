@@ -2,6 +2,7 @@ import hashlib
 import json
 import subprocess
 import sys
+import warnings
 from pathlib import Path
 
 import numpy as np
@@ -10,11 +11,13 @@ import pytest
 
 from rankcloak.revision_statistics import (
     PAYLOAD_RECOVERY_SEMANTICS,
+    PRIMARY_V2_EVIDENCE_STATUS,
     MixedEffectsUnavailable,
     RevisionStatisticsError,
     adjust_pvalues,
     automated_text_quality_metrics,
     build_trial_quality_table,
+    enrich_runtime_conditions,
     exact_binomial_interval,
     fit_r_lme4,
     fit_statsmodels_mixedlm,
@@ -23,11 +26,15 @@ from rankcloak.revision_statistics import (
     run_mixed_effects_specs,
     run_statistics_analysis,
     summarize_detector_results,
+    summarize_continuous_outcomes,
     summarize_recovery,
     synthetic_smoke_frames,
     validate_detector_rows,
+    validate_feature_rows,
     validate_trial_results,
+    validate_runtime_results,
     wilson_interval,
+    _iter_primary_effect_cells,
 )
 
 
@@ -356,6 +363,88 @@ def test_pairwise_effects_reject_implicit_replay_pooling():
         )
 
 
+def test_protocol_effects_allow_only_deterministic_protocol_descriptors():
+    trials = synthetic_smoke_frames()["trials"].copy()
+    trials["representation_name"] = trials["protocol_variant"].map(
+        {"ascii_b8": "ascii", "hex_nibble": "hex"}
+    )
+    trials["codec_id"] = trials["protocol_variant"].map(
+        {"ascii_b8": "ascii_codec", "hex_nibble": "hex_codec"}
+    )
+    effects = pairwise_effect_sizes(
+        trials,
+        outcome="exact_recovery",
+        factor="protocol_variant",
+        binary=True,
+        n_resamples=10,
+    )
+    assert len(effects) == 1
+    assert set(effects["representation_name_scope"]) == {
+        "deterministically_defined_by_protocol_variant"
+    }
+    assert set(effects["codec_id_scope"]) == {
+        "deterministically_defined_by_protocol_variant"
+    }
+
+    invalid = trials.copy()
+    invalid.loc[invalid.index[0], "representation_name"] = "inconsistent"
+    with pytest.raises(RevisionStatisticsError, match="representation_name"):
+        pairwise_effect_sizes(
+            invalid,
+            outcome="exact_recovery",
+            factor="protocol_variant",
+            binary=True,
+            n_resamples=10,
+        )
+
+
+def test_primary_effect_cells_isolate_other_declared_design_factors():
+    rows = []
+    for model in ("model_a", "model_b"):
+        for prompt in ("prompt_a", "prompt_b"):
+            for payload_class in ("class_a", "class_b"):
+                for protocol in ("protocol_a", "protocol_b"):
+                    rows.append(
+                        {
+                            "model_id": model,
+                            "prompt_category": prompt,
+                            "payload_class": payload_class,
+                            "protocol_variant": protocol,
+                            "value": 1,
+                        }
+                    )
+    frame = pd.DataFrame(rows)
+    protocol_cells = list(
+        _iter_primary_effect_cells(frame, "protocol_variant")
+    )
+    assert len(protocol_cells) == 8
+    assert all(
+        cell["protocol_variant"].nunique() == 2
+        and cell["model_id"].nunique() == 1
+        and cell["prompt_category"].nunique() == 1
+        and cell["payload_class"].nunique() == 1
+        for _scopes, cell in protocol_cells
+    )
+    model_cells = list(_iter_primary_effect_cells(frame, "model_id"))
+    assert len(model_cells) == 4
+    assert all(
+        cell["model_id"].nunique() == 2
+        and cell["protocol_variant"].nunique() == 1
+        and cell["prompt_category"].nunique() == 1
+        for _scopes, cell in model_cells
+    )
+    prompt_cells = list(
+        _iter_primary_effect_cells(frame, "prompt_category")
+    )
+    assert len(prompt_cells) == 4
+    assert all(
+        cell["prompt_category"].nunique() == 2
+        and cell["protocol_variant"].nunique() == 1
+        and cell["model_id"].nunique() == 1
+        for _scopes, cell in prompt_cells
+    )
+
+
 def test_quality_collapses_nested_segments_and_labels_surface_scope():
     features = synthetic_smoke_frames()["features"]
     quality = build_trial_quality_table(features)
@@ -370,6 +459,157 @@ def test_quality_collapses_nested_segments_and_labels_surface_scope():
     )
     assert flags["surface_flag_total"] > 0
     assert flags["human_rating_substitute"] is False
+
+
+def test_non_english_readability_is_unavailable_and_language_is_stratified():
+    spanish = automated_text_quality_metrics(
+        "Este texto tiene dos frases. La segunda frase es clara y rápida.",
+        language="es",
+    )
+    chinese = automated_text_quality_metrics(
+        "这是第一句话。这是第二句话。",
+        language="zh_hans",
+    )
+    assert np.isnan(spanish["flesch_reading_ease_heuristic"])
+    assert np.isnan(chinese["flesch_reading_ease_heuristic"])
+    assert spanish["readability_scope"] == "not_computed_non_english"
+    assert chinese["readability_scope"] == "not_computed_non_english"
+    assert spanish["spanish_unicode_word_count"] == 12
+    assert spanish["spanish_sentence_count"] == 2
+    assert spanish["spanish_words_per_sentence"] == pytest.approx(6.0)
+    assert spanish["language_specific_diagnostic_scope"] == (
+        "spanish_unicode_word_surface_diagnostics"
+    )
+    assert np.isnan(spanish["chinese_han_character_count"])
+    assert chinese["chinese_han_character_count"] == 12
+    assert chinese["chinese_sentence_count"] == 2
+    assert chinese["chinese_han_characters_per_sentence"] == pytest.approx(6.0)
+    assert chinese["language_specific_diagnostic_scope"] == (
+        "chinese_han_character_surface_diagnostics"
+    )
+    assert np.isnan(chinese["spanish_unicode_word_count"])
+
+    english_features = synthetic_smoke_frames()["features"].copy()
+    english_features["language"] = "en"
+    spanish_features = english_features.copy()
+    spanish_features["trial_id"] += "__es"
+    spanish_features["language"] = "es"
+    quality = build_trial_quality_table(
+        pd.concat([english_features, spanish_features], ignore_index=True)
+    )
+    summary = summarize_continuous_outcomes(
+        quality,
+        outcomes=["repeated_bigram_fraction"],
+        n_resamples=10,
+    )
+    assert set(summary["language"]) == {"en", "es"}
+    assert quality.loc[
+        quality["language"].eq("es"), "flesch_reading_ease_heuristic"
+    ].isna().all()
+
+
+def test_recovery_and_continuous_summaries_preserve_ablation_identity():
+    canonical = synthetic_smoke_frames()["trials"].copy()
+    canonical["ablation_factor"] = "canonical"
+    canonical["ablation_level"] = "canonical"
+    canonical["tail_policy"] = "dynamic_completion_v1"
+    ablated = canonical.copy()
+    ablated["trial_id"] += "__tail_none"
+    ablated["ablation_factor"] = "tail_policy"
+    ablated["ablation_level"] = "none"
+    ablated["tail_policy"] = "none"
+    combined = pd.concat([canonical, ablated], ignore_index=True)
+
+    recovery = summarize_recovery(combined)
+    continuous = summarize_continuous_outcomes(
+        combined,
+        outcomes=["effective_payload_rate"],
+        n_resamples=10,
+    )
+    expected = {("canonical", "canonical"), ("tail_policy", "none")}
+    assert set(zip(recovery["ablation_factor"], recovery["ablation_level"])) == expected
+    assert set(zip(continuous["ablation_factor"], continuous["ablation_level"])) == expected
+
+    feature_rows = pd.DataFrame(
+        {
+            "trial_id": ["feature_canonical", "feature_tail_none"],
+            "payload_name": ["payload", "payload"],
+            "text_view": ["full_message", "full_message"],
+            "text": ["Canonical text.", "Ablated text."],
+            "language": ["en", "en"],
+            "ablation_factor": ["canonical", "tail_policy"],
+            "ablation_level": ["canonical", "none"],
+            "tail_policy": ["dynamic_completion_v1", "none"],
+            "replay_mode": ["saved_token_ids", "transformed_text_retokenized"],
+            "transformation_id": ["unmodified", "whitespace_trim"],
+            "mitigation_id": ["none", "limited"],
+            "robustness_family": ["reference", "raw_transmission"],
+        }
+    )
+    quality = build_trial_quality_table(feature_rows)
+    assert set(zip(quality["ablation_factor"], quality["ablation_level"])) == expected
+    assert set(
+        zip(
+            quality["replay_mode"],
+            quality["transformation_id"],
+            quality["mitigation_id"],
+            quality["robustness_family"],
+        )
+    ) == {
+        ("saved_token_ids", "unmodified", "none", "reference"),
+        (
+            "transformed_text_retokenized",
+            "whitespace_trim",
+            "limited",
+            "raw_transmission",
+        ),
+    }
+
+
+def test_runtime_enrichment_preserves_trial_conditions_and_session_scope():
+    trials = pd.DataFrame(
+        {
+            "trial_id": ["trial"],
+            "payload_name": ["payload"],
+            "model_id": ["model"],
+            "protocol_variant": ["segmented"],
+            "payload_class": ["sha256_hex"],
+            "language": ["es"],
+            "ablation_factor": ["tail_policy"],
+            "ablation_level": ["none"],
+            "tail_policy": ["none"],
+            "alphabet_size_B": [16],
+            "H_bits": [256],
+        }
+    )
+    runtime = pd.DataFrame(
+        {
+            "trial_id": ["trial", "model_load::session"],
+            "payload_name": ["payload", "not_applicable_model_load"],
+            "model_id": ["model", "model"],
+            "protocol_variant": ["segmented", "not_applicable_model_load"],
+            "runtime_scope": ["trial", "model_load_session"],
+            "generation_seconds": [1.0, np.nan],
+            "model_load_seconds": [np.nan, 2.0],
+        }
+    )
+    validated, _ = validate_runtime_results(runtime)
+    enriched = enrich_runtime_conditions(validated, trials)
+    trial_row = enriched[enriched["trial_id"].eq("trial")].iloc[0]
+    session_row = enriched[enriched["trial_id"].eq("model_load::session")].iloc[0]
+    assert bool(trial_row["runtime_trial_metadata_matched"])
+    assert trial_row["language"] == "es"
+    assert trial_row["ablation_factor"] == "tail_policy"
+    assert trial_row["tail_policy"] == "none"
+    assert trial_row["alphabet_size_B"] == 16
+    assert not bool(session_row["runtime_trial_metadata_matched"])
+    assert pd.isna(session_row["language"])
+
+    conflicting = runtime.copy()
+    conflicting.loc[0, "model_id"] = "different_model"
+    validated, _ = validate_runtime_results(conflicting)
+    with pytest.raises(RevisionStatisticsError, match="Runtime model_id conflicts"):
+        enrich_runtime_conditions(validated, trials)
 
 
 def test_quality_preserves_exact_segment_join_and_token_weights_log_probability():
@@ -417,6 +657,28 @@ def test_nested_log_probability_fails_closed_without_complete_weights():
         build_trial_quality_table(features)
 
 
+def test_cross_payload_duplicate_feature_text_is_audited_not_rejected():
+    features = pd.DataFrame(
+        {
+            "trial_id": ["trial_a", "trial_b"],
+            "payload_name": ["payload_a", "payload_b"],
+            "model_id": ["model", "model"],
+            "protocol_variant": ["protocol", "protocol"],
+            "prompt_id": ["prompt_a", "prompt_b"],
+            "text_view": ["transformed_full_message"] * 2,
+            "text": ["degenerate repeated artifact"] * 2,
+        }
+    )
+    validated, _ = validate_feature_rows(features)
+    assert validated["cross_payload_duplicate_text"].all()
+    assert validated.attrs["cross_payload_duplicate_text_hash_count"] == 1
+    assert validated.attrs["cross_payload_duplicate_text_row_count"] == 2
+    assert validated.attrs["cross_payload_duplicate_text_payload_count"] == 2
+
+    quality = build_trial_quality_table(features)
+    assert quality["cross_payload_duplicate_text_artifact"].all()
+
+
 def test_partition_leakage_and_detector_duplicate_guards():
     leaked = pd.DataFrame(
         {
@@ -456,6 +718,59 @@ def test_paired_payload_effect_sizes_and_multiplicity_columns():
     assert "hedges_g" in effects
     assert "p_value_holm" in effects
     assert "p_value_bh" in effects
+
+
+def test_degenerate_pairwise_test_is_explicitly_unsupported_without_warnings():
+    payloads = [f"p{index}" for index in range(4)]
+    frame = pd.DataFrame(
+        {
+            "payload_name": payloads + payloads,
+            "condition": ["a"] * 4 + ["b"] * 4,
+            "quality": [1.0] * 8,
+            "study_phase": ["exploratory"] * 8,
+        }
+    )
+    with warnings.catch_warnings(record=True) as captured:
+        warnings.simplefilter("always")
+        effects = pairwise_effect_sizes(
+            frame,
+            outcome="quality",
+            factor="condition",
+            n_resamples=20,
+            seed=81,
+        )
+    assert not any(
+        issubclass(item.category, RuntimeWarning) for item in captured
+    )
+    row = effects.iloc[0]
+    assert row["mean_difference"] == 0.0
+    assert row["mean_difference_ci_low"] == 0.0
+    assert row["mean_difference_ci_high"] == 0.0
+    assert pd.isna(row["p_value_raw"])
+    assert row["test"] == "unsupported_paired_t_numerical_degeneracy"
+    assert not bool(row["inferential_p_value_supported"])
+
+    independent = frame.copy()
+    independent.loc[
+        independent["condition"].eq("b"), "payload_name"
+    ] = [f"q{index}" for index in range(4)]
+    with warnings.catch_warnings(record=True) as captured:
+        warnings.simplefilter("always")
+        effects = pairwise_effect_sizes(
+            independent,
+            outcome="quality",
+            factor="condition",
+            n_resamples=20,
+            seed=82,
+        )
+    assert not any(
+        issubclass(item.category, RuntimeWarning) for item in captured
+    )
+    row = effects.iloc[0]
+    assert row["comparison_design"] == "independent_payload"
+    assert pd.isna(row["p_value_raw"])
+    assert row["test"] == "unsupported_welch_t_numerical_degeneracy"
+    assert not bool(row["inferential_p_value_supported"])
 
 
 def test_quality_effects_require_an_explicit_single_view_scope():
@@ -807,6 +1122,75 @@ def test_statistics_analysis_excludes_explicitly_unavailable_trials(tmp_path):
     assert artifacts.integrity_report["estimand_exclusions"] == {
         "unavailable_trial_rows": 1,
         "unavailable_rows_counted": False,
+    }
+
+
+def test_statistics_accepts_heldout_continuous_quality_separately(tmp_path):
+    rows = []
+    for index, score in enumerate((-2.0, -3.0)):
+        rows.append(
+            {
+                "record_type": "heldout_evaluator_feature",
+                "trial_id": f"evaluation_{index}",
+                "row_id": f"evaluation_{index}",
+                "source_trial_id": f"source_{index}",
+                "payload_name": f"payload_{index}",
+                "model_id": "generator_model",
+                "evaluator_model_id": "heldout_model",
+                "protocol_variant": "protocol",
+                "prompt_id": "prompt",
+                "prompt_category": "explanatory",
+                "payload_class": "sha256_hex",
+                "language": "en",
+                "text_view": "full_message",
+                "quality_estimand": "mean_evaluator_token_log_probability",
+                "evidence_status": "confirmatory_heldout_evaluator",
+                "source_evidence_status": PRIMARY_V2_EVIDENCE_STATUS,
+                "study_phase": "primary_v2_confirmatory",
+                "protocol_contract_revision": "payload_fidelity_v2",
+                "result_schema_revision": "payload_aware_result_v2",
+                "same_model_evaluation": False,
+                "human_rating_substitute": False,
+                "heldout_evaluator_log_probability": score,
+            }
+        )
+    path = tmp_path / "continuous_quality.jsonl"
+    path.write_text("".join(json.dumps(row) + "\n" for row in rows))
+    trials = synthetic_smoke_frames()["trials"].iloc[:2].copy()
+    trials["trial_id"] = ["source_0", "source_1"]
+    trials["payload_name"] = ["payload_0", "payload_1"]
+    trials["ablation_factor"] = ["canonical", "tail_policy"]
+    trials["ablation_level"] = ["canonical", "none"]
+    trials["evidence_status"] = (
+        "confirmatory_ablation_v2_payload_fidelity_after_manifest_freeze"
+    )
+    trials["study_phase"] = "ablation_v2_confirmatory"
+    trial_path = tmp_path / "trials.csv"
+    trials.to_csv(trial_path, index=False)
+
+    artifacts = run_statistics_analysis(
+        output_dir=tmp_path / "continuous-quality-analysis",
+        trial_paths=[trial_path],
+        continuous_quality_paths=[path],
+        statistics_config=STATISTICS_CONFIG,
+        smoke=True,
+    )
+    continuous = pd.read_csv(artifacts.files["continuous"])
+    heldout = continuous[
+        continuous["outcome"].eq("heldout_evaluator_log_probability")
+    ]
+    assert len(heldout) == 2
+    assert set(heldout["evaluator_model_id"]) == {"heldout_model"}
+    assert set(heldout["ablation_factor"]) == {"canonical", "tail_policy"}
+    assert set(heldout["ablation_level"]) == {"canonical", "none"}
+    assert set(heldout["n_payloads"]) == {1}
+    assert artifacts.integrity_report["independent_payloads"][
+        "continuous_quality"
+    ] == 2
+    assert artifacts.integrity_report["continuous_quality_source_metadata"] == {
+        "matched_rows": 2,
+        "unmatched_rows": 0,
+        "unmatched_role": "ordinary_controls_or_unjoined_sources",
     }
 
 

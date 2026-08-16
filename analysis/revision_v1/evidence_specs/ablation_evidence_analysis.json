@@ -1,0 +1,62 @@
+{
+  "schema_version": "rankcloak-revision-ablation-evidence-analysis-v1",
+  "analysis_id": "frozen_ablation_canonical_contrasts_v1",
+  "analysis_status": "exploratory_post_outcome_evidence_extraction",
+  "confirmatory_generation_design_unchanged": true,
+  "outcomes_were_available_before_analysis_specification": true,
+  "expected_input": {
+    "trial_rows": 1824,
+    "unavailable_rows": 48,
+    "planned_work_units": 1872,
+    "payload_groups": 48,
+    "evidence_status": "confirmatory_ablation_v2_payload_fidelity_after_manifest_freeze",
+    "study_phase": "ablation_v2_confirmatory"
+  },
+  "canonical_selector": {
+    "ablation_factor": "canonical",
+    "ablation_level": "canonical"
+  },
+  "factors": [
+    {
+      "factor": "token_filter",
+      "condition_column": "token_filter",
+      "canonical_value": "safe_text_filter_v1",
+      "levels": ["none", "roundtrip_stable_filter_v1"]
+    },
+    {
+      "factor": "leadin_tokens",
+      "condition_column": "leadin_tokens",
+      "canonical_value": "0",
+      "levels": ["2", "4", "8", "16", "32"]
+    },
+    {
+      "factor": "segment_size_ranks",
+      "condition_column": "segment_size_ranks",
+      "canonical_value": "8",
+      "levels": ["4", "16", "32"]
+    },
+    {
+      "factor": "tail_policy",
+      "condition_column": "tail_policy",
+      "canonical_value": "dynamic_completion_v1",
+      "levels": ["none", "sentence_tail_min20_max60"]
+    }
+  ],
+  "continuous_outcomes": [
+    "forced_token_count",
+    "tail_token_count",
+    "full_token_count",
+    "effective_artifact_bits_per_full_token",
+    "mean_log_probability"
+  ],
+  "inference": {
+    "analysis_unit": "payload_name",
+    "model_policy": "restrict_each_level_contrast_to_models_observed_at_that_level",
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 2026081603,
+    "confidence_level": 0.95,
+    "multiplicity": "holm_within_outcome_across_all_canonical_contrasts",
+    "secondary_multiplicity": "benjamini_hochberg_within_outcome",
+    "primary_inference": false
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "argv": [
+    ".venv/bin/python",
+    "scripts/run_revision_statistics.py",
+    "--trials",
+    "results/revision_v1/analysis_inputs/primary_v2/trials.csv",
+    "results/revision_v1/analysis_inputs/ablation_v2/trials.csv",
+    "results/revision_v1/analysis_inputs/multilingual_v2/trials.csv",
+    "results/revision_v1/analysis_inputs/robustness_v2/trials.csv",
+    "--continuous-quality",
+    "results/revision_v1/heldout_evaluator/primary_v2/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/primary_v2/qwen2_5_7b_instruct_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/ablation_v2/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/ablation_v2/qwen2_5_7b_instruct_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/ablation_v2/mistral_7b_instruct_v0_3_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/multilingual_v2/llama3_8b_instruct_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/multilingual_v2/qwen2_5_7b_instruct_q4_k_m/continuous_quality.jsonl",
+    "results/revision_v1/heldout_evaluator/multilingual_v2/mistral_7b_instruct_v0_3_q4_k_m/continuous_quality.jsonl",
+    "--features",
+    "results/revision_v1/analysis_inputs/primary_v2/features.csv",
+    "results/revision_v1/analysis_inputs/ablation_v2/features.csv",
+    "results/revision_v1/analysis_inputs/multilingual_v2/features.csv",
+    "results/revision_v1/analysis_inputs/robustness_v2/features.csv",
+    "--detectors",
+    "results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv",
+    "--runtime",
+    "results/revision_v1/analysis_inputs/primary_v2/runtime.csv",
+    "results/revision_v1/analysis_inputs/ablation_v2/runtime.csv",
+    "results/revision_v1/analysis_inputs/multilingual_v2/runtime.csv",
+    "results/revision_v1/analysis_inputs/robustness_v2/runtime.csv",
+    "--output-dir",
+    "results/revision_v1/final_experiment_package/statistics/python",
+    "--overwrite"
+  ],
+  "completed_at_utc": "2026-08-16T17:32:50.070993Z",
+  "cpu_time_seconds": null,
+  "cpu_time_status": "not_separately_captured; observed CPU utilization remained approximately one full core throughout",
+  "device_scope": "CPU non-neural statistical analysis",
+  "git_head": "223a06f649494eb1fefeca8832cf89a069d92cdc",
+  "neural_training_performed": false,
+  "outputs": {
+    "integrity_report": {
+      "path": "statistics_integrity_report.json",
+      "sha256": "ee8cf1f8fb7593dff33676e5a40ae594bd88939ee6dbf204ca9e4ec5b0133ae9",
+      "size_bytes": 3814
+    },
+    "statistics_manifest": {
+      "path": "statistics_run_manifest.json",
+      "sha256": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381",
+      "size_bytes": 8983
+    }
+  },
+  "schema_version": "rankcloak-final-statistics-execution-audit-v1",
+  "source_files": [
+    {
+      "path": "rankcloak/revision_statistics.py",
+      "sha256": "ab80a687e38780f5662c7bdf5deb28bc61051b71011566bcbb74610be5940b23"
+    },
+    {
+      "path": "scripts/run_revision_statistics.py",
+      "sha256": "7b7785161da368c1f00efc477d6b62bb4f9960d95d5a7bfae09b50d08eb5bee2"
+    },
+    {
+      "path": "configs/revision_v1/statistics.json",
+      "sha256": "62029282f69e6ec50235b92a5bd63e04b37191c9154f11493220453d64311b9e"
+    }
+  ],
+  "started_at_utc": "2026-08-16T16:34:11Z",
+  "status": "passed",
+  "validation": {
+    "bootstrap_resamples": 2000,
+    "detector_core_point_metrics_max_absolute_difference_from_saved_metrics": 0.0,
+    "detector_fit_rows": 56,
+    "duplicate_full_output_rows": 0,
+    "infinite_numeric_output_cells": 0,
+    "nested_segments_collapsed_before_quality_inference": true,
+    "output_row_counts": {
+      "continuous_summary.csv": 78088,
+      "detector_summary.csv": 56,
+      "effect_sizes.csv": 8446,
+      "mixed_effects_coefficients.csv": 0,
+      "quality_trial_metrics.csv": 29520,
+      "recovery_summary.csv": 3696
+    },
+    "payload_bootstrap_unit": true,
+    "segments_as_independent_observations": false,
+    "statistics_manifest_declared_output_count": 8
+  },
+  "wall_seconds": 3519.070993
+}

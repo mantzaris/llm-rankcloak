@@ -1,0 +1,68 @@
+{
+  "children": {
+    "metric.json": {
+      "row_count": 1,
+      "sha256": "a3a1302475c4d58b2d17ce708166ec2842e4c74fc91e870933f63959de25268f",
+      "size_bytes": 4726
+    },
+    "predictions.json": {
+      "row_count": 880,
+      "sha256": "627280f1e20163beb93dd12aa520d3db7a89bcc1ef06ea9a9918c07bdaa509f6",
+      "size_bytes": 442194
+    }
+  },
+  "children_sha256": "4cae4c93b38b3b9f9740ac84bb59f5edf4a65a0bba76d7d9490ff69d29652147",
+  "completed_at_utc": "2026-08-16T12:53:50.285462+00:00",
+  "elapsed_seconds": 1626.9641032759973,
+  "manifest_sha256": "5e66ce8f60ec886efec222d673e8afd4fdfa4f8c95126f2dcedf9821566febfd",
+  "plan_sha256": "77af6099480194331ed0f6993290186a004c51f384d1ee933e94c5a7f1a40e62",
+  "run_identity_sha256": "849f765cdfac97420006eca1c7da9788717deb7f480b88dceaaf169d2ed32c59",
+  "schema_version": "rankcloak-revision-detector-fit-checkpoint-v1",
+  "started_at_utc": "2026-08-16T12:26:43.321374+00:00",
+  "task_identity": {
+    "bootstrap_resamples": 2000,
+    "decision_threshold": 0.5,
+    "detector_kind": "pretrained_transformer",
+    "detector_name": "deberta_v3_base_classifier",
+    "detector_position": 1,
+    "effective_detector_config": {
+      "allow_downloads": false,
+      "batch_size": 8,
+      "device": "cuda:0",
+      "enabled": true,
+      "epochs": 3,
+      "fallback": "hashed_ngram_smoke",
+      "fallback_maximum_features": 20000,
+      "fallback_ngram_max": 5,
+      "fallback_ngram_min": 3,
+      "kind": "pretrained_transformer",
+      "learning_rate": 2e-05,
+      "maximum_length": 256,
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": null,
+      "name": "deberta_v3_base_classifier",
+      "offline_only": true,
+      "torch_num_threads": 1,
+      "weight_decay": 0.01
+    },
+    "effective_detector_config_sha256": "dcc73bd841cebdbb1e2c39136fcedfb5e8f43fcbb34c7cc2dd92779d0cf65cf6",
+    "excluded_held_out_rows": 0,
+    "held_out_column": "prompt_template_id",
+    "held_out_value": "professional_schedule_note",
+    "ordinal": 37,
+    "partition_policy": "full_held_out_condition",
+    "purged_train_rows": 1760,
+    "regime": "held_out_template",
+    "scientific_detector_config_sha256": "47d45a5010b771e8dfadc31ec75a6941b35d1f292ab3d62bf76c8a11ce971a5e",
+    "seed": 1630337985,
+    "split_id": "held_out_template:professional_schedule_note",
+    "split_position": 18,
+    "test_indices_sha256": "62725a833f04805caa48d49c1252ac999af4a2776ba0e00a45fe94e40e7cc623",
+    "test_row_count": 880,
+    "test_row_ids_ordered_sha256": "edef1b7d2a7e8e4053504c7aa0864df2672890e4a964561a6058bb4fa47bbea2",
+    "train_indices_sha256": "1941d8c113874be2032cebb5efdf4bf56ad4c8bbec02a73274e6a4aefac33b79",
+    "train_row_count": 13200,
+    "train_row_ids_ordered_sha256": "4608dda1c94f9fb6a204124a2c3258658d1a5eb8392ec185e73760bb05d1f554"
+  },
+  "task_identity_sha256": "53b8a48ad09b17689b347acd264e5391c51ee65fef63fc7ecbbd90a542dd7752"
+}

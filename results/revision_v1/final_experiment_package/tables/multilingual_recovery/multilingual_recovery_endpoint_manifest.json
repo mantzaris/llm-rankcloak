@@ -1,0 +1,62 @@
+{
+  "analysis_status": "secondary_post_audit_language_group_sensitivity",
+  "frozen_generation_design_unchanged": true,
+  "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_multilingual_endpoint.py --multilingual-trials /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/multilingual_v2/trials.csv --endpoint-config /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/multilingual_recovery_endpoint.json --output-dir /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/multilingual_recovery --overwrite",
+  "inputs": {
+    "endpoint_config": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/multilingual_recovery_endpoint.json",
+      "sha256": "44fe0f67f0c4e8159b8cb9a51ab3fb4af293200e78b3b145e9585f80d3731cff",
+      "size_bytes": 1159
+    },
+    "multilingual_trials": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/analysis_inputs/multilingual_v2/trials.csv",
+      "row_count": 576,
+      "sha256": "66e5d9fdec7259121ac7d442ca2108a9af7a3e86e0b64732131b68c50490550a",
+      "size_bytes": 463483
+    }
+  },
+  "limitations": [
+    "The language-group sensitivity was specified after saved outcomes were available.",
+    "It does not replace the frozen secondary payload-trial endpoint.",
+    "Only Spanish and Simplified Chinese secondary conditions were evaluated.",
+    "Wilson intervals do not model cross-configuration heterogeneity."
+  ],
+  "manifest_sha256": "918d980162a5f1ab20bdecc44cffa9613461c065ca1eb6e50d9d07498e69b71f",
+  "observed_design": {
+    "languages": [
+      "es",
+      "zh_hans"
+    ],
+    "model_families": 3,
+    "payload_classes": 8,
+    "payloads": 48,
+    "prompt_categories": 6,
+    "prompt_templates": 12,
+    "protocol_variants": 2,
+    "trial_rows": 576
+  },
+  "outcomes_were_available_before_grouping_specification": true,
+  "outputs": {
+    "endpoints": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_recovery_endpoints.csv",
+      "row_count": 6,
+      "sha256": "e305b46f4e614e023606c0d759be4538691158268a498c5759b0b24b3d88bd25",
+      "size_bytes": 2260
+    },
+    "language_payload_outcomes": {
+      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/tables/multilingual_recovery/multilingual_language_payload_outcomes.csv",
+      "row_count": 96,
+      "sha256": "a47bfda10f67c2afc23a4c5093d051db7875e3910a9fdc7af6b09315d851f860",
+      "size_bytes": 6682
+    }
+  },
+  "schema_version": "rankcloak-multilingual-recovery-endpoint-v1",
+  "status": "passed",
+  "summary": {
+    "endpoint_rows": 6,
+    "language_payload_rows": 96,
+    "strict_language_model_payload_successes": 288,
+    "strict_language_payload_successes": 96,
+    "trial_successes": 576
+  }
+}

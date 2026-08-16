@@ -249,6 +249,8 @@ def test_primary_evaluator_join_is_complete_hash_checked_and_immutable(tmp_path)
     assert manifest["source_record_hashes_recomputed"] is True
     assert manifest["evaluator_artifact_pins_verified"] is True
     assert manifest["evaluator_artifact_pins"] == dict(sorted(MODEL_PINS.items()))
+    assert manifest["artifact_diagnostics"]["status"] == "source_feature_column_preserved"
+    assert manifest["artifact_diagnostics"]["selected_source_column"] == "surface_flag_total"
     with (output / "primary_features_with_heldout_evaluator.csv").open(
         "r", encoding="utf-8", newline=""
     ) as handle:
@@ -271,6 +273,59 @@ def test_primary_evaluator_join_is_complete_hash_checked_and_immutable(tmp_path)
             evaluator_feature_manifests=evaluator_manifests,
             output_dir=tmp_path / "tampered_join",
         )
+
+
+def test_primary_evaluator_join_derives_prespecified_artifact_diagnostics_when_absent(
+    tmp_path,
+):
+    preprocessing, evaluator_manifests = _fixture(tmp_path)
+    preprocessing_value = json.loads(preprocessing.read_text(encoding="utf-8"))
+    feature_declaration = next(
+        row for row in preprocessing_value["outputs"] if row["role"] == "features"
+    )
+    feature_path = Path(feature_declaration["path"])
+    with feature_path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
+        columns = [
+            column
+            for column in reader.fieldnames or []
+            if column != "surface_flag_total"
+        ]
+    with feature_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(
+            {column: row[column] for column in columns} for row in rows
+        )
+    replacement = _declaration(
+        feature_path, role="features", rows=len(rows)
+    )
+    preprocessing_value["outputs"] = [
+        replacement if row["role"] == "features" else row
+        for row in preprocessing_value["outputs"]
+    ]
+    _json(preprocessing, preprocessing_value)
+
+    output = tmp_path / "joined-derived"
+    manifest = join_primary_heldout_evaluator_features(
+        preprocessing_manifest=preprocessing,
+        evaluator_feature_manifests=evaluator_manifests,
+        output_dir=output,
+    )
+    diagnostics = manifest["artifact_diagnostics"]
+    assert diagnostics["status"] == "derived_from_hash_bound_text_rows"
+    assert diagnostics["selected_source_column"] == "surface_flag_total"
+    assert diagnostics["derived_columns"] == [
+        "surface_flag_total",
+        "artifact_like_fragment_count",
+    ]
+    with (output / "primary_features_with_heldout_evaluator.csv").open(
+        "r", encoding="utf-8", newline=""
+    ) as handle:
+        joined = list(csv.DictReader(handle))
+    assert {row["surface_flag_total"] for row in joined} == {"2"}
+    assert {row["artifact_like_fragment_count"] for row in joined} == {"0"}
 
 
 def test_primary_evaluator_join_rejects_forged_actual_artifact_pin(tmp_path):
