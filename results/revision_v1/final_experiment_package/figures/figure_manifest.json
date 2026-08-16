@@ -1,123 +1,363 @@
 {
+  "ablation_figure_status": "exploratory_post_outcome",
+  "absolute_local_paths_emitted": false,
   "detector_cross_split_bars": "minimum_to_maximum_range_not_confidence_interval",
+  "detector_matched_bars": "payload_group_bootstrap_95_confidence_interval",
   "detector_supplementary_panels_status": "exploratory_post_freeze",
+  "figures": {
+    "ablation": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "exploratory_post_outcome",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/ablation_summary.png",
+      "panel_count": 3,
+      "plotted_row_count": 9,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/ablation_figure_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/ablation_summary.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/ablation_technical_note.md",
+      "title": "Ablation summary",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+    },
+    "capacity_tail": {
+      "classification": "Core compact candidate",
+      "evidence_status": "supporting",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+      "panel_count": 3,
+      "plotted_row_count": 18,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/capacity_tail_technical_note.md",
+      "title": "Capacity and tail overhead",
+      "uncertainty": "tail medians with 5th-95th percentile ranges"
+    },
+    "detector_compact": {
+      "classification": "Core compact candidate",
+      "evidence_status": "confirmatory_endpoints_plus_exploratory_low_fpr_metric",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.png",
+      "panel_count": 3,
+      "plotted_row_count": 24,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/detector_compact_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/neural_detector_technical_note.md",
+      "title": "Neural detection, compact",
+      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges"
+    },
+    "detector_full": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "confirmatory_and_exploratory_panels_separated",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+      "panel_count": 6,
+      "plotted_row_count": 48,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/neural_detector_technical_note.md",
+      "title": "Neural detection, complete",
+      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges"
+    },
+    "overhead_compact": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "supporting",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.png",
+      "panel_count": 3,
+      "plotted_row_count": 54,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/overhead_compact_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/computational_overhead_technical_note.md",
+      "title": "Computational overhead, compact",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+    },
+    "overhead_full": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "supporting",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+      "panel_count": 4,
+      "plotted_row_count": 72,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/computational_overhead_technical_note.md",
+      "title": "Computational overhead, complete",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+    },
+    "readability": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "automated_not_human_rating",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/automated_readability.png",
+      "panel_count": 3,
+      "plotted_row_count": 21,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/automated_readability_technical_note.md",
+      "title": "Automated surface diagnostics",
+      "uncertainty": "prompt-template-cluster bootstrap 95% confidence intervals"
+    },
+    "robustness_compact": {
+      "classification": "Core compact candidate",
+      "evidence_status": "secondary_with_diagnostic_scope",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.png",
+      "panel_count": 1,
+      "plotted_row_count": 11,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/robustness_compact_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/robustness_technical_note.md",
+      "title": "Exact-copy fragility, compact",
+      "uncertainty": "source-cover Wilson 95% confidence intervals"
+    },
+    "robustness_full": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "secondary_with_diagnostic_scope",
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+      "panel_count": 4,
+      "plotted_row_count": 24,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
+      "technical_note": "results/revision_v1/final_experiment_package/figures/robustness_technical_note.md",
+      "title": "Exact-copy fragility, complete",
+      "uncertainty": "source-cover Wilson 95% confidence intervals"
+    }
+  },
+  "generation_command": "scripts/build_revision_figures.py --robustness-manifest results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json --theory-manifest results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json --readability-manifest results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json --overhead-manifest results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json --detector-manifest results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json --ablation-manifest results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json --output-dir results/revision_v1/final_experiment_package/figures --overwrite",
+  "historical_parent_manifest_note": "Parent package manifests may retain sealed historical absolute-path provenance; this figure manifest and all new figure-related references are repository-relative.",
   "human_rating_figures_emitted": false,
   "inputs": {
+    "ablation_manifest": {
+      "path": "results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json",
+      "sha256": "296b78d0e538e3f2efea3bbd7ee9c389d5b8848de7a46719c3c262def277d3f2"
+    },
     "detector_manifest": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json",
+      "path": "results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json",
       "sha256": "cf94cd4f1698f9c339629e787c2b1d691fee0a0d2839a7e88059e8f3ab79d9f1"
     },
+    "generator_sources": {
+      "cli": {
+        "path": "scripts/build_revision_figures.py",
+        "sha256": "b6ca5a345d27ec8d9c992387c4cf75c3426f63b8f2ef216cc1b3eafe3a3dee4b"
+      },
+      "implementation": {
+        "path": "rankcloak/revision_figures.py",
+        "sha256": "55a33672a5543e8e2b2b1611a4ed41e1f27f124ad38ba8a84a5e6a20151575c4"
+      }
+    },
     "overhead_manifest": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json",
+      "path": "results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json",
       "sha256": "f5e10d7730b25f022948c37be373d34888e05e2cbc52bc11b6e742564df3ecdb"
     },
     "readability_manifest": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json",
+      "path": "results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json",
       "sha256": "5d2167a9ca39d2432b541f11c14f3198da0c13c89284b41ba9b6d401aba2be28"
     },
     "robustness_manifest": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
+      "path": "results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
       "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177"
     },
     "theory_manifest": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json",
+      "path": "results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json",
       "sha256": "e2449de3aafca211fd2c7b644400c6225b56bc969743a2682d1105da99b0ac4d"
     }
   },
+  "inspection_output_format": "png_300_dpi",
+  "manifest_sha256": "d6c3b274a79ca0dbc443d14b51c8c59da92b9fa92adea5cc0613914489f97a52",
   "outputs": {
+    "ablation_note": {
+      "path": "results/revision_v1/final_experiment_package/figures/ablation_technical_note.md",
+      "sha256": "e69c23a7547a9c8a1d09f5467615ed60b5aa497f3cf04c42689786f75170e45c",
+      "size_bytes": 951
+    },
+    "ablation_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/ablation_summary.pdf",
+      "sha256": "ab8b7ab7f89d12d3f86639e1b2add147fe0a6b0b106cb910c5f399710bcb54ab",
+      "size_bytes": 26326
+    },
+    "ablation_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/ablation_summary.png",
+      "sha256": "130c97a363f67d100c9c474cfa75f1a30901717aa48519d1398e6ca63e72e09a",
+      "size_bytes": 192736
+    },
+    "ablation_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/ablation_figure_source.csv",
+      "row_count": 9,
+      "sha256": "5a289c72f7d9d2fddf2b14da378fb8c81ba1246600ee4d6d95bfdd27b486187a",
+      "size_bytes": 5155
+    },
     "commands": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/generation_commands.txt",
-      "sha256": "cc0b9594216dd73f6cceb8c8d322b3bde8313a86323c18a34d7211d90df387ee",
-      "size_bytes": 953
+      "path": "results/revision_v1/final_experiment_package/figures/generation_commands.txt",
+      "sha256": "77116dcbc8b86816835d34dd8a76f5a457217cf98ed932478de3bb4b95f399ba",
+      "size_bytes": 792
+    },
+    "detector_compact_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.pdf",
+      "sha256": "e9cf81473b42f7cbb7837847b52cc1777458fbbde52066d6ae711128ad237eb2",
+      "size_bytes": 29731
+    },
+    "detector_compact_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.png",
+      "sha256": "141e66964cf99a22a1792dc9cb242d35b3339d2ae6b69a087667b2e8bee2be2b",
+      "size_bytes": 138073
+    },
+    "detector_compact_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/detector_compact_source.csv",
+      "row_count": 24,
+      "sha256": "8ca700608a2236e739b258685257af7e378ed06f410d7e8dae6762118e928b56",
+      "size_bytes": 7704
+    },
+    "detector_note": {
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_technical_note.md",
+      "sha256": "ec485b5ff4bfadfefe00fb282a1b43caf62407af65b37f9e3d1ed2b12d5af6bc",
+      "size_bytes": 916
     },
     "detector_pdf": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
-      "sha256": "8dd62fcf6d6d2e95ae555e002ce3e680bb86be891ee249fdb302167b5cfe7c38",
-      "size_bytes": 35829
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
+      "sha256": "2788686179e04eaf8794f9817ffccc20b44a38e69da48cf23cc98c5abce3b093",
+      "size_bytes": 34872
     },
     "detector_png": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
-      "sha256": "0bd0b30f3cec6fb2505571eb73562ba8916bfec30ff3b5e748aaf2f7f8ac5e33",
-      "size_bytes": 230075
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+      "sha256": "b8d600eeb4ca0dd314cb9dedb067af1893f691741ffb91cd3a1710a31fe9b80e",
+      "size_bytes": 210482
     },
     "detector_source": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
+      "path": "results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
       "row_count": 48,
-      "sha256": "f3bfd86e26fc709a546b98c54cd22785dcfe7fea156c03076194b97162fdf4de",
-      "size_bytes": 10980
+      "sha256": "aafa788114c6d8afa0e4db18a40aab6a1bc1d2423c925ba65d1a954037c5218e",
+      "size_bytes": 15047
+    },
+    "inventory": {
+      "path": "results/revision_v1/final_experiment_package/figures/figure_inventory.csv",
+      "sha256": "72bb5d1a54806a73ecbbf054d527e636949a7b39a97b4bdfd3004575ecf6647d",
+      "size_bytes": 4518
+    },
+    "overhead_compact_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.pdf",
+      "sha256": "86ee5da521fe9cd0559c93994dd5a3009bb33b0b6f1407faab342b7623e11d1e",
+      "size_bytes": 28438
+    },
+    "overhead_compact_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.png",
+      "sha256": "ed8940be825018fe983e9b2e341b3e044e090904c3d356bd715cda58280af5f8",
+      "size_bytes": 156617
+    },
+    "overhead_compact_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/overhead_compact_source.csv",
+      "row_count": 54,
+      "sha256": "9fe1171e8a59fe53fdae61e64fa3beaadfd2595f5d10e1222c9e02453be38abb",
+      "size_bytes": 19589
+    },
+    "overhead_note": {
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead_technical_note.md",
+      "sha256": "1fa7b93ac0622251f4694e30d56e59e1338a55e285733ee2f79ad55c05437398",
+      "size_bytes": 699
     },
     "overhead_pdf": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
-      "sha256": "1c00dbc0e0470885a69f098b26fc605bae340c071ff62b0cd0398198dd43efbf",
-      "size_bytes": 37210
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
+      "sha256": "a581556f7aa25cdef4e6e4aa19eecd09ad2a9312e8b344f608ca30fd0f0da70e",
+      "size_bytes": 32425
     },
     "overhead_png": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/computational_overhead.png",
-      "sha256": "cbcc0d5a9f1b12e58aadab4a86bb2872d556dfaa974d6122b7980df917f165ac",
-      "size_bytes": 396573
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+      "sha256": "be713a5eb122fa6a195e47511991f4821cc434d3c8e63b01d258829c415c38b2",
+      "size_bytes": 247789
     },
     "overhead_source": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
+      "path": "results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
       "row_count": 72,
-      "sha256": "1ecfa6194cdf45d6ba9541773d6004366511cdca358d11ec6583829ff3faa479",
-      "size_bytes": 21607
+      "sha256": "909293a81d2d3715f823126bf6da302e488af32d726f8d84c0b61f638cc1dd1c",
+      "size_bytes": 26176
+    },
+    "readability_note": {
+      "path": "results/revision_v1/final_experiment_package/figures/automated_readability_technical_note.md",
+      "sha256": "1d3137fa2233afcaa7b5e680edd47a7c1bc8f07140ec662f93d9f269fbcd5758",
+      "size_bytes": 880
     },
     "readability_pdf": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
-      "sha256": "5bd0eabb366656cce77da5ce560d765fdc40d1077838d98044734d955b4c9ec4",
-      "size_bytes": 20893
+      "path": "results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
+      "sha256": "bb2a9dc5637f7639e8ff130cb3f5d5f9dcaffaee83efee38c657f4e754babf06",
+      "size_bytes": 28575
     },
     "readability_png": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/automated_readability.png",
-      "sha256": "48a7b899544e928d364bf8511aa143c5379ca21a12aa9d4c3dd3177434faf2b3",
-      "size_bytes": 171771
+      "path": "results/revision_v1/final_experiment_package/figures/automated_readability.png",
+      "sha256": "8a3ac2d3b670d16b9fc22d048730032c1a8c8cc66de597a330bd6275a859ed19",
+      "size_bytes": 181895
     },
     "readability_source": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
+      "path": "results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
       "row_count": 21,
-      "sha256": "bcff7be1982eb8aef8ff0e413764959bab8c22ac453ec6a7e1c711a4845d80c7",
-      "size_bytes": 6631
+      "sha256": "00b977ea6926cebabbdfeb2f41656fab4cb181bf4358746d9467c275f0c69988",
+      "size_bytes": 8752
+    },
+    "robustness_compact_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.pdf",
+      "sha256": "b3451614c393d2ba538e40ef631fc72e45beb19568bbb09a8ce2d25ed76db899",
+      "size_bytes": 26922
+    },
+    "robustness_compact_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.png",
+      "sha256": "49987cde58f1f4172b47d2047d7a3640f87f52d6fc7b5a53f72203833ce1f6c1",
+      "size_bytes": 200398
+    },
+    "robustness_compact_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_compact_source.csv",
+      "row_count": 11,
+      "sha256": "ac66a5642a8d72571b446645ebab35c501c6f3d88f23b2885586fcfcfd5790cb",
+      "size_bytes": 2684
+    },
+    "robustness_note": {
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_technical_note.md",
+      "sha256": "90ece0ecbc617af5bfd544c49f882b41f0fe69ca654a199b1f54b6a861bd2eae",
+      "size_bytes": 1040
     },
     "robustness_pdf": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
-      "sha256": "cb1d3f32ee5200f95f7f99413debb7da0d6242c7fca9921d80d73c43dbe408f4",
-      "size_bytes": 27578
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
+      "sha256": "25faad6fe2f602ed188316f88fc1d0adda66379ffca65fe67b28574aad716e81",
+      "size_bytes": 29798
     },
     "robustness_png": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
-      "sha256": "ccdeb6498eeb4fc930a954655bd22670196511a01ec1acbd80b9088ab21e1797",
-      "size_bytes": 428969
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+      "sha256": "38038e7dc7f58332dae605f7a4b1d7908ecfd80e52c7f9c8d3957ffec0c71e63",
+      "size_bytes": 302531
     },
     "robustness_source": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
       "row_count": 24,
-      "sha256": "0929f35bc80fa720016dbe663362d99dd1ce415f6a9869aaac1d548ad74c240a",
-      "size_bytes": 4451
+      "sha256": "6fed641e41f4bf7239d8f840ae1a515817ff97905b41e2379d9ccacc7f34f755",
+      "size_bytes": 5707
+    },
+    "theory_note": {
+      "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_technical_note.md",
+      "sha256": "5ef868f619bbb60482ab0299cef5b7fa7cd94fb73cb10e71a0e57e0d80d17cca",
+      "size_bytes": 975
     },
     "theory_pdf": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
-      "sha256": "81c21430626f06c3c42837927d5d9124099f0ba5a2e1a50e2b6dc31811b16298",
-      "size_bytes": 27740
+      "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
+      "sha256": "039f85d8090253ba70339d2afc402988d75598570afd049a3e367a1c1f6f378b",
+      "size_bytes": 27929
     },
     "theory_png": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
-      "sha256": "6c8159adee541a0ee08a8468f33b34bcb2eeac4175c8b55b3925dd9e27b5f4a1",
-      "size_bytes": 303633
+      "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+      "sha256": "7b8ff84fd0a77e550ff9387a1e45bb02b2c551cbbfd0e31b58727fa6480dd3a8",
+      "size_bytes": 277161
     },
     "theory_source": {
-      "path": "/home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
-      "row_count": 9,
-      "sha256": "dde73fa720829071f3388d488a88691b6930e92bf62da25c7c1e01227d306063",
-      "size_bytes": 1419
+      "path": "results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
+      "row_count": 18,
+      "sha256": "7bb944fd7a12709569246fb0f21e53e7444272bf38d456fb8d6d114f2141d52c",
+      "size_bytes": 4237
+    },
+    "validation": {
+      "path": "results/revision_v1/final_experiment_package/figures/figure_validation.json",
+      "sha256": "032d966dee553b062114051723e4d028c0da7d5a713c60829cf0832a543bc7f8",
+      "size_bytes": 7930
     }
   },
+  "portable_repository_relative_paths": true,
+  "primary_output_format": "vector_pdf",
+  "project_root_assumption": "run_from_repository_root",
   "readability_figure_scope": "automated_surface_diagnostics_not_human_judgements",
-  "schema_version": "rankcloak-computational-figure-evidence-v1",
+  "schema_version": "rankcloak-computational-figure-evidence-v2",
   "source_tables_hash_validated_before_plotting": true,
   "status": "passed",
   "summary": {
-    "figure_count": 5,
-    "rendered_file_count": 10,
-    "source_table_count": 5
+    "figure_count": 9,
+    "inventory_row_count": 9,
+    "rendered_file_count": 18,
+    "source_table_count": 9,
+    "technical_note_count": 6
   }
 }

@@ -1,0 +1,182 @@
+{
+  "authoritative_upstream_sources": {
+    "ablation": {
+      "path": "results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_canonical_contrasts.csv",
+      "sha256": "ab7b54b0b9778595d7ec5613a6db86c8b1570f0edd050c954b01c33c59f399f4"
+    },
+    "detector_metrics": {
+      "path": "results/revision_v1/final_experiment_package/detectors/analysis/detector_extended_metrics.csv",
+      "sha256": "256307b2951e46cf3d7ad4263dc3c9bf6490749e5004f92957811e349477598a"
+    },
+    "detector_plot": {
+      "path": "results/revision_v1/final_experiment_package/detectors/analysis/detector_plot_source.csv",
+      "sha256": "4f010e4bd9b6fc21df2fbf398c844e38d0d4eecfc01229d7e64c9d4c70031e4d"
+    },
+    "overhead": {
+      "path": "results/revision_v1/final_experiment_package/overhead/overhead_plot_source.csv",
+      "sha256": "d7fbe5ee21fc2b6733525a55c803ec94ad3f1189a3c7c6214cf550f0128fcd00"
+    },
+    "readability": {
+      "path": "results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_summary.csv",
+      "sha256": "16b09e609655baa781440213599cdb9d41ca31dd5c43071f25544e8c69558751"
+    },
+    "robustness": {
+      "path": "results/revision_v1/final_experiment_package/robustness/robustness_recovery_plot_source.csv",
+      "sha256": "98afef4bd516c46351994946417a1fe5c8515b9747fa004ae3ee078acea1ebe4"
+    },
+    "theory": {
+      "path": "results/revision_v1/final_experiment_package/theory/theory_empirical_validation.csv",
+      "sha256": "89523e3381137d21a7d6291ed7ce50cefeb8ac424ac14709e4ad60af75cfd95c"
+    }
+  },
+  "checks": {
+    "ablation_exploratory_status_preserved": true,
+    "absolute_local_paths_emitted": false,
+    "automated_readability_not_human_rating": true,
+    "confidence_intervals_and_ranges_distinguished": true,
+    "intervals_contain_estimates": true,
+    "no_nan_or_infinite_plotted_values": true,
+    "pdf_primary_png_300dpi_secondary": true
+  },
+  "figures": {
+    "ablation": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "exploratory_post_outcome",
+      "panel_count": 3,
+      "plotted_row_count": 9,
+      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+    },
+    "capacity_tail": {
+      "classification": "Core compact candidate",
+      "evidence_status": "supporting",
+      "panel_count": 3,
+      "plotted_row_count": 18,
+      "uncertainty": "tail medians with 5th-95th percentile ranges"
+    },
+    "detector_compact": {
+      "classification": "Core compact candidate",
+      "evidence_status": "confirmatory_endpoints_plus_exploratory_low_fpr_metric",
+      "panel_count": 3,
+      "plotted_row_count": 24,
+      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges"
+    },
+    "detector_full": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "confirmatory_and_exploratory_panels_separated",
+      "panel_count": 6,
+      "plotted_row_count": 48,
+      "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges"
+    },
+    "overhead_compact": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "supporting",
+      "panel_count": 3,
+      "plotted_row_count": 54,
+      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+    },
+    "overhead_full": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "supporting",
+      "panel_count": 4,
+      "plotted_row_count": 72,
+      "uncertainty": "payload-group bootstrap 95% confidence intervals"
+    },
+    "readability": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "automated_not_human_rating",
+      "panel_count": 3,
+      "plotted_row_count": 21,
+      "uncertainty": "prompt-template-cluster bootstrap 95% confidence intervals"
+    },
+    "robustness_compact": {
+      "classification": "Core compact candidate",
+      "evidence_status": "secondary_with_diagnostic_scope",
+      "panel_count": 1,
+      "plotted_row_count": 11,
+      "uncertainty": "source-cover Wilson 95% confidence intervals"
+    },
+    "robustness_full": {
+      "classification": "Full supporting candidate",
+      "evidence_status": "secondary_with_diagnostic_scope",
+      "panel_count": 4,
+      "plotted_row_count": 24,
+      "uncertainty": "source-cover Wilson 95% confidence intervals"
+    }
+  },
+  "schema_version": "rankcloak-computational-figure-validation-v2",
+  "source_tables": {
+    "ablation_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/ablation_figure_source.csv",
+      "row_count": 9,
+      "sha256": "5a289c72f7d9d2fddf2b14da378fb8c81ba1246600ee4d6d95bfdd27b486187a",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "detector_compact_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/detector_compact_source.csv",
+      "row_count": 24,
+      "sha256": "8ca700608a2236e739b258685257af7e378ed06f410d7e8dae6762118e928b56",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "detector_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/detector_figure_source.csv",
+      "row_count": 48,
+      "sha256": "aafa788114c6d8afa0e4db18a40aab6a1bc1d2423c925ba65d1a954037c5218e",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "overhead_compact_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/overhead_compact_source.csv",
+      "row_count": 54,
+      "sha256": "9fe1171e8a59fe53fdae61e64fa3beaadfd2595f5d10e1222c9e02453be38abb",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "overhead_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/overhead_figure_source.csv",
+      "row_count": 72,
+      "sha256": "909293a81d2d3715f823126bf6da302e488af32d726f8d84c0b61f638cc1dd1c",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "readability_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/readability_figure_source.csv",
+      "row_count": 21,
+      "sha256": "00b977ea6926cebabbdfeb2f41656fab4cb181bf4358746d9467c275f0c69988",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "robustness_compact_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_compact_source.csv",
+      "row_count": 11,
+      "sha256": "ac66a5642a8d72571b446645ebab35c501c6f3d88f23b2885586fcfcfd5790cb",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "robustness_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_figure_source.csv",
+      "row_count": 24,
+      "sha256": "6fed641e41f4bf7239d8f840ae1a515817ff97905b41e2379d9ccacc7f34f755",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "theory_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/theory_figure_source.csv",
+      "row_count": 18,
+      "sha256": "7bb944fd7a12709569246fb0f21e53e7444272bf38d456fb8d6d114f2141d52c",
+      "validated_derivation_from_hash_validated_upstream": true
+    }
+  },
+  "status": "passed"
+}

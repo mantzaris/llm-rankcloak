@@ -108,19 +108,36 @@ def _declared_output_path(
     declaration: Mapping[str, Any],
     *,
     label: str,
+    repository_root: Path | None,
+    repository_relative: bool,
 ) -> Path:
     raw = declaration.get("path")
     if not isinstance(raw, str) or not raw:
         raise PackageIndexError(f"{label} lacks a declared path")
     candidate = Path(raw)
     if not candidate.is_absolute():
-        candidate = manifest_path.parent / candidate
+        if repository_relative:
+            if repository_root is None:
+                raise PackageIndexError(
+                    f"{label} declares repository-relative paths but no repository root was found"
+                )
+            candidate = repository_root / candidate
+        else:
+            candidate = manifest_path.parent / candidate
     return _regular_file(candidate, label=label)
+
+
+def _repository_root(start: Path) -> Path | None:
+    for candidate in (start, *start.parents):
+        if (candidate / ".git").exists():
+            return candidate.resolve()
+    return None
 
 
 def _validate_component_manifest(
     label: str,
     manifest_path: Path,
+    repository_root: Path | None,
 ) -> tuple[dict[str, Any], int]:
     resolved = _regular_file(manifest_path, label=f"component manifest {label}")
     manifest = _read_json(resolved, label=f"component manifest {label}")
@@ -130,6 +147,9 @@ def _validate_component_manifest(
             f"Component manifest {label} has no declared outputs object"
         )
     output_entries: list[dict[str, Any]] = []
+    repository_relative = (
+        manifest.get("portable_repository_relative_paths") is True
+    )
     for output_label, declaration in sorted(
         outputs.items(), key=lambda item: str(item[0])
     ):
@@ -141,6 +161,8 @@ def _validate_component_manifest(
             resolved,
             declaration,
             label=f"{label} output {output_label}",
+            repository_root=repository_root,
+            repository_relative=repository_relative,
         )
         observed_sha = file_sha256(path)
         observed_size = int(path.stat().st_size)
@@ -246,6 +268,7 @@ def build_package_index(
     if raw_root.is_symlink() or not raw_root.is_dir():
         raise PackageIndexError(f"Missing or unsafe package root: {raw_root}")
     root = raw_root.resolve()
+    repository_root = _repository_root(root)
     target = (
         root / "manifest.json"
         if output_path is None
@@ -273,7 +296,9 @@ def build_package_index(
     for label, path in sorted(component_manifests.items()):
         if not label:
             raise PackageIndexError("Component manifest label is empty")
-        entry, validated_count = _validate_component_manifest(label, Path(path))
+        entry, validated_count = _validate_component_manifest(
+            label, Path(path), repository_root
+        )
         components.append(entry)
         declared_output_count += validated_count
 

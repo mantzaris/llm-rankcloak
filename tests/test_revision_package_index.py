@@ -95,6 +95,46 @@ def test_package_index_rejects_tampered_component_output(tmp_path: Path):
         )
 
 
+def test_package_index_accepts_opt_in_repository_relative_figure_paths(
+    tmp_path: Path,
+):
+    repository = tmp_path / "repository"
+    (repository / ".git").mkdir(parents=True)
+    package = repository / "results" / "package"
+    figures = package / "figures"
+    figures.mkdir(parents=True)
+    output = figures / "figure.pdf"
+    output.write_bytes(b"%PDF-fixture")
+    component = figures / "figure_manifest.json"
+    component.write_text(
+        json.dumps(
+            {
+                "schema_version": "figure-fixture-v2",
+                "status": "passed",
+                "portable_repository_relative_paths": True,
+                "outputs": {
+                    "figure": {
+                        "path": "results/package/figures/figure.pdf",
+                        "sha256": file_sha256(output),
+                        "size_bytes": output.stat().st_size,
+                    }
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    artifacts = build_package_index(
+        package_root=package,
+        component_manifests={"figures": component},
+        external_references={},
+    )
+
+    manifest = json.loads(Path(artifacts.manifest_path).read_text(encoding="utf-8"))
+    validated = manifest["component_manifests"][0]["validated_outputs"][0]
+    assert validated["sha256"] == file_sha256(output)
+
+
 def test_package_index_rejects_symlink_in_package_tree(tmp_path: Path):
     package, component, external = _fixture(tmp_path)
     (package / "unsafe_link").symlink_to(external)

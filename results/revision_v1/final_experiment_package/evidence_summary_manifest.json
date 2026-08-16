@@ -1,4 +1,19 @@
 {
+  "figure_hash_refresh": {
+    "canonical_figure_manifest": {
+      "path": "results/revision_v1/final_experiment_package/figures/figure_manifest.json",
+      "sha256": "869a69439c5cbdad4e09cb948213729f2a7867d20e8ee04d6cee42d8b91ee815"
+    },
+    "historical_absolute_path_provenance_preserved": true,
+    "historical_generation_command_preserved": true,
+    "refresh_command": "scripts/refresh_revision_figure_parent_hashes.py --evidence-summary-manifest results/revision_v1/final_experiment_package/evidence_summary_manifest.json --reference-table results/revision_v1/final_experiment_package/tables/evidence_artifact_references.csv --figure-dir results/revision_v1/final_experiment_package/figures --figure-manifest results/revision_v1/final_experiment_package/figures/figure_manifest.json",
+    "refresh_git_head": "9bbe81115df617fc89132e84c815400b4f7a98d2",
+    "scientific_estimates_changed": false,
+    "scope": "existing_figure_reference_identities_only",
+    "sealed_evidence_git_head_preserved": "223a06f649494eb1fefeca8832cf89a069d92cdc",
+    "updated_reference_count": 15,
+    "working_tree_context": "local_uncommitted_figure_revision"
+  },
   "generation_command": "/home/meow/Documents/repos/llm-rankcloak/scripts/build_revision_evidence_summary.py --package-root /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package --evidence-spec /home/meow/Documents/repos/llm-rankcloak/analysis/revision_v1/evidence_specs/final_evidence_records.json --progress-ledger /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_progress_snapshot_v1.json --payload-corpus /home/meow/Documents/repos/llm-rankcloak/release_inputs/revision_v1/revision_payloads.jsonl --payload-manifest /home/meow/Documents/repos/llm-rankcloak/release_inputs/revision_v1/PAYLOAD_MANIFEST.json --prompts-config /home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/prompts.json --models-config /home/meow/Documents/repos/llm-rankcloak/configs/revision_v1/models.json --detector-run-manifest /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json --human-evaluation-status /home/meow/Documents/repos/llm-rankcloak/results/revision_v1/final_experiment_package/readability/human_evaluation_status.json --overwrite",
   "git_head": "223a06f649494eb1fefeca8832cf89a069d92cdc",
   "inputs": {
@@ -44,7 +59,7 @@
       "size_bytes": 4730
     }
   },
-  "manifest_sha256": "3a344e2b6ab04a985c68607e2d70b038c759029f19763574dcc0dcbc8995b581",
+  "manifest_sha256": "931d891d7d3ef00401b8b9b7a2f179250a00b282d3e416ba89ffdae58d5c44ae",
   "outputs": {
     "STATUS.md": {
       "path": "results/revision_v1/final_experiment_package/STATUS.md",
@@ -92,8 +107,8 @@
     "tables/evidence_artifact_references.csv": {
       "path": "results/revision_v1/final_experiment_package/tables/evidence_artifact_references.csv",
       "row_count": 73,
-      "sha256": "4b4275fe080462213d5487b45c02cff96ba64549a6556d5f7256d7404abf5a41",
-      "size_bytes": 11478
+      "sha256": "9ae5143c5c07508fa208ff7a28c33e5c0b7338eade0450849107e2f6c58f6882",
+      "size_bytes": 11479
     },
     "tables/reviewer_evidence_matrix.csv": {
       "path": "results/revision_v1/final_experiment_package/tables/reviewer_evidence_matrix.csv",
@@ -225,92 +240,92 @@
     {
       "path": "results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
       "row_count": null,
-      "sha256": "5bd0eabb366656cce77da5ce560d765fdc40d1077838d98044734d955b4c9ec4",
-      "size_bytes": 20893
+      "sha256": "bb2a9dc5637f7639e8ff130cb3f5d5f9dcaffaee83efee38c657f4e754babf06",
+      "size_bytes": 28575
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/automated_readability.png",
       "row_count": null,
-      "sha256": "48a7b899544e928d364bf8511aa143c5379ca21a12aa9d4c3dd3177434faf2b3",
-      "size_bytes": 171771
+      "sha256": "8a3ac2d3b670d16b9fc22d048730032c1a8c8cc66de597a330bd6275a859ed19",
+      "size_bytes": 181895
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
       "row_count": null,
-      "sha256": "81c21430626f06c3c42837927d5d9124099f0ba5a2e1a50e2b6dc31811b16298",
-      "size_bytes": 27740
+      "sha256": "039f85d8090253ba70339d2afc402988d75598570afd049a3e367a1c1f6f378b",
+      "size_bytes": 27929
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
       "row_count": null,
-      "sha256": "6c8159adee541a0ee08a8468f33b34bcb2eeac4175c8b55b3925dd9e27b5f4a1",
-      "size_bytes": 303633
+      "sha256": "7b8ff84fd0a77e550ff9387a1e45bb02b2c551cbbfd0e31b58727fa6480dd3a8",
+      "size_bytes": 277161
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
       "row_count": null,
-      "sha256": "1c00dbc0e0470885a69f098b26fc605bae340c071ff62b0cd0398198dd43efbf",
-      "size_bytes": 37210
+      "sha256": "a581556f7aa25cdef4e6e4aa19eecd09ad2a9312e8b344f608ca30fd0f0da70e",
+      "size_bytes": 32425
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.png",
       "row_count": null,
-      "sha256": "cbcc0d5a9f1b12e58aadab4a86bb2872d556dfaa974d6122b7980df917f165ac",
-      "size_bytes": 396573
+      "sha256": "be713a5eb122fa6a195e47511991f4821cc434d3c8e63b01d258829c415c38b2",
+      "size_bytes": 247789
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
       "row_count": 48,
-      "sha256": "f3bfd86e26fc709a546b98c54cd22785dcfe7fea156c03076194b97162fdf4de",
-      "size_bytes": 10980
+      "sha256": "aafa788114c6d8afa0e4db18a40aab6a1bc1d2423c925ba65d1a954037c5218e",
+      "size_bytes": 15047
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
       "row_count": null,
-      "sha256": "8dd62fcf6d6d2e95ae555e002ce3e680bb86be891ee249fdb302167b5cfe7c38",
-      "size_bytes": 35829
+      "sha256": "2788686179e04eaf8794f9817ffccc20b44a38e69da48cf23cc98c5abce3b093",
+      "size_bytes": 34872
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
       "row_count": null,
-      "sha256": "0bd0b30f3cec6fb2505571eb73562ba8916bfec30ff3b5e748aaf2f7f8ac5e33",
-      "size_bytes": 230075
+      "sha256": "b8d600eeb4ca0dd314cb9dedb067af1893f691741ffb91cd3a1710a31fe9b80e",
+      "size_bytes": 210482
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
       "row_count": 72,
-      "sha256": "1ecfa6194cdf45d6ba9541773d6004366511cdca358d11ec6583829ff3faa479",
-      "size_bytes": 21607
+      "sha256": "909293a81d2d3715f823126bf6da302e488af32d726f8d84c0b61f638cc1dd1c",
+      "size_bytes": 26176
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
       "row_count": 21,
-      "sha256": "bcff7be1982eb8aef8ff0e413764959bab8c22ac453ec6a7e1c711a4845d80c7",
-      "size_bytes": 6631
+      "sha256": "00b977ea6926cebabbdfeb2f41656fab4cb181bf4358746d9467c275f0c69988",
+      "size_bytes": 8752
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
       "row_count": 24,
-      "sha256": "0929f35bc80fa720016dbe663362d99dd1ce415f6a9869aaac1d548ad74c240a",
-      "size_bytes": 4451
+      "sha256": "6fed641e41f4bf7239d8f840ae1a515817ff97905b41e2379d9ccacc7f34f755",
+      "size_bytes": 5707
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
       "row_count": null,
-      "sha256": "cb1d3f32ee5200f95f7f99413debb7da0d6242c7fca9921d80d73c43dbe408f4",
-      "size_bytes": 27578
+      "sha256": "25faad6fe2f602ed188316f88fc1d0adda66379ffca65fe67b28574aad716e81",
+      "size_bytes": 29798
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
       "row_count": null,
-      "sha256": "ccdeb6498eeb4fc930a954655bd22670196511a01ec1acbd80b9088ab21e1797",
-      "size_bytes": 428969
+      "sha256": "38038e7dc7f58332dae605f7a4b1d7908ecfd80e52c7f9c8d3957ffec0c71e63",
+      "size_bytes": 302531
     },
     {
       "path": "results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
-      "row_count": 9,
-      "sha256": "dde73fa720829071f3388d488a88691b6930e92bf62da25c7c1e01227d306063",
-      "size_bytes": 1419
+      "row_count": 18,
+      "sha256": "7bb944fd7a12709569246fb0f21e53e7444272bf38d456fb8d6d114f2141d52c",
+      "size_bytes": 4237
     },
     {
       "path": "results/revision_v1/final_experiment_package/overhead/detector_cuda_benchmark_manifest.json",

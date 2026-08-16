@@ -28,26 +28,39 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument("--readability-manifest", type=Path, required=True)
     parser.add_argument("--overhead-manifest", type=Path, required=True)
     parser.add_argument("--detector-manifest", type=Path, required=True)
+    parser.add_argument("--ablation-manifest", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
     return parser
 
 
+def _repository_relative(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(PROJECT_ROOT).as_posix()
+    except ValueError as exc:
+        raise FigureEvidenceError(
+            f"Figure-related path is outside the repository root: {resolved}"
+        ) from exc
+
+
 def _reproducible_command(args: argparse.Namespace) -> str:
     values = [
-        str(Path(__file__).resolve()),
+        "scripts/build_revision_figures.py",
         "--robustness-manifest",
-        str(args.robustness_manifest.resolve()),
+        _repository_relative(args.robustness_manifest),
         "--theory-manifest",
-        str(args.theory_manifest.resolve()),
+        _repository_relative(args.theory_manifest),
         "--readability-manifest",
-        str(args.readability_manifest.resolve()),
+        _repository_relative(args.readability_manifest),
         "--overhead-manifest",
-        str(args.overhead_manifest.resolve()),
+        _repository_relative(args.overhead_manifest),
         "--detector-manifest",
-        str(args.detector_manifest.resolve()),
+        _repository_relative(args.detector_manifest),
+        "--ablation-manifest",
+        _repository_relative(args.ablation_manifest),
         "--output-dir",
-        str(args.output_dir.resolve()),
+        _repository_relative(args.output_dir),
     ]
     if args.overwrite:
         values.append("--overwrite")
@@ -63,8 +76,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             readability_manifest=args.readability_manifest,
             overhead_manifest=args.overhead_manifest,
             detector_manifest=args.detector_manifest,
+            ablation_manifest=args.ablation_manifest,
             output_dir=args.output_dir,
             command=_reproducible_command(args),
+            project_root=PROJECT_ROOT,
+            generator_sources={
+                "implementation": PROJECT_ROOT / "rankcloak" / "revision_figures.py",
+                "cli": Path(__file__).resolve(),
+            },
             overwrite=args.overwrite,
         )
     except FigureEvidenceError as exc:
