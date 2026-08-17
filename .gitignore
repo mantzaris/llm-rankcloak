@@ -51,6 +51,6 @@ results/**/*.tar
 results/**/*.tar.gz
 
 
-.paper
+
 .agent
 .codex

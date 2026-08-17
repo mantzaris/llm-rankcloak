@@ -1,0 +1,117 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@nameuse{bbl@beforestart}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{naturemag-doi}
+\citation{NorelliBronstein2025Calgacus}
+\citation{NorelliBronstein2025Calgacus}
+\citation{Simmons1984Prisoners,Cachin1998InformationTheoretic,Hopper2002ProvablySecureSteganography,Petitcolas1999InformationHidingSurvey}
+\citation{Fang2017GeneratingSteganographicTextLSTMs,Yang2019RNNStega,Ziegler2019NeuralLinguisticSteganography,DaiCai2019NearImperceptible,Shen2020SelfAdjustingArithmetic,Zhang2021ProvablySecureGenerative,wang2025dynamicallyallocatedintervalbasedgenerative,Wu2024GenerativeTextSteganographyLLM,Lin2024ZeroShotGLS}
+\citation{Kirchenbauer2023WatermarkLLM}
+\citation{Wayner1992MimicFunctions,Wayner1995StrongTheoreticalSteganography}
+\citation{ChapmanDavida1997HidingHidden,Bennett2004LinguisticSteganography}
+\citation{ChangClark2014PracticalLinguisticSteganography}
+\citation{Weinberg2012StegoTorus,Dyer2013FormatTransformingEncryption}
+\citation{Zander2007CovertChannelsCountermeasures,Badar2025StegomalwareSurvey}
+\citation{Wen2019CNNTextSteganalysis,Wu2021GNNLinguisticSteganalysis,Wang2023FewShotLinguisticSteganalysis,Bai2024NextGenerationSteganalysis,Gehrmann2019GLTR,Mitchell2023DetectGPT,Sadasivan2023AIDetection}
+\citation{RogerGreenblatt2023HidingReasoning,Motwani2024SecretCollusion,Zolkowski2025EarlySignsSteganographicCapabilities}
+\babel@aux{english}{}
+\citation{NIST2015SecureHashStandard,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}
+\citation{Sennrich2016SubwordUnits,KudoRichardson2018SentencePiece}
+\citation{YanMurawaki2025TokenizationInconsistency}
+\citation{NorelliBronstein2025Calgacus}
+\citation{NorelliBronstein2025Calgacus}
+\newlabel{eq:next-token-prob}{{1}{3}{}{equation.0.1}{}}
+\newlabel{eq:rank-order}{{2}{3}{}{equation.0.2}{}}
+\newlabel{eq:rank-function}{{3}{3}{}{equation.0.3}{}}
+\newlabel{eq:calgacus-rank-transcoding}{{4}{3}{}{equation.0.4}{}}
+\newlabel{eq:rankcloak-codec}{{5}{4}{}{equation.0.5}{}}
+\newlabel{eq:rankcloak-nonseg}{{6}{4}{}{equation.0.6}{}}
+\newlabel{eq:codec-exact-recovery}{{7}{4}{}{equation.0.7}{}}
+\newlabel{eq:hex-nibble-map}{{8}{4}{}{equation.0.8}{}}
+\newlabel{eq:ascii-radix-map}{{9}{4}{}{equation.0.9}{}}
+\newlabel{eq:filtered-rank}{{10}{4}{}{equation.0.10}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Non-segmented RankCloak bounded-codec trial for encoding a displayed synthetic artifact as ranks, generating one cover token per rank, and recovering by exact-copy replay.\relax }}{5}{algorithm.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{alg:nonseg}{{1}{5}{Non-segmented RankCloak bounded-codec trial for encoding a displayed synthetic artifact as ranks, generating one cover token per rank, and recovering by exact-copy replay.\relax }{algorithm.1}{}}
+\newlabel{eq:rank-segmentation}{{11}{5}{}{equation.0.11}{}}
+\newlabel{eq:segmented-forced-span}{{12}{6}{}{equation.0.12}{}}
+\newlabel{eq:segmented-message}{{13}{6}{}{equation.0.13}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Segmented multi-cover RankCloak trial for distributing a hex-nibble payload across payload-bearing forced spans with non-payload natural tails.\relax }}{7}{algorithm.2}\protected@file@percent }
+\newlabel{alg:segmented}{{2}{7}{Segmented multi-cover RankCloak trial for distributing a hex-nibble payload across payload-bearing forced spans with non-payload natural tails.\relax }{algorithm.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Greedy natural-tail policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder.\relax }}{8}{algorithm.3}\protected@file@percent }
+\newlabel{alg:tail}{{3}{8}{Greedy natural-tail policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder.\relax }{algorithm.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  Payload representation and rank-pressure summary for the completed payload diagnostics. Direct subword token counts are ranges over the two examples in each payload class. Maximum observed direct rank is the largest payload-side next-token rank observed within that class. The bounded-rank columns report deterministic codec lengths, not observed model ranks. Hex-nibble coding applies only to lowercase hex-like payloads; n/a indicates that the codec is not applicable.\relax }}{9}{table.caption.1}\protected@file@percent }
+\newlabel{tab:payloads}{{1}{9}{Payload representation and rank-pressure summary for the completed payload diagnostics. Direct subword token counts are ranges over the two examples in each payload class. Maximum observed direct rank is the largest payload-side next-token rank observed within that class. The bounded-rank columns report deterministic codec lengths, not observed model ranks. Hex-nibble coding applies only to lowercase hex-like payloads; n/a indicates that the codec is not applicable.\relax }{table.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Payload representation and direct rank-pressure diagnostics from the completed payload diagnostics. Panel A compares deterministic codec rank counts by payload class. Panel B shows direct subword rank pressure on a log scale. Bounded-rank encodings constrain possible requested ranks but increase rank count relative to direct subword tokenization. Direct subword tokenization can be compact but produced large observed ranks for several synthetic artifact classes.\relax }}{10}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:representation}{{1}{10}{Payload representation and direct rank-pressure diagnostics from the completed payload diagnostics. Panel A compares deterministic codec rank counts by payload class. Panel B shows direct subword rank pressure on a log scale. Bounded-rank encodings constrain possible requested ranks but increase rank count relative to direct subword tokenization. Direct subword tokenization can be compact but produced large observed ranks for several synthetic artifact classes.\relax }{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Capacity-quality frontier for completed cover-generation trials. Panel A compares completed non-segmented bounded-rank variants by generated length and mean token log-probability proxy. Longer covers indicate that more generated tokens were needed to carry the payload, while less negative log-probability values indicate that the generated tokens were more likely under the model. Panel B places non-segmented rows and segmented full public-message rows on the same length-quality plane. Segmented full-message values include non-payload natural tails, so they should not be interpreted as payload-bearing forced-span quality. Point area scales with mean deterministic artifact flags. The experimental lead-in variant is shown separately because it has one observed exact-recovery failure.\relax }}{12}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:capacityquality}{{2}{12}{Capacity-quality frontier for completed cover-generation trials. Panel A compares completed non-segmented bounded-rank variants by generated length and mean token log-probability proxy. Longer covers indicate that more generated tokens were needed to carry the payload, while less negative log-probability values indicate that the generated tokens were more likely under the model. Panel B places non-segmented rows and segmented full public-message rows on the same length-quality plane. Segmented full-message values include non-payload natural tails, so they should not be interpreted as payload-bearing forced-span quality. Point area scales with mean deterministic artifact flags. The experimental lead-in variant is shown separately because it has one observed exact-recovery failure.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Forced-span versus full-message metrics for completed segmented trials. Full-message metrics include greedy natural tails and can look substantially better than payload-bearing forced-span metrics. The comparison is used to show when apparent public-message quality is driven by non-payload continuation text rather than by the tokens that carry the payload.\relax }}{13}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:forcedfull}{{3}{13}{Forced-span versus full-message metrics for completed segmented trials. Full-message metrics include greedy natural tails and can look substantially better than payload-bearing forced-span metrics. The comparison is used to show when apparent public-message quality is driven by non-payload continuation text rather than by the tokens that carry the payload.\relax }{figure.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Completed recovery and cover-quality summary by protocol variant. Segmented log-probability values are full-message values and include non-payload natural tails. The table reports partial-pilot evidence only.\relax }}{14}{table.caption.4}\protected@file@percent }
+\newlabel{tab:protocolquality}{{2}{14}{Completed recovery and cover-quality summary by protocol variant. Segmented log-probability values are full-message values and include non-payload natural tails. The table reports partial-pilot evidence only.\relax }{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Worked payload-to-cover example for a segmented hex-nibble row. The payload excerpt is synthetic and truncated. Hex-nibble coding maps each lowercase hex character to a rank in \(1,\ldots  ,16\). The forced cover span carries the payload ranks; the natural tail is public non-payload text and is ignored by the decoder. The table is illustrative and does not claim human naturalness, undetectability, encryption, or cryptographic security.\relax }}{14}{table.caption.7}\protected@file@percent }
+\newlabel{tab:examples}{{3}{14}{Worked payload-to-cover example for a segmented hex-nibble row. The payload excerpt is synthetic and truncated. Hex-nibble coding maps each lowercase hex character to a rank in \(1,\ldots ,16\). The forced cover span carries the payload ranks; the natural tail is public non-payload text and is ignored by the decoder. The table is illustrative and does not claim human naturalness, undetectability, encryption, or cryptographic security.\relax }{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Tail-topic quality diagnostic for completed segmented messages. In the vertical axis label, mean log \(p\) denotes mean token log probability. Tail gain is the full-message mean token log probability minus the forced-prefix mean token log probability (it is not a tail-only likelihood). Tail tokens are greedy non-payload continuations, carry no payload ranks, and are ignored by the decoder.\relax }}{15}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:tailtopic}{{4}{15}{Tail-topic quality diagnostic for completed segmented messages. In the vertical axis label, mean log \(p\) denotes mean token log probability. Tail gain is the full-message mean token log probability minus the forced-prefix mean token log probability (it is not a tail-only likelihood). Tail tokens are greedy non-payload continuations, carry no payload ranks, and are ignored by the decoder.\relax }{figure.caption.6}{}}
+\bibcite{NorelliBronstein2025Calgacus}{1}
+\bibcite{Simmons1984Prisoners}{2}
+\bibcite{Cachin1998InformationTheoretic}{3}
+\bibcite{Hopper2002ProvablySecureSteganography}{4}
+\bibcite{Petitcolas1999InformationHidingSurvey}{5}
+\bibcite{Fang2017GeneratingSteganographicTextLSTMs}{6}
+\bibcite{Yang2019RNNStega}{7}
+\bibcite{Ziegler2019NeuralLinguisticSteganography}{8}
+\bibcite{DaiCai2019NearImperceptible}{9}
+\bibcite{Shen2020SelfAdjustingArithmetic}{10}
+\bibcite{Zhang2021ProvablySecureGenerative}{11}
+\bibcite{wang2025dynamicallyallocatedintervalbasedgenerative}{12}
+\bibcite{Wu2024GenerativeTextSteganographyLLM}{13}
+\bibcite{Lin2024ZeroShotGLS}{14}
+\bibcite{Kirchenbauer2023WatermarkLLM}{15}
+\bibcite{Wayner1992MimicFunctions}{16}
+\bibcite{Wayner1995StrongTheoreticalSteganography}{17}
+\bibcite{ChapmanDavida1997HidingHidden}{18}
+\bibcite{Bennett2004LinguisticSteganography}{19}
+\@writefile{toc}{\contentsline {section}{\hspace  *{-\tocsep }References}{17}{table.caption.7}\protected@file@percent }
+\bibcite{ChangClark2014PracticalLinguisticSteganography}{20}
+\bibcite{Weinberg2012StegoTorus}{21}
+\bibcite{Dyer2013FormatTransformingEncryption}{22}
+\bibcite{Zander2007CovertChannelsCountermeasures}{23}
+\bibcite{Badar2025StegomalwareSurvey}{24}
+\bibcite{Wen2019CNNTextSteganalysis}{25}
+\bibcite{Wu2021GNNLinguisticSteganalysis}{26}
+\bibcite{Wang2023FewShotLinguisticSteganalysis}{27}
+\bibcite{Bai2024NextGenerationSteganalysis}{28}
+\bibcite{Gehrmann2019GLTR}{29}
+\bibcite{Mitchell2023DetectGPT}{30}
+\bibcite{Sadasivan2023AIDetection}{31}
+\bibcite{RogerGreenblatt2023HidingReasoning}{32}
+\bibcite{Motwani2024SecretCollusion}{33}
+\bibcite{Zolkowski2025EarlySignsSteganographicCapabilities}{34}
+\bibcite{NIST2015SecureHashStandard}{35}
+\bibcite{Josefsson2006RFC4648}{36}
+\bibcite{DavisPeabodyLeach2024RFC9562}{37}
+\bibcite{Sennrich2016SubwordUnits}{38}
+\bibcite{KudoRichardson2018SentencePiece}{39}
+\bibcite{YanMurawaki2025TokenizationInconsistency}{40}
+\newlabel{LastPage}{{}{19}{}{page.19}{}}
+\xdef\lastpage@lastpage{19}
+\xdef\lastpage@lastpageHy{19}
+\ttl@finishall
