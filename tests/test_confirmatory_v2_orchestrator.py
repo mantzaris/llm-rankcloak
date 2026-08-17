@@ -840,7 +840,6 @@ def test_downstream_contract_pins_join_detector_r_report_and_manifest() -> None:
         "theory",
         "reports",
         "figures",
-        "manuscript_revision",
     ]
     join = by_id["primary_evaluator_join"]["argv"]
     assert join.count("--evaluator-feature-manifest") == 3
@@ -921,19 +920,57 @@ def test_downstream_contract_pins_join_detector_r_report_and_manifest() -> None:
         "required_help_tokens"
     ]
     assert by_id["figures"]["completion"]["path"] == "{figures_manifest}"
-    manuscript = by_id["manuscript_revision"]
-    for token in (
-        "--report-manifest",
-        "--figures-dir",
-        "--statistics-manifest",
-        "--mixed-model-manifest",
-        "--progress-manifest",
-        "--evaluator-unavailability-manifest",
-        "--manuscript-root",
-        "--output-dir",
-    ):
-        assert token in manuscript["argv"]
-        assert token in manuscript["interface"]["required_help_tokens"]
+
+
+def test_current_downstream_interfaces_exist_and_manuscript_stage_is_retired() -> None:
+    contract_path = PROJECT_ROOT / "operations/confirmatory_v2/downstream_commands.json"
+    contract = orchestrator.load_command_contract(contract_path)
+    substitutions = orchestrator._format_values()
+    forbidden = (
+        "scripts/revise_revision_manuscripts.py",
+        "tests/test_revision_manuscripts.py",
+        ".paper/scientific_reports",
+        "results/revision_v1/manuscript_revision_v2",
+    )
+    serialized = json.dumps(contract, sort_keys=True)
+    assert all(token not in serialized for token in forbidden)
+    assert contract["operations"][-1]["operation_id"] == "figures"
+    assert contract["operations"][-1]["completion"]["kind"] == "figures_v1"
+
+    for operation in contract["operations"]:
+        interface = operation["interface"]
+        interface_path = Path(
+            str(interface["path"]).format_map(substitutions)
+        )
+        if not interface_path.is_absolute():
+            interface_path = PROJECT_ROOT / interface_path
+        assert interface_path.is_file(), operation["operation_id"]
+        assert not interface_path.is_symlink(), operation["operation_id"]
+
+    figures = contract["operations"][-1]
+    runtime_path = figures["interface"]["runtime_path"]
+    assert runtime_path == figures["argv"][1]
+    assert runtime_path.startswith("{report_output_dir}/")
+
+
+def test_current_commands_and_documentation_exclude_retired_manuscript_paths() -> None:
+    forbidden = (
+        "scripts/revise_revision_manuscripts.py",
+        "tests/test_revision_manuscripts.py",
+        ".paper/scientific_reports",
+        "results/revision_v1/manuscript_revision_v2",
+    )
+    active_paths = (
+        "README.md",
+        "operations/confirmatory_v2/downstream_commands.json",
+        "scripts/supervise_confirmatory_v2.py",
+        "release/revision_v1_template/release_spec.json",
+        "release/revision_v1_template/README.md",
+        "revision_docs/DOI_RELEASE_PLAN.md",
+    )
+    for relative in active_paths:
+        text = (PROJECT_ROOT / relative).read_text(encoding="utf-8")
+        assert all(token not in text for token in forbidden), relative
 
 
 def test_checkpointed_detector_action_and_status_are_exact_and_signed(

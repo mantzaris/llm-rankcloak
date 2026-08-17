@@ -13,7 +13,9 @@ metrics, the final vector figures and plot-source tables, the completed
 paperV2 publication package, and a portable derivative of
 results/revision_v1/final_experiment_package. The source package index is pinned
 by SHA-256 and its included files and selected external references are verified
-before assembly.
+before assembly. The environment bundle is an execution-time dependency and
+hardware record, not a live-current-source attestation: its frozen source pins
+legitimately retain the subsequently retired, non-scientific manuscript helper.
 
 Machine-local paths in retained result metadata are rebased only in the staged
 copy. The archive records both source and staged hashes for every rewritten

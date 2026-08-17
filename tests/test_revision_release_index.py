@@ -25,7 +25,7 @@ def synthetic_project(tmp_path: Path):
             write(root / relative, json.dumps(policy) + "\n")
         else:
             write(root / relative, "validator {}\n".format(relative))
-    for _group, source, _destination, _role, _kind in release_index.CONFIRMATORY_ARTIFACT_SPECS:
+    for _group, source, _destination, _role, _kind in release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS:
         path = root / source
         if source in release_index.CONFIRMATORY_FILE_SOURCES:
             if source.endswith("confirmatory_v2_events.jsonl"):
@@ -37,7 +37,7 @@ def synthetic_project(tmp_path: Path):
         else:
             write(path / "verified.txt", "{}\n".format(source))
     manifest_fixture = release_index._file_record(
-        root / release_index.CONFIRMATORY_ARTIFACT_SPECS[0][1] / "verified.txt",
+        root / release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS[0][1] / "verified.txt",
         root,
     )
     actions = [
@@ -47,8 +47,8 @@ def synthetic_project(tmp_path: Path):
             "manifest": dict(manifest_fixture),
         }
         for operation_id, completion_kind in zip(
-            release_index.EXPECTED_ACTION_IDS,
-            release_index.EXPECTED_ACTION_KINDS,
+            release_index.LEGACY_EXPECTED_ACTION_IDS,
+            release_index.LEGACY_EXPECTED_ACTION_KINDS,
         )
     ]
     verification = {
@@ -65,7 +65,7 @@ def synthetic_project(tmp_path: Path):
         for relative in release_index.VALIDATOR_SOURCE_PATHS
     ]
     artifacts = []
-    for group, source, destination, role, kind in release_index.CONFIRMATORY_ARTIFACT_SPECS:
+    for group, source, destination, role, kind in release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS:
         files = release_index._artifact_files(root, source)
         artifacts.append({
             "group": group,
@@ -105,17 +105,17 @@ def test_index_binds_exact_safe_confirmatory_file_sets(tmp_path, monkeypatch):
     target = root / release_index.DEFAULT_INDEX
     release_index.write_confirmatory_release_index(target, value)
     monkeypatch.setattr(
-        release_index, "verify_live_confirmatory_pipeline", lambda _root: verification
+        release_index, "verify_legacy_confirmatory_pipeline", lambda _root: verification
     )
     report = release_index.verify_confirmatory_release_index(target, root)
     assert report["status"] == "verified_complete"
-    assert report["artifact_count"] == len(release_index.CONFIRMATORY_ARTIFACT_SPECS)
+    assert report["artifact_count"] == len(release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS)
     assert report["manifest_sha256"] == value["manifest_sha256"]
 
 
 def test_index_rejects_artifact_or_validator_drift(tmp_path):
     root, value, _verification = synthetic_project(tmp_path)
-    first_source = root / release_index.CONFIRMATORY_ARTIFACT_SPECS[0][1]
+    first_source = root / release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS[0][1]
     (first_source / "verified.txt").write_text("tampered\n", encoding="utf-8")
     with pytest.raises(release_index.ConfirmatoryReleaseIndexError, match="bytes differ"):
         release_index._verify_index_document(value, root, verify_live=False)
@@ -130,11 +130,11 @@ def test_index_rejects_artifact_or_validator_drift(tmp_path):
 
 def test_index_refuses_weights_and_no_overwrite(tmp_path):
     root, value, _verification = synthetic_project(tmp_path)
-    first_source = root / release_index.CONFIRMATORY_ARTIFACT_SPECS[0][1]
+    first_source = root / release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS[0][1]
     write(first_source / "model.gguf", "not real weights")
     with pytest.raises(release_index.ConfirmatoryReleaseIndexError, match="model weights"):
         release_index._artifact_files(
-            root, release_index.CONFIRMATORY_ARTIFACT_SPECS[0][1]
+            root, release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS[0][1]
         )
     (first_source / "model.gguf").unlink()
     target = root / release_index.DEFAULT_INDEX
@@ -192,7 +192,7 @@ def test_staged_verifier_rechecks_remapped_candidate_bytes(tmp_path):
         index_path, candidate
     )
     assert report["artifact_count"] == len(
-        release_index.CONFIRMATORY_ARTIFACT_SPECS
+        release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS
     )
     victim = candidate / value["artifacts"][0]["destination"] / "verified.txt"
     victim.write_text("tampered\n", encoding="utf-8")
@@ -243,12 +243,16 @@ def test_staged_resolver_uses_candidate_bytes_without_original_host_fallback(tmp
 
 
 def test_release_map_excludes_superseded_invalid_smoke_and_model_paths():
-    sources = {row[1] for row in release_index.CONFIRMATORY_ARTIFACT_SPECS}
+    sources = {row[1] for row in release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS}
     assert "results/revision_v1/primary" not in sources
     assert not any("smoke" in source for source in sources)
     assert not any("invalidations" in source for source in sources)
     assert not any("models" in Path(source).parts for source in sources)
-    assert "results/revision_v1/manuscript_revision_v2" in sources
+    assert "results/revision_v1/manuscript_revision_v2" not in sources
+    assert not any(
+        row[4] == "manuscript_revision_v1"
+        for row in release_index.LEGACY_CONFIRMATORY_ARTIFACT_SPECS
+    )
     assert "results/revision_v1/final_progress_snapshot_v1.json" in sources
 
 

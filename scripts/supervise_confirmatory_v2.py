@@ -6278,8 +6278,6 @@ def _format_values() -> dict[str, str]:
         "report_manifest": str(PROJECT_ROOT / RESULTS_ROOT / "reports" / "confirmatory_v2" / "report_output_manifest.json"),
         "figures_output_dir": str(PROJECT_ROOT / RESULTS_ROOT / "reports" / "confirmatory_v2_figures"),
         "figures_manifest": str(PROJECT_ROOT / RESULTS_ROOT / "reports" / "confirmatory_v2_figures" / "figure_render_manifest.json"),
-        "manuscript_output_dir": str(PROJECT_ROOT / RESULTS_ROOT / "manuscript_revision_v2"),
-        "manuscript_manifest": str(PROJECT_ROOT / RESULTS_ROOT / "manuscript_revision_v2" / "manuscript_revision_manifest.json"),
         "evaluator_unavailability_manifest": str(
             PROJECT_ROOT / EVALUATOR_UNAVAILABILITY_PATH
         ),
@@ -6350,7 +6348,6 @@ def load_command_contract(path: Path) -> dict[str, Any]:
         "theory",
         "reports",
         "figures",
-        "manuscript_revision",
     ]
     if identifiers != required_order:
         raise InterfaceHalt(
@@ -7208,7 +7205,13 @@ def verify_completion(spec: Mapping[str, Any], substitutions: Mapping[str, str])
     if kind == "figures_v1":
         registry = Path(str(completion["registry"].format_map(substitutions)))
         output_dir = Path(str(completion["output_dir"].format_map(substitutions)))
-        renderer = Path(str(spec["interface"]["path"]).format_map(substitutions))
+        renderer = Path(
+            str(
+                spec["interface"].get(
+                    "runtime_path", spec["interface"]["path"]
+                )
+            ).format_map(substitutions)
+        )
         if not renderer.is_absolute():
             renderer = PROJECT_ROOT / renderer
         if (
@@ -7253,129 +7256,6 @@ def verify_completion(spec: Mapping[str, Any], substitutions: Mapping[str, str])
             figure = path.parent / str(item["path"])
             if figure.read_bytes()[:4] != b"%PDF":
                 raise InterfaceHalt("rendered figure is not a PDF: {}".format(figure))
-        return True
-    if kind == "manuscript_revision_v1":
-        unsigned = dict(manifest)
-        claimed = unsigned.pop("manifest_sha256", None)
-        if (
-            manifest.get("schema_version") != "rankcloak-revision-manuscript-run-v1"
-            or manifest.get("artifact_type")
-            != "rankcloak_revision_manuscript_package"
-            or canonical_json_sha256(unsigned) != claimed
-            or manifest.get("fixture_mode") is not False
-            or manifest.get("non_scientific_fixture") is not False
-            or manifest.get("originals_preserved") is not True
-            or manifest.get("main_word_limit_satisfied") is not True
-            or manifest.get("main_display_limit_satisfied") is not True
-            or manifest.get("no_fabricated_results") is not True
-            or manifest.get("all_computational_placeholders_resolved") is not True
-            or manifest.get("cross_document_values_consistent") is not True
-            or manifest.get("pdf_compilation_passed") is not True
-            or manifest.get("smoke_or_pilot_values_used") is not False
-            or manifest.get("human_recruitment_performed") is not False
-            or manifest.get("human_outcomes_estimated") is not False
-            or manifest.get("public_release_performed") is not False
-        ):
-            raise InterfaceHalt("manuscript revision manifest violates the preservation/reporting contract")
-        outputs = manifest.get("outputs")
-        if not isinstance(outputs, list) or {row.get("role") for row in outputs} != {"main2", "supplementary2", "response_letter"}:
-            raise InterfaceHalt("manuscript manifest lacks the three required revised documents")
-        _verify_declared_files(path, outputs)
-        product_files = manifest.get("product_files")
-        compiled = manifest.get("compiled_pdfs")
-        protected = manifest.get("protected_submitted_artifacts_after")
-        provenance = manifest.get("provenance_manifests")
-        support = manifest.get("support_files")
-        if (
-            not isinstance(product_files, list)
-            or manifest.get("product_files_sha256")
-            != canonical_json_sha256(product_files)
-            or not isinstance(compiled, list)
-            or len(compiled) != 3
-            or manifest.get("compiled_pdfs_sha256")
-            != canonical_json_sha256(compiled)
-            or not isinstance(protected, list)
-            or len(protected) != 4
-            or not isinstance(provenance, list)
-            or len(provenance) != 6
-            or manifest.get("provenance_manifests_sha256")
-            != canonical_json_sha256(provenance)
-            or not isinstance(support, list)
-            or manifest.get("support_files_sha256")
-            != canonical_json_sha256(support)
-        ):
-            raise InterfaceHalt("manuscript package declarations are incomplete")
-        _verify_declared_files(path, product_files)
-        _verify_declared_files(path, compiled)
-        _verify_declared_files(path, protected)
-        _verify_declared_files(path, provenance)
-        _verify_declared_files(path, support)
-        provenance_by_role = {
-            str(row.get("role")): row for row in provenance
-        }
-        expected_provenance_roles = {
-            "report_manifest",
-            "report_integrity",
-            "statistics_manifest",
-            "mixed_model_manifest",
-            "final_progress_snapshot",
-            "evaluator_unavailability",
-        }
-        if set(provenance_by_role) != expected_provenance_roles:
-            raise InterfaceHalt("manuscript bundled provenance role set is incomplete")
-        role_hash_fields = {
-            "report_manifest": "report_manifest_sha256",
-            "report_integrity": "report_integrity_sha256",
-            "statistics_manifest": "statistics_manifest_sha256",
-            "mixed_model_manifest": "mixed_model_manifest_sha256",
-            "final_progress_snapshot": "final_progress_snapshot_sha256",
-            "evaluator_unavailability": (
-                "evaluator_unavailability_manifest_sha256"
-            ),
-        }
-        if any(
-            provenance_by_role[role].get("sha256") != manifest.get(field)
-            for role, field in role_hash_fields.items()
-        ):
-            raise InterfaceHalt("manuscript bundled provenance hash linkage failed")
-        if (
-            manifest.get("report_manifest_sha256")
-            != file_sha256(Path(substitutions["report_manifest"]))
-            or manifest.get("statistics_manifest_sha256")
-            != file_sha256(Path(substitutions["statistics_manifest"]))
-            or manifest.get("mixed_model_manifest_sha256")
-            != file_sha256(Path(substitutions["mixed_models_manifest"]))
-            or manifest.get("final_progress_snapshot_sha256")
-            != file_sha256(Path(substitutions["progress_manifest"]))
-            or manifest.get("evaluator_unavailability_manifest_sha256")
-            != file_sha256(
-                Path(substitutions["evaluator_unavailability_manifest"])
-            )
-        ):
-            raise InterfaceHalt("manuscript package belongs to different sealed inputs")
-        evaluator_accounting = manifest.get("evaluator_accounting")
-        if evaluator_accounting != {
-            "frozen_target": FROZEN_EVALUATOR_TARGET_UNITS,
-            "scoreable_rows": SCOREABLE_EVALUATOR_UNITS,
-            "terminal_upstream_unavailable": (
-                STRUCTURALLY_UNAVAILABLE_EVALUATOR_UNITS
-            ),
-            "scores_imputed_or_fabricated": False,
-        }:
-            raise InterfaceHalt("manuscript evaluator accounting is not exact")
-        gpu_hours = float(manifest.get("cumulative_actual_gpu_hours", math.inf))
-        if not math.isfinite(gpu_hours) or gpu_hours < 0 or gpu_hours > BUDGET_GPU_HOURS:
-            raise InterfaceHalt("manuscript package exceeds the GPU-hour contract")
-        for row in compiled:
-            pdf = _resolved_declared_path(path, row.get("path"))
-            if pdf.read_bytes()[:4] != b"%PDF":
-                raise InterfaceHalt("compiled manuscript product is not a PDF")
-        for row in outputs:
-            source = _resolved_declared_path(path, row.get("path")).read_text(
-                encoding="utf-8"
-            )
-            if source.count(r"\input{generated_results.tex}") != 1:
-                raise InterfaceHalt("manuscript source is not bound once to generated results")
         return True
     raise InterfaceHalt("unknown completion-contract kind: {}".format(kind))
 
@@ -7549,7 +7429,11 @@ def execute_figures(
             }
         )
     renderer_path = Path(
-        str(spec["interface"]["path"]).format_map(substitutions)
+        str(
+            spec["interface"].get(
+                "runtime_path", spec["interface"]["path"]
+            )
+        ).format_map(substitutions)
     )
     if not renderer_path.is_absolute():
         renderer_path = PROJECT_ROOT / renderer_path
@@ -7825,7 +7709,7 @@ def run_orchestrator(args: argparse.Namespace) -> int:
                         status="sealing_final_progress",
                         message=(
                             "Publishing the immutable source-bound progress snapshot "
-                            "before reports and manuscript revision."
+                            "before reports and figures."
                         ),
                         action=action,
                         retries=retries,
@@ -7899,7 +7783,7 @@ def run_orchestrator(args: argparse.Namespace) -> int:
         budget = calculate_budget(projection, progress)
         write_state(
             status="complete",
-            message="Full frozen post-primary DAG, figures, and manuscript revision are complete.",
+            message="Full frozen post-primary computational DAG and figures are complete.",
             action=None,
             retries=retries,
             progress=progress,

@@ -148,7 +148,7 @@
       {
         "destination": "environment/revision_v1",
         "evidence_role": "environment_reproduction_input",
-        "note": "Content-hashed Python, R, CUDA, hardware, determinism, and dependency-lock snapshot; model binaries are not included.",
+        "note": "Execution-time content-hashed Python, R, CUDA, hardware, determinism, and dependency-lock snapshot; historical source pins are provenance rather than a live-current-source attestation, and model binaries are not included.",
         "required": true,
         "source": "environment/revision_v1"
       }
@@ -331,6 +331,64 @@
     ]
   },
   "authoritative_evidence_package": {
+    "external_reference_mappings": [
+      {
+        "label": "detector_dataset_manifest",
+        "repository_path": "results/revision_v1/neural_detector/confirmatory_v2/detector_dataset_manifest.csv"
+      },
+      {
+        "label": "detector_predictions",
+        "repository_path": "results/revision_v1/neural_detector/confirmatory_v2/detector_predictions.csv"
+      },
+      {
+        "label": "detector_run_manifest",
+        "repository_path": "results/revision_v1/neural_detector/confirmatory_v2/detector_run_manifest.json"
+      },
+      {
+        "label": "detector_split_manifest",
+        "repository_path": "results/revision_v1/neural_detector/confirmatory_v2/detector_split_manifest.json"
+      },
+      {
+        "label": "evidence_spec",
+        "repository_path": "analysis/revision_v1/evidence_specs/final_evidence_records.json"
+      },
+      {
+        "label": "evidence_summary_manifest",
+        "repository_path": "results/revision_v1/final_experiment_package/evidence_summary_manifest.json"
+      },
+      {
+        "label": "final_progress",
+        "repository_path": "results/revision_v1/final_progress_snapshot_v1.json"
+      },
+      {
+        "label": "frozen_config_manifest",
+        "repository_path": "configs/revision_v1/config_manifest.json"
+      },
+      {
+        "label": "frozen_environment_manifest",
+        "repository_path": "environment/revision_v1/environment_manifest.json"
+      },
+      {
+        "label": "heldout_join_v5",
+        "repository_path": "results/revision_v1/analysis_inputs/primary_heldout_join_v5/heldout_feature_join_manifest.json"
+      },
+      {
+        "label": "payload_corpus",
+        "repository_path": "release_inputs/revision_v1/revision_payloads.jsonl"
+      },
+      {
+        "label": "payload_manifest",
+        "repository_path": "release_inputs/revision_v1/PAYLOAD_MANIFEST.json"
+      },
+      {
+        "label": "requirements_lock",
+        "repository_path": "environment/revision_v1/requirements-lock.txt"
+      },
+      {
+        "label": "theory_validation",
+        "repository_path": "results/revision_v1/final_experiment_package/theory/theory_validation_manifest.json"
+      }
+    ],
     "manifest": "results/revision_v1/final_experiment_package/manifest.json",
     "manifest_sha256": "b7ec0c47a59fa6a9a33de2fd072f9e2e4db4c38328cc8757aa5fa562451e2349",
     "required_external_labels": [

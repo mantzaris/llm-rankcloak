@@ -337,11 +337,14 @@
         "pdf"
       ],
       "interface": {
-        "path": "{report_output_dir}/plots/plot_revision_figures.py",
+        "path": "rankcloak/revision_reporting.py",
+        "runtime_path": "{report_output_dir}/plots/plot_revision_figures.py",
         "required_source_tokens": [
           "--output-dir",
           "--format",
-          "--only"
+          "--only",
+          "plot_revision_figures.py",
+          "plot_registry.csv"
         ]
       },
       "completion": {
@@ -350,53 +353,6 @@
         "registry": "{report_output_dir}/plots/plot_registry.csv",
         "output_dir": "{figures_output_dir}",
         "format": "pdf"
-      }
-    },
-    {
-      "operation_id": "manuscript_revision",
-      "stage": "manuscript_revision",
-      "output_dir": "{manuscript_output_dir}",
-      "argv": [
-        "{project_root}/.venv/bin/python",
-        "scripts/revise_revision_manuscripts.py",
-        "--report-manifest",
-        "{report_manifest}",
-        "--figures-dir",
-        "{figures_output_dir}",
-        "--statistics-manifest",
-        "{statistics_manifest}",
-        "--mixed-model-manifest",
-        "{mixed_models_manifest}",
-        "--progress-manifest",
-        "{progress_manifest}",
-        "--evaluator-unavailability-manifest",
-        "{evaluator_unavailability_manifest}",
-        "--manuscript-root",
-        "{project_root}/.paper/scientific_reports",
-        "--output-dir",
-        "{manuscript_output_dir}"
-      ],
-      "interface": {
-        "path": "scripts/revise_revision_manuscripts.py",
-        "probe_argv": [
-          "{project_root}/.venv/bin/python",
-          "scripts/revise_revision_manuscripts.py",
-          "--help"
-        ],
-        "required_help_tokens": [
-          "--report-manifest",
-          "--figures-dir",
-          "--statistics-manifest",
-          "--mixed-model-manifest",
-          "--progress-manifest",
-          "--evaluator-unavailability-manifest",
-          "--manuscript-root",
-          "--output-dir"
-        ]
-      },
-      "completion": {
-        "kind": "manuscript_revision_v1",
-        "path": "{manuscript_manifest}"
       }
     }
   ]

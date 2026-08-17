@@ -1,5 +1,12 @@
 # Neural detector execution
 
+> **Historical status.** This document records the earlier pre-completion
+> execution design. The CPU/CUDA equivalence stage was abandoned as
+> computationally infeasible; the completed study used the final CUDA detector
+> matrix and same-device repeatability checks, and it makes no CPU/GPU
+> equivalence claim. The launch and release commands below are retained only as
+> execution-time provenance and are not the current reproduction procedure.
+
 The confirmatory detector matrix contains 56 neural fits: two frozen
 architectures over 28 frozen data splits. The first production attempt used
 the original serial, CPU-only implementation. A read-only audit after roughly

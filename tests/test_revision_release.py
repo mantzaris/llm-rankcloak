@@ -43,6 +43,89 @@ def canonical_sha256(value) -> str:
     ).hexdigest()
 
 
+def authoritative_reference_fixture(
+    tmp_path: Path, checkout_name: str = "fixture-checkout"
+):
+    root = tmp_path / checkout_name
+    root.mkdir(parents=True)
+    source = "results/revision_v1/final_experiment_package"
+    package_relative = "verified.txt"
+    package_file = write(root / source / package_relative, "sealed package file\n")
+    external_relative = "tracked/external-reference.txt"
+    external_file = write(root / external_relative, "required external bytes\n")
+    historical_path = (
+        "/" + "home/historical-user/Documents/repos/llm-rankcloak/"
+        + external_relative
+    )
+    manifest = {
+        "schema_version": "rankcloak-final-experiment-package-index-v1",
+        "status": "passed",
+        "package_files": [
+            {
+                "path": package_relative,
+                "size_bytes": package_file.stat().st_size,
+                "sha256": hashlib.sha256(package_file.read_bytes()).hexdigest(),
+            }
+        ],
+        "external_references": [
+            {
+                "label": "required-reference",
+                "path": historical_path,
+                "size_bytes": external_file.stat().st_size,
+                "sha256": hashlib.sha256(external_file.read_bytes()).hexdigest(),
+            }
+        ],
+        "summary": {"package_file_count": 1, "external_reference_count": 1},
+    }
+    manifest["manifest_sha256"] = canonical_sha256(manifest)
+    manifest_path = write(
+        root / source / "manifest.json",
+        json.dumps(manifest, sort_keys=True) + "\n",
+    )
+    spec = {
+        "authoritative_evidence_package": {
+            "source": source,
+            "manifest": source + "/manifest.json",
+            "manifest_sha256": hashlib.sha256(
+                manifest_path.read_bytes()
+            ).hexdigest(),
+            "status": "passed",
+            "required_external_labels": ["required-reference"],
+            "external_reference_mappings": [
+                {
+                    "label": "required-reference",
+                    "repository_path": external_relative,
+                }
+            ],
+        },
+        "artifacts": {
+            group: [] for group in revision_release.ARTIFACT_GROUPS
+        },
+    }
+    spec["artifacts"]["figure_table_outputs"] = [
+        {"source": source, "destination": source, "exclude_paths": []}
+    ]
+    included_files = [
+        {
+            "source": source + "/" + package_relative,
+            "size_bytes": package_file.stat().st_size,
+            "sha256": hashlib.sha256(package_file.read_bytes()).hexdigest(),
+        }
+    ]
+    return root, spec, included_files, {external_relative}
+
+
+def resign_authoritative_manifest(root: Path, spec, mutate) -> None:
+    declaration = spec["authoritative_evidence_package"]
+    path = root / declaration["manifest"]
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    mutate(manifest)
+    manifest.pop("manifest_sha256", None)
+    manifest["manifest_sha256"] = canonical_sha256(manifest)
+    path.write_text(json.dumps(manifest, sort_keys=True) + "\n", encoding="utf-8")
+    declaration["manifest_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def add_verified_environment_snapshot(root: Path, spec, r_status="complete") -> Path:
     directory = root / "environment/fixture_revision_v1"
     requirements = write(directory / "requirements-lock.txt", "-e .\n")
@@ -315,6 +398,126 @@ def test_verified_environment_snapshot_satisfies_gate_and_tampering_fails(tmp_pa
     )
 
 
+def test_explicit_external_reference_mapping_validates(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    report = revision_release.verify_authoritative_evidence_package(
+        spec, root, included, tracked_files=tracked
+    )
+    assert report["status"] == "verified_complete"
+    assert report["verified_external_reference_count"] == 1
+
+
+def test_explicit_mapping_is_independent_of_checkout_basename(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(
+        tmp_path, checkout_name="unrelated-portability-name"
+    )
+    manifest_path = root / spec["authoritative_evidence_package"]["manifest"]
+    historical = json.loads(manifest_path.read_text())["external_references"][0][
+        "path"
+    ]
+    assert "/llm-rankcloak/" in historical
+    assert root.name not in historical
+    assert revision_release.verify_authoritative_evidence_package(
+        spec, root, included, tracked_files=tracked
+    )["status"] == "verified_complete"
+
+
+def test_explicit_mapping_rejects_wrong_repository_path(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    wrong = write(root / "tracked/wrong.txt", "different bytes\n")
+    mapping = spec["authoritative_evidence_package"][
+        "external_reference_mappings"
+    ][0]
+    mapping["repository_path"] = "tracked/wrong.txt"
+    tracked.add("tracked/wrong.txt")
+    assert wrong.is_file()
+    with pytest.raises(RevisionReleaseError, match="external reference differs"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
+def test_explicit_mapping_rejects_wrong_frozen_hash(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+
+    def mutate(manifest):
+        manifest["external_references"][0]["sha256"] = "0" * 64
+
+    resign_authoritative_manifest(root, spec, mutate)
+    with pytest.raises(RevisionReleaseError, match="external reference differs"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
+def test_explicit_mapping_rejects_duplicate_label(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    mappings = spec["authoritative_evidence_package"][
+        "external_reference_mappings"
+    ]
+    mappings.append(dict(mappings[0]))
+    with pytest.raises(RevisionReleaseError, match="Duplicate external-reference"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
+def test_explicit_mapping_rejects_required_label_without_mapping(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    spec["authoritative_evidence_package"]["required_external_labels"].append(
+        "undeclared-required-reference"
+    )
+    with pytest.raises(RevisionReleaseError, match="lack explicit mappings"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
+def test_explicit_mapping_rejects_mapping_not_declared_required(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    spec["authoritative_evidence_package"]["external_reference_mappings"].append(
+        {"label": "extra", "repository_path": "tracked/external-reference.txt"}
+    )
+    with pytest.raises(RevisionReleaseError, match="not declared required"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
+@pytest.mark.parametrize("unsafe", ["/absolute/reference.txt", "../escape.txt"])
+def test_explicit_mapping_rejects_unsafe_path(tmp_path, unsafe):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    spec["authoritative_evidence_package"]["external_reference_mappings"][0][
+        "repository_path"
+    ] = unsafe
+    with pytest.raises(RevisionReleaseError, match="safe relative path"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
+def test_explicit_mapping_rejects_untracked_file(tmp_path):
+    root, spec, included, _tracked = authoritative_reference_fixture(tmp_path)
+    with pytest.raises(RevisionReleaseError, match="is not tracked"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=set()
+        )
+
+
+def test_explicit_mapping_rejects_symlink(tmp_path):
+    root, spec, included, tracked = authoritative_reference_fixture(tmp_path)
+    link_relative = "tracked/external-link.txt"
+    (root / link_relative).symlink_to(root / "tracked/external-reference.txt")
+    spec["authoritative_evidence_package"]["external_reference_mappings"][0][
+        "repository_path"
+    ] = link_relative
+    tracked.add(link_relative)
+    with pytest.raises(RevisionReleaseError, match="not a regular tracked file"):
+        revision_release.verify_authoritative_evidence_package(
+            spec, root, included, tracked_files=tracked
+        )
+
+
 def test_real_release_template_uses_tracked_environment_and_final_evidence():
     project_root = Path(__file__).resolve().parents[1]
     spec = json.loads(
@@ -546,9 +749,21 @@ def test_real_template_uses_current_tracked_sources_and_authoritative_package():
     )
     assert final_package["evidence_role"] == "authoritative_final_evidence"
     assert final_package["portable_paths"] is True
-    assert spec["authoritative_evidence_package"]["manifest_sha256"] == (
+    authoritative = spec["authoritative_evidence_package"]
+    assert authoritative["manifest_sha256"] == (
         "b7ec0c47a59fa6a9a33de2fd072f9e2e4db4c38328cc8757aa5fa562451e2349"
     )
+    mappings = {
+        row["label"]: row["repository_path"]
+        for row in authoritative["external_reference_mappings"]
+    }
+    assert set(mappings) == set(authoritative["required_external_labels"])
+    assert all(
+        not Path(path).is_absolute() and ".." not in Path(path).parts
+        for path in mappings.values()
+    )
+    tracked = revision_release._tracked_repository_files(project_root)
+    assert all(path in tracked for path in mappings.values())
 
 
 def test_real_template_resolves_clean_checkout_and_dry_runs_final_ready(tmp_path):

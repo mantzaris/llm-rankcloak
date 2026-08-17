@@ -1,8 +1,11 @@
-"""Fail-closed index for offline confirmatory release artifacts.
+"""Legacy compatibility validator for pre-final confirmatory indexes.
 
-The index is created only after the sealed progress snapshot and every
-post-primary completion contract pass their existing validators.  It performs
-no experiment, model load, network request, DOI action, or publication action.
+This module preserves fail-closed validation for the earlier confirmatory-index
+schema.  It is not the active code-and-data release recipe; current archives use
+``rankcloak.revision_release`` and the sealed final experiment package.  The
+legacy validator performs no experiment, model load, network request, DOI
+action, or publication action, and manuscript preparation is not part of its
+current computational action map.
 """
 
 from __future__ import annotations
@@ -76,7 +79,7 @@ ARTIFACT_FIELDS = {
     "group", "source", "destination", "evidence_role", "completion_kind",
     "file_count", "files", "files_sha256",
 }
-EXPECTED_ACTION_IDS = (
+LEGACY_EXPECTED_ACTION_IDS = (
     "preprocess_primary_v2",
     "preprocess_ablation_v2",
     "preprocess_multilingual_v2",
@@ -88,16 +91,15 @@ EXPECTED_ACTION_IDS = (
     "theory",
     "reports",
     "figures",
-    "manuscript_revision",
 )
-EXPECTED_ACTION_KINDS = (
+LEGACY_EXPECTED_ACTION_KINDS = (
     "preprocess_v2", "preprocess_v2", "preprocess_v2", "preprocess_v2",
     "evaluator_join_v1", "detector_v2", "statistics_v1", "mixed_models_v1",
-    "theory_v1", "report_v1", "figures_v1", "manuscript_revision_v1",
+    "theory_v1", "report_v1", "figures_v1",
 )
 
 # (group, source, destination, evidence role, completion kind)
-CONFIRMATORY_ARTIFACT_SPECS = (
+LEGACY_CONFIRMATORY_ARTIFACT_SPECS = (
     ("configs", "configs/revision_v1", "configs/revision_v1", "supporting_methodological_material", "detector_v2"),
     ("configs", "analysis/revision_v1/detector_confirmatory_plan.json", "configs/revision_v1/detector_confirmatory_plan.json", "supporting_methodological_material", "detector_v2"),
     ("raw_results", "results/revision_v1/compute_projection_165h_v2.json", "results/validation/compute_projection_165h_v2.json", "exploratory_compute_gate_not_for_confirmatory_pooling", "compute_gate_v2"),
@@ -129,7 +131,6 @@ CONFIRMATORY_ARTIFACT_SPECS = (
     ("figure_table_outputs", "results/revision_v1/reports/confirmatory_v2", "reporting/confirmatory_v2", "confirmatory_scientific_evidence", "report_v1"),
     ("figure_table_outputs", "results/revision_v1/reports/confirmatory_v2_figures", "reporting/confirmatory_v2_figures", "confirmatory_scientific_evidence", "figures_v1"),
     ("environment_inputs", "environment/revision_v1", "environment/revision_v1", "environment_reproduction_input", "detector_environment_v1"),
-    ("documentation", "results/revision_v1/manuscript_revision_v2", "manuscript/final_revision_v2", "documentation_not_scientific_result", "manuscript_revision_v1"),
 )
 CONFIRMATORY_FILE_SOURCES = frozenset({
     "analysis/revision_v1/detector_confirmatory_plan.json",
@@ -317,7 +318,11 @@ def _load_supervisor(project_root: Path):
     return module
 
 
-def verify_live_confirmatory_pipeline(project_root: Path) -> dict[str, object]:
+def verify_legacy_confirmatory_pipeline(project_root: Path) -> dict[str, object]:
+    """Validate the retained pre-final index contract against local artifacts.
+
+    The current code-and-data release does not call this compatibility path.
+    """
     root = Path(project_root).resolve(strict=True)
     progress_path = root / "results/revision_v1/final_progress_snapshot_v1.json"
     try:
@@ -343,7 +348,7 @@ def verify_live_confirmatory_pipeline(project_root: Path) -> dict[str, object]:
     )
     specifications = list(preprocess) + list(contract["operations"])
     observed_ids = tuple(str(row.get("operation_id")) for row in specifications)
-    if observed_ids != EXPECTED_ACTION_IDS:
+    if observed_ids != LEGACY_EXPECTED_ACTION_IDS:
         raise ConfirmatoryReleaseIndexError("confirmatory completion action order changed")
     for row in specifications:
         if not supervisor.verify_completion(row, substitutions):
@@ -376,11 +381,12 @@ def verify_live_confirmatory_pipeline(project_root: Path) -> dict[str, object]:
 
 
 def render_confirmatory_release_index(project_root: Path) -> dict[str, object]:
+    """Render the legacy index schema; not used by the active release recipe."""
     root = Path(project_root).resolve(strict=True)
-    verification = verify_live_confirmatory_pipeline(root)
+    verification = verify_legacy_confirmatory_pipeline(root)
     validators = [_file_record(root / relative, root) for relative in VALIDATOR_SOURCE_PATHS]
     artifacts = []
-    for group, source, destination, role, kind in CONFIRMATORY_ARTIFACT_SPECS:
+    for group, source, destination, role, kind in LEGACY_CONFIRMATORY_ARTIFACT_SPECS:
         files = _artifact_files(root, source)
         artifacts.append(
             {
@@ -455,7 +461,7 @@ def _verify_index_document(
     for row in validators:
         if row != _file_record(root / str(row["path"]), root):
             raise ConfirmatoryReleaseIndexError("confirmatory validator source changed")
-    if verify_live and value.get("verification") != verify_live_confirmatory_pipeline(root):
+    if verify_live and value.get("verification") != verify_legacy_confirmatory_pipeline(root):
         raise ConfirmatoryReleaseIndexError("live confirmatory verification differs from release index")
     verification = value.get("verification")
     actions = verification.get("actions") if isinstance(verification, dict) else None
@@ -464,14 +470,14 @@ def _verify_index_document(
         or verification.get("status") != "verified_complete"
         or not isinstance(actions, list)
         or any(not isinstance(row, dict) for row in actions)
-        or tuple(str(row.get("operation_id")) for row in actions) != EXPECTED_ACTION_IDS
+        or tuple(str(row.get("operation_id")) for row in actions) != LEGACY_EXPECTED_ACTION_IDS
         or verification.get("actions_sha256") != canonical_json_sha256(actions)
     ):
         raise ConfirmatoryReleaseIndexError("confirmatory pipeline-verification declaration mismatch")
     artifacts = value.get("artifacts")
     if not isinstance(artifacts, list) or value.get("artifacts_sha256") != canonical_json_sha256(artifacts):
         raise ConfirmatoryReleaseIndexError("confirmatory artifact-list hash mismatch")
-    expected_specs = [tuple(row) for row in CONFIRMATORY_ARTIFACT_SPECS]
+    expected_specs = [tuple(row) for row in LEGACY_CONFIRMATORY_ARTIFACT_SPECS]
     observed_specs = []
     for artifact in artifacts:
         if not isinstance(artifact, dict):
@@ -929,7 +935,7 @@ def verify_staged_confirmatory_release_index(
         or verification.get("status") != "verified_complete"
         or not isinstance(actions, list)
         or any(not isinstance(row, dict) for row in actions)
-        or tuple(str(row.get("operation_id")) for row in actions) != EXPECTED_ACTION_IDS
+        or tuple(str(row.get("operation_id")) for row in actions) != LEGACY_EXPECTED_ACTION_IDS
         or verification.get("actions_sha256") != canonical_json_sha256(actions)
         or not isinstance(counts, dict)
         or final_progress.get("execution_status") != "complete"
@@ -939,7 +945,7 @@ def verify_staged_confirmatory_release_index(
     ):
         raise ConfirmatoryReleaseIndexError("staged pipeline verification is incomplete")
     for action, operation_id, completion_kind in zip(
-        actions, EXPECTED_ACTION_IDS, EXPECTED_ACTION_KINDS
+        actions, LEGACY_EXPECTED_ACTION_IDS, LEGACY_EXPECTED_ACTION_KINDS
     ):
         manifest = action.get("manifest")
         if (
@@ -961,7 +967,7 @@ def verify_staged_confirmatory_release_index(
         ))
         for row in artifacts if isinstance(row, dict)
     ]
-    if observed_specs != [tuple(row) for row in CONFIRMATORY_ARTIFACT_SPECS]:
+    if observed_specs != [tuple(row) for row in LEGACY_CONFIRMATORY_ARTIFACT_SPECS]:
         raise ConfirmatoryReleaseIndexError("staged confirmatory artifact map mismatch")
     expected_staged_paths: set[str] = set()
     directory_destinations: list[Path] = []
@@ -1177,12 +1183,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 __all__ = [
-    "CONFIRMATORY_ARTIFACT_SPECS",
+    "LEGACY_CONFIRMATORY_ARTIFACT_SPECS",
     "ConfirmatoryReleaseIndexError",
     "INDEX_SCHEMA",
     "render_confirmatory_release_index",
     "verify_confirmatory_release_index",
     "verify_staged_confirmatory_release_index",
-    "verify_live_confirmatory_pipeline",
+    "verify_legacy_confirmatory_pipeline",
     "write_confirmatory_release_index",
 ]

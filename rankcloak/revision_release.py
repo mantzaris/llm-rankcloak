@@ -26,7 +26,7 @@ from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 from .revision_artifacts import canonical_json_sha256, file_sha256
 from .revision_release_index import (
-    CONFIRMATORY_ARTIFACT_SPECS,
+    LEGACY_CONFIRMATORY_ARTIFACT_SPECS,
     ConfirmatoryReleaseIndexError,
     confirmatory_artifact_path_policy,
     verify_confirmatory_release_index,
@@ -44,7 +44,9 @@ PACKAGE_MANIFEST_TYPE = "rankcloak_code_data_offline_release_candidate"
 PORTABLE_EVIDENCE_SCHEMA = "rankcloak-portable-final-evidence-package-v1"
 HOME_PREFIX = "/" + "home/"
 CONFIRMATORY_INDEX_DESTINATION = "CONFIRMATORY_ARTIFACT_INDEX.json"
-CONFIRMATORY_SOURCES = {row[1] for row in CONFIRMATORY_ARTIFACT_SPECS}
+LEGACY_CONFIRMATORY_SOURCES = {
+    row[1] for row in LEGACY_CONFIRMATORY_ARTIFACT_SPECS
+}
 
 ARTIFACT_GROUPS = (
     "source_code",
@@ -410,7 +412,7 @@ def validate_release_spec(spec: Mapping[str, object]) -> Dict[str, object]:
             )
             for group, entry in gated_entries
         ]
-        expected = [tuple(row[:4]) for row in CONFIRMATORY_ARTIFACT_SPECS]
+        expected = [tuple(row[:4]) for row in LEGACY_CONFIRMATORY_ARTIFACT_SPECS]
         if observed != expected:
             raise RevisionReleaseError(
                 "Confirmatory allowlist must exactly match the verified release map"
@@ -458,7 +460,7 @@ def validate_release_spec(spec: Mapping[str, object]) -> Dict[str, object]:
             )
         allowed = {
             "source", "manifest", "manifest_sha256", "status",
-            "required_external_labels",
+            "required_external_labels", "external_reference_mappings",
         }
         if set(authoritative) - allowed:
             raise RevisionReleaseError(
@@ -494,6 +496,7 @@ def validate_release_spec(spec: Mapping[str, object]) -> Dict[str, object]:
             raise RevisionReleaseError(
                 "required_external_labels must be a non-empty unique string list"
             )
+        _explicit_external_reference_mappings(authoritative)
     if not isinstance(spec.get("tracked_sources_only", False), bool):
         raise RevisionReleaseError("tracked_sources_only must be true or false")
     required_groups = spec.get("required_groups", list(DEFAULT_REQUIRED_GROUPS))
@@ -611,7 +614,7 @@ def _entry_files(
             )
             continue
         if (
-            source_relative.as_posix() in CONFIRMATORY_SOURCES
+            source_relative.as_posix() in LEGACY_CONFIRMATORY_SOURCES
             and entry.get("evidence_role") == "confirmatory_scientific_evidence"
         ):
             nested = (
@@ -704,39 +707,61 @@ def _tracked_repository_files(project_root: Path) -> set[str]:
     }
 
 
-def _portable_manifest_reference(
-    raw: object, project_root: Path
-) -> tuple[PurePosixPath, Path]:
-    text = str(raw).replace("\\", "/")
-    candidate = Path(text)
-    root = project_root.resolve()
-    if candidate.is_absolute():
-        resolved = candidate.resolve(strict=False)
-        if _within_root(root, resolved):
-            relative = PurePosixPath(resolved.relative_to(root).as_posix())
-        else:
-            parts = PurePosixPath(text).parts
-            try:
-                marker = len(parts) - 1 - tuple(reversed(parts)).index(root.name)
-            except ValueError as exc:
-                raise RevisionReleaseError(
-                    "Authoritative manifest path is not repository-bound: {}".format(
-                        text
-                    )
-                ) from exc
-            relative = _safe_relative_path(
-                PurePosixPath(*parts[marker + 1 :]).as_posix(),
-                "authoritative manifest reference",
+def _explicit_external_reference_mappings(
+    declaration: Mapping[str, object],
+) -> Dict[str, PurePosixPath]:
+    required = declaration.get("required_external_labels", [])
+    rows = declaration.get("external_reference_mappings")
+    if not isinstance(required, list) or not isinstance(rows, list) or not rows:
+        raise RevisionReleaseError(
+            "Explicit external-reference mappings are required"
+        )
+    mappings: Dict[str, PurePosixPath] = {}
+    for row in rows:
+        if (
+            not isinstance(row, Mapping)
+            or set(row) != {"label", "repository_path"}
+        ):
+            raise RevisionReleaseError(
+                "Each external-reference mapping requires only label and repository_path"
             )
-    else:
-        relative = _safe_relative_path(text, "authoritative manifest reference")
-    return relative, root / Path(*relative.parts)
+        label = row.get("label")
+        if not isinstance(label, str) or not label:
+            raise RevisionReleaseError(
+                "External-reference mapping labels must be non-empty strings"
+            )
+        if label in mappings:
+            raise RevisionReleaseError(
+                "Duplicate external-reference mapping label: {}".format(label)
+            )
+        mappings[label] = _safe_relative_path(
+            row.get("repository_path"),
+            "external-reference repository_path",
+        )
+    required_labels = {str(label) for label in required}
+    mapped_labels = set(mappings)
+    missing = sorted(required_labels - mapped_labels)
+    undeclared = sorted(mapped_labels - required_labels)
+    if missing:
+        raise RevisionReleaseError(
+            "Required external-reference labels lack explicit mappings: {}".format(
+                ", ".join(missing)
+            )
+        )
+    if undeclared:
+        raise RevisionReleaseError(
+            "External-reference mappings are not declared required: {}".format(
+                ", ".join(undeclared)
+            )
+        )
+    return mappings
 
 
 def verify_authoritative_evidence_package(
     spec: Mapping[str, object],
     project_root: Path,
     included_files: Sequence[Mapping[str, object]],
+    tracked_files: Optional[set[str]] = None,
 ) -> Dict[str, object]:
     declaration = spec.get("authoritative_evidence_package")
     if declaration is None:
@@ -751,6 +776,12 @@ def verify_authoritative_evidence_package(
     if not isinstance(declaration, Mapping):
         raise RevisionReleaseError("authoritative_evidence_package is malformed")
     root = Path(project_root).resolve()
+    tracked = (
+        tracked_files
+        if tracked_files is not None
+        else _tracked_repository_files(root)
+    )
+    external_mappings = _explicit_external_reference_mappings(declaration)
     source_relative = _safe_relative_path(
         declaration["source"], "authoritative evidence source"
     )
@@ -861,11 +892,24 @@ def verify_authoritative_evidence_package(
         raise RevisionReleaseError(
             "Authoritative final-package manifest lacks external_references"
         )
-    by_label = {
-        str(row.get("label")): row
-        for row in external_rows
-        if isinstance(row, Mapping)
-    }
+    by_label: Dict[str, Mapping[str, object]] = {}
+    for row in external_rows:
+        if not isinstance(row, Mapping):
+            raise RevisionReleaseError(
+                "Malformed final-package external reference"
+            )
+        label = row.get("label")
+        if not isinstance(label, str) or not label:
+            raise RevisionReleaseError(
+                "Final-package external reference lacks a label"
+            )
+        if label in by_label:
+            raise RevisionReleaseError(
+                "Duplicate final-package external reference label: {}".format(
+                    label
+                )
+            )
+        by_label[label] = row
     verified_external = 0
     for label in declaration["required_external_labels"]:
         row = by_label.get(str(label))
@@ -875,18 +919,37 @@ def verify_authoritative_evidence_package(
                     label
                 )
             )
-        relative, referenced = _portable_manifest_reference(
-            row.get("path"), project_root
-        )
+        relative = external_mappings[str(label)]
+        relative_text = relative.as_posix()
+        referenced = root / Path(*relative.parts)
+        resolved = referenced.resolve(strict=False)
+        if not _within_root(root, resolved):
+            raise RevisionReleaseError(
+                "Mapped external reference escapes the repository: {}".format(
+                    relative_text
+                )
+            )
+        if relative_text not in tracked:
+            raise RevisionReleaseError(
+                "Mapped external reference is not tracked: {}".format(relative_text)
+            )
         if (
             not referenced.is_file()
             or referenced.is_symlink()
-            or referenced.stat().st_size != row.get("size_bytes")
+            or not stat.S_ISREG(referenced.stat().st_mode)
+        ):
+            raise RevisionReleaseError(
+                "Mapped external reference is not a regular tracked file: {}".format(
+                    relative_text
+                )
+            )
+        if (
+            referenced.stat().st_size != row.get("size_bytes")
             or file_sha256(referenced) != row.get("sha256")
         ):
             raise RevisionReleaseError(
                 "Required final-package external reference differs: {}".format(
-                    relative
+                    relative_text
                 )
             )
         verified_external += 1
@@ -950,7 +1013,7 @@ def resolve_release_inputs(
         for entry in spec.get("artifacts", {}).get(group, []):
             source_text = str(entry.get("source", ""))
             if (
-                source_text in CONFIRMATORY_SOURCES
+                source_text in LEGACY_CONFIRMATORY_SOURCES
                 and entry.get("evidence_role") == "confirmatory_scientific_evidence"
                 and not verified_by_source
             ):
@@ -1022,7 +1085,7 @@ def resolve_release_inputs(
         for group in ARTIFACT_GROUPS
     }
     authoritative = verify_authoritative_evidence_package(
-        spec, root, files
+        spec, root, files, tracked_files=tracked_files
     )
     return {
         "validation": validation,
