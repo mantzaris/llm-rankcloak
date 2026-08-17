@@ -18,12 +18,6 @@
     ],
     "documentation": [
       {
-        "destination": "documentation/REVISION_PLAN.md",
-        "evidence_role": "documentation_not_scientific_result",
-        "required": true,
-        "source": "REVISION_PLAN.md"
-      },
-      {
         "destination": "documentation/revision_docs",
         "evidence_role": "documentation_not_scientific_result",
         "note": "Includes the payload-fidelity incident report, invalidation protocol, release plan, and supporting audit documentation.",

@@ -5,10 +5,11 @@ deposit. It is a staging template only. Running the assembler does not access
 the network, contact Zenodo, mint or reserve a DOI, publish a GitHub release, or
 perform any other external action.
 
-The checked-in specification intentionally remains incomplete while the
-payload-fidelity-v2 confirmatory experiments, human-study approvals, and final
-analysis outputs are unfinished. The allowlist assigns every raw-result source
-an explicit evidence role. Tokenizer preflight, three-model `smoke_v3`, held-out
+The checked-in specification is a pre-publication staging template. The
+computational revision has a closed confirmatory index; human-study approval,
+participant work, and any external deposit remain outside this package. The
+allowlist assigns every raw-result source an explicit evidence role. Tokenizer
+preflight, three-model `smoke_v3`, held-out
 smoke evaluation, and the compute projection are validation/gate artifacts and
 cannot be pooled as confirmatory evidence. The invalidation registry and prior
 GPU-charge ledger are forensic only; the ledger is never runtime-rate evidence.
@@ -18,10 +19,10 @@ statistics, theory, report, figure, and manuscript products are marked
 confirmatory or final documentation. Mere directory existence is never enough:
 the assembler excludes all of those paths unless
 `results/revision_v1/confirmatory_release_index_v1.json` exists and revalidates.
-That self-hashed index can be created only after the immutable final progress
+That self-hashed index is accepted only after the immutable final progress
 snapshot is complete/failure-free and every supervisor completion validator
-passes. Thus no confirmatory tree is copied while the downstream DAG and its
-final release index remain incomplete, even though upstream shards are sealed.
+passes. The assembler copies confirmatory trees only while the finalized index
+continues to revalidate.
 The invalid legacy primary tree and all `smoke_v2` shard bytes are rejected by the
 assembler. The verified offline environment snapshot is allowlisted at
 `environment/revision_v1/`. A dry run reports every missing artifact, excluded

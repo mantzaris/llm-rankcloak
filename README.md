@@ -157,7 +157,7 @@ Profiles:
 - `paper-statistics`: writes bootstrap summaries, effect sizes, paper figures, and Markdown tables.
 - `paper-main-pilot-resume`: runs the staged pilot sequence with resume and batch controls.
 - `paper-main-pilot`: runs the smaller paper-oriented result matrix and writes paper-ready CSV, JSONL, Markdown, and PNG artifacts.
-- `paper-main`: runs the larger frozen paper-oriented result matrix when CPU time is available.
+- `paper-main`: reproduces the larger frozen legacy paper-oriented result matrix.
 - `paper-analysis`: aggregates existing pilot and paper result directories without model generation.
 - `strong-prompts-pilot`: a faster comparison between short and long specific prompts.
 - `strong-prompts`: a stronger prompt sweep over recipe, biology, car-buying, and comparison prompts.
@@ -173,7 +173,7 @@ Run the pilot first:
 python3 scripts/run_experiment.py --profile strong-prompts-pilot --output-dir results/rankcloak_strong_prompt_pilot --overwrite
 ```
 
-Run the full sweep when CPU time is available:
+To reproduce the full sweep:
 
 ```bash
 python3 scripts/run_experiment.py --profile strong-prompts --output-dir results/rankcloak_strong_prompt_sweep --overwrite
@@ -292,7 +292,7 @@ python3 scripts/run_experiment.py \
   --overwrite
 ```
 
-Run the full matrix when CPU time is available:
+To reproduce the legacy full matrix:
 
 ```bash
 python3 scripts/run_experiment.py \
@@ -403,14 +403,9 @@ Outputs are written under `results/rankcloak_crypto_artifact_exploration/`.
 
 Small CSV, JSON, JSONL, Markdown, and PNG results are intentionally committable. Large local model files and heavyweight binary artifacts are ignored.
 
-## Paper-Readiness Roadmap
+## Completed Revision Package
 
-- Full payload sweep across more cover genres.
-- Detector AUC experiments after feature extraction stabilizes.
-- Distribution-matched rank coding.
-- Model comparison across Phi, Llama, Mistral, Qwen, and Gemma.
-- Edit robustness tests for whitespace, punctuation, platform copying, and paraphrase.
-- Human or LLM plausibility study.
+The revised manuscript is under `paperV2/`; its completed computational evidence is sealed under `results/revision_v1/final_experiment_package/`. The materials under `human_study/` remain pre-recruitment planning artifacts, not participant evidence.
 
 ## Sources
 
