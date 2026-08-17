@@ -4,469 +4,355 @@
       {
         "destination": "configs/revision_v1",
         "evidence_role": "supporting_methodological_material",
+        "note": "Frozen model, prompt, detector, robustness, ablation, multilingual, and statistics configurations.",
         "required": true,
         "source": "configs/revision_v1"
-      },
-      {
-        "destination": "configs/revision_v1/detector_confirmatory_plan.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Offline confirmatory detector artifact/weight/license hash plan. Detector model bytes are explicitly excluded.",
-        "required": true,
-        "sha256": "d6d0a54f17b117e4f96df5aab3bfa7386dace1e3ba6343deefb320fca6c8feb3",
-        "source": "analysis/revision_v1/detector_confirmatory_plan.json"
       }
     ],
     "documentation": [
       {
-        "destination": "documentation/revision_docs",
+        "destination": "project/README.md",
         "evidence_role": "documentation_not_scientific_result",
-        "note": "Includes the payload-fidelity incident report, invalidation protocol, release plan, and supporting audit documentation.",
+        "note": "Project overview and user-facing repository documentation.",
         "required": true,
-        "source": "revision_docs"
+        "source": "README.md"
       },
       {
-        "destination": "manuscript/main2.tex",
+        "destination": "paperV2",
         "evidence_role": "documentation_not_scientific_result",
-        "note": "Current revision source snapshot; generated results remain machine-sourced and this draft is not a substitute for final journal submission files.",
+        "note": "Completed revised manuscript, Supplementary Information, response, cover letter, bibliography, provenance CSV, local vector figures, and final PDFs.",
         "required": true,
-        "source": ".paper/scientific_reports/main2.tex"
+        "source": "paperV2"
       },
       {
-        "destination": "manuscript/supplementary2.tex",
+        "destination": "release/revision_v1_template",
         "evidence_role": "documentation_not_scientific_result",
-        "note": "Current revision source snapshot; generated results remain machine-sourced and this draft is not a substitute for final journal submission files.",
+        "note": "Current offline code-and-data archive specification and local assembly instructions.",
         "required": true,
-        "source": ".paper/scientific_reports/supplementary2.tex"
+        "source": "release/revision_v1_template"
       },
       {
-        "destination": "manuscript/references2.bib",
+        "destination": "revision_docs/CAPACITY_QUALITY_THEORY.md",
         "evidence_role": "documentation_not_scientific_result",
-        "note": "Current revision source snapshot; generated results remain machine-sourced and this draft is not a substitute for final journal submission files.",
+        "note": "Retained scientific or reproducibility documentation.",
         "required": true,
-        "source": ".paper/scientific_reports/references2.bib"
+        "source": "revision_docs/CAPACITY_QUALITY_THEORY.md"
       },
       {
-        "destination": "manuscript/response_letter2.tex",
+        "destination": "revision_docs/COMPUTE_BUDGET_METHOD.md",
         "evidence_role": "documentation_not_scientific_result",
-        "note": "Current revision source snapshot; generated results remain machine-sourced and this draft is not a substitute for final journal submission files.",
+        "note": "Retained scientific or reproducibility documentation.",
         "required": true,
-        "source": ".paper/scientific_reports/response_letter2.tex"
+        "source": "revision_docs/COMPUTE_BUDGET_METHOD.md"
       },
       {
-        "destination": "manuscript/final_revision_v2",
+        "destination": "revision_docs/DAIRSTEGA_COMPATIBILITY_AUDIT.md",
         "evidence_role": "documentation_not_scientific_result",
-        "note": "Final manifest-verified manuscript source/PDF package; absent until the confirmatory DAG and immutable progress seal are complete.",
+        "note": "Retained scientific or reproducibility documentation.",
         "required": true,
-        "source": "results/revision_v1/manuscript_revision_v2"
+        "source": "revision_docs/DAIRSTEGA_COMPATIBILITY_AUDIT.md"
+      },
+      {
+        "destination": "revision_docs/DIRECT_SUBWORD_PAYLOAD_FIDELITY_INCIDENT.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/DIRECT_SUBWORD_PAYLOAD_FIDELITY_INCIDENT.md"
+      },
+      {
+        "destination": "revision_docs/DOI_RELEASE_PLAN.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/DOI_RELEASE_PLAN.md"
+      },
+      {
+        "destination": "revision_docs/HELDOUT_EVALUATOR.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/HELDOUT_EVALUATOR.md"
+      },
+      {
+        "destination": "revision_docs/INVALIDATION_PROTOCOL.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/INVALIDATION_PROTOCOL.md"
+      },
+      {
+        "destination": "revision_docs/LEGACY_INCURRED_GPU_LEDGER.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/LEGACY_INCURRED_GPU_LEDGER.md"
+      },
+      {
+        "destination": "revision_docs/MODEL_AND_LICENSE_PROVENANCE.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/MODEL_AND_LICENSE_PROVENANCE.md"
+      },
+      {
+        "destination": "revision_docs/PREPROCESSING_PIPELINE.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/PREPROCESSING_PIPELINE.md"
+      },
+      {
+        "destination": "revision_docs/PUBLISHED_COMPARATOR_AUDIT.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/PUBLISHED_COMPARATOR_AUDIT.md"
+      },
+      {
+        "destination": "revision_docs/REFERENCE_AUDIT.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Historical full reference-verification record; the final cited subset is paperV2/scientific_reports/references.bib.",
+        "required": true,
+        "source": "revision_docs/REFERENCE_AUDIT.md"
+      },
+      {
+        "destination": "revision_docs/REVISION_RUNNER.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/REVISION_RUNNER.md"
+      },
+      {
+        "destination": "revision_docs/STATISTICAL_MODEL_PLAN.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/STATISTICAL_MODEL_PLAN.md"
+      },
+      {
+        "destination": "revision_docs/SUBMITTED_ARTIFACT_HASHES.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/SUBMITTED_ARTIFACT_HASHES.md"
+      },
+      {
+        "destination": "revision_docs/TOKENIZER_PREFLIGHT.md",
+        "evidence_role": "documentation_not_scientific_result",
+        "note": "Retained scientific or reproducibility documentation.",
+        "required": true,
+        "source": "revision_docs/TOKENIZER_PREFLIGHT.md"
       }
     ],
     "environment_inputs": [
       {
         "destination": "environment/revision_v1",
         "evidence_role": "environment_reproduction_input",
-        "note": "Offline content-hashed environment snapshot; contains identities and lock metadata, never model weights or dependency binaries.",
+        "note": "Content-hashed Python, R, CUDA, hardware, determinism, and dependency-lock snapshot; model binaries are not included.",
         "required": true,
         "source": "environment/revision_v1"
       }
     ],
     "figure_table_outputs": [
       {
-        "destination": "reporting/validation/smoke_v3_reports_v3",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Current non-superseded smoke-v3 generated reports; exploratory placeholders, not manuscript evidence. v1/v2 report directories are excluded.",
+        "destination": "results/revision_v1/final_experiment_package",
+        "evidence_role": "authoritative_final_evidence",
+        "exclude_paths": [
+          "manifest.json",
+          "figure_previews_v2",
+          "figures/ablation_summary.png",
+          "figures/automated_readability.png",
+          "figures/capacity_tail_validation.png",
+          "figures/computational_overhead.png",
+          "figures/computational_overhead_compact.png",
+          "figures/neural_detector_performance.png",
+          "figures/neural_detector_performance_compact.png",
+          "figures/robustness_recovery.png",
+          "figures/robustness_recovery_compact.png",
+          "changed_and_generated_files.txt",
+          "changed_and_generated_files_manifest.json",
+          "resource_and_process_audit.json",
+          "evidence_summary_prefinal_failure_20260816T1736Z.json",
+          "package_index_prefinal_failure_20260816T1746Z.json",
+          "statistics/mixed_models_prefinal_failure_20260816T0855Z.json",
+          "statistics/mixed_models_prefinal_v3_correction_audit.json",
+          "statistics/statistics_predetector_failure_20260816T0950Z.json",
+          "statistics/test_suite/full_suite_prefinal_diagnostic.json"
+        ],
+        "note": "Portable derivative of the sealed final evidence package. Source hashes are retained while machine-local paths are rebased; duplicate raster previews and pre-final diagnostics are omitted.",
+        "portable_paths": true,
         "required": true,
-        "source": "results/revision_v1/smoke_v3_reports_v3"
-      },
-      {
-        "destination": "reporting/confirmatory_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/reports/confirmatory_v2"
-      },
-      {
-        "destination": "reporting/confirmatory_v2_figures",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/reports/confirmatory_v2_figures"
-      }
-    ],
-    "human_materials": [
-      {
-        "destination": "human_study/materials",
-        "evidence_role": "human_study_preregistration_material_no_responses",
-        "note": "Participant-facing placeholders and ethics metadata must be resolved before final-ready assembly.",
-        "required": true,
-        "source": "human_study"
+        "source": "results/revision_v1/final_experiment_package"
       }
     ],
     "processed_results": [
       {
-        "destination": "results/validation/smoke_v3_preprocessed_v1",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Current non-superseded smoke-v3 preprocessing output; exploratory only. Older preprocessing intermediates are excluded.",
-        "required": true,
-        "source": "results/revision_v1/smoke_v3_preprocessed_v1"
-      },
-      {
-        "destination": "results/validation/smoke_v3_integrity_v1",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Current smoke-v3 integrity audit; confirmatory_pooling_eligible is false.",
-        "required": true,
-        "source": "results/revision_v1/smoke_v3_integrity_v1"
-      },
-      {
-        "destination": "results/validation/smoke_v3_theory_v2",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Current non-superseded smoke-v3 theory validation; exploratory only.",
-        "required": true,
-        "source": "results/revision_v1/smoke_v3_theory_v2"
-      },
-      {
-        "destination": "results/processed/primary_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "results/revision_v1/analysis_inputs/primary_v2",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Authoritative primary trial, feature, runtime, availability, and preprocessing tables.",
+        "portable_paths": true,
         "required": true,
         "source": "results/revision_v1/analysis_inputs/primary_v2"
       },
       {
-        "destination": "results/processed/ablation_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "results/revision_v1/analysis_inputs/ablation_v2",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Authoritative ablation trial, feature, runtime, availability, and preprocessing tables.",
+        "portable_paths": true,
         "required": true,
         "source": "results/revision_v1/analysis_inputs/ablation_v2"
       },
       {
-        "destination": "results/processed/multilingual_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/analysis_inputs/multilingual_v2"
-      },
-      {
-        "destination": "results/processed/robustness_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "results/revision_v1/analysis_inputs/robustness_v2",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Authoritative robustness trial, feature, runtime, availability, and preprocessing tables.",
+        "portable_paths": true,
         "required": true,
         "source": "results/revision_v1/analysis_inputs/robustness_v2"
       },
       {
-        "destination": "results/processed/primary_heldout_join_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "results/revision_v1/analysis_inputs/multilingual_v2",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Authoritative multilingual trial, feature, runtime, availability, and preprocessing tables.",
+        "portable_paths": true,
         "required": true,
-        "source": "results/revision_v1/analysis_inputs/primary_heldout_join_v2"
+        "source": "results/revision_v1/analysis_inputs/multilingual_v2"
+      },
+      {
+        "destination": "results/revision_v1/analysis_inputs/primary_heldout_join_v5",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Final held-out evaluator feature join used by the reported quality analyses.",
+        "portable_paths": true,
+        "required": true,
+        "source": "results/revision_v1/analysis_inputs/primary_heldout_join_v5"
+      },
+      {
+        "destination": "results/revision_v1/final_progress_snapshot_v1.json",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Immutable final 38,504-work-unit accounting snapshot.",
+        "portable_paths": true,
+        "required": true,
+        "source": "results/revision_v1/final_progress_snapshot_v1.json"
       }
     ],
     "public_payload_corpus": [
       {
-        "destination": "data/public_payload_corpus.jsonl",
+        "destination": "release_inputs/revision_v1",
         "evidence_role": "supporting_methodological_material",
-        "note": "Generated immutably from the frozen public deterministic corpus; 480 non-operational test vectors.",
+        "note": "Public deterministic 480-payload cryptographic test-vector corpus and its hash manifest.",
         "required": true,
-        "sha256": "6e45aafbc639f49c8fb07fc3055aa2d25e47025a2e945c4ffd2f5ac017322fd2",
-        "source": "release_inputs/revision_v1/revision_payloads.jsonl"
-      },
-      {
-        "destination": "data/public_payload_manifest.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Binds corpus derivation, public seed, class counts, cryptography version, validation status, and payload-file hash.",
-        "required": true,
-        "sha256": "1a3217c4e4a3dc0bbb5e35e65c60f5dc00270724bf618de25e332d43d25a843a",
-        "source": "release_inputs/revision_v1/PAYLOAD_MANIFEST.json"
+        "source": "release_inputs/revision_v1"
       }
     ],
     "raw_results": [
       {
-        "destination": "results/validation/tokenizer_preflight_v2",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Passing payload-fidelity-v2 tokenizer preflight; validation only and never pooled as a confirmatory result.",
-        "required": true,
-        "source": "results/revision_v1/tokenizer_preflight_v2"
-      },
-      {
-        "destination": "results/validation/smoke_v3",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Balanced three-model smoke results; exploratory validation only and never pooled as confirmatory evidence or runtime-rate evidence.",
-        "required": true,
-        "source": "results/revision_v1/smoke_v3"
-      },
-      {
-        "destination": "results/validation/heldout_evaluator_smoke_v3",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Held-out evaluator smoke outputs; exploratory validation only and never pooled as confirmatory evidence.",
-        "required": true,
-        "source": "results/revision_v1/heldout_evaluator/smoke_v3"
-      },
-      {
-        "destination": "results/validation/compute_projection_v2.json",
-        "evidence_role": "exploratory_compute_gate_not_for_confirmatory_pooling",
-        "note": "Compute-gate projection only; it is neither scientific outcome evidence nor a replacement for confirmatory results.",
-        "required": true,
-        "source": "results/revision_v1/compute_projection_v2.json"
-      },
-      {
-        "destination": "results/validation/compute_projection_165h_v2.json",
-        "evidence_role": "exploratory_compute_gate_not_for_confirmatory_pooling",
-        "note": "Authorized 165-GPU-hour GO projection and provenance gate; compute-only, not a scientific outcome or pooling input.",
-        "required": true,
-        "sha256": "6b588febaade14ee39a2c08322c1db1e82d307db40a25637a1ec2a25b21b91e4",
-        "source": "results/revision_v1/compute_projection_165h_v2.json"
-      },
-      {
-        "destination": "results/forensic/invalidations/primary__qwen2_5_7b__direct_payload_fidelity.json",
-        "evidence_role": "forensic_invalidated_not_for_pooling",
-        "note": "Fail-closed registry entry for an invalidated pre-payload-fidelity-v2 partial shard; the invalid shard bytes are deliberately excluded.",
-        "required": true,
-        "source": "results/revision_v1/invalidations/primary__qwen2_5_7b__direct_payload_fidelity.json"
-      },
-      {
-        "destination": "results/forensic/incurred_charges/legacy_completed_smoke_v2.json",
-        "evidence_role": "forensic_charge_only_not_rate_evidence",
-        "note": "Prior incurred-GPU charge ledger only; scientific-evidence and runtime-rate use are prohibited.",
-        "required": true,
-        "source": "results/revision_v1/incurred_charges/legacy_completed_smoke_v2.json"
-      },
-      {
-        "destination": "results/operations/detector_live_readonly_audit_20260813T0145Z.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Read-only diagnostic and stop-decision record for the superseded uncheckpointed CPU detector process; not scientific evidence or a pooling input.",
-        "required": true,
-        "sha256": "1f4bd079e7133805efb729c9fd4ed55838eeb7d396e0daabc1de20405addfcf7",
-        "source": "results/revision_v1/supervisor/detector_live_readonly_audit_20260813T0145Z.json"
-      },
-      {
-        "destination": "results/operations/detector_live_readonly_audit_addendum_20260813T0151Z.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Read-only process-I/O phase inference, conservative CPU runtime projection, and exact safe-stop record; operational provenance only, not scientific evidence or a pooling input.",
-        "required": true,
-        "sha256": "3944929bde41f4c8aed6a3f8e6bc8098f435fa97868336d75e8831248314044d",
-        "source": "results/revision_v1/supervisor/detector_live_readonly_audit_addendum_20260813T0151Z.json"
-      },
-      {
-        "destination": "CONFIRMATORY_ARTIFACT_INDEX.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Self-hashed exact byte inventory generated only after sealed progress and every downstream completion contract verify.",
-        "required": true,
-        "source": "results/revision_v1/confirmatory_release_index_v1.json"
-      },
-      {
-        "destination": "results/confirmatory/primary_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "note": "Included only when the final progress seal proves all three primary shards complete and failure-free.",
-        "required": true,
-        "source": "results/revision_v1/primary_v2"
-      },
-      {
-        "destination": "results/confirmatory/ablation_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/ablation_v2"
-      },
-      {
-        "destination": "results/confirmatory/multilingual_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/multilingual_v2"
-      },
-      {
-        "destination": "results/confirmatory/robustness_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/robustness_v2"
-      },
-      {
-        "destination": "results/confirmatory/heldout_evaluator/primary_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/heldout_evaluator/primary_v2"
-      },
-      {
-        "destination": "results/confirmatory/heldout_evaluator/ablation_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/heldout_evaluator/ablation_v2"
-      },
-      {
-        "destination": "results/confirmatory/heldout_evaluator/multilingual_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/heldout_evaluator/multilingual_v2"
-      },
-      {
-        "destination": "results/confirmatory/provenance/upstream_dependent_unavailability_v1.json",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/heldout_evaluator/upstream_dependent_unavailability_v1.json"
-      },
-      {
-        "destination": "results/confirmatory/provenance/final_progress_snapshot_v1.json",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "required": true,
-        "source": "results/revision_v1/final_progress_snapshot_v1.json"
-      },
-      {
-        "destination": "results/confirmatory/neural_detector",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "results/revision_v1/neural_detector/confirmatory_v2",
+        "evidence_role": "authoritative_final_evidence",
+        "note": "Final 56-fit detector manifest, frozen splits, metrics, 55,440 prediction rows, and dataset manifest; model weights and checkpoints are excluded.",
+        "portable_paths": true,
         "required": true,
         "source": "results/revision_v1/neural_detector/confirmatory_v2"
-      },
-      {
-        "destination": "results/confirmatory/neural_detector/checkpoints",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "note": "Exact 56-fit manifest-last checkpoint set and durable fit-permit receipts; transient locks, active permits, and quarantined invalid bytes are excluded.",
-        "required": true,
-        "source": "results/revision_v1/neural_detector/confirmatory_v2.checkpoints"
-      },
-      {
-        "destination": "results/confirmatory/neural_detector/status.json",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "note": "Signed terminal detector status binding the final manifest, terminal receipt, and incorporated GPU ledger.",
-        "required": true,
-        "source": "results/revision_v1/neural_detector/confirmatory_v2.status.json"
-      },
-      {
-        "destination": "results/confirmatory/neural_detector/equivalence_v1",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "note": "Signed CPU/CUDA equivalence, same-CUDA repeatability, checkpoint, receipt, and exact-six GPU-accounting evidence for both neural architectures.",
-        "required": true,
-        "source": "results/revision_v1/detector_equivalence_v1"
-      },
-      {
-        "destination": "results/confirmatory/neural_detector/benchmarks/task_0_cuda.json",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "note": "Supervisor-finalized representative TextCNN CUDA benchmark bound to its reusable production checkpoint.",
-        "required": true,
-        "source": "results/revision_v1/supervisor/detector_benchmark_task_0_cuda.json"
-      },
-      {
-        "destination": "results/confirmatory/neural_detector/benchmarks/task_1_cuda.json",
-        "evidence_role": "confirmatory_scientific_evidence",
-        "note": "Supervisor-finalized representative DeBERTa CUDA benchmark bound to its reusable production checkpoint.",
-        "required": true,
-        "source": "results/revision_v1/supervisor/detector_benchmark_task_1_cuda.json"
-      },
-      {
-        "destination": "results/operations/confirmatory_v2_events.jsonl",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Immutable operational event trail, including per-fit ceiling permits and terminal confirmatory completion; not a scientific outcome or pooling input.",
-        "required": true,
-        "source": "results/revision_v1/supervisor/confirmatory_v2_events.jsonl"
       }
     ],
     "source_code": [
       {
-        "destination": "source/rankcloak",
+        "destination": "rankcloak",
         "evidence_role": "supporting_methodological_material",
+        "note": "RankCloak implementation and deterministic analysis/verification modules.",
         "required": true,
         "source": "rankcloak"
       },
       {
-        "destination": "source/scripts",
+        "destination": "scripts",
         "evidence_role": "supporting_methodological_material",
+        "note": "Command-line analysis, verification, release, and reproducibility entry points.",
         "required": true,
         "source": "scripts"
       },
       {
-        "destination": "source/tools",
+        "destination": "tools",
         "evidence_role": "supporting_methodological_material",
+        "note": "Publication and repository validation utilities.",
         "required": true,
         "source": "tools"
       },
       {
-        "destination": "source/tests",
+        "destination": "tests",
         "evidence_role": "supporting_methodological_material",
+        "note": "Tracked non-network test suite and scientific-integrity assertions.",
         "required": true,
         "source": "tests"
       },
       {
-        "destination": "source/pyproject.toml",
+        "destination": "pyproject.toml",
         "evidence_role": "supporting_methodological_material",
+        "note": "Python package metadata and declared dependencies.",
         "required": true,
         "source": "pyproject.toml"
-      },
-      {
-        "destination": "source/operations/confirmatory_v2/downstream_commands.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Mutable operational command wiring used by the release-index verifier; no frozen scientific plan or model artifact is changed.",
-        "required": true,
-        "source": "operations/confirmatory_v2/downstream_commands.json"
-      },
-      {
-        "destination": "source/operations/confirmatory_v2/detector_acceleration_policy_v1.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Predeclared operational GPU, checkpoint, equivalence, and hard-ceiling reserve policy; it does not alter the frozen detector data, splits, seeds, architectures, or metrics.",
-        "required": true,
-        "source": "operations/confirmatory_v2/detector_acceleration_policy_v1.json"
-      },
-      {
-        "destination": "source/analysis/revision_v1/confirmatory_model_plan.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Pinned confirmatory statistical-model plan used by the downstream analysis contract.",
-        "required": true,
-        "source": "analysis/revision_v1/confirmatory_model_plan.json"
-      },
-      {
-        "destination": "source/analysis/revision_v1/r_environment.lock.json",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Pinned R dependency lock used by confirmatory mixed-model analysis.",
-        "required": true,
-        "source": "analysis/revision_v1/r_environment.lock.json"
-      },
-      {
-        "destination": "source/analysis/revision_v1/run_with_locked_r.sh",
-        "evidence_role": "supporting_methodological_material",
-        "note": "Offline launcher for the pinned R analysis environment.",
-        "required": true,
-        "source": "analysis/revision_v1/run_with_locked_r.sh"
-      },
-      {
-        "destination": "source/release/revision_v1_template/README.md",
-        "evidence_role": "supporting_methodological_material",
-        "required": true,
-        "source": "release/revision_v1_template/README.md"
-      },
-      {
-        "destination": "source/release/revision_v1_template/release_spec.json",
-        "evidence_role": "supporting_methodological_material",
-        "required": true,
-        "source": "release/revision_v1_template/release_spec.json"
       }
     ],
     "statistics_outputs": [
       {
-        "destination": "analysis/validation/smoke_v3_statistics_v3",
-        "evidence_role": "exploratory_validation_not_for_confirmatory_pooling",
-        "note": "Current non-superseded smoke-v3 statistics; exploratory only. v1/v2 intermediates are excluded.",
+        "destination": "analysis/revision_v1/evidence_specs",
+        "evidence_role": "supporting_methodological_material",
+        "note": "Machine-readable endpoint, robustness, ablation, topic, and detector analysis specifications.",
         "required": true,
-        "source": "results/revision_v1/smoke_v3_statistics_v3"
+        "source": "analysis/revision_v1/evidence_specs"
       },
       {
-        "destination": "analysis/statistics_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "analysis/revision_v1/confirmatory_model_plan.json",
+        "evidence_role": "supporting_methodological_material",
+        "note": "Declared statistical model and grouping plan.",
         "required": true,
-        "source": "results/revision_v1/analysis/statistics_v2"
+        "source": "analysis/revision_v1/confirmatory_model_plan.json"
       },
       {
-        "destination": "analysis/mixed_models_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "analysis/revision_v1/detector_confirmatory_plan.json",
+        "evidence_role": "supporting_methodological_material",
+        "note": "Frozen detector data, split, seed, architecture, and metric contract.",
         "required": true,
-        "source": "results/revision_v1/analysis/mixed_models_v2"
+        "source": "analysis/revision_v1/detector_confirmatory_plan.json"
       },
       {
-        "destination": "analysis/theory_confirmatory_v2",
-        "evidence_role": "confirmatory_scientific_evidence",
+        "destination": "analysis/revision_v1/mixed_effects_specs.json",
+        "evidence_role": "supporting_methodological_material",
+        "note": "Mixed-effects model specifications used by the retained outputs.",
         "required": true,
-        "source": "results/revision_v1/theory/confirmatory_v2"
+        "source": "analysis/revision_v1/mixed_effects_specs.json"
+      },
+      {
+        "destination": "analysis/revision_v1/r_environment.lock.json",
+        "evidence_role": "supporting_methodological_material",
+        "note": "Locked R package identities for the retained mixed-model analysis.",
+        "portable_paths": true,
+        "required": true,
+        "source": "analysis/revision_v1/r_environment.lock.json"
       }
     ]
   },
-  "citation_file": "CITATION.cff",
-  "confirmatory_artifact_index": "results/revision_v1/confirmatory_release_index_v1.json",
-  "evidence_partition_policy": {
-    "confirmatory_artifact_index_required": true,
-    "partial_or_unverified_confirmatory_outputs_included": false,
-    "exploratory_validation_confirmatory_pooling_permitted": false,
-    "forensic_artifacts_scientific_evidence_permitted": false,
-    "invalidated_shard_bytes_included": false,
-    "legacy_charge_ledger_rate_evidence_permitted": false,
-    "protocol_contract_revision": "payload_fidelity_v2",
-    "result_schema_revision": "payload_aware_result_v2"
+  "authoritative_evidence_package": {
+    "manifest": "results/revision_v1/final_experiment_package/manifest.json",
+    "manifest_sha256": "b7ec0c47a59fa6a9a33de2fd072f9e2e4db4c38328cc8757aa5fa562451e2349",
+    "required_external_labels": [
+      "detector_dataset_manifest",
+      "detector_predictions",
+      "detector_run_manifest",
+      "detector_split_manifest",
+      "evidence_spec",
+      "evidence_summary_manifest",
+      "final_progress",
+      "frozen_config_manifest",
+      "frozen_environment_manifest",
+      "heldout_join_v5",
+      "payload_corpus",
+      "payload_manifest",
+      "requirements_lock",
+      "theory_validation"
+    ],
+    "source": "results/revision_v1/final_experiment_package",
+    "status": "passed"
   },
+  "citation_file": "CITATION.cff",
   "license_file": "LICENSE",
   "metadata": {
     "creators": [
@@ -475,59 +361,36 @@
         "name": "Alexander V. Mantzaris"
       }
     ],
-    "description": "Source, public synthetic inputs, immutable confirmatory outputs when complete, explicitly partitioned exploratory and forensic audit artifacts, analyses, figures, tables, and pre-recruitment human-study materials supporting the RankCloak major revision.",
+    "description": "Tracked source code, public deterministic payloads, authoritative processed tables, detector predictions and metrics, vector figures, sealed final computational evidence, environment metadata, and the completed revised paper package. No participant outcomes were collected.",
     "direct_participant_identifiers_included": false,
     "doi": null,
+    "human_participant_outcomes_collected": false,
     "raw_human_response_data_included": false,
-    "title": "RankCloak Scientific Reports revision reproducibility package",
-    "version": "revision-v1-payload-fidelity-v2-draft"
+    "title": "RankCloak code and data for the Scientific Reports major revision",
+    "version": "computational-revision-final"
   },
-  "package_id": "rankcloak-scientific-reports-revision-v1",
+  "package_id": "rankcloak-computational-revision-code-data",
   "release_status": "draft_external_action_prohibited",
   "reproduction_commands": [
     {
-      "command": "python -m pytest -q",
-      "label": "Validate source and deterministic fixtures"
+      "command": "python -m pytest -q -k \"not textcnn_reports_reproducible_post_training_state_hash\"",
+      "label": "From a full source checkout: run the safe suite with CPU-neural execution deselected"
     },
     {
-      "command": "python scripts/build_revision_payload_manifest.py --help",
-      "label": "Regenerate the public deterministic payload corpus"
+      "command": "python scripts/build_revision_release.py --spec release/revision_v1_template/release_spec.json --output-dir /tmp/rankcloak-code-data-candidate --dry-run --require-final-ready",
+      "label": "From a full source checkout: validate the archive recipe without writing output"
     },
     {
-      "command": "python scripts/run_revision_tokenizer_preflight.py --help",
-      "label": "Verify the payload-fidelity-v2 tokenizer preflight"
+      "command": "python scripts/build_revision_release.py --spec release/revision_v1_template/release_spec.json --output-dir /tmp/rankcloak-code-data-candidate --require-final-ready",
+      "label": "From a full source checkout: assemble a local candidate"
     },
     {
-      "command": "python scripts/run_revision_matrix.py --stage primary_v2 --dry-run",
-      "label": "Inspect the frozen payload-fidelity-v2 primary matrix"
+      "command": "python -B scripts/verify_revision_release.py . --require-doi-null",
+      "label": "From the assembled candidate root: independently verify every staged byte"
     },
     {
-      "command": "python scripts/project_revision_compute.py --help",
-      "label": "Recheck the compute projection gate"
-    },
-    {
-      "command": "python scripts/build_revision_environment_lock.py --output-dir environment/revision_v1 --check --verify-model-files",
-      "label": "Verify the offline environment snapshot"
-    },
-    {
-      "command": "python scripts/run_revision_statistics.py --help",
-      "label": "Run statistical analysis from supplied immutable inputs"
-    },
-    {
-      "command": "python scripts/build_revision_reports.py --help",
-      "label": "Regenerate manuscript figures and tables"
-    },
-    {
-      "command": "python scripts/build_revision_confirmatory_release_index.py --dry-run",
-      "label": "Verify the sealed confirmatory DAG and preview the exact release artifact index"
-    },
-    {
-      "command": "python scripts/build_revision_confirmatory_release_index.py --check",
-      "label": "Reverify the immutable confirmatory release index and every indexed byte"
-    },
-    {
-      "command": "python tools/count_scientific_reports.py --help",
-      "label": "Verify journal word and display-item limits"
+      "command": "python tools/count_scientific_reports.py",
+      "label": "From either tree: check the revised manuscript word and display-item counts"
     }
   ],
   "required_groups": [
@@ -538,8 +401,8 @@
     "processed_results",
     "statistics_outputs",
     "figure_table_outputs",
-    "human_materials",
-    "environment_inputs"
+    "environment_inputs",
+    "documentation"
   ],
   "schema_version": "1.0",
   "third_party": [
@@ -596,5 +459,6 @@
       "source_url": "https://huggingface.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF",
       "upstream_model_url": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/tree/c170c708c41dac9275d15a8fff4eca08d52bab71"
     }
-  ]
+  ],
+  "tracked_sources_only": true
 }

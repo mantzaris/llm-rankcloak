@@ -26,9 +26,9 @@ from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MAIN = REPO_ROOT / ".paper" / "scientific_reports" / "main.tex"
+DEFAULT_MAIN = REPO_ROOT / "paperV2" / "scientific_reports" / "main2.tex"
 DEFAULT_SUPPLEMENT = (
-    REPO_ROOT / ".paper" / "scientific_reports" / "supplementary.tex"
+    REPO_ROOT / "paperV2" / "scientific_reports" / "supplementary2.tex"
 )
 
 COUNTED_MAIN_SECTIONS = (

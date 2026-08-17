@@ -1,13 +1,10 @@
 import hashlib
-import importlib.util
 import json
 from pathlib import Path
 
 import pytest
 
 import rankcloak.revision_release as revision_release
-from rankcloak.revision_release_index import CONFIRMATORY_ARTIFACT_SPECS
-
 from rankcloak.revision_release import (
     DRAFT_CONTENT_STATUS,
     EXTERNAL_STATUS,
@@ -202,6 +199,7 @@ def fixture_project(tmp_path: Path):
             "doi": None,
             "direct_participant_identifiers_included": False,
             "raw_human_response_data_included": False,
+            "human_participant_outcomes_collected": False,
         },
         "license_file": "LICENSE",
         "citation_file": "CITATION.cff",
@@ -317,50 +315,26 @@ def test_verified_environment_snapshot_satisfies_gate_and_tampering_fails(tmp_pa
     )
 
 
-def test_real_release_template_allowlists_verified_environment_bundle():
+def test_real_release_template_uses_tracked_environment_and_final_evidence():
     project_root = Path(__file__).resolve().parents[1]
     spec = json.loads(
         (project_root / "release/revision_v1_template/release_spec.json").read_text()
     )
-    assert spec["artifacts"]["environment_inputs"] == [
-        {
-            "source": "environment/revision_v1",
-            "destination": "environment/revision_v1",
-            "required": True,
-            "note": "Offline content-hashed environment snapshot; contains identities and lock metadata, never model weights or dependency binaries.",
-            "evidence_role": "environment_reproduction_input",
-        }
-    ]
+    environment_entries = spec["artifacts"]["environment_inputs"]
+    assert len(environment_entries) == 1
+    assert environment_entries[0]["source"] == "environment/revision_v1"
+    assert environment_entries[0]["destination"] == "environment/revision_v1"
+    assert environment_entries[0]["required"] is True
     report = plan_release(spec, project_root=project_root)
-    env_spec = importlib.util.spec_from_file_location(
-        "_release_test_environment_lock",
-        project_root / "scripts/build_revision_environment_lock.py",
-    )
-    assert env_spec and env_spec.loader
-    envlock = importlib.util.module_from_spec(env_spec)
-    env_spec.loader.exec_module(envlock)
-    check_ok = (
-        envlock.verify_bundle(project_root / "environment/revision_v1")["status"]
-        == "ok"
-        and envlock.verify_live_scientific_pins(
-            project_root / "environment/revision_v1",
-            project_root,
-            verify_model_files=False,
-        )["status"]
-        == "ok"
-    )
-    index_verified = (
-        report["confirmatory_artifact_verification"]["status"]
-        == "verified_complete"
-    )
-    expected_present = check_ok and index_verified
-    assert report["environment_inventory"]["verified_environment_snapshot_present"] is expected_present
-    assert report["environment_inventory"]["exact_lock_input_present"] is expected_present
-    environment_missing = any(
-        row["group"] == "environment_inputs"
-        for row in report["resolution"]["missing_artifacts"]
-    )
-    assert environment_missing is (not expected_present)
+    assert report["environment_inventory"]["exact_lock_input_present"] is True
+    authoritative = report["authoritative_evidence_verification"]
+    assert authoritative["status"] == "verified_complete"
+    assert authoritative["included_package_file_count"] == 130
+    assert authoritative["source_package_file_count"] == 203
+    assert authoritative["verified_external_reference_count"] == 14
+    assert report["confirmatory_artifact_verification"]["status"] == "not_required"
+    assert report["readiness"]["final_ready"] is True
+    assert report["readiness"]["blockers"] == []
 
 
 def test_no_overwrite_is_enforced_and_existing_bytes_survive(tmp_path):
@@ -536,72 +510,74 @@ def test_raw_result_roles_and_legacy_exclusions_fail_closed(tmp_path):
         validate_release_spec(spec)
 
 
-def test_real_template_partitions_validation_forensics_and_confirmatory_inputs():
+def test_real_template_uses_current_tracked_sources_and_authoritative_package():
     project_root = Path(__file__).resolve().parents[1]
     spec = json.loads(
         (project_root / "release/revision_v1_template/release_spec.json").read_text()
     )
-    raw = spec["artifacts"]["raw_results"]
-    by_source = {row["source"]: row for row in raw}
-    assert "results/revision_v1/primary" not in by_source
-    assert not any("/smoke_v2" in source for source in by_source)
-    assert by_source["results/revision_v1/tokenizer_preflight_v2"]["evidence_role"] == "exploratory_validation_not_for_confirmatory_pooling"
-    assert by_source["results/revision_v1/smoke_v3"]["evidence_role"] == "exploratory_validation_not_for_confirmatory_pooling"
-    assert by_source["results/revision_v1/compute_projection_v2.json"]["evidence_role"] == "exploratory_compute_gate_not_for_confirmatory_pooling"
-    assert by_source["results/revision_v1/compute_projection_165h_v2.json"]["evidence_role"] == "exploratory_compute_gate_not_for_confirmatory_pooling"
-    assert by_source["results/revision_v1/invalidations/primary__qwen2_5_7b__direct_payload_fidelity.json"]["evidence_role"] == "forensic_invalidated_not_for_pooling"
-    assert by_source["results/revision_v1/incurred_charges/legacy_completed_smoke_v2.json"]["evidence_role"] == "forensic_charge_only_not_rate_evidence"
-    assert by_source["results/revision_v1/primary_v2"]["evidence_role"] == "confirmatory_scientific_evidence"
-    observed_confirmatory = [
-        (
-            group,
-            row["source"],
-            row["destination"],
-            row["evidence_role"],
-            next(
-                expected[4]
-                for expected in CONFIRMATORY_ARTIFACT_SPECS
-                if expected[1] == row["source"]
-            ),
-        )
+    serialized = json.dumps(spec, sort_keys=True).lower()
+    assert spec["tracked_sources_only"] is True
+    assert "confirmatory_artifact_index" not in spec
+    assert ".paper/" not in serialized
+    assert "confirmatory_release_index_v1.json" not in serialized
+    assert "detector_equivalence_v1" not in serialized
+    assert "equivalence" not in serialized
+    assert "human_materials" not in spec["required_groups"]
+    commands = [row["command"] for row in spec["reproduction_commands"]]
+    assert any(
+        "not textcnn_reports_reproducible_post_training_state_hash" in command
+        for command in commands
+    )
+    assert "python -m pytest -q" not in commands
+    assert "python -B scripts/verify_revision_release.py . --require-doi-null" in commands
+
+    entries = [
+        row
         for group in revision_release.ARTIFACT_GROUPS
         for row in spec["artifacts"].get(group, [])
-        if row["source"] in {expected[1] for expected in CONFIRMATORY_ARTIFACT_SPECS}
     ]
-    assert observed_confirmatory == list(CONFIRMATORY_ARTIFACT_SPECS)
-    assert spec["confirmatory_artifact_index"] == (
-        "results/revision_v1/confirmatory_release_index_v1.json"
+    assert entries
+    assert all(not Path(row["source"]).is_absolute() for row in entries)
+    assert all((project_root / row["source"]).exists() for row in entries)
+    assert all(not row["source"].startswith(".paper/") for row in entries)
+    final_package = next(
+        row for row in entries
+        if row["source"] == "results/revision_v1/final_experiment_package"
     )
-    assert spec["evidence_partition_policy"]["invalidated_shard_bytes_included"] is False
-    validate_release_spec(spec)
+    assert final_package["evidence_role"] == "authoritative_final_evidence"
+    assert final_package["portable_paths"] is True
+    assert spec["authoritative_evidence_package"]["manifest_sha256"] == (
+        "b7ec0c47a59fa6a9a33de2fd072f9e2e4db4c38328cc8757aa5fa562451e2349"
+    )
 
 
-def test_real_template_excludes_partial_confirmatory_tree_without_verified_index(tmp_path):
+def test_real_template_resolves_clean_checkout_and_dry_runs_final_ready(tmp_path):
     project_root = Path(__file__).resolve().parents[1]
     spec = json.loads(
         (project_root / "release/revision_v1_template/release_spec.json").read_text()
     )
-    isolated_root = tmp_path / "project"
-    isolated_root.mkdir()
-    plan = plan_release(spec, project_root=isolated_root)
-    gate = plan["confirmatory_artifact_verification"]
-    assert gate["required"] is True
-    assert gate["status"] == "missing"
-    confirmatory_sources = {row[1] for row in CONFIRMATORY_ARTIFACT_SPECS}
-    assert not any(
-        row["source"] in confirmatory_sources
-        for row in plan["resolution"]["files"]
+    target = tmp_path / "not-created"
+    report = build_release_candidate(
+        spec, target, project_root=project_root, dry_run=True,
+        require_final_ready=True,
     )
-    assert any(
-        blocker["code"] == "missing_verified_confirmatory_artifact_index"
-        for blocker in plan["readiness"]["blockers"]
+    assert report["dry_run"] is True
+    assert report["output_created"] is False
+    assert not target.exists()
+    assert report["resolution"]["missing_artifacts"] == []
+    tracked = revision_release._tracked_repository_files(project_root)
+    assert all(
+        row["source"] in tracked for row in report["resolution"]["files"]
     )
-    primary = next(
-        row for row in plan["resolution"]["resolutions"]
-        if row["source"] == "results/revision_v1/primary_v2"
+    assert report["readiness"]["content_readiness"] == FINAL_CONTENT_STATUS
+    assert report["readiness"]["blockers"] == []
+    assert report["authoritative_evidence_verification"]["status"] == (
+        "verified_complete"
     )
-    assert primary["files"] == []
-    assert primary["verification_status"] == "confirmatory_index_missing"
+    assert report["confirmatory_artifact_verification"]["status"] == "not_required"
+    assert {
+        row["code"] for row in report["readiness"]["publication_blockers"]
+    } == {"external_publication_authorization_absent", "doi_not_assigned"}
 
 
 def test_confirmatory_role_without_exact_index_map_is_rejected(tmp_path):

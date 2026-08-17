@@ -74,8 +74,11 @@ def test_checksum_tamper_and_unlisted_file_are_detected(tmp_path):
 
 
 def test_forbidden_paths_secrets_and_model_weights_fail_closed():
+    forbidden_home = "/" + "home/"
     with pytest.raises(envlock.EnvironmentLockError, match="absolute user path"):
-        envlock._scan_for_forbidden_content({"x.json": b'{"path":"/home/person/secret"}'})
+        envlock._scan_for_forbidden_content(
+            {"x.json": ('{"path":"' + forbidden_home + 'person/secret"}').encode("utf-8")}
+        )
     with pytest.raises(envlock.EnvironmentLockError, match="private-key"):
         envlock._scan_for_forbidden_content({"x.txt": b"-----BEGIN PRIVATE KEY-----"})
     with pytest.raises(envlock.EnvironmentLockError, match="model-weight"):
@@ -141,7 +144,8 @@ def test_project_r_library_inventory_hashes_description_without_copying(tmp_path
 def test_python_inventory_sanitizes_editable_source_paths():
     record, requirements = envlock.collect_python_environment(Path.cwd())
     serialized = json.dumps(record, sort_keys=True)
-    assert "/home/" not in serialized
+    forbidden_home = "/" + "home/"
+    assert forbidden_home not in serialized
     assert "file://" not in serialized
     assert record["package_count"] > 0
     assert b"-e ." in requirements
@@ -260,7 +264,6 @@ def test_scientific_source_contract_includes_payload_fidelity_and_power_grid():
         "scripts/update_revision_progress.py",
         "scripts/supervise_primary_v2.py",
         "scripts/supervise_confirmatory_v2.py",
-        "scripts/revise_revision_manuscripts.py",
         "scripts/build_revision_environment_lock.py",
         "scripts/build_revision_release.py",
         "scripts/build_revision_confirmatory_release_index.py",

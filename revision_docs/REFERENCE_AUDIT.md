@@ -1,10 +1,10 @@
 # RankCloak reference audit
 
 Audit date: 9 August 2026. This audit covers every entry in the submitted
-`.paper/scientific_reports/references.bib` and the citation order compiled into
+`paperV1/scientific_reports/references.bib` and the citation order compiled into
 `main.bbl`. The submitted manuscript, Supplementary Information, inline
 bibliography, and `references.bib` were not edited. The staged revision is
-`.paper/scientific_reports/references2.bib`.
+`paperV2/scientific_reports/references.bib`.
 
 ## Outcome
 
@@ -31,8 +31,8 @@ bibliography, and `references.bib` were not edited. The staged revision is
   “Andrei Kanikotan”; PyPI and the official repository identify the author as
   Andrei Betlen. Both records are corrected.
 - The official title of Wayner's 1995 article is misspelled “Stegnography” in
-  the version-of-record metadata. `references2.bib` preserves that official
-  title rather than silently normalizing it.
+  the version-of-record metadata. The revised bibliography preserves that
+  official title rather than silently normalizing it.
 - The peer-reviewed patient-Huffman prior work is already present as
   `DaiCai2019NearImperceptible` (ACL 2019, DOI `10.18653/v1/P19-1422`) and is
   retained for the comparator discussion.
