@@ -158,10 +158,14 @@
           "figures/capacity_tail_validation.png",
           "figures/computational_overhead.png",
           "figures/computational_overhead_compact.png",
+          "figures/empirical_capacity_quality_frontier.png",
+          "figures/forced_span_full_message_quality.png",
           "figures/neural_detector_performance.png",
           "figures/neural_detector_performance_compact.png",
+          "figures/payload_representation_rank_capacity.png",
           "figures/robustness_recovery.png",
           "figures/robustness_recovery_compact.png",
+          "figures/tail_gain_by_prompt_category.png",
           "changed_and_generated_files.txt",
           "changed_and_generated_files_manifest.json",
           "resource_and_process_audit.json",
@@ -383,7 +387,7 @@
       }
     ],
     "manifest": "results/revision_v1/final_experiment_package/manifest.json",
-    "manifest_sha256": "b7ec0c47a59fa6a9a33de2fd072f9e2e4db4c38328cc8757aa5fa562451e2349",
+    "manifest_sha256": "338e9c2ee0e10367d4b8ccb9b6068f532d8fa961e5369a6097bb53820074f264",
     "required_external_labels": [
       "detector_dataset_manifest",
       "detector_predictions",

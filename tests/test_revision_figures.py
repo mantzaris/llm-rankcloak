@@ -915,7 +915,8 @@ def test_canonical_continuity_manifest_handoff_and_publication_copies_validate()
         "unavailable_rows": 0,
     }
     serialized_manifest = json.dumps(manifest, sort_keys=True)
-    assert "/home/meow" not in serialized_manifest
+    machine_local_home = str(Path("/", "home", "meow"))
+    assert machine_local_home not in serialized_manifest
 
     for key, entry in manifest["outputs"].items():
         target = PROJECT_ROOT / entry["path"]
@@ -934,7 +935,7 @@ def test_canonical_continuity_manifest_handoff_and_publication_copies_validate()
     handoff_path = PROJECT_ROOT / handoff_entry["path"]
     assert file_sha256(handoff_path) == handoff_entry["sha256"]
     handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
-    assert "/home/meow" not in json.dumps(handoff, sort_keys=True)
+    assert machine_local_home not in json.dumps(handoff, sort_keys=True)
     assert [
         row["original_figure_number"] for row in handoff["original_figures"]
     ] == [1, 2, 3, 4]

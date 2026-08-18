@@ -532,8 +532,8 @@ def test_real_release_template_uses_tracked_environment_and_final_evidence():
     assert report["environment_inventory"]["exact_lock_input_present"] is True
     authoritative = report["authoritative_evidence_verification"]
     assert authoritative["status"] == "verified_complete"
-    assert authoritative["included_package_file_count"] == 130
-    assert authoritative["source_package_file_count"] == 203
+    assert authoritative["included_package_file_count"] == 138
+    assert authoritative["source_package_file_count"] == 215
     assert authoritative["verified_external_reference_count"] == 14
     assert report["confirmatory_artifact_verification"]["status"] == "not_required"
     assert report["readiness"]["final_ready"] is True
@@ -766,7 +766,7 @@ def test_real_template_uses_current_tracked_sources_and_authoritative_package():
     assert final_package["portable_paths"] is True
     authoritative = spec["authoritative_evidence_package"]
     assert authoritative["manifest_sha256"] == (
-        "b7ec0c47a59fa6a9a33de2fd072f9e2e4db4c38328cc8757aa5fa562451e2349"
+        "338e9c2ee0e10367d4b8ccb9b6068f532d8fa961e5369a6097bb53820074f264"
     )
     mappings = {
         row["label"]: row["repository_path"]
