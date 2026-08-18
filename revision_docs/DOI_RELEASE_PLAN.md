@@ -1,18 +1,22 @@
 # Code-and-data deposit workflow
 
+Reserved archive DOI: `10.5281/zenodo.21987450`
+
 ## Scope
 
-The repository provides an offline assembler for a future combined RankCloak
+The repository provides an offline assembler for the combined RankCloak
 code-and-data deposit. It stages a local candidate only and has no network,
-upload, publication, release, or DOI-minting capability. The journal article
-DOI is separate from any future archive DOI.
+upload, publication, release, or DOI-minting capability. Zenodo has reserved
+the DOI above, but the draft record is not yet published; the journal article
+DOI will be a separate identifier.
 
 The active specification is
 release/revision_v1_template/release_spec.json. Despite the retained directory
 name, it describes the completed computational revision rather than the earlier
 prospective confirmatory workflow. It depends on tracked canonical paths,
-including paperV2 and the sealed final experiment package, and does not depend
-on private manuscript staging or a legacy confirmatory release index.
+the sealed final experiment package, excludes both paperV1 and paperV2, and
+does not depend on private manuscript staging or a legacy confirmatory release
+index.
 
 ## Integrity model
 
@@ -49,7 +53,7 @@ paths, secrets, model weights, and inconsistent metadata.
 
 ## External action
 
-After author review, a separate authorized workflow may create the external
-archive record, upload the independently verified candidate, assign its DOI,
-and update citation metadata if desired. None of those actions is performed or
-assumed by the local assembler.
+After author review, a separate authorized workflow must upload the
+independently verified candidate and publish the existing Zenodo draft. None of
+those actions is performed or assumed by the local assembler, and the reserved
+DOI may not resolve publicly until publication.

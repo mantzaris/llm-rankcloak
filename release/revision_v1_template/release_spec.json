@@ -18,13 +18,6 @@
         "source": "README.md"
       },
       {
-        "destination": "paperV2",
-        "evidence_role": "documentation_not_scientific_result",
-        "note": "Completed revised manuscript, Supplementary Information, response, cover letter, bibliography, provenance CSV, local vector figures, and final PDFs.",
-        "required": true,
-        "source": "paperV2"
-      },
-      {
         "destination": "release/revision_v1_template",
         "evidence_role": "documentation_not_scientific_result",
         "note": "Current offline code-and-data archive specification and local assembly instructions.",
@@ -419,13 +412,13 @@
         "name": "Alexander V. Mantzaris"
       }
     ],
-    "description": "Tracked source code, public deterministic payloads, authoritative processed tables, detector predictions and metrics, vector figures, sealed final computational evidence, environment metadata, and the completed revised paper package. No participant outcomes were collected.",
+    "description": "Tracked source code, public deterministic payloads, authoritative processed tables, detector predictions and metrics, vector figures, sealed final computational evidence, and environment metadata. No participant outcomes were collected.",
     "direct_participant_identifiers_included": false,
-    "doi": null,
+    "doi": "10.5281/zenodo.21987450",
     "human_participant_outcomes_collected": false,
     "raw_human_response_data_included": false,
     "title": "RankCloak code and data for the Scientific Reports major revision",
-    "version": "computational-revision-final"
+    "version": "1.0.0"
   },
   "package_id": "rankcloak-computational-revision-code-data",
   "release_status": "draft_external_action_prohibited",
@@ -443,12 +436,8 @@
       "label": "From a full source checkout: assemble a local candidate"
     },
     {
-      "command": "python -B scripts/verify_revision_release.py . --require-doi-null",
+      "command": "python -B scripts/verify_revision_release.py .",
       "label": "From the assembled candidate root: independently verify every staged byte"
-    },
-    {
-      "command": "python tools/count_scientific_reports.py",
-      "label": "From either tree: check the revised manuscript word and display-item counts"
     }
   ],
   "required_groups": [

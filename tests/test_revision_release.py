@@ -726,13 +726,23 @@ def test_real_template_uses_current_tracked_sources_and_authoritative_package():
     assert "detector_equivalence_v1" not in serialized
     assert "equivalence" not in serialized
     assert "human_materials" not in spec["required_groups"]
+    assert spec["metadata"]["doi"] == "10.5281/zenodo.21987450"
+    assert spec["metadata"]["version"] == "1.0.0"
+    citation_fields = dict(
+        line.split(": ", 1)
+        for line in (project_root / "CITATION.cff").read_text().splitlines()
+        if ": " in line
+    )
+    assert citation_fields["doi"] == "10.5281/zenodo.21987450"
+    assert citation_fields["version"] == "1.0.0"
     commands = [row["command"] for row in spec["reproduction_commands"]]
     assert any(
         "not textcnn_reports_reproducible_post_training_state_hash" in command
         for command in commands
     )
     assert "python -m pytest -q" not in commands
-    assert "python -B scripts/verify_revision_release.py . --require-doi-null" in commands
+    assert "python -B scripts/verify_revision_release.py ." in commands
+    assert all("count_scientific_reports.py" not in command for command in commands)
 
     entries = [
         row
@@ -743,6 +753,11 @@ def test_real_template_uses_current_tracked_sources_and_authoritative_package():
     assert all(not Path(row["source"]).is_absolute() for row in entries)
     assert all((project_root / row["source"]).exists() for row in entries)
     assert all(not row["source"].startswith(".paper/") for row in entries)
+    assert all(
+        not row["source"].startswith(("paperV1/", "paperV2/"))
+        and row["source"] not in {"paperV1", "paperV2"}
+        for row in entries
+    )
     final_package = next(
         row for row in entries
         if row["source"] == "results/revision_v1/final_experiment_package"
@@ -784,6 +799,32 @@ def test_real_template_resolves_clean_checkout_and_dry_runs_final_ready(tmp_path
     assert all(
         row["source"] in tracked for row in report["resolution"]["files"]
     )
+    resolved_sources = {row["source"] for row in report["resolution"]["files"]}
+    resolved_destinations = {
+        row["destination"] for row in report["resolution"]["files"]
+    }
+    forbidden_publication_names = {
+        "main2.pdf",
+        "main2.tex",
+        "supplementary2.pdf",
+        "supplementary2.tex",
+        "response_to_reviewers.tex",
+        "rankcloak_response_to_reviewers_v2.pdf",
+        "cover_letter.tex",
+        "rankcloak_cover_letter_v2.pdf",
+    }
+    assert all(
+        not path.startswith(("paperV1/", "paperV2/"))
+        for path in resolved_sources | resolved_destinations
+    )
+    assert not {
+        Path(path).name for path in resolved_destinations
+    } & forbidden_publication_names
+    assert "rankcloak/revision_release.py" in resolved_destinations
+    assert (
+        "results/revision_v1/neural_detector/confirmatory_v2/"
+        "detector_predictions.csv"
+    ) in resolved_destinations
     assert report["readiness"]["content_readiness"] == FINAL_CONTENT_STATUS
     assert report["readiness"]["blockers"] == []
     assert report["authoritative_evidence_verification"]["status"] == (
@@ -792,7 +833,7 @@ def test_real_template_resolves_clean_checkout_and_dry_runs_final_ready(tmp_path
     assert report["confirmatory_artifact_verification"]["status"] == "not_required"
     assert {
         row["code"] for row in report["readiness"]["publication_blockers"]
-    } == {"external_publication_authorization_absent", "doi_not_assigned"}
+    } == {"external_publication_authorization_absent"}
 
 
 def test_confirmatory_role_without_exact_index_map_is_rejected(tmp_path):

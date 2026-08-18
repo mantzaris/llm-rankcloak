@@ -407,6 +407,8 @@ Small CSV, JSON, JSONL, Markdown, and PNG results are intentionally committable.
 
 The revised manuscript is under `paperV2/`; its completed computational evidence is sealed under `results/revision_v1/final_experiment_package/`. The materials under `human_study/` remain pre-recruitment planning artifacts, not participant evidence.
 
+Reserved code-and-data archive DOI: https://doi.org/10.5281/zenodo.21987450
+
 ## Sources
 
 The notebook and code use the Calgacus paper at `https://arxiv.org/pdf/2510.20075` and implementation ideas inspected from `https://github.com/mantzaris/LlmStenoExplore`. The prior repository is not vendored here.
