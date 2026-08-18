@@ -41,97 +41,33 @@ This Supplementary Information documents the extended RankCloak methods and the 
 
 \section*{Supplementary Note S1: Extended RankCloak methods}\label{si:s1}
 
-\subsection*{Rank ordering and tie handling}
+The main Methods now contains the rank definition, Calgacus transformation, complete payload-codec equations, and the full non-segmented, segmented, and natural-tail algorithms. This note records implementation details and edge cases that extend those central presentations without duplicating their equations or pseudocode.
 
-For a fixed model \(M\), token history \(h\), vocabulary \(\mathcal V\), next-token logit \(z_M(v\mid h)\), and integer token identifier \(\operatorname{id}(v)\), RankCloak orders candidates by the lexicographic key
-\[
-\bigl(-z_M(v\mid h),\,\operatorname{id}(v)\bigr).
-\]
-Ranks are one-indexed:
-\[
-\Rank_h(v)=1+\left|\left\{u:z_M(u\mid h)>z_M(v\mid h)\ \lor\
-[z_M(u\mid h)=z_M(v\mid h)\land\operatorname{id}(u)<\operatorname{id}(v)]\right\}\right|.
-\]
-The inverse \(\tok_h(r)\) is the unique token occupying rank \(r\). No stochastic sampling or nondeterministic tie operation is used. The model artifact, embedded tokenizer, quantization, chat/prompt rendering, filter mask, and tie rule are therefore part of the replay configuration.
+\subsection*{Direct-subword framing and bounded-codec metadata}
 
-\subsection*{Payload codecs}
+The direct-subword arm tokenizes the original UTF-8 payload bytes with special-token insertion disabled and computes its ranks under the model's empty/BOS payload context. A preflight detokenizes the token sequence and requires the original payload bytes to be an exact suffix. The only accepted extra bytes are an explicitly retained leading-space prefix; the record stores its byte length, base64 value, and SHA-256 digest. A non-space prefix, any suffix transformation, or any payload-byte mismatch makes the representation unavailable before cover generation. During inverse transcoding, recovered ranks regenerate the payload-side token IDs, the saved prefix is removed only after exact prefix verification, and the recovered bytes and digest must equal the original. This framing correction prevents tokenization-level equality from being mistaken for recovery of the declared artifact.
 
-Let \(x=(b_1,\ldots,b_m)\) be the exact serialized payload bytes.
+For the ASCII \(B=8\) and \(B=16\) conditions, metadata stores the alphabet size, bits per symbol, exact source-byte length, and the number of zero bits appended at the end of the complete serialized bitstream. The decoder validates every recovered rank, reconstructs the padded bitstream, removes only the recorded terminal padding, and returns exactly the declared number of bytes. The \(B=8\) codec therefore uses \(\lceil8m/3\rceil\) ranks for \(m\) serialized bytes rather than independently padding each byte to three radix-8 digits. The hexadecimal condition records the exact canonical character length and rejects ranks outside 1--16. It is never applied to base64 or hyphenated UUID text.
 
-\paragraph{Direct subword representation.}
-The displayed serialization is tokenized under a declared payload-side context. If the resulting tokens are \(e_i\), their ranks \(\Rank_{g_i}(e_i)\) form the representation. This representation can be short but its rank ceiling is the model vocabulary size; it is therefore a measurement condition rather than a bounded codec.
+\subsection*{Candidate masks and deterministic ordering}
 
-\paragraph{ASCII-byte fixed radix.}
-For base \(B\in\{8,16\}\), set \(w=\lceil\log_B 256\rceil\). Each byte has the unique fixed-width expansion
-\[
-b_i=\sum_{j=0}^{w-1}d_{ij}B^{w-1-j},\qquad 0\leq d_{ij}<B,
-\]
-and is encoded as ranks \(d_{ij}+1\). Thus ASCII \(B=8\) uses three ranks per byte, all in 1--8; ASCII \(B=16\) uses two ranks per byte, all in 1--16. Decoding subtracts one, groups exactly \(w\) digits, rejects digits or values outside the declared range, reconstructs the bytes, and verifies the expected serialized length and digest.
+The implementation converts logits to 64-bit numerical scores and orders eligible candidates with a lexicographic sort whose primary key is decreasing score and secondary key is increasing token ID. Rank lookup counts candidates with a strictly greater score plus equal-score candidates having a lower ID. This realizes the tie contract in the main Methods without a stochastic operation.
 
-\paragraph{Hex-nibble representation.}
-After verifying canonical lowercase hexadecimal syntax, each character \(c_i\in\{0,\ldots,9,a,\ldots,f\}\) maps to its nibble value \(\nu(c_i)\in[0,15]\) and rank \(\nu(c_i)+1\). Decoding applies the inverse map and rejects any rank outside 1--16. This codec is not applied to base64 or hyphenated UUID display forms unless an eligible canonical hex serialization was declared.
+The canonical \code{safe_text_filter_v1} is constructed once per model and excludes empty or replacement-character pieces, disallowed controls, and declared code, markup, URL, escape, and formatting fragments. The no-filter condition uses the complete candidate vocabulary. The stricter \code{roundtrip_stable_filter_v1} additionally requires that each isolated token piece detokenize and retokenize to that same single ID. This isolated condition does not imply contextual visible-text stability. Its Mistral mask was empty, so the associated cells and their dependent analyses are recorded as unavailable rather than failed. Mask identity, allowed-token count, and digest are retained with each trial.
 
-\subsection*{Non-segmented encoder and decoder}
+\subsection*{Segment records, lead-ins, and tail policies}
 
-\begin{algorithm}[H]
-\caption{Deterministic non-segmented RankCloak encoding}
-\label{alg:encode}
-\begin{algorithmic}[1]
-\Require Serialized payload \(x\), codec \(C\), prompt \(p\), model/tokenizer \(M\), filter \(F\)
-\Ensure Saved cover token IDs \(Y\), representation metadata
-\State \(R\gets C.\Enc(x)\); \(h\gets\operatorname{tokenize}_M(p)\); \(Y\gets[\,]\)
-\For{\(r\) in \(R\)}
-  \State compute logits for \(M(\,\cdot\mid h)\)
-  \State apply the deterministic allowed-token mask \(F\)
-  \State order allowed tokens by decreasing logit then token ID
-  \State \(y\gets\tok_h(r)\); append \(y\) to \(Y\) and \(h\)
-\EndFor
-\State save \(Y\), prompt/configuration identities, codec metadata, and payload digest
-\State \Return \(Y\)
-\end{algorithmic}
-\end{algorithm}
+Each segment record stores its rank slice, prompt identity and tokenized context, exact lead-in, forced, tail, and full token-ID arrays, token-role mask, and half-open forced offsets. Single-topic segmentation reuses the assigned prompt; multi-topic segmentation rotates deterministically through the six prompt categories while preserving the assigned template index. Neither segment order nor boundary metadata is authenticated by RankCloak itself.
 
-\begin{algorithm}[H]
-\caption{Exact-copy and forced-span RankCloak decoding}
-\label{alg:decode}
-\begin{algorithmic}[1]
-\Require Saved or retokenized token IDs \(Y\), forced-span boundaries \(\mathcal B\), codec \(C\), prompt schedule, model/tokenizer \(M\), filter \(F\)
-\Ensure Decoded payload \(\hat x\) or structured failure
-\State \(\hat R\gets[\,]\)
-\For{each segment \(j\) in declared order}
-  \State initialize \(h\) from the exact segment prompt and any declared lead-in
-  \For{each token \(y\) within forced boundary \(\mathcal B_j\)}
-    \State recreate the filtered deterministic ordering under \(h\)
-    \State append \(\Rank_h(y)\) to \(\hat R\); append \(y\) to \(h\)
-  \EndFor
-  \State ignore every token labeled natural tail
-\EndFor
-\State \(\hat x\gets C.\Dec(\hat R)\); verify length, serialization, and payload digest
-\State \Return \(\hat x\) or the first structured divergence
-\end{algorithmic}
-\end{algorithm}
+A lead-in is a serial rank-1 prefix generated before a forced span. Saved-token replay supplies those exact IDs; the separate greedy-lead-in mode regenerates them and checks equality before decoding. Because a lead-in changes every forced-token history, it is not interchangeable with a tail. Lead-in lengths 2, 4, 8, 16, and 32 were compared with the no-lead-in condition.
 
-For a non-segmented record, \(\mathcal B\) covers the entire generated payload sequence. For a segmented record, representation ranks \(R=(r_1,\ldots,r_n)\) are partitioned into ordered half-open slices
-\[
-R_j=R[jq:\min\{(j+1)q,n\}],
-\]
-where \(q\) is the segment size. Forced token offsets and role masks are saved separately for each public message. Segment order and boundaries are authenticated only by the retained experimental record; RankCloak itself does not provide an authentication mechanism.
+The original fixed sentence-tail policy is Algorithm 3 in the main Methods. The completed revision also froze \code{dynamic_completion_v1}: after at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced parentheses, brackets, braces, and quotation marks, and no declared trailing connective or punctuation fragment. Reaching 256 tokens without satisfying the rule is an explicitly censored emergency stop. The ablation compares dynamic stopping with the original 20--60-token sentence-tail policy and with no tail. Every tail token retains the role \code{tail} and is excluded from rank reconstruction.
 
-\subsection*{Lead-ins, natural tails, and dynamic stopping}
+\subsection*{Replay modes and structured endpoints}
 
-A lead-in consists of rank-1 greedy tokens generated before a forced span. It carries no payload, but it changes every forced-token context and must be reproduced before decoding. Lead-in lengths 2, 4, 8, 16, and 32 were evaluated against the no-lead-in canonical condition.
+The main Algorithms 1 and 2 define saved-token exact-copy recovery. Detokenized-text replay instead renders the complete visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic; it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step. Cross-model replay uses a different declared model/tokenizer pair.
 
-After a segmented forced span, the dynamic policy emits greedy tokens. Stopping is permitted only after at least eight natural tokens and when the declared rules recognize terminal punctuation (\code{.}, \code{!}, or \code{?}) or a double newline, delimiters are balanced, and the final form is not a declared dangling connective or punctuation fragment. An emergency maximum of 256 tail tokens yields a censored stop. Fixed 20--60-token sentence completion and no-tail alternatives were also evaluated. Every tail token is labeled \code{tail}, carries no rank, and is excluded from forced-span decoding.
-
-\subsection*{Filtering}
-
-The canonical \code{safe_text_filter_v1} constructs a deterministic allowed-token mask before ranking. It excludes declared unusable or non-public token forms and is applied identically at encoder and decoder. The no-filter ablation uses the complete candidate vocabulary; \code{roundtrip_stable_filter_v1} additionally requires isolated text/token roundtrip stability. Because removal changes rank indices, a filter is part of the key-like shared configuration rather than a cleanup step. The Mistral roundtrip-stable mask was empty under the isolated criterion, producing declared unavailable cells rather than failed trials.
-
-\subsection*{Replay modes and endpoint definitions}
-
-Saved-token replay passes the original generated token IDs directly to Algorithm~\ref{alg:decode}. Detokenized-text replay first renders visible text, invokes the embedded tokenizer again, and then applies declared boundary logic. Greedy-lead-in replay deterministically regenerates a declared prefix. Transformed-text replay applies exactly one frozen perturbation before tokenization. Cross-model replay uses a different declared decoder model and tokenizer.
-
-Exact rank replay means every recovered forced rank equals the encoded rank. Exact representation recovery means the reconstructed codec representation matches. The primary endpoint is stronger: the recovered serialized bytes and their SHA-256 digest equal the source. Payload-trial, payload-group, and model--payload-group endpoints are distinct. The latter two require every constituent trial to succeed. Natural tails are never included in any rank or payload endpoint.
+For every mode, the record distinguishes exact forced-rank replay, exact representation recovery, and exact serialized-payload recovery. The primary endpoint requires the last of these, including byte length and SHA-256 identity. Failures retain the first segment and forced position where available, expected and observed token IDs and ranks, the context digest, and boundary offsets. Payload-group and model--payload-group endpoints require all constituent trials to pass. Natural tails never enter any recovery endpoint.
 
 \section*{Supplementary Note S2: Corpus, models, prompts, and work-unit accounting}\label{si:s2}
 
@@ -515,44 +451,45 @@ Fixed-seed reruns on the same CUDA device produced exact metric equality for bot
 
 \section*{Supplementary Note S8: Capacity--quality theory}\label{si:s8}
 
-\subsection*{Rank bounds and payload length}
+The main Methods defines bounded forced length, nominal and effective rates, full-message overhead, and the same-context probability bound. This note gives finite-code consequences, proof conditions, and the retained-field audit without repeating those central equations.
 
-Let a radix-\(B\) codec map a payload of \(L\) bits to \(n_B\) one-indexed ranks in \(\{1,\ldots,B\}\). For fixed-width digits,
+\subsection*{Finite code space and exact inversion}
+
+Let \(H\), \(B\), and \(n_B\) have the meanings in Main Eq.~(14). The unused capacity of the smallest fixed-length rank word is described by
 \[
-n_B=\left\lceil\frac{L}{\log_2 B}\right\rceil
+\sigma_B=n_B\log_2B-H,\qquad
+\eta_B=\frac{2^H}{B^{n_B}}=2^{-\sigma_B},\qquad
+u_B=1-\eta_B .
 \]
-when the payload is treated as a bit string with an explicitly retained length; for the byte codec, the exact implementation uses \(n_B=m\lceil\log_B256\rceil\) for \(m\) bytes. Hex nibbles use \(n_{16}=2m\). Every forced position therefore selects a token whose filtered rank is at most \(B\). Direct subword representation has no codec-imposed rank bound beyond the eligible vocabulary.
+Here \(\sigma_B\) is code-space slack in bits, \(\eta_B\) is utilization, and \(u_B\) is the unused codeword fraction. For a power-of-two alphabet and an integer-length bitstream, \(\sigma_B\) equals literal terminal padding bits. The byte codec records those bits explicitly; for \(B=8\), one byte is the finite example \(n_B=3\) with one terminal padding bit, while a multi-byte payload is packed as one continuous stream. Hex nibbles have zero slack when the represented source length is exactly four bits per canonical character.
 
-\paragraph{Rank-bound proposition.}
-Assume that at each forced position the deterministic filtered ordering contains at least \(B\) eligible tokens and that encoder and replay decoder share the same ordering state. If every codec digit is in \(0,\ldots,B-1\), then every selected forced token has rank in \(1,\ldots,B\), and decoder inversion returns the original fixed-width digits. This follows immediately from selecting \(\tok_h(d+1)\) and replaying \(\Rank_h\{\tok_h(d+1)\}=d+1\). The proposition is conditional on the shared state; it does not establish robustness to retokenization or context edits.
+The rank-bound proposition assumes that every forced history has at least \(B\) eligible candidates and that encoder and decoder reproduce the same model, token IDs, prompt context, mask, and ordering. A digit \(d\in\{0,\ldots,B-1\}\) selects the token at filtered rank \(d+1\); exact replay ranks that same saved token as \(d+1\). Serial induction over the forced span recovers the rank word, and injectivity of the codec recovers the representation. The proposition does not apply after an altered token, context, boundary, mask, or model, and it supplies no edit-correction property.
 
-\subsection*{Segmentation, tails, and rate}
+\subsection*{Segmentation and overhead decomposition}
 
-Partition a rank sequence of length \(n_B\) into segment lengths \(s_1,\ldots,s_J\), with \(\sum_js_j=n_B\). Segmentation changes the number of prompt resets and tails but not the theoretical number of payload-bearing forced positions. If segment \(j\) contains \(t_j\geq0\) non-payload tail tokens, total cover length is
+For segment forced lengths \(s_j\), lead-in lengths \(\ell_j\), and tail lengths \(t_j\), the saved records satisfy \(\sum_js_j=n_B\). The empirically audited residual can be decomposed as
 \[
-N_{\rm full}=n_B+\sum_{j=1}^J t_j+\delta ,
+D=N_{\mathrm{full}}-n_B
+ =\sum_{j=1}^{J}(\ell_j+t_j)+\delta,\qquad \delta\ge0 .
 \]
-where \(\delta\geq0\) denotes other counted cover-extension tokens under the retained accounting convention. The positive cover-length residual is \(N_{\rm full}-n_B\); it is overhead, not a recovery error. With payload length \(L\),
-\[
-R_{\rm forced}=\frac{L}{n_B},\qquad
-R_{\rm effective}=\frac{L}{N_{\rm full}}
-\quad\text{bits per full token},
-\]
-so \(R_{\rm effective}\leq R_{\rm forced}\) whenever \(N_{\rm full}\geq n_B\). A no-tail policy increases the effective rate arithmetically by reducing the denominator; this relation says nothing about perceived cover quality.
+Thus segmentation alone preserves forced-position count, while more resets can create more opportunities for non-payload continuations. A no-tail condition raises bits per full token by shrinking the denominator. This is an arithmetic consequence and not evidence that the resulting visible text is more readable or natural.
 
-\subsection*{Conditional probability bound}
+\subsection*{Conditional likelihood gap}
 
-Let \(p_{(1)}(h)\geq\cdots\geq p_{(B)}(h)\) be the first \(B\) filtered next-token probabilities at history \(h\). A bounded-rank codec selects some \(r\leq B\), hence
+The per-history ordering in Main Eq.~(16) permits a trace-level comparison with the rank-1 eligible token and, for bounded codecs, the rank-\(B\) token. In addition to \(Q_B\), the audit records
 \[
--\log p_{(1)}(h)\ \leq\ -\log p_{(r)}(h)\ \leq\ -\log p_{(B)}(h).
+\Delta_B
+ = Q_B-Q_{\mathrm{greedy}}
+ =\frac{1}{n_B}\sum_{i=1}^{n_B}
+   \left[-\log p_M(y_i\mid h_i)+\log p_{(1)}(h_i)\right]\ge0 .
 \]
-Averaging gives a trace-level bound on forced-token negative log probability when all three terms are retained under the same filtered distribution. It is a model-scale likelihood statement, not a theorem about grammar, semantic coherence, human naturalness, or detectability.
+The upper rank-\(B\) endpoint is evaluated only when its probability was retained under the identical filtered history. Direct subword traces have no single fixed \(B\), so that endpoint is unavailable rather than imputed. These quantities are model-scale surprisals in nats per forced token, not linguistic or participant outcomes.
 
 \subsection*{Empirical checks and trace boundary}
 
-The validation inventory contained 17,424 eligible retained records. Of these, 7,008 had all fields required for complete capacity/rate/quality checks. Across evaluable traces there were zero forced-position-count violations, zero rank/rate-bound violations, and zero supported quality-bound violations. The nine aggregate cells in the capacity panel of the main manuscript lay exactly on the theoretical-versus-observed forced-position identity. There were 2,976 positive cover-length residuals, attributable to natural tails or other counted cover extension.
+The validation inventory contained 17,424 eligible retained records. Of these, 7,008 had all fields required for complete capacity, rate, and supported quality-bound checks. Across evaluable traces there were zero forced-position-count violations, zero rank/rate-bound violations, and zero supported quality-bound violations. The nine aggregate cells in the capacity panel of the main manuscript lay exactly on the theoretical-versus-observed forced-position identity. There were 2,976 positive cover-length residuals, attributable to natural tails or other counted cover extension.
 
-The complete encoder--decoder cascade proposition is not directly trace-evaluable from the saved record structure: none of the retained rows simultaneously carries every intermediate object required to replay the entire proof chain as one trace. Thus the algebraic results are conditional proofs and the retained-field checks are supporting empirical validation, not a complete end-to-end trace proof. They also do not validate human naturalness.
+The complete encoder--decoder cascade proposition is not directly trace-evaluable from the saved record structure: none of the retained rows simultaneously carries every intermediate object required to replay the entire proof chain as one trace. The algebraic results are therefore conditional proofs and the retained-field checks are supporting empirical validation, not a complete end-to-end trace proof. They also do not validate human naturalness.
 
 \begin{table}[H]
 \centering
