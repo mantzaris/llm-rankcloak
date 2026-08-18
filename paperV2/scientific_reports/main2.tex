@@ -19,6 +19,12 @@
 \newcommand{\tok}{\operatorname{token}}
 \newcommand{\Enc}{\operatorname{Enc}}
 \newcommand{\Dec}{\operatorname{Dec}}
+\newcommand{\RankOf}{\operatorname{rank\_of}}
+\newcommand{\Encode}{\operatorname{encode}}
+\newcommand{\Decode}{\operatorname{decode}}
+\newcommand{\Tokenize}{\operatorname{tokenize}}
+\newcommand{\Detokenize}{\operatorname{detokenize}}
+\newcommand{\NextLogits}{\operatorname{next\_logits}}
 \modulolinenumbers[5]
 
 \title{RankCloak: Hiding Synthetic Cryptographic Artifacts in Plain English with Language Models}
@@ -52,241 +58,295 @@ The resulting evaluation introduces RankCloak as a reproducible methodology for 
 
 \section*{Methods}\label{sec:methods}
 
-RankCloak measures whether serialized artifacts that do not normally look like language can be represented as language-model token ranks and then expressed as generated cover text while remaining exactly recoverable under a declared replay contract. Conceptually, the method proceeds in four steps. First, the payload is converted into a sequence of integer ranks. Second, a cover prompt defines the next-token ordering used for public-text generation. Third, the sender emits the token at each required rank under that cover context. Fourth, the receiver replays the same context and recovers the rank of each received token. The non-segmented procedure maps one payload to one cover sequence; the segmented procedure maps a hexadecimal payload to several ordered forced spans followed by non-payload continuations.
+RankCloak measures whether synthetic artifacts that do not normally look like language can be represented as LLM token ranks and then expressed as generated cover text while remaining exactly recoverable under a declared replay contract. The motivating examples are hashes, authentication tags, nonces, hexadecimal tokens, UUID identifiers, authenticated-encryption outputs, and signatures; in their original visible forms, many of these strings are recognizable by simple pattern matching, but RankCloak asks whether the same serialized artifact can instead be carried by the token choices of an LLM-generated message. Conceptually, the method proceeds in four steps. First, the payload is converted into a sequence of integer ranks. Second, a cover prompt defines the next-token distribution used for public-text generation. Third, the sender emits the token at each required rank under that cover context. Fourth, the receiver replays the same cover context and recovers the rank of each exact saved token, following the rank-transcoding idea described by Norelli and Bronstein\cite{NorelliBronstein2026Calgacus}. If the recovered rank sequence matches the encoded payload ranks and the codec reconstructs the declared serialized bytes, the payload has been decoded exactly. The algorithms below implement two RankCloak procedures: a non-segmented procedure that maps one payload into one cover sequence and decodes the complete generated sequence, and a segmented procedure that maps a hex-like payload into several short payload-bearing spans, appends non-payload natural tails, and decodes only the forced spans. These procedures support both construction-side and detection-side measurement because they provide exact-copy recovery tests, rank-pressure measurements, cover-quality proxies, labeled cover examples, and rank-derived features that can be audited by steganalysis methods.
 
-Sender and receiver share a configuration \(K_{\mathrm{common}}\) containing the exact model artifact, tokenizer, quantization and backend settings, prompt rendering, deterministic rank rule, payload codec, filter, segmentation metadata, lead-in and tail policies where applicable, and the saved payload-bearing token IDs. This configuration is a reproducibility contract, not a cryptographic key, authentication mechanism, or synchronization protocol.
+Sender and receiver are assumed to share a common overall LLM configuration, denoted as \(K_{\mathrm{common}}\). This configuration includes the exact model artifact, tokenizer, quantization and backend settings, prompt rendering, deterministic rank-ordering rule, payload codec, segmentation rule where used, tail and lead-in policies where used, token filter where used, forced-span boundaries where used, and saved payload-bearing token IDs. Protocol labels select predeclared variants of this shared configuration. They are not modeled as cryptographic keys, authentication tags, signatures, or operational commands.
 
-\subsection*{Rank definition and Calgacus baseline}\label{sec:rank-method}
+Recovery is evaluated under an exact-copy replay requirement for deterministic context reproduction. This means that the receiver consumes the saved generated token IDs and replays the same model, tokenizer, prompt configuration, rank-ordering rule, codec, filter, and segmentation metadata. Visible-text detokenization and retokenization is a separate, weaker replay condition. Edits, paraphrases, whitespace normalization, moderation rewrites, truncation of payload-bearing tokens, retokenization, model changes, quantization changes, prompt changes, or filter changes can alter ranks and are outside the supported exact-copy condition.
 
-Let \(M\) be an autoregressive language model with vocabulary \(\mathcal V\). For token history \(h\), let \(z_M(v\mid h)\) be the next-token logit of \(v\in\mathcal V\), \(p_M(v\mid h)\) its probability, and \(\operatorname{id}(v)\) its integer token identifier:
+The exact-copy assumptions used throughout the experiments are:
+\begin{itemize}
+\item Shared configuration: sender and receiver use the same model artifact, tokenizer, quantization and backend, prompt rendering, rank rule, codec, filters, segmentation policy, and tail or lead-in policy.
+\item Deterministic rank ordering: ranks are one-indexed and computed from descending logits with token-ID tie-breaking.
+\item Payload codecs: ASCII-byte fixed-radix coding applies to exact serialized bytes; hex-nibble coding applies only to canonical lowercase hexadecimal payloads.
+\item Non-segmented decoding: the receiver replays the complete saved cover-token sequence.
+\item Segmented decoding: the receiver decodes only the saved payload-bearing forced spans; natural tails are public text but carry no payload ranks.
+\item Endpoint validation: rank recovery, representation recovery, serialized byte length, and SHA-256 identity are recorded separately, with exact serialized-payload equality as the primary endpoint.
+\end{itemize}
+The reader-facing protocol labels are defined in Supplementary Table S1. Those labels distinguish non-segmented variants, where recovery replays the complete generated cover-token sequence, from segmented variants, where recovery decodes only the payload-bearing forced span and ignores non-payload tails.
+
+\subsection*{Basic rank definition}\label{sec:rank-method}
+
+Rank-transcoding uses the rank of a token in an LLM next-token ordering as the transferable object. A rank is defined by sorting candidate tokens under a model context. Exact recovery is possible only when the sender and receiver replay the same model, tokenizer, prompt, rank rule, and generated tokens.
+Let \(M\) denote an autoregressive language model with vocabulary \(\mathcal{V}\). For a token context \(h\), let \(z_M(v\mid h)\) be the next-token logit for token \(v\in\mathcal{V}\), and let \(\operatorname{id}(v)\) be its deterministic token id. The model probability is
 \begin{equation}
 p_M(v\mid h)=
 \frac{\exp z_M(v\mid h)}
 {\sum_{u\in\mathcal V}\exp z_M(u\mid h)}.
 \label{eq:next-token-prob}
 \end{equation}
-Candidates are sorted by decreasing logit. Exact logit ties are broken by increasing token identifier, matching the implementation's lexicographic sort:
+Ranks are one-indexed. Token-id tie-breaking makes the ordering deterministic:
 \begin{equation}
-u\prec_h v
+u \prec_h v
 \Longleftrightarrow
 z_M(u\mid h)>z_M(v\mid h)
 \ \text{or}\
-\bigl[z_M(u\mid h)=z_M(v\mid h)
-\ \text{and}\ \operatorname{id}(u)<\operatorname{id}(v)\bigr].
+\left[z_M(u\mid h)=z_M(v\mid h)\ \text{and}\ \operatorname{id}(u)<\operatorname{id}(v)\right].
 \label{eq:rank-order}
 \end{equation}
-Ranks are one-indexed, and the inverse selector is unique under this ordering:
+The rank of a token and the inverse rank selector are
 \begin{equation}
 \rho_h(v)=1+\left|\{u\in\mathcal V:u\prec_h v\}\right|,
 \qquad
-\tok_h(r)=v\ \text{such that}\ \rho_h(v)=r.
+\operatorname{token}_h(r)=v\ \text{such that}\ \rho_h(v)=r.
 \label{eq:rank-function}
 \end{equation}
-Because softmax is order-preserving, ranks may be computed directly from logits. Token-ID tie-breaking is nevertheless part of \(K_{\mathrm{common}}\); changing it can change every subsequent context.
+Here \(\operatorname{token}_h(r)\) means the token at rank \(r\) in the deterministic ordering for context \(h\). Because softmax is order-preserving, the released implementation computes this order directly from 64-bit logit values and breaks exact ties by increasing token ID.
 
-The starting point is Calgacus, in which ranks rather than token identities are transferred between contexts\cite{NorelliBronstein2026Calgacus}. Let hidden text tokenize as \(e_1,\ldots,e_n\). Its payload-side history \(g_i\) contains the preceding hidden tokens and any declared payload prompt; cover-side history \(h_i\) contains the cover prompt and preceding emitted cover tokens. For emitted cover token \(y_i\) and transferred rank \(r_i\),
+\subsection*{Calgacus rank-transcoding baseline}\label{sec:calgacus-method}
+
+The starting point is the Calgacus rank-transcoding construction, in which ranks rather than token identities are transferred between contexts\cite{NorelliBronstein2026Calgacus}. In the Calgacus procedure, a hidden text can be tokenized as \(e_1,e_2,\ldots\). For each hidden-text token \(e_i\), the sender computes its rank under a payload-side context \(g_i\), where \(g_i\) is determined by the preceding hidden-text tokens and any payload-side conditioning used by the protocol. The sender then emits a cover token by selecting the token with the same rank under a cover-side context \(h_i\), where \(h_i\) is determined by the cover prompt or key and the previously emitted cover tokens.
+
+For hidden-text token \(e_i\), payload-side context \(g_i\), cover-side context \(h_i\), emitted cover token \(y_i\), and transferred rank \(r_i\), the baseline rank-transcoding step is
 \begin{equation}
-r_i=\rho_{g_i}(e_i),\qquad
-y_i=\tok_{h_i}(r_i),\qquad
-\hat r_i=\rho_{h_i}(y_i),\qquad
-\hat e_i=\tok_{g_i}(\hat r_i).
+r_i=\rho_{g_i}(e_i),
+\qquad
+y_i=\operatorname{token}_{h_i}(r_i),
+\qquad
+\hat r_i=\rho_{h_i}(y_i).
 \label{eq:calgacus-rank-transcoding}
 \end{equation}
-With identical replay state, \(\hat r_i=r_i\) and \(\hat e_i=e_i\). This is Calgacus's same-token-length arbitrary-text baseline: \(n\) hidden tokens determine \(n\) cover tokens. RankCloak uses this direct-subword condition as one measurement arm but extends the payload side with explicit bounded representations of exact cryptographic serializations. Those codecs may require more ranks, so their cover length is not a same-length claim.
+Under exact replay with the same model, tokenizer, prompt configuration, and deterministic rank rule, the recovered rank satisfies \(\hat r_i=r_i\). The receiver can then replay the payload-side context and reconstruct the hidden-text token as \(\hat e_i=\operatorname{token}_{g_i}(\hat r_i)\). This is a same-token-length arbitrary-text baseline: one hidden-text token determines one cover token. The construction shows that a rank sequence can be carried by generated text without directly emitting the hidden tokens. Direct application to cryptographic-artifact strings, however, can impose high rank pressure. Such strings are often poorly predicted by a language model, so their payload-side tokens can occupy low-probability, high-rank positions, and selecting those same ranks under a cover prompt can degrade model-likelihood and surface diagnostics even when recovery remains exact.
 
-\subsection*{Bounded payload representations}\label{sec:payload-method}
+RankCloak keeps the cover-side rank-transfer idea from Calgacus but changes the payload-side representation. Instead of relying only on direct LLM tokenization of the displayed artifact, RankCloak maps serialized artifact strings into explicit bounded rank sequences. In the RankCloak notation used below, the displayed artifact is \(x\), the payload codec is \(C\), and the encoded rank sequence is \(R=C(x)\). Recovery therefore proceeds by reconstructing \(\hat R\) from the cover tokens and decoding \(\hat{x}=C^{-1}(\hat R)\), rather than by replaying a natural-language hidden-text stream token by token. The direct-subword condition retains the Calgacus payload-side ranks as a separate measurement arm. The contribution relative to the baseline is the measurement framework around artifact-specific representations: direct subword rank diagnostics, bounded ASCII-byte and hex-nibble codecs, deterministic token filtering, segmented forced spans, non-payload tails, and separate forced-span versus full-message metrics.
 
-Let \(x\) denote the exact serialized payload and \(C\) an invertible declared codec. Direct-subword representation tokenizes the literal serialization as \(e_1,\ldots,e_n\) under its payload-side history and retains its Calgacus ranks. Bounded representations instead map the serialization before any cover generation:
+\subsection*{RankCloak bounded payload-codec methods}\label{sec:payload-method}
+
+RankCloak changes the payload side by applying explicit codecs to displayed synthetic payload strings. The goal is to avoid treating a hash-like or ciphertext serialization as an ordinary natural-language token sequence. Instead, the displayed artifact is converted into a controlled sequence of ranks before cover generation begins. This makes rank pressure measurable by design. A codec can trade cover length against rank magnitude so that smaller rank alphabets constrain forced token choices but require more generated tokens, while more compact representations can reduce length but may impose larger rank pressure.
+
+For payload string \(x\), codec \(C\), encoded rank sequence \(R\), and recovered rank sequence \(\hat R\),
 \begin{equation}
-C_{\mathrm{direct}}(x)=\bigl(\rho_{g_i}(e_i)\bigr)_{i=1}^{n},
-\qquad
-R=C(x)=(r_1,\ldots,r_N),
+R=C(x)=(r_1,\ldots,r_n),
 \qquad
 \hat x=C^{-1}(\hat R).
 \label{eq:rankcloak-codec}
 \end{equation}
-The direct arm has no codec-imposed rank ceiling below the eligible vocabulary size. Its final implementation disables special-token insertion for the payload text and accepts only a reversible tokenization whose detokenization differs from the literal UTF-8 payload by an explicitly recorded leading-space prefix; any other affix or payload-byte change fails validation.
+The direct-subword arm is not folded into Eq.~\eqref{eq:rankcloak-codec}: it tokenizes the literal serialization under the Calgacus payload context and retains the resulting ranks without imposing a fixed rank alphabet. The released implementation disables special-token insertion and accepts only a reversible tokenization whose detokenization differs from the literal UTF-8 payload by an explicitly recorded leading-space prefix. Any other affix or payload-byte change makes that representation unavailable before generation; complete framing metadata appears in Supplementary Note S1.
 
-Non-segmented cover selection uses the same inverse rank operation as Calgacus, but bounded ranks come from \(C\) rather than a predicted hidden-text token:
+Non-segmented cover generation and replay recovery then use the same rank selector as the Calgacus baseline, but the ranks come from the payload codec rather than only from direct payload-side LLM token ranks:
 \begin{equation}
-y_i=\tok_{h_i}(r_i),\qquad
-\hat r_i=\rho_{h_i}(y_i),\qquad
-\hat R=(\hat r_1,\ldots,\hat r_N).
+y_i=\operatorname{token}_{h_i}(r_i),
+\qquad
+\hat r_i=\rho_{h_i}(y_i),
+\qquad
+\hat R=(\hat r_1,\ldots,\hat r_n).
 \label{eq:rankcloak-nonseg}
 \end{equation}
-Codec-level exact recovery requires both identical ranks and exact inversion of the declared serialization:
+Codec-level exact recovery requires both rank recovery and an invertible codec for the displayed payload:
 \begin{equation}
 \hat x=x
 \quad\text{when}\quad
 \hat R=R
 \quad\text{and}\quad
-C^{-1}\!\bigl(C(x)\bigr)=x.
+C^{-1}(C(x))=x.
 \label{eq:codec-exact-recovery}
 \end{equation}
 
-Hex-nibble coding applies only after validating canonical lowercase hexadecimal syntax. Each displayed hexadecimal character maps to one bounded rank:
+Hex-nibble coding applies to canonical lowercase hexadecimal payloads. It maps each displayed hexadecimal character to one bounded rank:
 \begin{equation}
-\texttt{0}\mapsto1,\ \texttt{1}\mapsto2,\ \ldots,\
-\texttt{9}\mapsto10,\ \texttt{a}\mapsto11,\ \ldots,\
-\texttt{f}\mapsto16.
+\texttt{0}\mapsto 1,\quad
+\texttt{1}\mapsto 2,\quad
+\ldots,\quad
+\texttt{9}\mapsto 10,\quad
+\texttt{a}\mapsto 11,\quad
+\ldots,\quad
+\texttt{f}\mapsto 16.
 \label{eq:hex-nibble-map}
 \end{equation}
-Thus a 64-character SHA-256 hexadecimal serialization yields 64 ranks in \(1,\ldots,16\). Base64 and hyphenated UUID display forms are rejected by this codec rather than silently normalized.
+Thus each lowercase hex character maps to one rank in \(1,\ldots,16\). A 64-character SHA-256 hexadecimal serialization becomes 64 ranks under this codec. Base64 and hyphenated UUID display forms are rejected rather than silently normalized. The bounded alphabet controls maximum requested rank while increasing the number of forced positions; its relationship to observed cover diagnostics is evaluated rather than assumed.
 
-The codec historically labeled ASCII-byte fixed radix applies to the exact serialized byte string, including UTF-8 bytes where relevant. For \(m\) bytes, \(B\in\{8,16\}\), and \(q=\log_2B\), the implementation concatenates the \(8m\) payload bits, pads only the end of that complete bitstream, and splits it into \(q\)-bit digits:
+ASCII-byte fixed-radix coding applies to arbitrary displayed payload strings. It first expresses the displayed UTF-8 byte string as base-\(B\) digits \(d_i\), then maps each digit to rank \(d_i+1\):
 \begin{equation}
-\beta(x)0^{\pi}
- =\operatorname{bin}_{q}(d_1)\Vert\cdots\Vert
-  \operatorname{bin}_{q}(d_{n_B}),\quad
-\pi=(-8m)\bmod q,\quad
-n_B=\left\lceil\frac{8m}{q}\right\rceil,\quad
-0\le d_i<B,\quad r_i=d_i+1.
+d_i\in\{0,\ldots,B-1\},
+\qquad
+r_i=d_i+1.
 \label{eq:ascii-radix-map}
 \end{equation}
-Decoding subtracts one, rejects out-of-range digits, removes the recorded \(\pi\) end-padding bits, and reconstructs exactly \(m\) bytes. In particular, \(B=8\) packs the full stream into 3-bit digits; it does not allocate three independently padded digits to every byte. This correction matches the released codec and the capacity analysis.
+The released codec concatenates the complete serialized byte bitstream, appends zero bits only at its end to reach a multiple of \(\log_2B\), and records the original byte length and terminal-padding count. Decoding subtracts one from each rank, validates the digit range, removes only that recorded padding, and reconstructs exactly the declared number of bytes. Consequently, the \(B=8\) condition uses \(\lceil8m/3\rceil\) ranks for \(m\) serialized bytes rather than independently padding every byte; the \(B=16\) condition uses two ranks per byte. Supplementary Note S1 gives the complete metadata and edge cases.
 
-When a deterministic filter is configured, selection and replay ranks are computed in the same allowed set \(A_h\subseteq\mathcal V\):
+When a deterministic token filter is configured, ranks are computed within the allowed token set \(A_h\):
 \begin{equation}
-\rho_h^{F}(v)=1+\left|\{u\in A_h:u\prec_h v\}\right|,
+\rho^F_h(v)=1+\left|\{u\in A_h:u\prec_h v\}\right|,
 \qquad
-\tok_h^{F}(r)=v\in A_h\ \text{such that}\ \rho_h^{F}(v)=r.
+A_h\subseteq\mathcal V.
 \label{eq:filtered-rank}
 \end{equation}
-The encoder fails if \(A_h\) contains fewer candidates than a requested rank. The filter is applied before selection and is never a post-generation rewrite. Removing one candidate shifts all lower choices, so encoder and decoder must use the identical ordered mask.
+Here \(A_h\) is the allowed token set after filtering. If no filter is configured, \(A_h=\mathcal V\). The inverse selector \(\operatorname{token}_h^F(r)\) denotes the token at rank \(r\) in the same ordered allowed set. Sender and receiver must apply the identical mask and ordering because removing one candidate shifts every lower choice; a trial is unavailable if the allowed set cannot supply a requested rank.
 
-\subsection*{Non-segmented and segmented RankCloak protocols}\label{sec:encoding-method}
-
-Algorithm~\ref{alg:nonseg} restores the complete non-segmented protocol. It makes validation, codec selection, saved-token replay, and structured failures explicit. The original V1 procedure is retained, with the payload-fidelity preflight, token-ID tie rule, digest endpoint, and bitstream codec behavior corrected to match the final implementation.
+Algorithm~\ref{alg:nonseg} gives the non-segmented bounded-codec RankCloak procedure. The algorithm first encodes the displayed artifact into ranks. It then generates one cover token per rank under the cover prompt. Recovery replays the same prompt and exact saved token sequence, recomputes each token's rank, and decodes the recovered ranks back to the displayed payload. This algorithm is the basic measurement unit for the non-segmented cover-generation trials.
 
 \begin{algorithm}[H]
-\caption{Non-segmented RankCloak encoding and exact-copy recovery}
+\caption{Non-segmented RankCloak bounded-codec trial for encoding a displayed synthetic artifact as ranks, generating one cover token per rank, and recovering by exact-copy replay.}
 \label{alg:nonseg}
 \begin{algorithmic}[1]
-\Require Exact serialized payload \(x\); declared codec mode \(\gamma\); model and tokenizer \(M\)
-\Require Cover prompt \(p\); optional deterministic filter \(F\); shared configuration \(K_{\mathrm{common}}\)
-\Ensure Saved cover tokens \(Y\), decoded payload \(\hat x\), or a structured failure
-\State Validate the declared byte length, syntax, and source digest of \(x\)
-\If{\(\gamma\) is hexadecimal and \(x\) is not canonical lowercase hexadecimal}
-  \State \Return codec-applicability failure
-\ElsIf{\(\gamma\) is direct subword and literal tokenization is not reversibly framed}
-  \State \Return payload-tokenization failure
-\EndIf
-\State Select \(C_{\gamma}\); set \(R\gets C_{\gamma}.\Enc(x)\)
-\State \(h\gets\operatorname{tokenize}_{M}(p)\); \(Y\gets[\,]\)
-\For{each requested rank \(r_i\) in \(R\)}
-  \State Compute \(M\)'s next-token logits under \(h\) and construct the declared \(A_h\)
-  \If{\(r_i<1\) or \(r_i>|A_h|\)}
-    \State \Return out-of-range rank failure at position \(i\)
-  \EndIf
-  \State \(y_i\gets\tok_h^{F}(r_i)\); append \(y_i\) to \(Y\) and to \(h\)
+\Require Synthetic payload \(x\); model \(M\); cover prompt \(p\); payload codec \(C\); optional deterministic token filter \(F\); shared configuration \(K_{\mathrm{common}}\).
+\Ensure Cover text, recovered payload \(\hat{x}\), exact-recovery flag, and recorded cover metrics.
+\State \(R \gets C.\Encode(x)\)
+\State \(\mathrm{context} \gets \Tokenize(p)\)
+\State \(\mathrm{cover\_tokens} \gets [\,]\)
+\For{each rank \(r_i \in R\)}
+    \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+    \If{\(F\) is configured}
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+    \Else
+        \State \(\mathrm{allowed\_tokens} \gets \mathrm{vocabulary}(M)\)
+    \EndIf
+    \State \(y_i \gets\) token with one-indexed rank \(r_i\) among \(\mathrm{allowed\_tokens}\)
+    \State append \(y_i\) to \(\mathrm{cover\_tokens}\)
+    \State append \(y_i\) to \(\mathrm{context}\)
 \EndFor
-\State Save \(Y\), \(R\), payload/codec metadata, prompt and configuration identities, and digest
+\State \(\mathrm{cover\_text} \gets \Detokenize(\mathrm{cover\_tokens})\)
 \Statex
-\State \(h\gets\operatorname{tokenize}_{M}(p)\); \(\hat R\gets[\,]\)
-\For{each exact saved token \(y_i\) in \(Y\)}
-  \State Recreate \(A_h\); fail if \(y_i\notin A_h\)
-  \State Append \(\rho_h^{F}(y_i)\) to \(\hat R\); append \(y_i\) to \(h\)
+\State \(\mathrm{context} \gets \Tokenize(p)\)
+\State \(\mathrm{recovered\_ranks} \gets [\,]\)
+\For{each exact saved token \(y_i\) in \(\mathrm{cover\_tokens}\)}
+    \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+    \If{\(F\) is configured}
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+    \Else
+        \State \(\mathrm{allowed\_tokens} \gets \mathrm{vocabulary}(M)\)
+    \EndIf
+    \State append \(\RankOf(y_i,\mathrm{logits},\mathrm{allowed\_tokens})\) to \(\mathrm{recovered\_ranks}\)
+    \State append \(y_i\) to \(\mathrm{context}\)
 \EndFor
-\State Decode \(\hat x\gets C_{\gamma}.\Dec(\hat R)\)
-\If{\(\hat R\ne R\), inversion fails, or length, syntax, digest, or bytes differ from \(x\)}
-  \State \Return first structured rank, representation, or payload failure
-\EndIf
-\State \Return \(Y,\hat x\), and exact serialized-payload success
+\State \(\hat{x} \gets C.\Decode(\mathrm{recovered\_ranks})\)
+\State \(\mathrm{exact\_recovery} \gets (\hat{x}=x)\)
+\State \Return \(\mathrm{cover\_text}, \hat{x}, \mathrm{exact\_recovery}\)
 \end{algorithmic}
 \end{algorithm}
 
-For a full bounded rank sequence \(R\), segmentation partitions ranks into ordered, non-overlapping chunks:
+Before Algorithm~\ref{alg:nonseg} is executed, the selected representation validates payload syntax, exact byte length, codec applicability, and the source digest. The retained record saves the requested ranks, cover-token IDs, prompt and configuration identities, codec metadata, and failure position where applicable. After decoding, exact rank and representation equality are distinguished from exact serialized-payload equality, which additionally requires the declared byte length, bytes, syntax, and SHA-256 digest to match. The same generation and replay loop also applies when the validated direct-subword representation supplies \(R\); its payload-side reconstruction and framing checks are detailed in Supplementary Note S1.
+
+\subsection*{RankCloak segmented multi-cover method}\label{sec:encoding-method}
+
+The segmented multi-cover method extends RankCloak from one cover sequence to several shorter public messages. Long sequences of forced ranks can accumulate topic drift, formatting artifacts, or low-probability continuations. Segmentation restarts the cover context for each chunk, allowing the effect of distributing the payload across several messages to be measured without claiming that those messages are human-natural. The method is also useful analytically because it separates the payload-bearing forced span from the rest of the public message.
+
+For a full rank sequence \(R\), segmentation splits the payload into \(m\) chunks:
 \begin{equation}
-R=R^{(1)}\Vert\cdots\Vert R^{(J)},\qquad
-R^{(j)}=(r_{a_j+1},\ldots,r_{b_j}),\qquad
-0=a_1<b_1=a_2<\cdots<b_J=N.
+R = R^{(1)}\Vert R^{(2)}\Vert \cdots \Vert R^{(m)}.
 \label{eq:rank-segmentation}
 \end{equation}
-For segment \(j\), its prompt establishes histories \(h_k^{(j)}\). The forced span emits one token per rank and saved-token replay recovers only those tokens:
+Here \(\Vert\) denotes sequence concatenation, and each \(R^{(j)}\) is an ordered, non-overlapping rank chunk. The completed design includes frozen segmented schedules and an ablation over 4-, 8-, 16-, and 32-rank chunks rather than treating one chunk size as universally preferred.
+
+For segment \(j\), the forced span emits one token per payload rank. Recovery uses only those forced tokens:
 \begin{equation}
-y_k^{(j)}=\tok_{h_k^{(j)}}^{F}\!\left(r_k^{(j)}\right),
+y^{(j)}_k=
+\operatorname{token}_{h^{(j)}_k}\left(r^{(j)}_k\right),
 \qquad
-\hat r_k^{(j)}=\rho_{h_k^{(j)}}^{F}\!\left(y_k^{(j)}\right).
+\hat r^{(j)}_k=
+\rho_{h^{(j)}_k}\left(y^{(j)}_k\right).
 \label{eq:segmented-forced-span}
 \end{equation}
-Let \(a^{(j)}\) be an optional non-payload lead-in and \(z^{(j)}\) a non-payload tail. The rendered public message, saved half-open forced boundary, and recovered rank order are
+When a filter is configured, both operations use the filtered ordering defined after Eq.~\eqref{eq:filtered-rank}. After the forced span \(y^{(j)}\), the sender appends a greedy non-payload tail \(z^{(j)}\). The public message is the tokenizer rendering of the concatenated token sequence \(y^{(j)}\Vert z^{(j)}\). The receiver ignores \(z^{(j)}\) and decodes only \(y^{(j)}\):
 \begin{equation}
-m_j=\operatorname{detokenize}\!\left(a^{(j)}\Vert y^{(j)}\Vert z^{(j)}\right),
-\quad
-\mathcal B_j=\bigl[|a^{(j)}|,\ |a^{(j)}|+|y^{(j)}|\bigr),
-\quad
-\hat R=\hat R^{(1)}\Vert\cdots\Vert\hat R^{(J)}.
+m_j=\operatorname{text}\left(y^{(j)}\Vert z^{(j)}\right),
+\qquad
+\hat R=\hat R^{(1)}\Vert\cdots\Vert\hat R^{(m)}.
 \label{eq:segmented-message}
 \end{equation}
-The decoder does not infer \(\mathcal B_j\) from prose. Segment order, prompts, rank slices, token-role masks, and boundaries are part of the retained record.
+Here \(\operatorname{text}(\cdot)\) means ordinary tokenizer rendering of the token sequence; it is not an additional cryptographic operation. The canonical expression in Eq.~\eqref{eq:segmented-message} has no lead-in. For the evaluated lead-in extension, a non-payload prefix is generated before \(y^{(j)}\), and the record stores exact lead-in, forced, tail, and full token-ID arrays, a token-role mask, and half-open forced-span offsets. The decoder uses those declared offsets and does not infer a payload boundary from visible prose.
 
-Algorithm~\ref{alg:segmented} restores the multi-cover procedure. The evaluated segmented protocols use canonical hex-nibble payloads, while the algorithm exposes the lead-in and tail parameters needed to describe the completed ablations.
+A core component of this method is the forced-span and tail separation. The payload is carried only by the forced span, while the tail is a greedy continuation whose effect on the complete public message is measured separately. This distinction prevents a misleading quality result: full-message diagnostics can change because of the non-payload tail even if the payload-bearing forced span remains low probability or exhibits surface artifacts. For that reason, the Results report forced-span metrics and full-message metrics separately.
+
+Algorithm~\ref{alg:segmented} describes the segmented multi-cover protocol. It encodes the hex-like payload, splits the rank sequence into short chunks, generates one forced span per chunk, appends the selected tail-policy output after each forced span, and recovers the payload by replaying only the forced spans. Each segment is its own replay component: generation starts from its declared prompt, and recovery reads the exact saved token IDs within its declared forced-span boundary.
 
 \begin{algorithm}[H]
-\caption{Segmented multi-cover RankCloak encoding and forced-span recovery}
+\caption{Segmented multi-cover RankCloak trial for distributing a hex-nibble payload across payload-bearing forced spans with non-payload natural tails.}
 \label{alg:segmented}
 \begin{algorithmic}[1]
-\Require Canonical lowercase hexadecimal payload \(x\); model/tokenizer \(M\); filter \(F\)
-\Require Chunk size \(s\); ordered prompt schedule \(P\); lead-in rule \(L\); tail policy \(T\)
-\Ensure Ordered public messages, saved boundaries, decoded payload \(\hat x\), or structured failure
-\State Validate \(x\)'s syntax, declared length, and digest; set \(R\gets C_{\mathrm{hex}}.\Enc(x)\)
-\State Partition \(R\) into ordered chunks \(R^{(1)},\ldots,R^{(J)}\) of at most \(s\) ranks
-\For{\(j=1,\ldots,J\)}
-  \State Select the declared segment prompt \(P[j]\); initialize \(h\gets\operatorname{tokenize}_M(P[j])\)
-  \State Generate optional greedy lead-in \(a^{(j)}\) under \(L\); append it to \(h\)
-  \State Record the forced start offset \(|a^{(j)}|\); set \(y^{(j)}\gets[\,]\)
-  \For{each \(r_k^{(j)}\) in \(R^{(j)}\)}
-    \State Recreate \(A_h\); fail if \(r_k^{(j)}\notin[1,|A_h|]\)
-    \State Select \(\tok_h^F(r_k^{(j)})\); append it to \(y^{(j)}\) and to \(h\)
-  \EndFor
-  \State Record the forced stop offset and rank slice; label all token roles
-  \State \(z^{(j)}\gets\Call{Tail}{M,h,F,T}\); label every \(z^{(j)}\) token non-payload
-  \State Save \(a^{(j)},y^{(j)},z^{(j)},\mathcal B_j,P[j]\), and the rendered message \(m_j\)
+\Require Synthetic hex-like payload \(x\); model \(M\); hex-nibble codec \(C_{\mathrm{hex}}\); segment size \(s\); prompt schedule \(P=(p_1,\ldots,p_m)\); deterministic token filter \(F\); tail policy \(T\); shared configuration \(K_{\mathrm{common}}\).
+\Ensure Public messages \((\mathrm{message}_1,\ldots,\mathrm{message}_m)\), recovered payload \(\hat{x}\), exact-recovery flag, forced-span metrics, and full-message metrics.
+\State \(R \gets C_{\mathrm{hex}}.\Encode(x)\)
+\State split \(R\) into chunks \((R_1,\ldots,R_m)\), each with at most \(s\) ranks
+\For{each segment \(j=1,\ldots,m\)}
+    \State \(\mathrm{context} \gets \Tokenize(P[j])\)
+    \State \(\mathrm{forced\_tokens}_j \gets [\,]\)
+    \For{each rank \(r \in R_j\)}
+        \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+        \State \(y \gets\) token with one-indexed rank \(r\) among \(\mathrm{allowed\_tokens}\)
+        \State append \(y\) to \(\mathrm{forced\_tokens}_j\)
+        \State append \(y\) to \(\mathrm{context}\)
+    \EndFor
+    \State \(\mathrm{tail\_tokens}_j \gets \Call{TailPolicy}{M,\mathrm{context},F,T}\)
+    \State \(\mathrm{message}_j \gets \Detokenize(\operatorname{concat}(\mathrm{forced\_tokens}_j,\mathrm{tail\_tokens}_j))\)
 \EndFor
+\State emit public messages \((\mathrm{message}_1,\ldots,\mathrm{message}_m)\)
 \Statex
-\State \(\hat R\gets[\,]\)
-\For{\(j=1,\ldots,J\) in the saved order}
-  \State Reinitialize the exact prompt; replay the exact declared lead-in
-  \State Read only saved tokens in \(\mathcal B_j\); ignore every tail token
-  \State Recompute their filtered ranks serially and append them to \(\hat R\)
-  \If{a boundary, token role, context, eligibility, rank, or chunk length differs}
-    \State \Return first structured segment and forced-position failure
-  \EndIf
+\State \(\mathrm{recovered\_chunks} \gets [\,]\)
+\For{each segment \(j=1,\ldots,m\)}
+    \State \(\mathrm{context} \gets \Tokenize(P[j])\)
+    \State read the exact saved tokens within the declared forced-span boundary for \(R_j\)
+    \State ignore all tail tokens
+    \State \(\mathrm{segment\_ranks} \gets [\,]\)
+    \For{each forced token \(y\) in the payload-bearing span}
+        \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+        \State append \(\RankOf(y,\mathrm{logits},\mathrm{allowed\_tokens})\) to \(\mathrm{segment\_ranks}\)
+        \State append \(y\) to \(\mathrm{context}\)
+    \EndFor
+    \State append \(\mathrm{segment\_ranks}\) to \(\mathrm{recovered\_chunks}\)
 \EndFor
-\State \(\hat x\gets C_{\mathrm{hex}}.\Dec(\hat R)\); verify length, syntax, digest, and byte equality
-\State \Return messages, boundaries, \(\hat x\), and exact success; otherwise return structured failure
+\State \(\hat{x} \gets C_{\mathrm{hex}}.\Decode(\mathrm{concat}(\mathrm{recovered\_chunks}))\)
+\State \(\mathrm{exact\_recovery} \gets (\hat{x}=x)\)
+\State \Return \((\mathrm{message}_1,\ldots,\mathrm{message}_m),\hat{x},\mathrm{exact\_recovery}\)
 \end{algorithmic}
 \end{algorithm}
 
-\newpage
+The non-lead-in form in Algorithm~\ref{alg:segmented} supplies the canonical segment layout. The lead-in extension inserts a rank-1 prefix before the forced span; its exact token IDs must be replayed before forced-rank recovery, and its saved length shifts the half-open forced boundary. Lead-in lengths 2, 4, 8, 16, and 32 were compared with the no-lead-in condition. Single-topic segmentation reuses its assigned prompt, whereas multi-topic segmentation rotates deterministically through the declared prompt categories. Segment order, prompts, boundaries, and token roles are retained metadata rather than information inferred by the decoder.
 
-Algorithm~\ref{alg:tail} is the original greedy sentence-completion policy. It is a separate non-payload component: its tokens may change the visible message and full-message metrics, but never enter \(\hat R\).
+Algorithm~\ref{alg:tail} implements the fixed natural-tail policy available to Algorithm~\ref{alg:segmented}. The tail is generated greedily, begins only after the payload-bearing forced span, and is not decoded. Its purpose is to measure how a non-payload continuation changes the complete public message while preserving a separate measurement of the forced span. This tail extension is a sentence-completion step rather than part of the hidden payload. A forced span can end abruptly because its tokens were selected to carry payload ranks, not necessarily to finish a phrase or sentence. The minimum length and sentence-boundary rule allow a continuation before the hard cap prevents non-payload text from growing without bound; no claim of human-perceived completeness follows from this heuristic.
 
 \begin{algorithm}[H]
-\caption{Greedy natural-tail policy following a segmented forced span}
+\caption{Greedy natural-tail policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder.}
 \label{alg:tail}
 \begin{algorithmic}[1]
-\Require Model \(M\); context \(h\) after the forced span; deterministic filter \(F\)
-\Ensure Non-payload tail tokens \(Z\)
-\State \(Z\gets[\,]\)
-\While{\(|Z|<60\)}
-  \State Select the rank-1 token \(z\) in \(A_h\); append \(z\) to \(Z\) and to \(h\)
-  \If{\(|Z|\ge20\) and \(\operatorname{detokenize}(Z)\) ends at a sentence boundary}
-    \State \textbf{break}
-  \EndIf
+\Require Model \(M\); current context after the forced span; deterministic token filter \(F\).
+\Ensure Non-payload tail tokens.
+\State \(\mathrm{tail\_tokens} \gets [\,]\)
+\While{\(|\mathrm{tail\_tokens}| < 60\)}
+    \State choose the rank-1 token \(z\) under \(M.\NextLogits(\mathrm{context})\) among tokens allowed by \(F\)
+    \State append \(z\) to \(\mathrm{tail\_tokens}\)
+    \State append \(z\) to \(\mathrm{context}\)
+    \If{\(|\mathrm{tail\_tokens}| \geq 20\) and \(\Detokenize(\mathrm{tail\_tokens})\) ends at a sentence boundary}
+        \State \textbf{break}
+    \EndIf
 \EndWhile
-\State \Return \(Z\)
+\State \Return \(\mathrm{tail\_tokens}\)
 \end{algorithmic}
 \end{algorithm}
 
+Algorithm~\ref{alg:tail} is the fixed 20--60-token realization of \textsc{TailPolicy} when \(T\) selects sentence completion. The completed primary matrix uses a separately frozen dynamic condition as its reference level: after at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced delimiters, and no declared dangling connective or punctuation, with a 256-token emergency cap recorded as censoring. A no-tail condition returns an empty tail. All three policies are non-payload conditions ignored during decoding; their complete stopping definitions appear in Supplementary Note S1.
 
-The completed V2 primary matrix used a separately frozen dynamic greedy stopping condition as its study-specific reference level. It permits stopping after at least eight tail tokens only at terminal punctuation or a double newline, with balanced delimiters and no declared dangling connective or punctuation; a 256-token emergency cap is recorded as censoring. The tail ablation compared that heuristic with Algorithm~\ref{alg:tail} and with no tail. Dynamic stopping does not replace the original tail algorithm as a payload-bearing operation: all policies are greedy, all tails remain non-payload, and all are ignored during decoding. Lead-ins are also non-payload, but because they precede the forced span their exact tokens must be replayed before its ranks can be recovered.
+\subsection*{Evaluation corpus, controls, and metrics}\label{sec:design-method}\label{sec:quality-method}
 
-\subsection*{Replay contract, capacity, and endpoints}\label{sec:replay-method}\label{sec:capacity-method}\label{sec:endpoint-method}
+The experiments use deterministic synthetic payloads that resemble cryptographic or operational artifacts while avoiding real secret material. The corpus contains 480 public deterministic test vectors, 60 in each of eight algorithm-defined classes: SHA-256 hexadecimal digests, HMAC-SHA256 hexadecimal tags, deterministic 96-bit nonces, 128-bit hexadecimal tokens, UUIDv4 identifiers, AES-256-GCM base64 outputs, ChaCha20--Poly1305 base64 outputs, and Ed25519 base64 signatures\cite{NIST2015SecureHashStandard,Krawczyk1997RFC2104,NIST2007GCM,NirLangley2018RFC8439,JosefssonLiusvaara2017RFC8032,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}. Authenticated-encryption and signature rows are genuine outputs of the declared algorithms under reproducible public test inputs. No real credentials, API keys, private keys, account identifiers, operational secrets, commands, private user data, or deployed traffic are used.
 
-The strongest endpoint passes the original saved token IDs to the decoder under \(K_{\mathrm{common}}\). Saved IDs are an exact-copy record, not an ordinary text channel. Visible-text replay first detokenizes and retokenizes the rendered string, so an apparently unchanged string may yield different IDs or boundaries\cite{YanMurawaki2025TokenizationInconsistency}. Arbitrary editing, paraphrasing, formatting changes, truncation of payload-bearing tokens, cross-model decoding, and prompt or filter search are not supported recovery modes.
+Each payload is evaluated first as a representation problem and then, where applicable, as a cover-generation problem. The representation diagnostics measure how the exact serialization behaves under direct subword tokenization and how many ranks are required by the bounded codecs. Cover-generation conditions include direct subword ranks, ASCII-byte fixed-radix coding with \(B=8\), ASCII-byte fixed-radix coding with \(B=16\), raw hex-nibble coding for eligible lowercase hexadecimal payloads, and single- and multi-topic segmented hex-nibble protocols. All generation, recovery, and diagnostic rows use the deterministic rank-ordering rule in Eqs.~\eqref{eq:rank-order}--\eqref{eq:rank-function} as part of the shared replay configuration.
 
-Controlled secondary tests separately evaluated unmodified visible text, final-tail truncation, Unicode NFKC, quote conversion, whitespace and line-ending changes, deterministic character and token edits, markdown copy/paste, paraphrase, limited canonicalization, and cross-model decoding. Transformations were frozen as separate conditions rather than composed into an uncontrolled channel. Final-tail truncation removes only declared non-payload tokens and is not evidence of arbitrary truncation tolerance. First-divergence labels localize the first recorded mismatch but do not prove its cause.
+Generation used Meta-Llama-3-8B-Instruct, Qwen2.5-7B-Instruct, and Mistral-7B-Instruct-v0.3 in pinned Q4\_K\_M configurations with their embedded GGUF tokenizers. Eighteen English templates span six prompt categories. Secondary Spanish and Simplified Chinese conditions evaluate saved-token recovery but do not establish multilingual human naturalness. The primary matrix contains 14,400 generated units: 6,480 RankCloak payload trials and 7,920 prompt-, model-, representation-, and length-matched ordinary controls. The complete ledger reconciles 38,504 declared work units across the primary, robustness, ablation, multilingual, evaluator, and detector stages. Complete corpus construction, model and tokenizer identities and hashes, prompt schedules, and work-unit accounting appear in Supplementary Note S2.
+
+The protocol variants define how encoded ranks become public text. Non-segmented trials use Algorithm~\ref{alg:nonseg} and replay the complete saved cover-token sequence. Segmented trials use Algorithm~\ref{alg:segmented}; Algorithm~\ref{alg:tail} or another declared tail condition follows each forced span, while recovery uses only the saved forced tokens. Prompt-matched controls provide comparison text for automated diagnostics and detector training; they are not human-written naturalness baselines. The deterministic safe-text filter rejects declared control, replacement, code, markup, URL, escape, and formatting fragments. The ablation compares it with no filter and an isolated roundtrip-stable filter, lead-in lengths 0, 2, 4, 8, 16, and 32, chunk sizes 4, 8, 16, and 32, dynamic, fixed, and no-tail policies, and frozen single- versus multi-topic schedules.
+
+The Results report exact serialized-payload recovery, representation and rank diagnostics, cover length, requested-rank pressure, token log probability, deterministic surface artifacts, and automated readability diagnostics. A balanced 504-stimulus subset covers seven generation conditions and all 18 English templates; its surface measures include Flesch Reading Ease\cite{Flesch1948Readability}, frozen artifact flags, and TF--IDF prompt similarity, with intervals bootstrapped over prompt templates. Source-model and held-out-evaluator likelihoods are reported as model diagnostics, not participant ratings. No human study was performed.
+
+For segmented rows, every cover-quality measurement is assigned to one of two scopes. Forced-span metrics are computed only over payload-bearing tokens decoded by the receiver. Full-message metrics are computed over the complete rendered message, including non-payload tails and any experimental lead-in. This scope distinction is necessary because tails can change full-message proxies while carrying no payload ranks. Declared unavailable combinations are excluded from the applicable estimand and reported separately rather than classified as observed failures. Complete metric definitions, transformation coverage, ablation schedules, and exclusion rules appear in Supplementary Notes S3--S6.
+
+\subsection*{Recovery, robustness, and capacity endpoints}\label{sec:replay-method}\label{sec:capacity-method}\label{sec:endpoint-method}
+
+The strongest recovery endpoint passes the original saved token IDs to the decoder under \(K_{\mathrm{common}}\). Saved IDs are an exact-copy record, not an ordinary text channel. Visible-text replay first detokenizes and retokenizes the rendered string, so an apparently unchanged string can yield different IDs or boundaries\cite{YanMurawaki2025TokenizationInconsistency}. Arbitrary editing, paraphrasing, formatting changes, truncation of payload-bearing tokens, cross-model decoding, and prompt or filter search are not supported recovery modes.
+
+Controlled secondary tests separately evaluate unmodified visible text, final-tail truncation, Unicode NFKC, quote conversion, whitespace and line-ending changes, deterministic character and token edits, markdown copy/paste, paraphrase, limited canonicalization, and cross-model decoding. Transformations are frozen as separate conditions rather than composed into an uncontrolled channel. Final-tail truncation removes only declared non-payload tokens and is not evidence of arbitrary truncation tolerance. First-divergence labels localize the first recorded mismatch but do not establish its cause.
 
 For a bounded representation containing \(H\) source bits and a rank alphabet of size \(B\), the minimum fixed-radix forced length and nominal forced-position rate are
 \begin{equation}
@@ -319,27 +379,17 @@ Q_B=\frac{1}{n_B}\sum_{i=1}^{n_B}-\log p_M(y_i\mid h_i).
 \end{equation}
 Some tables report mean log probability \(\bar\ell=-Q_B\), for which larger values are less negative. These bounds concern model likelihood under identical filtered histories; they are not statements about grammar, meaning, human naturalness, security, or detectability.
 
-The confirmatory recovery endpoint is exact equality between the decoded serialized payload bytes and the declared source, including length, syntax, and SHA-256 digest. Exact rank and representation equality are retained as diagnostics. Trial-level Wilson 95\% intervals are reported\cite{Wilson1927Interval}; a strict payload group passes only if every constituent prompt, model, and eligible protocol trial succeeds, and a model--payload group applies the same rule within one model. Segments are never counted as independent payload trials. Declared unavailable combinations are excluded from estimands and reported separately rather than classified as failures.
+The confirmatory endpoint is exact equality between the decoded serialized payload bytes and the declared source, including length, syntax, and SHA-256 digest. Exact rank and representation equality are retained as diagnostics. Trial-level Wilson 95\% intervals are reported\cite{Wilson1927Interval}; a strict payload group passes only if every constituent prompt, model, and eligible protocol trial succeeds, and a model--payload group applies the same rule within one model. Segments are never counted as independent payload trials. Grouped bootstrap procedures use payload or prompt template as the resampling unit according to the estimand. Declared unavailable combinations never enter a failure denominator.
 
-\subsection*{Experimental design and automated quality evaluation}\label{sec:design-method}\label{sec:quality-method}
+\subsection*{Neural steganalysis, statistical analysis, and computational overhead}\label{sec:detector-method}\label{sec:statistics-method}
 
-The corpus contains 480 public deterministic test vectors, 60 in each of eight classes: SHA-256 hexadecimal digests, HMAC-SHA256 hexadecimal tags, deterministic 96-bit nonces, 128-bit hexadecimal tokens, UUIDv4 identifiers, AES-256-GCM base64 outputs, ChaCha20--Poly1305 base64 outputs, and Ed25519 base64 signatures\cite{NIST2015SecureHashStandard,Krawczyk1997RFC2104,NIST2007GCM,NirLangley2018RFC8439,JosefssonLiusvaara2017RFC8032,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}. Authenticated-encryption and signature rows are genuine outputs of the declared algorithms under reproducible test inputs, not random strings relabeled as ciphertext or signatures. The corpus contains no operational secrets, credentials, private user data, or deployment traffic.
+The frozen detector corpus contains 15,840 rows, balanced between 7,920 RankCloak covers and 7,920 matched ordinary controls and grouped by the 480 payloads. A TextCNN-equivalent classifier\cite{Kim2014CNN,Wen2019CNNTextSteganalysis} uses lowercase tokens, a 30,000-term vocabulary, length 256, 300-dimensional embeddings, 100 filters at widths 3 and 5, dropout 0.5, and Adam learning rate 0.001. A DeBERTa-v3-base classifier uses length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs\cite{He2021DeBERTa}. Payload groups, never individual rows, define train/test splits.
 
-Generation used Meta-Llama-3-8B-Instruct, Qwen2.5-7B-Instruct, and Mistral-7B-Instruct-v0.3 in the pinned Q4\_K\_M configurations with their embedded GGUF tokenizers and a one-model-at-a-time serial rank-replay harness. Eighteen English templates span casual conversation, professional communication, forum question-and-answer, recipe/procedure, personal narrative/blog, and factual/explanatory writing. The primary matrix contains 14,400 generated units: 6,480 RankCloak payload trials and 7,920 prompt-, model-, representation-, and length-matched ordinary controls. The secondary Spanish and Simplified Chinese matrices test saved-token recovery only, not human-perceived multilingual naturalness. Exact artifact hashes, tokenizer identities, revisions, prompt texts, and schedules are in Supplementary Note S2. The configured GGUF files are absent from the current checkout, so fresh generation replay was unavailable; this absence is not an experimental failure.
-
-The complete ledger reconciles 38,504 declared work units. The ablation matrix varies the deterministic safe-text filter against no filter and an isolated roundtrip-stable filter, lead-ins of 0, 2, 4, 8, 16, and 32 tokens, rank chunks of 4, 8, 16, and 32, and dynamic, fixed 20--60-token, and no-tail policies. Fifteen prompt-topic contrasts compare the frozen single- and multi-topic schedules. The robustness matrix applies the replay and transmission conditions above. The Mistral roundtrip-stable mask was empty under the frozen isolated-token criterion, yielding 432 unavailable dependent units across the ablation, mitigation, and evaluator matrices; no unavailable unit enters a failure denominator. Complete schedules, transformation definitions, work accounting, and exclusion rules appear in Supplementary Notes S2, S4, and S6.
-
-A balanced set of 504 computational stimuli covers seven generation conditions and all 18 English templates. Automated surface diagnostics include Flesch Reading Ease\cite{Flesch1948Readability}, frozen artifact flags, and TF--IDF prompt similarity, with intervals bootstrapped over prompt templates. Model-based evaluation compares source-model and held-out-evaluator log probability while preserving the distinction between payload-bearing forced spans and full messages containing tails. These are automated readability and likelihood diagnostics, not participant ratings. No ethics-authorized recruitment or survey deployment occurred: there were zero participants and zero human ratings.
-
-\subsection*{Neural steganalysis, statistical analysis, and overhead}\label{sec:detector-method}\label{sec:statistics-method}
-
-The frozen detector corpus contains 15,840 rows, balanced between 7,920 RankCloak covers and 7,920 matched ordinary controls and grouped by the 480 payloads. A TextCNN-equivalent classifier\cite{Kim2014CNN,Wen2019CNNTextSteganalysis} used lowercase tokens, a 30,000-term vocabulary, length 256, 300-dimensional embeddings, 100 filters at widths 3 and 5, dropout 0.5, and Adam learning rate 0.001. A DeBERTa-v3-base classifier used length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs\cite{He2021DeBERTa}. Payload groups, never individual rows, define train/test splits.
-
-Each architecture was fit on one matched split, 18 held-out-template splits, three leave-one-model splits, and six leave-one-codec splits, for 56 completed fits and 55,440 predictions. Primary endpoints are ROC-AUC and balanced accuracy; precision, Brier score, and sensitivity at 1\% false-positive rate are exploratory. Payload-group bootstrap intervals use 2,000 resamples\cite{Efron1979Bootstrap}. Audits test exact visible-text and token-sequence identity, then diagnose normalized character \(n\)-gram near-duplicates at the declared threshold. Excluding affected test payload groups without retraining is a sensitivity check and does not eliminate the near-duplicate limitation. Fixed-seed repeats establish same-device CUDA repeatability only; CPU/GPU equivalence was not tested.
+Each architecture is fit on one matched split, 18 held-out-template splits, three leave-one-model splits, and six leave-one-codec splits, for 56 completed fits and 55,440 predictions. The split definitions and seeds were frozen before fitting. Primary endpoints are ROC-AUC and balanced accuracy; precision, Brier score, and sensitivity at 1\% false-positive rate are exploratory. Payload-group bootstrap intervals use 2,000 resamples\cite{Efron1979Bootstrap}. Audits test exact visible-text and token-sequence identity, then diagnose normalized character \(n\)-gram near-duplicates at the declared threshold. Excluding affected test payload groups without retraining is a sensitivity check and does not eliminate the near-duplicate limitation. Fixed-seed repeats establish same-device CUDA repeatability only; CPU/GPU equivalence was not tested.
 
 Statistical inference respects payload and prompt-template grouping, with segments nested within covers. Paired ablations use payload as the pairing and bootstrap unit. Mixed models include payload and prompt grouping where supported, negative-binomial models for overdispersed artifact counts, and Gaussian models for continuous outcomes\cite{Bates2015lme4,Brooks2017glmmTMB}. Holm adjustment controls selected contrast families; Benjamini--Hochberg values accompany exploratory families. Convergence, dispersion, zero-inflation, singularity, and residual diagnostics are retained. Three of five fitted mixed models were singular, no undeclared fixed-effects fallback was substituted, and compact ablation, topic, auxiliary-detector, and near-duplicate analyses remain labeled exploratory or post-outcome where applicable. Complete model formulas, bootstrap seeds, split definitions, diagnostics, and multiplicity details are in Supplementary Notes S5--S7.
 
-Generation overhead uses inclusive wrapper wall time retained by the harness, including the reported setup, generation, and supported replay scopes. Payload throughput is representation bits divided by generation time, and effective rate follows Eq.~\eqref{eq:effective-rate}. Detector benchmarks report fixed-device CUDA wall/training time and peak allocated VRAM. CPU time, repeated warm-up measurements, and cross-device hardware generalization were unavailable and were not inferred.
+Generation overhead uses inclusive wrapper wall time retained by the harness, including the reported setup, generation, and supported replay scopes. Payload throughput is representation bits divided by generation time, and effective rate follows Eq.~\eqref{eq:effective-rate}. Detector benchmarks report fixed-device CUDA wall/training time and peak allocated VRAM. CPU time, repeated warm-up measurements, and cross-device hardware generalization were unavailable and were not inferred. Complete timing cells and component scopes appear in Supplementary Note S9.
 
 \section*{Results}\label{sec:results}
 

@@ -41,7 +41,7 @@ This Supplementary Information documents the extended RankCloak methods and the 
 
 \section*{Supplementary Note S1: Extended RankCloak methods}\label{si:s1}
 
-The main Methods now contains the rank definition, Calgacus transformation, complete payload-codec equations, and the full non-segmented, segmented, and natural-tail algorithms. This note records implementation details and edge cases that extend those central presentations without duplicating their equations or pseudocode.
+The main Methods contains the rank definition, Calgacus transformation, complete payload-codec equations, and the full non-segmented, segmented, and natural-tail algorithms. This note records implementation details and edge cases that extend those central presentations without duplicating their equations or pseudocode.
 
 \subsection*{Direct-subword framing and bounded-codec metadata}
 
@@ -61,7 +61,7 @@ Each segment record stores its rank slice, prompt identity and tokenized context
 
 A lead-in is a serial rank-1 prefix generated before a forced span. Saved-token replay supplies those exact IDs; the separate greedy-lead-in mode regenerates them and checks equality before decoding. Because a lead-in changes every forced-token history, it is not interchangeable with a tail. Lead-in lengths 2, 4, 8, 16, and 32 were compared with the no-lead-in condition.
 
-The original fixed sentence-tail policy is Algorithm 3 in the main Methods. The completed revision also froze \code{dynamic_completion_v1}: after at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced parentheses, brackets, braces, and quotation marks, and no declared trailing connective or punctuation fragment. Reaching 256 tokens without satisfying the rule is an explicitly censored emergency stop. The ablation compares dynamic stopping with the original 20--60-token sentence-tail policy and with no tail. Every tail token retains the role \code{tail} and is excluded from rank reconstruction.
+The fixed 20--60-token sentence-tail policy is Algorithm 3 in the main Methods. The completed study also froze \code{dynamic_completion_v1}: after at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced parentheses, brackets, braces, and quotation marks, and no declared trailing connective or punctuation fragment. Reaching 256 tokens without satisfying the rule is an explicitly censored emergency stop. The ablation compares dynamic stopping with the fixed sentence-tail policy and with no tail. Every tail token retains the role \code{tail} and is excluded from rank reconstruction.
 
 \subsection*{Replay modes and structured endpoints}
 

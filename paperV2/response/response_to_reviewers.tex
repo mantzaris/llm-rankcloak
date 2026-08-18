@@ -32,11 +32,11 @@ The editor requested substantial experimental and methodological improvement: a 
 
 \Status{Substantially addressed}
 
-The revised manuscript incorporates the completed evidence for every computational item listed. Main Table 1 summarizes the 480-artifact design, three models, 18 templates, 6,480 primary payload trials, grouped sensitivities, two secondary languages, and the complete 38,504-unit ledger. Four main figures address capacity/tail cost, transmission fragility, automated readability, and neural detectability; Main Table 2 summarizes ablations, topic effects, and overhead. The main Methods now contains the complete mathematical and algorithmic core; the Supplement provides extended implementation details, work-unit reconciliation, transformation coverage, reviewer-relevant ablation contrasts, all 15 topic contrasts, detector leakage/sensitivity results, extended theory, all 18 primary timing cells, and worked failures. The complete 60-row ablation table remains available in machine-readable form in the public repository.
+The revised manuscript incorporates the completed evidence for every computational item listed. Main Table 1 summarizes the 480-artifact design, three models, 18 templates, 6,480 primary payload trials, grouped sensitivities, two secondary languages, and the complete 38,504-unit ledger. Four main figures address capacity/tail cost, transmission fragility, automated readability, and neural detectability; Main Table 2 summarizes ablations, topic effects, and overhead. The main Methods retains the five-subsection mathematical and algorithmic core of the submitted RankCloak framework. The new recovery, robustness, capacity, neural-detector, statistical, and overhead methods extend that core; the Supplement provides detailed implementation contracts, work-unit reconciliation, transformation coverage, reviewer-relevant ablation contrasts, all 15 topic contrasts, detector leakage/sensitivity results, extended theory, all 18 primary timing cells, and worked failures. The complete 60-row ablation table remains available in machine-readable form in the public repository.
 
 The conclusions no longer present RankCloak as practical, robust, secure, or undetectable. The Discussion treats high detector performance as adverse evidence and concludes that the method is a reproducible measurement framework, not a demonstrated covert channel. The human-evaluation component remains only partially addressed: established automated metrics were added, but there were zero participants and ratings. Deployment was not performed.
 
-\textbf{Locations:} Abstract; Results and Figs.~1--4; Discussion; Responsible use and limitations; Supplementary Notes S1--S10.
+\textbf{Locations:} Main Methods, ``Basic rank definition'' through ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Figs.~1--4; Discussion; Responsible use and limitations; Supplementary Notes S1--S10.
 
 \subsection*{DOI-assigning code archive}
 \begin{reviewcomment}
@@ -60,7 +60,7 @@ The exact-copy replay assumption is highly restrictive. Please add theoretical d
 
 We now distinguish saved token IDs from ordinary visible-text transmission. Saved IDs are the strongest replay record, while detokenization/retokenization recovered only 88/144. Raw unmodified text recovered 144/144, but NFKC, quote conversion, whitespace changes, line-ending conversion, character/token edits, markdown copy/paste, paraphrase, and cross-model decoding were damaging or fatal. The final-10\%-tail truncation result is explained narrowly: only declared non-payload tokens were removed. Limited canonicalization did not recover the available transformed cells. The Supplement inventories five directly tested, three partially represented, and three untested requested perturbation classes and avoids causal claims from first-divergence labels.
 
-\textbf{Locations:} Methods, ``Replay contract, capacity, and endpoints''; Results and Fig.~2; Discussion; Supplementary Note S4.
+\textbf{Locations:} Methods, ``Recovery, robustness, and capacity endpoints''; Results and Fig.~2; Discussion; Supplementary Note S4.
 
 \subsection*{2. Evaluation-corpus size}
 \begin{reviewcomment}
@@ -71,7 +71,7 @@ Two examples per payload class are insufficient; expand the dataset to a substan
 
 The completed corpus contains 480 artifacts: eight classes with 60 public deterministic artifacts per class. The primary design contains 14,400 work units, including 6,480 payload-bearing trials. Trial-, payload-, and model--payload-group endpoints and Wilson intervals are reported separately so repeated prompt/protocol observations are not mistaken for independently generated artifacts.
 
-\textbf{Locations:} Methods, ``Experimental design and automated quality evaluation''; Results and Table~1; Supplementary Notes S2--S3.
+\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics''; Results and Table~1; Supplementary Notes S2--S3.
 
 \subsection*{3. Human-perceived naturalness}
 \begin{reviewcomment}
@@ -82,7 +82,7 @@ Log-probability proxies do not establish human-perceived naturalness; incorporat
 
 We added established automated surface diagnostics on 504 balanced computational stimuli, including Flesch Reading Ease, surface flags, prompt similarity, prompt-template bootstrap intervals, and source/held-out model-based contrasts. The manuscript repeatedly states that these are not human ratings. No ethics-authorized recruitment or survey deployment occurred, and there were zero participants and zero ratings. Prepared materials are treated as planning artifacts only. A human study therefore remains uncollected.
 
-\textbf{Locations:} Methods, ``Experimental design and automated quality evaluation''; Results and Fig.~3; Discussion; Supplementary Note S5.
+\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics''; Results and Fig.~3; Discussion; Supplementary Note S5.
 
 \subsection*{4. Deterministic token-filter ablation}
 \begin{reviewcomment}
@@ -93,7 +93,7 @@ The impact of the deterministic token filter is not isolated; compare generation
 
 A paired 48-payload, three-model no-filter contrast was added. Mean log-probability difference was -0.001797 (95\% CI, -0.037738 to 0.035394), and effective-rate difference was -0.062969 bits per full token (CI, -0.134265 to 0.007651); both selected intervals include zero. The Mistral roundtrip-stable-filter cell was unavailable for 48 work units because its isolated eligible vocabulary was empty. That cell is reported as unavailable, not failed.
 
-\textbf{Locations:} Methods, ``Bounded payload representations'' and Algorithm~1; Results and Table~2; Supplementary Notes S1 and S6 and Table~S10.
+\textbf{Locations:} Methods, ``RankCloak bounded payload-codec methods'' and Algorithm~1; Results and Table~2; Supplementary Notes S1 and S6 and Table~S10.
 
 \subsection*{5. Lead-in lengths and boundary failures}
 \begin{reviewcomment}
@@ -104,7 +104,7 @@ The failed lead-in variant suggests boundary vulnerabilities; test several lead-
 
 Lead-in lengths 2, 4, 8, 16, and 32 were evaluated against no lead-in. The compact 32-token contrast was adverse: mean log probability changed by -1.652327 and full-message length by +159.590278 tokens. The result is labeled exploratory/post-outcome and interpreted as a boundary/context association rather than a proven single mechanism. Greedy lead-in replay itself recovered 144/144 in the frozen robustness test, which distinguishes reproducible lead-ins from visible-text boundary stability.
 
-\textbf{Locations:} Methods, ``Non-segmented and segmented RankCloak protocols'' and Algorithms~2--3; Results and Table~2; Supplementary Notes S1 and S6 and Table~S10.
+\textbf{Locations:} Methods, ``RankCloak segmented multi-cover method'' and Algorithms~2--3; Results and Table~2; Supplementary Notes S1 and S6 and Table~S10.
 
 \subsection*{6. Dynamic semantic stopping}
 \begin{reviewcomment}
@@ -113,9 +113,9 @@ Fixed tail caps may produce unnatural endings; implement and evaluate a dynamic 
 
 \Status{Substantially addressed}
 
-The completed reference matrix uses a frozen dynamic stopping rule requiring minimum tail length, declared terminal punctuation or double newline, balanced delimiters, and absence of specified dangling forms, with an emergency cap. The restored canonical greedy policy remains Algorithm~3 and is distinguished from this study-specific dynamic rule. The ablation compares dynamic stopping with fixed 20--60-token sentence tails and no-tail generation. No-tail rate gains are described as denominator effects, not quality improvements. Because no participant study was conducted, the dynamic rule is explicitly called a heuristic rather than evidence of semantic completeness to readers.
+The completed reference matrix uses a frozen dynamic stopping rule requiring minimum tail length, declared terminal punctuation or double newline, balanced delimiters, and absence of specified dangling forms, with an emergency cap. The fixed 20--60-token greedy policy remains Algorithm~3 and is distinguished from this study-specific dynamic rule. The ablation compares dynamic stopping with fixed sentence tails and no-tail generation. No-tail rate gains are described as denominator effects, not quality improvements. Because no participant study was conducted, the dynamic rule is explicitly called a heuristic rather than evidence of semantic completeness to readers.
 
-\textbf{Locations:} Methods, ``Non-segmented and segmented RankCloak protocols'' and Algorithm~3; Results and Table~2; Supplementary Notes S1 and S6.
+\textbf{Locations:} Methods, ``RankCloak segmented multi-cover method'' and Algorithm~3; Results and Table~2; Supplementary Notes S1 and S6.
 
 \subsection*{7. Stronger neural steganalysis}
 \begin{reviewcomment}
@@ -137,7 +137,7 @@ The topic difference lacks statistical validation; test it across broader prompt
 
 The primary prompt schedule now covers 18 templates in six categories. Fifteen locked within-model topic contrasts were extracted with Holm adjustment. One Llama artifact-count ratio excluded the null (1.276361; 95\% CI, 1.114743--1.461409; adjusted \(p=0.003294\)); the other 14 adjusted values were at least 0.396248. Because the compact extraction occurred after outcomes were available, it is labeled exploratory/post-outcome and does not support a general topic advantage.
 
-\textbf{Locations:} Methods, ``Experimental design and automated quality evaluation'' and ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Table~2; Supplementary Note S6 and Table~S11.
+\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics'' and ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Table~2; Supplementary Note S6 and Table~S11.
 
 \subsection*{9. Capacity--quality formalization}
 \begin{reviewcomment}
@@ -148,7 +148,7 @@ The capacity--quality relationship is visualized but not mathematically formaliz
 
 The revision defines codec-implied forced length, nominal and effective rate, segmentation/tail length identities, a bounded-rank proposition, and a conditional forced-token probability bound. Empirical checking covered 17,424 records, with 7,008 fully evaluable and zero forced-position, rate-bound, or supported quality-bound violations; 2,976 positive residuals quantify tail/cover overhead. The complete encoder--decoder cascade is not directly trace-evaluable from the retained record schema, and model likelihood is not presented as proof of human quality.
 
-\textbf{Locations:} Methods, ``Replay contract, capacity, and endpoints''; Results and Fig.~1; Supplementary Note S8 and Table~S14.
+\textbf{Locations:} Methods, ``Recovery, robustness, and capacity endpoints''; Results and Fig.~1; Supplementary Note S8 and Table~S14.
 
 \subsection*{10. Cryptographic payload realism}
 \begin{reviewcomment}
@@ -159,7 +159,7 @@ Ciphertext-like base64 strings were not generated by real encryption algorithms;
 
 The corpus now contains deterministic outputs from declared algorithms: SHA-256, HMAC-SHA256, 96-bit nonces, 128-bit tokens, UUIDv4, AES-256-GCM, ChaCha20--Poly1305, and Ed25519. The encryption and signature outputs use their declared base64 serializations. They are reproducible public test vectors, not operational secrets or deployment payloads; that boundary is explicit.
 
-\textbf{Locations:} Methods, ``Bounded payload representations'' and ``Experimental design and automated quality evaluation''; Results and Table~1; Supplementary Note S2 and Table~S1; Supplementary Note S10 worked example.
+\textbf{Locations:} Methods, ``RankCloak bounded payload-codec methods'' and ``Evaluation corpus, controls, and metrics''; Results and Table~1; Supplementary Note S2 and Table~S1; Supplementary Note S10 worked example.
 
 \subsection*{11. Multiple language-model families}
 \begin{reviewcomment}
@@ -170,7 +170,7 @@ Dependence on one architecture limits generalizability; replicate with at least 
 
 The completed primary study uses three open-source 7B--8B families: Meta-Llama-3-8B-Instruct, Qwen2.5-7B-Instruct, and Mistral-7B-Instruct-v0.3, all under pinned Q4\_K\_M configurations. Recovery and principal summaries are stratified by model. The paper does not extend this evidence to very-large proprietary models or changing hosted services; the configured GGUF files are also absent from the present checkout, so fresh local generation replay is unavailable.
 
-\textbf{Locations:} Methods, ``Experimental design and automated quality evaluation''; Results and Table~1; Discussion; Supplementary Notes S2--S3.
+\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics''; Results and Table~1; Discussion; Supplementary Notes S2--S3.
 
 \subsection*{12. Computational overhead}
 \begin{reviewcomment}
@@ -205,7 +205,7 @@ The reviewer recognized the separation of payload representation, recovery corre
 
 The core RankCloak formulation remains the manuscript's contribution. The revised work preserves direct subword, bounded ASCII-byte and hex-nibble representations, non-segmented and segmented generation, forced-span decoding, and non-payload tails, while replacing pilot evidence and sharpening the replay and claim boundaries.
 
-\textbf{Locations:} Introduction; Methods, ``Bounded payload representations'' and ``Non-segmented and segmented RankCloak protocols''; Supplementary Note S1.
+\textbf{Locations:} Introduction; Methods, ``RankCloak bounded payload-codec methods'' and ``RankCloak segmented multi-cover method''; Supplementary Note S1.
 
 \subsection*{1. Scale, models, languages, and deployment}
 \begin{reviewcomment}
@@ -216,7 +216,7 @@ The study is controlled and limited; investigate larger-scale LLMs, different mo
 
 Scale, family diversity, payload realism, and secondary-language exact-copy recovery were expanded: 480 algorithm-defined artifacts, three model families, 18 English templates, and 288 Spanish plus 288 Simplified Chinese trials. All 576 secondary-language trials recovered under saved-token replay. These tests do not establish multilingual naturalness. Very-large proprietary models and real-world deployment were not tested, and no deployment claim is made.
 
-\textbf{Locations:} Methods, ``Experimental design and automated quality evaluation''; Results and Table~1; computational/generalizability Results; Discussion and limitations; Supplementary Notes S2--S3.
+\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics''; Results and Table~1; computational/generalizability Results; Discussion and limitations; Supplementary Notes S2--S3.
 
 \subsection*{2. Human perception, steganalysis, and suggested Ding et al. citation}
 \begin{reviewcomment}
@@ -229,7 +229,7 @@ Automated readability and held-out model diagnostics were added, but no particip
 
 We verified the suggested Ding et al. paper. It concerns cross-lingual position representations for machine translation, not a linguistic-steganography method or detector. Citing it as a baseline would imply a relationship that the present experiments do not test. We therefore did not force the citation and instead clarified RankCloak's relationship to directly relevant rank transfer and token-selection literature.
 
-\textbf{Locations:} Introduction; Methods, ``Experimental design and automated quality evaluation'' and ``Neural steganalysis, statistical analysis, and computational overhead''; automated-quality and neural-detection Results; Supplementary Notes S5 and S7.
+\textbf{Locations:} Introduction; Methods, ``Evaluation corpus, controls, and metrics'' and ``Neural steganalysis, statistical analysis, and computational overhead''; automated-quality and neural-detection Results; Supplementary Notes S5 and S7.
 
 \section*{Summary of remaining boundaries}
 
