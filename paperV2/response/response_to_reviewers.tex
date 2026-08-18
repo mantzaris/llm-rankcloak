@@ -32,7 +32,7 @@ The editor requested substantial experimental and methodological improvement: a 
 
 \Status{Substantially addressed}
 
-The revised manuscript incorporates the completed evidence for every computational item listed. Main Table 1 summarizes the 480-artifact design, three models, 18 templates, 6,480 primary payload trials, grouped sensitivities, two secondary languages, and the complete 38,504-unit ledger. Four main figures address capacity/tail cost, transmission fragility, automated readability, and neural detectability; Main Table 2 summarizes ablations, topic effects, and overhead. The main Methods retains the five-subsection mathematical and algorithmic core of the submitted RankCloak framework. The new recovery, robustness, capacity, neural-detector, statistical, and overhead methods extend that core; the Supplement provides detailed implementation contracts, work-unit reconciliation, transformation coverage, reviewer-relevant ablation contrasts, all 15 topic contrasts, detector leakage/sensitivity results, extended theory, all 18 primary timing cells, and worked failures. The complete 60-row ablation table remains available in machine-readable form in the public repository.
+The revised manuscript incorporates the completed evidence for every computational item listed. Main Table 1 summarizes the 480-artifact design, three models, 18 templates, 6,480 primary payload trials, grouped sensitivities, two secondary languages, and the complete 38,504-unit ledger. Four main figures address payload representation and rank/capacity tradeoffs, transmission fragility, paired forced-span/full-message quality, and neural detectability; Main Table 2 summarizes ablations, topic effects, and overhead. The main Methods retains the five-subsection mathematical and algorithmic core of the submitted RankCloak framework. The new recovery, robustness, capacity, neural-detector, statistical, and overhead methods extend that core; the Supplement provides detailed implementation contracts, work-unit reconciliation, transformation coverage, reviewer-relevant ablation contrasts, all 15 topic contrasts, detector leakage/sensitivity results, automated readability, the empirical frontier, extended theory, all 18 primary timing cells, and worked failures. The complete 60-row ablation table remains available in machine-readable form in the public repository.
 
 The conclusions no longer present RankCloak as practical, robust, secure, or undetectable. The Discussion treats high detector performance as adverse evidence and concludes that the method is a reproducible measurement framework, not a demonstrated covert channel. The human-evaluation component remains only partially addressed: established automated metrics were added, but there were zero participants and ratings. Deployment was not performed.
 
@@ -82,7 +82,7 @@ Log-probability proxies do not establish human-perceived naturalness; incorporat
 
 We added established automated surface diagnostics on 504 balanced computational stimuli, including Flesch Reading Ease, surface flags, prompt similarity, prompt-template bootstrap intervals, and source/held-out model-based contrasts. The manuscript repeatedly states that these are not human ratings. No ethics-authorized recruitment or survey deployment occurred, and there were zero participants and zero ratings. Prepared materials are treated as planning artifacts only. A human study therefore remains uncollected.
 
-\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics''; Results and Fig.~3; Discussion; Supplementary Note S5.
+\textbf{Locations:} Methods, ``Evaluation corpus, controls, and metrics''; Results, ``Forced span versus full message''; Discussion; Supplementary Note S5 and Fig.~S2.
 
 \subsection*{4. Deterministic token-filter ablation}
 \begin{reviewcomment}
@@ -126,7 +126,7 @@ The preliminary detector is inadequate; add strong neural steganalysis models.
 
 The revision adds a TextCNN-equivalent linguistic-steganalysis architecture and a pretrained DeBERTa-v3-base classifier over a balanced 15,840-row corpus. Each architecture completed one matched, 18 held-out-template, three leave-one-model, and six leave-one-codec fits (56/56 total; 55,440 prediction rows). Matched ROC-AUC was 0.990190 and 0.999834, respectively. These near-perfect results are presented prominently as adverse evidence. Exact identity leakage checks passed; a 53-pair lexical near-duplicate limitation, exclusion sensitivity, and same-device CUDA repeatability are disclosed. No CPU/GPU equivalence is claimed.
 
-\textbf{Locations:} Methods, ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Fig.~4; Discussion; Supplementary Note S7 and Fig.~S3.
+\textbf{Locations:} Methods, ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Fig.~4; Discussion; Supplementary Note S7 and Fig.~S6.
 
 \subsection*{8. Single-topic versus multi-topic inference}
 \begin{reviewcomment}
@@ -146,9 +146,9 @@ The capacity--quality relationship is visualized but not mathematically formaliz
 
 \Status{Substantially addressed}
 
-The revision defines codec-implied forced length, nominal and effective rate, segmentation/tail length identities, a bounded-rank proposition, and a conditional forced-token probability bound. Empirical checking covered 17,424 records, with 7,008 fully evaluable and zero forced-position, rate-bound, or supported quality-bound violations; 2,976 positive residuals quantify tail/cover overhead. The complete encoder--decoder cascade is not directly trace-evaluable from the retained record schema, and model likelihood is not presented as proof of human quality.
+The revision defines codec-implied forced length, nominal and effective rate, segmentation/tail length identities, a bounded-rank proposition, and a conditional forced-token probability bound. Main Fig.~1 presents the expanded representation, rank-pressure, and descriptive common-support rate comparison; Supplementary Fig.~S3 gives the empirical frontier. The distinct theoretical audit covered 17,424 records, with 7,008 fully evaluable and zero forced-position, rate-bound, or supported quality-bound violations; 2,976 positive residuals quantify tail/cover overhead. The complete encoder--decoder cascade is not directly trace-evaluable from the retained record schema, and model likelihood is not presented as proof of human quality.
 
-\textbf{Locations:} Methods, ``Recovery, robustness, and capacity endpoints''; Results and Fig.~1; Supplementary Note S8 and Table~S14.
+\textbf{Locations:} Methods, ``Recovery, robustness, and capacity endpoints''; Results and Fig.~1; Supplementary Note S5 and Fig.~S3; Supplementary Note S8, Fig.~S7, and Table~S14.
 
 \subsection*{10. Cryptographic payload realism}
 \begin{reviewcomment}
@@ -181,7 +181,7 @@ Add time and memory analysis for RankCloak encoding and decoding.
 
 Across 18 primary model--protocol cells and 12,144 matched runtime rows, mean inclusive generation time ranged 1.674368--16.087628 seconds, payload throughput 13.631855--100.851772 bits/s, and effective rate 0.710004--7.322003 bits per full token. The Supplement reports the complete plot/table, component scopes, detector CUDA time, and peak allocated VRAM. Measurements are inclusive wrapper wall time; CPU time and repeated warm-up measurements were unavailable, so no broad hardware or CPU/GPU claim is made.
 
-\textbf{Locations:} Methods, ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Table~2; Supplementary Note S9, Fig.~S4, and Tables~S15--S16.
+\textbf{Locations:} Methods, ``Neural steganalysis, statistical analysis, and computational overhead''; Results and Table~2; Supplementary Note S9, Fig.~S8, and Tables~S15--S16.
 
 \subsection*{13. Reliance on preprints and technical reports}
 \begin{reviewcomment}
