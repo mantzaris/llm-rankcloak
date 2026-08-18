@@ -10,18 +10,28 @@ import pytest
 from matplotlib import pyplot as plt
 
 from rankcloak.revision_figures import (
+    CONTINUITY_OUTPUT_FILENAMES,
     FIGURE_HEIGHT_INCHES,
     FIGURE_TITLES,
     OUTPUT_FILENAMES,
     PROHIBITED_PLOT_PHRASES,
     FigureEvidenceError,
+    _capacity_frontier_source,
+    _forced_full_source,
+    _load_continuity_evidence,
+    _payload_rank_source,
     _plot_theory,
+    _segmented_trial_pairs,
+    _tail_gain_source,
     _theory_source,
     build_core_figures,
     canonical_json_sha256,
     file_sha256,
     refresh_evidence_summary_figure_hashes,
 )
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 EXPECTED_FIGURES = {
@@ -746,3 +756,201 @@ def test_parent_refresh_changes_only_existing_figure_identities(tmp_path: Path):
         "refresh-head"
     )
     assert artifacts.updated_reference_count == 2
+
+
+def test_authoritative_continuity_sources_preserve_units_pairing_and_scope():
+    evidence = _load_continuity_evidence(
+        primary_preprocessing_manifest=(
+            PROJECT_ROOT
+            / "results/revision_v1/analysis_inputs/primary_v2/"
+            "preprocessing_output_manifest.json"
+        ),
+        statistics_manifest=(
+            PROJECT_ROOT
+            / "results/revision_v1/final_experiment_package/statistics/"
+            "python/statistics_run_manifest.json"
+        ),
+        topic_effects_manifest=(
+            PROJECT_ROOT
+            / "results/revision_v1/final_experiment_package/statistics/"
+            "topic_effects/topic_effect_extraction_manifest.json"
+        ),
+        project_root=PROJECT_ROOT,
+    )
+    assert evidence.primary_trial_rows == 6480
+    assert evidence.primary_feature_rows == 34560
+    assert evidence.unavailable_rows == 0
+    assert evidence.failure_rows == 0
+    assert len(evidence.direct_records) == 1440
+    assert len(evidence.quality) == 29520
+    assert evidence.direct_records["direct_rank_position_count"].sum() == 60861
+
+    payload = _payload_rank_source(evidence)
+    frontier = _capacity_frontier_source(evidence)
+    forced_full = _forced_full_source(evidence)
+    tail = _tail_gain_source(evidence)
+    canonical_dir = (
+        PROJECT_ROOT
+        / "results/revision_v1/final_experiment_package/figures"
+    )
+    for derived, filename in (
+        (payload, CONTINUITY_OUTPUT_FILENAMES["payload_rank_source"]),
+        (frontier, CONTINUITY_OUTPUT_FILENAMES["capacity_frontier_source"]),
+        (forced_full, CONTINUITY_OUTPUT_FILENAMES["forced_full_source"]),
+        (tail, CONTINUITY_OUTPUT_FILENAMES["tail_gain_source"]),
+    ):
+        plotted = pd.read_csv(canonical_dir / filename)
+        pd.testing.assert_frame_equal(
+            plotted,
+            derived,
+            check_dtype=False,
+            check_exact=False,
+            rtol=1e-12,
+            atol=1e-12,
+        )
+    assert set(CONTINUITY_OUTPUT_FILENAMES) == {
+        "payload_rank_pdf",
+        "payload_rank_png",
+        "payload_rank_source",
+        "capacity_frontier_pdf",
+        "capacity_frontier_png",
+        "capacity_frontier_source",
+        "forced_full_pdf",
+        "forced_full_png",
+        "forced_full_source",
+        "tail_gain_pdf",
+        "tail_gain_png",
+        "tail_gain_source",
+    }
+    assert (len(payload), len(frontier), len(forced_full), len(tail)) == (
+        56,
+        36,
+        18,
+        36,
+    )
+
+    direct_rank = payload.loc[payload["panel"].eq("direct_rank_pressure")]
+    assert direct_rank["observed_max"].max() == 145498
+    assert set(direct_rank["rank_control_label"]) == {"No codec ceiling"}
+    bounded_counts = payload.loc[
+        payload["panel"].eq("forced_symbol_count")
+        & payload["subgroup"].ne("direct_subword")
+    ]
+    assert set(bounded_counts["rank_control_label"]) == {
+        "Rank ceiling 8",
+        "Rank ceiling 16",
+    }
+
+    assert set(frontier["n_trials"]) == {240}
+    assert set(frontier["n_payloads"]) == {240}
+    assert set(frontier["unavailable_rows_in_scope"]) == {0}
+    assert frontier["filtering_rule"].str.contains("no lead-in").all()
+    for estimate, low, high in (
+        ("mean_token_count", "token_count_ci_low", "token_count_ci_high"),
+        (
+            "mean_log_probability",
+            "log_probability_ci_low",
+            "log_probability_ci_high",
+        ),
+    ):
+        assert (frontier[low] <= frontier[estimate]).all()
+        assert (frontier[estimate] <= frontier[high]).all()
+
+    paired = _segmented_trial_pairs(evidence)
+    assert len(paired) == 1440
+    differences = forced_full.loc[
+        forced_full["panel"].eq("paired_difference")
+    ]
+    assert len(differences) == 6
+    assert set(differences["n_trials"]) == {240}
+    assert set(differences["tail_payload_capacity_bits"]) == {0}
+    for row in differences.itertuples(index=False):
+        expected = paired.loc[
+            paired["model_id"].eq(row.model_id)
+            & paired["protocol_variant"].eq(row.protocol_variant),
+            "tail_gain",
+        ].mean()
+        assert row.estimate == pytest.approx(expected, abs=1e-12)
+    assert differences["estimate"].between(
+        3.5619535984096777, 3.7956573646131013
+    ).all()
+
+    assert len(tail) == 36
+    assert set(tail["n_segments"]) == {230}
+    assert set(tail["n_payloads"]) == {40, 190}
+    assert set(tail["unavailable_rows_in_scope"]) == {0}
+    assert set(tail["tail_payload_capacity_bits"]) == {0}
+    assert (tail["tail_gain_mean"] > 0).all()
+    assert tail["tail_gain_mean"].min() == pytest.approx(
+        2.82572084705127, abs=1e-12
+    )
+    assert tail["tail_gain_mean"].max() == pytest.approx(
+        3.652576306791113, abs=1e-12
+    )
+    assert set(tail["adjusted_topic_analysis_relation"]) == {
+        "distinct_from_adjusted_single_vs_multi_topic_mixed_model_contrasts"
+    }
+
+
+def test_canonical_continuity_manifest_handoff_and_publication_copies_validate():
+    figure_dir = (
+        PROJECT_ROOT
+        / "results/revision_v1/final_experiment_package/figures"
+    )
+    manifest_path = figure_dir / OUTPUT_FILENAMES["manifest"]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    signature = manifest.pop("manifest_sha256")
+    assert signature == canonical_json_sha256(manifest)
+    assert manifest["schema_version"].endswith("figure-evidence-v3")
+    assert manifest["continuity_figures_included"] is True
+    assert manifest["summary"]["figure_count"] == 13
+    assert manifest["summary"]["publication_copy_count"] == 12
+    assert manifest["continuity_scope"] == {
+        "failure_rows": 0,
+        "new_generation_or_model_fitting_performed": False,
+        "original_figures_mapped": [1, 2, 3, 4],
+        "original_pilot_values_reused": False,
+        "primary_feature_rows": 34560,
+        "primary_trial_rows": 6480,
+        "unavailable_rows": 0,
+    }
+    serialized_manifest = json.dumps(manifest, sort_keys=True)
+    assert "/home/meow" not in serialized_manifest
+
+    for key, entry in manifest["outputs"].items():
+        target = PROJECT_ROOT / entry["path"]
+        assert target.is_file(), key
+        assert file_sha256(target) == entry["sha256"], key
+        assert target.stat().st_size == entry["size_bytes"], key
+
+    for key, entry in manifest["publication_copies"].items():
+        canonical = PROJECT_ROOT / entry["canonical_path"]
+        publication = PROJECT_ROOT / entry["publication_path"]
+        assert entry["byte_identical"] is True, key
+        assert canonical.read_bytes() == publication.read_bytes(), key
+        assert file_sha256(canonical) == entry["sha256"], key
+
+    handoff_entry = manifest["continuity_handoff"]
+    handoff_path = PROJECT_ROOT / handoff_entry["path"]
+    assert file_sha256(handoff_path) == handoff_entry["sha256"]
+    handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
+    assert "/home/meow" not in json.dumps(handoff, sort_keys=True)
+    assert [
+        row["original_figure_number"] for row in handoff["original_figures"]
+    ] == [1, 2, 3, 4]
+    assert [
+        row["continuity_status"] for row in handoff["original_figures"]
+    ] == [
+        "expanded replacement",
+        "expanded replacement",
+        "expanded replacement",
+        "expanded replacement; pilot superseded",
+    ]
+    assert handoff["original_figures"][1]["related_current_figure"][
+        "relationship"
+    ] == "related theory/invariant validation; not equivalent"
+    assert handoff["original_figures"][3][
+        "adjusted_topic_analysis_comparison"
+    ]["equivalent_to_tail_gain_figure"] is False
+    for source_path, expected_hash in handoff["source_hashes"].items():
+        assert file_sha256(PROJECT_ROOT / source_path) == expected_hash

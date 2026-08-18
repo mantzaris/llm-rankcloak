@@ -29,6 +29,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument("--overhead-manifest", type=Path, required=True)
     parser.add_argument("--detector-manifest", type=Path, required=True)
     parser.add_argument("--ablation-manifest", type=Path, required=True)
+    parser.add_argument("--primary-preprocessing-manifest", type=Path)
+    parser.add_argument("--statistics-manifest", type=Path)
+    parser.add_argument("--topic-effects-manifest", type=Path)
+    parser.add_argument("--publication-dir", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
     return parser
@@ -62,6 +66,15 @@ def _reproducible_command(args: argparse.Namespace) -> str:
         "--output-dir",
         _repository_relative(args.output_dir),
     ]
+    optional_paths = (
+        ("--primary-preprocessing-manifest", args.primary_preprocessing_manifest),
+        ("--statistics-manifest", args.statistics_manifest),
+        ("--topic-effects-manifest", args.topic_effects_manifest),
+        ("--publication-dir", args.publication_dir),
+    )
+    for option, path in optional_paths:
+        if path is not None:
+            values.extend((option, _repository_relative(path)))
     if args.overwrite:
         values.append("--overwrite")
     return " ".join(shlex.quote(value) for value in values)
@@ -77,6 +90,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             overhead_manifest=args.overhead_manifest,
             detector_manifest=args.detector_manifest,
             ablation_manifest=args.ablation_manifest,
+            primary_preprocessing_manifest=args.primary_preprocessing_manifest,
+            statistics_manifest=args.statistics_manifest,
+            topic_effects_manifest=args.topic_effects_manifest,
+            publication_dir=args.publication_dir,
             output_dir=args.output_dir,
             command=_reproducible_command(args),
             project_root=PROJECT_ROOT,

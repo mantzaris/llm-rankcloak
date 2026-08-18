@@ -1,0 +1,358 @@
+{
+  "original_figures": [
+    {
+      "authoritative_source_files": [
+        "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl",
+        "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+        "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+        "results/revision_v1/analysis_inputs/primary_v2/trials.csv"
+      ],
+      "canonical_output": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.pdf",
+      "continuity_status": "expanded replacement",
+      "estimand": "Distribution of forced representation symbols; distribution of each direct payload's maximum expected rank; effective artifact bits per forced token",
+      "evidence_classification": "confirmatory retained records; descriptive estimands",
+      "final_generated_filename": "payload_representation_rank_capacity.pdf",
+      "intended_placement": "Main Figure 1 candidate",
+      "limitations": [
+        "Direct counts and ranks are tokenizer/model dependent.",
+        "Bounded codec lengths are deterministic and therefore collapsed across models.",
+        "Effective artifact rate is descriptive and is not a cryptographic capacity or security guarantee."
+      ],
+      "models_and_conditions": {
+        "common_rate_scope": [
+          "sha256_hex",
+          "hmac_sha256_hex",
+          "token_128_bit_hex",
+          "nonce_96_bit_hex"
+        ],
+        "models": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "representations": [
+          "direct_subword",
+          "ascii_b8",
+          "ascii_b16",
+          "hex_nibble"
+        ]
+      },
+      "original_dataset_scope": "12 pilot payload diagnostics: two examples in each of six payload classes; hex nibble applicable to eight rows",
+      "original_figure_number": 1,
+      "original_scientific_question": "How do direct subwords and deterministic bounded codecs trade payload-symbol count against requested-rank pressure?",
+      "original_title": "Payload representation and direct rank-pressure diagnostics",
+      "principal_result": {
+        "common_hex_effective_rate_medians": {
+          "ascii_b16": 2.0,
+          "ascii_b8": 1.4970760233918128,
+          "direct_subword": 4.571428571428571,
+          "hex_nibble": 4.0
+        },
+        "deterministic_rank_ceilings": {
+          "ascii_b16": 16,
+          "ascii_b8": 8,
+          "direct_subword": null,
+          "hex_nibble": 16
+        },
+        "direct_class_median_symbol_count_max": 66.0,
+        "direct_class_median_symbol_count_min": 20.0,
+        "largest_observed_direct_rank": 145498,
+        "summary": "Direct subwords were usually shorter but had no codec ceiling and reached rank 145,498; bounded codecs spent more symbols to cap every requested rank at 8 or 16."
+      },
+      "sample_size": {
+        "ascii_codec_unique_payloads": 480,
+        "direct_payload_model_pairs": 1440,
+        "direct_token_rank_positions": 60861,
+        "hex_codec_unique_payloads": 240,
+        "models": 3,
+        "payload_classes": 8,
+        "payloads_per_class": 60,
+        "unique_payloads": 480
+      },
+      "uncertainty_definition": "Descriptive medians and observed 5th-95th percentiles; observed maxima are ranges, not confidence limits",
+      "unit_of_analysis": {
+        "bounded_codec_counts": "unique payload",
+        "direct_counts_and_ranks": "payload-model pair",
+        "effective_rate": "payload-model pair for direct; unique payload for bounded"
+      }
+    },
+    {
+      "authoritative_source_files": [
+        "results/revision_v1/analysis_inputs/primary_v2/trials.csv",
+        "results/revision_v1/final_experiment_package/statistics/python/quality_trial_metrics.csv",
+        "results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json"
+      ],
+      "canonical_output": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.pdf",
+      "continuity_status": "expanded replacement",
+      "estimand": "Cell mean token count versus cell mean source-model token log probability; marker area is mean deterministic surface flag count",
+      "evidence_classification": "confirmatory retained matrix; descriptive frontier",
+      "final_generated_filename": "empirical_capacity_quality_frontier.pdf",
+      "intended_placement": "Supplementary empirical capacity-quality frontier",
+      "limitations": [
+        "The common-support restriction excludes non-hex payload classes so that all six protocols use the same payloads.",
+        "Source-model log probability and surface flags are automated diagnostics, not human judgments.",
+        "The existing capacity_tail_validation.pdf tests theoretical identities and tail overhead; it is related but not an empirical replacement for original Figure 2."
+      ],
+      "models_and_conditions": {
+        "lead_in": "not present in the complete primary matrix; exploratory ablation lead-ins were not pooled",
+        "models": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "payload_classes": [
+          "sha256_hex",
+          "hmac_sha256_hex",
+          "token_128_bit_hex",
+          "nonce_96_bit_hex"
+        ],
+        "protocols": [
+          "direct_subword_calgacus",
+          "nonseg_ascii_b8",
+          "nonseg_ascii_b16",
+          "nonseg_hex_nibble_b16",
+          "segmented_hex_multi_topic",
+          "segmented_hex_single_topic"
+        ],
+        "views": [
+          "forced_span",
+          "full_message"
+        ]
+      },
+      "original_dataset_scope": "20 completed nonsegmented pilot trials plus seven completed segmented trials; one experimental lead-in failure",
+      "original_figure_number": 2,
+      "original_scientific_question": "How do cover length, model likelihood, and visible artifact burden vary across codec and segmented-message choices?",
+      "original_title": "Capacity-quality frontier for completed cover-generation trials",
+      "principal_result": {
+        "forced_length_cell_mean_range": [
+          26.508333333333333,
+          123.0
+        ],
+        "full_length_cell_mean_range": [
+          26.508333333333333,
+          359.92083333333335
+        ],
+        "mean_log_probability_cell_range": [
+          -6.580485407955282,
+          -1.187657132773838
+        ],
+        "summary": "The expanded empirical frontier remains protocol- and model-dependent: compact direct spans have the lowest length but often the poorest likelihood, while segmented full messages move to much higher likelihood by adding non-payload tail length."
+      },
+      "related_current_figure": {
+        "filename": "capacity_tail_validation.pdf",
+        "relationship": "related theory/invariant validation; not equivalent"
+      },
+      "sample_size": {
+        "common_hex_payloads_per_cell": 240,
+        "failed_rows": 0,
+        "model_protocol_cells": 18,
+        "plotted_view_cells": 36,
+        "trial_rows": 4320,
+        "unavailable_rows": 0
+      },
+      "uncertainty_definition": "2,000-resample equal-weight payload-name percentile-bootstrap 95% confidence intervals for both axes and artifact burden",
+      "unit_of_analysis": "payload-model-protocol trial view"
+    },
+    {
+      "authoritative_source_files": [
+        "results/revision_v1/analysis_inputs/primary_v2/trials.csv",
+        "results/revision_v1/final_experiment_package/statistics/python/quality_trial_metrics.csv",
+        "results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json"
+      ],
+      "canonical_output": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.pdf",
+      "continuity_status": "expanded replacement",
+      "estimand": "Mean source-model token log probability for forced and full trial views, plus the within-trial full-minus-forced paired difference",
+      "evidence_classification": "confirmatory retained matrix; paired descriptive estimates",
+      "final_generated_filename": "forced_span_full_message_quality.pdf",
+      "intended_placement": "Main Figure 3 candidate",
+      "limitations": [
+        "Full-message gains mix the unchanged forced span with greedy non-payload tokens.",
+        "The natural tail adds zero payload ranks and therefore no payload capacity.",
+        "The primary matrix contains no lead-in condition; lead-in effects remain in the separate exploratory ablation analysis."
+      ],
+      "models_and_conditions": {
+        "lead_in_tokens": 0,
+        "models": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "protocols": [
+          "segmented_hex_multi_topic",
+          "segmented_hex_single_topic"
+        ],
+        "representation": "hex_nibble",
+        "tail_policy": "dynamic_completion_v1"
+      },
+      "original_dataset_scope": "Seven completed segmented pilot trials, including one experimental lead-in failure",
+      "original_figure_number": 3,
+      "original_scientific_question": "Does apparent full-message likelihood improve because the payload-bearing forced span improves, or because a natural non-payload tail is added?",
+      "original_title": "Forced-span versus full-message metrics for completed segmented trials",
+      "principal_result": {
+        "cell_paired_gains": [
+          {
+            "ci_high": 3.6341356396742173,
+            "ci_low": 3.4915374987145906,
+            "estimate": 3.5619535984096777,
+            "model_id": "llama3_8b_instruct_q4_k_m",
+            "n_paired_trials": 240,
+            "protocol_variant": "segmented_hex_multi_topic"
+          },
+          {
+            "ci_high": 3.637567741675487,
+            "ci_low": 3.4909954523584568,
+            "estimate": 3.564990976847783,
+            "model_id": "llama3_8b_instruct_q4_k_m",
+            "n_paired_trials": 240,
+            "protocol_variant": "segmented_hex_single_topic"
+          },
+          {
+            "ci_high": 3.870879883610121,
+            "ci_low": 3.701262907536164,
+            "estimate": 3.7845379581846923,
+            "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+            "n_paired_trials": 240,
+            "protocol_variant": "segmented_hex_multi_topic"
+          },
+          {
+            "ci_high": 3.875067965301025,
+            "ci_low": 3.7170985201062208,
+            "estimate": 3.7956573646131013,
+            "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+            "n_paired_trials": 240,
+            "protocol_variant": "segmented_hex_single_topic"
+          },
+          {
+            "ci_high": 3.7499781163838044,
+            "ci_low": 3.5905016812109687,
+            "estimate": 3.6697415553713397,
+            "model_id": "qwen2_5_7b_instruct_q4_k_m",
+            "n_paired_trials": 240,
+            "protocol_variant": "segmented_hex_multi_topic"
+          },
+          {
+            "ci_high": 3.7117711509215874,
+            "ci_low": 3.525547205990035,
+            "estimate": 3.6198963377442075,
+            "model_id": "qwen2_5_7b_instruct_q4_k_m",
+            "n_paired_trials": 240,
+            "protocol_variant": "segmented_hex_single_topic"
+          }
+        ],
+        "overall_forced_span_mean_log_probability": -5.09090351461903,
+        "overall_full_message_mean_log_probability": -1.42477388275723,
+        "overall_mean_paired_gain": 3.6661296318618004,
+        "summary": "Across 1,440 paired trials, mean log probability rose from -5.090904 for payload-bearing spans to -1.424774 for full messages; the mean paired difference was +3.666130."
+      },
+      "sample_size": {
+        "failed_rows": 0,
+        "model_protocol_cells": 6,
+        "nested_segments_per_view": 8280,
+        "paired_trials": 1440,
+        "paired_trials_per_model_protocol_cell": 240,
+        "unavailable_rows": 0
+      },
+      "uncertainty_definition": "2,000-resample paired equal-weight payload-name percentile-bootstrap 95% confidence intervals",
+      "unit_of_analysis": "paired payload-model-protocol trial; nested segment likelihoods are token-weighted within each trial view"
+    },
+    {
+      "adjusted_topic_analysis_comparison": {
+        "equivalent_to_tail_gain_figure": false,
+        "estimand": "model-adjusted multi-topic minus single-topic source-cover mean log probability, not full-minus-forced tail gain",
+        "new_model_fit_performed": false,
+        "source_quality_estimate_range": [
+          -0.0221396413944403,
+          0.0188126002941881
+        ],
+        "source_quality_holm_p_values": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "authoritative_source_files": [
+        "results/revision_v1/analysis_inputs/primary_v2/features.csv",
+        "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_schedule_contrasts.csv",
+        "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json"
+      ],
+      "canonical_output": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.pdf",
+      "continuity_status": "expanded replacement; pilot superseded",
+      "estimand": "For each segment, full-message mean token log probability minus forced-span mean token log probability; segment-weighted mean within model-schedule-category group",
+      "evidence_classification": "exploratory descriptive subgroup reconstruction",
+      "final_generated_filename": "tail_gain_by_prompt_category.pdf",
+      "intended_placement": "Supplementary tail-gain topic analysis",
+      "limitations": [
+        "Single-topic cells contain 40 independent payload/trial clusters whereas multi-topic cells contain 190, despite 230 segment messages in every displayed group.",
+        "Prompt-category rows are descriptive and do not establish a prompt ranking or human naturalness.",
+        "The adjusted single-topic versus multi-topic analysis uses mixed-model source-quality, artifact, rate, evaluator, and throughput contrasts; it does not estimate segment tail gain."
+      ],
+      "models_and_conditions": {
+        "models": [
+          "llama3_8b_instruct_q4_k_m",
+          "mistral_7b_instruct_v0_3_q4_k_m",
+          "qwen2_5_7b_instruct_q4_k_m"
+        ],
+        "prompt_categories": [
+          "casual_conversation",
+          "factual_explanatory",
+          "forum_question_answer",
+          "personal_narrative_blog",
+          "professional_communication",
+          "recipe_procedure"
+        ],
+        "protocols": [
+          "segmented_hex_multi_topic",
+          "segmented_hex_single_topic"
+        ],
+        "tail_policy": "dynamic_completion_v1"
+      },
+      "original_dataset_scope": "48 pilot segment messages across five prompt labels with unequal counts from 3 to 27",
+      "original_figure_number": 4,
+      "original_scientific_question": "Is full-minus-forced tail gain positive across prompt topics, and how does it vary by model and topic schedule?",
+      "original_title": "Tail-topic quality diagnostic for completed segmented messages",
+      "principal_result": {
+        "all_group_means_positive": true,
+        "group_tail_gain_mean_max": 3.652576306791113,
+        "group_tail_gain_mean_min": 2.82572084705127,
+        "summary": "All 36 expanded model-schedule-category group means were positive; segment-level mean gains ranged from 2.825721 to 3.652576."
+      },
+      "sample_size": {
+        "displayed_groups": 36,
+        "failed_rows": 0,
+        "multi_topic_payload_clusters_per_group": 190,
+        "paired_segments": 8280,
+        "segmented_trials": 1440,
+        "segments_per_group": 230,
+        "single_topic_payload_clusters_per_group": 40,
+        "unavailable_rows": 0
+      },
+      "uncertainty_definition": "2,000-resample payload-cluster percentile-bootstrap 95% confidence intervals, stratified by payload class",
+      "unit_of_analysis": "paired segment message; displayed means weight segment messages equally and uncertainty resamples payload/trial clusters"
+    }
+  ],
+  "primary_matrix_availability": {
+    "failed_rows": 0,
+    "feature_rows": 34560,
+    "strict_complete": true,
+    "trial_rows": 6480,
+    "unavailable_rows": 0
+  },
+  "schema_version": "rankcloak-continuity-figure-handoff-v1",
+  "scope": "computational_figure_continuity_only",
+  "source_hashes": {
+    "results/revision_v1/analysis_inputs/primary_v2/failures.csv": "7618aacf6ea704407abaa4fa103d0c7b0fa6f8c9839c5b91fe0d9325fb2a86db",
+    "results/revision_v1/analysis_inputs/primary_v2/features.csv": "6ef9568a848d3f07c2d81989519444e3671a27bf48de706326a950db6f32cbfd",
+    "results/revision_v1/analysis_inputs/primary_v2/preprocessing_input_manifest.json": "2b52d551a36497aaae754094345af1e89da59885f5df253a117786bc7ed5aee9",
+    "results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1",
+    "results/revision_v1/analysis_inputs/primary_v2/trials.csv": "12b11bad2c7b6468d7f8e4ed12fde2a0ab29996cda8594d0cbcaa6b06797ae7b",
+    "results/revision_v1/analysis_inputs/primary_v2/unavailable.csv": "17b9c410361d225e1dd2058141edc94430ff78e1297ea80c1ad5d7e1a2c38642",
+    "results/revision_v1/final_experiment_package/statistics/python/quality_trial_metrics.csv": "3a863a9a0bfe6fcc29f5cd5214904017ea9ef31f79dee2ed9d7656820c332709",
+    "results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381",
+    "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json": "c01494cf3fac9ff8e26b6fde65d6cea2e47e11a3fe70988ecaa0b0f2814f02f0",
+    "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_schedule_contrasts.csv": "30e941e11f6c71b475a2fc0aff9edf2999585c7132eec1a138804681ed51f459",
+    "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+    "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+    "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a"
+  },
+  "status": "passed"
+}

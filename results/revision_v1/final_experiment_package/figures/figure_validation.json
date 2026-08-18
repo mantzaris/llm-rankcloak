@@ -16,6 +16,46 @@
       "path": "results/revision_v1/final_experiment_package/overhead/overhead_plot_source.csv",
       "sha256": "d7fbe5ee21fc2b6733525a55c803ec94ad3f1189a3c7c6214cf550f0128fcd00"
     },
+    "primary_failures": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/failures.csv",
+      "sha256": "7618aacf6ea704407abaa4fa103d0c7b0fa6f8c9839c5b91fe0d9325fb2a86db"
+    },
+    "primary_features": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/features.csv",
+      "sha256": "6ef9568a848d3f07c2d81989519444e3671a27bf48de706326a950db6f32cbfd"
+    },
+    "primary_preprocessing_input_manifest": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/preprocessing_input_manifest.json",
+      "sha256": "2b52d551a36497aaae754094345af1e89da59885f5df253a117786bc7ed5aee9"
+    },
+    "primary_preprocessing_manifest": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+      "sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1"
+    },
+    "primary_records_llama3_8b_instruct_q4_k_m": {
+      "path": "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl",
+      "sha256": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00"
+    },
+    "primary_records_mistral_7b_instruct_v0_3_q4_k_m": {
+      "path": "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl",
+      "sha256": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba"
+    },
+    "primary_records_qwen2_5_7b_instruct_q4_k_m": {
+      "path": "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+      "sha256": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a"
+    },
+    "primary_trials": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/trials.csv",
+      "sha256": "12b11bad2c7b6468d7f8e4ed12fde2a0ab29996cda8594d0cbcaa6b06797ae7b"
+    },
+    "primary_unavailable": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/unavailable.csv",
+      "sha256": "17b9c410361d225e1dd2058141edc94430ff78e1297ea80c1ad5d7e1a2c38642"
+    },
+    "quality_trial_metrics": {
+      "path": "results/revision_v1/final_experiment_package/statistics/python/quality_trial_metrics.csv",
+      "sha256": "3a863a9a0bfe6fcc29f5cd5214904017ea9ef31f79dee2ed9d7656820c332709"
+    },
     "readability": {
       "path": "results/revision_v1/final_experiment_package/readability/selected_stimulus_readability_summary.csv",
       "sha256": "16b09e609655baa781440213599cdb9d41ca31dd5c43071f25544e8c69558751"
@@ -24,32 +64,64 @@
       "path": "results/revision_v1/final_experiment_package/robustness/robustness_recovery_plot_source.csv",
       "sha256": "98afef4bd516c46351994946417a1fe5c8515b9747fa004ae3ee078acea1ebe4"
     },
+    "statistics_manifest": {
+      "path": "results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json",
+      "sha256": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381"
+    },
     "theory": {
       "path": "results/revision_v1/final_experiment_package/theory/theory_empirical_validation.csv",
       "sha256": "89523e3381137d21a7d6291ed7ce50cefeb8ac424ac14709e4ad60af75cfd95c"
+    },
+    "topic_effects_manifest": {
+      "path": "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json",
+      "sha256": "c01494cf3fac9ff8e26b6fde65d6cea2e47e11a3fe70988ecaa0b0f2814f02f0"
+    },
+    "topic_schedule_contrasts": {
+      "path": "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_schedule_contrasts.csv",
+      "sha256": "30e941e11f6c71b475a2fc0aff9edf2999585c7132eec1a138804681ed51f459"
     }
   },
   "checks": {
     "ablation_exploratory_status_preserved": true,
     "absolute_local_paths_emitted": false,
+    "adjusted_topic_contrast_not_labeled_as_tail_gain": true,
     "automated_readability_not_human_rating": true,
     "capacity_marker_displacement_applied": false,
     "capacity_markers_use_true_data_coordinates": true,
     "concise_plot_titles_validated": true,
     "confidence_intervals_and_ranges_distinguished": true,
+    "continuity_primary_scope_has_zero_failures": true,
+    "continuity_primary_scope_has_zero_unavailable_rows": true,
+    "continuity_source_records_hash_validated": true,
+    "empirical_frontier_not_labeled_as_theory_identity": true,
+    "forced_full_pairing_validated": true,
     "intervals_contain_estimates": true,
     "no_nan_or_infinite_plotted_values": true,
     "pdf_primary_png_300dpi_secondary": true,
-    "prohibited_plot_phrases_absent": true
+    "prohibited_plot_phrases_absent": true,
+    "publication_pdf_copies_byte_identical": true,
+    "segment_tail_gain_pairing_validated": true
   },
   "figures": {
     "ablation": {
       "classification": "Full supporting candidate",
       "evidence_status": "exploratory_post_outcome",
       "height_mm": 90.17,
+      "intended_placement": "Supplementary ablation contrasts",
       "panel_count": 3,
       "plotted_row_count": 9,
       "title": "Exploratory ablation contrasts",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
+    },
+    "capacity_frontier": {
+      "classification": "Expanded supplementary continuity candidate",
+      "evidence_status": "confirmatory_records_descriptive_frontier",
+      "height_mm": 93.98,
+      "intended_placement": "Supplementary empirical capacity-quality frontier",
+      "panel_count": 2,
+      "plotted_row_count": 36,
+      "title": "Empirical capacity-quality frontier",
       "uncertainty": "payload-group bootstrap 95% confidence intervals",
       "width_mm": 180.0
     },
@@ -57,6 +129,7 @@
       "classification": "Core compact candidate",
       "evidence_status": "supporting",
       "height_mm": 115.57,
+      "intended_placement": "Supplementary capacity and tail validation",
       "panel_count": 3,
       "plotted_row_count": 18,
       "title": "Capacity and tail overhead",
@@ -67,6 +140,7 @@
       "classification": "Core compact candidate",
       "evidence_status": "confirmatory_endpoints_plus_exploratory_low_fpr_metric",
       "height_mm": 87.63,
+      "intended_placement": "Main Figure 4 candidate",
       "panel_count": 3,
       "plotted_row_count": 24,
       "title": "Neural detectability",
@@ -77,16 +151,29 @@
       "classification": "Full supporting candidate",
       "evidence_status": "confirmatory_and_exploratory_panels_separated",
       "height_mm": 148.59,
+      "intended_placement": "Supplementary complete detector view",
       "panel_count": 6,
       "plotted_row_count": 48,
       "title": "Neural detectability",
       "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges",
       "width_mm": 180.0
     },
+    "forced_full": {
+      "classification": "Expanded main-text continuity candidate",
+      "evidence_status": "confirmatory_records_paired_descriptive_estimands",
+      "height_mm": 91.44,
+      "intended_placement": "Main Figure 3 candidate",
+      "panel_count": 2,
+      "plotted_row_count": 18,
+      "title": "Forced span versus message",
+      "uncertainty": "paired payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
+    },
     "overhead_compact": {
       "classification": "Full supporting candidate",
       "evidence_status": "supporting",
       "height_mm": 90.17,
+      "intended_placement": "Optional compact supporting candidate",
       "panel_count": 3,
       "plotted_row_count": 54,
       "title": "Computational overhead",
@@ -97,16 +184,29 @@
       "classification": "Full supporting candidate",
       "evidence_status": "supporting",
       "height_mm": 130.81,
+      "intended_placement": "Supplementary computational overhead",
       "panel_count": 4,
       "plotted_row_count": 72,
       "title": "Computational overhead",
       "uncertainty": "payload-group bootstrap 95% confidence intervals",
       "width_mm": 180.0
     },
+    "payload_rank": {
+      "classification": "Expanded main-text continuity candidate",
+      "evidence_status": "confirmatory_records_descriptive_estimands",
+      "height_mm": 119.38,
+      "intended_placement": "Main Figure 1 candidate",
+      "panel_count": 3,
+      "plotted_row_count": 56,
+      "title": "Payload representation trade-off",
+      "uncertainty": "descriptive medians and 5th-95th percentile ranges; observed maxima are not confidence limits",
+      "width_mm": 180.0
+    },
     "readability": {
       "classification": "Full supporting candidate",
       "evidence_status": "automated_not_human_rating",
       "height_mm": 95.25,
+      "intended_placement": "Supplementary automated readability diagnostics",
       "panel_count": 3,
       "plotted_row_count": 21,
       "title": "Automated readability diagnostics",
@@ -117,6 +217,7 @@
       "classification": "Core compact candidate",
       "evidence_status": "secondary_with_diagnostic_scope",
       "height_mm": 104.14,
+      "intended_placement": "Main Figure 2 candidate",
       "panel_count": 1,
       "plotted_row_count": 11,
       "title": "Exact-copy fragility",
@@ -127,14 +228,26 @@
       "classification": "Full supporting candidate",
       "evidence_status": "secondary_with_diagnostic_scope",
       "height_mm": 154.94,
+      "intended_placement": "Supplementary complete robustness view",
       "panel_count": 4,
       "plotted_row_count": 24,
       "title": "Exact-copy fragility",
       "uncertainty": "source-cover Wilson 95% confidence intervals",
       "width_mm": 180.0
+    },
+    "tail_gain": {
+      "classification": "Expanded supplementary continuity candidate",
+      "evidence_status": "exploratory_descriptive_topic_subgroups",
+      "height_mm": 102.87,
+      "intended_placement": "Supplementary tail-gain topic analysis",
+      "panel_count": 3,
+      "plotted_row_count": 36,
+      "title": "Tail gain by topic",
+      "uncertainty": "payload-cluster bootstrap 95% confidence intervals for segment-weighted means",
+      "width_mm": 180.0
     }
   },
-  "schema_version": "rankcloak-computational-figure-validation-v2",
+  "schema_version": "rankcloak-computational-figure-validation-v3",
   "source_tables": {
     "ablation_source": {
       "all_plotted_values_finite": true,
@@ -142,6 +255,14 @@
       "path": "results/revision_v1/final_experiment_package/figures/ablation_figure_source.csv",
       "row_count": 9,
       "sha256": "5a289c72f7d9d2fddf2b14da378fb8c81ba1246600ee4d6d95bfdd27b486187a",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "capacity_frontier_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier_source.csv",
+      "row_count": 36,
+      "sha256": "4a7216007bfccbe27dea14d401bcc38c58386f51a6f5f445c5771eeef57a215a",
       "validated_derivation_from_hash_validated_upstream": true
     },
     "detector_compact_source": {
@@ -160,6 +281,14 @@
       "sha256": "aafa788114c6d8afa0e4db18a40aab6a1bc1d2423c925ba65d1a954037c5218e",
       "validated_derivation_from_hash_validated_upstream": true
     },
+    "forced_full_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality_source.csv",
+      "row_count": 18,
+      "sha256": "e29cf3f5b80840cde520c8169d522b0376d2a1421c4d8864a31895a797adf369",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
     "overhead_compact_source": {
       "all_plotted_values_finite": true,
       "interval_order_validated": true,
@@ -174,6 +303,14 @@
       "path": "results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
       "row_count": 72,
       "sha256": "909293a81d2d3715f823126bf6da302e488af32d726f8d84c0b61f638cc1dd1c",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "payload_rank_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity_source.csv",
+      "row_count": 56,
+      "sha256": "5f57baa8e1f6fdd152e0e93129f86ef023a9f4185f7f42ff43c5a2c2590793c8",
       "validated_derivation_from_hash_validated_upstream": true
     },
     "readability_source": {
@@ -198,6 +335,14 @@
       "path": "results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
       "row_count": 24,
       "sha256": "6fed641e41f4bf7239d8f840ae1a515817ff97905b41e2379d9ccacc7f34f755",
+      "validated_derivation_from_hash_validated_upstream": true
+    },
+    "tail_gain_source": {
+      "all_plotted_values_finite": true,
+      "interval_order_validated": true,
+      "path": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category_source.csv",
+      "row_count": 36,
+      "sha256": "c2b16c67172db97824db3d409f47b5f2e68f927b6a46cde6beca49147c5476ff",
       "validated_derivation_from_hash_validated_upstream": true
     },
     "theory_source": {

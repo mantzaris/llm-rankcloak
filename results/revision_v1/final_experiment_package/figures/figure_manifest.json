@@ -1,6 +1,26 @@
 {
   "ablation_figure_status": "exploratory_post_outcome",
   "absolute_local_paths_emitted": false,
+  "continuity_figures_included": true,
+  "continuity_handoff": {
+    "path": "paperV2/scientific_reports/figures/continuity_figure_handoff.json",
+    "sha256": "e84fb8b703d72952b0e633931ac10c964dc50b29f1c7e0c3d306436aed452223",
+    "size_bytes": 18519
+  },
+  "continuity_scope": {
+    "failure_rows": 0,
+    "new_generation_or_model_fitting_performed": false,
+    "original_figures_mapped": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "original_pilot_values_reused": false,
+    "primary_feature_rows": 34560,
+    "primary_trial_rows": 6480,
+    "unavailable_rows": 0
+  },
   "detector_cross_split_bars": "minimum_to_maximum_range_not_confidence_interval",
   "detector_matched_bars": "payload_group_bootstrap_95_confidence_interval",
   "detector_supplementary_panels_status": "exploratory_post_freeze",
@@ -10,6 +30,7 @@
       "evidence_status": "exploratory_post_outcome",
       "height_mm": 90.17,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/ablation_summary.png",
+      "intended_placement": "Supplementary ablation contrasts",
       "panel_count": 3,
       "plotted_row_count": 9,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/ablation_figure_source.csv",
@@ -19,11 +40,27 @@
       "uncertainty": "payload-group bootstrap 95% confidence intervals",
       "width_mm": 180.0
     },
+    "capacity_frontier": {
+      "classification": "Expanded supplementary continuity candidate",
+      "evidence_status": "confirmatory_records_descriptive_frontier",
+      "height_mm": 93.98,
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.png",
+      "intended_placement": "Supplementary empirical capacity-quality frontier",
+      "panel_count": 2,
+      "plotted_row_count": 36,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.pdf",
+      "structured_handoff": "paperV2/scientific_reports/figures/continuity_figure_handoff.json",
+      "title": "Empirical capacity-quality frontier",
+      "uncertainty": "payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
+    },
     "capacity_tail": {
       "classification": "Core compact candidate",
       "evidence_status": "supporting",
       "height_mm": 115.57,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+      "intended_placement": "Supplementary capacity and tail validation",
       "panel_count": 3,
       "plotted_row_count": 18,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/theory_figure_source.csv",
@@ -38,6 +75,7 @@
       "evidence_status": "confirmatory_endpoints_plus_exploratory_low_fpr_metric",
       "height_mm": 87.63,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.png",
+      "intended_placement": "Main Figure 4 candidate",
       "panel_count": 3,
       "plotted_row_count": 24,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/detector_compact_source.csv",
@@ -52,6 +90,7 @@
       "evidence_status": "confirmatory_and_exploratory_panels_separated",
       "height_mm": 148.59,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+      "intended_placement": "Supplementary complete detector view",
       "panel_count": 6,
       "plotted_row_count": 48,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/detector_figure_source.csv",
@@ -61,11 +100,27 @@
       "uncertainty": "matched 95% CIs; held-out cross-split min-max ranges",
       "width_mm": 180.0
     },
+    "forced_full": {
+      "classification": "Expanded main-text continuity candidate",
+      "evidence_status": "confirmatory_records_paired_descriptive_estimands",
+      "height_mm": 91.44,
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.png",
+      "intended_placement": "Main Figure 3 candidate",
+      "panel_count": 2,
+      "plotted_row_count": 18,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.pdf",
+      "structured_handoff": "paperV2/scientific_reports/figures/continuity_figure_handoff.json",
+      "title": "Forced span versus message",
+      "uncertainty": "paired payload-group bootstrap 95% confidence intervals",
+      "width_mm": 180.0
+    },
     "overhead_compact": {
       "classification": "Full supporting candidate",
       "evidence_status": "supporting",
       "height_mm": 90.17,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.png",
+      "intended_placement": "Optional compact supporting candidate",
       "panel_count": 3,
       "plotted_row_count": 54,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/overhead_compact_source.csv",
@@ -80,6 +135,7 @@
       "evidence_status": "supporting",
       "height_mm": 130.81,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+      "intended_placement": "Supplementary computational overhead",
       "panel_count": 4,
       "plotted_row_count": 72,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/overhead_figure_source.csv",
@@ -89,11 +145,27 @@
       "uncertainty": "payload-group bootstrap 95% confidence intervals",
       "width_mm": 180.0
     },
+    "payload_rank": {
+      "classification": "Expanded main-text continuity candidate",
+      "evidence_status": "confirmatory_records_descriptive_estimands",
+      "height_mm": 119.38,
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.png",
+      "intended_placement": "Main Figure 1 candidate",
+      "panel_count": 3,
+      "plotted_row_count": 56,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.pdf",
+      "structured_handoff": "paperV2/scientific_reports/figures/continuity_figure_handoff.json",
+      "title": "Payload representation trade-off",
+      "uncertainty": "descriptive medians and 5th-95th percentile ranges; observed maxima are not confidence limits",
+      "width_mm": 180.0
+    },
     "readability": {
       "classification": "Full supporting candidate",
       "evidence_status": "automated_not_human_rating",
       "height_mm": 95.25,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/automated_readability.png",
+      "intended_placement": "Supplementary automated readability diagnostics",
       "panel_count": 3,
       "plotted_row_count": 21,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/readability_figure_source.csv",
@@ -108,6 +180,7 @@
       "evidence_status": "secondary_with_diagnostic_scope",
       "height_mm": 104.14,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.png",
+      "intended_placement": "Main Figure 2 candidate",
       "panel_count": 1,
       "plotted_row_count": 11,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/robustness_compact_source.csv",
@@ -122,6 +195,7 @@
       "evidence_status": "secondary_with_diagnostic_scope",
       "height_mm": 154.94,
       "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+      "intended_placement": "Supplementary complete robustness view",
       "panel_count": 4,
       "plotted_row_count": 24,
       "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/robustness_figure_source.csv",
@@ -130,9 +204,24 @@
       "title": "Exact-copy fragility",
       "uncertainty": "source-cover Wilson 95% confidence intervals",
       "width_mm": 180.0
+    },
+    "tail_gain": {
+      "classification": "Expanded supplementary continuity candidate",
+      "evidence_status": "exploratory_descriptive_topic_subgroups",
+      "height_mm": 102.87,
+      "inspection_png_300dpi": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.png",
+      "intended_placement": "Supplementary tail-gain topic analysis",
+      "panel_count": 3,
+      "plotted_row_count": 36,
+      "plotted_source_csv": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category_source.csv",
+      "primary_pdf": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.pdf",
+      "structured_handoff": "paperV2/scientific_reports/figures/continuity_figure_handoff.json",
+      "title": "Tail gain by topic",
+      "uncertainty": "payload-cluster bootstrap 95% confidence intervals for segment-weighted means",
+      "width_mm": 180.0
     }
   },
-  "generation_command": "scripts/build_revision_figures.py --robustness-manifest results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json --theory-manifest results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json --readability-manifest results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json --overhead-manifest results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json --detector-manifest results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json --ablation-manifest results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json --output-dir results/revision_v1/final_experiment_package/figures --overwrite",
+  "generation_command": "scripts/build_revision_figures.py --robustness-manifest results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json --theory-manifest results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json --readability-manifest results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json --overhead-manifest results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json --detector-manifest results/revision_v1/final_experiment_package/detectors/analysis/detector_analysis_manifest.json --ablation-manifest results/revision_v1/final_experiment_package/statistics/ablation_analysis/ablation_evidence_manifest.json --output-dir results/revision_v1/final_experiment_package/figures --primary-preprocessing-manifest results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json --statistics-manifest results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json --topic-effects-manifest results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json --publication-dir paperV2/scientific_reports/figures --overwrite",
   "historical_parent_manifest_note": "Parent package manifests may retain sealed historical absolute-path provenance; this figure manifest and all new figure-related references are repository-relative.",
   "human_rating_figures_emitted": false,
   "inputs": {
@@ -147,16 +236,20 @@
     "generator_sources": {
       "cli": {
         "path": "scripts/build_revision_figures.py",
-        "sha256": "b6ca5a345d27ec8d9c992387c4cf75c3426f63b8f2ef216cc1b3eafe3a3dee4b"
+        "sha256": "4a43ec2fb6b741710099272a54dacfd6e4c14a139f97dd14e0fead164ce53160"
       },
       "implementation": {
         "path": "rankcloak/revision_figures.py",
-        "sha256": "44dd635770bf7e52ac932c8a2f86a7a64d342f0fc8f6e81a404b7a06f2fbbb55"
+        "sha256": "5fa699ac3b87f03ad400e4c52806995aa5eb46743aac74ba6849147dc114b4d5"
       }
     },
     "overhead_manifest": {
       "path": "results/revision_v1/final_experiment_package/overhead/overhead_analysis_manifest.json",
       "sha256": "f5e10d7730b25f022948c37be373d34888e05e2cbc52bc11b6e742564df3ecdb"
+    },
+    "primary_preprocessing_manifest": {
+      "path": "results/revision_v1/analysis_inputs/primary_v2/preprocessing_output_manifest.json",
+      "sha256": "510b5e200d7098c97cb41426cb92b34e834d2eb59c470996afaa1ad1e72bc7b1"
     },
     "readability_manifest": {
       "path": "results/revision_v1/final_experiment_package/readability/readability_and_stimulus_manifest.json",
@@ -166,13 +259,21 @@
       "path": "results/revision_v1/final_experiment_package/robustness/robustness_analysis_manifest.json",
       "sha256": "5a9a84a8ec30fa49f5ba7592c0dae6718eb7984eb5536eec3d6c41a6968a4177"
     },
+    "statistics_manifest": {
+      "path": "results/revision_v1/final_experiment_package/statistics/python/statistics_run_manifest.json",
+      "sha256": "3026e8ed050218bb649a80fb7a1d2ee30604fdad11308746b61330f00f70e381"
+    },
     "theory_manifest": {
       "path": "results/revision_v1/final_experiment_package/theory/theory_empirical_manifest.json",
       "sha256": "e2449de3aafca211fd2c7b644400c6225b56bc969743a2682d1105da99b0ac4d"
+    },
+    "topic_effects_manifest": {
+      "path": "results/revision_v1/final_experiment_package/statistics/topic_effects/topic_effect_extraction_manifest.json",
+      "sha256": "c01494cf3fac9ff8e26b6fde65d6cea2e47e11a3fe70988ecaa0b0f2814f02f0"
     }
   },
   "inspection_output_format": "png_300_dpi",
-  "manifest_sha256": "620fc999e9e9e849ff52e38bfcd330383a63970878f51048418fa59fe942fe26",
+  "manifest_sha256": "19c1db5859a8f67253b8430bd09e986f67172e88cf7f52d5db7e6cdcbb569690",
   "outputs": {
     "ablation_note": {
       "path": "results/revision_v1/final_experiment_package/figures/ablation_technical_note.md",
@@ -195,10 +296,26 @@
       "sha256": "5a289c72f7d9d2fddf2b14da378fb8c81ba1246600ee4d6d95bfdd27b486187a",
       "size_bytes": 5155
     },
+    "capacity_frontier_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.pdf",
+      "sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d",
+      "size_bytes": 32930
+    },
+    "capacity_frontier_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.png",
+      "sha256": "ad5aa960794b26a8bdbc1850bcefcea44bf331dda9ea7f998fb07b35357870f7",
+      "size_bytes": 176830
+    },
+    "capacity_frontier_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier_source.csv",
+      "row_count": 36,
+      "sha256": "4a7216007bfccbe27dea14d401bcc38c58386f51a6f5f445c5771eeef57a215a",
+      "size_bytes": 18903
+    },
     "commands": {
       "path": "results/revision_v1/final_experiment_package/figures/generation_commands.txt",
-      "sha256": "77116dcbc8b86816835d34dd8a76f5a457217cf98ed932478de3bb4b95f399ba",
-      "size_bytes": 792
+      "sha256": "8588588c7749e79d22497b90ae1178c48653f3d6ae702890dc59b3a52c0c6006",
+      "size_bytes": 1207
     },
     "detector_compact_pdf": {
       "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.pdf",
@@ -237,10 +354,26 @@
       "sha256": "aafa788114c6d8afa0e4db18a40aab6a1bc1d2423c925ba65d1a954037c5218e",
       "size_bytes": 15047
     },
+    "forced_full_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.pdf",
+      "sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91",
+      "size_bytes": 24645
+    },
+    "forced_full_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.png",
+      "sha256": "601813b5d8b6d990586b999e5ff340f854679e2b38839739f1bdfbd9d8ffe9fa",
+      "size_bytes": 142638
+    },
+    "forced_full_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality_source.csv",
+      "row_count": 18,
+      "sha256": "e29cf3f5b80840cde520c8169d522b0376d2a1421c4d8864a31895a797adf369",
+      "size_bytes": 8273
+    },
     "inventory": {
       "path": "results/revision_v1/final_experiment_package/figures/figure_inventory.csv",
-      "sha256": "0d8b8f37f2698fe4c5d330ba2593006584dda175335abde76ae445ee74bc83fc",
-      "size_bytes": 4607
+      "sha256": "fe577c63640c1c4e647b1f1bb88f970b44be8e3f6606621f20b03c6eabf0b9a8",
+      "size_bytes": 7065
     },
     "overhead_compact_pdf": {
       "path": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.pdf",
@@ -278,6 +411,22 @@
       "row_count": 72,
       "sha256": "909293a81d2d3715f823126bf6da302e488af32d726f8d84c0b61f638cc1dd1c",
       "size_bytes": 26176
+    },
+    "payload_rank_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.pdf",
+      "sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08",
+      "size_bytes": 36606
+    },
+    "payload_rank_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.png",
+      "sha256": "ced9e282cf45ba577624e7d5d017fbbf5125fed8dc4e252cfb40dddde71dd019",
+      "size_bytes": 301134
+    },
+    "payload_rank_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity_source.csv",
+      "row_count": 56,
+      "sha256": "5f57baa8e1f6fdd152e0e93129f86ef023a9f4185f7f42ff43c5a2c2590793c8",
+      "size_bytes": 28938
     },
     "readability_note": {
       "path": "results/revision_v1/final_experiment_package/figures/automated_readability_technical_note.md",
@@ -337,6 +486,22 @@
       "sha256": "6fed641e41f4bf7239d8f840ae1a515817ff97905b41e2379d9ccacc7f34f755",
       "size_bytes": 5707
     },
+    "tail_gain_pdf": {
+      "path": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.pdf",
+      "sha256": "25f5d03d5a5b0f651b30f58a83e874669806fef8da3dc43704710d2fd1956ee1",
+      "size_bytes": 26301
+    },
+    "tail_gain_png": {
+      "path": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.png",
+      "sha256": "f90643751fc051f71d40f10bf75ffc6d71c1280858d8e701bb4b4002ac9a8b9e",
+      "size_bytes": 116392
+    },
+    "tail_gain_source": {
+      "path": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category_source.csv",
+      "row_count": 36,
+      "sha256": "c2b16c67172db97824db3d409f47b5f2e68f927b6a46cde6beca49147c5476ff",
+      "size_bytes": 24228
+    },
     "theory_note": {
       "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_technical_note.md",
       "sha256": "78c0cc5c1491136426e8a39e49cdb2a554ec239731219280cb587f0e31cb7279",
@@ -360,22 +525,98 @@
     },
     "validation": {
       "path": "results/revision_v1/final_experiment_package/figures/figure_validation.json",
-      "sha256": "76fedcbf4018b19dd7e144f102dcafa53ad43649884cdfdd1615c65e9bf9a6ea",
-      "size_bytes": 8972
+      "sha256": "0374d6c028a6e5fcaec9d8065c2f101a822f5d95da4f1af785656359a6e1c207",
+      "size_bytes": 16431
     }
   },
   "portable_repository_relative_paths": true,
   "primary_output_format": "vector_pdf",
   "project_root_assumption": "run_from_repository_root",
+  "publication_copies": {
+    "ablation_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/ablation_summary.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/ablation_summary.pdf",
+      "sha256": "ed234d911f8d2b5a772cebd58613e971692535c65bcc10db862277e42081cbc7"
+    },
+    "capacity_frontier_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/empirical_capacity_quality_frontier.pdf",
+      "sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d"
+    },
+    "detector_compact_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/neural_detector_performance_compact.pdf",
+      "sha256": "41b97f51b6efeca45848862ca01803866825464937dd8931d5045cb32db34ae7"
+    },
+    "detector_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/neural_detector_performance.pdf",
+      "sha256": "5abfff283fad532f22be033c86eb49dc3a1b11d5e7bf2315fb4c27ad972ec6f4"
+    },
+    "forced_full_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/forced_span_full_message_quality.pdf",
+      "sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91"
+    },
+    "overhead_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/computational_overhead.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/computational_overhead.pdf",
+      "sha256": "d9ff4346189b3084da36dda3f75ccbe5779d45740c26e9357cbb69a58117d800"
+    },
+    "payload_rank_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/payload_representation_rank_capacity.pdf",
+      "sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08"
+    },
+    "readability_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/automated_readability.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/automated_readability.pdf",
+      "sha256": "a6b85f79f9bc4964cf4d77cab23242ed18effe772b54d8a445824ac3045b18a1"
+    },
+    "robustness_compact_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/robustness_recovery_compact.pdf",
+      "sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797"
+    },
+    "robustness_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/robustness_recovery.pdf",
+      "sha256": "fe47daa66d07aa6173e45bf757dd1d81a07b5d459f4b1556c868d68004f785fc"
+    },
+    "tail_gain_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/tail_gain_by_prompt_category.pdf",
+      "sha256": "25f5d03d5a5b0f651b30f58a83e874669806fef8da3dc43704710d2fd1956ee1"
+    },
+    "theory_pdf": {
+      "byte_identical": true,
+      "canonical_path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.pdf",
+      "publication_path": "paperV2/scientific_reports/figures/capacity_tail_validation.pdf",
+      "sha256": "8a145258b0b29902d552e896406c97e7fae641f1b51933b90cff75d5fbe3a6ce"
+    }
+  },
   "readability_figure_scope": "automated_surface_diagnostics_not_human_judgements",
-  "schema_version": "rankcloak-computational-figure-evidence-v2",
+  "schema_version": "rankcloak-computational-figure-evidence-v3",
   "source_tables_hash_validated_before_plotting": true,
   "status": "passed",
   "summary": {
-    "figure_count": 9,
-    "inventory_row_count": 9,
-    "rendered_file_count": 18,
-    "source_table_count": 9,
+    "figure_count": 13,
+    "inventory_row_count": 13,
+    "publication_copy_count": 12,
+    "rendered_file_count": 26,
+    "source_table_count": 13,
+    "structured_handoff_count": 1,
     "technical_note_count": 6
   }
 }

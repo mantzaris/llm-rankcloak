@@ -2,12 +2,12 @@
   "figure_hash_refresh": {
     "canonical_figure_manifest": {
       "path": "results/revision_v1/final_experiment_package/figures/figure_manifest.json",
-      "sha256": "97919135a28700461e8d73924a1e25fa97714d2b343c5769be4ba0c0a066a3e7"
+      "sha256": "d3c4b8516d6e00c95a7bf97e33fbfbd373d9970547b26d00d0dd09211958ff6e"
     },
     "historical_absolute_path_provenance_preserved": true,
     "historical_generation_command_preserved": true,
     "refresh_command": "scripts/refresh_revision_figure_parent_hashes.py --evidence-summary-manifest results/revision_v1/final_experiment_package/evidence_summary_manifest.json --reference-table results/revision_v1/final_experiment_package/tables/evidence_artifact_references.csv --figure-dir results/revision_v1/final_experiment_package/figures --figure-manifest results/revision_v1/final_experiment_package/figures/figure_manifest.json",
-    "refresh_git_head": "525a38cc87c73bafcf6ab2fbc5821177a644fbb5",
+    "refresh_git_head": "dcc28bb2fc3f239ab18309222ac52f68bd7c89aa",
     "scientific_estimates_changed": false,
     "scope": "existing_figure_reference_identities_only",
     "sealed_evidence_git_head_preserved": "223a06f649494eb1fefeca8832cf89a069d92cdc",
@@ -59,7 +59,7 @@
       "size_bytes": 4730
     }
   },
-  "manifest_sha256": "25143d6307267745dd9f1ace65ac43d388188507d9c5c3c96bc6453a48b7077e",
+  "manifest_sha256": "d527e8eaa56c7e223212146eba171c3f6e645428d3c98cf52765b668df3a074b",
   "outputs": {
     "STATUS.md": {
       "path": "results/revision_v1/final_experiment_package/STATUS.md",

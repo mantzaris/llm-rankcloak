@@ -6,6 +6,7 @@ import csv
 import hashlib
 import json
 import os
+import shutil
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
@@ -34,6 +35,10 @@ FIGURE_TITLES = {
     "overhead_compact": "Computational overhead",
     "overhead_full": "Computational overhead",
     "ablation": "Exploratory ablation contrasts",
+    "payload_rank": "Payload representation trade-off",
+    "capacity_frontier": "Empirical capacity-quality frontier",
+    "forced_full": "Forced span versus message",
+    "tail_gain": "Tail gain by topic",
 }
 
 FIGURE_HEIGHT_INCHES = {
@@ -46,6 +51,10 @@ FIGURE_HEIGHT_INCHES = {
     "overhead_compact": 3.55,
     "overhead_full": 5.15,
     "ablation": 3.55,
+    "payload_rank": 4.70,
+    "capacity_frontier": 3.70,
+    "forced_full": 3.60,
+    "tail_gain": 4.05,
 }
 
 PROHIBITED_PLOT_PHRASES = (
@@ -111,6 +120,38 @@ OUTPUT_FILENAMES = {
     "commands": "generation_commands.txt",
     "manifest": "figure_manifest.json",
 }
+
+CONTINUITY_OUTPUT_FILENAMES = {
+    "payload_rank_pdf": "payload_representation_rank_capacity.pdf",
+    "payload_rank_png": "payload_representation_rank_capacity.png",
+    "payload_rank_source": "payload_representation_rank_capacity_source.csv",
+    "capacity_frontier_pdf": "empirical_capacity_quality_frontier.pdf",
+    "capacity_frontier_png": "empirical_capacity_quality_frontier.png",
+    "capacity_frontier_source": "empirical_capacity_quality_frontier_source.csv",
+    "forced_full_pdf": "forced_span_full_message_quality.pdf",
+    "forced_full_png": "forced_span_full_message_quality.png",
+    "forced_full_source": "forced_span_full_message_quality_source.csv",
+    "tail_gain_pdf": "tail_gain_by_prompt_category.pdf",
+    "tail_gain_png": "tail_gain_by_prompt_category.png",
+    "tail_gain_source": "tail_gain_by_prompt_category_source.csv",
+}
+
+CONTINUITY_HANDOFF_FILENAME = "continuity_figure_handoff.json"
+
+PUBLICATION_PDF_KEYS = (
+    "payload_rank_pdf",
+    "robustness_compact_pdf",
+    "forced_full_pdf",
+    "detector_compact_pdf",
+    "readability_pdf",
+    "robustness_pdf",
+    "ablation_pdf",
+    "detector_pdf",
+    "overhead_pdf",
+    "theory_pdf",
+    "capacity_frontier_pdf",
+    "tail_gain_pdf",
+)
 
 FAMILY_ORDER = (
     "replay_modes",
@@ -289,6 +330,101 @@ PROTOCOL_FAMILIES = {
     "segmented_hex_single_topic": "Segmented",
 }
 
+CONTINUITY_PROTOCOL_COLORS = {
+    "direct_subword_calgacus": PALETTE["purple"],
+    "nonseg_ascii_b8": PALETTE["blue"],
+    "nonseg_ascii_b16": PALETTE["sky"],
+    "nonseg_hex_nibble_b16": PALETTE["orange"],
+    "segmented_hex_multi_topic": PALETTE["green"],
+    "segmented_hex_single_topic": PALETTE["vermillion"],
+}
+
+PAYLOAD_CLASS_ORDER = (
+    "sha256_hex",
+    "hmac_sha256_hex",
+    "token_128_bit_hex",
+    "nonce_96_bit_hex",
+    "uuid_v4",
+    "aes256_gcm_base64",
+    "chacha20_poly1305_base64",
+    "ed25519_signature_base64",
+)
+
+PAYLOAD_CLASS_LABELS = {
+    "sha256_hex": "SHA-256 hex",
+    "hmac_sha256_hex": "HMAC-SHA256 hex",
+    "token_128_bit_hex": "128-bit token hex",
+    "nonce_96_bit_hex": "96-bit nonce hex",
+    "uuid_v4": "UUIDv4",
+    "aes256_gcm_base64": "AES-GCM base64",
+    "chacha20_poly1305_base64": "ChaCha20 base64",
+    "ed25519_signature_base64": "Ed25519 base64",
+}
+
+REPRESENTATION_ORDER = (
+    "direct_subword",
+    "ascii_b8",
+    "ascii_b16",
+    "hex_nibble",
+)
+
+REPRESENTATION_LABELS = {
+    "direct_subword": "Direct subword",
+    "ascii_b8": "ASCII B=8",
+    "ascii_b16": "ASCII B=16",
+    "hex_nibble": "Hex nibble B=16",
+}
+
+REPRESENTATION_COLORS = {
+    "direct_subword": PALETTE["purple"],
+    "ascii_b8": PALETTE["blue"],
+    "ascii_b16": PALETTE["sky"],
+    "hex_nibble": PALETTE["orange"],
+}
+
+TOPIC_CATEGORY_ORDER = (
+    "casual_conversation",
+    "factual_explanatory",
+    "forum_question_answer",
+    "personal_narrative_blog",
+    "professional_communication",
+    "recipe_procedure",
+)
+
+TOPIC_CATEGORY_LABELS = {
+    "casual_conversation": "Casual conversation",
+    "factual_explanatory": "Factual explanation",
+    "forum_question_answer": "Forum answer",
+    "personal_narrative_blog": "Personal narrative",
+    "professional_communication": "Professional note",
+    "recipe_procedure": "Procedure / recipe",
+}
+
+CONTINUITY_PROTOCOL_ORDER = (
+    "direct_subword_calgacus",
+    "nonseg_ascii_b8",
+    "nonseg_ascii_b16",
+    "nonseg_hex_nibble_b16",
+    "segmented_hex_multi_topic",
+    "segmented_hex_single_topic",
+)
+
+SEGMENTED_PROTOCOL_ORDER = (
+    "segmented_hex_multi_topic",
+    "segmented_hex_single_topic",
+)
+
+COMMON_HEX_PAYLOAD_CLASSES = (
+    "sha256_hex",
+    "hmac_sha256_hex",
+    "token_128_bit_hex",
+    "nonce_96_bit_hex",
+)
+
+PRIMARY_EVIDENCE_STATUS = (
+    "confirmatory_primary_v2_payload_fidelity_after_manifest_freeze"
+)
+
 ABLATION_SELECTION = (
     ("leadin_tokens", "32", "mean_log_probability", "32-token lead-in", 0),
     ("token_filter", "none", "mean_log_probability", "No token filter", 1),
@@ -319,6 +455,22 @@ class FigureParentRefreshArtifacts:
     reference_table: str
     updated_reference_count: int
     manifest_sha256: str
+
+
+@dataclass(frozen=True)
+class ContinuityEvidence:
+    trials: pd.DataFrame
+    features: pd.DataFrame
+    quality: pd.DataFrame
+    direct_records: pd.DataFrame
+    authoritative_paths: dict[str, str]
+    authoritative_hashes: dict[str, str]
+    bootstrap_resamples: int
+    bootstrap_seed: int
+    primary_trial_rows: int
+    primary_feature_rows: int
+    unavailable_rows: int
+    failure_rows: int
 
 
 def file_sha256(path: str | Path) -> str:
@@ -424,6 +576,8 @@ def _set_figure_header(
 
 def _validate_figure_presentation(
     figures: Mapping[str, plt.Figure],
+    *,
+    include_continuity: bool = False,
 ) -> None:
     figure_ids = {
         "robustness_compact": "robustness_compact",
@@ -436,6 +590,15 @@ def _validate_figure_presentation(
         "detector": "detector_full",
         "ablation": "ablation",
     }
+    if include_continuity:
+        figure_ids.update(
+            {
+                "payload_rank": "payload_rank",
+                "capacity_frontier": "capacity_frontier",
+                "forced_full": "forced_full",
+                "tail_gain": "tail_gain",
+            }
+        )
     if set(figures) != set(figure_ids):
         raise FigureEvidenceError("figure presentation validation set is incomplete")
     for render_key, figure in figures.items():
@@ -2076,8 +2239,10 @@ def _technical_notes(
     }
 
 
-def _figure_specs() -> dict[str, dict[str, Any]]:
-    return {
+def _figure_specs(
+    *, include_continuity: bool = False
+) -> dict[str, dict[str, Any]]:
+    specs = {
         "robustness_compact": {
             "title": FIGURE_TITLES["robustness_compact"],
             "classification": "Core compact candidate",
@@ -2187,19 +2352,111 @@ def _figure_specs() -> dict[str, dict[str, Any]]:
             "uncertainty": "payload-group bootstrap 95% confidence intervals",
         },
     }
+    intended_placements = {
+        "robustness_compact": "Main Figure 2 candidate",
+        "robustness_full": "Supplementary complete robustness view",
+        "detector_compact": "Main Figure 4 candidate",
+        "detector_full": "Supplementary complete detector view",
+        "capacity_tail": "Supplementary capacity and tail validation",
+        "readability": "Supplementary automated readability diagnostics",
+        "overhead_compact": "Optional compact supporting candidate",
+        "overhead_full": "Supplementary computational overhead",
+        "ablation": "Supplementary ablation contrasts",
+    }
+    if include_continuity:
+        specs.update(
+            {
+                "payload_rank": {
+                    "title": FIGURE_TITLES["payload_rank"],
+                    "classification": "Expanded main-text continuity candidate",
+                    "evidence_status": "confirmatory_records_descriptive_estimands",
+                    "panel_count": 3,
+                    "plotted_row_count": 56,
+                    "source_key": "payload_rank_source",
+                    "pdf_key": "payload_rank_pdf",
+                    "png_key": "payload_rank_png",
+                    "note_key": None,
+                    "uncertainty": (
+                        "descriptive medians and 5th-95th percentile ranges; "
+                        "observed maxima are not confidence limits"
+                    ),
+                },
+                "capacity_frontier": {
+                    "title": FIGURE_TITLES["capacity_frontier"],
+                    "classification": "Expanded supplementary continuity candidate",
+                    "evidence_status": "confirmatory_records_descriptive_frontier",
+                    "panel_count": 2,
+                    "plotted_row_count": 36,
+                    "source_key": "capacity_frontier_source",
+                    "pdf_key": "capacity_frontier_pdf",
+                    "png_key": "capacity_frontier_png",
+                    "note_key": None,
+                    "uncertainty": "payload-group bootstrap 95% confidence intervals",
+                },
+                "forced_full": {
+                    "title": FIGURE_TITLES["forced_full"],
+                    "classification": "Expanded main-text continuity candidate",
+                    "evidence_status": "confirmatory_records_paired_descriptive_estimands",
+                    "panel_count": 2,
+                    "plotted_row_count": 18,
+                    "source_key": "forced_full_source",
+                    "pdf_key": "forced_full_pdf",
+                    "png_key": "forced_full_png",
+                    "note_key": None,
+                    "uncertainty": (
+                        "paired payload-group bootstrap 95% confidence intervals"
+                    ),
+                },
+                "tail_gain": {
+                    "title": FIGURE_TITLES["tail_gain"],
+                    "classification": "Expanded supplementary continuity candidate",
+                    "evidence_status": "exploratory_descriptive_topic_subgroups",
+                    "panel_count": 3,
+                    "plotted_row_count": 36,
+                    "source_key": "tail_gain_source",
+                    "pdf_key": "tail_gain_pdf",
+                    "png_key": "tail_gain_png",
+                    "note_key": None,
+                    "uncertainty": (
+                        "payload-cluster bootstrap 95% confidence intervals "
+                        "for segment-weighted means"
+                    ),
+                },
+            }
+        )
+        intended_placements.update(
+            {
+                "payload_rank": "Main Figure 1 candidate",
+                "capacity_frontier": (
+                    "Supplementary empirical capacity-quality frontier"
+                ),
+                "forced_full": "Main Figure 3 candidate",
+                "tail_gain": "Supplementary tail-gain topic analysis",
+            }
+        )
+    for figure_id, placement in intended_placements.items():
+        specs[figure_id]["intended_placement"] = placement
+    return specs
 
 
 def _figure_inventory(
-    targets: Mapping[str, Path], project_root: Path
+    targets: Mapping[str, Path],
+    project_root: Path,
+    *,
+    include_continuity: bool = False,
 ) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
-    for figure_id, spec in _figure_specs().items():
+    for figure_id, spec in _figure_specs(
+        include_continuity=include_continuity
+    ).items():
+        note_key = spec["note_key"]
         rows.append(
             {
                 "figure_id": figure_id,
                 "title": spec["title"],
                 "classification": spec["classification"],
                 "evidence_status": spec["evidence_status"],
+                "intended_placement": spec["intended_placement"],
                 "panel_count": spec["panel_count"],
                 "plotted_row_count": spec["plotted_row_count"],
                 "width_mm": 180.0,
@@ -2211,8 +2468,10 @@ def _figure_inventory(
                 "plotted_source_csv": _portable_path(
                     targets[spec["source_key"]], project_root
                 ),
-                "technical_note": _portable_path(
-                    targets[spec["note_key"]], project_root
+                "technical_note": (
+                    _portable_path(targets[note_key], project_root)
+                    if note_key
+                    else ""
                 ),
                 "uncertainty": spec["uncertainty"],
             }
@@ -2271,6 +2530,2401 @@ def _source_row_count(path: Path) -> int | None:
         with path.open("r", encoding="utf-8") as handle:
             return sum(1 for line in handle if line.strip())
     return None
+
+
+def _resolve_historical_manifest_path(
+    value: Any,
+    *,
+    manifest_path: Path,
+    project_root: Path,
+) -> Path:
+    raw = Path(str(value))
+    if not raw.is_absolute():
+        candidate = (manifest_path.parent / raw).resolve()
+    else:
+        candidate = raw.resolve()
+        try:
+            candidate.relative_to(project_root)
+        except ValueError:
+            parts = list(raw.parts)
+            for anchor in ("results", "configs", "release_inputs"):
+                if anchor in parts:
+                    candidate = (
+                        project_root / Path(*parts[parts.index(anchor) :])
+                    ).resolve()
+                    break
+    _portable_path(candidate, project_root)
+    return candidate
+
+
+def _validated_input_files(
+    manifest: Mapping[str, Any],
+    manifest_path: Path,
+    *,
+    role: str,
+    project_root: Path,
+) -> list[Path]:
+    entries = manifest.get("input_files")
+    if not isinstance(entries, list):
+        raise FigureEvidenceError("Preprocessing input manifest lacks input_files")
+    paths: list[Path] = []
+    for entry in entries:
+        if not isinstance(entry, Mapping) or entry.get("role") != role:
+            continue
+        path = _resolve_historical_manifest_path(
+            entry.get("path"),
+            manifest_path=manifest_path,
+            project_root=project_root,
+        )
+        if not path.is_file():
+            raise FigureEvidenceError(f"Declared {role} input is missing: {path}")
+        if file_sha256(path) != entry.get("sha256"):
+            raise FigureEvidenceError(f"Declared {role} input hash mismatch: {path}")
+        paths.append(path)
+    if not paths:
+        raise FigureEvidenceError(f"No hash-validated {role} inputs were declared")
+    return sorted(paths)
+
+
+def _declared_role_output(
+    manifest: Mapping[str, Any],
+    manifest_path: Path,
+    role: str,
+) -> Path:
+    entries = manifest.get("outputs")
+    if not isinstance(entries, list):
+        raise FigureEvidenceError(
+            "Preprocessing output manifest lacks its output inventory"
+        )
+    matches = [
+        entry
+        for entry in entries
+        if isinstance(entry, Mapping) and entry.get("role") == role
+    ]
+    if len(matches) != 1:
+        raise FigureEvidenceError(
+            f"Preprocessing output manifest must declare one {role} output"
+        )
+    entry = matches[0]
+    raw_path = Path(str(entry.get("path", "")))
+    path = (
+        raw_path.resolve()
+        if raw_path.is_absolute()
+        else (manifest_path.parent / raw_path).resolve()
+    )
+    if not path.is_file():
+        raise FigureEvidenceError(f"Declared {role} output does not exist: {path}")
+    if file_sha256(path) != entry.get("sha256"):
+        raise FigureEvidenceError(f"Declared {role} output hash mismatch: {path}")
+    return path
+
+
+def _load_direct_records(
+    record_paths: Sequence[Path],
+    *,
+    project_root: Path,
+) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+    for path in record_paths:
+        portable = _portable_path(path, project_root)
+        with path.open("r", encoding="utf-8") as handle:
+            for source_row, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    record = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise FigureEvidenceError(
+                        f"Invalid retained JSON record {portable}:{source_row}"
+                    ) from exc
+                if (
+                    record.get("record_type") != "rankcloak_trial"
+                    or record.get("protocol_variant")
+                    != "direct_subword_calgacus"
+                ):
+                    continue
+                if record.get("execution_status") != "completed":
+                    raise FigureEvidenceError(
+                        f"Direct record is not completed: {portable}:{source_row}"
+                    )
+                if record.get("evidence_status") != PRIMARY_EVIDENCE_STATUS:
+                    raise FigureEvidenceError(
+                        "Direct record does not retain the frozen primary status"
+                    )
+                representation = record.get("representation")
+                if not isinstance(representation, Mapping):
+                    raise FigureEvidenceError(
+                        f"Direct record lacks representation: {portable}:{source_row}"
+                    )
+                ranks = representation.get("expected_ranks")
+                if (
+                    not isinstance(ranks, list)
+                    or not ranks
+                    or any(
+                        isinstance(value, bool)
+                        or not isinstance(value, int)
+                        or value < 1
+                        for value in ranks
+                    )
+                ):
+                    raise FigureEvidenceError(
+                        f"Direct ranks are invalid: {portable}:{source_row}"
+                    )
+                forced_count = int(record.get("forced_token_count", -1))
+                if forced_count != len(ranks):
+                    raise FigureEvidenceError(
+                        f"Direct rank/count mismatch: {portable}:{source_row}"
+                    )
+                saved = record.get("saved_token_id_replay")
+                if (
+                    not isinstance(saved, Mapping)
+                    or saved.get("exact_payload_recovery") is not True
+                    or saved.get("exact_representation_recovery") is not True
+                    or saved.get("all_segment_ranks_exact") is not True
+                    or saved.get("recovered_ranks") != ranks
+                ):
+                    raise FigureEvidenceError(
+                        f"Direct saved-token replay is not exact: {portable}:{source_row}"
+                    )
+                rows.append(
+                    {
+                        "trial_id": str(record["trial_id"]),
+                        "model_id": str(record["model_id"]),
+                        "payload_name": str(record["payload_name"]),
+                        "payload_class": str(record["payload_class"]),
+                        "forced_token_count": forced_count,
+                        "artifact_bit_length": int(record["artifact_bit_length"]),
+                        "direct_max_rank": int(max(ranks)),
+                        "direct_rank_position_count": int(len(ranks)),
+                        "source_file": portable,
+                        "source_row": int(source_row),
+                        "source_record_sha256": hashlib.sha256(
+                            line.rstrip("\n").encode("utf-8")
+                        ).hexdigest(),
+                    }
+                )
+    frame = pd.DataFrame(rows)
+    if frame.empty:
+        raise FigureEvidenceError("No retained direct-subword records were found")
+    if frame["trial_id"].duplicated().any():
+        raise FigureEvidenceError("Retained direct-subword trial IDs are not unique")
+    return frame
+
+
+def _load_continuity_evidence(
+    *,
+    primary_preprocessing_manifest: str | Path,
+    statistics_manifest: str | Path,
+    topic_effects_manifest: str | Path,
+    project_root: str | Path = PROJECT_ROOT,
+) -> ContinuityEvidence:
+    root = Path(project_root).resolve()
+    primary_manifest_path = Path(primary_preprocessing_manifest).resolve()
+    statistics_manifest_path = Path(statistics_manifest).resolve()
+    topic_manifest_path = Path(topic_effects_manifest).resolve()
+    primary_manifest = _read_json(
+        primary_manifest_path, label="primary preprocessing output manifest"
+    )
+    statistics = _read_json(
+        statistics_manifest_path, label="statistics run manifest"
+    )
+    topic_manifest = _read_json(
+        topic_manifest_path, label="topic-effect extraction manifest"
+    )
+    trials_path = _declared_role_output(
+        primary_manifest, primary_manifest_path, "trials"
+    )
+    features_path = _declared_role_output(
+        primary_manifest, primary_manifest_path, "features"
+    )
+    unavailable_path = _declared_role_output(
+        primary_manifest, primary_manifest_path, "unavailable"
+    )
+    failures_path = _declared_role_output(
+        primary_manifest, primary_manifest_path, "failures"
+    )
+    input_manifest_path = _declared_role_output(
+        primary_manifest, primary_manifest_path, "input_manifest"
+    )
+    input_manifest = _read_json(
+        input_manifest_path, label="primary preprocessing input manifest"
+    )
+    if input_manifest.get("strict_complete") is not True:
+        raise FigureEvidenceError(
+            "Continuity figures require a strict-complete primary matrix"
+        )
+    record_paths = _validated_input_files(
+        input_manifest,
+        input_manifest_path,
+        role="records",
+        project_root=root,
+    )
+    if len(record_paths) != len(MODEL_STYLES):
+        raise FigureEvidenceError(
+            "Primary continuity evidence must contain one record file per model"
+        )
+    quality_path = _declared_output(
+        statistics, statistics_manifest_path, "quality"
+    )
+    topic_contrasts_path = _declared_output(
+        topic_manifest, topic_manifest_path, "topic_schedule_contrasts"
+    )
+    if topic_manifest.get("new_model_fit_performed") is not False:
+        raise FigureEvidenceError(
+            "Continuity handoff requires the locked no-refit topic extraction"
+        )
+
+    trials = pd.read_csv(trials_path, low_memory=False)
+    feature_columns = (
+        "trial_id",
+        "model_id",
+        "payload_name",
+        "payload_class",
+        "protocol_variant",
+        "source_type",
+        "view",
+        "segment_index",
+        "segment_prompt_category",
+        "token_count",
+        "mean_log_probability",
+        "evidence_status",
+        "study_phase",
+        "language",
+    )
+    features = pd.read_csv(
+        features_path, usecols=list(feature_columns), low_memory=False
+    )
+    quality_columns = (
+        "trial_id",
+        "view",
+        "model_id",
+        "payload_name",
+        "payload_class",
+        "protocol_variant",
+        "source_type",
+        "study_phase",
+        "source_mean_log_probability",
+        "surface_flag_total",
+    )
+    quality = pd.read_csv(
+        quality_path, usecols=list(quality_columns), low_memory=False
+    )
+    direct_records = _load_direct_records(record_paths, project_root=root)
+
+    declared_counts = primary_manifest.get("row_counts")
+    if not isinstance(declared_counts, Mapping):
+        raise FigureEvidenceError(
+            "Primary preprocessing manifest lacks declared row counts"
+        )
+    expected_trial_rows = int(declared_counts.get("trials", -1))
+    expected_feature_rows = int(declared_counts.get("features", -1))
+    unavailable_rows = int(declared_counts.get("unavailable", -1))
+    failure_rows = int(declared_counts.get("failures", -1))
+    if len(trials) != expected_trial_rows or len(features) != expected_feature_rows:
+        raise FigureEvidenceError(
+            "Loaded continuity tables do not match manifest row counts"
+        )
+    if unavailable_rows != 0 or failure_rows != 0:
+        raise FigureEvidenceError(
+            "Primary continuity matrix contains unavailable or failed rows"
+        )
+    if _source_row_count(unavailable_path) != 0:
+        raise FigureEvidenceError("Primary unavailable table is not empty")
+    if _source_row_count(failures_path) != 0:
+        raise FigureEvidenceError("Primary failure table is not empty")
+
+    required_protocols = set(CONTINUITY_PROTOCOL_ORDER)
+    observed_protocols = set(trials["protocol_variant"].astype(str).unique())
+    if observed_protocols != required_protocols:
+        raise FigureEvidenceError(
+            "Primary trials do not contain the complete continuity protocol grid"
+        )
+    if set(trials["model_id"].astype(str).unique()) != set(MODEL_STYLES):
+        raise FigureEvidenceError(
+            "Primary trials do not contain the complete continuity model grid"
+        )
+    if set(trials["evidence_status"].astype(str).unique()) != {
+        PRIMARY_EVIDENCE_STATUS
+    }:
+        raise FigureEvidenceError(
+            "Primary trials mix evidence statuses in the continuity scope"
+        )
+    expected_direct = int(
+        primary_manifest.get("invariants", {})
+        .get("payload_fidelity_contract", {})
+        .get("direct_rows", -1)
+    )
+    if len(direct_records) != expected_direct:
+        raise FigureEvidenceError(
+            "Retained direct record count does not match preprocessing invariants"
+        )
+    trial_direct = trials.loc[
+        trials["protocol_variant"].eq("direct_subword_calgacus"),
+        [
+            "trial_id",
+            "model_id",
+            "payload_name",
+            "payload_class",
+            "forced_token_count",
+            "artifact_bit_length",
+        ],
+    ].copy()
+    joined = direct_records.merge(
+        trial_direct,
+        on=["trial_id", "model_id", "payload_name", "payload_class"],
+        suffixes=("_record", "_trial"),
+        validate="one_to_one",
+    )
+    if len(joined) != len(direct_records):
+        raise FigureEvidenceError(
+            "Direct raw records do not join one-to-one to preprocessed trials"
+        )
+    for column in ("forced_token_count", "artifact_bit_length"):
+        if not np.array_equal(
+            joined[f"{column}_record"].to_numpy(),
+            joined[f"{column}_trial"].to_numpy(),
+        ):
+            raise FigureEvidenceError(
+                f"Direct raw/preprocessed mismatch for {column}"
+            )
+
+    determinism = statistics.get("determinism")
+    if not isinstance(determinism, Mapping):
+        raise FigureEvidenceError("Statistics manifest lacks determinism settings")
+    bootstrap_resamples = int(determinism.get("bootstrap_resamples", 0))
+    bootstrap_seed = int(determinism.get("bootstrap_seed", 0))
+    if bootstrap_resamples <= 0:
+        raise FigureEvidenceError("Bootstrap resample count must be positive")
+
+    paths: dict[str, str] = {
+        "primary_preprocessing_manifest": _portable_path(
+            primary_manifest_path, root
+        ),
+        "primary_preprocessing_input_manifest": _portable_path(
+            input_manifest_path, root
+        ),
+        "primary_trials": _portable_path(trials_path, root),
+        "primary_features": _portable_path(features_path, root),
+        "primary_unavailable": _portable_path(unavailable_path, root),
+        "primary_failures": _portable_path(failures_path, root),
+        "statistics_manifest": _portable_path(statistics_manifest_path, root),
+        "quality_trial_metrics": _portable_path(quality_path, root),
+        "topic_effects_manifest": _portable_path(topic_manifest_path, root),
+        "topic_schedule_contrasts": _portable_path(topic_contrasts_path, root),
+    }
+    for path in record_paths:
+        model_id = path.parent.name
+        paths[f"primary_records_{model_id}"] = _portable_path(path, root)
+    hashes = {
+        label: file_sha256(root / path) for label, path in paths.items()
+    }
+    return ContinuityEvidence(
+        trials=trials,
+        features=features,
+        quality=quality,
+        direct_records=direct_records,
+        authoritative_paths=paths,
+        authoritative_hashes=hashes,
+        bootstrap_resamples=bootstrap_resamples,
+        bootstrap_seed=bootstrap_seed,
+        primary_trial_rows=len(trials),
+        primary_feature_rows=len(features),
+        unavailable_rows=unavailable_rows,
+        failure_rows=failure_rows,
+    )
+
+
+def _descriptive_summary(values: Sequence[float]) -> dict[str, float]:
+    array = np.asarray(values, dtype=float)
+    if array.size == 0 or not np.isfinite(array).all():
+        raise FigureEvidenceError("Descriptive source contains non-finite values")
+    low, high = np.quantile(array, [0.05, 0.95])
+    return {
+        "estimate": float(np.median(array)),
+        "range_low": float(low),
+        "range_high": float(high),
+        "observed_min": float(array.min()),
+        "observed_max": float(array.max()),
+    }
+
+
+def _payload_bootstrap_mean(
+    values: Sequence[float],
+    payloads: Sequence[Any],
+    *,
+    n_resamples: int,
+    seed: int,
+) -> dict[str, float | int]:
+    if len(values) != len(payloads) or not values:
+        raise FigureEvidenceError(
+            "Payload bootstrap values and identifiers must align"
+        )
+    data = pd.DataFrame(
+        {
+            "value": pd.to_numeric(pd.Series(values), errors="coerce"),
+            "payload": pd.Series(payloads, dtype=str),
+        }
+    )
+    if data["value"].isna().any():
+        raise FigureEvidenceError("Payload bootstrap contains missing values")
+    payload_values = data.groupby("payload", sort=True)["value"].mean()
+    array = payload_values.to_numpy(dtype=float)
+    point = float(array.mean())
+    if len(array) < 2:
+        low = high = point
+    else:
+        rng = np.random.default_rng(int(seed))
+        samples = np.empty(int(n_resamples), dtype=float)
+        for index in range(int(n_resamples)):
+            samples[index] = float(
+                rng.choice(array, size=len(array), replace=True).mean()
+            )
+        low, high = np.quantile(samples, [0.025, 0.975])
+    return {
+        "estimate": point,
+        "ci_low": float(min(low, point)),
+        "ci_high": float(max(high, point)),
+        "n_payloads": int(len(array)),
+    }
+
+
+def _segment_cluster_bootstrap_mean(
+    frame: pd.DataFrame,
+    *,
+    value_column: str,
+    cluster_column: str,
+    stratum_column: str,
+    n_resamples: int,
+    seed: int,
+) -> dict[str, float | int]:
+    required = (value_column, cluster_column, stratum_column)
+    _require_columns(frame, required, label="segment cluster bootstrap")
+    data = frame[list(required)].copy()
+    data[value_column] = pd.to_numeric(data[value_column], errors="coerce")
+    if data.empty or data[value_column].isna().any():
+        raise FigureEvidenceError(
+            "Segment cluster bootstrap contains missing or no values"
+        )
+    cluster_rows = (
+        data.groupby(
+            [stratum_column, cluster_column], sort=True, dropna=False
+        )[value_column]
+        .agg(["sum", "count"])
+        .reset_index()
+    )
+    point = float(data[value_column].mean())
+    rng = np.random.default_rng(int(seed))
+    samples = np.empty(int(n_resamples), dtype=float)
+    strata = [
+        group[["sum", "count"]].to_numpy(dtype=float)
+        for _, group in cluster_rows.groupby(stratum_column, sort=True)
+    ]
+    for index in range(int(n_resamples)):
+        total_sum = 0.0
+        total_count = 0.0
+        for array in strata:
+            selected = rng.integers(0, len(array), size=len(array))
+            total_sum += float(array[selected, 0].sum())
+            total_count += float(array[selected, 1].sum())
+        samples[index] = total_sum / total_count
+    low, high = np.quantile(samples, [0.025, 0.975])
+    return {
+        "estimate": point,
+        "ci_low": float(min(low, point)),
+        "ci_high": float(max(high, point)),
+        "n_segments": int(len(data)),
+        "n_clusters": int(cluster_rows[cluster_column].nunique()),
+    }
+
+
+def _quality_trial_views(evidence: ContinuityEvidence) -> pd.DataFrame:
+    trials = evidence.trials.loc[
+        evidence.trials["evidence_status"].eq(PRIMARY_EVIDENCE_STATUS),
+        [
+            "trial_id",
+            "model_id",
+            "payload_name",
+            "payload_class",
+            "protocol_variant",
+            "representation_name",
+            "segmented",
+            "topic_schedule",
+            "leadin_tokens",
+            "tail_policy",
+            "forced_token_count",
+            "full_token_count",
+            "artifact_bit_length",
+            "exact_payload_recovery",
+        ],
+    ].copy()
+    quality = evidence.quality.loc[
+        evidence.quality["study_phase"].eq("primary_v2_confirmatory")
+        & evidence.quality["source_type"].eq("rankcloak"),
+        [
+            "trial_id",
+            "view",
+            "source_mean_log_probability",
+            "surface_flag_total",
+        ],
+    ].copy()
+    if quality.duplicated(["trial_id", "view"]).any():
+        raise FigureEvidenceError(
+            "Trial-level quality table is not unique by trial and view"
+        )
+    joined = quality.merge(trials, on="trial_id", validate="many_to_one")
+    view_counts = joined.groupby("trial_id")["view"].nunique()
+    if len(view_counts) != len(trials) or not view_counts.eq(2).all():
+        raise FigureEvidenceError(
+            "Every primary RankCloak trial must have forced and full quality views"
+        )
+    if set(joined["view"].unique()) != {"forced_span", "full_message"}:
+        raise FigureEvidenceError(
+            "Primary continuity quality includes an unexpected text view"
+        )
+    joined["token_count"] = np.where(
+        joined["view"].eq("forced_span"),
+        joined["forced_token_count"],
+        joined["full_token_count"],
+    )
+    joined["mean_log_probability"] = pd.to_numeric(
+        joined["source_mean_log_probability"], errors="coerce"
+    )
+    joined["artifact_flags"] = pd.to_numeric(
+        joined["surface_flag_total"], errors="coerce"
+    )
+    _finite_columns(
+        joined,
+        ("token_count", "mean_log_probability", "artifact_flags"),
+        label="primary trial quality views",
+    )
+    if not joined["exact_payload_recovery"].astype(bool).all():
+        raise FigureEvidenceError(
+            "Primary continuity quality scope includes a recovery failure"
+        )
+    return joined
+
+
+def _payload_rank_source(evidence: ContinuityEvidence) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+    direct = evidence.direct_records.copy()
+    direct_source_files = ";".join(sorted(direct["source_file"].unique()))
+    trials_source = evidence.authoritative_paths["primary_trials"]
+
+    for payload_class in PAYLOAD_CLASS_ORDER:
+        group = direct.loc[direct["payload_class"].eq(payload_class)]
+        if len(group) != 180 or group["payload_name"].nunique() != 60:
+            raise FigureEvidenceError(
+                f"Direct symbol-count scope is incomplete for {payload_class}"
+            )
+        summary = _descriptive_summary(group["forced_token_count"])
+        rows.append(
+            {
+                "panel": "forced_symbol_count",
+                "group": payload_class,
+                "subgroup": "direct_subword",
+                **summary,
+                "n_units": int(len(group)),
+                "n_payloads": int(group["payload_name"].nunique()),
+                "n_models": int(group["model_id"].nunique()),
+                "unit_of_analysis": "payload_model_pair",
+                "interval_definition": "5th_to_95th_observed_percentile_range",
+                "rank_control_label": "No codec ceiling",
+                "scope": "all_primary_payload_classes",
+                "filtering_rule": (
+                    "completed primary direct-subword records; one row per "
+                    "payload-model pair"
+                ),
+                "source_files": direct_source_files,
+                "evidence_status": "confirmatory_records_descriptive_estimand",
+            }
+        )
+
+    bounded_protocols = {
+        "nonseg_ascii_b8": ("ascii_b8", "Rank ceiling 8"),
+        "nonseg_ascii_b16": ("ascii_b16", "Rank ceiling 16"),
+        "nonseg_hex_nibble_b16": ("hex_nibble", "Rank ceiling 16"),
+    }
+    bounded_unique: dict[str, pd.DataFrame] = {}
+    for protocol, (representation, rank_label) in bounded_protocols.items():
+        protocol_rows = evidence.trials.loc[
+            evidence.trials["protocol_variant"].eq(protocol)
+        ].copy()
+        consistency = protocol_rows.groupby("payload_name").agg(
+            forced_values=("forced_token_count", "nunique"),
+            bit_values=("artifact_bit_length", "nunique"),
+        )
+        if not consistency[["forced_values", "bit_values"]].eq(1).all().all():
+            raise FigureEvidenceError(
+                f"Deterministic bounded counts change across models for {protocol}"
+            )
+        unique = (
+            protocol_rows.sort_values("model_id", kind="stable")
+            .drop_duplicates("payload_name")
+            .copy()
+        )
+        bounded_unique[representation] = unique
+        applicable_classes = (
+            COMMON_HEX_PAYLOAD_CLASSES
+            if representation == "hex_nibble"
+            else PAYLOAD_CLASS_ORDER
+        )
+        for payload_class in applicable_classes:
+            group = unique.loc[unique["payload_class"].eq(payload_class)]
+            if len(group) != 60:
+                raise FigureEvidenceError(
+                    f"Bounded symbol-count scope is incomplete for "
+                    f"{representation}/{payload_class}"
+                )
+            summary = _descriptive_summary(group["forced_token_count"])
+            rows.append(
+                {
+                    "panel": "forced_symbol_count",
+                    "group": payload_class,
+                    "subgroup": representation,
+                    **summary,
+                    "n_units": int(len(group)),
+                    "n_payloads": int(group["payload_name"].nunique()),
+                    "n_models": 0,
+                    "unit_of_analysis": "unique_payload",
+                    "interval_definition": "5th_to_95th_observed_percentile_range",
+                    "rank_control_label": rank_label,
+                    "scope": "codec_applicable_primary_payload_classes",
+                    "filtering_rule": (
+                        f"completed primary {protocol} trials collapsed across "
+                        "models because codec length is deterministic"
+                    ),
+                    "source_files": trials_source,
+                    "evidence_status": (
+                        "confirmatory_records_deterministic_codec_descriptive"
+                    ),
+                }
+            )
+
+    model_order = list(MODEL_STYLES)
+    for payload_class in PAYLOAD_CLASS_ORDER:
+        for model_id in model_order:
+            group = direct.loc[
+                direct["payload_class"].eq(payload_class)
+                & direct["model_id"].eq(model_id)
+            ]
+            if len(group) != 60:
+                raise FigureEvidenceError(
+                    f"Direct rank-pressure scope is incomplete for "
+                    f"{model_id}/{payload_class}"
+                )
+            summary = _descriptive_summary(group["direct_max_rank"])
+            rows.append(
+                {
+                    "panel": "direct_rank_pressure",
+                    "group": payload_class,
+                    "subgroup": model_id,
+                    **summary,
+                    "n_units": int(len(group)),
+                    "n_payloads": int(group["payload_name"].nunique()),
+                    "n_models": 1,
+                    "unit_of_analysis": "payload_model_pair_maximum_rank",
+                    "interval_definition": (
+                        "5th_to_95th_observed_percentile_range_plus_observed_max"
+                    ),
+                    "rank_control_label": "No codec ceiling",
+                    "scope": "all_primary_direct_subword_payloads",
+                    "filtering_rule": (
+                        "maximum expected direct-subword rank within each "
+                        "completed payload-model record"
+                    ),
+                    "source_files": direct_source_files,
+                    "evidence_status": "confirmatory_records_descriptive_estimand",
+                }
+            )
+
+    direct_hex = direct.loc[
+        direct["payload_class"].isin(COMMON_HEX_PAYLOAD_CLASSES)
+    ].copy()
+    direct_hex["effective_rate"] = (
+        direct_hex["artifact_bit_length"] / direct_hex["forced_token_count"]
+    )
+    rate_groups: list[tuple[str, pd.DataFrame, str, str]] = [
+        (
+            "direct_subword",
+            direct_hex,
+            "No codec ceiling; maximum observed rank "
+            f"{int(direct_hex['direct_max_rank'].max()):,}",
+            direct_source_files,
+        )
+    ]
+    for representation, rank_label in (
+        ("ascii_b8", "Rank ceiling 8"),
+        ("ascii_b16", "Rank ceiling 16"),
+        ("hex_nibble", "Rank ceiling 16"),
+    ):
+        group = bounded_unique[representation]
+        group = group.loc[
+            group["payload_class"].isin(COMMON_HEX_PAYLOAD_CLASSES)
+        ].copy()
+        group["effective_rate"] = (
+            group["artifact_bit_length"] / group["forced_token_count"]
+        )
+        rate_groups.append((representation, group, rank_label, trials_source))
+    for representation, group, rank_label, source_files in rate_groups:
+        expected_units = 720 if representation == "direct_subword" else 240
+        if len(group) != expected_units:
+            raise FigureEvidenceError(
+                f"Common-support rate scope is incomplete for {representation}"
+            )
+        summary = _descriptive_summary(group["effective_rate"])
+        rows.append(
+            {
+                "panel": "effective_artifact_rate",
+                "group": "common_hex_payloads",
+                "subgroup": representation,
+                **summary,
+                "n_units": int(len(group)),
+                "n_payloads": int(group["payload_name"].nunique()),
+                "n_models": (
+                    int(group["model_id"].nunique())
+                    if representation == "direct_subword"
+                    else 0
+                ),
+                "unit_of_analysis": (
+                    "payload_model_pair"
+                    if representation == "direct_subword"
+                    else "unique_payload"
+                ),
+                "interval_definition": "5th_to_95th_observed_percentile_range",
+                "rank_control_label": rank_label,
+                "scope": "balanced_common_support_four_hex_payload_classes",
+                "filtering_rule": (
+                    "artifact_bit_length divided by forced payload symbols; "
+                    "hex-applicable payload classes only"
+                ),
+                "source_files": source_files,
+                "evidence_status": "confirmatory_records_descriptive_estimand",
+            }
+        )
+    source = pd.DataFrame(rows)
+    if len(source) != 56:
+        raise FigureEvidenceError("Payload/rank source must contain 56 rows")
+    _finite_columns(
+        source,
+        (
+            "estimate",
+            "range_low",
+            "range_high",
+            "observed_min",
+            "observed_max",
+            "n_units",
+            "n_payloads",
+            "n_models",
+        ),
+        label="payload/rank plotted source",
+    )
+    return source
+
+
+def _capacity_frontier_source(
+    evidence: ContinuityEvidence,
+) -> pd.DataFrame:
+    quality = _quality_trial_views(evidence)
+    quality = quality.loc[
+        quality["payload_class"].isin(COMMON_HEX_PAYLOAD_CLASSES)
+        & quality["protocol_variant"].isin(CONTINUITY_PROTOCOL_ORDER)
+    ].copy()
+    rows: list[dict[str, Any]] = []
+    group_index = 0
+    for view in ("forced_span", "full_message"):
+        for model_id in MODEL_STYLES:
+            for protocol in CONTINUITY_PROTOCOL_ORDER:
+                group = quality.loc[
+                    quality["view"].eq(view)
+                    & quality["model_id"].eq(model_id)
+                    & quality["protocol_variant"].eq(protocol)
+                ]
+                if len(group) != 240 or group["payload_name"].nunique() != 240:
+                    raise FigureEvidenceError(
+                        f"Capacity frontier cell is incomplete: "
+                        f"{view}/{model_id}/{protocol}"
+                    )
+                summaries = {}
+                for offset, column in enumerate(
+                    ("token_count", "mean_log_probability", "artifact_flags")
+                ):
+                    summaries[column] = _payload_bootstrap_mean(
+                        group[column].tolist(),
+                        group["payload_name"].tolist(),
+                        n_resamples=evidence.bootstrap_resamples,
+                        seed=evidence.bootstrap_seed
+                        + group_index * 17
+                        + offset,
+                    )
+                rows.append(
+                    {
+                        "view": view,
+                        "model_id": model_id,
+                        "protocol_variant": protocol,
+                        "protocol_family": PROTOCOL_FAMILIES[protocol],
+                        "representation_name": str(
+                            group["representation_name"].iloc[0]
+                        ),
+                        "n_trials": int(len(group)),
+                        "n_payloads": int(group["payload_name"].nunique()),
+                        "mean_token_count": summaries["token_count"]["estimate"],
+                        "token_count_ci_low": summaries["token_count"]["ci_low"],
+                        "token_count_ci_high": summaries["token_count"]["ci_high"],
+                        "mean_log_probability": summaries[
+                            "mean_log_probability"
+                        ]["estimate"],
+                        "log_probability_ci_low": summaries[
+                            "mean_log_probability"
+                        ]["ci_low"],
+                        "log_probability_ci_high": summaries[
+                            "mean_log_probability"
+                        ]["ci_high"],
+                        "mean_artifact_flags": summaries["artifact_flags"][
+                            "estimate"
+                        ],
+                        "artifact_flags_ci_low": summaries["artifact_flags"][
+                            "ci_low"
+                        ],
+                        "artifact_flags_ci_high": summaries["artifact_flags"][
+                            "ci_high"
+                        ],
+                        "marker_area_points_squared": (
+                            20.0
+                            + 12.0
+                            * float(summaries["artifact_flags"]["estimate"])
+                        ),
+                        "bootstrap_resamples": evidence.bootstrap_resamples,
+                        "bootstrap_seed": evidence.bootstrap_seed,
+                        "confidence_level": 0.95,
+                        "bootstrap_unit": "payload_name",
+                        "unit_of_analysis": "payload_model_protocol_trial_view",
+                        "interval_definition": (
+                            "equal_weight_payload_percentile_bootstrap_95_ci"
+                        ),
+                        "filtering_rule": (
+                            "completed primary RankCloak trials on the balanced "
+                            "common support of four hex payload classes; no lead-in"
+                        ),
+                        "unavailable_rows_in_scope": 0,
+                        "evidence_status": (
+                            "confirmatory_records_descriptive_frontier"
+                        ),
+                    }
+                )
+                group_index += 1
+    source = pd.DataFrame(rows)
+    if len(source) != 36:
+        raise FigureEvidenceError("Capacity frontier source must contain 36 rows")
+    _finite_columns(
+        source,
+        (
+            "n_trials",
+            "n_payloads",
+            "mean_token_count",
+            "token_count_ci_low",
+            "token_count_ci_high",
+            "mean_log_probability",
+            "log_probability_ci_low",
+            "log_probability_ci_high",
+            "mean_artifact_flags",
+            "artifact_flags_ci_low",
+            "artifact_flags_ci_high",
+            "marker_area_points_squared",
+        ),
+        label="empirical capacity-quality frontier",
+    )
+    _interval_errors(
+        source["mean_token_count"].to_numpy(),
+        source["token_count_ci_low"].to_numpy(),
+        source["token_count_ci_high"].to_numpy(),
+        label="frontier token-count intervals",
+    )
+    _interval_errors(
+        source["mean_log_probability"].to_numpy(),
+        source["log_probability_ci_low"].to_numpy(),
+        source["log_probability_ci_high"].to_numpy(),
+        label="frontier log-probability intervals",
+    )
+    return source
+
+
+def _segmented_trial_pairs(evidence: ContinuityEvidence) -> pd.DataFrame:
+    quality = _quality_trial_views(evidence)
+    quality = quality.loc[
+        quality["protocol_variant"].isin(SEGMENTED_PROTOCOL_ORDER)
+    ].copy()
+    index_columns = (
+        "trial_id",
+        "model_id",
+        "payload_name",
+        "payload_class",
+        "protocol_variant",
+        "topic_schedule",
+    )
+    pairs = quality.pivot(
+        index=list(index_columns),
+        columns="view",
+        values="mean_log_probability",
+    ).reset_index()
+    if pairs[["forced_span", "full_message"]].isna().any().any():
+        raise FigureEvidenceError("Segmented trial quality pairing is incomplete")
+    pairs["tail_gain"] = pairs["full_message"] - pairs["forced_span"]
+    if len(pairs) != 1440 or pairs["trial_id"].nunique() != 1440:
+        raise FigureEvidenceError(
+            "Segmented trial pairing must contain 1,440 primary trials"
+        )
+    return pairs
+
+
+def _forced_full_source(evidence: ContinuityEvidence) -> pd.DataFrame:
+    pairs = _segmented_trial_pairs(evidence)
+    rows: list[dict[str, Any]] = []
+    group_index = 0
+    for model_id in MODEL_STYLES:
+        for protocol in SEGMENTED_PROTOCOL_ORDER:
+            group = pairs.loc[
+                pairs["model_id"].eq(model_id)
+                & pairs["protocol_variant"].eq(protocol)
+            ]
+            if len(group) != 240 or group["payload_name"].nunique() != 240:
+                raise FigureEvidenceError(
+                    f"Forced/full paired cell is incomplete: {model_id}/{protocol}"
+                )
+            for view_offset, view in enumerate(("forced_span", "full_message")):
+                summary = _payload_bootstrap_mean(
+                    group[view].tolist(),
+                    group["payload_name"].tolist(),
+                    n_resamples=evidence.bootstrap_resamples,
+                    seed=evidence.bootstrap_seed
+                    + group_index * 31
+                    + view_offset,
+                )
+                rows.append(
+                    {
+                        "panel": "span_message_comparison",
+                        "model_id": model_id,
+                        "protocol_variant": protocol,
+                        "metric_scope": view,
+                        "estimate": summary["estimate"],
+                        "ci_low": summary["ci_low"],
+                        "ci_high": summary["ci_high"],
+                        "n_trials": int(len(group)),
+                        "n_payloads": int(group["payload_name"].nunique()),
+                        "n_models": 1,
+                        "unit_of_analysis": "paired_payload_trial_view",
+                        "estimand": "mean_token_log_probability",
+                        "interval_definition": (
+                            "equal_weight_payload_percentile_bootstrap_95_ci"
+                        ),
+                        "bootstrap_resamples": evidence.bootstrap_resamples,
+                        "bootstrap_seed": evidence.bootstrap_seed,
+                        "filtering_rule": (
+                            "completed primary segmented trials; trial-level "
+                            "token-weighted collapse across nested segments"
+                        ),
+                        "unavailable_rows_in_scope": 0,
+                        "tail_payload_capacity_bits": 0,
+                        "evidence_status": (
+                            "confirmatory_records_paired_descriptive_estimand"
+                        ),
+                    }
+                )
+            difference = _payload_bootstrap_mean(
+                group["tail_gain"].tolist(),
+                group["payload_name"].tolist(),
+                n_resamples=evidence.bootstrap_resamples,
+                seed=evidence.bootstrap_seed + group_index * 31 + 2,
+            )
+            rows.append(
+                {
+                    "panel": "paired_difference",
+                    "model_id": model_id,
+                    "protocol_variant": protocol,
+                    "metric_scope": "full_message_minus_forced_span",
+                    "estimate": difference["estimate"],
+                    "ci_low": difference["ci_low"],
+                    "ci_high": difference["ci_high"],
+                    "n_trials": int(len(group)),
+                    "n_payloads": int(group["payload_name"].nunique()),
+                    "n_models": 1,
+                    "unit_of_analysis": "paired_payload_trial_difference",
+                    "estimand": (
+                        "full_message_mean_log_probability_minus_"
+                        "forced_span_mean_log_probability"
+                    ),
+                    "interval_definition": (
+                        "paired_equal_weight_payload_percentile_bootstrap_95_ci"
+                    ),
+                    "bootstrap_resamples": evidence.bootstrap_resamples,
+                    "bootstrap_seed": evidence.bootstrap_seed,
+                    "filtering_rule": (
+                        "within-trial full-message minus forced-span quality; "
+                        "completed primary segmented trials"
+                    ),
+                    "unavailable_rows_in_scope": 0,
+                    "tail_payload_capacity_bits": 0,
+                    "evidence_status": (
+                        "confirmatory_records_paired_descriptive_estimand"
+                    ),
+                }
+            )
+            group_index += 1
+    source = pd.DataFrame(rows)
+    if len(source) != 18:
+        raise FigureEvidenceError("Forced/full source must contain 18 rows")
+    _finite_columns(
+        source,
+        (
+            "estimate",
+            "ci_low",
+            "ci_high",
+            "n_trials",
+            "n_payloads",
+            "n_models",
+            "bootstrap_resamples",
+            "bootstrap_seed",
+            "unavailable_rows_in_scope",
+            "tail_payload_capacity_bits",
+        ),
+        label="forced/full plotted source",
+    )
+    _interval_errors(
+        source["estimate"].to_numpy(),
+        source["ci_low"].to_numpy(),
+        source["ci_high"].to_numpy(),
+        label="forced/full intervals",
+    )
+    return source
+
+
+def _tail_gain_source(evidence: ContinuityEvidence) -> pd.DataFrame:
+    features = evidence.features.loc[
+        evidence.features["study_phase"].eq("primary_v2_confirmatory")
+        & evidence.features["source_type"].eq("rankcloak")
+        & evidence.features["protocol_variant"].isin(SEGMENTED_PROTOCOL_ORDER)
+    ].copy()
+    key_columns = [
+        "trial_id",
+        "model_id",
+        "payload_name",
+        "payload_class",
+        "protocol_variant",
+        "segment_index",
+        "segment_prompt_category",
+    ]
+    forced = features.loc[
+        features["view"].eq("forced_span"),
+        key_columns + ["token_count", "mean_log_probability"],
+    ].rename(
+        columns={
+            "token_count": "forced_token_count",
+            "mean_log_probability": "forced_mean_log_probability",
+        }
+    )
+    full = features.loc[
+        features["view"].eq("full_message"),
+        key_columns + ["token_count", "mean_log_probability"],
+    ].rename(
+        columns={
+            "token_count": "full_token_count",
+            "mean_log_probability": "full_mean_log_probability",
+        }
+    )
+    if forced.duplicated(key_columns).any() or full.duplicated(key_columns).any():
+        raise FigureEvidenceError(
+            "Segment views are not unique by trial and segment index"
+        )
+    paired = forced.merge(full, on=key_columns, validate="one_to_one")
+    if len(paired) != len(forced) or len(paired) != len(full):
+        raise FigureEvidenceError("Forced/full segment pairing is incomplete")
+    paired["tail_gain"] = (
+        paired["full_mean_log_probability"]
+        - paired["forced_mean_log_probability"]
+    )
+    paired["tail_token_count"] = (
+        paired["full_token_count"] - paired["forced_token_count"]
+    )
+    _finite_columns(
+        paired,
+        (
+            "forced_token_count",
+            "full_token_count",
+            "forced_mean_log_probability",
+            "full_mean_log_probability",
+            "tail_gain",
+            "tail_token_count",
+        ),
+        label="paired segment tail gain",
+    )
+    if (paired["tail_token_count"] <= 0).any():
+        raise FigureEvidenceError(
+            "Primary segmented tail-gain scope contains a nonpositive tail"
+        )
+    if len(paired) != 8280 or paired["trial_id"].nunique() != 1440:
+        raise FigureEvidenceError(
+            "Tail-gain reconstruction must contain 8,280 paired segments"
+        )
+
+    rows: list[dict[str, Any]] = []
+    group_index = 0
+    for model_id in MODEL_STYLES:
+        for protocol in SEGMENTED_PROTOCOL_ORDER:
+            for category in TOPIC_CATEGORY_ORDER:
+                group = paired.loc[
+                    paired["model_id"].eq(model_id)
+                    & paired["protocol_variant"].eq(protocol)
+                    & paired["segment_prompt_category"].eq(category)
+                ]
+                if len(group) != 230:
+                    raise FigureEvidenceError(
+                        f"Tail topic cell is incomplete: "
+                        f"{model_id}/{protocol}/{category}"
+                    )
+                summary = _segment_cluster_bootstrap_mean(
+                    group,
+                    value_column="tail_gain",
+                    cluster_column="payload_name",
+                    stratum_column="payload_class",
+                    n_resamples=evidence.bootstrap_resamples,
+                    seed=evidence.bootstrap_seed + group_index * 43,
+                )
+                rows.append(
+                    {
+                        "model_id": model_id,
+                        "protocol_variant": protocol,
+                        "topic_schedule": (
+                            "deterministic_six_category_rotation"
+                            if protocol == "segmented_hex_multi_topic"
+                            else "single_category_within_trial"
+                        ),
+                        "prompt_category": category,
+                        "n_segments": int(len(group)),
+                        "n_trials": int(group["trial_id"].nunique()),
+                        "n_payloads": int(group["payload_name"].nunique()),
+                        "tail_gain_mean": summary["estimate"],
+                        "ci_low": summary["ci_low"],
+                        "ci_high": summary["ci_high"],
+                        "mean_tail_tokens": float(
+                            group["tail_token_count"].mean()
+                        ),
+                        "bootstrap_resamples": evidence.bootstrap_resamples,
+                        "bootstrap_seed": evidence.bootstrap_seed,
+                        "confidence_level": 0.95,
+                        "unit_of_analysis": (
+                            "paired_segment_message; payload-clustered uncertainty"
+                        ),
+                        "estimand": (
+                            "segment full-message mean token log probability "
+                            "minus segment forced-span mean token log probability"
+                        ),
+                        "interval_definition": (
+                            "payload_cluster_percentile_bootstrap_95_ci_for_"
+                            "segment_weighted_mean_stratified_by_payload_class"
+                        ),
+                        "filtering_rule": (
+                            "completed primary segmented English segment views "
+                            "paired by trial_id and segment_index"
+                        ),
+                        "unavailable_rows_in_scope": 0,
+                        "tail_payload_capacity_bits": 0,
+                        "evidence_status": (
+                            "exploratory_descriptive_topic_subgroup"
+                        ),
+                        "adjusted_topic_analysis_relation": (
+                            "distinct_from_adjusted_single_vs_multi_topic_"
+                            "mixed_model_contrasts"
+                        ),
+                    }
+                )
+                group_index += 1
+    source = pd.DataFrame(rows)
+    if len(source) != 36:
+        raise FigureEvidenceError("Tail-gain source must contain 36 rows")
+    _finite_columns(
+        source,
+        (
+            "n_segments",
+            "n_trials",
+            "n_payloads",
+            "tail_gain_mean",
+            "ci_low",
+            "ci_high",
+            "mean_tail_tokens",
+            "bootstrap_resamples",
+            "bootstrap_seed",
+            "unavailable_rows_in_scope",
+            "tail_payload_capacity_bits",
+        ),
+        label="tail-gain plotted source",
+    )
+    _interval_errors(
+        source["tail_gain_mean"].to_numpy(),
+        source["ci_low"].to_numpy(),
+        source["ci_high"].to_numpy(),
+        label="tail-gain intervals",
+    )
+    return source
+
+
+def _plot_payload_rank(source: pd.DataFrame) -> plt.Figure:
+    figure = plt.figure(
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["payload_rank"])
+    )
+    grid = figure.add_gridspec(
+        2,
+        2,
+        height_ratios=(1.08, 1.0),
+        left=0.18,
+        right=0.985,
+        bottom=0.19,
+        top=0.84,
+        hspace=0.58,
+        wspace=0.42,
+    )
+    counts_axis = figure.add_subplot(grid[0, :])
+    rank_axis = figure.add_subplot(grid[1, 0])
+    rate_axis = figure.add_subplot(grid[1, 1])
+    _set_figure_header(
+        figure,
+        "payload_rank",
+        note="Whiskers: observed 5th–95th percentiles; ×: observed maxima",
+    )
+
+    count_rows = source.loc[source["panel"].eq("forced_symbol_count")]
+    representation_offsets = {
+        representation: offset
+        for representation, offset in zip(
+            REPRESENTATION_ORDER, (-0.27, -0.09, 0.09, 0.27)
+        )
+    }
+    base_y = {
+        payload_class: float(index)
+        for index, payload_class in enumerate(PAYLOAD_CLASS_ORDER)
+    }
+    for representation in REPRESENTATION_ORDER:
+        group = count_rows.loc[count_rows["subgroup"].eq(representation)]
+        y = np.asarray(
+            [
+                base_y[payload_class] + representation_offsets[representation]
+                for payload_class in group["group"]
+            ],
+            dtype=float,
+        )
+        point = group["estimate"].to_numpy(dtype=float)
+        error = _interval_errors(
+            point,
+            group["range_low"].to_numpy(dtype=float),
+            group["range_high"].to_numpy(dtype=float),
+            label=f"{representation} symbol-count range",
+        )
+        counts_axis.errorbar(
+            point,
+            y,
+            xerr=error,
+            fmt="o",
+            color=REPRESENTATION_COLORS[representation],
+            markeredgecolor="white",
+            markeredgewidth=0.45,
+            markersize=4.5,
+            linewidth=1.0,
+            capsize=1.8,
+            label=REPRESENTATION_LABELS[representation],
+            zorder=3,
+        )
+    counts_axis.set_xscale("log")
+    counts_axis.set_yticks(
+        list(base_y.values()),
+        [PAYLOAD_CLASS_LABELS[value] for value in PAYLOAD_CLASS_ORDER],
+    )
+    counts_axis.invert_yaxis()
+    counts_axis.set_xlabel("Forced payload symbols (log scale)")
+    counts_axis.set_title("A  Payload symbols", loc="left", fontweight="bold")
+    counts_axis.grid(axis="x", color=PALETTE["light_gray"], linewidth=0.7)
+    counts_axis.legend(
+        ncol=4,
+        loc="lower right",
+        bbox_to_anchor=(1.0, 1.01),
+        frameon=False,
+        fontsize=6.7,
+        handletextpad=0.35,
+        columnspacing=0.9,
+    )
+
+    rank_rows = source.loc[source["panel"].eq("direct_rank_pressure")]
+    model_offsets = {
+        model_id: offset
+        for model_id, offset in zip(MODEL_STYLES, (-0.20, 0.0, 0.20))
+    }
+    for model_id, (model_label, color, marker) in MODEL_STYLES.items():
+        group = rank_rows.loc[rank_rows["subgroup"].eq(model_id)]
+        y = np.asarray(
+            [
+                base_y[payload_class] + model_offsets[model_id]
+                for payload_class in group["group"]
+            ],
+            dtype=float,
+        )
+        point = group["estimate"].to_numpy(dtype=float)
+        error = _interval_errors(
+            point,
+            group["range_low"].to_numpy(dtype=float),
+            group["range_high"].to_numpy(dtype=float),
+            label=f"{model_id} direct-rank range",
+        )
+        rank_axis.errorbar(
+            point,
+            y,
+            xerr=error,
+            fmt=marker,
+            color=color,
+            markeredgecolor="white",
+            markeredgewidth=0.45,
+            markersize=4.2,
+            linewidth=0.9,
+            capsize=1.5,
+            label=model_label,
+            zorder=3,
+        )
+        rank_axis.scatter(
+            group["observed_max"].to_numpy(dtype=float),
+            y,
+            marker="x",
+            s=13,
+            color=color,
+            linewidths=0.8,
+            zorder=4,
+        )
+    rank_axis.axvline(
+        8, color=PALETTE["gray"], linestyle=":", linewidth=0.8, zorder=1
+    )
+    rank_axis.axvline(
+        16, color=PALETTE["black"], linestyle=":", linewidth=0.8, zorder=1
+    )
+    rank_axis.text(
+        8,
+        0.97,
+        "B=8",
+        transform=rank_axis.get_xaxis_transform(),
+        rotation=90,
+        ha="right",
+        va="top",
+        fontsize=5.8,
+        color=PALETTE["gray"],
+    )
+    rank_axis.text(
+        16,
+        0.97,
+        "B=16",
+        transform=rank_axis.get_xaxis_transform(),
+        rotation=90,
+        ha="right",
+        va="top",
+        fontsize=5.8,
+        color=PALETTE["black"],
+    )
+    rank_axis.set_xscale("log")
+    rank_axis.set_xlim(6.0, max(2.0e5, source["observed_max"].max() * 1.15))
+    rank_axis.set_yticks(
+        list(base_y.values()),
+        [PAYLOAD_CLASS_LABELS[value] for value in PAYLOAD_CLASS_ORDER],
+    )
+    rank_axis.invert_yaxis()
+    rank_axis.set_xlabel("Per-payload maximum direct rank (log scale)")
+    rank_axis.set_title("B  Direct rank pressure", loc="left", fontweight="bold")
+    rank_axis.grid(axis="x", color=PALETTE["light_gray"], linewidth=0.7)
+    model_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker=marker,
+            linestyle="none",
+            color=color,
+            markerfacecolor=color,
+            markeredgecolor="white",
+            markersize=4.8,
+            label=label,
+        )
+        for label, color, marker in MODEL_STYLES.values()
+    ]
+    figure.legend(
+        handles=model_handles,
+        loc="lower left",
+        bbox_to_anchor=(0.18, 0.012),
+        ncol=3,
+        frameon=False,
+        fontsize=6.2,
+        handletextpad=0.3,
+        columnspacing=0.8,
+    )
+
+    rate_rows = source.loc[source["panel"].eq("effective_artifact_rate")]
+    rate_y = np.arange(len(REPRESENTATION_ORDER), dtype=float)
+    maximum_annotation_x = 0.0
+    for index, representation in enumerate(REPRESENTATION_ORDER):
+        row = rate_rows.loc[rate_rows["subgroup"].eq(representation)].iloc[0]
+        point = np.asarray([float(row["estimate"])])
+        error = _interval_errors(
+            point,
+            np.asarray([float(row["range_low"])]),
+            np.asarray([float(row["range_high"])]),
+            label=f"{representation} effective-rate range",
+        )
+        rate_axis.errorbar(
+            point,
+            [rate_y[index]],
+            xerr=error,
+            fmt="o",
+            color=REPRESENTATION_COLORS[representation],
+            markeredgecolor="white",
+            markeredgewidth=0.45,
+            markersize=5.0,
+            linewidth=1.0,
+            capsize=2.0,
+            zorder=3,
+        )
+        annotation_x = float(row["range_high"]) + 0.12
+        maximum_annotation_x = max(maximum_annotation_x, annotation_x)
+        control_label = {
+            "direct_subword": "No codec ceiling",
+            "ascii_b8": "Rank ceiling 8",
+            "ascii_b16": "Rank ceiling 16",
+            "hex_nibble": "Rank ceiling 16",
+        }[representation]
+        rate_axis.text(
+            annotation_x,
+            rate_y[index],
+            control_label,
+            va="center",
+            ha="left",
+            fontsize=6.1,
+            color=PALETTE["black"],
+        )
+    rate_axis.set_yticks(
+        rate_y,
+        [REPRESENTATION_LABELS[value] for value in REPRESENTATION_ORDER],
+    )
+    rate_axis.invert_yaxis()
+    rate_axis.set_xlim(
+        0.0,
+        max(
+            maximum_annotation_x + 2.0,
+            float(rate_rows["range_high"].max()) * 1.65,
+        ),
+    )
+    rate_axis.set_xlabel("Effective artifact bits per forced token")
+    rate_axis.set_title(
+        "C  Compactness and rank control", loc="left", fontweight="bold"
+    )
+    rate_axis.grid(axis="x", color=PALETTE["light_gray"], linewidth=0.7)
+    return figure
+
+
+def _plot_capacity_frontier(source: pd.DataFrame) -> plt.Figure:
+    figure, axes = plt.subplots(
+        1,
+        2,
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["capacity_frontier"]),
+    )
+    _set_figure_header(
+        figure,
+        "capacity_frontier",
+        note="Bars: payload-bootstrap 95% CIs; point area: mean surface flags",
+    )
+    figure.subplots_adjust(
+        left=0.08, right=0.985, bottom=0.28, top=0.82, wspace=0.25
+    )
+    for axis, view, title in zip(
+        axes,
+        ("forced_span", "full_message"),
+        ("A  Payload-bearing forced span", "B  Full visible message"),
+    ):
+        group = source.loc[source["view"].eq(view)]
+        for _, row in group.iterrows():
+            protocol = str(row["protocol_variant"])
+            model_id = str(row["model_id"])
+            _, _, marker = MODEL_STYLES[model_id]
+            color = CONTINUITY_PROTOCOL_COLORS[protocol]
+            x = np.asarray([float(row["mean_token_count"])])
+            y = np.asarray([float(row["mean_log_probability"])])
+            xerr = _interval_errors(
+                x,
+                np.asarray([float(row["token_count_ci_low"])]),
+                np.asarray([float(row["token_count_ci_high"])]),
+                label="frontier token-count interval",
+            )
+            yerr = _interval_errors(
+                y,
+                np.asarray([float(row["log_probability_ci_low"])]),
+                np.asarray([float(row["log_probability_ci_high"])]),
+                label="frontier log-probability interval",
+            )
+            axis.errorbar(
+                x,
+                y,
+                xerr=xerr,
+                yerr=yerr,
+                fmt="none",
+                ecolor=color,
+                elinewidth=0.8,
+                capsize=1.5,
+                alpha=0.75,
+                zorder=2,
+            )
+            axis.scatter(
+                x,
+                y,
+                s=float(row["marker_area_points_squared"]),
+                color=color,
+                marker=marker,
+                edgecolor="white",
+                linewidth=0.55,
+                zorder=3,
+            )
+        axis.set_title(title, loc="left", fontweight="bold")
+        axis.set_xlabel("Mean token count")
+        axis.set_ylabel("Mean token log probability (higher is better)")
+        axis.grid(color=PALETTE["light_gray"], linewidth=0.7)
+    model_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker=marker,
+            linestyle="none",
+            color=PALETTE["black"],
+            markerfacecolor="white",
+            markeredgecolor=PALETTE["black"],
+            markersize=5,
+            label=label,
+        )
+        for label, _, marker in MODEL_STYLES.values()
+    ]
+    axes[0].legend(
+        handles=model_handles,
+        title="Source model",
+        loc="lower right",
+        frameon=False,
+        fontsize=6.4,
+        title_fontsize=6.5,
+    )
+    size_handles = [
+        axes[1].scatter(
+            [],
+            [],
+            s=20.0 + 12.0 * flags,
+            color=PALETTE["gray"],
+            edgecolor="white",
+            linewidth=0.5,
+            label=f"{flags:g}",
+        )
+        for flags in (1.0, 3.0, 5.0)
+    ]
+    axes[1].legend(
+        handles=size_handles,
+        title="Mean surface flags",
+        loc="lower right",
+        frameon=False,
+        fontsize=6.4,
+        title_fontsize=6.5,
+    )
+    protocol_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker="o",
+            linestyle="none",
+            color=CONTINUITY_PROTOCOL_COLORS[protocol],
+            markerfacecolor=CONTINUITY_PROTOCOL_COLORS[protocol],
+            markeredgecolor="white",
+            markersize=5.2,
+            label=PROTOCOL_LABELS[protocol],
+        )
+        for protocol in CONTINUITY_PROTOCOL_ORDER
+    ]
+    figure.legend(
+        handles=protocol_handles,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.015),
+        ncol=3,
+        frameon=False,
+        fontsize=6.6,
+        handletextpad=0.35,
+        columnspacing=1.0,
+    )
+    return figure
+
+
+def _forced_full_row_order() -> list[tuple[str, str]]:
+    return [
+        (model_id, protocol)
+        for model_id in MODEL_STYLES
+        for protocol in SEGMENTED_PROTOCOL_ORDER
+    ]
+
+
+def _plot_forced_full(source: pd.DataFrame) -> plt.Figure:
+    figure, axes = plt.subplots(
+        1,
+        2,
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["forced_full"]),
+        gridspec_kw={"width_ratios": (1.25, 0.75)},
+    )
+    _set_figure_header(
+        figure,
+        "forced_full",
+        note="n=240 paired payload trials per cell; tails carry no payload ranks",
+    )
+    figure.subplots_adjust(
+        left=0.22, right=0.985, bottom=0.18, top=0.81, wspace=0.27
+    )
+    order = _forced_full_row_order()
+    y_positions = np.arange(len(order), dtype=float)
+    labels = [
+        f"{MODEL_STYLES[model_id][0]} · "
+        f"{'Multi-topic' if protocol.endswith('multi_topic') else 'Single-topic'}"
+        for model_id, protocol in order
+    ]
+    comparison = source.loc[
+        source["panel"].eq("span_message_comparison")
+    ]
+    view_styles = {
+        "forced_span": (
+            "Forced span",
+            PALETTE["purple"],
+            "o",
+            "white",
+        ),
+        "full_message": (
+            "Full message",
+            PALETTE["green"],
+            "s",
+            PALETTE["green"],
+        ),
+    }
+    for y, (model_id, protocol) in zip(y_positions, order):
+        cell = comparison.loc[
+            comparison["model_id"].eq(model_id)
+            & comparison["protocol_variant"].eq(protocol)
+        ]
+        forced_point = float(
+            cell.loc[cell["metric_scope"].eq("forced_span"), "estimate"].iloc[0]
+        )
+        full_point = float(
+            cell.loc[cell["metric_scope"].eq("full_message"), "estimate"].iloc[0]
+        )
+        axes[0].plot(
+            [forced_point, full_point],
+            [y, y],
+            color=PALETTE["light_gray"],
+            linewidth=1.2,
+            zorder=1,
+        )
+        for view, (_, color, marker, facecolor) in view_styles.items():
+            row = cell.loc[cell["metric_scope"].eq(view)].iloc[0]
+            point = np.asarray([float(row["estimate"])])
+            error = _interval_errors(
+                point,
+                np.asarray([float(row["ci_low"])]),
+                np.asarray([float(row["ci_high"])]),
+                label=f"{view} interval",
+            )
+            axes[0].errorbar(
+                point,
+                [y],
+                xerr=error,
+                fmt=marker,
+                color=color,
+                markerfacecolor=facecolor,
+                markeredgecolor=color,
+                markeredgewidth=0.8,
+                markersize=5.0,
+                linewidth=1.0,
+                capsize=2.0,
+                zorder=3,
+            )
+    axes[0].set_yticks(y_positions, labels)
+    axes[0].invert_yaxis()
+    axes[0].set_xlabel("Mean token log probability (higher is better)")
+    axes[0].set_title("A  Span and message", loc="left", fontweight="bold")
+    axes[0].grid(axis="x", color=PALETTE["light_gray"], linewidth=0.7)
+    view_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker=style[2],
+            linestyle="none",
+            color=style[1],
+            markerfacecolor=style[3],
+            markeredgecolor=style[1],
+            markersize=5,
+            label=style[0],
+        )
+        for style in view_styles.values()
+    ]
+    axes[0].legend(
+        handles=view_handles,
+        loc="lower right",
+        frameon=False,
+        fontsize=6.8,
+    )
+
+    differences = source.loc[source["panel"].eq("paired_difference")]
+    axes[1].axvline(
+        0.0, color=PALETTE["black"], linestyle="--", linewidth=0.8, zorder=1
+    )
+    for y, (model_id, protocol) in zip(y_positions, order):
+        row = differences.loc[
+            differences["model_id"].eq(model_id)
+            & differences["protocol_variant"].eq(protocol)
+        ].iloc[0]
+        point = np.asarray([float(row["estimate"])])
+        error = _interval_errors(
+            point,
+            np.asarray([float(row["ci_low"])]),
+            np.asarray([float(row["ci_high"])]),
+            label="paired tail-gain interval",
+        )
+        _, color, model_marker = MODEL_STYLES[model_id]
+        marker = model_marker if protocol.endswith("multi_topic") else "D"
+        axes[1].errorbar(
+            point,
+            [y],
+            xerr=error,
+            fmt=marker,
+            color=color,
+            markeredgecolor="white",
+            markeredgewidth=0.5,
+            markersize=5.0,
+            linewidth=1.0,
+            capsize=2.0,
+            zorder=3,
+        )
+    axes[1].set_yticks(y_positions, [""] * len(y_positions))
+    axes[1].invert_yaxis()
+    axes[1].set_xlabel("Full message − forced span")
+    axes[1].set_title("B  Paired difference", loc="left", fontweight="bold")
+    axes[1].grid(axis="x", color=PALETTE["light_gray"], linewidth=0.7)
+    return figure
+
+
+def _plot_tail_gain(source: pd.DataFrame) -> plt.Figure:
+    figure, axes = plt.subplots(
+        1,
+        3,
+        figsize=(FULL_WIDTH_INCHES, FIGURE_HEIGHT_INCHES["tail_gain"]),
+        sharex=True,
+        sharey=True,
+    )
+    _set_figure_header(
+        figure,
+        "tail_gain",
+        note=(
+            "230 segments/group; payload clusters: "
+            "single-topic n=40, multi-topic n=190"
+        ),
+    )
+    figure.subplots_adjust(
+        left=0.19, right=0.985, bottom=0.18, top=0.80, wspace=0.12
+    )
+    y_base = {
+        category: float(index)
+        for index, category in enumerate(TOPIC_CATEGORY_ORDER)
+    }
+    protocol_style = {
+        "segmented_hex_multi_topic": (
+            "Multi-topic",
+            PALETTE["green"],
+            "o",
+            -0.12,
+        ),
+        "segmented_hex_single_topic": (
+            "Single-topic",
+            PALETTE["vermillion"],
+            "s",
+            0.12,
+        ),
+    }
+    for panel_index, (axis, model_id) in enumerate(zip(axes, MODEL_STYLES)):
+        for protocol in SEGMENTED_PROTOCOL_ORDER:
+            label, color, marker, offset = protocol_style[protocol]
+            group = source.loc[
+                source["model_id"].eq(model_id)
+                & source["protocol_variant"].eq(protocol)
+            ]
+            y = np.asarray(
+                [
+                    y_base[category] + offset
+                    for category in group["prompt_category"]
+                ],
+                dtype=float,
+            )
+            point = group["tail_gain_mean"].to_numpy(dtype=float)
+            error = _interval_errors(
+                point,
+                group["ci_low"].to_numpy(dtype=float),
+                group["ci_high"].to_numpy(dtype=float),
+                label=f"{model_id}/{protocol} tail-gain interval",
+            )
+            axis.errorbar(
+                point,
+                y,
+                xerr=error,
+                fmt=marker,
+                color=color,
+                markeredgecolor="white",
+                markeredgewidth=0.45,
+                markersize=4.7,
+                linewidth=1.0,
+                capsize=1.8,
+                label=label,
+                zorder=3,
+            )
+        axis.axvline(
+            0.0,
+            color=PALETTE["black"],
+            linestyle="--",
+            linewidth=0.8,
+            zorder=1,
+        )
+        axis.set_xlim(-0.05, 4.1)
+        axis.set_title(
+            f"{chr(ord('A') + panel_index)}  {MODEL_STYLES[model_id][0]}",
+            loc="left",
+            fontweight="bold",
+        )
+        axis.grid(axis="x", color=PALETTE["light_gray"], linewidth=0.7)
+        axis.set_xlabel("Full − forced mean log p")
+    axes[0].set_yticks(
+        list(y_base.values()),
+        [TOPIC_CATEGORY_LABELS[value] for value in TOPIC_CATEGORY_ORDER],
+    )
+    axes[0].invert_yaxis()
+    handles = [
+        Line2D(
+            [0],
+            [0],
+            marker=style[2],
+            linestyle="none",
+            color=style[1],
+            markerfacecolor=style[1],
+            markeredgecolor="white",
+            markersize=5,
+            label=style[0],
+        )
+        for style in protocol_style.values()
+    ]
+    figure.legend(
+        handles=handles,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.025),
+        ncol=2,
+        frameon=False,
+        fontsize=7.0,
+    )
+    return figure
+
+
+def _atomic_copy_file(source: Path, target: Path) -> Path:
+    temporary = target.with_name(f".{target.name}.tmp-{uuid.uuid4().hex}")
+    shutil.copyfile(source, temporary)
+    os.replace(temporary, target)
+    return target
+
+
+def _continuity_handoff(
+    *,
+    evidence: ContinuityEvidence,
+    sources: Mapping[str, pd.DataFrame],
+    targets: Mapping[str, Path],
+    project_root: Path,
+) -> dict[str, Any]:
+    payload_source = sources["payload_rank_source"]
+    frontier_source = sources["capacity_frontier_source"]
+    forced_source = sources["forced_full_source"]
+    tail_source = sources["tail_gain_source"]
+    record_sources = sorted(
+        path
+        for label, path in evidence.authoritative_paths.items()
+        if label.startswith("primary_records_")
+    )
+    model_ids = list(MODEL_STYLES)
+
+    direct_count = payload_source.loc[
+        payload_source["panel"].eq("forced_symbol_count")
+        & payload_source["subgroup"].eq("direct_subword")
+    ]
+    direct_rank = payload_source.loc[
+        payload_source["panel"].eq("direct_rank_pressure")
+    ]
+    effective_rate = payload_source.loc[
+        payload_source["panel"].eq("effective_artifact_rate")
+    ]
+    rate_medians = {
+        representation: float(
+            effective_rate.loc[
+                effective_rate["subgroup"].eq(representation), "estimate"
+            ].iloc[0]
+        )
+        for representation in REPRESENTATION_ORDER
+    }
+
+    forced_comparison = forced_source.loc[
+        forced_source["panel"].eq("span_message_comparison")
+    ]
+    forced_mean = float(
+        forced_comparison.loc[
+            forced_comparison["metric_scope"].eq("forced_span"), "estimate"
+        ].mean()
+    )
+    full_mean = float(
+        forced_comparison.loc[
+            forced_comparison["metric_scope"].eq("full_message"), "estimate"
+        ].mean()
+    )
+    differences = forced_source.loc[
+        forced_source["panel"].eq("paired_difference")
+    ]
+    paired_gain = float(differences["estimate"].mean())
+    cell_gains = [
+        {
+            "model_id": str(row["model_id"]),
+            "protocol_variant": str(row["protocol_variant"]),
+            "n_paired_trials": int(row["n_trials"]),
+            "estimate": float(row["estimate"]),
+            "ci_low": float(row["ci_low"]),
+            "ci_high": float(row["ci_high"]),
+        }
+        for _, row in differences.iterrows()
+    ]
+
+    topic_contrasts_path = (
+        project_root
+        / evidence.authoritative_paths["topic_schedule_contrasts"]
+    )
+    topic_contrasts = pd.read_csv(topic_contrasts_path)
+    adjusted_quality = topic_contrasts.loc[
+        topic_contrasts["model_id"].eq("primary_cover_log_probability")
+    ]
+    if len(adjusted_quality) != 3:
+        raise FigureEvidenceError(
+            "Adjusted source-quality topic contrast scope is incomplete"
+        )
+
+    common_sources = {
+        "primary_preprocessing_manifest": evidence.authoritative_paths[
+            "primary_preprocessing_manifest"
+        ],
+        "primary_trials": evidence.authoritative_paths["primary_trials"],
+        "primary_features": evidence.authoritative_paths["primary_features"],
+        "quality_trial_metrics": evidence.authoritative_paths[
+            "quality_trial_metrics"
+        ],
+    }
+    return {
+        "schema_version": "rankcloak-continuity-figure-handoff-v1",
+        "status": "passed",
+        "scope": "computational_figure_continuity_only",
+        "primary_matrix_availability": {
+            "trial_rows": evidence.primary_trial_rows,
+            "feature_rows": evidence.primary_feature_rows,
+            "failed_rows": evidence.failure_rows,
+            "unavailable_rows": evidence.unavailable_rows,
+            "strict_complete": True,
+        },
+        "original_figures": [
+            {
+                "original_figure_number": 1,
+                "original_title": (
+                    "Payload representation and direct rank-pressure diagnostics"
+                ),
+                "original_scientific_question": (
+                    "How do direct subwords and deterministic bounded codecs "
+                    "trade payload-symbol count against requested-rank pressure?"
+                ),
+                "original_dataset_scope": (
+                    "12 pilot payload diagnostics: two examples in each of six "
+                    "payload classes; hex nibble applicable to eight rows"
+                ),
+                "final_generated_filename": targets["payload_rank_pdf"].name,
+                "canonical_output": _portable_path(
+                    targets["payload_rank_pdf"], project_root
+                ),
+                "intended_placement": "Main Figure 1 candidate",
+                "authoritative_source_files": record_sources
+                + [common_sources["primary_trials"]],
+                "unit_of_analysis": {
+                    "direct_counts_and_ranks": "payload-model pair",
+                    "bounded_codec_counts": "unique payload",
+                    "effective_rate": (
+                        "payload-model pair for direct; unique payload for bounded"
+                    ),
+                },
+                "sample_size": {
+                    "unique_payloads": 480,
+                    "payload_classes": 8,
+                    "payloads_per_class": 60,
+                    "models": 3,
+                    "direct_payload_model_pairs": int(
+                        evidence.direct_records.shape[0]
+                    ),
+                    "direct_token_rank_positions": int(
+                        evidence.direct_records[
+                            "direct_rank_position_count"
+                        ].sum()
+                    ),
+                    "ascii_codec_unique_payloads": 480,
+                    "hex_codec_unique_payloads": 240,
+                },
+                "models_and_conditions": {
+                    "models": model_ids,
+                    "representations": list(REPRESENTATION_ORDER),
+                    "common_rate_scope": list(COMMON_HEX_PAYLOAD_CLASSES),
+                },
+                "estimand": (
+                    "Distribution of forced representation symbols; distribution "
+                    "of each direct payload's maximum expected rank; effective "
+                    "artifact bits per forced token"
+                ),
+                "uncertainty_definition": (
+                    "Descriptive medians and observed 5th-95th percentiles; "
+                    "observed maxima are ranges, not confidence limits"
+                ),
+                "principal_result": {
+                    "largest_observed_direct_rank": int(
+                        direct_rank["observed_max"].max()
+                    ),
+                    "direct_class_median_symbol_count_min": float(
+                        direct_count["estimate"].min()
+                    ),
+                    "direct_class_median_symbol_count_max": float(
+                        direct_count["estimate"].max()
+                    ),
+                    "deterministic_rank_ceilings": {
+                        "ascii_b8": 8,
+                        "ascii_b16": 16,
+                        "hex_nibble": 16,
+                        "direct_subword": None,
+                    },
+                    "common_hex_effective_rate_medians": rate_medians,
+                    "summary": (
+                        "Direct subwords were usually shorter but had no codec "
+                        "ceiling and reached rank 145,498; bounded codecs spent "
+                        "more symbols to cap every requested rank at 8 or 16."
+                    ),
+                },
+                "limitations": [
+                    "Direct counts and ranks are tokenizer/model dependent.",
+                    "Bounded codec lengths are deterministic and therefore "
+                    "collapsed across models.",
+                    "Effective artifact rate is descriptive and is not a "
+                    "cryptographic capacity or security guarantee.",
+                ],
+                "continuity_status": "expanded replacement",
+                "evidence_classification": (
+                    "confirmatory retained records; descriptive estimands"
+                ),
+            },
+            {
+                "original_figure_number": 2,
+                "original_title": (
+                    "Capacity-quality frontier for completed cover-generation trials"
+                ),
+                "original_scientific_question": (
+                    "How do cover length, model likelihood, and visible artifact "
+                    "burden vary across codec and segmented-message choices?"
+                ),
+                "original_dataset_scope": (
+                    "20 completed nonsegmented pilot trials plus seven completed "
+                    "segmented trials; one experimental lead-in failure"
+                ),
+                "final_generated_filename": targets[
+                    "capacity_frontier_pdf"
+                ].name,
+                "canonical_output": _portable_path(
+                    targets["capacity_frontier_pdf"], project_root
+                ),
+                "intended_placement": (
+                    "Supplementary empirical capacity-quality frontier"
+                ),
+                "authoritative_source_files": [
+                    common_sources["primary_trials"],
+                    common_sources["quality_trial_metrics"],
+                    evidence.authoritative_paths["statistics_manifest"],
+                ],
+                "unit_of_analysis": "payload-model-protocol trial view",
+                "sample_size": {
+                    "common_hex_payloads_per_cell": 240,
+                    "model_protocol_cells": 18,
+                    "trial_rows": 4320,
+                    "plotted_view_cells": 36,
+                    "unavailable_rows": 0,
+                    "failed_rows": 0,
+                },
+                "models_and_conditions": {
+                    "models": model_ids,
+                    "protocols": list(CONTINUITY_PROTOCOL_ORDER),
+                    "views": ["forced_span", "full_message"],
+                    "payload_classes": list(COMMON_HEX_PAYLOAD_CLASSES),
+                    "lead_in": (
+                        "not present in the complete primary matrix; exploratory "
+                        "ablation lead-ins were not pooled"
+                    ),
+                },
+                "estimand": (
+                    "Cell mean token count versus cell mean source-model token "
+                    "log probability; marker area is mean deterministic surface "
+                    "flag count"
+                ),
+                "uncertainty_definition": (
+                    "2,000-resample equal-weight payload-name percentile-bootstrap "
+                    "95% confidence intervals for both axes and artifact burden"
+                ),
+                "principal_result": {
+                    "forced_length_cell_mean_range": [
+                        float(
+                            frontier_source.loc[
+                                frontier_source["view"].eq("forced_span"),
+                                "mean_token_count",
+                            ].min()
+                        ),
+                        float(
+                            frontier_source.loc[
+                                frontier_source["view"].eq("forced_span"),
+                                "mean_token_count",
+                            ].max()
+                        ),
+                    ],
+                    "full_length_cell_mean_range": [
+                        float(
+                            frontier_source.loc[
+                                frontier_source["view"].eq("full_message"),
+                                "mean_token_count",
+                            ].min()
+                        ),
+                        float(
+                            frontier_source.loc[
+                                frontier_source["view"].eq("full_message"),
+                                "mean_token_count",
+                            ].max()
+                        ),
+                    ],
+                    "mean_log_probability_cell_range": [
+                        float(frontier_source["mean_log_probability"].min()),
+                        float(frontier_source["mean_log_probability"].max()),
+                    ],
+                    "summary": (
+                        "The expanded empirical frontier remains protocol- and "
+                        "model-dependent: compact direct spans have the lowest "
+                        "length but often the poorest likelihood, while segmented "
+                        "full messages move to much higher likelihood by adding "
+                        "non-payload tail length."
+                    ),
+                },
+                "limitations": [
+                    "The common-support restriction excludes non-hex payload "
+                    "classes so that all six protocols use the same payloads.",
+                    "Source-model log probability and surface flags are automated "
+                    "diagnostics, not human judgments.",
+                    "The existing capacity_tail_validation.pdf tests theoretical "
+                    "identities and tail overhead; it is related but not an "
+                    "empirical replacement for original Figure 2.",
+                ],
+                "continuity_status": "expanded replacement",
+                "evidence_classification": (
+                    "confirmatory retained matrix; descriptive frontier"
+                ),
+                "related_current_figure": {
+                    "filename": "capacity_tail_validation.pdf",
+                    "relationship": (
+                        "related theory/invariant validation; not equivalent"
+                    ),
+                },
+            },
+            {
+                "original_figure_number": 3,
+                "original_title": (
+                    "Forced-span versus full-message metrics for completed "
+                    "segmented trials"
+                ),
+                "original_scientific_question": (
+                    "Does apparent full-message likelihood improve because the "
+                    "payload-bearing forced span improves, or because a natural "
+                    "non-payload tail is added?"
+                ),
+                "original_dataset_scope": (
+                    "Seven completed segmented pilot trials, including one "
+                    "experimental lead-in failure"
+                ),
+                "final_generated_filename": targets["forced_full_pdf"].name,
+                "canonical_output": _portable_path(
+                    targets["forced_full_pdf"], project_root
+                ),
+                "intended_placement": "Main Figure 3 candidate",
+                "authoritative_source_files": [
+                    common_sources["primary_trials"],
+                    common_sources["quality_trial_metrics"],
+                    evidence.authoritative_paths["statistics_manifest"],
+                ],
+                "unit_of_analysis": (
+                    "paired payload-model-protocol trial; nested segment "
+                    "likelihoods are token-weighted within each trial view"
+                ),
+                "sample_size": {
+                    "paired_trials": 1440,
+                    "paired_trials_per_model_protocol_cell": 240,
+                    "model_protocol_cells": 6,
+                    "nested_segments_per_view": 8280,
+                    "unavailable_rows": 0,
+                    "failed_rows": 0,
+                },
+                "models_and_conditions": {
+                    "models": model_ids,
+                    "representation": "hex_nibble",
+                    "protocols": list(SEGMENTED_PROTOCOL_ORDER),
+                    "tail_policy": "dynamic_completion_v1",
+                    "lead_in_tokens": 0,
+                },
+                "estimand": (
+                    "Mean source-model token log probability for forced and full "
+                    "trial views, plus the within-trial full-minus-forced paired "
+                    "difference"
+                ),
+                "uncertainty_definition": (
+                    "2,000-resample paired equal-weight payload-name percentile-"
+                    "bootstrap 95% confidence intervals"
+                ),
+                "principal_result": {
+                    "overall_forced_span_mean_log_probability": forced_mean,
+                    "overall_full_message_mean_log_probability": full_mean,
+                    "overall_mean_paired_gain": paired_gain,
+                    "cell_paired_gains": cell_gains,
+                    "summary": (
+                        f"Across 1,440 paired trials, mean log probability rose "
+                        f"from {forced_mean:.6f} for payload-bearing spans to "
+                        f"{full_mean:.6f} for full messages; the mean paired "
+                        f"difference was +{paired_gain:.6f}."
+                    ),
+                },
+                "limitations": [
+                    "Full-message gains mix the unchanged forced span with "
+                    "greedy non-payload tokens.",
+                    "The natural tail adds zero payload ranks and therefore no "
+                    "payload capacity.",
+                    "The primary matrix contains no lead-in condition; lead-in "
+                    "effects remain in the separate exploratory ablation analysis.",
+                ],
+                "continuity_status": "expanded replacement",
+                "evidence_classification": (
+                    "confirmatory retained matrix; paired descriptive estimates"
+                ),
+            },
+            {
+                "original_figure_number": 4,
+                "original_title": (
+                    "Tail-topic quality diagnostic for completed segmented messages"
+                ),
+                "original_scientific_question": (
+                    "Is full-minus-forced tail gain positive across prompt topics, "
+                    "and how does it vary by model and topic schedule?"
+                ),
+                "original_dataset_scope": (
+                    "48 pilot segment messages across five prompt labels with "
+                    "unequal counts from 3 to 27"
+                ),
+                "final_generated_filename": targets["tail_gain_pdf"].name,
+                "canonical_output": _portable_path(
+                    targets["tail_gain_pdf"], project_root
+                ),
+                "intended_placement": (
+                    "Supplementary tail-gain topic analysis"
+                ),
+                "authoritative_source_files": [
+                    common_sources["primary_features"],
+                    evidence.authoritative_paths["topic_schedule_contrasts"],
+                    evidence.authoritative_paths["topic_effects_manifest"],
+                ],
+                "unit_of_analysis": (
+                    "paired segment message; displayed means weight segment "
+                    "messages equally and uncertainty resamples payload/trial clusters"
+                ),
+                "sample_size": {
+                    "paired_segments": 8280,
+                    "segmented_trials": 1440,
+                    "displayed_groups": 36,
+                    "segments_per_group": 230,
+                    "single_topic_payload_clusters_per_group": 40,
+                    "multi_topic_payload_clusters_per_group": 190,
+                    "unavailable_rows": 0,
+                    "failed_rows": 0,
+                },
+                "models_and_conditions": {
+                    "models": model_ids,
+                    "protocols": list(SEGMENTED_PROTOCOL_ORDER),
+                    "prompt_categories": list(TOPIC_CATEGORY_ORDER),
+                    "tail_policy": "dynamic_completion_v1",
+                },
+                "estimand": (
+                    "For each segment, full-message mean token log probability "
+                    "minus forced-span mean token log probability; segment-weighted "
+                    "mean within model-schedule-category group"
+                ),
+                "uncertainty_definition": (
+                    "2,000-resample payload-cluster percentile-bootstrap 95% "
+                    "confidence intervals, stratified by payload class"
+                ),
+                "principal_result": {
+                    "group_tail_gain_mean_min": float(
+                        tail_source["tail_gain_mean"].min()
+                    ),
+                    "group_tail_gain_mean_max": float(
+                        tail_source["tail_gain_mean"].max()
+                    ),
+                    "all_group_means_positive": bool(
+                        (tail_source["tail_gain_mean"] > 0).all()
+                    ),
+                    "summary": (
+                        "All 36 expanded model-schedule-category group means were "
+                        "positive; segment-level mean gains ranged from "
+                        f"{tail_source['tail_gain_mean'].min():.6f} to "
+                        f"{tail_source['tail_gain_mean'].max():.6f}."
+                    ),
+                },
+                "limitations": [
+                    "Single-topic cells contain 40 independent payload/trial "
+                    "clusters whereas multi-topic cells contain 190, despite "
+                    "230 segment messages in every displayed group.",
+                    "Prompt-category rows are descriptive and do not establish a "
+                    "prompt ranking or human naturalness.",
+                    "The adjusted single-topic versus multi-topic analysis uses "
+                    "mixed-model source-quality, artifact, rate, evaluator, and "
+                    "throughput contrasts; it does not estimate segment tail gain.",
+                ],
+                "continuity_status": "expanded replacement; pilot superseded",
+                "evidence_classification": (
+                    "exploratory descriptive subgroup reconstruction"
+                ),
+                "adjusted_topic_analysis_comparison": {
+                    "estimand": (
+                        "model-adjusted multi-topic minus single-topic source-cover "
+                        "mean log probability, not full-minus-forced tail gain"
+                    ),
+                    "source_quality_estimate_range": [
+                        float(adjusted_quality["estimate"].min()),
+                        float(adjusted_quality["estimate"].max()),
+                    ],
+                    "source_quality_holm_p_values": [
+                        float(value)
+                        for value in adjusted_quality["p_value_holm"].tolist()
+                    ],
+                    "new_model_fit_performed": False,
+                    "equivalent_to_tail_gain_figure": False,
+                },
+            },
+        ],
+        "source_hashes": {
+            path: evidence.authoritative_hashes[label]
+            for label, path in evidence.authoritative_paths.items()
+        },
+    }
 
 
 def refresh_evidence_summary_figure_hashes(
@@ -2435,6 +5089,10 @@ def build_core_figures(
     overhead_manifest: str | Path,
     detector_manifest: str | Path,
     ablation_manifest: str | Path,
+    primary_preprocessing_manifest: str | Path | None = None,
+    statistics_manifest: str | Path | None = None,
+    topic_effects_manifest: str | Path | None = None,
+    publication_dir: str | Path | None = None,
     output_dir: str | Path,
     command: str,
     project_root: str | Path = PROJECT_ROOT,
@@ -2444,6 +5102,21 @@ def build_core_figures(
     """Build plots only from hash-validated computational source tables."""
 
     root = Path(project_root).resolve()
+    continuity_arguments = (
+        primary_preprocessing_manifest,
+        statistics_manifest,
+        topic_effects_manifest,
+    )
+    include_continuity = all(value is not None for value in continuity_arguments)
+    if any(value is not None for value in continuity_arguments) and not include_continuity:
+        raise FigureEvidenceError(
+            "Primary preprocessing, statistics, and topic-effect manifests "
+            "must be supplied together for continuity figures"
+        )
+    if publication_dir is not None and not include_continuity:
+        raise FigureEvidenceError(
+            "Publication synchronization requires continuity inputs"
+        )
     if str(root) in command or command.lstrip().startswith("/"):
         raise FigureEvidenceError(
             "Figure generation command must be repository-relative and portable"
@@ -2475,6 +5148,16 @@ def build_core_figures(
     ablation_path = _declared_output(
         ablation, ablation_manifest_path, "contrasts"
     )
+    continuity_evidence = (
+        _load_continuity_evidence(
+            primary_preprocessing_manifest=primary_preprocessing_manifest,
+            statistics_manifest=statistics_manifest,
+            topic_effects_manifest=topic_effects_manifest,
+            project_root=root,
+        )
+        if include_continuity
+        else None
+    )
 
     _configure_style()
     robustness_full = _robustness_source(robustness_path)
@@ -2491,13 +5174,48 @@ def build_core_figures(
         "detector_source": detector_full,
         "ablation_source": _ablation_source(ablation_path),
     }
+    if continuity_evidence is not None:
+        sources.update(
+            {
+                "payload_rank_source": _payload_rank_source(
+                    continuity_evidence
+                ),
+                "capacity_frontier_source": _capacity_frontier_source(
+                    continuity_evidence
+                ),
+                "forced_full_source": _forced_full_source(
+                    continuity_evidence
+                ),
+                "tail_gain_source": _tail_gain_source(continuity_evidence),
+            }
+        )
     output_path = Path(output_dir).resolve()
     _portable_path(output_path, root)
     output_path.mkdir(parents=True, exist_ok=True)
+    output_filenames = dict(OUTPUT_FILENAMES)
+    if include_continuity:
+        output_filenames.update(CONTINUITY_OUTPUT_FILENAMES)
     targets = {
-        key: output_path / filename for key, filename in OUTPUT_FILENAMES.items()
+        key: output_path / filename for key, filename in output_filenames.items()
     }
+    publication_path: Path | None = None
+    publication_targets: dict[str, Path] = {}
+    handoff_target: Path | None = None
+    if publication_dir is not None:
+        publication_path = Path(publication_dir).resolve()
+        _portable_path(publication_path, root)
+        publication_path.mkdir(parents=True, exist_ok=True)
+        publication_targets = {
+            key: publication_path / targets[key].name
+            for key in PUBLICATION_PDF_KEYS
+        }
+        handoff_target = publication_path / CONTINUITY_HANDOFF_FILENAME
     existing = [path for path in targets.values() if path.exists()]
+    existing.extend(
+        path for path in publication_targets.values() if path.exists()
+    )
+    if handoff_target is not None and handoff_target.exists():
+        existing.append(handoff_target)
     if existing and not overwrite:
         raise FigureEvidenceError(
             "Refusing to overwrite figure outputs: "
@@ -2523,7 +5241,24 @@ def build_core_figures(
         "detector": _plot_detectors(sources["detector_source"]),
         "ablation": _plot_ablation(sources["ablation_source"]),
     }
-    _validate_figure_presentation(figures)
+    if include_continuity:
+        figures.update(
+            {
+                "payload_rank": _plot_payload_rank(
+                    sources["payload_rank_source"]
+                ),
+                "capacity_frontier": _plot_capacity_frontier(
+                    sources["capacity_frontier_source"]
+                ),
+                "forced_full": _plot_forced_full(
+                    sources["forced_full_source"]
+                ),
+                "tail_gain": _plot_tail_gain(sources["tail_gain_source"]),
+            }
+        )
+    _validate_figure_presentation(
+        figures, include_continuity=include_continuity
+    )
     try:
         for name, figure in figures.items():
             _atomic_save_figure(figure, targets[f"{name}_pdf"])
@@ -2531,6 +5266,33 @@ def build_core_figures(
     finally:
         for figure in figures.values():
             plt.close(figure)
+    publication_copy_entries: dict[str, dict[str, Any]] = {}
+    if publication_targets:
+        for key, publication_target in publication_targets.items():
+            _atomic_copy_file(targets[key], publication_target)
+            canonical_hash = file_sha256(targets[key])
+            publication_hash = file_sha256(publication_target)
+            if canonical_hash != publication_hash:
+                raise FigureEvidenceError(
+                    f"Publication copy is not byte-identical: {publication_target}"
+                )
+            publication_copy_entries[key] = {
+                "canonical_path": _portable_path(targets[key], root),
+                "publication_path": _portable_path(publication_target, root),
+                "sha256": canonical_hash,
+                "byte_identical": True,
+            }
+        if handoff_target is None or continuity_evidence is None:
+            raise FigureEvidenceError(
+                "Publication continuity handoff target was not initialized"
+            )
+        handoff = _continuity_handoff(
+            evidence=continuity_evidence,
+            sources=sources,
+            targets=targets,
+            project_root=root,
+        )
+        _atomic_write_json(handoff, handoff_target)
     _atomic_write_text(command.rstrip() + "\n", targets["commands"])
 
     upstream_paths = {
@@ -2542,22 +5304,33 @@ def build_core_figures(
         "detector_metrics": _portable_path(detector_metrics_path, root),
         "ablation": _portable_path(ablation_path, root),
     }
+    validation_upstream_paths = dict(upstream_paths)
+    if continuity_evidence is not None:
+        validation_upstream_paths.update(
+            continuity_evidence.authoritative_paths
+        )
     notes = _technical_notes(upstream_paths, sources["ablation_source"])
     for key, value in notes.items():
         _atomic_write_text(value, targets[key])
-    inventory = _figure_inventory(targets, root)
+    inventory = _figure_inventory(
+        targets, root, include_continuity=include_continuity
+    )
     _atomic_write_csv(inventory, targets["inventory"])
 
-    figure_specs = _figure_specs()
+    figure_specs = _figure_specs(include_continuity=include_continuity)
     validation = {
-        "schema_version": "rankcloak-computational-figure-validation-v2",
+        "schema_version": (
+            "rankcloak-computational-figure-validation-v3"
+            if include_continuity
+            else "rankcloak-computational-figure-validation-v2"
+        ),
         "status": "passed",
         "authoritative_upstream_sources": {
             label: {
                 "path": path,
                 "sha256": file_sha256(root / path),
             }
-            for label, path in upstream_paths.items()
+            for label, path in validation_upstream_paths.items()
         },
         "source_tables": {
             key: {
@@ -2581,6 +5354,7 @@ def build_core_figures(
                 ),
                 "evidence_status": spec["evidence_status"],
                 "classification": spec["classification"],
+                "intended_placement": spec["intended_placement"],
                 "uncertainty": spec["uncertainty"],
             }
             for figure_id, spec in figure_specs.items()
@@ -2597,19 +5371,61 @@ def build_core_figures(
             "capacity_marker_displacement_applied": False,
             "absolute_local_paths_emitted": False,
             "pdf_primary_png_300dpi_secondary": True,
+            "continuity_source_records_hash_validated": bool(
+                continuity_evidence is not None
+            )
+            if include_continuity
+            else True,
+            "continuity_primary_scope_has_zero_failures": (
+                continuity_evidence.failure_rows == 0
+                if continuity_evidence is not None
+                else True
+            ),
+            "continuity_primary_scope_has_zero_unavailable_rows": (
+                continuity_evidence.unavailable_rows == 0
+                if continuity_evidence is not None
+                else True
+            ),
+            "forced_full_pairing_validated": (
+                len(sources.get("forced_full_source", ())) == 18
+                if include_continuity
+                else True
+            ),
+            "segment_tail_gain_pairing_validated": (
+                len(sources.get("tail_gain_source", ())) == 36
+                if include_continuity
+                else True
+            ),
+            "empirical_frontier_not_labeled_as_theory_identity": True,
+            "adjusted_topic_contrast_not_labeled_as_tail_gain": True,
+            "publication_pdf_copies_byte_identical": all(
+                entry["byte_identical"]
+                for entry in publication_copy_entries.values()
+            ),
         },
     }
     _atomic_write_json(validation, targets["validation"])
 
     summary = {
-        "figure_count": 9,
-        "rendered_file_count": 18,
-        "source_table_count": 9,
+        "figure_count": len(figure_specs),
+        "rendered_file_count": 2 * len(figure_specs),
+        "source_table_count": len(sources),
         "technical_note_count": 6,
-        "inventory_row_count": 9,
+        "inventory_row_count": len(figure_specs),
     }
+    if include_continuity:
+        summary.update(
+            {
+                "publication_copy_count": len(publication_copy_entries),
+                "structured_handoff_count": int(handoff_target is not None),
+            }
+        )
     manifest: dict[str, Any] = {
-        "schema_version": "rankcloak-computational-figure-evidence-v2",
+        "schema_version": (
+            "rankcloak-computational-figure-evidence-v3"
+            if include_continuity
+            else "rankcloak-computational-figure-evidence-v2"
+        ),
         "status": "passed",
         "inputs": {
             "robustness_manifest": {
@@ -2659,7 +5475,45 @@ def build_core_figures(
             "Parent package manifests may retain sealed historical absolute-path provenance; "
             "this figure manifest and all new figure-related references are repository-relative."
         ),
+        "continuity_figures_included": include_continuity,
     }
+    if include_continuity:
+        primary_path = Path(primary_preprocessing_manifest).resolve()
+        statistics_path = Path(statistics_manifest).resolve()
+        topic_path = Path(topic_effects_manifest).resolve()
+        manifest["inputs"].update(
+            {
+                "primary_preprocessing_manifest": {
+                    "path": _portable_path(primary_path, root),
+                    "sha256": file_sha256(primary_path),
+                },
+                "statistics_manifest": {
+                    "path": _portable_path(statistics_path, root),
+                    "sha256": file_sha256(statistics_path),
+                },
+                "topic_effects_manifest": {
+                    "path": _portable_path(topic_path, root),
+                    "sha256": file_sha256(topic_path),
+                },
+            }
+        )
+        manifest["continuity_scope"] = {
+            "primary_trial_rows": continuity_evidence.primary_trial_rows,
+            "primary_feature_rows": continuity_evidence.primary_feature_rows,
+            "failure_rows": continuity_evidence.failure_rows,
+            "unavailable_rows": continuity_evidence.unavailable_rows,
+            "original_figures_mapped": [1, 2, 3, 4],
+            "original_pilot_values_reused": False,
+            "new_generation_or_model_fitting_performed": False,
+        }
+    if publication_copy_entries:
+        manifest["publication_copies"] = publication_copy_entries
+    if handoff_target is not None:
+        manifest["continuity_handoff"] = {
+            "path": _portable_path(handoff_target, root),
+            "sha256": file_sha256(handoff_target),
+            "size_bytes": handoff_target.stat().st_size,
+        }
     if generator_sources:
         manifest["inputs"]["generator_sources"] = {
             label: {
@@ -2680,10 +5534,11 @@ def build_core_figures(
             entry["row_count"] = len(sources[key])
         manifest["outputs"][key] = entry
     for figure_id, spec in figure_specs.items():
-        manifest["figures"][figure_id] = {
+        figure_entry = {
             "title": spec["title"],
             "classification": spec["classification"],
             "evidence_status": spec["evidence_status"],
+            "intended_placement": spec["intended_placement"],
             "panel_count": spec["panel_count"],
             "plotted_row_count": spec["plotted_row_count"],
             "width_mm": 180.0,
@@ -2696,12 +5551,31 @@ def build_core_figures(
             "plotted_source_csv": _portable_path(
                 targets[spec["source_key"]], root
             ),
-            "technical_note": _portable_path(targets[spec["note_key"]], root),
         }
+        if spec["note_key"]:
+            figure_entry["technical_note"] = _portable_path(
+                targets[spec["note_key"]], root
+            )
+        elif handoff_target is not None:
+            figure_entry["structured_handoff"] = _portable_path(
+                handoff_target, root
+            )
+        manifest["figures"][figure_id] = figure_entry
     manifest["manifest_sha256"] = canonical_json_sha256(manifest)
     _atomic_write_json(manifest, targets["manifest"])
+    artifact_files = {
+        key: str(path.resolve()) for key, path in targets.items()
+    }
+    artifact_files.update(
+        {
+            f"publication_{key}": str(path.resolve())
+            for key, path in publication_targets.items()
+        }
+    )
+    if handoff_target is not None:
+        artifact_files["continuity_handoff"] = str(handoff_target.resolve())
     return FigureArtifacts(
         output_dir=str(output_path.resolve()),
-        files={key: str(path.resolve()) for key, path in targets.items()},
+        files=artifact_files,
         summary=summary,
     )
