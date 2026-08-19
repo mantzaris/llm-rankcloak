@@ -1,0 +1,99 @@
+\relax 
+\providecommand\babel@aux[2]{}
+\@nameuse{bbl@beforestart}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{naturemag-doi}
+\citation{NorelliBronstein2026Calgacus}
+\citation{Simmons1984Prisoners,Cachin1998InformationTheoretic,Hopper2002ProvablySecureSteganography,Petitcolas1999InformationHidingSurvey}
+\citation{Fang2017GeneratingSteganographicTextLSTMs,Yang2019RNNStega,Ziegler2019NeuralLinguisticSteganography,DaiCai2019NearImperceptible,Shen2020SelfAdjustingArithmetic,Zhang2021ProvablySecureGenerative,Wang2025DAIRStega,Wu2024GenerativeTextSteganographyLLM,Lin2024ZeroShotGLS}
+\citation{Kirchenbauer2023WatermarkLLM}
+\citation{Wayner1992MimicFunctions,Wayner1995StrongTheoreticalSteganography}
+\citation{ChapmanDavida1997HidingHidden,Bennett2004LinguisticSteganography}
+\citation{ChangClark2014PracticalLinguisticSteganography}
+\citation{Weinberg2012StegoTorus,Dyer2013FormatTransformingEncryption}
+\citation{Zander2007CovertChannelsCountermeasures,Badar2025StegomalwareSurvey}
+\citation{Wen2019CNNTextSteganalysis,Wu2021GNNLinguisticSteganalysis,Wang2023FewShotLinguisticSteganalysis,Gehrmann2019GLTR,Mitchell2023DetectGPT,Sadasivan2025AIDetection}
+\citation{Motwani2024SecretCollusion,Zolkowski2026EarlySigns}
+\babel@aux{english}{}
+\newlabel{sec:introduction}{{}{1}{}{Doc-Start}{}}
+\citation{NIST2015SecureHashStandard,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}
+\citation{Sennrich2016SubwordUnits,KudoRichardson2018SentencePiece}
+\citation{YanMurawaki2025TokenizationInconsistency}
+\citation{NorelliBronstein2026Calgacus}
+\newlabel{sec:methods}{{}{2}{}{Doc-Start}{}}
+\citation{NorelliBronstein2026Calgacus}
+\newlabel{sec:rank-method}{{}{3}{}{Doc-Start}{}}
+\newlabel{eq:next-token-prob}{{1}{3}{}{equation.0.1}{}}
+\newlabel{eq:rank-order}{{2}{3}{}{equation.0.2}{}}
+\newlabel{eq:rank-function}{{3}{3}{}{equation.0.3}{}}
+\newlabel{sec:calgacus-method}{{}{4}{}{equation.0.3}{}}
+\newlabel{eq:calgacus-rank-transcoding}{{4}{4}{}{equation.0.4}{}}
+\newlabel{sec:payload-method}{{}{4}{}{equation.0.4}{}}
+\newlabel{eq:rankcloak-codec}{{5}{4}{}{equation.0.5}{}}
+\newlabel{eq:rankcloak-nonseg}{{6}{4}{}{equation.0.6}{}}
+\newlabel{eq:codec-exact-recovery}{{7}{4}{}{equation.0.7}{}}
+\newlabel{eq:hex-nibble-map}{{8}{4}{}{equation.0.8}{}}
+\newlabel{eq:ascii-radix-map}{{9}{5}{}{equation.0.9}{}}
+\newlabel{eq:filtered-rank}{{10}{5}{}{equation.0.10}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Non-segmented RankCloak bounded-codec trial for encoding a displayed synthetic artifact as ranks, generating one cover token per rank, and recovering by exact-copy replay.}}{6}{algorithm.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{alg:nonseg}{{1}{6}{Non-segmented RankCloak bounded-codec trial for encoding a displayed synthetic artifact as ranks, generating one cover token per rank, and recovering by exact-copy replay}{algorithm.1}{}}
+\newlabel{sec:encoding-method}{{}{6}{}{algorithm.1}{}}
+\newlabel{eq:rank-segmentation}{{11}{6}{}{equation.0.11}{}}
+\newlabel{eq:segmented-forced-span}{{12}{7}{}{equation.0.12}{}}
+\newlabel{eq:segmented-message}{{13}{7}{}{equation.0.13}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Segmented multi-cover RankCloak trial for distributing a hex-nibble payload across payload-bearing forced spans with non-payload natural tails.}}{8}{algorithm.2}\protected@file@percent }
+\newlabel{alg:segmented}{{2}{8}{Segmented multi-cover RankCloak trial for distributing a hex-nibble payload across payload-bearing forced spans with non-payload natural tails}{algorithm.2}{}}
+\citation{NIST2015SecureHashStandard,Krawczyk1997RFC2104,NIST2007GCM,NirLangley2018RFC8439,JosefssonLiusvaara2017RFC8032,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}
+\citation{Flesch1948Readability}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Greedy natural-tail policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder.}}{9}{algorithm.3}\protected@file@percent }
+\newlabel{alg:tail}{{3}{9}{Greedy natural-tail policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder}{algorithm.3}{}}
+\newlabel{sec:design-method}{{}{9}{}{algorithm.3}{}}
+\newlabel{sec:quality-method}{{}{9}{}{algorithm.3}{}}
+\citation{YanMurawaki2025TokenizationInconsistency}
+\citation{Wilson1927Interval}
+\newlabel{sec:replay-method}{{}{10}{}{algorithm.3}{}}
+\newlabel{sec:capacity-method}{{}{10}{}{algorithm.3}{}}
+\newlabel{sec:endpoint-method}{{}{10}{}{algorithm.3}{}}
+\newlabel{eq:capacity}{{14}{10}{}{equation.0.14}{}}
+\newlabel{eq:effective-rate}{{15}{10}{}{equation.0.15}{}}
+\newlabel{eq:quality-bound}{{16}{10}{}{equation.0.16}{}}
+\citation{Kim2014CNN,Wen2019CNNTextSteganalysis}
+\citation{He2021DeBERTa}
+\citation{Efron1979Bootstrap}
+\citation{Bates2015lme4,Brooks2017glmmTMB}
+\newlabel{sec:detector-method}{{}{11}{}{equation.0.16}{}}
+\newlabel{sec:statistics-method}{{}{11}{}{equation.0.16}{}}
+\newlabel{sec:results}{{}{11}{}{equation.0.16}{}}
+\newlabel{sec:results-recovery}{{}{11}{}{equation.0.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \textbf  {Evaluation design and recovery endpoints.} Confidence intervals are trial- or group-level Wilson 95\% intervals as identified. Recovery requires saved-token exact-copy replay with the declared shared configuration. Unavailable work units are configuration/retained-output absences, not observed decoding failures.}}{12}{table.caption.1}\protected@file@percent }
+\newlabel{tab:design-recovery}{{1}{12}{\textbf {Evaluation design and recovery endpoints.} Confidence intervals are trial- or group-level Wilson 95\% intervals as identified. Recovery requires saved-token exact-copy replay with the declared shared configuration. Unavailable work units are configuration/retained-output absences, not observed decoding failures}{table.caption.1}{}}
+\newlabel{sec:results-capacity}{{}{12}{}{table.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Payload representation, rank pressure, and capacity tradeoff.} Direct-subword symbol counts and rank pressure are summarized for 1,440 payload model observations comprising 60,861 direct-rank positions, their values are tokenizer and model dependent. Bounded codecs constrain requested ranks to at most 8 or 16, at the cost of more forced positions. Effective artifact-rate comparisons use the four-class common hexadecimal support and are descriptive rather than cryptographic-security capacities. Whiskers show observed 5th to the 95th percentiles, not confidence intervals.}}{13}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:capacity}{{1}{13}{\textbf {Payload representation, rank pressure, and capacity tradeoff.} Direct-subword symbol counts and rank pressure are summarized for 1,440 payload model observations comprising 60,861 direct-rank positions, their values are tokenizer and model dependent. Bounded codecs constrain requested ranks to at most 8 or 16, at the cost of more forced positions. Effective artifact-rate comparisons use the four-class common hexadecimal support and are descriptive rather than cryptographic-security capacities. Whiskers show observed 5th to the 95th percentiles, not confidence intervals}{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textbf  {Empirical capacity-quality frontier.} Mean token count is shown against mean source-model token log probability for 4,320 trials on four-class common hexadecimal support, spanning three models, six protocols, 18 model protocol cells, and 36 forced-span or full-message cells. Higher mean token log probability is better, point area represents mean automated surface-flag burden. Error bars are 2,000-resample payload-bootstrap 95\% confidence intervals. The primary matrix contains no lead-in condition. Likelihood and surface flags are automated diagnostics, not human judgments, and this empirical frontier is distinct from the theoretical capacity-tail validation in Supplementary Fig. S6.}}{14}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:empirical-frontier}{{2}{14}{\textbf {Empirical capacity-quality frontier.} Mean token count is shown against mean source-model token log probability for 4,320 trials on four-class common hexadecimal support, spanning three models, six protocols, 18 model protocol cells, and 36 forced-span or full-message cells. Higher mean token log probability is better, point area represents mean automated surface-flag burden. Error bars are 2,000-resample payload-bootstrap 95\% confidence intervals. The primary matrix contains no lead-in condition. Likelihood and surface flags are automated diagnostics, not human judgments, and this empirical frontier is distinct from the theoretical capacity-tail validation in Supplementary Fig. S6}{figure.caption.3}{}}
+\newlabel{sec:results-robustness}{{}{14}{}{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {Exact-copy fragility.} Recovery proportions and Wilson 95\% intervals are shown for the principal replay and transmission conditions. Saved token IDs preserve the strongest replay contract of visible-text detokenization/retokenization already reduces recovery. NFKC normalization, quote conversion, and trimming reduce it further, while markdown copy/paste, paraphrase, and cross-model decoding yield no successful payloads. Final-10\%-tail truncation removes only declared non-payload tail tokens and must not be interpreted as arbitrary truncation tolerance. The full transformation matrix, denominators, limited canonicalization cells, and first-divergence diagnostics appear in Supplementary Figure S1 and Supplementary Note S4.}}{15}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:robustness}{{3}{15}{\textbf {Exact-copy fragility.} Recovery proportions and Wilson 95\% intervals are shown for the principal replay and transmission conditions. Saved token IDs preserve the strongest replay contract of visible-text detokenization/retokenization already reduces recovery. NFKC normalization, quote conversion, and trimming reduce it further, while markdown copy/paste, paraphrase, and cross-model decoding yield no successful payloads. Final-10\%-tail truncation removes only declared non-payload tail tokens and must not be interpreted as arbitrary truncation tolerance. The full transformation matrix, denominators, limited canonicalization cells, and first-divergence diagnostics appear in Supplementary Figure S1 and Supplementary Note S4}{figure.caption.4}{}}
+\newlabel{sec:results-quality}{{}{15}{}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textbf  {Forced span versus full message.} Mean token log probability is paired within 1,440 segmented trials across three models and single-topic or multi-topic schedules, with 240 trials per model schedule cell. Error bars are 2,000-resample paired payload-bootstrap 95\% confidence intervals; all six intervals for the full-minus-forced gain exclude zero. Natural tails contain no payload ranks and add no payload capacity, so the improved full-message average is not an improvement to the payload-bearing forced span.}}{16}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:forced-full}{{4}{16}{\textbf {Forced span versus full message.} Mean token log probability is paired within 1,440 segmented trials across three models and single-topic or multi-topic schedules, with 240 trials per model schedule cell. Error bars are 2,000-resample paired payload-bootstrap 95\% confidence intervals; all six intervals for the full-minus-forced gain exclude zero. Natural tails contain no payload ranks and add no payload capacity, so the improved full-message average is not an improvement to the payload-bearing forced span}{figure.caption.5}{}}
+\newlabel{sec:results-ablations}{{}{16}{}{figure.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces \textbf  {Compact reviewer-requested analysis and operational summary.} Differences are level minus canonical unless otherwise stated. Ablation and topic rows are a locked exploratory/post-outcome extraction from retained analyses; no new model was fit. Reviewer-relevant ablations, complete topic rows, availability, and timing cells are in the Supplementary Information; the full 60-row contrast table remains machine-readable in the repository.}}{17}{table.caption.6}\protected@file@percent }
+\newlabel{tab:reviewer-analyses}{{2}{17}{\textbf {Compact reviewer-requested analysis and operational summary.} Differences are level minus canonical unless otherwise stated. Ablation and topic rows are a locked exploratory/post-outcome extraction from retained analyses; no new model was fit. Reviewer-relevant ablations, complete topic rows, availability, and timing cells are in the Supplementary Information; the full 60-row contrast table remains machine-readable in the repository}{table.caption.6}{}}
+\newlabel{sec:results-detector}{{}{17}{}{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \textbf  {Neural detectability.} Matched ROC-AUC and balanced accuracy are shown with payload-group bootstrap 95\% confidence intervals; held-out-template, leave-one-model, and leave-one-codec results are summarized as ranges across frozen splits. Higher performance is adverse for RankCloak concealment because it indicates that covers are distinguishable from matched controls. Both classifiers completed all 28 regimes. Exact identity leakage checks passed, but a declared lexical near-duplicate diagnostic affected 16 splits; exclusion sensitivity produced small observed changes without eliminating that limitation. The full six-panel view and exploratory precision, Brier, low-false-positive, leakage, and repeatability results appear in Supplementary Figure S5.}}{18}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:detector}{{5}{18}{\textbf {Neural detectability.} Matched ROC-AUC and balanced accuracy are shown with payload-group bootstrap 95\% confidence intervals; held-out-template, leave-one-model, and leave-one-codec results are summarized as ranges across frozen splits. Higher performance is adverse for RankCloak concealment because it indicates that covers are distinguishable from matched controls. Both classifiers completed all 28 regimes. Exact identity leakage checks passed, but a declared lexical near-duplicate diagnostic affected 16 splits; exclusion sensitivity produced small observed changes without eliminating that limitation. The full six-panel view and exploratory precision, Brier, low-false-positive, leakage, and repeatability results appear in Supplementary Figure S5}{figure.caption.7}{}}
+\newlabel{sec:results-overhead}{{}{18}{}{figure.caption.7}{}}
+\newlabel{sec:discussion}{{}{18}{}{figure.caption.7}{}}
+\bibdata{references}
+\newlabel{sec:limitations}{{}{19}{}{figure.caption.7}{}}
+\newlabel{sec:data-code}{{}{19}{}{figure.caption.7}{}}
+\ttl@finishall
+\newlabel{LastPage}{{}{20}{}{page.20}{}}
+\gdef\lastpage@lastpage{20}
+\gdef\lastpage@lastpageHy{20}
+\gdef \@abspage@last{20}
