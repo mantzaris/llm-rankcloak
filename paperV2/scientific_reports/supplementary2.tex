@@ -31,7 +31,7 @@
 \affil[*]{Correspondence: alexander.mantzaris@ucf.edu}
 
 \begin{abstract}
-This Supplementary Information supports the extended RankCloak methods and the evidence produced supporting the revised manuscript. It specifies deterministic rank ordering, payload codecs, segmented forced spans, replay contracts, filtering, corpus construction, prompt and model identities, and work-unit accounting. It reports recovery strata, multilingual secondary tests, controlled transmission perturbations, automated readability and model-based quality diagnostics, reviewer-relevant ablation contrasts and all topic contrasts, neural detector splits and leakage sensitivity, capacity-quality relationships, computational overhead, and worked examples. Evidence classifications and unresolved boundaries are retained explicitly. The material does not include human evaluation, deployment validation, broad multilingual naturalness evidence, cryptographic-security proof, or a claim of robust visible-text transmission.
+This Supplementary Information supports the extended RankCloak methods and the evidence produced supporting the revised manuscript. It specifies deterministic rank ordering, payload codecs, segmented forced spans, replay contracts, filtering, corpus construction, prompt and model identities, and work-unit accounting. It reports recovery strata, multilingual secondary tests, controlled transmission perturbations, automated readability and model-based quality diagnostics, reviewer-relevant ablation contrasts and all topic contrasts, neural detector splits and leakage sensitivity, capacity and quality relationships, computational overhead, and worked examples. Evidence classifications and unresolved boundaries are retained explicitly. The material does not include human evaluation, deployment validation, broad multilingual naturalness evidence, cryptographic-security proof, or a claim of robust visible-text transmission.
 \end{abstract}
 
 \begin{document}
@@ -47,7 +47,7 @@ The main Methods contains the rank definition, Calgacus transformation, complete
 
 The direct-subword arm tokenizes the original UTF-8 payload bytes with special-token insertion disabled and computes its ranks under the model's empty/BOS payload context. A preflight detokenizes the token sequence and requires the original payload bytes to be an exact suffix. The only accepted extra bytes are an explicitly retained leading-space prefix; the record stores its byte length, base64 value, and SHA-256 digest. A non-space prefix, any suffix transformation, or any payload-byte mismatch makes the representation unavailable before cover generation. During inverse transcoding, recovered ranks regenerate the payload-side token IDs, the saved prefix is removed only after exact prefix verification, and the recovered bytes and digest must equal the original. This framing correction prevents tokenization-level equality from being mistaken for recovery of the declared artifact.
 
-For the ASCII \(B=8\) and \(B=16\) conditions, metadata stores the alphabet size, bits per symbol, exact source-byte length, and the number of zero bits appended at the end of the complete serialized bitstream. The decoder validates every recovered rank, reconstructs the padded bitstream, removes only the recorded terminal padding, and returns exactly the declared number of bytes. The \(B=8\) codec therefore uses \(\lceil8m/3\rceil\) ranks for \(m\) serialized bytes rather than independently padding each byte to three radix-8 digits. The hexadecimal condition records the exact canonical character length and rejects ranks outside 1-16. It is never applied to base64 or hyphenated UUID text.
+For the ASCII \(B=8\) and \(B=16\) conditions, metadata stores the alphabet size, bits per symbol, exact source-byte length, and the number of zero bits appended at the end of the complete serialized bitstream. The decoder validates every recovered rank, reconstructs the padded bitstream, removes only the recorded terminal padding, and returns exactly the declared number of bytes. The \(B=8\) codec therefore uses \(\lceil8m/3\rceil\) ranks for \(m\) serialized bytes rather than independently padding each byte to three radix-8 digits. The hexadecimal condition records the exact canonical character length and rejects ranks outside 1 to 16. It is never applied to base64 or hyphenated UUID text.
 
 \subsection*{Candidate masks and deterministic ordering}
 
@@ -61,12 +61,12 @@ Each segment record stores its rank slice, prompt identity and tokenized context
 
 A lead-in is a serial rank-1 prefix generated before a forced span. Saved-token replay supplies those exact IDs;\, the separate greedy-lead-in mode regenerates them and checks equality before decoding. Because a lead-in changes every forced-token history, it is not interchangeable with a tail. Lead-in lengths 2, 4, 8, 16, and 32 were compared with the no-lead-in condition.
 
-The fixed 20-60 token sentence-tail policy is Algorithm 3 in the main Methods. The completed study also froze \code{dynamic_completion_v1}, after at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced parentheses, brackets, braces, and quotation marks, and no declared trailing connective or punctuation fragment. Reaching 256 tokens without satisfying the rule is an explicitly censored emergency stop. The ablation compares dynamic stopping with the fixed sentence-tail policy and with no tail. Every tail token retains the role \code{tail} and is excluded from rank reconstruction.
+The fixed sentence-tail policy of 20 to 60 tokens is Algorithm 3 in the main Methods. The completed study also froze \code{dynamic_completion_v1}. After at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced parentheses, brackets, braces, and quotation marks, and no declared trailing connective or punctuation fragment. Reaching 256 tokens without satisfying the rule is an explicitly censored emergency stop. The ablation compares dynamic stopping with the fixed sentence-tail policy and with no tail. Every tail token retains the role \code{tail} and is excluded from rank reconstruction.
 
 \subsection*{Replay modes and structured endpoints}
 
-The main Algorithms 1 and 2 define saved-token exact-copy recovery. Detokenized-text replay instead renders the complete visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic, it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step. Cross-model replay uses a different declared model/tokenizer pair.
-For every mode, the record distinguishes exact forced-rank replay, exact representation recovery, and exact serialized-payload recovery. The primary endpoint requires the last of these, including byte length and SHA-256 identity. Failures retain the first segment and forced position where available, expected and observed token IDs and ranks, the context digest, and boundary offsets. Payload-group and model--payload-group endpoints require all constituent trials to pass. Natural tails never enter any recovery endpoint.
+The main Algorithms 1 and 2 define saved-token exact-copy recovery. Detokenized-text replay instead renders the complete visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic; it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step. Cross-model replay uses a different declared model/tokenizer pair.
+For every mode, the record distinguishes exact forced-rank replay, exact representation recovery, and exact serialized-payload recovery. The primary endpoint requires the last of these, including byte length and SHA-256 identity. Failures retain the first segment and forced position where available, expected and observed token IDs and ranks, the context digest, and boundary offsets. Payload group and model by payload group endpoints require all constituent trials to pass. Natural tails never enter any recovery endpoint.
 
 \section*{Supplementary Note S2: Corpus, models, prompts, and work-unit accounting}\label{si:s2}
 
@@ -87,7 +87,7 @@ Deterministic nonce & 60 & 96-bit nonce serialization \\
 128-bit token & 60 & Deterministically generated lowercase hexadecimal token \\
 UUIDv4 & 60 & Standards-conforming version/variant bits and canonical UUID display \\
 AES-256-GCM & 60 & Base64 serialization of deterministic authenticated-encryption output \\
-ChaCha20--Poly1305 & 60 & Base64 serialization of deterministic AEAD output \\
+ChaCha20-Poly1305 & 60 & Base64 serialization of deterministic AEAD output \\
 Ed25519 signature & 60 & Base64 serialization of a deterministic signature test output \\
 \bottomrule
 \end{tabularx}
@@ -197,7 +197,7 @@ Hex nibble, segmented multi-topic & 720 & 720 & Forced spans decoded; tails igno
 \caption{\label{tab:primary-strata}Primary recovery by model and protocol. Every row uses the same exact serialized-payload endpoint. These overlapping summaries are descriptive strata, not additional independent trials.}
 \end{table}
 
-At the frozen trial endpoint, 6,480/6,480 trials recovered, with Wilson 95\% CI [0.9994075335, 1.0000000000]. At the strict payload endpoint, a payload passed only when every observed model, prompt, and protocol trial passed: 480/480, CI [0.9920605009, 1.0000000000]. At the model payload endpoint, the result was 1,440/1,440, CI [0.9973394178, 1.0000000000]. Exact rank replay was retained as a diagnostic; the confirmatory outcome was the original serialized payload bytes and digest.
+At the frozen trial endpoint, 6,480/6,480 trials recovered, with Wilson 95\% CI [0.9994075335, 1.0000000000]. At the strict payload endpoint, a payload passed only when every observed model, prompt, and protocol trial passed: 480/480, CI [0.9920605009, 1.0000000000]. At the endpoint grouped by model and payload, the result was 1,440/1,440, CI [0.9973394178, 1.0000000000]. Exact rank replay was retained as a diagnostic; the confirmatory outcome was the original serialized payload bytes and digest.
 
 \begin{table}[H]
 \centering
@@ -206,12 +206,12 @@ At the frozen trial endpoint, 6,480/6,480 trials recovered, with Wilson 95\% CI 
 \toprule
 Language & Trial success & Payload-group success & Trial Wilson 95\% CI & Scope \\
 \midrule
-Spanish & 288/288 & 48/48 & 0.986837-1.000000 & Secondary saved-token exact-copy recovery \\
-Simplified Chinese & 288/288 & 48/48 & 0.986837-1.000000 & Secondary saved-token exact-copy recovery \\
+Spanish & 288/288 & 48/48 & [0.986837, 1.000000] & Secondary saved-token exact-copy recovery \\
+Simplified Chinese & 288/288 & 48/48 & [0.986837, 1.000000] & Secondary saved-token exact-copy recovery \\
 Combined & 576/576 & 96/96 & Descriptive combined total & No human naturalness or broad multilingual inference \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:multilingual}Secondary multilingual recovery. Each language's payload-group Wilson interval is 0.925900--1.000000.}
+\caption{\label{tab:multilingual}Secondary multilingual recovery. Each language's payload-group Wilson interval is [0.925900, 1.000000].}
 \end{table}
 
 These results do not test translation, code switching, cross-language decoding, or native-speaker judgments. They also remain conditional on the same model/tokenizer artifacts and exact saved tokens. The GGUF artifacts are absent from the current checkout; consequently the retained results can be integrity-checked against their manifests, but fresh generation or rank replay cannot be reproduced locally from this checkout alone.
@@ -235,25 +235,25 @@ Family/replay & Condition & Success & Total & Wilson 95\% CI \\
 Family/replay & Condition & Success & Total & Wilson 95\% CI \\
 \midrule
 \endhead
-Replay: saved IDs & Unmodified & 144 & 144 & 0.974016-1.000000 \\
-Replay: detokenize/retokenize & Unmodified & 88 & 144 & 0.529589-0.686859 \\
-Replay: greedy lead-in regeneration & Unmodified & 144 & 144 & 0.974016-1.000000 \\
-Raw transmission & Unmodified & 144 & 144 & 0.974016-1.000000 \\
-Raw transmission & Final 10\% tail-only truncation & 144 & 144 & 0.974016-1.000000 \\
-Raw transmission & Unicode NFKC & 82 & 144 & 0.487804-0.647476 \\
-Raw transmission & Quote conversion & 56 & 144 & 0.313141-0.470411 \\
-Raw transmission & Token deletion & 34 & 144 & 0.174168-0.311768 \\
-Raw transmission & Whitespace trim & 28 & 144 & 0.138095-0.266672 \\
-Raw transmission & Whitespace collapse & 21 & 144 & 0.097405-0.212667 \\
-Raw transmission & Character deletion & 18 & 144 & 0.080551-0.188937 \\
-Raw transmission & Character insertion & 18 & 144 & 0.080551-0.188937 \\
-Raw transmission & Character substitution & 16 & 144 & 0.069559-0.172872 \\
-Raw transmission & LF-to-CRLF line endings & 16 & 144 & 0.069559-0.172872 \\
-Raw transmission & Markdown blockquote copy/paste & 0 & 144 & 0.000000-0.025984 \\
-Raw transmission & Deterministic paraphrase & 0 & 144 & 0.000000-0.025984 \\
-Cross-model retokenized & Unmodified, two alternate decoders & 0 & 288 outcomes/144 covers & source-cover CI 0.000000-0.025984 \\
-Limited canonicalization & Unmodified & 96 & 96 & 0.961524-1.000000 \\
-Limited canonicalization & Each of six available transformed cells & 0 & 96 per cell & 0.000000-0.038476 \\
+Replay: saved IDs & Unmodified & 144 & 144 & [0.974016, 1.000000] \\
+Replay: detokenize/retokenize & Unmodified & 88 & 144 & [0.529589, 0.686859] \\
+Replay: greedy lead-in regeneration & Unmodified & 144 & 144 & [0.974016, 1.000000] \\
+Raw transmission & Unmodified & 144 & 144 & [0.974016, 1.000000] \\
+Raw transmission & Final 10\% tail-only truncation & 144 & 144 & [0.974016, 1.000000] \\
+Raw transmission & Unicode NFKC & 82 & 144 & [0.487804, 0.647476] \\
+Raw transmission & Quote conversion & 56 & 144 & [0.313141, 0.470411] \\
+Raw transmission & Token deletion & 34 & 144 & [0.174168, 0.311768] \\
+Raw transmission & Whitespace trim & 28 & 144 & [0.138095, 0.266672] \\
+Raw transmission & Whitespace collapse & 21 & 144 & [0.097405, 0.212667] \\
+Raw transmission & Character deletion & 18 & 144 & [0.080551, 0.188937] \\
+Raw transmission & Character insertion & 18 & 144 & [0.080551, 0.188937] \\
+Raw transmission & Character substitution & 16 & 144 & [0.069559, 0.172872] \\
+Raw transmission & LF-to-CRLF line endings & 16 & 144 & [0.069559, 0.172872] \\
+Raw transmission & Markdown blockquote copy/paste & 0 & 144 & [0.000000, 0.025984] \\
+Raw transmission & Deterministic paraphrase & 0 & 144 & [0.000000, 0.025984] \\
+Cross-model retokenized & Unmodified, two alternate decoders & 0 & 288 outcomes/144 covers & source-cover CI [0.000000, 0.025984] \\
+Limited canonicalization & Unmodified & 96 & 96 & [0.961524, 1.000000] \\
+Limited canonicalization & Each of six available transformed cells & 0 & 96 per cell & [0.000000, 0.038476] \\
 \bottomrule
 \end{longtable}
 
@@ -291,7 +291,7 @@ The computational stimulus design selected 504 rows balanced over seven conditio
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/automated_readability.pdf}
-\caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload natural tails. These measures are automated surface properties, not human ratings, evidence of human-perceived naturalness, or substitutes for a participant study, no participant was recruited and no rating was collected.}
+\caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload natural tails. These measures are automated surface properties, not human ratings, evidence of human-perceived naturalness, or substitutes for a participant study; no participant was recruited and no rating was collected.}
 \end{figure}
 
 \begin{table}[H]
@@ -301,16 +301,16 @@ The computational stimulus design selected 504 rows balanced over seven conditio
 \toprule
 Condition & Mean Flesch & Prompt-template bootstrap 95\% CI & Interpretation \\
 \midrule
-Ordinary control & 61.940597 & 54.897042-68.143167 & Automated control reference \\
-Segmented full message & 60.551834 & 56.873661-64.135677 & Forced spans plus non-payload tails \\
+Ordinary control & 61.940597 & [54.897042, 68.143167] & Automated control reference \\
+Segmented full message & 60.551834 & [56.873661, 64.135677] & Forced spans plus non-payload tails \\
 \bottomrule
 \end{tabularx}
 \caption{\label{tab:readability}Principal automated readability rows. The complete figure includes all seven balanced conditions and associated surface diagnostics.}
 \end{table}
 
-Source-model quality supplied 45 protocol/model contrasts; 42 had Holm-adjusted \(p<0.05\), with estimates from -5.298565 to +2.684536. The independently held-out evaluator also supplied 45 contrasts, 42 adjusted \(p<0.05\), from -6.161972 to +3.287497. Signs differed by protocol and model, so there is no universal quality ordering. The source-cover-log-probability and held-out-evaluator mixed models were singular. Their coefficient tables remain diagnostic, no fixed-effects fallback was substituted.
+Source-model quality supplied 45 protocol/model contrasts; 42 had Holm-adjusted \(p<0.05\), with estimates from -5.298565 to +2.684536. The independently held-out evaluator also supplied 45 contrasts, 42 adjusted \(p<0.05\), from -6.161972 to +3.287497. Signs differed by protocol and model, so there is no universal quality ordering. The source-cover-log-probability and held-out-evaluator mixed models were singular. Their coefficient tables remain diagnostic; no fixed-effects fallback was substituted.
 
-The empirical capacity quality frontier shown in Main Fig. 2 contains 4,320 trials restricted to the four payload classes on the common hexadecimal support. Three models and six protocols form 18 model protocol cells; separate forced-span and full-message views yield 36 plotted cells. For every cell, effective artifact bits per forced token use the same artifact information numerator, mean token log probability is reported on the vertical axis, and point area represents mean automated surface-flag burden. Intervals use 2,000 payload-bootstrap resamples. Non-hexadecimal payload classes are excluded by the common-support restriction, and no lead-in condition exists in the complete primary matrix.
+The empirical capacity and quality frontier shown in Main Fig. 2 contains 4,320 trials restricted to the four payload classes on the common hexadecimal support. Three models and six protocols form 18 model and protocol cells; separate forced-span and full-message views yield 36 plotted cells. For every cell, mean token count is reported on the horizontal axis, mean source model token log probability is reported on the vertical axis, and point area represents mean automated surface-flag burden. Intervals use 2,000 payload-bootstrap resamples. Non-hexadecimal payload classes are excluded by the common-support restriction, and no lead-in condition exists in the complete primary matrix.
 Forced-span metrics average only payload-bearing token positions. Full-message metrics additionally include greedy tail positions and can therefore improve as the tail becomes longer even if the forced span is unchanged. Both are reported to avoid treating tail fluency as evidence about the embedded positions.
 The human-study status manifest records recruitment authorized = false, survey deployed = false, participants = 0, and ratings = 0. Planning materials are retained only to document a possible future design. They were not administered and are not reproduced here as a completed instrument. A model-name mismatch in those planning materials (Llama 3.1 versus the executed Llama 3 model) further prevents treating them as an approved executed protocol.
 
@@ -323,9 +323,9 @@ The ablation matrix paired 48 payload groups within each available model. The ca
 
 Across the evaluated 2, 4, 8, 16, and 32 token conditions, lead-ins generally worsened likelihood, and longer lead-ins generally increased full-message length. The 32-token contrast had mean-log-probability difference -1.652327 (95\% CI, -1.749091 to -1.553103) and full-token-count difference +159.590278 (125.829861 to 191.030035). This is an adverse boundary/context result, but the paired contrast is not a causal decomposition. Segment-size changes altered efficiency and cover length: moving from 8 to 32 ranks increased effective rate by 1.231461 bits per full token (1.073116 to 1.388188) and decreased full-message length by 174.500000 tokens (-208.405035 to -140.573264). Forced-token count is codec-determined and unchanged; the length difference arises from fewer segment tails.
 
-Removing the filter changed mean log probability by -0.001797 (-0.037738 to 0.035394) and effective rate by -0.062969 (-0.134265 to 0.007651), both selected intervals include zero. The Mistral roundtrip-stable-filter condition was unavailable for 48 work units, so the stable-filter zero rows use two models, whereas the no-filter comparison uses three. These contrasts do not establish a filter benefit.
+Removing the filter changed mean log probability by -0.001797 (-0.037738 to 0.035394) and effective rate by -0.062969 (-0.134265 to 0.007651); both selected intervals include zero. The Mistral roundtrip-stable-filter condition was unavailable for 48 work units, so the stable-filter zero rows use two models, whereas the no-filter comparison uses three. These contrasts do not establish a filter benefit.
 
-Relative to dynamic stopping, no tail increased effective rate by 3.171551 bits per full token and reduced full-message length by 254.951389 tokens, removing non-payload text cannot be interpreted as a cover-quality improvement. The fixed 20-60 token sentence-tail policy reduced full-message length by 65.708333 tokens. Dynamic stopping checks a frozen sentence-boundary/length predicate and then applies an emergency cap, it is not a reader judgment.
+Relative to dynamic stopping, no tail increased effective rate by 3.171551 bits per full token and reduced full-message length by 254.951389 tokens; removing non-payload text cannot be interpreted as a cover-quality improvement. The fixed sentence-tail policy of 20 to 60 tokens reduced full-message length by 65.708333 tokens. Dynamic stopping checks a frozen sentence-boundary/length predicate and then applies an emergency cap; it is not a reader judgment.
 
 \begin{figure}[H]
 \centering
@@ -363,7 +363,7 @@ Fixed sentence tail & \shortstack[l]{0.000000\\{[0.000000, 0.000000]}} & \shorts
 
 \subsection*{Prompt-topic contrasts}
 
-The topic extraction compares the multi-topic and single-topic segmented schedules within model. Artifact counts are ratios on the response scale so the remaining estimates are multi-topic minus single-topic contrasts on their reported model scales. One of 15 rows excluded the null: the Llama expected artifact-count ratio was 1.276361 (95\% CI, 1.114743--1.461409; Holm-adjusted \(p=0.003294\)). Every other Holm-adjusted value was at least 0.396248. This locked extraction is exploratory and post-outcome where it supports neither a general topic advantage nor a new confirmatory hypothesis.
+The topic extraction compares the multi-topic and single-topic segmented schedules within model. Artifact counts are ratios on the response scale so the remaining estimates are multi-topic minus single-topic contrasts on their reported model scales. One of 15 rows excluded the null: the Llama expected artifact-count ratio was 1.276361 (95\% CI, 1.114743 to 1.461409; Holm-adjusted \(p=0.003294\)). Every other Holm-adjusted value was at least 0.396248. This locked extraction is exploratory and post-outcome where it supports neither a general topic advantage nor a new confirmatory hypothesis.
 
 A separate exploratory subgroup display defines tail gain as full-message mean token log probability minus forced-span mean token log probability. It contains 8,280 paired segments from 1,440 segmented trials across three models, six prompt categories, and single-topic and multi-topic schedules, giving 36 displayed groups. Every group contains 230 segments, and all 36 group means were positive, ranging from +2.825721 to +3.652576. The numbers of independent payload clusters differ by schedule, 40 for single-topic and 190 for multi-topic. Uncertainty uses 2,000-resample payload-cluster bootstrapping stratified by payload class. This subgroup estimand is not equivalent to the adjusted single-topic versus multi-topic mixed-model contrast where the adjusted source-quality contrasts ranged from -0.02214 to +0.01881 and had Holm-adjusted \(p=1.0\) for all three models.
 
@@ -408,12 +408,12 @@ Payload throughput & Qwen & -0.009378 & [-0.043829, 0.025073] & 0.595439 \\
 The frozen corpus contains 15,840 rows, 7,920 RankCloak covers and 7,920 matched ordinary controls, grouped by 480 payloads. Payload groups, rather than rows, were assigned to train, validation, and test sets. The TextCNN-equivalent implementation lowercases and tokenizes text into a 30,000-term vocabulary, truncates or pads to 256 tokens, uses 300-dimensional learned embeddings and 100 filters at each of widths 3 and 5, applies dropout 0.5, and optimizes with Adam at learning rate 0.001. The pretrained DeBERTa-v3-base classifier uses maximum length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs.
 For each architecture, the frozen design comprises one matched split, 18 held-out-template splits, three leave-one-model splits, and six leave-one-codec splits. Thus 28 fits per architecture and 56/56 fits overall completed, producing 55,440 prediction rows. No row-level reassignment was used to improve performance.
 
-Primary reported endpoints are ROC-AUC and balanced accuracy. Precision, Brier score, and true-positive rate at false-positive rate at most 1\% are explicitly supplementary/exploratory post-freeze measures. All confidence intervals for an individual split use 2,000 payload-group bootstrap resamples. Ranges across heterogeneous held-out splits are descriptive minima and maxima, not confidence intervals. Every split-level estimate and interval for all retained metrics is supplied in machine-readable Supplementary Data Table S7.1 (\path{supplementary_tables/detector_split_metrics.csv}).
+Primary reported endpoints are ROC-AUC and balanced accuracy. Precision, Brier score, and true-positive rate at false-positive rate at most 1\% are explicitly supplementary/exploratory post-freeze measures. All confidence intervals for an individual split use 2,000 payload-group bootstrap resamples. Ranges across heterogeneous held-out splits are descriptive minima and maxima, not confidence intervals. Every split-level estimate and interval for all retained metrics is supplied in the machine-readable supplementary CSV (\path{supplementary_tables/detector_split_metrics.csv}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/neural_detector_performance.pdf}
-\caption{\label{fig:detector-full}\textbf{Full neural-detector evaluation.} The six panels report confirmatory frozen endpoints together with supplementary exploratory metrics. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Brier score is lower-is-better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
+\caption{\label{fig:detector-full}\textbf{Full neural-detector evaluation.} The six panels report confirmatory frozen endpoints together with supplementary exploratory metrics. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
 \end{figure}
 
 \begin{table}[H]
@@ -423,16 +423,16 @@ Primary reported endpoints are ROC-AUC and balanced accuracy. Precision, Brier s
 \toprule
 Architecture & Matched metric & Estimate & Payload-bootstrap 95\% CI & Status \\
 \midrule
-TextCNN-equivalent & ROC-AUC & 0.990190 & 0.987740-0.992682 & Confirmatory frozen \\
-TextCNN-equivalent & Balanced accuracy & 0.951010 & 0.943456-0.958466 & Confirmatory frozen \\
-TextCNN-equivalent & Precision & 0.954684 & 0.945891-0.963421 & Supplementary exploratory \\
-TextCNN-equivalent & Brier score & 0.039320 & 0.033497-0.045453 & Supplementary exploratory \\
-TextCNN-equivalent & TPR at FPR \(\leq1\%\) & 0.840909 & 0.806517-0.889752 & Supplementary exploratory \\
-DeBERTa-v3-base & ROC-AUC & 0.999834 & 0.999696-0.999939 & Confirmatory frozen \\
-DeBERTa-v3-base & Balanced accuracy & 0.991919 & 0.987654-0.995665 & Confirmatory frozen \\
-DeBERTa-v3-base & Precision & 0.999487 & 0.998393-1.000000 & Supplementary exploratory \\
-DeBERTa-v3-base & Brier score & 0.007895 & 0.004432-0.011787 & Supplementary exploratory \\
-DeBERTa-v3-base & TPR at FPR \(\leq1\%\) & 0.993434 & 0.988724-0.998387 & Supplementary exploratory \\
+TextCNN-equivalent & ROC-AUC & 0.990190 & [0.987740, 0.992682] & Confirmatory frozen \\
+TextCNN-equivalent & Balanced accuracy & 0.951010 & [0.943456, 0.958466] & Confirmatory frozen \\
+TextCNN-equivalent & Precision & 0.954684 & [0.945891, 0.963421] & Supplementary exploratory \\
+TextCNN-equivalent & Brier score & 0.039320 & [0.033497, 0.045453] & Supplementary exploratory \\
+TextCNN-equivalent & TPR at FPR \(\leq1\%\) & 0.840909 & [0.806517, 0.889752] & Supplementary exploratory \\
+DeBERTa-v3-base & ROC-AUC & 0.999834 & [0.999696, 0.999939] & Confirmatory frozen \\
+DeBERTa-v3-base & Balanced accuracy & 0.991919 & [0.987654, 0.995665] & Confirmatory frozen \\
+DeBERTa-v3-base & Precision & 0.999487 & [0.998393, 1.000000] & Supplementary exploratory \\
+DeBERTa-v3-base & Brier score & 0.007895 & [0.004432, 0.011787] & Supplementary exploratory \\
+DeBERTa-v3-base & TPR at FPR \(\leq1\%\) & 0.993434 & [0.988724, 0.998387] & Supplementary exploratory \\
 \bottomrule
 \end{tabularx}
 \caption{\label{tab:detector-matched}Matched detector endpoints. Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.}
@@ -445,12 +445,12 @@ DeBERTa-v3-base & TPR at FPR \(\leq1\%\) & 0.993434 & 0.988724-0.998387 & Supple
 \toprule
 Architecture & Regime (split count) & ROC-AUC range & Balanced-accuracy range \\
 \midrule
-TextCNN-equivalent & Held-out template (18) & 0.720421-0.981705 & 0.565909-0.919318 \\
-TextCNN-equivalent & Leave one model (3) & 0.925623-0.973650 & 0.850758-0.883333 \\
-TextCNN-equivalent & Leave one codec (6) & 0.966532-0.998634 & 0.895833-0.980556 \\
-DeBERTa-v3-base & Held-out template (18) & 0.996291-0.999979 & 0.952273-0.995455 \\
-DeBERTa-v3-base & Leave one model (3) & 0.996772-0.999979 & 0.945455-0.970455 \\
-DeBERTa-v3-base & Leave one codec (6) & 0.997917-1.000000 & 0.927778-0.998611 \\
+TextCNN-equivalent & Held-out template (18) & [0.720421, 0.981705] & [0.565909, 0.919318] \\
+TextCNN-equivalent & Leave one model (3) & [0.925623, 0.973650] & [0.850758, 0.883333] \\
+TextCNN-equivalent & Leave one codec (6) & [0.966532, 0.998634] & [0.895833, 0.980556] \\
+DeBERTa-v3-base & Held-out template (18) & [0.996291, 0.999979] & [0.952273, 0.995455] \\
+DeBERTa-v3-base & Leave one model (3) & [0.996772, 0.999979] & [0.945455, 0.970455] \\
+DeBERTa-v3-base & Leave one codec (6) & [0.997917, 1.000000] & [0.927778, 0.998611] \\
 \bottomrule
 \end{tabularx}
 \caption{\label{tab:detector-ranges}Ranges across heterogeneous frozen held-out splits. These ranges are not pooled confidence intervals.}
@@ -462,7 +462,7 @@ Exact train/test visible-text identity and exact tokenizer-sequence identity che
 
 Fixed-seed reruns on the same CUDA device produced exact metric equality for both architectures. This is evidence of same-device repeatability only. CPU neural training was infeasible in the retained run and no CPU result was substituted; the study makes no CPU/GPU equivalence claim. The representative CUDA benchmark recorded TextCNN wall/training times 91.358113/9.497936 seconds and peak allocated VRAM 306,247,680 bytes; DeBERTa values were 1,536.660910/1,425.063414 seconds and 6,380,851,200 bytes.
 
-\section*{Supplementary Note S8: Capacity--quality theory}\label{si:s8}
+\section*{Supplementary Note S8: Capacity and quality theory}\label{si:s8}
 
 The main Methods defines bounded forced length, nominal and effective rates, full-message overhead, and the same-context probability bound. This note gives finite-code consequences, proof conditions, and the retained-field audit without repeating those central equations.
 
@@ -501,16 +501,16 @@ The upper rank-\(B\) endpoint is evaluated only when its probability was retaine
 
 \subsection*{Empirical checks and trace boundary}
 
-The validation inventory contained 17,424 eligible retained records. Of these, 7,008 had all fields required for complete capacity, rate, and supported quality-bound checks. Across evaluable traces there were zero forced-position-count violations, zero rank/rate-bound violations, and zero supported quality-bound violations. The nine aggregate cells in the theoretical-capacity panel of Supplementary Fig. S6 lay exactly on the theoretical-versus-observed forced-position identity. There were 2,976 positive cover-length residuals, attributable to natural tails or other counted cover extension.
+The validation inventory contained 17,424 eligible retained records. Of these, 7,008 had all fields required for complete capacity, rate, and supported quality-bound checks. Across evaluable traces there were zero forced-position-count violations, zero rank/rate-bound violations, and zero supported quality-bound violations. The nine aggregate cells in the theoretical capacity panel of Supplementary Fig. S6 lay exactly on the identity between theoretical and observed forced positions. There were 2,976 positive cover-length residuals, attributable to natural tails or other counted cover extension.
 
 The complete encoder decoder cascade proposition is not directly trace-evaluable from the saved record structure: none of the retained rows simultaneously carries every intermediate object required to replay the entire proof chain as one trace. The algebraic results are therefore conditional proofs and the retained-field checks are supporting empirical validation, not a complete end-to-end trace proof. They also do not validate human naturalness.
 
-This theoretical validation asks whether the retained fields satisfy the declared fixed-radix identities, rate bounds, and supported same-context likelihood bound. It is distinct from the empirical capacity-quality frontier in Main Fig. 2, which compares observed representation rates and automated model/surface diagnostics on common payload support.
+This theoretical validation asks whether the retained fields satisfy the declared fixed-radix identities, rate bounds, and supported same-context likelihood bound. It is distinct from the empirical capacity and quality frontier in Main Fig. 2, which compares observed representation rates and automated model/surface diagnostics on common payload support.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/capacity_tail_validation.pdf}
-\caption{\label{fig:capacity-validation}\textbf{Theoretical capacity-tail validation.} Fixed-radix payload length and effective full-message rate are checked against their declared algebraic bounds, while the cover-length residual isolates tokens beyond the forced payload positions. Across 17,424 retained records, 7,008 were evaluable for the complete plotted capacity and supported quality-bound checks; no forced-position, rate-bound, or evaluated quality-bound violation occurred. Positive residuals in 2,976 records represent natural tails or other cover overhead. This validation tests retained-field identities and differs from the empirical common-support frontier in Main Fig. 2; neither analysis is evidence of human-perceived naturalness.}
+\caption{\label{fig:capacity-validation}\textbf{Theoretical capacity and tail validation.} Fixed-radix payload length and effective full-message rate are checked against their declared algebraic bounds, while the cover-length residual isolates tokens beyond the forced payload positions. Across 17,424 retained records, 7,008 were evaluable for the complete plotted capacity and supported quality-bound checks; no forced-position, rate-bound, or evaluated quality-bound violation occurred. Positive residuals in 2,976 records represent natural tails or other cover overhead. This validation tests retained-field identities and differs from the empirical common-support frontier in Main Fig. 2; neither analysis is evidence of human-perceived naturalness.}
 \end{figure}
 
 \begin{table}[H]
@@ -534,14 +534,14 @@ Complete cascade traces & 0 & End-to-end proposition not directly trace-evaluabl
 
 \section*{Supplementary Note S9: Computational overhead}\label{si:s9}
 
-Primary-stage timing used 12,144 matched payload rows across the 18 model--protocol cells in Table~\ref{tab:overhead-cells}. Intervals are 2,000-resample payload-group bootstrap intervals. Generation time is retained inclusive wrapper wall time; representation, filter setup, model generation, and supported recovery fields are reported separately in the sealed tables but are not claimed to be perfectly isolated kernel timings. Encoding wrapper time and supported decoding measurements consequently should not be summed as independent hardware primitives.
+Primary-stage timing used 12,144 matched payload rows across the 18 model and protocol cells in Table~\ref{tab:overhead-cells}. Intervals are 2,000-resample payload-group bootstrap intervals. Generation time is retained inclusive wrapper wall time; representation, filter setup, model generation, and supported recovery fields are reported separately in the sealed tables but are not claimed to be perfectly isolated kernel timings. Encoding wrapper time and supported decoding measurements consequently should not be summed as independent hardware primitives.
 
 Across the 18 cells, mean inclusive generation time ranged from 1.674368 to 16.087628 seconds and payload throughput from 13.631855 to 100.851772 bits/s; effective payload rate ranged from 0.710004 to 7.322003 bits per full token. Direct-rank and hex-nibble protocols were generally faster than the byte-expanded conditions, while segmented protocols were generally slower because they repeated prompt and tail work. These retained inclusive wall-time measurements support computational accounting under the recorded hardware and harness, not universal hardware-performance claims.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/computational_overhead.pdf}
-\caption{\label{fig:overhead-full}\textbf{Complete computational-overhead summary.} Primary model protocol cells show payload-bootstrap summaries for inclusive generation, encoding setup, supported recovery, throughput, and effective rate. The setup panel uses a logarithmic axis because cells span several orders of magnitude. CPU time and repeated warm-up measurements were unavailable and wall time is not relabeled as CPU time.}
+\caption{\label{fig:overhead-full}\textbf{Complete computational overhead summary.} Primary model and protocol cells show payload-bootstrap summaries for inclusive generation, encoding setup, supported recovery, throughput, and effective rate. The setup panel uses a logarithmic axis because cells span several orders of magnitude. CPU time and repeated warm-up measurements were unavailable and wall time is not relabeled as CPU time.}
 \end{figure}
 
 \begin{table}[H]
@@ -552,29 +552,29 @@ Across the 18 cells, mean inclusive generation time ranged from 1.674368 to 16.0
 \toprule
 Model & Protocol & \(n\) & Mean generation time, s (95\% CI) & Mean payload throughput, bit/s (95\% CI) \\
 \midrule
-Llama & Direct ranks & 480 & \shortstack[l]{2.074349\\(2.014282-2.135219)} & \shortstack[l]{87.658980\\(85.892805-89.433262)} \\
-& ASCII-16 & 480 & \shortstack[l]{6.776682\\(6.572039-6.982913)} & \shortstack[l]{37.409987\\(36.542507-38.322129)} \\
-& ASCII-8 & 480 & \shortstack[l]{8.896445\\(8.619910-9.172562)} & \shortstack[l]{28.522326\\(27.867278-29.213688)} \\
-& Hex-16 & 240 & \shortstack[l]{3.236699\\(3.099398-3.376963)} & \shortstack[l]{55.691381\\(55.148301-56.225745)} \\
-& Segmented multi-topic & 240 & \shortstack[l]{15.946543\\(14.850856-17.084494)} & \shortstack[l]{13.827671\\(13.155163-14.496873)} \\
-& Segmented single-topic & 240 & \shortstack[l]{16.087628\\(15.017670-17.208756)} & \shortstack[l]{13.631855\\(12.954794-14.325096)} \\
+Llama & Direct ranks & 480 & \shortstack[l]{2.074349\\{[2.014282, 2.135219]}} & \shortstack[l]{87.658980\\{[85.892805, 89.433262]}} \\
+& ASCII-16 & 480 & \shortstack[l]{6.776682\\{[6.572039, 6.982913]}} & \shortstack[l]{37.409987\\{[36.542507, 38.322129]}} \\
+& ASCII-8 & 480 & \shortstack[l]{8.896445\\{[8.619910, 9.172562]}} & \shortstack[l]{28.522326\\{[27.867278, 29.213688]}} \\
+& Hex-16 & 240 & \shortstack[l]{3.236699\\{[3.099398, 3.376963]}} & \shortstack[l]{55.691381\\{[55.148301, 56.225745]}} \\
+& Segmented multi-topic & 240 & \shortstack[l]{15.946543\\{[14.850856, 17.084494]}} & \shortstack[l]{13.827671\\{[13.155163, 14.496873]}} \\
+& Segmented single-topic & 240 & \shortstack[l]{16.087628\\{[15.017670, 17.208756]}} & \shortstack[l]{13.631855\\{[12.954794, 14.325096]}} \\
 \addlinespace
-Qwen & Direct ranks & 480 & \shortstack[l]{2.632108\\(2.565827-2.699101)} & \shortstack[l]{70.911677\\(68.729360-73.171915)} \\
-& ASCII-16 & 480 & \shortstack[l]{7.480319\\(7.242905-7.714463)} & \shortstack[l]{33.843456\\(33.153343-34.571271)} \\
-& ASCII-8 & 480 & \shortstack[l]{9.847052\\(9.537974-10.155572)} & \shortstack[l]{25.724469\\(25.198423-26.278772)} \\
-& Hex-16 & 240 & \shortstack[l]{3.427555\\(3.284745-3.575041)} & \shortstack[l]{52.584782\\(52.074452-53.086870)} \\
-& Segmented multi-topic & 240 & \shortstack[l]{12.276814\\(11.449256-13.133478)} & \shortstack[l]{17.040206\\(16.420206-17.655385)} \\
-& Segmented single-topic & 240 & \shortstack[l]{11.881962\\(11.129651-12.646529)} & \shortstack[l]{17.182540\\(16.534412-17.783251)} \\
+Qwen & Direct ranks & 480 & \shortstack[l]{2.632108\\{[2.565827, 2.699101]}} & \shortstack[l]{70.911677\\{[68.729360, 73.171915]}} \\
+& ASCII-16 & 480 & \shortstack[l]{7.480319\\{[7.242905, 7.714463]}} & \shortstack[l]{33.843456\\{[33.153343, 34.571271]}} \\
+& ASCII-8 & 480 & \shortstack[l]{9.847052\\{[9.537974, 10.155572]}} & \shortstack[l]{25.724469\\{[25.198423, 26.278772]}} \\
+& Hex-16 & 240 & \shortstack[l]{3.427555\\{[3.284745, 3.575041]}} & \shortstack[l]{52.584782\\{[52.074452, 53.086870]}} \\
+& Segmented multi-topic & 240 & \shortstack[l]{12.276814\\{[11.449256, 13.133478]}} & \shortstack[l]{17.040206\\{[16.420206, 17.655385]}} \\
+& Segmented single-topic & 240 & \shortstack[l]{11.881962\\{[11.129651, 12.646529]}} & \shortstack[l]{17.182540\\{[16.534412, 17.783251]}} \\
 \addlinespace
-Mistral & Direct ranks & 480 & \shortstack[l]{1.674368\\(1.637117-1.711610)} & \shortstack[l]{95.454287\\(92.689931-98.318820)} \\
-& ASCII-16 & 480 & \shortstack[l]{3.532546\\(3.430360-3.637370)} & \shortstack[l]{71.264443\\(69.655729-72.892828)} \\
-& ASCII-8 & 480 & \shortstack[l]{4.558496\\(4.421249-4.699172)} & \shortstack[l]{55.340577\\(54.149134-56.561483)} \\
-& Hex-16 & 240 & \shortstack[l]{1.762009\\(1.698523-1.826194)} & \shortstack[l]{100.851772\\(99.168287-102.554774)} \\
-& Segmented multi-topic & 240 & \shortstack[l]{10.478402\\(9.810233-11.196055)} & \shortstack[l]{20.368846\\(19.484536-21.270824)} \\
-& Segmented single-topic & 240 & \shortstack[l]{10.858662\\(10.074554-11.660671)} & \shortstack[l]{20.014386\\(19.095928-20.969663)} \\
+Mistral & Direct ranks & 480 & \shortstack[l]{1.674368\\{[1.637117, 1.711610]}} & \shortstack[l]{95.454287\\{[92.689931, 98.318820]}} \\
+& ASCII-16 & 480 & \shortstack[l]{3.532546\\{[3.430360, 3.637370]}} & \shortstack[l]{71.264443\\{[69.655729, 72.892828]}} \\
+& ASCII-8 & 480 & \shortstack[l]{4.558496\\{[4.421249, 4.699172]}} & \shortstack[l]{55.340577\\{[54.149134, 56.561483]}} \\
+& Hex-16 & 240 & \shortstack[l]{1.762009\\{[1.698523, 1.826194]}} & \shortstack[l]{100.851772\\{[99.168287, 102.554774]}} \\
+& Segmented multi-topic & 240 & \shortstack[l]{10.478402\\{[9.810233, 11.196055]}} & \shortstack[l]{20.368846\\{[19.484536, 21.270824]}} \\
+& Segmented single-topic & 240 & \shortstack[l]{10.858662\\{[10.074554, 11.660671]}} & \shortstack[l]{20.014386\\{[19.095928, 20.969663]}} \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:overhead-cells}\textbf{Primary model--protocol inclusive generation time and payload throughput.} Llama denotes Meta-Llama-3-8B-Instruct, Qwen denotes Qwen2.5-7B-Instruct, and Mistral denotes Mistral-7B-Instruct-v0.3; all use the reported Q4\_K\_M configurations. Parentheses contain payload-bootstrap 95\% confidence intervals.}
+\caption{\label{tab:overhead-cells}\textbf{Inclusive generation time and payload throughput by model and protocol.} Llama denotes Meta-Llama-3-8B-Instruct, Qwen denotes Qwen2.5-7B-Instruct, and Mistral denotes Mistral-7B-Instruct-v0.3; all use the reported Q4\_K\_M configurations. Brackets contain payload-bootstrap 95\% confidence intervals.}
 \end{table}
 
 \begin{table}[H]
