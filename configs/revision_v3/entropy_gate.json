@@ -1,0 +1,44 @@
+{
+  "schema_version": "rankcloak-revision-v3-entropy-gate-design-v1",
+  "status": "predeclared_not_started",
+  "seed": 20260831,
+  "gate_rule": "consume one payload rank iff filtered next-token Shannon entropy in bits is greater than or equal to the model-specific threshold",
+  "thresholds": {
+    "ungated": null,
+    "moderate": "model-specific median from ordinary-generation development traces",
+    "strict": "model-specific 75th percentile from ordinary-generation development traces"
+  },
+  "threshold_selection_excludes_detector_outcomes": true,
+  "fixed_payload_maximum_length_multiplier": 6,
+  "fixed_token_budget_reference": "paired ungated payload-span token count",
+  "models": [
+    "llama3_8b_instruct_q4_k_m",
+    "mistral_7b_instruct_v0_3_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m"
+  ],
+  "templates": [
+    "explain_everyday_system",
+    "professional_project_update"
+  ],
+  "payload_indices": [3, 41],
+  "calibration_prompt_ids": [
+    "casual_weekend_chat",
+    "professional_project_update",
+    "forum_practical_answer",
+    "procedure_simple_meal",
+    "narrative_small_discovery",
+    "explain_weather_pattern"
+  ],
+  "planned_rankcloak_trials": 360,
+  "planned_ordinary_control_trials": 360,
+  "planned_reused_ungated_rankcloak_trials": 0,
+  "planned_reused_ungated_ordinary_control_trials": 0,
+  "planned_new_ungated_rankcloak_trials": 120,
+  "planned_new_ungated_ordinary_control_trials": 120,
+  "planned_new_gated_rankcloak_trials": 240,
+  "planned_new_length_matched_ordinary_control_trials": 240,
+  "planned_new_generation_trials": 720,
+  "planned_calibration_traces": 18,
+  "fixed_token_budget_rows_derived_without_additional_generation": true,
+  "generation_blocker_policy": "do not acquire large weights, credentials, or paid compute automatically"
+}

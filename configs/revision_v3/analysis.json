@@ -1,0 +1,68 @@
+{
+  "schema_version": "rankcloak-revision-v3-analysis-config-v1",
+  "seed": 20260831,
+  "deduplication": {
+    "unicode_normalization": "NFKC",
+    "casefold": true,
+    "whitespace_collapse": true,
+    "exact_hash": "SHA-256 over normalized UTF-8 text",
+    "near_duplicate_method": "character-boundary TF-IDF cosine similarity",
+    "analyzer": "char_wb",
+    "ngram_range": [3, 5],
+    "minimum_document_frequency": 2,
+    "near_duplicate_threshold": 0.95
+  },
+  "partitions": {
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "test_fraction": 0.2,
+    "immutable_units": [
+      "payload_group_id",
+      "pair_id",
+      "normalized exact-text group",
+      "near-duplicate connected component"
+    ]
+  },
+  "detector_metrics": {
+    "bootstrap_unit": "dedup_cluster_id",
+    "bootstrap_resamples": 2000,
+    "partial_auc_max_fpr": 0.01,
+    "partial_auc_normalization": "empirical step area divided by 0.01",
+    "low_fpr_targets": [0.01, 0.001],
+    "minimum_negatives_for_fpr_0_01": 100,
+    "minimum_negatives_for_fpr_0_001": 1000,
+    "threshold_data": "validation only"
+  },
+  "human_controls": {
+    "source_id": "databricks_dolly_15k_v1_pinned",
+    "source_revision": "bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a",
+    "source_sha256": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+    "license": "CC-BY-SA-3.0",
+    "maximum_relative_word_difference": 0.35,
+    "use": "secondary computational control only",
+    "threshold_selection_uses_human_labels": false
+  },
+  "model_aware_detector": {
+    "feature_set": "shared saved token-log-probability summaries",
+    "prohibited_label_asymmetric_features": [
+      "rank fields absent from ordinary controls",
+      "field-presence indicators",
+      "RankCloak-only gate or codec metadata"
+    ],
+    "logistic_C_grid": [0.01, 0.1, 1.0, 10.0],
+    "selection_metric": "validation ROC-AUC"
+  },
+  "topic_variability": {
+    "paired_conditions": [
+      "segmented_hex_single_topic",
+      "segmented_hex_multi_topic"
+    ],
+    "pair_keys": ["model_id", "payload_name"],
+    "diversity_metrics": [
+      "exact output uniqueness",
+      "normalized character edit distance",
+      "casefolded word-type Jaccard similarity"
+    ],
+    "example_rule": "first three pairs by SHA-256 of model and payload identity"
+  }
+}

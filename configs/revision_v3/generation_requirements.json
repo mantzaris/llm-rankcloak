@@ -1,0 +1,67 @@
+{
+  "schema_version": "rankcloak-revision-v3-generation-requirements-v1",
+  "status": "preflight_failed_missing_exact_weights_and_cuda_backend",
+  "verified_metadata_date": "2026-08-31",
+  "required_backend": {
+    "package": "llama-cpp-python",
+    "version": "0.3.23",
+    "cuda_required": true,
+    "present_in_project_venv": false,
+    "installation_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv/bin/pip install --no-cache-dir llama-cpp-python==0.3.23"
+  },
+  "artifacts": [
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+      "revision": "a06c33ec89c1e3402009fb47f466a89127c6d223",
+      "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "size_bytes": 4920734272,
+      "sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "expected_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "download_command": "huggingface-cli download QuantFactory/Meta-Llama-3-8B-Instruct-GGUF Meta-Llama-3-8B-Instruct.Q4_K_M.gguf --revision a06c33ec89c1e3402009fb47f466a89127c6d223 --local-dir models/llama3_8b"
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+      "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+      "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "size_bytes": 4372812000,
+      "sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "expected_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "download_command": "huggingface-cli download bartowski/Mistral-7B-Instruct-v0.3-GGUF Mistral-7B-Instruct-v0.3-Q4_K_M.gguf --revision 61fd4167fff3ab01ee1cfe0da183fa27a944db48 --local-dir models/mistral_7b_instruct_v0_3"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "size_bytes": 4683074240,
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "expected_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "download_command": "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q4_K_M.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q8_0",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "filename": "Qwen2.5-7B-Instruct-Q8_0.gguf",
+      "quantization": "Q8_0",
+      "size_bytes": 8098525888,
+      "sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+      "expected_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q8_0.gguf",
+      "download_command": "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q8_0.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct"
+    }
+  ],
+  "entropy_q4_weight_bytes": 13976620512,
+  "matched_quantization_q4_q8_weight_bytes": 12781600128,
+  "all_unique_required_weight_bytes": 22075146400,
+  "recommended_free_storage_bytes": 30000000000,
+  "available_hardware": "NVIDIA RTX 5000 Ada Generation, 32760 MiB",
+  "entropy_runtime_estimate": "2-6 GPU-hours for 720 new evaluation generations plus 18 calibration traces",
+  "quantization_runtime_estimate": "4-10 GPU-hours for 1,920 new Q8 generations; planning estimate only",
+  "post_download_verification_command": "sha256sum models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q8_0.gguf",
+  "policy": "Do not acquire these weights, install the backend, or start paid compute without explicit user authorization."
+}

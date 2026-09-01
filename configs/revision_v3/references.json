@@ -1,0 +1,27 @@
+{
+  "schema_version": "rankcloak-revision-v3-reference-provenance-v1",
+  "references": [
+    {
+      "id": "cai_ding_tao_2025_entropy_guided_watermarking",
+      "authors": ["Shizhan Cai", "Liang Ding", "Dacheng Tao"],
+      "title": "Entropy-guided watermarking for LLMs: A test-time framework for robust and traceable text generation",
+      "year": 2025,
+      "venue": "arXiv preprint",
+      "arxiv_id": "2504.12108",
+      "url": "https://arxiv.org/abs/2504.12108",
+      "design_use": "Motivated entropy-dependent eligibility at test time and predeclared entropy thresholds.",
+      "task_distinction": "The cited method concerns watermarking and cumulative watermark entropy. Revision V3 implements a RankCloak-specific positionwise gate for arbitrary payload-symbol consumption and does not claim task equivalence."
+    },
+    {
+      "id": "databricks_dolly_15k_v1",
+      "organization": "Databricks, Inc.",
+      "title": "databricks-dolly-15k",
+      "version": "1.0",
+      "revision": "bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a",
+      "url": "https://huggingface.co/datasets/databricks/databricks-dolly-15k/tree/bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a",
+      "license": "CC-BY-SA-3.0",
+      "source_file_sha256": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+      "authorship_basis": "The official dataset card identifies Databricks employees as authors and states that they were instructed not to use generative AI."
+    }
+  ]
+}

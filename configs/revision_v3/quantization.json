@@ -1,0 +1,39 @@
+{
+  "schema_version": "rankcloak-revision-v3-quantization-design-v1",
+  "status": "predeclared_not_started",
+  "seed": 20260831,
+  "base_model": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+  "model_revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+  "upstream_base_model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "tokenizer": "embedded GGUF tokenizer",
+  "quantizations": ["Q4_K_M", "Q8_0"],
+  "codecs": ["ascii_b8", "ascii_b16"],
+  "payload_count": 480,
+  "paired_seeds_and_prompts": true,
+  "planned_new_rankcloak_trials": 960,
+  "planned_new_ordinary_control_trials": 960,
+  "planned_reused_rankcloak_trials": 960,
+  "planned_reused_ordinary_control_trials": 960,
+  "required_backend": "llama-cpp-python==0.3.23 built with CUDA support",
+  "artifacts": [
+    {
+      "quantization": "Q4_K_M",
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "size_bytes": 4683074240,
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423"
+    },
+    {
+      "quantization": "Q8_0",
+      "filename": "Qwen2.5-7B-Instruct-Q8_0.gguf",
+      "size_bytes": 8098525888,
+      "sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b"
+    }
+  ],
+  "required_weight_bytes_if_none_present": 12781600128,
+  "incremental_q8_download_bytes_after_q4_restoration": 8098525888,
+  "download_commands": [
+    "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q4_K_M.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct",
+    "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q8_0.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct"
+  ],
+  "generation_blocker_policy": "do not acquire large weights, credentials, or paid compute automatically"
+}

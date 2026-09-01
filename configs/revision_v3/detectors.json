@@ -1,0 +1,46 @@
+{
+  "schema_version": "rankcloak-revision-v3-detectors-v1",
+  "seed": 20260831,
+  "detectors": {
+    "textcnn": {
+      "name": "published_textcnn_equivalent_v3",
+      "kind": "text_cnn",
+      "device": "cuda:0",
+      "torch_num_threads": 1,
+      "lowercase": true,
+      "minimum_token_frequency": 1,
+      "maximum_vocabulary_size": 30000,
+      "maximum_length": 256,
+      "embedding_dimension": 300,
+      "filter_sizes": [3, 5],
+      "filters_per_width": 100,
+      "dropout": 0.5,
+      "learning_rate": 0.001,
+      "weight_decay": 0.000001,
+      "epochs": 10,
+      "batch_size": 64,
+      "fallback": "none"
+    },
+    "deberta": {
+      "name": "deberta_v3_base_classifier_v3",
+      "kind": "pretrained_transformer",
+      "model_name_or_path": "microsoft/deberta-v3-base",
+      "model_revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+      "offline_only": true,
+      "allow_downloads": false,
+      "device": "cuda:0",
+      "torch_num_threads": 1,
+      "maximum_length": 256,
+      "learning_rate": 0.00002,
+      "weight_decay": 0.01,
+      "epochs": 3,
+      "batch_size": 8,
+      "fallback": "none"
+    },
+    "surprisal": {
+      "name": "model_aware_surprisal_logistic",
+      "kind": "saved_generation_trace_logistic",
+      "C_grid": [0.01, 0.1, 1.0, 10.0]
+    }
+  }
+}
