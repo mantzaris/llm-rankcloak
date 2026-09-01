@@ -546,6 +546,57 @@ def entropy_pair_differences(trials: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values(["gate_level", "experimental_cell_id"]).reset_index(drop=True)
 
 
+def entropy_control_differences(trials: pd.DataFrame) -> pd.DataFrame:
+    """Return paired RankCloak-minus-control diagnostics within each gate."""
+
+    metrics = (
+        "generated_token_count",
+        "mean_entropy_bits",
+        "mean_observed_rank",
+        "mean_token_surprisal_nats",
+        "mean_rank_pressure_log_probability_gap_nats",
+        "word_count",
+        "sentence_count",
+        "character_count",
+        "flesch_reading_ease_heuristic",
+        "flesch_kincaid_grade_heuristic",
+        "coleman_liau_index",
+        "unique_word_fraction",
+        "repeated_bigram_fraction",
+        "repeated_trigram_fraction",
+        "maximum_identical_word_run",
+        "surface_flag_total",
+        "artifact_like_fragment_count",
+        "prompt_word_jaccard",
+    )
+    rows: list[dict[str, object]] = []
+    for pairing_unit_id, cell in trials.groupby("pairing_unit_id", sort=True):
+        if len(cell) != 2 or set(cell["population"]) != {"rankcloak", "ordinary_control"}:
+            raise ValueError(
+                f"entropy pairing unit {pairing_unit_id} is not one matched pair"
+            )
+        encoded = cell.loc[cell["population"].eq("rankcloak")].iloc[0]
+        control = cell.loc[cell["population"].eq("ordinary_control")].iloc[0]
+        row = {
+            "pairing_unit_id": pairing_unit_id,
+            "experimental_cell_id": encoded["experimental_cell_id"],
+            "model_id": encoded["model_id"],
+            "payload_name": encoded["payload_name"],
+            "payload_class": encoded["payload_class"],
+            "representation_name": encoded["representation_name"],
+            "prompt_template_id": encoded["prompt_template_id"],
+            "gate_level": encoded["gate_level"],
+        }
+        for metric in metrics:
+            row[f"{metric}_rankcloak_minus_control"] = (
+                float(encoded[metric]) - float(control[metric])
+            )
+        rows.append(row)
+    return pd.DataFrame(rows).sort_values(
+        ["gate_level", "pairing_unit_id"]
+    ).reset_index(drop=True)
+
+
 def calibration_tables(
     generation_root: Path,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -1158,6 +1209,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         quantization_records
     )
     entropy_differences = entropy_pair_differences(entropy_trials)
+    entropy_control_difference = entropy_control_differences(entropy_trials)
 
     entropy_metrics = (
         "payload_completion", "saved_id_exact_payload_recovery",
@@ -1166,7 +1218,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         "generated_token_count", "added_tokens_vs_ungated", "length_ratio_vs_ungated",
         "mean_entropy_bits", "mean_observed_rank", "mean_token_surprisal_nats",
         "mean_rank_pressure_log_probability_gap_nats", "word_count",
-        "unique_word_fraction", "repeated_bigram_fraction", "surface_flag_total",
+        "sentence_count", "character_count", "flesch_reading_ease_heuristic",
+        "flesch_kincaid_grade_heuristic", "coleman_liau_index",
+        "unique_word_fraction", "repeated_bigram_fraction",
+        "repeated_trigram_fraction", "maximum_identical_word_run",
+        "surface_flag_total", "artifact_like_fragment_count",
+        "prompt_word_jaccard",
     )
     entropy_summaries = [
         summarize_metrics(
@@ -1191,6 +1248,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     entropy_difference_summary = summarize_metrics(
         entropy_differences, ["gate_level"], difference_metrics,
         group_column="experimental_cell_id", analysis_id="paired_entropy_difference",
+    )
+    control_difference_metrics = [
+        column
+        for column in entropy_control_difference
+        if column.endswith("_rankcloak_minus_control")
+    ]
+    entropy_control_difference_summary = summarize_metrics(
+        entropy_control_difference,
+        ["gate_level"],
+        control_difference_metrics,
+        group_column="experimental_cell_id",
+        analysis_id="paired_rankcloak_control_difference",
     )
 
     quant_metrics = (
@@ -1262,6 +1331,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         source / "entropy_generation_summary.csv": entropy_summary,
         source / "entropy_paired_differences.csv": entropy_differences,
         source / "entropy_paired_difference_summary.csv": entropy_difference_summary,
+        source / "entropy_rankcloak_control_differences.csv": entropy_control_difference,
+        source / "entropy_rankcloak_control_difference_summary.csv": entropy_control_difference_summary,
         source / "entropy_position_summary.csv": entropy_position_summary,
         source / "quantization_generation_trials.csv": quantization_trials.drop(columns=["full_text"]),
         source / "quantization_pair_comparison.csv": quantization_pairs,
@@ -1330,6 +1401,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     atomic_text(
         manuscript / "entropy_calibration_thresholds.tex",
         latex_table(thresholds.drop(columns=["threshold_record_sha256"]), "Frozen model-specific entropy thresholds.", "tab:entropy-calibration-thresholds"),
+    )
+    quality_metrics = {
+        "word_count_rankcloak_minus_control",
+        "unique_word_fraction_rankcloak_minus_control",
+        "repeated_bigram_fraction_rankcloak_minus_control",
+        "surface_flag_total_rankcloak_minus_control",
+        "prompt_word_jaccard_rankcloak_minus_control",
+    }
+    quality_main = entropy_control_difference_summary.loc[
+        entropy_control_difference_summary["metric"].isin(quality_metrics),
+        [
+            "gate_level",
+            "metric",
+            "mean",
+            "ci_low_95",
+            "ci_high_95",
+            "observation_count",
+            "group_count",
+        ],
+    ]
+    atomic_text(
+        manuscript / "entropy_gate_quality.tex",
+        latex_table(
+            quality_main,
+            "Paired RankCloak-minus-control text-quality diagnostics by entropy gate.",
+            "tab:entropy-gate-quality",
+        ),
     )
     atomic_text(
         manuscript / "matched_quantization_generation.tex",

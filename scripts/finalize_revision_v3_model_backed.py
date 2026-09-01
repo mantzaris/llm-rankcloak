@@ -261,6 +261,11 @@ def write_handoff_docs(
     subgroups: pd.DataFrame,
 ) -> None:
     entropy = pd.read_csv(output / "source_tables/entropy_generation_summary.csv", low_memory=False)
+    control_quality = pd.read_csv(
+        output
+        / "source_tables/entropy_rankcloak_control_difference_summary.csv",
+        low_memory=False,
+    )
     quantization = pd.read_csv(output / "source_tables/quantization_generation_summary.csv", low_memory=False)
     pairs = pd.read_csv(output / "source_tables/quantization_pair_summary.csv", low_memory=False)
     thresholds = pd.read_csv(output / "source_tables/entropy_calibration_thresholds.csv", low_memory=False)
@@ -306,8 +311,39 @@ Quantization detector fits used the frozen payload train/validation/test assignm
         length = summary_row(entropy, analysis_id="entropy_overall", metric="length_ratio_vs_ungated", population="rankcloak", gate_level=gate)
         saved = summary_row(entropy, analysis_id="entropy_overall", metric="saved_id_exact_payload_recovery", population="rankcloak", gate_level=gate)
         visible = summary_row(entropy, analysis_id="entropy_overall", metric="visible_text_exact_payload_recovery", population="rankcloak", gate_level=gate)
+        eligibility = summary_row(entropy, analysis_id="entropy_overall", metric="eligible_position_fraction", population="rankcloak", gate_level=gate)
+        rank = summary_row(entropy, analysis_id="entropy_overall", metric="mean_observed_rank", population="rankcloak", gate_level=gate)
+        surprisal = summary_row(entropy, analysis_id="entropy_overall", metric="mean_token_surprisal_nats", population="rankcloak", gate_level=gate)
+        pressure = summary_row(entropy, analysis_id="entropy_overall", metric="mean_rank_pressure_log_probability_gap_nats", population="rankcloak", gate_level=gate)
         entropy_lines.append(
-            f"{label}: payload completion {completion['mean']:.4f} ({int(completion['observation_count'])} trials; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, saved-ID exact recovery {saved['mean']:.4f}, and visible-text exact recovery {visible['mean']:.4f}."
+            f"{label}: payload completion {completion['mean']:.4f} ({int(completion['observation_count'])} trials; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, observed-token rank {rank['mean']:.4f}, token surprisal {surprisal['mean']:.4f} nats, rank pressure {pressure['mean']:.4f} nats, saved-ID exact recovery {saved['mean']:.4f}, and visible-text exact recovery {visible['mean']:.4f}."
+        )
+    quality_lines = []
+    quality_metrics = (
+        ("word_count_rankcloak_minus_control", "word count"),
+        ("unique_word_fraction_rankcloak_minus_control", "unique-word fraction"),
+        ("repeated_bigram_fraction_rankcloak_minus_control", "repeated-bigram fraction"),
+        ("surface_flag_total_rankcloak_minus_control", "surface-flag count"),
+        ("prompt_word_jaccard_rankcloak_minus_control", "prompt-word Jaccard"),
+    )
+    for gate, label in (("ungated", "Ungated"), ("moderate", "Median gate"), ("strict", "75th-percentile gate")):
+        values = [
+            (
+                text,
+                summary_row(
+                    control_quality,
+                    analysis_id="paired_rankcloak_control_difference",
+                    metric=metric,
+                    gate_level=gate,
+                ),
+            )
+            for metric, text in quality_metrics
+        ]
+        quality_lines.append(
+            label
+            + " paired RankCloak-minus-control mean differences were "
+            + ", ".join(f"{text} {row['mean']:.4f}" for text, row in values)
+            + "."
         )
     detector_lines = []
     for detector in DETECTORS:
@@ -344,7 +380,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
     results_prefix = old_results.split("\nNo model-backed entropy or matched-quantization outcome was produced.", 1)[0].rstrip()
     results = results_prefix + f"""
 
-All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} These outcomes quantify a capacity/length/recovery tradeoff; they do not by themselves establish reduced detectability or robust visible-text transport.
+All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} {' '.join(quality_lines)} The quality measures are transparent surface heuristics rather than human judgments. These outcomes quantify capacity, length, recovery, distributional, and heuristic-quality changes; they do not by themselves establish reduced detectability or robust visible-text transport.
 
 {' '.join(detector_lines)} The entropy detector corpus retained {entropy_dedup['retained_rows']:,}/{entropy_dedup['original_rows']:,} rows after locked pre-feature deduplication, with {entropy_dedup['removed_rows']} rows removed and zero audited cross-partition links. Each gate subgroup had fewer than 1,000 test controls after deduplication, so 0.1% TPR was not estimated.
 
@@ -394,7 +430,7 @@ def write_claim_matrix(output: Path) -> None:
             {
                 "proposed_claim": "Entropy gating changes payload capacity, output length, recovery, quality, and detector behavior",
                 "evidence_status": "supported_descriptively_as_quantified",
-                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_detectors.tex",
+                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
                 "qualification": "Direction and magnitude must be stated from the tables; no universal improvement claim",
             },
             {
@@ -522,6 +558,7 @@ def write_source_map(output: Path) -> None:
     rows = [
         ("manuscript_tables/entropy_calibration_thresholds.tex", "source_tables/entropy_calibration_thresholds.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_generation.tex", "source_tables/entropy_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
+        ("manuscript_tables/entropy_gate_quality.tex", "source_tables/entropy_rankcloak_control_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_detectors.tex", "source_tables/model_backed_detector_subgroups.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
         ("manuscript_tables/matched_quantization_generation.tex", "source_tables/quantization_generation_summary.csv;source_tables/quantization_pair_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/matched_quantization_detectors.tex", "source_tables/model_backed_detector_metrics.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
