@@ -572,6 +572,15 @@ def update_manifest(output: Path) -> None:
             "new_matched_quantization_q8_generations": 1920,
             "model_backed_historical_q4_replays": 1920,
             "matched_quantization_q4_trials_reused": 1920,
+            "real_model_smoke_records": int(
+                environment["real_model_smoke_record_count"]
+            ),
+            "real_model_smoke_new_generation_records": int(
+                environment["real_model_smoke_new_generation_count"]
+            ),
+            "real_model_smoke_q4_replay_records": int(
+                environment["real_model_smoke_q4_replay_count"]
+            ),
             "new_model_backed_detector_fits": 12,
         }
     )
@@ -601,6 +610,12 @@ def update_manifest(output: Path) -> None:
                 "historical_q4_model_backed_replay_count": 1920,
                 "execution_git_commits": environment["execution_git_commits"],
                 "sum_per_record_execution_seconds": execution_seconds,
+                "real_model_smoke_record_count": int(
+                    environment["real_model_smoke_record_count"]
+                ),
+                "real_model_smoke_execution_seconds_sum": float(
+                    environment["real_model_smoke_execution_seconds_sum"]
+                ),
                 "started_at": environment["execution_started_at"],
                 "completed_at": environment["execution_completed_at"],
                 "remote_paid_compute_used": False,

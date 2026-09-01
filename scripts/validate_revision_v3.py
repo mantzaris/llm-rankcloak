@@ -261,6 +261,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         and generation_validation.get("counts", {}).get("entropy_evaluations") == 720
         and generation_validation.get("counts", {}).get("quantization_q4_replays") == 1920
         and generation_validation.get("counts", {}).get("quantization_q8_generations") == 1920
+        and generation_validation.get("counts", {}).get("real_model_smoke_records") == 8
+        and generation_validation.get("checks", {}).get("real_model_smoke_matrix_exact")
+        is True
     )
     if not checks["model_backed_generation_validation_pass"]:
         errors.append("model-backed generation validation did not pass exact counts")

@@ -59,6 +59,21 @@ def load_records(path: Path) -> list[Mapping[str, object]]:
     return [json.loads(item.read_text(encoding="utf-8")) for item in sorted(path.glob("*/*.json"))]
 
 
+def record_validation_passes(record: Mapping[str, object]) -> bool:
+    """Interpret validation fields according to their declared assertion semantics."""
+
+    validation = record.get("validation", {})
+    if not isinstance(validation, Mapping):
+        return False
+    if record.get("record_type") == "entropy_calibration_trace":
+        return bool(
+            validation.get("target_token_count_exact") is True
+            and validation.get("finite_entropy_at_every_position") is True
+            and validation.get("detector_outcomes_used") is False
+        )
+    return bool(validation) and all(value is True for value in validation.values())
+
+
 def safe_mean(values: Sequence[object]) -> float:
     array = pd.to_numeric(pd.Series(list(values)), errors="coerce").to_numpy(dtype=float)
     array = array[np.isfinite(array)]
@@ -566,6 +581,7 @@ def validate_generation_ledgers(
     calibration_records: Sequence[Mapping[str, object]],
     entropy_records: Sequence[Mapping[str, object]],
     quantization_records: Sequence[Mapping[str, object]],
+    smoke_records: Sequence[Mapping[str, object]],
 ) -> Mapping[str, object]:
     """Fail closed on completeness, pairing, sampler, replay, and gate invariants."""
 
@@ -595,11 +611,39 @@ def validate_generation_ledgers(
             for record in records
             if record.get("schema_version") != SCHEMA_VERSION
             or record.get("execution_status") != "completed"
-            or not all(bool(value) for value in record.get("validation", {}).values())
+            or not record_validation_passes(record)
         ]
         checks[f"{name}_record_validation_failures"] = invalid
         if invalid:
             errors.append(f"{name} contains invalid completed records")
+
+    expected_smoke = {
+        ("entropy_calibration_trace", "llama3_8b_instruct_q4_k_m"),
+        ("entropy_calibration_trace", "mistral_7b_instruct_v0_3_q4_k_m"),
+        ("entropy_calibration_trace", "qwen2_5_7b_instruct_q4_k_m"),
+        ("entropy_rankcloak_trial", "llama3_8b_instruct_q4_k_m"),
+        ("entropy_rankcloak_trial", "mistral_7b_instruct_v0_3_q4_k_m"),
+        ("entropy_rankcloak_trial", "qwen2_5_7b_instruct_q4_k_m"),
+        ("quantization_q4_model_backed_replay", "qwen2_5_7b_instruct_q4_k_m"),
+        ("quantization_q8_generation", "qwen2_5_7b_instruct_q8_0"),
+    }
+    observed_smoke = [
+        (str(record.get("record_type")), str(record.get("model_id")))
+        for record in smoke_records
+    ]
+    checks["real_model_smoke_record_count"] = len(smoke_records)
+    checks["real_model_smoke_matrix_exact"] = bool(
+        len(observed_smoke) == len(set(observed_smoke))
+        and set(observed_smoke) == expected_smoke
+        and all(
+            record.get("schema_version") == SCHEMA_VERSION
+            and record.get("execution_status") == "completed"
+            and record_validation_passes(record)
+            for record in smoke_records
+        )
+    )
+    if not checks["real_model_smoke_matrix_exact"]:
+        errors.append("real-model smoke matrix is missing, duplicated, or invalid")
 
     failure_files = sorted((generation_root / "failures").glob("**/*.json"))
     checks["failure_record_count"] = len(failure_files)
@@ -732,6 +776,7 @@ def validate_generation_ledgers(
             "entropy_evaluations": len(entropy_records),
             "quantization_q4_replays": len(q4_by_pair),
             "quantization_q8_generations": len(q8_by_pair),
+            "real_model_smoke_records": len(smoke_records),
         },
         "checks": checks,
         "errors": errors,
@@ -1044,8 +1089,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     calibration_records = load_records(generation_root / "raw/entropy_calibration")
     entropy_records = load_records(generation_root / "raw/entropy")
     quantization_records = load_records(generation_root / "raw/quantization")
+    smoke_records = [
+        record
+        for phase in ("entropy_calibration", "entropy", "quantization")
+        for record in load_records(generation_root / f"smoke/{phase}")
+    ]
     audit = validate_generation_ledgers(
-        generation_root, calibration_records, entropy_records, quantization_records
+        generation_root,
+        calibration_records,
+        entropy_records,
+        quantization_records,
+        smoke_records,
     )
     if audit["status"] != "pass":
         atomic_json(output / "provenance/generation_analysis_validation.json", audit)
@@ -1173,12 +1227,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     for path, frame in tables.items():
         atomic_csv(path, frame)
     atomic_json(provenance / "generation_analysis_validation.json", audit)
-    atomic_json(
-        provenance / "generation_environment.json",
+    environment = dict(
         generation_environment(
-            [*calibration_records, *entropy_records, *quantization_records]
-        ),
+            [
+                *smoke_records,
+                *calibration_records,
+                *entropy_records,
+                *quantization_records,
+            ]
+        )
     )
+    environment.update(
+        {
+            "real_model_smoke_record_count": len(smoke_records),
+            "real_model_smoke_new_generation_count": sum(
+                record["record_type"] != "quantization_q4_model_backed_replay"
+                for record in smoke_records
+            ),
+            "real_model_smoke_q4_replay_count": sum(
+                record["record_type"] == "quantization_q4_model_backed_replay"
+                for record in smoke_records
+            ),
+            "real_model_smoke_execution_seconds_sum": float(
+                sum(float(record["execution_seconds"]) for record in smoke_records)
+            ),
+        }
+    )
+    atomic_json(provenance / "generation_environment.json", environment)
 
     entropy_main = entropy_summary.loc[
         entropy_summary["analysis_id"].eq("entropy_overall")
