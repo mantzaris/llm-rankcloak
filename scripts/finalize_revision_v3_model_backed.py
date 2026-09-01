@@ -498,6 +498,7 @@ The recovery-mode comparison""" + design_suffix
 - `fixed_payload_bits_per_generated_token`: serialized payload bits divided by full generated-token count.
 - `fixed_token_budget_payload_fraction`: serialized payload fraction embedded within the paired ungated token budget.
 - `ordinary_sampled_skip`: an entropy-ineligible top-p sample that does not consume a payload symbol.
+- Calibration `validation` maps contain the exclusion assertion `detector_outcomes_used=false`; a valid calibration record requires that value to be false while its token-count and finite-entropy assertions are true.
 - `mean_entropy_q8_minus_q4_bits`: paired mean change when Q8 replays the identical historical Q4 token path.
 - `observed_token_rank_changed_fraction` / `greedy_token_changed_fraction`: fraction of identical-path positions whose observed-token rank or greedy token differs across quantizations.
 - `positionwise_generated_token_match_fraction`: same-position Q4/Q8 token agreement for independently generated paired outputs.
