@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -69,7 +70,7 @@ def validate_prediction(
         expected_test = set(row_manifest.loc[row_manifest["partition"].eq("test"), "row_id"])
         if set(validation["row_id"]) != expected_validation or set(test["row_id"]) != expected_test:
             errors.append("matched row identities differ for {}".format(detector))
-    else:
+    elif evaluation.startswith("leave_one_model__"):
         target = evaluation.replace("leave_one_model__", "", 1)
         if target not in MODELS or set(test["model_id"]) != {target}:
             errors.append("held-family test identity differs for {}".format(evaluation))
@@ -77,6 +78,25 @@ def validate_prediction(
             errors.append("held model leaked into validation for {}".format(evaluation))
         if target in set(metrics["training_model_ids"]):
             errors.append("held model leaked into training for {}".format(evaluation))
+    elif evaluation == "entropy_gates":
+        if set(test["quantization"].astype(str)) != {"Q4_K_M"}:
+            errors.append("entropy test contains an unexpected quantization")
+        if set(test["gate_level"].astype(str)) != {"ungated", "moderate", "strict"}:
+            errors.append("entropy test lacks a gate level")
+        if metrics.get("deduplication_before_feature_extraction") is not True:
+            errors.append("entropy detector was not deduplicated before features")
+    elif evaluation in {"q4_to_q8", "q8_to_q4", "pooled_quantizations"}:
+        expected = {
+            "q4_to_q8": ({"Q4_K_M"}, {"Q8_0"}),
+            "q8_to_q4": ({"Q8_0"}, {"Q4_K_M"}),
+            "pooled_quantizations": ({"Q4_K_M", "Q8_0"}, {"Q4_K_M", "Q8_0"}),
+        }[evaluation]
+        if set(metrics["training_quantizations"]) != expected[0] or set(test["quantization"].astype(str)) != expected[1]:
+            errors.append("quantization holdout identity differs for {}".format(evaluation))
+        if metrics.get("deduplication_before_feature_extraction") is not True:
+            errors.append("quantization detector was not deduplicated before features")
+    else:
+        errors.append("unknown evaluation {}".format(evaluation))
     labels = test["label"].to_numpy(dtype=int)
     scores = test["score"].to_numpy(dtype=float)
     if not close(roc_auc(labels, scores), metrics["roc_auc"]):
@@ -129,8 +149,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         errors.append("a prepared partition is not exactly label balanced")
     prediction_files = sorted((output / "detector_predictions").glob("*.csv"))
     checks["prediction_file_count"] = len(prediction_files)
-    if len(prediction_files) != 12:
-        errors.append("expected 12 detector prediction ledgers")
+    if len(prediction_files) != 24:
+        errors.append("expected 24 detector prediction ledgers")
     for prediction_path in prediction_files:
         metric_path = output / "metrics" / (prediction_path.stem + ".json")
         if not metric_path.is_file():
@@ -139,8 +159,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         errors.extend(validate_prediction(prediction_path, metric_path, row_manifest))
     fit_files = sorted((output / "provenance").glob("*__fit.json"))
     checks["fit_metadata_count"] = len(fit_files)
-    if len(fit_files) != 12:
-        errors.append("expected 12 independent fit metadata records")
+    if len(fit_files) != 24:
+        errors.append("expected 24 independent fit metadata records")
     for path in fit_files:
         record = json.loads(path.read_text())
         if record.get("test_tuning") is not False:
@@ -185,7 +205,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         and entropy_plan[["payload_class", "representation_name"]].drop_duplicates().shape[0] == 20
         and entropy_plan["prompt_template_id"].nunique() == 2
         and entropy_plan["gate_level"].nunique() == 3
-        and entropy_plan["random_seed"].nunique() == 720
+        and entropy_plan["random_seed"].nunique() == 240
+        and entropy_plan.groupby(["experimental_cell_id", "population"])["random_seed"].nunique().eq(1).all()
+        and entropy_plan.groupby("experimental_cell_id")["random_seed"].nunique().eq(2).all()
     )
     if not checks["entropy_plan_all_new"]:
         errors.append("entropy generation plan is not the frozen 720-row all-new matrix")
@@ -218,15 +240,40 @@ def main(argv: Sequence[str] | None = None) -> int:
     generation_preflight = json.loads(
         (output / "provenance/generation_preflight.json").read_text(encoding="utf-8")
     )
-    checks["generation_preflight_fail_closed"] = bool(
-        generation_preflight.get("status") == "blocked"
+    checks["generation_preflight_ready"] = bool(
+        generation_preflight.get("status") == "ready"
         and generation_preflight.get("launch_performed") is False
         and generation_preflight.get("downloads_performed") is False
-        and generation_preflight.get("entropy_experiment_ready") is False
-        and generation_preflight.get("matched_quantization_experiment_ready") is False
+        and generation_preflight.get("entropy_experiment_ready") is True
+        and generation_preflight.get("matched_quantization_experiment_ready") is True
+        and generation_preflight.get("backend_cuda_valid") is True
+        and all(item.get("valid") is True for item in generation_preflight.get("artifacts", []))
     )
-    if not checks["generation_preflight_fail_closed"]:
-        errors.append("generation preflight did not fail closed as documented")
+    if not checks["generation_preflight_ready"]:
+        errors.append("generation preflight does not verify the exact backend and artifacts")
+
+    generation_validation = json.loads(
+        (output / "provenance/generation_analysis_validation.json").read_text(encoding="utf-8")
+    )
+    checks["model_backed_generation_validation_pass"] = bool(
+        generation_validation.get("status") == "pass"
+        and generation_validation.get("counts", {}).get("calibration_traces") == 18
+        and generation_validation.get("counts", {}).get("entropy_evaluations") == 720
+        and generation_validation.get("counts", {}).get("quantization_q4_replays") == 1920
+        and generation_validation.get("counts", {}).get("quantization_q8_generations") == 1920
+    )
+    if not checks["model_backed_generation_validation_pass"]:
+        errors.append("model-backed generation validation did not pass exact counts")
+    locked_audits = sorted(
+        (output / "deduplication").glob("model_backed__*__leakage_audit.json")
+    )
+    checks["model_backed_locked_dedup_audit_count"] = len(locked_audits)
+    checks["model_backed_locked_dedup_all_pass"] = bool(
+        len(locked_audits) == 4
+        and all(json.loads(path.read_text(encoding="utf-8")).get("status") == "pass" for path in locked_audits)
+    )
+    if not checks["model_backed_locked_dedup_all_pass"]:
+        errors.append("one or more model-backed locked dedup audits is missing or failed")
 
     recovery = pd.read_csv(output / "source_tables/recovery_mode_comparison.csv")
     recovery_rates = recovery.set_index("replay_mode")["recovery_rate"].to_dict()
@@ -289,11 +336,48 @@ def main(argv: Sequence[str] | None = None) -> int:
         "detector_low_fpr",
         "human_control_false_positives",
         "topic_conditioned_cover_variability",
+        "entropy_gate_capacity_recovery",
+        "entropy_gate_detector_performance",
+        "matched_quantization_sensitivity",
+        "matched_quantization_recovery",
+        "matched_quantization_detector_transfer",
     ):
         for suffix in (".pdf", ".png"):
             path = output / "figures" / (stem + suffix)
             if not path.is_file() or path.stat().st_size < 1000:
                 errors.append("missing or empty figure {}".format(path.name))
+    artifact_manifest = pd.read_csv(output / "artifact_manifest.csv")
+    manifest_paths = set(artifact_manifest["path"].astype(str))
+    excluded_artifacts = {
+        "artifact_manifest.csv",
+        "provenance/validation_report.json",
+    }
+    actual_paths = {
+        str(path.relative_to(output))
+        for path in output.rglob("*")
+        if path.is_file() and str(path.relative_to(output)) not in excluded_artifacts
+    }
+    checks["artifact_manifest_path_set_exact"] = manifest_paths == actual_paths
+    if not checks["artifact_manifest_path_set_exact"]:
+        errors.append("artifact manifest path set is incomplete or contains stale paths")
+    artifact_errors = []
+    for row in artifact_manifest.to_dict("records"):
+        path = output / str(row["path"])
+        if not path.is_file():
+            artifact_errors.append("missing {}".format(row["path"]))
+            continue
+        if int(row["size_bytes"]) != path.stat().st_size:
+            artifact_errors.append("size {}".format(row["path"]))
+        if hashlib.sha256(path.read_bytes()).hexdigest() != str(row["sha256"]):
+            artifact_errors.append("sha256 {}".format(row["path"]))
+        if path.suffix == ".csv" and pd.notna(row.get("row_count")):
+            row_count = sum(1 for _ in path.open("r", encoding="utf-8")) - 1
+            if int(row["row_count"]) != row_count:
+                artifact_errors.append("row_count {}".format(row["path"]))
+    checks["artifact_manifest_entry_count"] = len(artifact_manifest)
+    checks["artifact_manifest_checksums_valid"] = not artifact_errors
+    if artifact_errors:
+        errors.extend("artifact manifest mismatch: {}".format(item) for item in artifact_errors)
     checks["all_numeric_recomputations_pass"] = not any(
         "reproduce" in error or "differs" in error for error in errors
     )

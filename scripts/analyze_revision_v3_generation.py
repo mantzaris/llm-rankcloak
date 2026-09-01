@@ -7,6 +7,8 @@ import argparse
 import hashlib
 import json
 import math
+import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
@@ -718,8 +720,6 @@ def validate_generation_ledgers(
 
 
 def subprocess_git_head() -> str:
-    import subprocess
-
     return subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=PROJECT_ROOT,
@@ -727,6 +727,65 @@ def subprocess_git_head() -> str:
         capture_output=True,
         text=True,
     ).stdout.strip()
+
+
+def generation_environment(
+    records: Sequence[Mapping[str, object]],
+) -> Mapping[str, object]:
+    if not records:
+        raise ValueError("generation environment requires completed records")
+    backends: dict[str, Mapping[str, object]] = {}
+    artifacts: dict[str, Mapping[str, object]] = {}
+    for record in records:
+        manifest = record["model_manifest"]
+        backend = manifest["backend"]
+        backends.setdefault(canonical_sha256(backend), backend)
+        artifact = manifest["artifact"]
+        artifacts[str(artifact["model_id"])] = artifact
+    if len(backends) != 1:
+        raise ValueError("generation records disagree on backend environment")
+    backend = next(iter(backends.values()))
+    requirements = json.loads(
+        (PROJECT_ROOT / "configs/revision_v3/generation_requirements.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    cpu_text = Path("/proc/cpuinfo").read_text(encoding="utf-8", errors="replace")
+    cpu_match = re.search(r"^model name\s*:\s*(.+)$", cpu_text, flags=re.MULTILINE)
+    memory_text = Path("/proc/meminfo").read_text(encoding="utf-8", errors="replace")
+    memory_match = re.search(r"^MemTotal:\s*(\d+)\s*kB$", memory_text, flags=re.MULTILINE)
+    nvidia_raw = subprocess.run(
+        ["nvidia-smi"], check=True, capture_output=True, text=True
+    ).stdout
+    cuda_match = re.search(r"CUDA Version:\s*([0-9.]+)", nvidia_raw)
+    required_backend = requirements["required_backend"]
+    return {
+        "schema_version": "rankcloak-revision-v3-generation-environment-v1",
+        "python_version": backend["python_version"],
+        "python_implementation": backend["python_implementation"],
+        "platform": backend["platform"],
+        "cpu_model": cpu_match.group(1).strip() if cpu_match else None,
+        "logical_cpu_count": __import__("os").cpu_count(),
+        "physical_memory_bytes": int(memory_match.group(1)) * 1024 if memory_match else None,
+        "packages": backend["packages"],
+        "llama_cpp_system_info": backend["llama_cpp_system_info"],
+        "gpu_offload_supported": backend["gpu_offload_supported"],
+        "gpu_inventory": backend["gpu_inventory"],
+        "driver_reported_cuda_compatibility_version": cuda_match.group(1) if cuda_match else None,
+        "deterministic_environment": backend["deterministic_environment"],
+        "dedicated_environment": required_backend["dedicated_environment"],
+        "environment_creation_command": required_backend["environment_creation_command"],
+        "backend_installation_method": required_backend["installation_method"],
+        "backend_installation_command": required_backend["installation_command"],
+        "cuda_runtime_installation_command": required_backend["runtime_installation_command"],
+        "source_build_unavailable_reason": required_backend["source_build_unavailable_reason"],
+        "model_download_commands": [item["download_command"] for item in requirements["artifacts"]],
+        "model_artifacts": [artifacts[key] for key in sorted(artifacts)],
+        "model_artifact_total_bytes": int(sum(int(item["size_bytes"]) for item in artifacts.values())),
+        "remote_paid_compute_used": False,
+        "execution_started_at": min(str(record["started_at"]) for record in records),
+        "execution_completed_at": max(str(record["completed_at"]) for record in records),
+    }
 
 
 def position_summary(frame: pd.DataFrame, strata: Sequence[str]) -> pd.DataFrame:
@@ -1014,6 +1073,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     for path, frame in tables.items():
         atomic_csv(path, frame)
     atomic_json(provenance / "generation_analysis_validation.json", audit)
+    atomic_json(
+        provenance / "generation_environment.json",
+        generation_environment(
+            [*calibration_records, *entropy_records, *quantization_records]
+        ),
+    )
 
     entropy_main = entropy_summary.loc[
         entropy_summary["analysis_id"].eq("entropy_overall")

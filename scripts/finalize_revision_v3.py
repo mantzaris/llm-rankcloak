@@ -656,7 +656,9 @@ def artifact_sources(output: Path) -> pd.DataFrame:
 
 def artifact_manifest(output: Path) -> pd.DataFrame:
     rows = []
-    excluded = {"artifact_manifest.csv"}
+    # The manifest cannot checksum itself.  The validation report is also
+    # excluded because it validates the manifest and is written afterwards.
+    excluded = {"artifact_manifest.csv", "provenance/validation_report.json"}
     for path in sorted(item for item in output.rglob("*") if item.is_file()):
         relative = str(path.relative_to(output))
         if relative in excluded:
@@ -976,6 +978,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     atomic_csv(output / "provenance/experiment_status.csv", pd.DataFrame(experiment_status))
     atomic_json(manifest_path, manifest)
+    model_backed_validation = output / "provenance/generation_analysis_validation.json"
+    if model_backed_validation.is_file():
+        from finalize_revision_v3_model_backed import complete_handoff
+
+        complete_handoff(output)
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     atomic_csv(output / "artifact_manifest.csv", artifact_manifest(output))
     print(
         json.dumps(

@@ -244,7 +244,7 @@ def prepare_evaluation(
 
 def generated_log_probabilities(record: Mapping[str, object]) -> Sequence[float]:
     record_type = str(record["record_type"])
-    population = str(record["population"])
+    population = str(record.get("population", "unknown"))
     if record_type == "entropy_rankcloak_trial":
         return record["generation"]["embedding_log_probabilities"]
     if record_type == "entropy_ordinary_control":
