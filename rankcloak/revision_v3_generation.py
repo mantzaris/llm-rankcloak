@@ -36,6 +36,7 @@ from .model_io import (
     llama_cpp_gpu_offload_supported,
     load_llama_cpp_model,
     make_context_token_ids,
+    preload_pip_cuda_libraries,
 )
 from .revision_payloads import generate_revision_v1_payloads, validate_revision_corpus
 from .revision_protocol import (
@@ -332,6 +333,7 @@ def verify_model_artifact(model_id: str) -> Mapping[str, object]:
 
 
 def backend_manifest(gpu_uuid: str) -> Mapping[str, object]:
+    preload_pip_cuda_libraries()
     from llama_cpp import llama_cpp as llama_cpp_api
 
     package_version = importlib.metadata.version("llama-cpp-python")
