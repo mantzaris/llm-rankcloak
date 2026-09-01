@@ -255,12 +255,24 @@ def detector_main(
     return selected.iloc[0].to_dict()
 
 
+def true_count(values: pd.Series) -> int:
+    return int(values.map(lambda value: str(value).strip().lower() == "true").sum())
+
+
+def unavailable_conditions(audit: Mapping[str, object]) -> str:
+    conditions = list(audit.get("conditions_unavailable_after_deduplication", []))
+    return "none" if not conditions else ", ".join(map(str, conditions))
+
+
 def write_handoff_docs(
     output: Path,
     metrics: pd.DataFrame,
     subgroups: pd.DataFrame,
 ) -> None:
     entropy = pd.read_csv(output / "source_tables/entropy_generation_summary.csv", low_memory=False)
+    entropy_trials = pd.read_csv(
+        output / "source_tables/entropy_generation_trials.csv", low_memory=False
+    )
     control_quality = pd.read_csv(
         output
         / "source_tables/entropy_rankcloak_control_difference_summary.csv",
@@ -271,6 +283,10 @@ def write_handoff_docs(
         low_memory=False,
     )
     quantization = pd.read_csv(output / "source_tables/quantization_generation_summary.csv", low_memory=False)
+    quantization_trials = pd.read_csv(
+        output / "source_tables/quantization_generation_trials.csv",
+        low_memory=False,
+    )
     pairs = pd.read_csv(output / "source_tables/quantization_pair_summary.csv", low_memory=False)
     thresholds = pd.read_csv(output / "source_tables/entropy_calibration_thresholds.csv", low_memory=False)
     generation_audit = json.loads(
@@ -309,6 +325,15 @@ Quantization detector fits used the frozen payload train/validation/test assignm
 
     entropy_lines = []
     for gate, label in (("ungated", "Ungated"), ("moderate", "Median gate"), ("strict", "75th-percentile gate")):
+        gate_trials = entropy_trials.loc[
+            entropy_trials["population"].eq("rankcloak")
+            & entropy_trials["gate_level"].eq(gate)
+        ]
+        completed_count = true_count(gate_trials["payload_completion"])
+        saved_count = true_count(gate_trials["saved_id_exact_payload_recovery"])
+        visible_count = true_count(
+            gate_trials["visible_text_exact_payload_recovery"]
+        )
         completion = summary_row(entropy, analysis_id="entropy_overall", metric="payload_completion", population="rankcloak", gate_level=gate)
         capacity = summary_row(entropy, analysis_id="entropy_overall", metric="fixed_payload_bits_per_generated_token", population="rankcloak", gate_level=gate)
         budget = summary_row(entropy, analysis_id="entropy_overall", metric="fixed_token_budget_payload_fraction", population="rankcloak", gate_level=gate)
@@ -320,7 +345,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
         surprisal = summary_row(entropy, analysis_id="entropy_overall", metric="mean_token_surprisal_nats", population="rankcloak", gate_level=gate)
         pressure = summary_row(entropy, analysis_id="entropy_overall", metric="mean_rank_pressure_log_probability_gap_nats", population="rankcloak", gate_level=gate)
         entropy_lines.append(
-            f"{label}: payload completion {completion['mean']:.4f} ({int(completion['observation_count'])} trials; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, observed-token rank {rank['mean']:.4f}, token surprisal {surprisal['mean']:.4f} nats, rank pressure {pressure['mean']:.4f} nats, saved-ID exact recovery {saved['mean']:.4f}, and visible-text exact recovery {visible['mean']:.4f}."
+            f"{label}: payload completion {completed_count}/{len(gate_trials)} ({completion['mean']:.4f}; {len(gate_trials) - completed_count} maximum-budget failures; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, observed-token rank {rank['mean']:.4f}, token surprisal {surprisal['mean']:.4f} nats, rank pressure {pressure['mean']:.4f} nats, saved-ID exact recovery {saved_count}/{len(gate_trials)} ({saved['mean']:.4f}), and visible-text exact recovery {visible_count}/{len(gate_trials)} ({visible['mean']:.4f})."
         )
     quality_lines = []
     quality_metrics = (
@@ -395,6 +420,23 @@ Quantization detector fits used the frozen payload train/validation/test assignm
     rank_change = summary_row(pairs, analysis_id="quantization_pair_overall", metric="observed_token_rank_changed_fraction", population="rankcloak")
     greedy_change = summary_row(pairs, analysis_id="quantization_pair_overall", metric="greedy_token_changed_fraction", population="rankcloak")
     token_match = summary_row(pairs, analysis_id="quantization_pair_overall", metric="positionwise_generated_token_match_fraction", population="rankcloak")
+    q4_rankcloak_trials = quantization_trials.loc[
+        quantization_trials["quantization"].eq("Q4_K_M")
+        & quantization_trials["population"].eq("rankcloak")
+    ]
+    q8_rankcloak_trials = quantization_trials.loc[
+        quantization_trials["quantization"].eq("Q8_0")
+        & quantization_trials["population"].eq("rankcloak")
+    ]
+    q4_saved_count = true_count(
+        q4_rankcloak_trials["saved_id_exact_payload_recovery"]
+    )
+    q8_saved_count = true_count(
+        q8_rankcloak_trials["saved_id_exact_payload_recovery"]
+    )
+    q8_visible_count = true_count(
+        q8_rankcloak_trials["visible_text_exact_payload_recovery"]
+    )
     quant_detector_lines = []
     for evaluation, label in (("q4_to_q8", "Q4→Q8"), ("q8_to_q4", "Q8→Q4"), ("pooled_quantizations", "pooled")):
         parts = []
@@ -412,11 +454,11 @@ Quantization detector fits used the frozen payload train/validation/test assignm
 
 All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} {' '.join(gate_quality_lines)} {' '.join(quality_lines)} The quality measures are transparent surface heuristics rather than human judgments. These outcomes quantify capacity, length, recovery, distributional, and heuristic-quality changes; they do not by themselves establish reduced detectability or robust visible-text transport.
 
-{' '.join(detector_lines)} The entropy detector corpus retained {entropy_dedup['retained_rows']:,}/{entropy_dedup['original_rows']:,} rows after locked pre-feature deduplication, with {entropy_dedup['removed_rows']} rows removed and zero audited cross-partition links. Each gate subgroup had fewer than 1,000 test controls after deduplication, so 0.1% TPR was not estimated.
+{' '.join(detector_lines)} The entropy detector corpus retained {entropy_dedup['retained_rows']:,}/{entropy_dedup['original_rows']:,} rows after locked pre-feature deduplication, with {entropy_dedup['removed_rows']} rows removed and zero audited cross-partition links. Conditions unavailable after this audit: {unavailable_conditions(entropy_dedup)}. Each gate subgroup had fewer than 1,000 test controls after deduplication, so 0.1% TPR was not estimated.
 
-All 1,920 historical Q4 rows were successfully replayed under the exact pinned Q4 model, and all 1,920 paired Q8 generations completed. Saved-ID recovery among RankCloak rows was {q4_saved['mean']:.4f} for Q4 replay and {q8_saved['mean']:.4f} for Q8; Q8 visible-text recovery was {q8_visible['mean']:.4f}. On the identical historical Q4 token path for RankCloak rows, Q8 minus Q4 mean next-token entropy was {entropy_change['mean']:.4f} bits (95% CI {entropy_change['ci_low_95']:.4f}–{entropy_change['ci_high_95']:.4f}); the observed-token rank changed at a mean fraction {rank_change['mean']:.4f} of positions and the greedy token changed at {greedy_change['mean']:.4f}. Independently generated Q4/Q8 RankCloak outputs matched positionwise at mean fraction {token_match['mean']:.4f}. These are paired quantization sensitivities for one pinned Qwen model, not cross-family comparisons.
+All 1,920 historical Q4 rows were successfully replayed under the exact pinned Q4 model, and all 1,920 paired Q8 generations completed. Saved-ID recovery among RankCloak rows was {q4_saved_count}/{len(q4_rankcloak_trials)} ({q4_saved['mean']:.4f}) for Q4 replay and {q8_saved_count}/{len(q8_rankcloak_trials)} ({q8_saved['mean']:.4f}) for Q8; Q8 visible-text recovery was {q8_visible_count}/{len(q8_rankcloak_trials)} ({q8_visible['mean']:.4f}). On the identical historical Q4 token path for RankCloak rows, Q8 minus Q4 mean next-token entropy was {entropy_change['mean']:.4f} bits (95% CI {entropy_change['ci_low_95']:.4f}–{entropy_change['ci_high_95']:.4f}); the observed-token rank changed at a mean fraction {rank_change['mean']:.4f} of positions and the greedy token changed at {greedy_change['mean']:.4f}. Independently generated Q4/Q8 RankCloak outputs matched positionwise at mean fraction {token_match['mean']:.4f}. These are paired quantization sensitivities for one pinned Qwen model, not cross-family comparisons.
 
-{' '.join(quant_detector_lines)} Locked deduplication retained Q4→Q8 {quant_dedup['q4_to_q8']['retained_rows']:,}/{quant_dedup['q4_to_q8']['original_rows']:,}, Q8→Q4 {quant_dedup['q8_to_q4']['retained_rows']:,}/{quant_dedup['q8_to_q4']['original_rows']:,}, and pooled {quant_dedup['pooled_quantizations']['retained_rows']:,}/{quant_dedup['pooled_quantizations']['original_rows']:,} rows, with zero audited leakage. None of these test sets contained 1,000 negatives, so 0.1% operating points were unavailable rather than interpolated.
+{' '.join(quant_detector_lines)} Locked deduplication retained Q4→Q8 {quant_dedup['q4_to_q8']['retained_rows']:,}/{quant_dedup['q4_to_q8']['original_rows']:,}, Q8→Q4 {quant_dedup['q8_to_q4']['retained_rows']:,}/{quant_dedup['q8_to_q4']['original_rows']:,}, and pooled {quant_dedup['pooled_quantizations']['retained_rows']:,}/{quant_dedup['pooled_quantizations']['original_rows']:,} rows, with zero audited leakage. Conditions unavailable after deduplication were Q4→Q8: {unavailable_conditions(quant_dedup['q4_to_q8'])}; Q8→Q4: {unavailable_conditions(quant_dedup['q8_to_q4'])}; pooled: {unavailable_conditions(quant_dedup['pooled_quantizations'])}. None of these test sets contained 1,000 negatives, so 0.1% operating points were unavailable rather than interpolated.
 """
     atomic_text(results_path, results)
 
