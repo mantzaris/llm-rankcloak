@@ -98,7 +98,19 @@ def _finite_log_probabilities(record: Mapping[str, object]) -> list[float]:
 def generation_surprisal_features(record: Mapping[str, object]) -> Mapping[str, float]:
     """Extract only features available for both RankCloak and clean controls."""
 
-    logp = np.asarray(_finite_log_probabilities(record), dtype=np.float64)
+    return surprisal_features_from_log_probabilities(_finite_log_probabilities(record))
+
+
+def surprisal_features_from_log_probabilities(
+    log_probabilities: Sequence[float],
+) -> Mapping[str, float]:
+    """Summarize an exact-model token trace using the frozen attacker features."""
+
+    logp = np.asarray(list(log_probabilities), dtype=np.float64)
+    if logp.ndim != 1 or not len(logp) or not np.isfinite(logp).all():
+        raise RevisionV3AnalysisError(
+            "Surprisal features require a non-empty finite log-probability trace"
+        )
     surprisal = -logp
     first = surprisal[: max(1, len(surprisal) // 2)]
     last = surprisal[len(surprisal) // 2 :]
@@ -716,5 +728,6 @@ __all__ = [
     "prepare_human_control_evaluation",
     "rank_pressure_summary",
     "read_jsonl",
+    "surprisal_features_from_log_probabilities",
     "token_jaccard",
 ]
