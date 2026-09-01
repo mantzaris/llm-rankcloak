@@ -266,6 +266,10 @@ def write_handoff_docs(
         / "source_tables/entropy_rankcloak_control_difference_summary.csv",
         low_memory=False,
     )
+    gate_quality = pd.read_csv(
+        output / "source_tables/entropy_paired_difference_summary.csv",
+        low_memory=False,
+    )
     quantization = pd.read_csv(output / "source_tables/quantization_generation_summary.csv", low_memory=False)
     pairs = pd.read_csv(output / "source_tables/quantization_pair_summary.csv", low_memory=False)
     thresholds = pd.read_csv(output / "source_tables/entropy_calibration_thresholds.csv", low_memory=False)
@@ -345,6 +349,32 @@ Quantization detector fits used the frozen payload train/validation/test assignm
             + ", ".join(f"{text} {row['mean']:.4f}" for text, row in values)
             + "."
         )
+    gate_quality_lines = []
+    gate_quality_metrics = (
+        ("word_count_difference_vs_ungated", "word count"),
+        ("unique_word_fraction_difference_vs_ungated", "unique-word fraction"),
+        ("repeated_bigram_fraction_difference_vs_ungated", "repeated-bigram fraction"),
+        ("surface_flag_total_difference_vs_ungated", "surface-flag count"),
+    )
+    for gate, label in (("moderate", "Median gate"), ("strict", "75th-percentile gate")):
+        values = [
+            (
+                text,
+                summary_row(
+                    gate_quality,
+                    analysis_id="paired_entropy_difference",
+                    metric=metric,
+                    gate_level=gate,
+                ),
+            )
+            for metric, text in gate_quality_metrics
+        ]
+        gate_quality_lines.append(
+            label
+            + " paired gated-minus-ungated mean differences were "
+            + ", ".join(f"{text} {row['mean']:.4f}" for text, row in values)
+            + "."
+        )
     detector_lines = []
     for detector in DETECTORS:
         cells = [detector_subgroup(subgroups, detector, "gate_level", gate) for gate in ("ungated", "moderate", "strict")]
@@ -380,7 +410,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
     results_prefix = old_results.split("\nNo model-backed entropy or matched-quantization outcome was produced.", 1)[0].rstrip()
     results = results_prefix + f"""
 
-All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} {' '.join(quality_lines)} The quality measures are transparent surface heuristics rather than human judgments. These outcomes quantify capacity, length, recovery, distributional, and heuristic-quality changes; they do not by themselves establish reduced detectability or robust visible-text transport.
+All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} {' '.join(gate_quality_lines)} {' '.join(quality_lines)} The quality measures are transparent surface heuristics rather than human judgments. These outcomes quantify capacity, length, recovery, distributional, and heuristic-quality changes; they do not by themselves establish reduced detectability or robust visible-text transport.
 
 {' '.join(detector_lines)} The entropy detector corpus retained {entropy_dedup['retained_rows']:,}/{entropy_dedup['original_rows']:,} rows after locked pre-feature deduplication, with {entropy_dedup['removed_rows']} rows removed and zero audited cross-partition links. Each gate subgroup had fewer than 1,000 test controls after deduplication, so 0.1% TPR was not estimated.
 
@@ -430,7 +460,7 @@ def write_claim_matrix(output: Path) -> None:
             {
                 "proposed_claim": "Entropy gating changes payload capacity, output length, recovery, quality, and detector behavior",
                 "evidence_status": "supported_descriptively_as_quantified",
-                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
+                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_paired_difference_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_paired_changes.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
                 "qualification": "Direction and magnitude must be stated from the tables; no universal improvement claim",
             },
             {
@@ -560,6 +590,7 @@ def write_source_map(output: Path) -> None:
         ("manuscript_tables/entropy_calibration_thresholds.tex", "source_tables/entropy_calibration_thresholds.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_generation.tex", "source_tables/entropy_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_quality.tex", "source_tables/entropy_rankcloak_control_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
+        ("manuscript_tables/entropy_gate_paired_changes.tex", "source_tables/entropy_paired_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_detectors.tex", "source_tables/model_backed_detector_subgroups.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
         ("manuscript_tables/matched_quantization_generation.tex", "source_tables/quantization_generation_summary.csv;source_tables/quantization_pair_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/matched_quantization_detectors.tex", "source_tables/model_backed_detector_metrics.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),

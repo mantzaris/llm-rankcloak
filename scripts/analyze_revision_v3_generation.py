@@ -1432,6 +1432,32 @@ def main(argv: Sequence[str] | None = None) -> int:
             "tab:entropy-gate-quality",
         ),
     )
+    gate_quality_metrics = {
+        "word_count_difference_vs_ungated",
+        "unique_word_fraction_difference_vs_ungated",
+        "repeated_bigram_fraction_difference_vs_ungated",
+        "surface_flag_total_difference_vs_ungated",
+    }
+    gate_quality_main = entropy_difference_summary.loc[
+        entropy_difference_summary["metric"].isin(gate_quality_metrics),
+        [
+            "gate_level",
+            "metric",
+            "mean",
+            "ci_low_95",
+            "ci_high_95",
+            "observation_count",
+            "group_count",
+        ],
+    ]
+    atomic_text(
+        manuscript / "entropy_gate_paired_changes.tex",
+        latex_table(
+            gate_quality_main,
+            "Paired entropy-gated-minus-ungated RankCloak quality diagnostics.",
+            "tab:entropy-gate-paired-changes",
+        ),
+    )
     atomic_text(
         manuscript / "matched_quantization_generation.tex",
         latex_table(quant_main, "Matched Q4_K_M and Q8_0 generation outcomes.", "tab:matched-quantization-generation"),
