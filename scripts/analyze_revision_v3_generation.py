@@ -66,8 +66,14 @@ def record_validation_passes(record: Mapping[str, object]) -> bool:
     if not isinstance(validation, Mapping):
         return False
     if record.get("record_type") == "entropy_calibration_trace":
+        expected_fields = {
+            "target_token_count_exact",
+            "finite_entropy_at_every_position",
+            "detector_outcomes_used",
+        }
         return bool(
-            validation.get("target_token_count_exact") is True
+            set(validation) == expected_fields
+            and validation.get("target_token_count_exact") is True
             and validation.get("finite_entropy_at_every_position") is True
             and validation.get("detector_outcomes_used") is False
         )

@@ -454,6 +454,7 @@ PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.p
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector surprisal --output-dir /tmp/rankcloak_revision_v3_repro
 CUDA_VISIBLE_DEVICES=0 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector textcnn --output-dir /tmp/rankcloak_revision_v3_repro
 CUDA_VISIBLE_DEVICES=0 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector deberta --output-dir /tmp/rankcloak_revision_v3_repro
+.venv/bin/python -m pytest -q tests/test_revision_v3_*.py --junitxml=/tmp/rankcloak_revision_v3_repro/logs/pytest_v3_focused.xml
 .venv/bin/python -m pytest -q --junitxml=/tmp/rankcloak_revision_v3_repro/logs/pytest_full.xml
 .venv/bin/python scripts/finalize_revision_v3.py --output-dir /tmp/rankcloak_revision_v3_repro
 .venv/bin/python scripts/validate_revision_v3.py --output-dir /tmp/rankcloak_revision_v3_repro
@@ -593,6 +594,7 @@ def update_manifest(output: Path) -> None:
         ".venv/bin/python scripts/analyze_revision_v3_generation.py",
         ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only",
         ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector <surprisal|textcnn|deberta>",
+        ".venv/bin/python -m pytest -q tests/test_revision_v3_*.py --junitxml=results/revision_v3/logs/pytest_v3_focused.xml",
     ]
     completion_time = max(
         [environment["execution_completed_at"], *(record["completed_at"] for record in fits)]

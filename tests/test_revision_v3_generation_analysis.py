@@ -24,6 +24,9 @@ def test_calibration_negative_assertion_is_a_passing_validation():
     assert record_validation_passes(record)
     record["validation"]["detector_outcomes_used"] = True
     assert not record_validation_passes(record)
+    record["validation"]["detector_outcomes_used"] = False
+    record["validation"]["unexpected_assertion"] = False
+    assert not record_validation_passes(record)
 
 
 def test_noncalibration_validation_requires_all_positive_assertions():
