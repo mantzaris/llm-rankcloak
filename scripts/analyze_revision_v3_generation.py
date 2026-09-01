@@ -736,12 +736,15 @@ def generation_environment(
         raise ValueError("generation environment requires completed records")
     backends: dict[str, Mapping[str, object]] = {}
     artifacts: dict[str, Mapping[str, object]] = {}
+    source_hashes: dict[str, set[str]] = {}
     for record in records:
         manifest = record["model_manifest"]
         backend = manifest["backend"]
         backends.setdefault(canonical_sha256(backend), backend)
         artifact = manifest["artifact"]
         artifacts[str(artifact["model_id"])] = artifact
+        for source, digest in record.get("source_hashes", {}).items():
+            source_hashes.setdefault(str(source), set()).add(str(digest))
     if len(backends) != 1:
         raise ValueError("generation records disagree on backend environment")
     backend = next(iter(backends.values()))
@@ -782,6 +785,15 @@ def generation_environment(
         "model_download_commands": [item["download_command"] for item in requirements["artifacts"]],
         "model_artifacts": [artifacts[key] for key in sorted(artifacts)],
         "model_artifact_total_bytes": int(sum(int(item["size_bytes"]) for item in artifacts.values())),
+        "execution_git_commits": sorted(
+            {str(record["execution_git_commit"]) for record in records}
+        ),
+        "protocol_amendment_commits": sorted(
+            {str(record["protocol_amendment_commit"]) for record in records}
+        ),
+        "recorded_source_hashes": {
+            source: sorted(digests) for source, digests in sorted(source_hashes.items())
+        },
         "remote_paid_compute_used": False,
         "execution_started_at": min(str(record["started_at"]) for record in records),
         "execution_completed_at": max(str(record["completed_at"]) for record in records),

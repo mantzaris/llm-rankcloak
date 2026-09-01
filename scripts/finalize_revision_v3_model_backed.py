@@ -599,6 +599,7 @@ def update_manifest(output: Path) -> None:
                 **validation["counts"],
                 "new_generation_trial_count": 2640,
                 "historical_q4_model_backed_replay_count": 1920,
+                "execution_git_commits": environment["execution_git_commits"],
                 "sum_per_record_execution_seconds": execution_seconds,
                 "started_at": environment["execution_started_at"],
                 "completed_at": environment["execution_completed_at"],
