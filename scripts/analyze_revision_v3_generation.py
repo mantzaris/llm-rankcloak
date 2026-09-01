@@ -636,8 +636,27 @@ def validate_generation_ledgers(
         roles = list(map(str, generation["embedding_token_roles"]))
         threshold = record["threshold_bits"]
         expected_eligible = [True] * len(entropies) if threshold is None else [value >= float(threshold) for value in entropies]
+        if threshold is None:
+            sampling_policy_valid = bool(
+                generation["ineligible_token_policy"] == "not_applicable_gate_disabled"
+                and generation["ordinary_sampling_seed"] is None
+                and generation["ordinary_sampling_temperature"] is None
+                and generation["ordinary_sampling_top_p"] is None
+                and generation["ordinary_sampler"] is None
+                and not generation["ordinary_sampled_skip_positions"]
+            )
+        else:
+            sampling_policy_valid = bool(
+                generation["ineligible_token_policy"] == "ordinary_seeded_top_p_sampling"
+                and generation["ordinary_sampler"]
+                == "numpy_pcg64_serial_top_p_v1_token_id_tiebreak"
+                and math.isclose(
+                    float(generation["ordinary_sampling_temperature"]), 0.8
+                )
+                and math.isclose(float(generation["ordinary_sampling_top_p"]), 0.95)
+            )
         role_valid = all(
-            role == ("forced_payload" if is_eligible else "ordinary_sampled_skip")
+            role == ("payload" if is_eligible else "ordinary_sampled_skip")
             for role, is_eligible in zip(roles, eligible)
         )
         realized = list(generation["realized_ranks"])
@@ -651,7 +670,7 @@ def validate_generation_ledgers(
             and generation["ineligible_position_count"] == len(eligible) - consumed
             and record["saved_token_id_replay"]["exact_rank_prefix_recovery"]
             and record["validation"]["encoder_decoder_gate_positions_exact"]
-            and generation["ineligible_token_policy"] == "ordinary_sampled_skip"
+            and sampling_policy_valid
         ):
             gate_errors.append(str(record["plan_id"]))
     checks["entropy_gate_invariant_failures"] = gate_errors

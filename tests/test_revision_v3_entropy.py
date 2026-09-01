@@ -92,6 +92,10 @@ def test_skipped_positions_do_not_consume_or_shift_payload_symbols():
         "payload",
     ]
     assert generated["ordinary_sampled_skip_positions"] == [0, 2]
+    assert generated["ineligible_token_policy"] == "ordinary_seeded_top_p_sampling"
+    assert generated["ordinary_sampler"] == "numpy_pcg64_serial_top_p_v1_token_id_tiebreak"
+    assert generated["ordinary_sampling_temperature"] == pytest.approx(0.8)
+    assert generated["ordinary_sampling_top_p"] == pytest.approx(0.95)
     assert all(token_id != 0 for token_id in generated["ordinary_sampled_skip_token_ids"])
     recovered = recover_entropy_gated_span(
         ScheduledEntropyModel(schedule),
