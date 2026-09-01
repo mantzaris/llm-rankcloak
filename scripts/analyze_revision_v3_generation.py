@@ -74,6 +74,28 @@ def record_validation_passes(record: Mapping[str, object]) -> bool:
     return bool(validation) and all(value is True for value in validation.values())
 
 
+def payload_rank_trace_alignment_passes(
+    generation: Mapping[str, object],
+    expected_ranks: Sequence[int],
+) -> bool:
+    """Validate that sampled skips preserve the payload-rank subsequence."""
+
+    eligible = list(map(bool, generation["embedding_eligible_mask"]))
+    realized = list(generation["realized_ranks"])
+    consumed = int(generation["consumed_payload_rank_count"])
+    consumed_realized = [int(rank) for rank in realized if rank is not None]
+    return bool(
+        len(realized) == len(eligible)
+        and all(
+            (rank is not None) == is_eligible
+            for rank, is_eligible in zip(realized, eligible)
+        )
+        and consumed_realized == list(map(int, expected_ranks))[:consumed]
+        and list(map(int, generation["consumed_payload_rank_indices"]))
+        == list(range(consumed))
+    )
+
+
 def safe_mean(values: Sequence[object]) -> float:
     array = pd.to_numeric(pd.Series(list(values)), errors="coerce").to_numpy(dtype=float)
     array = array[np.isfinite(array)]
@@ -706,10 +728,13 @@ def validate_generation_ledgers(
         realized = list(generation["realized_ranks"])
         expected = list(map(int, record["expected_ranks"]))
         consumed = int(generation["consumed_payload_rank_count"])
+        realized_alignment_valid = payload_rank_trace_alignment_passes(
+            generation, expected
+        )
         if not (
             eligible == expected_eligible
             and role_valid
-            and realized == expected[:consumed]
+            and realized_alignment_valid
             and sum(eligible) == consumed
             and generation["ineligible_position_count"] == len(eligible) - consumed
             and record["saved_token_id_replay"]["exact_rank_prefix_recovery"]
