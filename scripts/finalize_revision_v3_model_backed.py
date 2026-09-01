@@ -273,6 +273,9 @@ def write_handoff_docs(
     entropy_trials = pd.read_csv(
         output / "source_tables/entropy_generation_trials.csv", low_memory=False
     )
+    entropy_positions = pd.read_csv(
+        output / "source_tables/entropy_position_summary.csv", low_memory=False
+    )
     control_quality = pd.read_csv(
         output
         / "source_tables/entropy_rankcloak_control_difference_summary.csv",
@@ -341,11 +344,34 @@ Quantization detector fits used the frozen payload train/validation/test assignm
         saved = summary_row(entropy, analysis_id="entropy_overall", metric="saved_id_exact_payload_recovery", population="rankcloak", gate_level=gate)
         visible = summary_row(entropy, analysis_id="entropy_overall", metric="visible_text_exact_payload_recovery", population="rankcloak", gate_level=gate)
         eligibility = summary_row(entropy, analysis_id="entropy_overall", metric="eligible_position_fraction", population="rankcloak", gate_level=gate)
-        rank = summary_row(entropy, analysis_id="entropy_overall", metric="mean_observed_rank", population="rankcloak", gate_level=gate)
         surprisal = summary_row(entropy, analysis_id="entropy_overall", metric="mean_token_surprisal_nats", population="rankcloak", gate_level=gate)
         pressure = summary_row(entropy, analysis_id="entropy_overall", metric="mean_rank_pressure_log_probability_gap_nats", population="rankcloak", gate_level=gate)
+        forced_rank = summary_row(
+            entropy_positions,
+            analysis_id="entropy_position_overall",
+            metric="observed_rank",
+            population="rankcloak",
+            gate_level=gate,
+            token_role="payload",
+        )
+        forced_surprisal = summary_row(
+            entropy_positions,
+            analysis_id="entropy_position_overall",
+            metric="token_surprisal_nats",
+            population="rankcloak",
+            gate_level=gate,
+            token_role="payload",
+        )
+        forced_pressure = summary_row(
+            entropy_positions,
+            analysis_id="entropy_position_overall",
+            metric="rank_pressure_log_probability_gap_nats",
+            population="rankcloak",
+            gate_level=gate,
+            token_role="payload",
+        )
         entropy_lines.append(
-            f"{label}: payload completion {completed_count}/{len(gate_trials)} ({completion['mean']:.4f}; {len(gate_trials) - completed_count} maximum-budget failures; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, observed-token rank {rank['mean']:.4f}, token surprisal {surprisal['mean']:.4f} nats, rank pressure {pressure['mean']:.4f} nats, saved-ID exact recovery {saved_count}/{len(gate_trials)} ({saved['mean']:.4f}), and visible-text exact recovery {visible_count}/{len(gate_trials)} ({visible['mean']:.4f})."
+            f"{label}: payload completion {completed_count}/{len(gate_trials)} ({completion['mean']:.4f}; {len(gate_trials) - completed_count} maximum-budget failures; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, all-position mean token surprisal {surprisal['mean']:.4f} nats and rank pressure {pressure['mean']:.4f} nats, forced-payload-token rank mean {forced_rank['mean']:.4f} (median {forced_rank['median']:.4f}, IQR {forced_rank['p25']:.4f}–{forced_rank['p75']:.4f}, p95 {forced_rank['p95']:.4f}, {int(forced_rank['position_count'])} positions), forced-token surprisal {forced_surprisal['mean']:.4f} nats, forced-token rank pressure {forced_pressure['mean']:.4f} nats, saved-ID exact recovery {saved_count}/{len(gate_trials)} ({saved['mean']:.4f}), and visible-text exact recovery {visible_count}/{len(gate_trials)} ({visible['mean']:.4f})."
         )
     quality_lines = []
     quality_metrics = (
@@ -502,7 +528,7 @@ def write_claim_matrix(output: Path) -> None:
             {
                 "proposed_claim": "Entropy gating changes payload capacity, output length, recovery, quality, and detector behavior",
                 "evidence_status": "supported_descriptively_as_quantified",
-                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_paired_difference_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_paired_changes.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
+                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_position_summary.csv;source_tables/entropy_paired_difference_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_forced_token_distribution.tex;manuscript_tables/entropy_gate_paired_changes.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
                 "qualification": "Direction and magnitude must be stated from the tables; no universal improvement claim",
             },
             {
@@ -631,6 +657,7 @@ def write_source_map(output: Path) -> None:
     rows = [
         ("manuscript_tables/entropy_calibration_thresholds.tex", "source_tables/entropy_calibration_thresholds.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_generation.tex", "source_tables/entropy_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
+        ("manuscript_tables/entropy_gate_forced_token_distribution.tex", "source_tables/entropy_position_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_quality.tex", "source_tables/entropy_rankcloak_control_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_paired_changes.tex", "source_tables/entropy_paired_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_detectors.tex", "source_tables/model_backed_detector_subgroups.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),

@@ -299,6 +299,32 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     if not checks["model_backed_generation_validation_pass"]:
         errors.append("model-backed generation validation did not pass exact counts")
+    entropy_positions = pd.read_csv(
+        output / "source_tables/entropy_position_summary.csv", low_memory=False
+    )
+    forced_positions = entropy_positions.loc[
+        entropy_positions["analysis_id"].eq("entropy_position_overall")
+        & entropy_positions["population"].eq("rankcloak")
+        & entropy_positions["token_role"].eq("payload")
+        & entropy_positions["metric"].isin(
+            {
+                "observed_rank",
+                "token_surprisal_nats",
+                "rank_pressure_log_probability_gap_nats",
+            }
+        )
+    ]
+    forced_table = output / "manuscript_tables/entropy_gate_forced_token_distribution.tex"
+    checks["entropy_forced_token_distribution_complete"] = bool(
+        len(forced_positions) == 9
+        and set(forced_positions["gate_level"].astype(str))
+        == {"ungated", "moderate", "strict"}
+        and forced_positions["position_count"].astype(int).gt(0).all()
+        and forced_table.is_file()
+        and forced_table.stat().st_size > 1000
+    )
+    if not checks["entropy_forced_token_distribution_complete"]:
+        errors.append("forced-token rank/surprisal distribution artifact is incomplete")
     locked_audits = sorted(
         (output / "deduplication").glob("model_backed__*__leakage_audit.json")
     )

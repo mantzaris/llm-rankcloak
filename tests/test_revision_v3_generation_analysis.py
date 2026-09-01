@@ -12,6 +12,7 @@ if str(SCRIPTS) not in sys.path:
 from analyze_revision_v3_generation import (  # noqa: E402
     entropy_control_differences,
     payload_rank_trace_alignment_passes,
+    position_summary,
     record_validation_passes,
 )
 
@@ -99,3 +100,25 @@ def test_entropy_control_differences_are_strictly_paired():
     assert result["word_count_rankcloak_minus_control"].iloc[0] == pytest.approx(2.0)
     with pytest.raises(ValueError, match="not one matched pair"):
         entropy_control_differences(pd.DataFrame([encoded]))
+
+
+def test_position_summary_reports_forced_token_rank_distribution():
+    frame = pd.DataFrame(
+        {
+            "population": ["rankcloak"] * 4,
+            "gate_level": ["moderate"] * 4,
+            "token_role": ["payload"] * 4,
+            "entropy_bits": [1.0, 2.0, 3.0, 4.0],
+            "observed_rank": [1, 3, 7, 9],
+            "token_surprisal_nats": [0.1, 0.3, 0.7, 0.9],
+            "rank_pressure_log_probability_gap_nats": [0.0, 0.2, 0.6, 0.8],
+        }
+    )
+    summary = position_summary(
+        frame, ["population", "gate_level", "token_role"]
+    )
+    ranks = summary.loc[summary["metric"].eq("observed_rank")].iloc[0]
+    assert ranks["position_count"] == 4
+    assert ranks["mean"] == pytest.approx(5.0)
+    assert ranks["median"] == pytest.approx(5.0)
+    assert ranks["p95"] == pytest.approx(8.7)

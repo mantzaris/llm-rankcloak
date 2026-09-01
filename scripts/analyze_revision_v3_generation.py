@@ -1314,8 +1314,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         sort=False,
     )
 
-    entropy_position_summary = position_summary(
-        entropy_positions, ["population", "gate_level", "model_id", "token_role"]
+    entropy_position_summary = pd.concat(
+        [
+            position_summary(
+                entropy_positions,
+                ["population", "gate_level", "token_role"],
+            ).assign(analysis_id="entropy_position_overall"),
+            position_summary(
+                entropy_positions,
+                ["population", "gate_level", "model_id", "token_role"],
+            ).assign(analysis_id="entropy_position_by_model"),
+        ],
+        ignore_index=True,
+        sort=False,
     )
     quantization_position_summary = position_summary(
         quantization_positions, ["population", "quantization", "path"]
@@ -1404,6 +1415,42 @@ def main(argv: Sequence[str] | None = None) -> int:
     atomic_text(
         manuscript / "entropy_calibration_thresholds.tex",
         latex_table(thresholds.drop(columns=["threshold_record_sha256"]), "Frozen model-specific entropy thresholds.", "tab:entropy-calibration-thresholds"),
+    )
+    forced_token_distribution = entropy_position_summary.loc[
+        entropy_position_summary["analysis_id"].eq("entropy_position_overall")
+        & entropy_position_summary["population"].eq("rankcloak")
+        & entropy_position_summary["token_role"].eq("payload")
+        & entropy_position_summary["metric"].isin(
+            [
+                "observed_rank",
+                "token_surprisal_nats",
+                "rank_pressure_log_probability_gap_nats",
+            ]
+        ),
+        [
+            "gate_level",
+            "metric",
+            "position_count",
+            "mean",
+            "standard_deviation",
+            "minimum",
+            "p25",
+            "median",
+            "p75",
+            "p95",
+            "maximum",
+        ],
+    ].sort_values(["gate_level", "metric"], kind="stable")
+    atomic_text(
+        manuscript / "entropy_gate_forced_token_distribution.tex",
+        latex_table(
+            forced_token_distribution,
+            (
+                "Descriptive per-position distributions for forced payload tokens "
+                "under each entropy gate."
+            ),
+            "tab:entropy-gate-forced-token-distribution",
+        ),
     )
     quality_metrics = {
         "word_count_rankcloak_minus_control",
