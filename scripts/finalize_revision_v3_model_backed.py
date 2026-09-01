@@ -593,13 +593,22 @@ def update_manifest(output: Path) -> None:
         ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only",
         ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector <surprisal|textcnn|deberta>",
     ]
+    completion_time = max(
+        [environment["execution_completed_at"], *(record["completed_at"] for record in fits)]
+    )
+    run_duration_seconds = float(
+        (
+            pd.Timestamp(completion_time)
+            - pd.Timestamp(manifest["start_time"])
+        ).total_seconds()
+    )
     manifest.pop("blocked_generation", None)
     manifest.update(
         {
             "status": "complete",
-            "completion_time": max(
-                [environment["execution_completed_at"], *(record["completed_at"] for record in fits)]
-            ),
+            "completion_time": completion_time,
+            "run_duration_seconds": run_duration_seconds,
+            "git_commit_at_generation_analysis": validation["analysis_git_commit"],
             "trial_counts": trial_counts,
             "detector_fit_count": 24,
             "new_model_backed_detector_fit_count": len(fits),
@@ -622,6 +631,14 @@ def update_manifest(output: Path) -> None:
                 "failed_trial_count": validation["checks"]["failure_record_count"],
             },
             "generation_environment": environment,
+            "model_backed_model_artifacts": environment["model_artifacts"],
+            "model_backed_tokenizers": environment["tokenizer_identifiers"],
+            "model_backed_inference_backend": {
+                "packages": environment["packages"],
+                "llama_cpp_system_info": environment["llama_cpp_system_info"],
+                "gpu_offload_supported": environment["gpu_offload_supported"],
+            },
+            "model_backed_device_information": environment["gpu_inventory"],
             "generation_preflight_status": "ready",
             "commands": list(dict.fromkeys([*manifest.get("commands", []), *model_backed_commands])),
             "random_seeds": sorted(

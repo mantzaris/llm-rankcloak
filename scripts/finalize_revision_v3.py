@@ -572,14 +572,57 @@ No model-backed entropy or matched-quantization outcome was produced. The fail-c
             )
         )
     if tests["failure_nodeids"]:
+        full = next(
+            (
+                record
+                for record in tests["files"]
+                if record["path"].endswith("pytest_full.xml")
+            ),
+            None,
+        )
+        focused = next(
+            (
+                record
+                for record in tests["files"]
+                if record["path"].endswith("pytest_v3_focused.xml")
+            ),
+            None,
+        )
+        full_summary = (
+            "The complete {tests}-test run passed {passed} tests and failed only "
+            "the following {failures} committed paperV2 reference-contract "
+            "assertions. The paperV2 tree was not modified because manuscript "
+            "files are immutable in this computational session:".format(
+                tests=full["tests"],
+                passed=(
+                    full["tests"]
+                    - full["failures"]
+                    - full["errors"]
+                    - full["skipped"]
+                ),
+                failures=full["failures"],
+            )
+            if full is not None
+            else "The recorded failures are the following immutable paperV2 reference-contract assertions:"
+        )
+        focused_summary = (
+            "All {} focused V3 tests passed.".format(focused["tests"])
+            if focused is not None
+            and focused["failures"] == 0
+            and focused["errors"] == 0
+            else "Focused V3 test details are recorded in the JUnit ledger."
+        )
         test_lines.extend(
             [
                 "",
-                "The complete 673-test run passed 670 tests and failed only the following three committed paperV2 reference-contract assertions. The paperV2 tree was not modified because manuscript files are immutable in this computational session:",
+                full_summary,
                 "",
                 *[f"- {nodeid}" for nodeid in tests["failure_nodeids"]],
                 "",
-                "All 27 focused V3 tests passed. The failed Pkg.test() probe in logs/julia_pkg_test.log is inapplicable: this repository contains no Julia project/package or Julia test sources, and Julia exited before executing tests.",
+                focused_summary
+                + " The failed Pkg.test() probe in logs/julia_pkg_test.log is "
+                "inapplicable: this repository contains no Julia project/package "
+                "or Julia test sources, and Julia exited before executing tests.",
             ]
         )
     atomic_text(output / "test_report.md", "\n".join(test_lines) + "\n")
