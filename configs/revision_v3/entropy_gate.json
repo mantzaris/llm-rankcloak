@@ -1,14 +1,45 @@
 {
-  "schema_version": "rankcloak-revision-v3-entropy-gate-design-v1",
-  "status": "predeclared_not_started",
+  "schema_version": "rankcloak-revision-v3-entropy-gate-design-v2",
+  "status": "prospectively_amended_before_model_backed_outcomes",
+  "protocol_amendment": "revision_docs/REVISION_V3_GENERATION_PROTOCOL_AMENDMENT.md",
   "seed": 20260831,
   "gate_rule": "consume one payload rank iff filtered next-token Shannon entropy in bits is greater than or equal to the model-specific threshold",
+  "ineligible_token_policy": {
+    "method": "ordinary_seeded_top_p_sampling",
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "sampler": "numpy_pcg64_serial_top_p_v1_token_id_tiebreak",
+    "allowed_token_mask": "same mask as the paired RankCloak condition",
+    "token_role": "ordinary_sampled_skip",
+    "payload_rank_consumed": false
+  },
   "thresholds": {
     "ungated": null,
     "moderate": "model-specific median from ordinary-generation development traces",
     "strict": "model-specific 75th percentile from ordinary-generation development traces"
   },
   "threshold_selection_excludes_detector_outcomes": true,
+  "calibration": {
+    "sampling_policy": "ordinary_seeded_top_p_sampling",
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "sampler": "numpy_pcg64_serial_top_p_v1_token_id_tiebreak",
+    "target_token_count_per_trace": 128,
+    "threshold_pooling": "pool all six clean development traces within model",
+    "detector_outcomes_used": false
+  },
+  "paired_seed_policy": {
+    "experimental_cell_keys": [
+      "model_id",
+      "payload_class",
+      "representation_name",
+      "prompt_template_id",
+      "payload_index"
+    ],
+    "rankcloak": "one stable seed per experimental cell, shared by ungated, moderate, and strict conditions",
+    "ordinary_control": "one separately derived stable seed per experimental cell, shared by all gate levels",
+    "length_matched_prefix_rule": "controls at different target lengths are deterministic prefixes of one ordinary trace"
+  },
   "fixed_payload_maximum_length_multiplier": 6,
   "fixed_token_budget_reference": "paired ungated payload-span token count",
   "models": [

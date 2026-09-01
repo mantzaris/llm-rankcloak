@@ -5,9 +5,10 @@ watermarking, not an implementation of the watermarking task in Cai et al.
 At each payload-span step the encoder computes Shannon entropy over the same
 admissible next-token distribution used for rank selection.  It consumes a
 payload rank only when entropy is at least the public threshold; otherwise it
-emits admissible rank 1 and leaves the payload index unchanged.  Replay repeats
-that decision before observing each saved token, so no gate-position side
-channel is required.
+emits an ordinary seeded top-p sample and leaves the payload index unchanged.
+Replay repeats the gate decision before observing each saved token, ignores the
+observed rank at sampled skips, and appends every observed token to context, so
+no gate-position side channel is required.
 """
 
 from __future__ import annotations
@@ -25,14 +26,21 @@ from .revision_protocol import (
     generate_rank_span,
     retokenize_message,
 )
+from .revision_runner import (
+    CONTROL_TEMPERATURE,
+    CONTROL_TOP_P,
+    excluded_control_token_ids,
+    sample_top_p_token,
+)
 from .token_filters import (
     choose_token_at_rank_with_optional_filter,
     rank_token_with_optional_filter,
 )
 
 
-SCHEMA_VERSION = "rankcloak-entropy-gate-v1"
-GATE_RULE = "eligible_when_filtered_next_token_shannon_entropy_bits_gte_threshold_v1"
+SCHEMA_VERSION = "rankcloak-entropy-gate-v2"
+GATE_RULE = "eligible_when_filtered_next_token_shannon_entropy_bits_gte_threshold_v2"
+ORDINARY_SAMPLER = "numpy_pcg64_serial_top_p_v1_token_id_tiebreak"
 
 
 class EntropyGateError(ValueError):
@@ -109,6 +117,14 @@ def _annotate_ungated(
             ),
             "embedding_start": int(result["forced_start"]),
             "embedding_stop": int(result["forced_stop"]),
+            "ineligible_token_policy": "not_applicable_gate_disabled",
+            "ordinary_sampling_seed": None,
+            "ordinary_sampling_temperature": None,
+            "ordinary_sampling_top_p": None,
+            "ordinary_sampler": None,
+            "ordinary_sampled_skip_positions": [],
+            "ordinary_sampled_skip_token_ids": [],
+            "ordinary_sampled_skip_log_probabilities": [],
         }
     )
     return result
@@ -125,6 +141,9 @@ def generate_entropy_gated_span(
     leadin_token_count: int = 0,
     tail_policy: str = TAIL_NONE,
     quality_rank_ceiling: Optional[int] = None,
+    sampling_seed: Optional[int] = None,
+    temperature: float = CONTROL_TEMPERATURE,
+    top_p: float = CONTROL_TOP_P,
 ) -> Dict[str, object]:
     """Generate a bounded payload span under the entropy eligibility rule."""
 
@@ -161,11 +180,21 @@ def generate_entropy_gated_span(
 
     threshold = float(entropy_threshold_bits)
     entropy_eligible(0.0, threshold)
+    if sampling_seed is None or int(sampling_seed) < 0:
+        raise EntropyGateError(
+            "a non-negative sampling_seed is required when the gate is enabled"
+        )
+    if not float(temperature) > 0.0:
+        raise EntropyGateError("ordinary-sampling temperature must be positive")
+    if not 0.0 < float(top_p) <= 1.0:
+        raise EntropyGateError("ordinary-sampling top_p must be in (0, 1]")
     if quality_rank_ceiling is not None and int(quality_rank_ceiling) < 1:
         raise EntropyGateError("quality_rank_ceiling must be positive")
 
     context = list(map(int, context_token_ids))
     evaluate_context(model, context)
+    rng = np.random.Generator(np.random.PCG64(int(sampling_seed)))
+    excluded = excluded_control_token_ids(model)
     leadin_ids: List[int] = []
     leadin_logp: List[float] = []
     for _ in range(leadin_count):
@@ -184,22 +213,18 @@ def generate_entropy_gated_span(
     roles: List[str] = []
     realized_ranks: List[Optional[int]] = []
     consumed_indices: List[int] = []
-    greedy_ids: List[int] = []
-    greedy_logp: List[float] = []
+    sampled_skip_positions: List[int] = []
+    sampled_skip_ids: List[int] = []
+    sampled_skip_logp: List[float] = []
     rank_b_ids: Optional[List[int]] = [] if quality_rank_ceiling is not None else None
     rank_b_logp: Optional[List[float]] = [] if quality_rank_ceiling is not None else None
     payload_index = 0
-    for _ in range(budget):
+    for position_index in range(budget):
         if payload_index >= len(requested_ranks):
             break
         logits = get_last_logits(model)
         entropy = shannon_entropy_bits(logits, allowed_token_mask)
         eligible = entropy_eligible(entropy, threshold)
-        greedy_id = choose_token_at_rank_with_optional_filter(
-            logits, 1, allowed_token_mask
-        )
-        greedy_ids.append(int(greedy_id))
-        greedy_logp.append(float(token_log_probability(logits, greedy_id)))
         if eligible:
             requested_rank = int(requested_ranks[payload_index])
             if quality_rank_ceiling is not None and requested_rank > int(
@@ -216,8 +241,18 @@ def generate_entropy_gated_span(
             roles.append("payload")
             realized_ranks.append(requested_rank)
         else:
-            token_id = greedy_id
-            roles.append("unforced_skip")
+            token_id = sample_top_p_token(
+                logits,
+                rng,
+                float(temperature),
+                float(top_p),
+                excluded,
+                allowed_token_mask,
+            )
+            sampled_skip_positions.append(int(position_index))
+            sampled_skip_ids.append(int(token_id))
+            sampled_skip_logp.append(float(token_log_probability(logits, token_id)))
+            roles.append("ordinary_sampled_skip")
             realized_ranks.append(None)
         if quality_rank_ceiling is not None:
             rank_b_id = choose_token_at_rank_with_optional_filter(
@@ -287,8 +322,15 @@ def generate_entropy_gated_span(
             else "maximum_generated_tokens_reached_before_payload_completion"
         ),
         "realized_ranks": realized_ranks,
-        "greedy_token_ids": greedy_ids,
-        "greedy_log_probabilities": greedy_logp,
+        "ineligible_token_policy": "ordinary_seeded_top_p_sampling",
+        "ordinary_sampling_seed": int(sampling_seed),
+        "ordinary_sampling_temperature": float(temperature),
+        "ordinary_sampling_top_p": float(top_p),
+        "ordinary_sampler": ORDINARY_SAMPLER,
+        "ordinary_sampling_excluded_special_token_ids": excluded,
+        "ordinary_sampled_skip_positions": sampled_skip_positions,
+        "ordinary_sampled_skip_token_ids": sampled_skip_ids,
+        "ordinary_sampled_skip_log_probabilities": sampled_skip_logp,
         "quality_rank_ceiling": (
             int(quality_rank_ceiling) if quality_rank_ceiling is not None else None
         ),
@@ -332,6 +374,7 @@ def recover_entropy_gated_span(
     ranks: List[int] = []
     entropies: List[float] = []
     eligible_mask: List[bool] = []
+    roles: List[str] = []
     log_probabilities: List[float] = []
     for token_id in map(int, embedding_token_ids):
         logits = get_last_logits(model)
@@ -339,6 +382,7 @@ def recover_entropy_gated_span(
         eligible = entropy_eligible(entropy, entropy_threshold_bits)
         entropies.append(float(entropy))
         eligible_mask.append(bool(eligible))
+        roles.append("payload" if eligible and len(ranks) < expected else "ordinary_sampled_skip")
         if eligible and len(ranks) < expected:
             ranks.append(
                 int(
@@ -356,11 +400,71 @@ def recover_entropy_gated_span(
         "ranks": ranks,
         "embedding_entropies_bits": entropies,
         "embedding_eligible_mask": eligible_mask,
+        "embedding_token_roles": roles,
         "token_log_probabilities": log_probabilities,
         "expected_payload_rank_count": expected,
         "recovered_payload_rank_count": int(len(ranks)),
         "payload_completion": bool(len(ranks) == expected),
         "context_sha256": context_sha256(context),
+    }
+
+
+def generate_ordinary_entropy_trace(
+    model: Any,
+    context_token_ids: Sequence[int],
+    target_token_count: int,
+    *,
+    sampling_seed: int,
+    temperature: float = CONTROL_TEMPERATURE,
+    top_p: float = CONTROL_TOP_P,
+    allowed_token_mask: Optional[Sequence[bool]] = None,
+) -> Dict[str, object]:
+    """Generate a clean development trace under the historical control sampler."""
+
+    target = int(target_token_count)
+    if target < 0:
+        raise EntropyGateError("calibration target_token_count must be non-negative")
+    seed = int(sampling_seed)
+    if seed < 0:
+        raise EntropyGateError("calibration sampling_seed must be non-negative")
+    if not float(temperature) > 0.0 or not 0.0 < float(top_p) <= 1.0:
+        raise EntropyGateError("invalid calibration ordinary-sampling parameters")
+    context = list(map(int, context_token_ids))
+    evaluate_context(model, context)
+    rng = np.random.Generator(np.random.PCG64(seed))
+    excluded = excluded_control_token_ids(model)
+    token_ids: List[int] = []
+    log_probabilities: List[float] = []
+    entropies: List[float] = []
+    for _ in range(target):
+        logits = get_last_logits(model)
+        entropies.append(shannon_entropy_bits(logits, allowed_token_mask))
+        token_id = sample_top_p_token(
+            logits,
+            rng,
+            float(temperature),
+            float(top_p),
+            excluded,
+            allowed_token_mask,
+        )
+        token_ids.append(int(token_id))
+        log_probabilities.append(float(token_log_probability(logits, token_id)))
+        model.eval([int(token_id)])
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "trace_kind": "ordinary_top_p_entropy_calibration",
+        "context_token_ids": context,
+        "context_sha256": context_sha256(context),
+        "token_ids": token_ids,
+        "text": safe_detokenize(model, token_ids),
+        "token_log_probabilities": log_probabilities,
+        "next_token_entropies_bits": entropies,
+        "token_role_mask": ["ordinary_control"] * len(token_ids),
+        "sampling_seed": seed,
+        "temperature": float(temperature),
+        "top_p": float(top_p),
+        "sampler": ORDINARY_SAMPLER,
+        "excluded_special_token_ids": excluded,
     }
 
 
@@ -414,6 +518,7 @@ __all__ = [
     "calibrate_entropy_gate_thresholds",
     "entropy_eligible",
     "generate_entropy_gated_span",
+    "generate_ordinary_entropy_trace",
     "recover_entropy_gated_span",
     "retokenize_entropy_gated_message",
     "shannon_entropy_bits",

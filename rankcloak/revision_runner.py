@@ -1173,7 +1173,9 @@ def _call_token_id(model: Any, names: Sequence[str]) -> Optional[int]:
     return None
 
 
-def _excluded_control_token_ids(model: Any) -> List[int]:
+def excluded_control_token_ids(model: Any) -> List[int]:
+    """Return BOS/EOS/EOT IDs excluded by the historical control sampler."""
+
     values = {
         value
         for value in (
@@ -1186,16 +1188,24 @@ def _excluded_control_token_ids(model: Any) -> List[int]:
     return sorted(map(int, values))
 
 
-def _sample_top_p_token(
+def sample_top_p_token(
     logits: Sequence[float],
     rng: np.random.Generator,
     temperature: float,
     top_p: float,
     excluded_token_ids: Sequence[int] = (),
+    allowed_token_mask: Optional[Sequence[bool]] = None,
 ) -> int:
+    """Sample one token under the historical serial PCG64 top-p contract."""
+
     values = np.asarray(logits, dtype=np.float64).copy()
     if values.ndim != 1 or not values.size:
         raise RevisionRunnerError("Sampling logits must be a non-empty vector")
+    if allowed_token_mask is not None:
+        mask = np.asarray(allowed_token_mask, dtype=bool)
+        if mask.shape != values.shape:
+            raise RevisionRunnerError("Allowed-token mask must match sampling logits")
+        values[~mask] = -np.inf
     for token_id in excluded_token_ids:
         if 0 <= int(token_id) < values.size:
             values[int(token_id)] = -np.inf
@@ -1249,12 +1259,12 @@ def generate_length_matched_control(
         )
     evaluate_context(model, context)
     rng = np.random.Generator(np.random.PCG64(int(seed)))
-    excluded = _excluded_control_token_ids(model)
+    excluded = excluded_control_token_ids(model)
     token_ids: List[int] = []
     log_probabilities: List[float] = []
     for _ in range(target):
         logits = get_last_logits(model)
-        token_id = _sample_top_p_token(
+        token_id = sample_top_p_token(
             logits, rng, float(temperature), float(top_p), excluded
         )
         token_ids.append(token_id)
@@ -2057,7 +2067,7 @@ def _greedy_rewrite(
     if len(context) + target > int(context_limit):
         raise RevisionRunnerError("Paraphrase prompt and output exceed context limit")
     evaluate_context(model, context)
-    excluded = set(_excluded_control_token_ids(model))
+    excluded = set(excluded_control_token_ids(model))
     token_ids: List[int] = []
     for _ in range(target):
         logits = np.asarray(get_last_logits(model), dtype=np.float64).copy()
@@ -4048,6 +4058,7 @@ __all__ = [
     "execute_robustness_decode",
     "execute_robustness_reference",
     "execute_robustness_transform",
+    "excluded_control_token_ids",
     "generate_length_matched_control",
     "load_jsonl_records",
     "load_external_source_records",
@@ -4060,4 +4071,5 @@ __all__ = [
     "reconcile_checkpoint_from_records",
     "relabel_limited_plan",
     "run_work_plan",
+    "sample_top_p_token",
 ]

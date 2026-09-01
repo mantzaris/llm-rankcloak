@@ -74,6 +74,7 @@ def test_maximum_length_payload_capacity_and_replay_accounting():
         entropy_threshold_bits=2.0,
         maximum_generated_tokens=256,
         quality_rank_ceiling=5,
+        sampling_seed=43,
     )
     assert generated["payload_completion"] is True
     assert generated["eligible_position_count"] == 256

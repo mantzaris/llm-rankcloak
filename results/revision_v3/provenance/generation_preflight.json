@@ -42,11 +42,17 @@
     }
   ],
   "backend_available": false,
+  "backend_cuda_valid": false,
+  "backend_environment": "/home/meow/Documents/repos/llm-rankcloak/.venv-generation-v3",
+  "backend_probe_stderr": "",
+  "backend_probe_stdout": "",
+  "backend_version_valid": false,
   "downloads_performed": false,
   "entropy_experiment_ready": false,
   "launch_performed": false,
   "matched_quantization_experiment_ready": false,
-  "requirements_config_sha256": "8521bd474ca223adf1668118435e923100aa9cd789bd413de128a79a201a8908",
-  "schema_version": "rankcloak-revision-v3-generation-preflight-v1",
+  "protocol_amendment_sha256": "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb",
+  "requirements_config_sha256": "04e5517dac68ae2fd3d6ed1f6892f9bdbd6b101c5090e8d39e85eba1ed47d3d9",
+  "schema_version": "rankcloak-revision-v3-generation-preflight-v2",
   "status": "blocked"
 }

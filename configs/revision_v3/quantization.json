@@ -1,6 +1,7 @@
 {
-  "schema_version": "rankcloak-revision-v3-quantization-design-v1",
-  "status": "predeclared_not_started",
+  "schema_version": "rankcloak-revision-v3-quantization-design-v2",
+  "status": "prospectively_amended_before_model_backed_outcomes",
+  "protocol_amendment": "revision_docs/REVISION_V3_GENERATION_PROTOCOL_AMENDMENT.md",
   "seed": 20260831,
   "base_model": "bartowski/Qwen2.5-7B-Instruct-GGUF",
   "model_revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
@@ -10,6 +11,31 @@
   "codecs": ["ascii_b8", "ascii_b16"],
   "payload_count": 480,
   "paired_seeds_and_prompts": true,
+  "historical_contract_sources": {
+    "task_plan": "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/plan.jsonl",
+    "raw_records": "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl",
+    "runtime_manifest": "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/runtime_manifest.json",
+    "model_manifest": "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/model_manifest.json"
+  },
+  "historical_control_seed_source": "raw Q4 ordinary_control record generation.sampling_seed",
+  "historical_control_sampling_policy": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "sampler": "numpy_pcg64_serial_top_p_v1_token_id_tiebreak"
+  },
+  "required_non_quantization_matches": [
+    "upstream base-model revision",
+    "embedded tokenizer",
+    "rendered prompt",
+    "payload identity and bytes",
+    "codec and expected ranks",
+    "token filter and allowed-token mask",
+    "target token count",
+    "historical control sampling seed",
+    "temperature and top_p",
+    "inference backend version",
+    "generation parameters"
+  ],
   "planned_new_rankcloak_trials": 960,
   "planned_new_ordinary_control_trials": 960,
   "planned_reused_rankcloak_trials": 960,

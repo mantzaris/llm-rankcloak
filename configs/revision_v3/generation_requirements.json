@@ -1,13 +1,15 @@
 {
-  "schema_version": "rankcloak-revision-v3-generation-requirements-v1",
-  "status": "preflight_failed_missing_exact_weights_and_cuda_backend",
+  "schema_version": "rankcloak-revision-v3-generation-requirements-v2",
+  "status": "locally_authorized_pending_verified_acquisition",
   "verified_metadata_date": "2026-08-31",
   "required_backend": {
     "package": "llama-cpp-python",
     "version": "0.3.23",
     "cuda_required": true,
-    "present_in_project_venv": false,
-    "installation_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv/bin/pip install --no-cache-dir llama-cpp-python==0.3.23"
+    "dedicated_environment": ".venv-generation-v3",
+    "present_in_dedicated_environment": false,
+    "environment_creation_command": ".venv/bin/python -m venv .venv-generation-v3",
+    "installation_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv-generation-v3/bin/pip install --no-cache-dir llama-cpp-python==0.3.23"
   },
   "artifacts": [
     {
@@ -63,5 +65,5 @@
   "entropy_runtime_estimate": "2-6 GPU-hours for 720 new evaluation generations plus 18 calibration traces",
   "quantization_runtime_estimate": "4-10 GPU-hours for 1,920 new Q8 generations; planning estimate only",
   "post_download_verification_command": "sha256sum models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q8_0.gguf",
-  "policy": "Do not acquire these weights, install the backend, or start paid compute without explicit user authorization."
+  "policy": "Exact local acquisition and CUDA backend installation are authorized for this run; substitutions and paid remote compute remain prohibited."
 }

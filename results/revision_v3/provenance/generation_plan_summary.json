@@ -3,22 +3,27 @@
     "analysis_rows": 720,
     "artifact_classes": 8,
     "calibration_traces": 18,
+    "experimental_cells": 120,
     "gate_levels": 3,
     "models": 3,
+    "ordinary_control_seed_count": 120,
     "planned_new_generation_rows": 720,
+    "rankcloak_seed_count": 120,
     "representation_cells": 20,
     "reused_rows": 0,
     "templates": 2
   },
   "preflight_status": "blocked",
+  "protocol_amendment_sha256": "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb",
   "quantization": {
     "analysis_rows": 3840,
     "artifact_classes": 8,
     "codecs": 2,
+    "historical_seed_source": "raw Q4 ordinary_control record generation.sampling_seed",
     "payloads": 480,
     "planned_new_q8_rows": 1920,
     "quantizations": 2,
     "reused_q4_rows": 1920
   },
-  "schema_version": "rankcloak-revision-v3-generation-plan-summary-v1"
+  "schema_version": "rankcloak-revision-v3-generation-plan-summary-v2"
 }
