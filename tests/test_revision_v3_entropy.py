@@ -66,6 +66,9 @@ def test_disabled_gate_reproduces_ordinary_rankcloak_tokens():
     )
     assert gated["full_token_ids"] == ordinary["full_token_ids"]
     assert gated["realized_ranks"] == ordinary["realized_ranks"]
+    assert gated["embedding_entropies_bits"] == pytest.approx([2.0, 2.0, 2.0])
+    assert gated["embedding_observed_ranks"] == [2, 3, 1]
+    assert len(gated["embedding_rank_pressure_log_probability_gaps_nats"]) == 3
     assert gated["payload_completion"] is True
 
 

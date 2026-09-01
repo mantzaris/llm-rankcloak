@@ -577,7 +577,7 @@ def preflight(requirements: Mapping[str, object]) -> Mapping[str, object]:
             [
                 str(environment_python),
                 "-c",
-                "import importlib.metadata as m; from llama_cpp import llama_cpp; print(m.version(\"llama-cpp-python\")); print(llama_cpp.llama_print_system_info().decode())",
+                "from rankcloak.model_io import preload_pip_cuda_libraries; preload_pip_cuda_libraries(); import importlib.metadata as m; from llama_cpp import llama_cpp; print(m.version(\"llama-cpp-python\")); print(llama_cpp.llama_print_system_info().decode())",
             ],
             cwd=PROJECT_ROOT,
             check=False,

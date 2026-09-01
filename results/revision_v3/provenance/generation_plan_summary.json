@@ -13,7 +13,7 @@
     "reused_rows": 0,
     "templates": 2
   },
-  "preflight_status": "blocked",
+  "preflight_status": "ready",
   "protocol_amendment_sha256": "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb",
   "quantization": {
     "analysis_rows": 3840,

@@ -1,5 +1,6 @@
 # Python environments and caches
 .venv/
+.venv-generation-v3/
 .r_libs/
 venv/
 env/

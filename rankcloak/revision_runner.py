@@ -90,6 +90,7 @@ from .revision_protocol import (
     transform_token_ids,
 )
 from .rank_codec import token_log_probability
+from .revision_v3_diagnostics import next_token_diagnostic
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -1262,13 +1263,30 @@ def generate_length_matched_control(
     excluded = excluded_control_token_ids(model)
     token_ids: List[int] = []
     log_probabilities: List[float] = []
+    entropies: List[float] = []
+    sampled_ranks: List[int] = []
+    greedy_token_ids: List[int] = []
+    greedy_log_probabilities: List[float] = []
+    rank_pressure_gaps: List[float] = []
     for _ in range(target):
         logits = get_last_logits(model)
         token_id = sample_top_p_token(
             logits, rng, float(temperature), float(top_p), excluded
         )
         token_ids.append(token_id)
-        log_probabilities.append(token_log_probability(logits, token_id))
+        diagnostic = next_token_diagnostic(logits, token_id)
+        log_probabilities.append(
+            float(diagnostic["observed_log_probability"])
+        )
+        entropies.append(float(diagnostic["entropy_bits"]))
+        sampled_ranks.append(int(diagnostic["observed_rank"]))
+        greedy_token_ids.append(int(diagnostic["greedy_token_id"]))
+        greedy_log_probabilities.append(
+            float(diagnostic["greedy_log_probability"])
+        )
+        rank_pressure_gaps.append(
+            float(diagnostic["rank_pressure_log_probability_gap_nats"])
+        )
         model.eval([token_id])
     return {
         "context_token_ids": list(map(int, context)),
@@ -1276,6 +1294,11 @@ def generate_length_matched_control(
         "token_role_mask": ["ordinary_control"] * len(token_ids),
         "text": safe_detokenize(model, token_ids),
         "token_log_probabilities": log_probabilities,
+        "next_token_entropies_bits": entropies,
+        "sampled_token_ranks": sampled_ranks,
+        "greedy_token_ids": greedy_token_ids,
+        "greedy_log_probabilities": greedy_log_probabilities,
+        "rank_pressure_log_probability_gaps_nats": rank_pressure_gaps,
         "target_token_count": target,
         "sampling_seed": int(seed),
         "temperature": float(temperature),

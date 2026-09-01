@@ -7,9 +7,18 @@
     "version": "0.3.23",
     "cuda_required": true,
     "dedicated_environment": ".venv-generation-v3",
-    "present_in_dedicated_environment": false,
+    "present_in_dedicated_environment": true,
     "environment_creation_command": ".venv/bin/python -m venv .venv-generation-v3",
-    "installation_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv-generation-v3/bin/pip install --no-cache-dir llama-cpp-python==0.3.23"
+    "prospective_source_build_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv-generation-v3/bin/pip install --no-cache-dir llama-cpp-python==0.3.23",
+    "source_build_unavailable_reason": "nvcc and cmake were not installed on the host",
+    "installation_method": "exact official project cu124 binary wheel plus pinned NVIDIA CUDA 12.4 user-space runtime libraries",
+    "installation_command": ".venv-generation-v3/bin/pip install --no-cache-dir --only-binary=:all: llama-cpp-python==0.3.23 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124",
+    "runtime_installation_command": ".venv-generation-v3/bin/pip install --no-cache-dir nvidia-cuda-runtime-cu12==12.4.127 nvidia-cublas-cu12==12.4.5.8",
+    "runtime_packages": {
+      "nvidia-cuda-runtime-cu12": "12.4.127",
+      "nvidia-cublas-cu12": "12.4.5.8"
+    },
+    "verified_cuda_system_info_contains": "CUDA : ARCHS = 700,750,800,860,890,900"
   },
   "artifacts": [
     {

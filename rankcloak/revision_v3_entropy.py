@@ -20,6 +20,12 @@ import numpy as np
 
 from .model_io import evaluate_context, get_last_logits, safe_detokenize
 from .rank_codec import token_log_probability
+from .revision_v3_diagnostics import (
+    GenerationDiagnosticError,
+    next_token_diagnostic,
+    shannon_entropy_bits as _shannon_entropy_bits,
+    trace_observed_tokens,
+)
 from .revision_protocol import (
     TAIL_NONE,
     context_sha256,
@@ -52,23 +58,10 @@ def shannon_entropy_bits(
 ) -> float:
     """Return numerically stable Shannon entropy in bits."""
 
-    values = np.asarray(logits, dtype=np.float64)
-    if values.ndim != 1 or values.size == 0:
-        raise EntropyGateError("logits must be a non-empty vector")
-    if allowed_token_mask is not None:
-        mask = np.asarray(allowed_token_mask, dtype=bool)
-        if mask.shape != values.shape:
-            raise EntropyGateError("allowed-token mask must match logits")
-        values = values[mask]
-    values = values[np.isfinite(values)]
-    if values.size == 0:
-        raise EntropyGateError("no finite admissible logits remain")
-    maximum = float(np.max(values))
-    weights = np.exp(values - maximum)
-    total = float(np.sum(weights))
-    probabilities = weights / total
-    entropy_nats = -float(np.sum(probabilities * np.log(probabilities)))
-    return float(entropy_nats / math.log(2.0))
+    try:
+        return _shannon_entropy_bits(logits, allowed_token_mask)
+    except GenerationDiagnosticError as exc:
+        raise EntropyGateError(str(exc)) from exc
 
 
 def entropy_eligible(entropy_bits: float, threshold_bits: Optional[float]) -> bool:
@@ -86,6 +79,7 @@ def _annotate_ungated(
     generated: Dict[str, object],
     original_rank_count: int,
     generated_rank_count: int,
+    diagnostics: Dict[str, object],
 ) -> Dict[str, object]:
     result = dict(generated)
     forced_ids = list(map(int, result["forced_token_ids"]))
@@ -96,7 +90,9 @@ def _annotate_ungated(
             "entropy_threshold_bits": None,
             "embedding_token_ids": forced_ids,
             "embedding_text": str(result["forced_text"]),
-            "embedding_entropies_bits": [None] * len(forced_ids),
+            "embedding_entropies_bits": list(
+                map(float, diagnostics["entropy_bits"])
+            ),
             "embedding_eligible_mask": [True] * len(forced_ids),
             "embedding_token_roles": ["payload"] * len(forced_ids),
             "consumed_payload_rank_indices": list(range(generated_rank_count)),
@@ -125,6 +121,23 @@ def _annotate_ungated(
             "ordinary_sampled_skip_positions": [],
             "ordinary_sampled_skip_token_ids": [],
             "ordinary_sampled_skip_log_probabilities": [],
+            "embedding_observed_ranks": list(
+                map(int, diagnostics["observed_ranks"])
+            ),
+            "embedding_greedy_token_ids": list(
+                map(int, diagnostics["greedy_token_ids"])
+            ),
+            "embedding_greedy_log_probabilities": list(
+                map(float, diagnostics["greedy_log_probabilities"])
+            ),
+            "embedding_rank_pressure_log_probability_gaps_nats": list(
+                map(
+                    float,
+                    diagnostics[
+                        "rank_pressure_log_probability_gaps_nats"
+                    ],
+                )
+            ),
         }
     )
     return result
@@ -176,7 +189,16 @@ def generate_entropy_gated_span(
             tail_policy=tail_policy,
             quality_rank_ceiling=quality_rank_ceiling,
         )
-        return _annotate_ungated(generated, len(requested_ranks), len(embedded))
+        diagnostics = trace_observed_tokens(
+            model,
+            list(map(int, context_token_ids))
+            + list(map(int, generated["leadin_token_ids"])),
+            generated["forced_token_ids"],
+            allowed_token_mask,
+        )
+        return _annotate_ungated(
+            generated, len(requested_ranks), len(embedded), diagnostics
+        )
 
     threshold = float(entropy_threshold_bits)
     entropy_eligible(0.0, threshold)
@@ -216,6 +238,10 @@ def generate_entropy_gated_span(
     sampled_skip_positions: List[int] = []
     sampled_skip_ids: List[int] = []
     sampled_skip_logp: List[float] = []
+    observed_ranks: List[int] = []
+    greedy_ids: List[int] = []
+    greedy_logp: List[float] = []
+    rank_pressure_gaps: List[float] = []
     rank_b_ids: Optional[List[int]] = [] if quality_rank_ceiling is not None else None
     rank_b_logp: Optional[List[float]] = [] if quality_rank_ceiling is not None else None
     payload_index = 0
@@ -254,6 +280,9 @@ def generate_entropy_gated_span(
             sampled_skip_logp.append(float(token_log_probability(logits, token_id)))
             roles.append("ordinary_sampled_skip")
             realized_ranks.append(None)
+        next_diagnostic = next_token_diagnostic(
+            logits, token_id, allowed_token_mask
+        )
         if quality_rank_ceiling is not None:
             rank_b_id = choose_token_at_rank_with_optional_filter(
                 logits, int(quality_rank_ceiling), allowed_token_mask
@@ -265,6 +294,12 @@ def generate_entropy_gated_span(
         embedding_logp.append(float(token_log_probability(logits, token_id)))
         entropies.append(float(entropy))
         eligible_mask.append(bool(eligible))
+        observed_ranks.append(int(next_diagnostic["observed_rank"]))
+        greedy_ids.append(int(next_diagnostic["greedy_token_id"]))
+        greedy_logp.append(float(next_diagnostic["greedy_log_probability"]))
+        rank_pressure_gaps.append(
+            float(next_diagnostic["rank_pressure_log_probability_gap_nats"])
+        )
         model.eval([int(token_id)])
 
     completed = payload_index == len(requested_ranks)
@@ -331,6 +366,10 @@ def generate_entropy_gated_span(
         "ordinary_sampled_skip_positions": sampled_skip_positions,
         "ordinary_sampled_skip_token_ids": sampled_skip_ids,
         "ordinary_sampled_skip_log_probabilities": sampled_skip_logp,
+        "embedding_observed_ranks": observed_ranks,
+        "embedding_greedy_token_ids": greedy_ids,
+        "embedding_greedy_log_probabilities": greedy_logp,
+        "embedding_rank_pressure_log_probability_gaps_nats": rank_pressure_gaps,
         "quality_rank_ceiling": (
             int(quality_rank_ceiling) if quality_rank_ceiling is not None else None
         ),
@@ -376,6 +415,7 @@ def recover_entropy_gated_span(
     eligible_mask: List[bool] = []
     roles: List[str] = []
     log_probabilities: List[float] = []
+    observed_ranks: List[int] = []
     for token_id in map(int, embedding_token_ids):
         logits = get_last_logits(model)
         entropy = shannon_entropy_bits(logits, allowed_token_mask)
@@ -392,6 +432,13 @@ def recover_entropy_gated_span(
                 )
             )
         log_probabilities.append(float(token_log_probability(logits, token_id)))
+        observed_ranks.append(
+            int(
+                rank_token_with_optional_filter(
+                    logits, token_id, allowed_token_mask
+                )
+            )
+        )
         model.eval([token_id])
     return {
         "schema_version": SCHEMA_VERSION,
@@ -402,6 +449,7 @@ def recover_entropy_gated_span(
         "embedding_eligible_mask": eligible_mask,
         "embedding_token_roles": roles,
         "token_log_probabilities": log_probabilities,
+        "observed_token_ranks": observed_ranks,
         "expected_payload_rank_count": expected,
         "recovered_payload_rank_count": int(len(ranks)),
         "payload_completion": bool(len(ranks) == expected),
@@ -436,6 +484,10 @@ def generate_ordinary_entropy_trace(
     token_ids: List[int] = []
     log_probabilities: List[float] = []
     entropies: List[float] = []
+    sampled_ranks: List[int] = []
+    greedy_ids: List[int] = []
+    greedy_logp: List[float] = []
+    rank_pressure_gaps: List[float] = []
     for _ in range(target):
         logits = get_last_logits(model)
         entropies.append(shannon_entropy_bits(logits, allowed_token_mask))
@@ -448,7 +500,18 @@ def generate_ordinary_entropy_trace(
             allowed_token_mask,
         )
         token_ids.append(int(token_id))
-        log_probabilities.append(float(token_log_probability(logits, token_id)))
+        diagnostic = next_token_diagnostic(
+            logits, token_id, allowed_token_mask
+        )
+        log_probabilities.append(
+            float(diagnostic["observed_log_probability"])
+        )
+        sampled_ranks.append(int(diagnostic["observed_rank"]))
+        greedy_ids.append(int(diagnostic["greedy_token_id"]))
+        greedy_logp.append(float(diagnostic["greedy_log_probability"]))
+        rank_pressure_gaps.append(
+            float(diagnostic["rank_pressure_log_probability_gap_nats"])
+        )
         model.eval([int(token_id)])
     return {
         "schema_version": SCHEMA_VERSION,
@@ -459,6 +522,10 @@ def generate_ordinary_entropy_trace(
         "text": safe_detokenize(model, token_ids),
         "token_log_probabilities": log_probabilities,
         "next_token_entropies_bits": entropies,
+        "sampled_token_ranks": sampled_ranks,
+        "greedy_token_ids": greedy_ids,
+        "greedy_log_probabilities": greedy_logp,
+        "rank_pressure_log_probability_gaps_nats": rank_pressure_gaps,
         "token_role_mask": ["ordinary_control"] * len(token_ids),
         "sampling_seed": seed,
         "temperature": float(temperature),
