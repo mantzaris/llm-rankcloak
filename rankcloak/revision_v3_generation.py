@@ -1419,6 +1419,11 @@ def sort_phase_rows(phase: str, rows: Iterable[Dict[str, str]]) -> List[Dict[str
                 row["plan_id"],
             ),
         )
+    if phase == "quantization":
+        return sorted(
+            rows,
+            key=lambda row: (row["pairing_unit_id"], row["quantization"]),
+        )
     return sorted(rows, key=lambda row: row["plan_id"])
 
 
