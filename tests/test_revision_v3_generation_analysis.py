@@ -77,7 +77,7 @@ def test_entropy_control_differences_are_strictly_paired():
         "maximum_identical_word_run",
         "surface_flag_total",
         "artifact_like_fragment_count",
-        "prompt_word_jaccard",
+        "tfidf_prompt_similarity",
     )
     identity = {
         "pairing_unit_id": "pair-1",

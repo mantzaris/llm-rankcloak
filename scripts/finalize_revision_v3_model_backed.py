@@ -324,7 +324,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
         ("unique_word_fraction_rankcloak_minus_control", "unique-word fraction"),
         ("repeated_bigram_fraction_rankcloak_minus_control", "repeated-bigram fraction"),
         ("surface_flag_total_rankcloak_minus_control", "surface-flag count"),
-        ("prompt_word_jaccard_rankcloak_minus_control", "prompt-word Jaccard"),
+        ("tfidf_prompt_similarity_rankcloak_minus_control", "TF-IDF prompt similarity"),
     )
     for gate, label in (("ungated", "Ungated"), ("moderate", "Median gate"), ("strict", "75th-percentile gate")):
         values = [
@@ -535,6 +535,7 @@ The recovery-mode comparison""" + design_suffix
 - `fixed_payload_bits_per_generated_token`: serialized payload bits divided by full generated-token count.
 - `fixed_token_budget_payload_fraction`: serialized payload fraction embedded within the paired ungated token budget.
 - `ordinary_sampled_skip`: an entropy-ineligible top-p sample that does not consume a payload symbol.
+- Ungated records retain the historical `forced_log_probabilities` field name; analysis aliases it to the same embedding-span trace represented by `embedding_log_probabilities` in gated records.
 - Calibration `validation` maps contain the exclusion assertion `detector_outcomes_used=false`; a valid calibration record requires that value to be false while its token-count and finite-entropy assertions are true.
 - `mean_entropy_q8_minus_q4_bits`: paired mean change when Q8 replays the identical historical Q4 token path.
 - `observed_token_rank_changed_fraction` / `greedy_token_changed_fraction`: fraction of identical-path positions whose observed-token rank or greedy token differs across quantizations.

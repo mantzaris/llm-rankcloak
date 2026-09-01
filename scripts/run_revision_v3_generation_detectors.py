@@ -23,6 +23,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from prepare_revision_v3 import atomic_csv, atomic_json, utc_now  # noqa: E402
 from rankcloak.revision_detection import run_configured_detector  # noqa: E402
 from rankcloak.revision_v3_analysis import (  # noqa: E402
+    entropy_embedding_log_probabilities,
     fit_surprisal_detector,
     surprisal_features_from_log_probabilities,
 )
@@ -246,7 +247,7 @@ def generated_log_probabilities(record: Mapping[str, object]) -> Sequence[float]
     record_type = str(record["record_type"])
     population = str(record.get("population", "unknown"))
     if record_type == "entropy_rankcloak_trial":
-        return record["generation"]["embedding_log_probabilities"]
+        return entropy_embedding_log_probabilities(record["generation"])
     if record_type == "entropy_ordinary_control":
         return record["generation"]["token_log_probabilities"]
     if record_type == "quantization_q4_model_backed_replay":

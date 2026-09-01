@@ -27,6 +27,9 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from prepare_revision_v3 import atomic_csv, atomic_json, atomic_text, utc_now  # noqa: E402
 from rankcloak.revision_statistics import automated_text_quality_metrics  # noqa: E402
+from rankcloak.revision_v3_analysis import (  # noqa: E402
+    entropy_embedding_log_probabilities,
+)
 from rankcloak.revision_v3_generation import (  # noqa: E402
     CALIBRATION_PLAN,
     ENTROPY_PLAN,
@@ -155,7 +158,7 @@ def surface_metrics(text: str, prompt: str) -> Mapping[str, object]:
             "maximum_identical_word_run",
             "surface_flag_total",
             "artifact_like_fragment_count",
-            "prompt_word_jaccard",
+            "tfidf_prompt_similarity",
         }
     }
 
@@ -172,7 +175,7 @@ def entropy_frames(records: Sequence[Mapping[str, object]]) -> tuple[pd.DataFram
             text = generation["full_text"]
             entropies = generation["embedding_entropies_bits"]
             ranks = generation["embedding_observed_ranks"]
-            logp = generation["embedding_log_probabilities"]
+            logp = entropy_embedding_log_probabilities(generation)
             greedy_logp = generation["embedding_greedy_log_probabilities"]
             pressure = generation[
                 "embedding_rank_pressure_log_probability_gaps_nats"
@@ -567,7 +570,7 @@ def entropy_control_differences(trials: pd.DataFrame) -> pd.DataFrame:
         "maximum_identical_word_run",
         "surface_flag_total",
         "artifact_like_fragment_count",
-        "prompt_word_jaccard",
+        "tfidf_prompt_similarity",
     )
     rows: list[dict[str, object]] = []
     for pairing_unit_id, cell in trials.groupby("pairing_unit_id", sort=True):
@@ -1223,7 +1226,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "unique_word_fraction", "repeated_bigram_fraction",
         "repeated_trigram_fraction", "maximum_identical_word_run",
         "surface_flag_total", "artifact_like_fragment_count",
-        "prompt_word_jaccard",
+        "tfidf_prompt_similarity",
     )
     entropy_summaries = [
         summarize_metrics(
@@ -1407,7 +1410,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "unique_word_fraction_rankcloak_minus_control",
         "repeated_bigram_fraction_rankcloak_minus_control",
         "surface_flag_total_rankcloak_minus_control",
-        "prompt_word_jaccard_rankcloak_minus_control",
+        "tfidf_prompt_similarity_rankcloak_minus_control",
     }
     quality_main = entropy_control_difference_summary.loc[
         entropy_control_difference_summary["metric"].isin(quality_metrics),

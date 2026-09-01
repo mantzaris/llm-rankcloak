@@ -6,6 +6,7 @@ import pytest
 
 from rankcloak.revision_v3_analysis import (
     RevisionV3AnalysisError,
+    entropy_embedding_log_probabilities,
     generation_surprisal_features,
     surprisal_features_from_log_probabilities,
 )
@@ -88,6 +89,17 @@ def test_surprisal_array_helper_matches_record_extractor() -> None:
     assert generation_surprisal_features(record) == direct
     assert direct["trace_token_count"] == 4.0
     assert np.isclose(direct["surprisal_mean"], 1.65)
+
+
+def test_entropy_embedding_log_probabilities_support_both_schema_variants() -> None:
+    assert entropy_embedding_log_probabilities(
+        {"embedding_log_probabilities": [-0.1, -0.2]}
+    ) == [-0.1, -0.2]
+    assert entropy_embedding_log_probabilities(
+        {"forced_log_probabilities": [-0.3, -0.4]}
+    ) == [-0.3, -0.4]
+    with pytest.raises(RevisionV3AnalysisError, match="embedding-span"):
+        entropy_embedding_log_probabilities({})
 
 
 @pytest.mark.parametrize("values", [[], [0.0, float("nan")], [float("inf")]])

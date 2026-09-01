@@ -101,6 +101,20 @@ def generation_surprisal_features(record: Mapping[str, object]) -> Mapping[str, 
     return surprisal_features_from_log_probabilities(_finite_log_probabilities(record))
 
 
+def entropy_embedding_log_probabilities(
+    generation: Mapping[str, object],
+) -> Sequence[float]:
+    """Return the harmonized entropy-study embedding-span probability trace."""
+
+    if "embedding_log_probabilities" in generation:
+        return generation["embedding_log_probabilities"]
+    if "forced_log_probabilities" in generation:
+        return generation["forced_log_probabilities"]
+    raise RevisionV3AnalysisError(
+        "Entropy RankCloak record lacks an embedding-span log-probability trace"
+    )
+
+
 def surprisal_features_from_log_probabilities(
     log_probabilities: Sequence[float],
 ) -> Mapping[str, float]:
@@ -721,6 +735,7 @@ __all__ = [
     "file_sha256",
     "fit_surprisal_detector",
     "generation_surprisal_features",
+    "entropy_embedding_log_probabilities",
     "grouped_mean_interval",
     "levenshtein_distance",
     "load_generation_feature_frame",
