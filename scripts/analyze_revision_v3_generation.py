@@ -862,6 +862,17 @@ def generation_environment(
     ).stdout
     cuda_match = re.search(r"CUDA Version:\s*([0-9.]+)", nvidia_raw)
     required_backend = requirements["required_backend"]
+    generation_python = (
+        PROJECT_ROOT
+        / str(required_backend["dedicated_environment"])
+        / "bin/python"
+    )
+    pip_freeze = subprocess.run(
+        [str(generation_python), "-m", "pip", "freeze", "--all"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
     q4_tokenizer = tokenizers.get("qwen2_5_7b_instruct_q4_k_m")
     q8_tokenizer = tokenizers.get("qwen2_5_7b_instruct_q8_0")
     paired_tokenizer_contract = None
@@ -895,6 +906,11 @@ def generation_environment(
         "logical_cpu_count": __import__("os").cpu_count(),
         "physical_memory_bytes": int(memory_match.group(1)) * 1024 if memory_match else None,
         "packages": backend["packages"],
+        "pip_freeze_command": (
+            f"{required_backend['dedicated_environment']}/bin/python "
+            "-m pip freeze --all"
+        ),
+        "pip_freeze": sorted(line for line in pip_freeze if line.strip()),
         "llama_cpp_system_info": backend["llama_cpp_system_info"],
         "gpu_offload_supported": backend["gpu_offload_supported"],
         "gpu_inventory": backend["gpu_inventory"],
