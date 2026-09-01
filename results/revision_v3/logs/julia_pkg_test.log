@@ -1,0 +1,16 @@
+ERROR: The Project.toml of the package being tested must have a name and a UUID entry
+Stacktrace:
+ [1] pkgerror(msg::String)
+   @ Pkg.Types ~/.julia/juliaup/julia-1.11.6+0.x64.linux.gnu/share/julia/stdlib/v1.11/Pkg/src/Types.jl:68
+ [2] test(ctx::Pkg.Types.Context, pkgs::Vector{Pkg.Types.PackageSpec}; coverage::Bool, test_fn::Nothing, julia_args::Cmd, test_args::Cmd, force_latest_compatible_version::Bool, allow_earlier_backwards_compatible_versions::Bool, allow_reresolve::Bool, kwargs::@Kwargs{io::IOContext{IO}})
+   @ Pkg.API ~/.julia/juliaup/julia-1.11.6+0.x64.linux.gnu/share/julia/stdlib/v1.11/Pkg/src/API.jl:473
+ [3] test(pkgs::Vector{Pkg.Types.PackageSpec}; io::IOContext{IO}, kwargs::@Kwargs{})
+   @ Pkg.API ~/.julia/juliaup/julia-1.11.6+0.x64.linux.gnu/share/julia/stdlib/v1.11/Pkg/src/API.jl:159
+ [4] test(pkgs::Vector{Pkg.Types.PackageSpec})
+   @ Pkg.API ~/.julia/juliaup/julia-1.11.6+0.x64.linux.gnu/share/julia/stdlib/v1.11/Pkg/src/API.jl:148
+ [5] test(; name::Nothing, uuid::Nothing, version::Nothing, url::Nothing, rev::Nothing, path::Nothing, mode::Pkg.Types.PackageMode, subdir::Nothing, kwargs::@Kwargs{})
+   @ Pkg.API ~/.julia/juliaup/julia-1.11.6+0.x64.linux.gnu/share/julia/stdlib/v1.11/Pkg/src/API.jl:174
+ [6] test()
+   @ Pkg.API ~/.julia/juliaup/julia-1.11.6+0.x64.linux.gnu/share/julia/stdlib/v1.11/Pkg/src/API.jl:165
+ [7] top-level scope
+   @ none:1
