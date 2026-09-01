@@ -755,13 +755,49 @@ def generation_environment(
         raise ValueError("generation environment requires completed records")
     backends: dict[str, Mapping[str, object]] = {}
     artifacts: dict[str, Mapping[str, object]] = {}
+    artifact_paths: dict[str, set[str]] = {}
+    artifact_verification_times: dict[str, set[str]] = {}
+    tokenizers: dict[str, Mapping[str, object]] = {}
     source_hashes: dict[str, set[str]] = {}
     for record in records:
         manifest = record["model_manifest"]
         backend = manifest["backend"]
         backends.setdefault(canonical_sha256(backend), backend)
         artifact = manifest["artifact"]
-        artifacts[str(artifact["model_id"])] = artifact
+        model_id = str(artifact["model_id"])
+        artifact_identity = {
+            field: artifact[field]
+            for field in (
+                "model_id",
+                "repo_id",
+                "revision",
+                "filename",
+                "quantization",
+                "size_bytes",
+                "sha256",
+            )
+        }
+        if model_id in artifacts and canonical_sha256(artifacts[model_id]) != canonical_sha256(artifact_identity):
+            raise ValueError(f"generation records disagree on artifact for {model_id}")
+        artifacts[model_id] = artifact_identity
+        artifact_paths.setdefault(model_id, set()).add(str(artifact["path"]))
+        artifact_verification_times.setdefault(model_id, set()).add(
+            str(artifact["verified_at"])
+        )
+        tokenizer = {
+            "model_id": artifact["model_id"],
+            "identifier": (
+                f"{artifact['repo_id']}@{artifact['revision']}:embedded_gguf_tokenizer"
+            ),
+            "source": "embedded_gguf_tokenizer",
+            "gguf_artifact_sha256": artifact["sha256"],
+            "vocabulary_size": int(manifest["vocabulary_size"]),
+            "bos_token_id": int(manifest["bos_token_id"]),
+            "gguf_general_name": manifest["gguf_general_name"],
+        }
+        if model_id in tokenizers and canonical_sha256(tokenizers[model_id]) != canonical_sha256(tokenizer):
+            raise ValueError(f"generation records disagree on tokenizer for {model_id}")
+        tokenizers[model_id] = tokenizer
         for source, digest in record.get("source_hashes", {}).items():
             source_hashes.setdefault(str(source), set()).add(str(digest))
     if len(backends) != 1:
@@ -781,6 +817,30 @@ def generation_environment(
     ).stdout
     cuda_match = re.search(r"CUDA Version:\s*([0-9.]+)", nvidia_raw)
     required_backend = requirements["required_backend"]
+    q4_tokenizer = tokenizers.get("qwen2_5_7b_instruct_q4_k_m")
+    q8_tokenizer = tokenizers.get("qwen2_5_7b_instruct_q8_0")
+    paired_tokenizer_contract = None
+    if q4_tokenizer is not None and q8_tokenizer is not None:
+        paired_tokenizer_contract = {
+            "q4_model_id": q4_tokenizer["model_id"],
+            "q8_model_id": q8_tokenizer["model_id"],
+            "upstream_identifier_exact": (
+                q4_tokenizer["identifier"] == q8_tokenizer["identifier"]
+            ),
+            "vocabulary_size_exact": (
+                q4_tokenizer["vocabulary_size"] == q8_tokenizer["vocabulary_size"]
+            ),
+            "bos_token_id_exact": (
+                q4_tokenizer["bos_token_id"] == q8_tokenizer["bos_token_id"]
+            ),
+            "rendered_context_ids_checked_per_trial": True,
+        }
+        if not all(
+            value is True
+            for key, value in paired_tokenizer_contract.items()
+            if key.endswith("_exact")
+        ):
+            raise ValueError("paired Q4/Q8 embedded tokenizers disagree")
     return {
         "schema_version": "rankcloak-revision-v3-generation-environment-v1",
         "python_version": backend["python_version"],
@@ -802,8 +862,17 @@ def generation_environment(
         "cuda_runtime_installation_command": required_backend["runtime_installation_command"],
         "source_build_unavailable_reason": required_backend["source_build_unavailable_reason"],
         "model_download_commands": [item["download_command"] for item in requirements["artifacts"]],
-        "model_artifacts": [artifacts[key] for key in sorted(artifacts)],
+        "model_artifacts": [
+            {
+                **artifacts[key],
+                "local_paths": sorted(artifact_paths[key]),
+                "verified_at": sorted(artifact_verification_times[key]),
+            }
+            for key in sorted(artifacts)
+        ],
         "model_artifact_total_bytes": int(sum(int(item["size_bytes"]) for item in artifacts.values())),
+        "tokenizer_identifiers": [tokenizers[key] for key in sorted(tokenizers)],
+        "matched_quantization_tokenizer_contract": paired_tokenizer_contract,
         "execution_git_commits": sorted(
             {str(record["execution_git_commit"]) for record in records}
         ),
