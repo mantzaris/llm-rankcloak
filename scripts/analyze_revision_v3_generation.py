@@ -1231,26 +1231,26 @@ def main(argv: Sequence[str] | None = None) -> int:
     entropy_summaries = [
         summarize_metrics(
             entropy_trials, ["population", "gate_level"], entropy_metrics,
-            group_column="experimental_cell_id", analysis_id="entropy_overall",
+            group_column="payload_name", analysis_id="entropy_overall",
         ),
         summarize_metrics(
             entropy_trials, ["population", "gate_level", "model_id"], entropy_metrics,
-            group_column="experimental_cell_id", analysis_id="entropy_by_model",
+            group_column="payload_name", analysis_id="entropy_by_model",
         ),
         summarize_metrics(
             entropy_trials, ["population", "gate_level", "representation_name"], entropy_metrics,
-            group_column="experimental_cell_id", analysis_id="entropy_by_representation",
+            group_column="payload_name", analysis_id="entropy_by_representation",
         ),
         summarize_metrics(
             entropy_trials, ["population", "gate_level", "payload_class"], entropy_metrics,
-            group_column="experimental_cell_id", analysis_id="entropy_by_artifact_class",
+            group_column="payload_name", analysis_id="entropy_by_artifact_class",
         ),
     ]
     entropy_summary = pd.concat(entropy_summaries, ignore_index=True, sort=False)
     difference_metrics = [column for column in entropy_differences if column.endswith("_difference_vs_ungated")]
     entropy_difference_summary = summarize_metrics(
         entropy_differences, ["gate_level"], difference_metrics,
-        group_column="experimental_cell_id", analysis_id="paired_entropy_difference",
+        group_column="payload_name", analysis_id="paired_entropy_difference",
     )
     control_difference_metrics = [
         column
@@ -1261,7 +1261,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         entropy_control_difference,
         ["gate_level"],
         control_difference_metrics,
-        group_column="experimental_cell_id",
+        group_column="payload_name",
         analysis_id="paired_rankcloak_control_difference",
     )
 
