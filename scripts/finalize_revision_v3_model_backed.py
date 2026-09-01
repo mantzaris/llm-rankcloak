@@ -426,6 +426,29 @@ Quantization detector fits used the frozen payload train/validation/test assignm
             + ", ".join(f"{text} {row['mean']:.4f}" for text, row in values)
             + "."
         )
+    model_lines = []
+    for model_id in sorted(entropy_trials["model_id"].astype(str).unique()):
+        model_trials = entropy_trials.loc[
+            entropy_trials["population"].eq("rankcloak")
+            & entropy_trials["model_id"].astype(str).eq(model_id)
+        ]
+        strict_trials = model_trials.loc[model_trials["gate_level"].eq("strict")]
+        visible_counts = {
+            gate: true_count(
+                model_trials.loc[
+                    model_trials["gate_level"].eq(gate),
+                    "visible_text_exact_payload_recovery",
+                ]
+            )
+            for gate in ("ungated", "moderate", "strict")
+        }
+        per_gate_count = {
+            gate: int(model_trials["gate_level"].eq(gate).sum())
+            for gate in ("ungated", "moderate", "strict")
+        }
+        model_lines.append(
+            f"{model_id}: strict payload completion {true_count(strict_trials['payload_completion'])}/{len(strict_trials)}; visible-text exact recovery ungated/median/strict {visible_counts['ungated']}/{per_gate_count['ungated']}, {visible_counts['moderate']}/{per_gate_count['moderate']}, and {visible_counts['strict']}/{per_gate_count['strict']}."
+        )
     detector_lines = []
     for detector in DETECTORS:
         cells = [detector_subgroup(subgroups, detector, "gate_level", gate) for gate in ("ungated", "moderate", "strict")]
@@ -478,7 +501,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
     results_prefix = old_results.split("\nNo model-backed entropy or matched-quantization outcome was produced.", 1)[0].rstrip()
     results = results_prefix + f"""
 
-All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} {' '.join(gate_quality_lines)} {' '.join(quality_lines)} The quality measures are transparent surface heuristics rather than human judgments. These outcomes quantify capacity, length, recovery, distributional, and heuristic-quality changes; they do not by themselves establish reduced detectability or robust visible-text transport.
+All 18 entropy calibration traces and all 720 entropy evaluation generations completed. The model-backed ledger audit found zero failed trials, exact agreement between encoder and replay-derived gate positions, and deterministic prefix agreement for all length-matched control groups. {' '.join(entropy_lines)} Model-stratified outcomes were: {' '.join(model_lines)} {' '.join(gate_quality_lines)} {' '.join(quality_lines)} The quality measures are transparent surface heuristics rather than human judgments. These outcomes quantify capacity, length, recovery, distributional, and heuristic-quality changes; they do not by themselves establish reduced detectability or robust visible-text transport.
 
 {' '.join(detector_lines)} The entropy detector corpus retained {entropy_dedup['retained_rows']:,}/{entropy_dedup['original_rows']:,} rows after locked pre-feature deduplication, with {entropy_dedup['removed_rows']} rows removed and zero audited cross-partition links. Conditions unavailable after this audit: {unavailable_conditions(entropy_dedup)}. Each gate subgroup had fewer than 1,000 test controls after deduplication, so 0.1% TPR was not estimated.
 
@@ -528,7 +551,7 @@ def write_claim_matrix(output: Path) -> None:
             {
                 "proposed_claim": "Entropy gating changes payload capacity, output length, recovery, quality, and detector behavior",
                 "evidence_status": "supported_descriptively_as_quantified",
-                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_position_summary.csv;source_tables/entropy_paired_difference_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_forced_token_distribution.tex;manuscript_tables/entropy_gate_paired_changes.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
+                "evidence_artifacts": "source_tables/entropy_generation_summary.csv;source_tables/entropy_position_summary.csv;source_tables/entropy_paired_difference_summary.csv;source_tables/entropy_rankcloak_control_difference_summary.csv;source_tables/model_backed_detector_subgroups.csv;manuscript_tables/entropy_gate_generation.tex;manuscript_tables/entropy_gate_by_model.tex;manuscript_tables/entropy_gate_forced_token_distribution.tex;manuscript_tables/entropy_gate_paired_changes.tex;manuscript_tables/entropy_gate_quality.tex;manuscript_tables/entropy_gate_detectors.tex",
                 "qualification": "Direction and magnitude must be stated from the tables; no universal improvement claim",
             },
             {
@@ -657,6 +680,7 @@ def write_source_map(output: Path) -> None:
     rows = [
         ("manuscript_tables/entropy_calibration_thresholds.tex", "source_tables/entropy_calibration_thresholds.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_generation.tex", "source_tables/entropy_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
+        ("manuscript_tables/entropy_gate_by_model.tex", "source_tables/entropy_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_forced_token_distribution.tex", "source_tables/entropy_position_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_quality.tex", "source_tables/entropy_rankcloak_control_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_paired_changes.tex", "source_tables/entropy_paired_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),

@@ -315,6 +315,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     ]
     forced_table = output / "manuscript_tables/entropy_gate_forced_token_distribution.tex"
+    model_table = output / "manuscript_tables/entropy_gate_by_model.tex"
     checks["entropy_forced_token_distribution_complete"] = bool(
         len(forced_positions) == 9
         and set(forced_positions["gate_level"].astype(str))
@@ -322,6 +323,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         and forced_positions["position_count"].astype(int).gt(0).all()
         and forced_table.is_file()
         and forced_table.stat().st_size > 1000
+        and model_table.is_file()
+        and model_table.stat().st_size > 1000
     )
     if not checks["entropy_forced_token_distribution_complete"]:
         errors.append("forced-token rank/surprisal distribution artifact is incomplete")

@@ -1412,6 +1412,36 @@ def main(argv: Sequence[str] | None = None) -> int:
         manuscript / "entropy_gate_generation.tex",
         latex_table(entropy_main, "Entropy-gated RankCloak generation outcomes.", "tab:entropy-gate-generation"),
     )
+    entropy_model_main = entropy_summary.loc[
+        entropy_summary["analysis_id"].eq("entropy_by_model")
+        & entropy_summary["population"].eq("rankcloak")
+        & entropy_summary["metric"].isin(
+            [
+                "payload_completion",
+                "fixed_payload_bits_per_generated_token",
+                "length_ratio_vs_ungated",
+                "visible_text_exact_payload_recovery",
+            ]
+        ),
+        [
+            "gate_level",
+            "model_id",
+            "metric",
+            "mean",
+            "ci_low_95",
+            "ci_high_95",
+            "observation_count",
+            "group_count",
+        ],
+    ].sort_values(["model_id", "gate_level", "metric"], kind="stable")
+    atomic_text(
+        manuscript / "entropy_gate_by_model.tex",
+        latex_table(
+            entropy_model_main,
+            "Entropy-gated RankCloak generation outcomes by model family.",
+            "tab:entropy-gate-by-model",
+        ),
+    )
     atomic_text(
         manuscript / "entropy_calibration_thresholds.tex",
         latex_table(thresholds.drop(columns=["threshold_record_sha256"]), "Frozen model-specific entropy thresholds.", "tab:entropy-calibration-thresholds"),
