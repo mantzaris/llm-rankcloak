@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "dedup_cluster_cross_partition": 0,
+    "near_duplicate_pair_cross_partition": 0,
+    "normalized_text_cross_partition": 0,
+    "pair_id_cross_partition": 0,
+    "payload_group_cross_partition": 0,
+    "row_id_cross_partition": 0
+  },
+  "near_duplicate_method": "char_wb_tfidf_cosine_ngrams_3_5_min_df_2_v1",
+  "near_duplicate_threshold": 0.95,
+  "normalization": "unicode_nfkc_casefold_whitespace_collapse_v1",
+  "schema_version": "rankcloak-revision-v3-dedup-v1",
+  "status": "pass",
+  "violations": {}
+}

@@ -1,0 +1,4 @@
+detector,detector_label,held_model_family_count,aggregation,roc_auc_macro_mean,roc_auc_minimum,roc_auc_maximum,partial_auc_fpr_0_01_macro_mean,partial_auc_fpr_0_01_minimum,partial_auc_fpr_0_01_maximum,tpr_at_fpr_0_01_macro_mean,tpr_at_fpr_0_01_minimum,tpr_at_fpr_0_01_maximum
+deberta,DeBERTa-v3-base,3,unweighted macro mean across three held families,0.9983522867587821,0.9971944342108991,0.9999878546935537,0.926226709688041,0.8052904954880187,0.9987854693553675,0.9912810194500334,0.9758551307847082,1.0
+surprisal,Model-aware surprisal,3,unweighted macro mean across three held families,0.9999811073010836,0.9999433219032505,1.0,0.9981107301083497,0.9943321903250489,1.0,0.9973172367538564,0.9919517102615694,1.0
+textcnn,TextCNN,3,unweighted macro mean across three held families,0.9576445932469397,0.9186163257209251,0.978361112348133,0.43303010551572346,0.05609917047556971,0.6234914517284796,0.7753185781354796,0.710261569416499,0.8329979879275654

@@ -1,0 +1,13 @@
+\begin{table}
+\caption{Recovery mode in the bounded 144-trial robustness sample.}
+\label{tab:v3_recovery_modes}
+\begin{tabular}{lrrrrrr}
+\toprule
+replay\_mode & observed\_outcome\_rows & success\_outcome\_rows & failure\_outcome\_rows & recovery\_rate & ci\_low & ci\_high \\
+\midrule
+detokenized\_text\_retokenized & 144 & 88 & 56 & 0.6111 & 0.5296 & 0.6869 \\
+greedy\_leadin\_regeneration & 144 & 144 & 0 & 1.0000 & 0.9740 & 1.0000 \\
+saved\_token\_ids & 144 & 144 & 0 & 1.0000 & 0.9740 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}

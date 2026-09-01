@@ -1,0 +1,24 @@
+{
+  "entropy": {
+    "analysis_rows": 720,
+    "artifact_classes": 8,
+    "calibration_traces": 18,
+    "gate_levels": 3,
+    "models": 3,
+    "planned_new_generation_rows": 720,
+    "representation_cells": 20,
+    "reused_rows": 0,
+    "templates": 2
+  },
+  "preflight_status": "blocked",
+  "quantization": {
+    "analysis_rows": 3840,
+    "artifact_classes": 8,
+    "codecs": 2,
+    "payloads": 480,
+    "planned_new_q8_rows": 1920,
+    "quantizations": 2,
+    "reused_q4_rows": 1920
+  },
+  "schema_version": "rankcloak-revision-v3-generation-plan-summary-v1"
+}

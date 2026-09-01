@@ -1,0 +1,15 @@
+# Revision V3 computational experiment design
+
+The predeclared design is tracked in revision_docs/REVISION_V3_COMPUTATIONAL_PLAN.md and machine-readable configurations under configs/revision_v3/. This result namespace never modifies V2 source data.
+
+The detector corpus is normalized with Unicode NFKC, case folding, and whitespace collapse before SHA-256 exact matching. Complete matched pairs implicated by an exact duplicate are removed. Character-boundary TF-IDF cosine similarity over 3--5 character n-grams defines near duplicates at the predeclared threshold 0.95. Payload groups linked by any near-duplicate edge form an immutable connected component. These components are assigned to train, validation, and test before feature extraction or detector fitting.
+
+Component assignment targeted 60/20/20 train/validation/test allocation; indivisible near-duplicate components and factor balancing produced the exact realized counts recorded in the deduplication summary. Leave-one-model-family-out tests use non-target families from train and validation components and the target family only from test components. Low-FPR thresholds are selected from validation labels and then frozen. The 0.1% operating point is reported only when both validation and test contain at least 1,000 negative observations.
+
+The human-authored secondary control uses the pinned Databricks Dolly 15k v1.0 source, automatically screened by the repository pipeline, deduplicated, checked against the detector corpus, and matched by available prompt topic and text length. It is a computational control, not a human evaluation. RankCloak-versus-human discrimination can include generic machine-versus-human cues.
+
+The model-aware detector uses only saved token-log-probability summaries available for both RankCloak and matched ordinary controls. Rank-only fields are excluded from classifier inputs because corresponding ordinary-control ranks were not stored. Topic variability is a paired comparison of the fixed-codec segmented single-topic and multi-topic conditions; it is reported separately from recovery mode.
+
+The bounded entropy-gate matrix is predeclared in configs/revision_v3/entropy_gate.json. It compares ungated, median-clean-development-entropy, and 75th-percentile gates under both fixed-payload and fixed-token-budget estimands. The bounded quantization design is predeclared in configs/revision_v3/quantization.json and holds the Qwen2.5 model revision, embedded tokenizer, prompts, payloads, codecs, and seeds fixed across Q4_K_M and Q8_0. Both model-backed studies remain unavailable because their exact pinned weights and the required CUDA llama.cpp backend are absent; no historical cross-family result is relabeled as a quantization comparison.
+
+The recovery-mode comparison reuses only the 144-trial V1 robustness sample after verifying its source checksum. Saved token IDs, greedy lead-in regeneration, and visible-text detokenization/retokenization are separate outcomes and are not extrapolated to the full 6,480-trial corpus.

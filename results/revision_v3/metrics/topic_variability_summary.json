@@ -1,0 +1,48 @@
+{
+  "exact_output_uniqueness": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_unit": "payload_name",
+    "ci_high_95": 1.0,
+    "ci_low_95": 1.0,
+    "mean": 1.0,
+    "n_groups": 240,
+    "n_observations": 720
+  },
+  "model_count": 3,
+  "multi_saved_id_exact_recovery_count": 720,
+  "multi_visible_text_available_count": 0,
+  "normalized_character_edit_distance": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_unit": "payload_name",
+    "ci_high_95": 0.6286834256678011,
+    "ci_low_95": 0.606959759108891,
+    "mean": 0.6178761835358131,
+    "n_groups": 240,
+    "n_observations": 720
+  },
+  "normalized_output_uniqueness": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_unit": "payload_name",
+    "ci_high_95": 1.0,
+    "ci_low_95": 1.0,
+    "mean": 1.0,
+    "n_groups": 240,
+    "n_observations": 720
+  },
+  "pair_count": 720,
+  "payload_class_count": 4,
+  "payload_count": 240,
+  "recovery_is_separate_from_variability": true,
+  "schema_version": "rankcloak-revision-v3-topic-variability-summary-v1",
+  "single_saved_id_exact_recovery_count": 720,
+  "single_visible_text_available_count": 0,
+  "token_jaccard_similarity": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_unit": "payload_name",
+    "ci_high_95": 0.2622638924950817,
+    "ci_low_95": 0.2441496929413574,
+    "mean": 0.2530532832329891,
+    "n_groups": 240,
+    "n_observations": 720
+  }
+}

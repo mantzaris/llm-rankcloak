@@ -1,0 +1,50 @@
+{
+  "schema_version": "rankcloak-revision-v3-reproducibility-audit-v1",
+  "status": "pass_with_documented_immutable_paperv2_test_failures",
+  "clean_room_preparation": {
+    "output_directory": "/tmp/rankcloak_revision_v3_repro_20260901_a",
+    "command": ".venv/bin/python scripts/prepare_revision_v3.py --human-candidates /tmp/rankcloak_revision_v3_dolly_import/human_control_candidates.jsonl --output-dir /tmp/rankcloak_revision_v3_repro_20260901_a",
+    "prepared_dedup_source_and_metric_ledgers_compared": 18,
+    "byte_identical_ledgers": 18,
+    "different_ledgers": 0,
+    "missing_ledgers": 0
+  },
+  "generation_plan_regeneration": {
+    "command": ".venv/bin/python scripts/build_revision_v3_generation_plans.py --output-dir /tmp/rankcloak_revision_v3_repro_20260901_a",
+    "ledgers_compared": 7,
+    "byte_identical_ledgers": 7,
+    "different_ledgers": 0
+  },
+  "derived_artifact_regeneration": {
+    "command": ".venv/bin/python scripts/finalize_revision_v3.py",
+    "source_tables_latex_tables_figures_and_handoffs_compared": 42,
+    "byte_identical_artifacts": 42,
+    "different_artifacts": 0,
+    "comparison_method": "SHA-256 over exact bytes before and after independent finalizer execution"
+  },
+  "figure_inspection": {
+    "status": "pass",
+    "inspected_png_previews": [
+      "figures/detector_model_family_generalization.png",
+      "figures/detector_low_fpr.png",
+      "figures/human_control_false_positives.png",
+      "figures/topic_conditioned_cover_variability.png"
+    ],
+    "checks": [
+      "no clipping",
+      "readable labels",
+      "nonmisleading zero-based axes",
+      "consistent detector colors and legends"
+    ],
+    "correction_applied": "Moved the model-family legend below both panels after the first inspection found overlap; regenerated PDF and PNG and reinspected."
+  },
+  "tests": {
+    "focused_v3": "27 passed, 0 failed",
+    "complete_python_suite": "670 passed, 3 immutable paperV2 reference-contract assertions failed",
+    "julia_probe": "inapplicable; repository has no Julia project or Julia test sources and no tests were executed"
+  },
+  "manuscript_tree_check": {
+    "command": "git diff --exit-code -- paperV2",
+    "status": "pass"
+  }
+}

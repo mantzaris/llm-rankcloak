@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    {
+      "available": false,
+      "expected_path": "/home/meow/Documents/repos/llm-rankcloak/models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "expected_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "expected_size_bytes": 4920734272,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "observed_sha256": null,
+      "observed_size_bytes": null,
+      "valid": false
+    },
+    {
+      "available": false,
+      "expected_path": "/home/meow/Documents/repos/llm-rankcloak/models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "expected_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "expected_size_bytes": 4372812000,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "observed_sha256": null,
+      "observed_size_bytes": null,
+      "valid": false
+    },
+    {
+      "available": false,
+      "expected_path": "/home/meow/Documents/repos/llm-rankcloak/models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "expected_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "expected_size_bytes": 4683074240,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "observed_sha256": null,
+      "observed_size_bytes": null,
+      "valid": false
+    },
+    {
+      "available": false,
+      "expected_path": "/home/meow/Documents/repos/llm-rankcloak/models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q8_0.gguf",
+      "expected_sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+      "expected_size_bytes": 8098525888,
+      "model_id": "qwen2_5_7b_instruct_q8_0",
+      "observed_sha256": null,
+      "observed_size_bytes": null,
+      "valid": false
+    }
+  ],
+  "backend_available": false,
+  "downloads_performed": false,
+  "entropy_experiment_ready": false,
+  "launch_performed": false,
+  "matched_quantization_experiment_ready": false,
+  "requirements_config_sha256": "8521bd474ca223adf1668118435e923100aa9cd789bd413de128a79a201a8908",
+  "schema_version": "rankcloak-revision-v3-generation-preflight-v1",
+  "status": "blocked"
+}

@@ -1,0 +1,31 @@
+{
+  "conditions_unavailable_after_deduplication": [],
+  "dedup_components": 460,
+  "deduplicated_rows": 15838,
+  "exact_duplicate_groups": 1,
+  "exact_duplicate_participating_rows": 2,
+  "leakage_audit_status": "pass",
+  "near_duplicate_clusters": 9,
+  "near_duplicate_cross_payload_pairs": 44,
+  "near_duplicate_method": "char_wb_tfidf_cosine_ngrams_3_5_min_df_2_v1",
+  "near_duplicate_pairs": 52,
+  "near_duplicate_threshold": 0.95,
+  "normalization": "unicode_nfkc_casefold_whitespace_collapse_v1",
+  "original_pairs": 7920,
+  "original_rows": 15840,
+  "partition_positive_rows": {
+    "test": 1491,
+    "train": 4952,
+    "validation": 1476
+  },
+  "partition_rows": {
+    "test": 2982,
+    "train": 9904,
+    "validation": 2952
+  },
+  "removed_observations": 2,
+  "removed_pairs": 1,
+  "schema_version": "rankcloak-revision-v3-dedup-v1",
+  "seed": 20260831,
+  "tfidf_feature_count": 130492
+}

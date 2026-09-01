@@ -1,0 +1,82 @@
+{
+  "completed_at": "2026-09-01T00:53:19.529031+00:00",
+  "detector": "surprisal",
+  "elapsed_seconds": 6.2831051030007075,
+  "evaluation_id": "leave_one_model__mistral_7b_instruct_v0_3_q4_k_m",
+  "fit": {
+    "candidates": [
+      {
+        "C": 0.01,
+        "validation_roc_auc": 1.0
+      },
+      {
+        "C": 0.1,
+        "validation_roc_auc": 1.0
+      },
+      {
+        "C": 1.0,
+        "validation_roc_auc": 1.0
+      },
+      {
+        "C": 10.0,
+        "validation_roc_auc": 1.0
+      }
+    ],
+    "coefficient_by_feature": {
+      "surprisal_first_half_mean": 0.2568277766317074,
+      "surprisal_fraction_ge_10": -0.08865368272940859,
+      "surprisal_fraction_ge_2": 0.3088081483553509,
+      "surprisal_fraction_ge_4": 0.3829820127413953,
+      "surprisal_fraction_ge_6": 0.17069327721462516,
+      "surprisal_fraction_ge_8": 0.0022601336494675,
+      "surprisal_last_half_mean": 0.21494099202410835,
+      "surprisal_max": 1.5526452538923599,
+      "surprisal_mean": 0.24011091999191708,
+      "surprisal_mean_absolute_step": -0.20828580242937222,
+      "surprisal_min": -0.012882317707946414,
+      "surprisal_q10": 0.13959344518400016,
+      "surprisal_q25": 0.123830972103018,
+      "surprisal_q50": 0.07139244392790395,
+      "surprisal_q75": 0.07728757769816962,
+      "surprisal_q90": 0.3389323078556275,
+      "surprisal_q95": 0.7680141219738063,
+      "surprisal_std": 1.0240790585003396,
+      "trace_token_count": 0.7236238690716394
+    },
+    "detector_name": "model_aware_surprisal_logistic",
+    "feature_columns": [
+      "surprisal_first_half_mean",
+      "surprisal_fraction_ge_10",
+      "surprisal_fraction_ge_2",
+      "surprisal_fraction_ge_4",
+      "surprisal_fraction_ge_6",
+      "surprisal_fraction_ge_8",
+      "surprisal_last_half_mean",
+      "surprisal_max",
+      "surprisal_mean",
+      "surprisal_mean_absolute_step",
+      "surprisal_min",
+      "surprisal_q10",
+      "surprisal_q25",
+      "surprisal_q50",
+      "surprisal_q75",
+      "surprisal_q90",
+      "surprisal_q95",
+      "surprisal_std",
+      "trace_token_count"
+    ],
+    "feature_version": "shared_generation_log_probability_summaries_v1",
+    "information_access": "saved per-token log probabilities from the exact generation model for both RankCloak and matched ordinary controls",
+    "intercept": 0.627364278040638,
+    "selected_C": 0.01,
+    "test_tuning": false
+  },
+  "human_row_count": 0,
+  "schema_version": "rankcloak-revision-v3-detector-fit-v1",
+  "seed": 1302287460,
+  "started_at": "2026-09-01T00:53:13.245904+00:00",
+  "test_row_count": 994,
+  "test_tuning": false,
+  "train_row_count": 6604,
+  "validation_row_count": 1968
+}

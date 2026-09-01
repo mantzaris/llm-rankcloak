@@ -1,0 +1,13 @@
+\begin{table}
+\caption{Matched-control detector performance on strictly deduplicated test data.}
+\label{tab:v3_detector_main}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+detector\_label & test\_positive\_count & test\_negative\_count & roc\_auc & roc\_auc\_ci\_low\_95 & roc\_auc\_ci\_high\_95 & partial\_auc\_fpr\_0\_01 & partial\_auc\_fpr\_0\_01\_ci\_low\_95 & partial\_auc\_fpr\_0\_01\_ci\_high\_95 \\
+\midrule
+TextCNN & 1491 & 1491 & 0.9868 & 0.9819 & 0.9913 & 0.6652 & 0.5355 & 0.7876 \\
+DeBERTa-v3-base & 1491 & 1491 & 0.9994 & 0.9984 & 1.0000 & 0.9948 & 0.9902 & 0.9987 \\
+Model-aware surprisal & 1491 & 1491 & 1.0000 & 1.0000 & 1.0000 & 0.9995 & 0.9970 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}

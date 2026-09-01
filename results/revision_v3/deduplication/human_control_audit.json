@@ -1,0 +1,20 @@
+{
+  "automatically_screened_candidates": 540,
+  "cross_corpus_near_duplicate_pairs": 0,
+  "human_control_version": "dolly_automatically_screened_length_topic_matched_v1",
+  "human_rows_excluded_for_cross_corpus_similarity": 0,
+  "manual_review_status": "not reviewed for participant-facing stimulus use; computational secondary control only",
+  "maximum_relative_word_difference": 0.35,
+  "near_duplicate_clusters_within_human": 0,
+  "near_duplicate_pairs_within_human": 0,
+  "near_duplicate_threshold": 0.95,
+  "normalized_exact_duplicate_groups": 0,
+  "normalized_exact_duplicate_rows_removed": 0,
+  "partition_policy": "all human near-duplicate clusters assigned to secondary human test only",
+  "schema_version": "rankcloak-revision-v3-analysis-v1",
+  "selected_human_controls": 250,
+  "selected_template_count": 16,
+  "source_records": 6606,
+  "tfidf_feature_count": 27142,
+  "threshold_selection_uses_human_labels": false
+}

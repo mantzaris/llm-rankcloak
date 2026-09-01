@@ -1,0 +1,83 @@
+{
+  "completed_at": "2026-09-01T01:15:49.311268+00:00",
+  "detector": "deberta",
+  "elapsed_seconds": 1226.7513754059983,
+  "evaluation_id": "matched",
+  "fit": {
+    "detector_name": "deberta_v3_base_classifier_v3",
+    "implementation_kind": "pretrained_transformer",
+    "implementation_metadata": {
+      "artifact_verification": {
+        "artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+        "artifacts": [
+          {
+            "path": "config.json",
+            "sha256": "649f6a1ec33c6bdd9a6486d5c66019d461139e54957073eafe9bbc2d34c75b0b",
+            "size_bytes": 579
+          },
+          {
+            "path": "pytorch_model.bin",
+            "sha256": "691d48a2800b926a19e3051def466fc2cca4f59a15e42ce4a0cf7f1b380b5e33",
+            "size_bytes": 371146213
+          },
+          {
+            "path": "spm.model",
+            "sha256": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+            "size_bytes": 2464616
+          },
+          {
+            "path": "tokenizer_config.json",
+            "sha256": "3f3978e0c036f2c2588cac34a6047cbb0af0b0dc1814254e291028529805496d",
+            "size_bytes": 52
+          }
+        ],
+        "ignored_top_level_entries": [
+          ".cache"
+        ],
+        "model_directory": "/home/meow/Documents/repos/llm-rankcloak/models/detectors/deberta_v3_base",
+        "model_id": "microsoft/deberta-v3-base",
+        "policy": "exact_regular_files_no_symlinks_cache_metadata_ignored",
+        "schema_version": "rankcloak-model-artifact-pin-v1",
+        "upstream_revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+        "verification_status": "verified"
+      },
+      "batch_size": 8,
+      "configured_model_name_or_path": "microsoft/deberta-v3-base",
+      "device": "cuda:0",
+      "downloads_enabled": false,
+      "epochs": 3,
+      "local_files_only": true,
+      "maximum_length": 256,
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_name_or_path": "/home/meow/Documents/repos/llm-rankcloak/models/detectors/deberta_v3_base",
+      "model_revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_schema_hash_algorithm": "rankcloak-torch-state-schema-v1",
+      "model_state_schema_sha256": "a4a703a81644ff2162ef60c3ad7d2b6ffed39f0236ee884f8b8874677ef6c12d",
+      "model_state_sha256": "0e621005000619a99272faf6ca2825f48ec829f38ac6494d847464a12b6f8754",
+      "phase_timings_seconds": {
+        "evaluation": 23.994362241995987,
+        "initialization_and_preprocessing": 15.079972110004746,
+        "total": 1200.3281538550073,
+        "trained_state_hashing": 1.990867675995105,
+        "training": 1159.2629393379975
+      },
+      "test_tuning": false,
+      "torch_version": "2.5.1+cu124",
+      "transformers_version": "4.46.3",
+      "upstream_model_id": "microsoft/deberta-v3-base",
+      "use_fast_tokenizer": false
+    },
+    "implementation_status": "complete",
+    "notes": "Prespecified detector completed without test-set tuning.",
+    "requested_kind": "pretrained_transformer"
+  },
+  "human_row_count": 250,
+  "schema_version": "rankcloak-revision-v3-detector-fit-v1",
+  "seed": 309852518,
+  "started_at": "2026-09-01T00:55:22.559865+00:00",
+  "test_row_count": 2982,
+  "test_tuning": false,
+  "train_row_count": 9904,
+  "validation_row_count": 2952
+}

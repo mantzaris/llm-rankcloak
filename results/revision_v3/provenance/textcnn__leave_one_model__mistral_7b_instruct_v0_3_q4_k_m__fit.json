@@ -1,0 +1,49 @@
+{
+  "completed_at": "2026-09-01T00:54:54.595142+00:00",
+  "detector": "textcnn",
+  "elapsed_seconds": 12.04472664599598,
+  "evaluation_id": "leave_one_model__mistral_7b_instruct_v0_3_q4_k_m",
+  "fit": {
+    "detector_name": "published_textcnn_equivalent_v3",
+    "implementation_kind": "text_cnn",
+    "implementation_metadata": {
+      "architecture": "word_embedding_parallel_conv_relu_global_max_pool_dropout",
+      "batch_size": 64,
+      "device": "cuda:0",
+      "dropout": 0.5,
+      "embedding_dimension": 300,
+      "epochs": 10,
+      "filter_sizes": [
+        3,
+        5
+      ],
+      "filters_per_width": 100,
+      "maximum_length": 256,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_schema_hash_algorithm": "rankcloak-torch-state-schema-v1",
+      "model_state_schema_sha256": "6494a39a7480346786c4ba7597e8dc7d1ee707fcad98dc3a3a09b3163854b648",
+      "model_state_sha256": "692df44e8e563d1048fe8c82cc5bd43a8912f9c61c1f46e3eb67fcf34035d665",
+      "phase_timings_seconds": {
+        "evaluation": 0.03789118400163716,
+        "initialization_and_preprocessing": 0.8111966910000774,
+        "total": 5.368782689001819,
+        "trained_state_hashing": 0.07648173299821792,
+        "training": 4.443204686001991
+      },
+      "test_tuning": false,
+      "torch_version": "2.5.1+cu124",
+      "vocabulary_size": 19800
+    },
+    "implementation_status": "complete",
+    "notes": "Prespecified detector completed without test-set tuning.",
+    "requested_kind": "text_cnn"
+  },
+  "human_row_count": 0,
+  "schema_version": "rankcloak-revision-v3-detector-fit-v1",
+  "seed": 108979142,
+  "started_at": "2026-09-01T00:54:42.550394+00:00",
+  "test_row_count": 994,
+  "test_tuning": false,
+  "train_row_count": 6604,
+  "validation_row_count": 1968
+}

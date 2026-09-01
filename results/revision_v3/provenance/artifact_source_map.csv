@@ -1,0 +1,11 @@
+artifact,authoritative_source,generation_command
+manuscript_tables/detector_main.tex,source_tables/detector_main_metrics.csv,python scripts/finalize_revision_v3.py
+manuscript_tables/detector_low_fpr.tex,source_tables/detector_main_metrics.csv,python scripts/finalize_revision_v3.py
+manuscript_tables/human_controls.tex,source_tables/detector_human_metrics.csv,python scripts/finalize_revision_v3.py
+manuscript_tables/deduplication.tex,deduplication/summary.json,python scripts/finalize_revision_v3.py
+manuscript_tables/topic_variability.tex,metrics/topic_variability_summary.json,python scripts/finalize_revision_v3.py
+manuscript_tables/recovery_modes.tex,source_tables/recovery_mode_comparison.csv,python scripts/finalize_revision_v3.py
+figures/detector_model_family_generalization.pdf,source_tables/detector_main_metrics.csv,python scripts/finalize_revision_v3.py
+figures/detector_low_fpr.pdf,source_tables/detector_main_metrics.csv,python scripts/finalize_revision_v3.py
+figures/human_control_false_positives.pdf,source_tables/detector_human_metrics.csv,python scripts/finalize_revision_v3.py
+figures/topic_conditioned_cover_variability.pdf,source_tables/topic_variability_pairs.csv,python scripts/finalize_revision_v3.py

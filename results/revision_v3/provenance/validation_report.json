@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "all_numeric_recomputations_pass": true,
+    "authoritative_detector_sha256_unchanged": true,
+    "authoritative_trial_sha256_unchanged": true,
+    "entropy_calibration_plan_valid": true,
+    "entropy_plan_all_new": true,
+    "entropy_plan_rows": 720,
+    "every_partition_binary_balanced": true,
+    "fit_metadata_count": 12,
+    "generation_preflight_fail_closed": true,
+    "historical_recovery_sha256_unchanged": true,
+    "human_import_provenance_valid": true,
+    "leakage_audit_pass": true,
+    "manuscript_directories_unmodified": true,
+    "prediction_file_count": 12,
+    "quantization_plan_valid": true,
+    "recovery_mode_source_valid": true,
+    "run_manifest_self_contained": true
+  },
+  "completed_at": "2026-09-01T02:33:54.607873+00:00",
+  "errors": [],
+  "schema_version": "rankcloak-revision-v3-validation-report-v1",
+  "status": "pass"
+}

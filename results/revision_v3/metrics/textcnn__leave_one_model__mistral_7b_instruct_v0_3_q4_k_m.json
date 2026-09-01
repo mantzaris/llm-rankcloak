@@ -1,0 +1,82 @@
+{
+  "bootstrap_resamples_requested": 2000,
+  "detector": "textcnn",
+  "evaluation_id": "leave_one_model__mistral_7b_instruct_v0_3_q4_k_m",
+  "false_positives_at_fpr_0_001": null,
+  "false_positives_at_fpr_0_01": 18,
+  "fpr_at_threshold_0_001": null,
+  "fpr_at_threshold_0_01": 0.03621730382293763,
+  "fpr_at_threshold_0_01_bootstrap_valid": 2000,
+  "fpr_at_threshold_0_01_ci_high_95": 0.05469602407495251,
+  "fpr_at_threshold_0_01_ci_low_95": 0.018867924528301886,
+  "implementation_kind": "text_cnn",
+  "partial_auc_fpr_0_01": 0.6234914517284796,
+  "partial_auc_fpr_0_01_bootstrap_valid": 2000,
+  "partial_auc_fpr_0_01_ci_high_95": 0.7707492546218105,
+  "partial_auc_fpr_0_01_ci_low_95": 0.4724517064682545,
+  "partial_auc_interpolation": "none; exact FP-budget step envelope",
+  "partial_auc_normalization": "raw empirical step area divided by 0.01",
+  "roc_auc": 0.978361112348133,
+  "roc_auc_bootstrap_valid": 2000,
+  "roc_auc_ci_high_95": 0.9860590716258548,
+  "roc_auc_ci_low_95": 0.9699706298829995,
+  "schema_version": "rankcloak-revision-v3-detector-metrics-v1",
+  "seed": 108979142,
+  "test_group_count": 99,
+  "test_model_ids": [
+    "mistral_7b_instruct_v0_3_q4_k_m"
+  ],
+  "test_negative_count": 497,
+  "test_positive_count": 497,
+  "test_rows": 994,
+  "threshold_at_fpr_0_001": null,
+  "threshold_at_fpr_0_01": 0.8154950141906738,
+  "threshold_selected_on_test": false,
+  "threshold_selection": {
+    "fpr_0_001": {
+      "available": false,
+      "minimum_negative_count": 1000,
+      "reason": "test negatives do not support the requested empirical resolution",
+      "target_fpr": 0.001,
+      "test_negative_count": 497,
+      "threshold": null,
+      "validation_negative_count": 984,
+      "validation_positive_count": 984
+    },
+    "fpr_0_01": {
+      "allowed_false_positives": 9,
+      "available": true,
+      "minimum_negative_count": 100,
+      "selection_rule": "maximize validation TPR among observed score thresholds with exact validation FP count at or below floor(target_fpr*n_negative); break ties by fewer FP then higher threshold",
+      "target_fpr": 0.01,
+      "threshold": 0.8154950141906738,
+      "validation_empirical_fpr": 0.009146341463414634,
+      "validation_empirical_tpr": 0.8099593495934959,
+      "validation_false_positives": 9,
+      "validation_negative_count": 984,
+      "validation_positive_count": 984,
+      "validation_true_positives": 797
+    }
+  },
+  "tpr_at_fpr_0_001": null,
+  "tpr_at_fpr_0_01": 0.8329979879275654,
+  "tpr_at_fpr_0_01_bootstrap_valid": 2000,
+  "tpr_at_fpr_0_01_ci_high_95": 0.8715203426124197,
+  "tpr_at_fpr_0_01_ci_low_95": 0.795111622747571,
+  "training_model_ids": [
+    "llama3_8b_instruct_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m"
+  ],
+  "training_rows": 6604,
+  "true_positives_at_fpr_0_001": null,
+  "true_positives_at_fpr_0_01": 414,
+  "uncertainty_unit": "dedup_cluster_id",
+  "unit_of_analysis": "detector corpus observation",
+  "validation_model_ids": [
+    "llama3_8b_instruct_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m"
+  ],
+  "validation_negative_count": 984,
+  "validation_positive_count": 984,
+  "validation_rows": 1968
+}

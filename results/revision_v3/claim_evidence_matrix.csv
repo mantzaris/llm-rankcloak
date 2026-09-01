@@ -1,0 +1,13 @@
+proposed_claim,evidence_status,evidence_artifacts,qualification
+V3 detector partitions are strict under the declared exact and near-duplicate rule,fully_addressed,deduplication/leakage_audit.json;deduplication/near_duplicate_pairs.csv,Does not detect semantic paraphrases below 0.95
+Matched ordinary LLM controls remain the primary detector comparison,fully_addressed,source_tables/detector_main_metrics.csv,Applies to the three historical families
+Human-authored controls were evaluated computationally at LLM-validation thresholds,bounded_representative,source_tables/detector_human_metrics.csv;figures/human_control_false_positives.pdf,Dolly genre coverage is uneven; generic machine-human signals remain
+Text-only detectors generalize to a held model family,fully_addressed_for_existing_three_families,source_tables/detector_main_metrics.csv;figures/detector_model_family_generalization.pdf,Not all possible unseen families
+Matched quantization sensitivity,dry_run_complete_outcomes_unavailable,provenance/quantization_generation_plan.csv;provenance/generation_preflight.json;limitations_for_manuscript.md,"Exact 1,920-row Q8 generation and CUDA llama.cpp backend absent"
+A data-adaptive black-box neural attacker was evaluated,fully_addressed,source_tables/detector_main_metrics.csv;provenance/deberta__matched__fit.json,Not comprehensive against every attacker
+An exact-model-aware surprisal attacker was evaluated,fully_addressed,source_tables/detector_main_metrics.csv;source_tables/rank_pressure_descriptive.csv,Ranks remain descriptive because control ranks were not stored
+Low-FPR thresholds were selected on validation and frozen for test,fully_addressed,source_tables/detector_main_metrics.csv;metrics,0.1% unavailable when n_negative is below 1000
+Entropy-gated RankCloak has replay-consistent protocol primitives,implementation_tests_and_dry_run_complete,provenance/entropy_generation_plan.csv;provenance/entropy_calibration_plan.csv;test_report.md,No model-backed outcomes
+"Entropy gating improves detectability, capacity, recovery, or quality",not_supported,provenance/generation_preflight.json;limitations_for_manuscript.md,All 720 evaluation generations are blocked
+RankCloak produces variable topic-conditioned covers,fully_addressed_for_paired_segmented_conditions,source_tables/topic_variability_pairs.csv;figures/topic_conditioned_cover_variability.pdf,Not evidence of secrecy or visible-text recovery
+Saved-ID replay and visible-text retokenization have distinct recovery behavior,fully_addressed_for_144_trial_robustness_sample,source_tables/recovery_mode_comparison.csv;manuscript_tables/recovery_modes.tex,"Historical bounded sample, not all 6,480 trials; does not remove exact-replay dependence"

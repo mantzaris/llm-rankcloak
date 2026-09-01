@@ -1,0 +1,22 @@
+\begin{table}
+\caption{Validation-frozen low-FPR detector operating points.}
+\label{tab:v3_low_fpr}
+\begin{tabular}{llrrrrrrrr}
+\toprule
+detector\_label & evaluation\_id & validation\_negative\_count & test\_negative\_count & tpr\_at\_fpr\_0\_01 & fpr\_at\_threshold\_0\_01 & false\_positives\_at\_fpr\_0\_01 & tpr\_at\_fpr\_0\_001 & fpr\_at\_threshold\_0\_001 & false\_positives\_at\_fpr\_0\_001 \\
+\midrule
+TextCNN & matched & 1476 & 1491 & 0.8317 & 0.0127 & 19 & 0.4829 & 0.0013 & 2.0000 \\
+TextCNN & leave\_one\_model\_\_llama3\_8b\_instruct\_q4\_k\_m & 984 & 497 & 0.7103 & 0.0704 & 35 & -- & -- & -- \\
+TextCNN & leave\_one\_model\_\_mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & 984 & 497 & 0.8330 & 0.0362 & 18 & -- & -- & -- \\
+TextCNN & leave\_one\_model\_\_qwen2\_5\_7b\_instruct\_q4\_k\_m & 984 & 497 & 0.7827 & 0.0201 & 10 & -- & -- & -- \\
+DeBERTa-v3-base & matched & 1476 & 1491 & 0.9913 & 0.0007 & 1 & 0.9886 & 0.0007 & 1.0000 \\
+DeBERTa-v3-base & leave\_one\_model\_\_llama3\_8b\_instruct\_q4\_k\_m & 984 & 497 & 0.9980 & 0.0563 & 28 & -- & -- & -- \\
+DeBERTa-v3-base & leave\_one\_model\_\_mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & 984 & 497 & 1.0000 & 0.0121 & 6 & -- & -- & -- \\
+DeBERTa-v3-base & leave\_one\_model\_\_qwen2\_5\_7b\_instruct\_q4\_k\_m & 984 & 497 & 0.9759 & 0.0040 & 2 & -- & -- & -- \\
+Model-aware surprisal & matched & 1476 & 1491 & 0.9987 & 0.0020 & 3 & 0.9987 & 0.0020 & 3.0000 \\
+Model-aware surprisal & leave\_one\_model\_\_llama3\_8b\_instruct\_q4\_k\_m & 984 & 497 & 0.9920 & 0.0060 & 3 & -- & -- & -- \\
+Model-aware surprisal & leave\_one\_model\_\_mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & 984 & 497 & 1.0000 & 0.0040 & 2 & -- & -- & -- \\
+Model-aware surprisal & leave\_one\_model\_\_qwen2\_5\_7b\_instruct\_q4\_k\_m & 984 & 497 & 1.0000 & 0.0000 & 0 & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
