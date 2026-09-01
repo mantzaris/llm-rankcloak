@@ -108,19 +108,32 @@ def validate_prediction(
             validation["label"], validation["score"], target
         )
         stored = metrics["threshold_selection"]["fpr_{}".format(suffix)]
-        if bool(selection["available"]) != bool(stored["available"]):
+        required = int(np.ceil(1.0 / target))
+        expected_available = bool(
+            selection["available"]
+            and int(metrics["test_negative_count"]) >= required
+        )
+        if expected_available != bool(stored["available"]):
             errors.append("threshold availability differs for {} {} {}".format(detector, evaluation, target))
             continue
-        if selection["available"]:
+        if expected_available:
             if not close(selection["threshold"], stored["threshold"]):
                 errors.append("validation threshold does not reproduce for {} {} {}".format(detector, evaluation, target))
-            required = int(np.ceil(1.0 / target))
-            if int(metrics["test_negative_count"]) >= required:
-                counts = frozen_threshold_counts(labels, scores, float(stored["threshold"]))
-                if not close(counts["tpr"], metrics["tpr_at_fpr_{}".format(suffix)]):
-                    errors.append("frozen test TPR differs for {} {} {}".format(detector, evaluation, target))
-                if int(counts["false_positives"]) != int(metrics["false_positives_at_fpr_{}".format(suffix)]):
-                    errors.append("false-positive count differs for {} {} {}".format(detector, evaluation, target))
+            counts = frozen_threshold_counts(labels, scores, float(stored["threshold"]))
+            if not close(counts["tpr"], metrics["tpr_at_fpr_{}".format(suffix)]):
+                errors.append("frozen test TPR differs for {} {} {}".format(detector, evaluation, target))
+            if int(counts["false_positives"]) != int(metrics["false_positives_at_fpr_{}".format(suffix)]):
+                errors.append("false-positive count differs for {} {} {}".format(detector, evaluation, target))
+        elif any(
+            metrics.get(field.format(suffix)) is not None
+            for field in (
+                "threshold_at_fpr_{}",
+                "tpr_at_fpr_{}",
+                "fpr_at_threshold_{}",
+                "false_positives_at_fpr_{}",
+            )
+        ):
+            errors.append("unavailable low-FPR point contains a numeric estimate for {} {} {}".format(detector, evaluation, target))
     if metrics.get("threshold_selected_on_test") is not False:
         errors.append("no-test-tuning flag is absent for {} {}".format(detector, evaluation))
     return errors
@@ -170,6 +183,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     manifest_models = run_manifest.get("model_artifacts", [])
     manifest_tokenizers = run_manifest.get("tokenizers", [])
     manifest_datasets = run_manifest.get("datasets", {})
+    generation_environment = run_manifest.get("generation_environment", {})
+    model_backed_models = run_manifest.get("model_backed_model_artifacts", [])
+    model_backed_tokenizers = run_manifest.get("model_backed_tokenizers", [])
     fit_seeds = {
         int(json.loads(path.read_text(encoding="utf-8"))["seed"])
         for path in fit_files
@@ -187,6 +203,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         and "inference_backends" in run_manifest
         and "device_information" in run_manifest
         and "software_environment" in run_manifest
+        and len(model_backed_models) == 4
+        and {record.get("sha256") for record in model_backed_models}
+        == {
+            "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+            "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+            "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+            "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+        }
+        and len(model_backed_tokenizers) == 4
+        and generation_environment.get(
+            "matched_quantization_tokenizer_contract", {}
+        ).get("upstream_identifier_exact")
+        is True
+        and generation_environment.get("remote_paid_compute_used") is False
+        and len(generation_environment.get("execution_git_commits", [])) >= 1
+        and float(run_manifest.get("run_duration_seconds", 0.0)) > 0.0
     )
     if not checks["run_manifest_self_contained"]:
         errors.append("run manifest is missing a required self-contained provenance field")
