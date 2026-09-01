@@ -1526,6 +1526,13 @@ def run_phase(
 ) -> Mapping[str, object]:
     plan_path, rows = phase_model_rows(phase, model_id)
     if smoke:
+        if phase == "entropy":
+            rows = [
+                row
+                for row in rows
+                if row["gate_level"] == "moderate"
+                and row["population"] == "rankcloak"
+            ]
         rows = rows[: int(limit or 1)]
     elif limit is not None:
         rows = rows[: int(limit)]
@@ -1764,6 +1771,13 @@ def dry_run_summary(
 ) -> Mapping[str, object]:
     plan_path, rows = phase_model_rows(phase, model_id)
     if smoke:
+        if phase == "entropy":
+            rows = [
+                row
+                for row in rows
+                if row["gate_level"] == "moderate"
+                and row["population"] == "rankcloak"
+            ]
         rows = rows[: int(limit or 1)]
     elif limit is not None:
         rows = rows[: int(limit)]
