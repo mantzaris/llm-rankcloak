@@ -1,0 +1,19 @@
+\begin{table}
+\caption{Descriptive per-position distributions for forced payload tokens under each entropy gate.}
+\label{tab:entropy-gate-forced-token-distribution}
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+gate\_level & metric & position\_count & mean & standard\_deviation & minimum & p25 & median & p75 & p95 & maximum \\
+\midrule
+moderate & observed\_rank & 8367 & 88.0552 & 1380.6332 & 1.0000 & 4.0000 & 7.0000 & 10.0000 & 103.4000 & 95005.0000 \\
+moderate & rank\_pressure\_log\_probability\_gap\_nats & 8367 & 3.4276 & 2.4701 & 0.0000 & 1.7355 & 2.9849 & 4.5804 & 8.0930 & 20.6655 \\
+moderate & token\_surprisal\_nats & 8367 & 4.4694 & 2.3346 & 0.1273 & 3.0575 & 3.9767 & 5.3129 & 9.0862 & 22.2834 \\
+strict & observed\_rank & 8224 & 89.4915 & 1392.5429 & 1.0000 & 4.0000 & 7.0000 & 10.0000 & 108.7000 & 95005.0000 \\
+strict & rank\_pressure\_log\_probability\_gap\_nats & 8224 & 3.0308 & 2.2719 & 0.0000 & 1.5862 & 2.6252 & 3.8968 & 7.2532 & 20.6655 \\
+strict & token\_surprisal\_nats & 8224 & 4.1585 & 2.2255 & 0.2407 & 2.8431 & 3.7049 & 4.8369 & 8.6838 & 22.2834 \\
+ungated & observed\_rank & 8367 & 88.0552 & 1380.6332 & 1.0000 & 4.0000 & 7.0000 & 10.0000 & 103.4000 & 95005.0000 \\
+ungated & rank\_pressure\_log\_probability\_gap\_nats & 8367 & 3.8585 & 2.8952 & 0.0000 & 1.8437 & 3.2003 & 5.1798 & 9.5635 & 25.2856 \\
+ungated & token\_surprisal\_nats & 8367 & 4.8495 & 2.6061 & 0.0000 & 3.2287 & 4.1848 & 5.8015 & 10.1019 & 25.2856 \\
+\bottomrule
+\end{tabular}
+\end{table}

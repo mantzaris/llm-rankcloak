@@ -1,0 +1,55 @@
+{
+  "schema_version": "rankcloak-revision-v3-post-generation-quality-audit-v1",
+  "completed_at": "2026-09-02T11:26:01-04:00",
+  "deterministic_regeneration": {
+    "generation_derived": {
+      "artifact_count": 27,
+      "byte_identical": true,
+      "command": ".venv/bin/python scripts/analyze_revision_v3_generation.py",
+      "scope": "entropy and quantization source CSVs, generated LaTeX tables, vector PDFs, and PNG previews"
+    },
+    "final_handoff": {
+      "artifact_count": 15,
+      "byte_identical": true,
+      "command": ".venv/bin/python scripts/finalize_revision_v3.py",
+      "scope": "handoff prose, claim/evidence and design documents, model-backed detector tables, LaTeX tables, vector PDFs, and PNG previews",
+      "deliberately_excluded_time_varying_artifacts": [
+        "results/revision_v3/run_manifest.json",
+        "results/revision_v3/artifact_manifest.csv",
+        "results/revision_v3/provenance/validation_report.json"
+      ]
+    }
+  },
+  "visual_figure_inspection": {
+    "inspected_png_files": [
+      "results/revision_v3/figures/entropy_gate_capacity_recovery.png",
+      "results/revision_v3/figures/entropy_gate_detector_performance.png",
+      "results/revision_v3/figures/matched_quantization_detector_transfer.png",
+      "results/revision_v3/figures/matched_quantization_recovery.png",
+      "results/revision_v3/figures/matched_quantization_sensitivity.png"
+    ],
+    "paired_vector_pdf_count": 5,
+    "checks": {
+      "clipping_absent": true,
+      "labels_readable": true,
+      "axes_nonmisleading": true,
+      "legends_consistent": true,
+      "legends_obscure_no_data": true
+    }
+  },
+  "corrective_actions_from_reproducibility_review": [
+    {
+      "issue": "model-backed experiment-design paragraphs accumulated on repeated finalization",
+      "resolution": "replace one delimited section idempotently and enforce it with a regression test and fail-closed validator check"
+    },
+    {
+      "issue": "detector-figure legends obscured strict-gate and pooled bars",
+      "resolution": "move legends to dedicated bottom margins and visually re-inspect both figures"
+    },
+    {
+      "issue": "detector rerun commands selected CUDA index 0 on a two-GPU host",
+      "resolution": "pin the recorded RTX 5000 Ada UUID in the generated rerun guide"
+    }
+  ],
+  "status": "pass"
+}

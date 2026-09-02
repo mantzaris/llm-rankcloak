@@ -1,0 +1,13 @@
+{
+  "completed_at": "2026-09-01T21:49:12.765095+00:00",
+  "completed_this_run": 1920,
+  "execution_seconds": 10441.62200541301,
+  "failed_this_run": 0,
+  "model_id": "qwen2_5_7b_instruct_q4_k_m",
+  "phase": "quantization",
+  "resumed_completed": 0,
+  "schema_version": "rankcloak-revision-v3-model-generation-v1",
+  "selected": 1920,
+  "smoke": false,
+  "started_at": "2026-09-01T18:55:11.143082+00:00"
+}

@@ -1,0 +1,25 @@
+\begin{table}
+\caption{Entropy-gated RankCloak generation outcomes.}
+\label{tab:entropy-gate-generation}
+\begin{tabular}{llrrrrr}
+\toprule
+gate\_level & metric & mean & ci\_low\_95 & ci\_high\_95 & observation\_count & group\_count \\
+\midrule
+moderate & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 120 & 16 \\
+moderate & saved\_id\_exact\_payload\_recovery & 1.0000 & 1.0000 & 1.0000 & 120 & 16 \\
+moderate & visible\_text\_exact\_payload\_recovery & 0.5417 & 0.4684 & 0.6047 & 120 & 16 \\
+moderate & fixed\_payload\_bits\_per\_generated\_token & 5.7920 & 5.5699 & 6.0298 & 120 & 16 \\
+moderate & length\_ratio\_vs\_ungated & 1.3743 & 1.3145 & 1.4266 & 120 & 16 \\
+strict & payload\_completion & 0.9500 & 0.9211 & 0.9804 & 120 & 16 \\
+strict & saved\_id\_exact\_payload\_recovery & 0.9500 & 0.9206 & 0.9820 & 120 & 16 \\
+strict & visible\_text\_exact\_payload\_recovery & 0.5667 & 0.5213 & 0.6111 & 120 & 16 \\
+strict & fixed\_payload\_bits\_per\_generated\_token & 4.0513 & 3.7037 & 4.4412 & 114 & 16 \\
+strict & length\_ratio\_vs\_ungated & 2.7615 & 2.4950 & 3.0075 & 120 & 16 \\
+ungated & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 120 & 16 \\
+ungated & saved\_id\_exact\_payload\_recovery & 1.0000 & 1.0000 & 1.0000 & 120 & 16 \\
+ungated & visible\_text\_exact\_payload\_recovery & 0.5167 & 0.4359 & 0.5877 & 120 & 16 \\
+ungated & fixed\_payload\_bits\_per\_generated\_token & 7.4001 & 7.2513 & 7.5239 & 120 & 16 \\
+ungated & length\_ratio\_vs\_ungated & 1.0000 & 1.0000 & 1.0000 & 120 & 16 \\
+\bottomrule
+\end{tabular}
+\end{table}

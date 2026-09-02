@@ -1,0 +1,19 @@
+\begin{table}
+\caption{Detector performance by entropy-gate level on locked, deduplicated test data.}
+\label{tab:entropy-gate-detectors}
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+detector\_label & level & positive\_count & negative\_count & roc\_auc & roc\_auc\_ci\_low\_95 & roc\_auc\_ci\_high\_95 & partial\_auc\_fpr\_0\_01 & tpr\_at\_fpr\_0\_01 & fpr\_at\_threshold\_0\_01 & false\_positives\_at\_fpr\_0\_01 \\
+\midrule
+TextCNN & moderate & 113 & 113 & 0.9825 & 0.9673 & 0.9934 & 0.7416 & 0.7965 & 0.0088 & 1.0000 \\
+TextCNN & strict & 116 & 116 & 0.8850 & 0.8379 & 0.9294 & 0.4138 & 0.4310 & 0.0172 & 2.0000 \\
+TextCNN & ungated & 117 & 117 & 0.9953 & 0.9906 & 0.9987 & 0.8536 & 0.8718 & 0.0085 & 1.0000 \\
+DeBERTa-v3-base & moderate & 113 & 113 & 0.9785 & 0.9588 & 0.9946 & 0.6878 & 0.8496 & 0.0177 & 2.0000 \\
+DeBERTa-v3-base & strict & 116 & 116 & 0.8893 & 0.8537 & 0.9312 & 0.3484 & 0.4914 & 0.0259 & 3.0000 \\
+DeBERTa-v3-base & ungated & 117 & 117 & 0.9999 & 0.9986 & 1.0000 & 0.9854 & 1.0000 & 0.0085 & 1.0000 \\
+Model-aware surprisal & moderate & 113 & 113 & 0.9999 & 0.9996 & 1.0000 & 0.9922 & 0.9381 & 0.0000 & 0.0000 \\
+Model-aware surprisal & strict & 116 & 116 & 0.9904 & 0.9833 & 0.9963 & 0.7845 & 0.6552 & 0.0000 & 0.0000 \\
+Model-aware surprisal & ungated & 117 & 117 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.0000 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,84 @@
+{
+  "checks": {
+    "dedup_cluster_id_cross_partition": 0,
+    "near_pair_cross_partition": 0,
+    "normalized_text_sha256_cross_partition": 0,
+    "pair_id_cross_partition": 0,
+    "payload_group_id_cross_partition": 0,
+    "row_id_cross_partition": 0
+  },
+  "conditions_unavailable_after_deduplication": [],
+  "cross_partition_component_actions": [
+    {
+      "partitions": "test;train",
+      "payload_group_ids": "revision_v1_aes256_gcm_base64_003;revision_v1_ed25519_signature_base64_028;revision_v1_nonce_96_bit_hex_057;revision_v1_sha256_hex_040;revision_v1_token_128_bit_hex_033;revision_v1_token_128_bit_hex_044;revision_v1_token_128_bit_hex_045",
+      "removed_payload_group_ids": "revision_v1_ed25519_signature_base64_028;revision_v1_nonce_96_bit_hex_057;revision_v1_sha256_hex_040;revision_v1_token_128_bit_hex_033;revision_v1_token_128_bit_hex_044;revision_v1_token_128_bit_hex_045",
+      "retained_partition": "test"
+    },
+    {
+      "partitions": "test;train",
+      "payload_group_ids": "revision_v1_aes256_gcm_base64_041;revision_v1_token_128_bit_hex_002;revision_v1_token_128_bit_hex_058;revision_v1_uuid_v4_001",
+      "removed_payload_group_ids": "revision_v1_token_128_bit_hex_002;revision_v1_token_128_bit_hex_058;revision_v1_uuid_v4_001",
+      "retained_partition": "test"
+    }
+  ],
+  "cross_partition_near_components_resolved": 2,
+  "deduplication_before_detector_feature_extraction": true,
+  "evaluation_id": "entropy_gates",
+  "exact_duplicate_groups": 21,
+  "final_near_duplicate_pairs": 77,
+  "final_tfidf_feature_count": 117098,
+  "generation_study": "entropy",
+  "near_duplicate_method": "char_wb_tfidf_cosine_ngrams_3_5_min_df_2_v1",
+  "near_duplicate_threshold": 0.95,
+  "normalization": "unicode_nfkc_casefold_whitespace_collapse_v1",
+  "original_rows": 13114,
+  "pair_grouping": "entropy pairing_unit_id or historical reference_q4_pair_id",
+  "partition_priority": [
+    "test",
+    "validation",
+    "train"
+  ],
+  "payload_grouping": "payload_name",
+  "preliminary_near_duplicate_pairs": 116,
+  "preliminary_tfidf_feature_count": 118261,
+  "removed_pairs": 200,
+  "removed_payload_groups": 20,
+  "removed_rows": 400,
+  "retained_counts_by_partition_and_label": [
+    {
+      "label": 0,
+      "partition": "test",
+      "row_count": 346
+    },
+    {
+      "label": 1,
+      "partition": "test",
+      "row_count": 346
+    },
+    {
+      "label": 0,
+      "partition": "train",
+      "row_count": 4571
+    },
+    {
+      "label": 1,
+      "partition": "train",
+      "row_count": 4571
+    },
+    {
+      "label": 0,
+      "partition": "validation",
+      "row_count": 1440
+    },
+    {
+      "label": 1,
+      "partition": "validation",
+      "row_count": 1440
+    }
+  ],
+  "retained_rows": 12714,
+  "schema_version": "rankcloak-revision-v3-locked-dedup-v1",
+  "source_file_sha256": "01008651d25ec4db06835bac9d4590f8b8300b458c76e66b32fe610ffd413c9a",
+  "status": "pass"
+}

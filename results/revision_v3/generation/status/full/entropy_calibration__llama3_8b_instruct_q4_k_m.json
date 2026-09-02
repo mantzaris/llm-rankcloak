@@ -1,0 +1,13 @@
+{
+  "completed_at": "2026-09-01T16:44:13.446247+00:00",
+  "completed_this_run": 6,
+  "execution_seconds": 52.98400251001294,
+  "failed_this_run": 0,
+  "model_id": "llama3_8b_instruct_q4_k_m",
+  "phase": "entropy_calibration",
+  "resumed_completed": 0,
+  "schema_version": "rankcloak-revision-v3-model-generation-v1",
+  "selected": 6,
+  "smoke": false,
+  "started_at": "2026-09-01T16:43:20.462210+00:00"
+}

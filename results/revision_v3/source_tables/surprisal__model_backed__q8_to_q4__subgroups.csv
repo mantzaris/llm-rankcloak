@@ -1,0 +1,14 @@
+dimension,level,row_count,positive_count,negative_count,group_count,available,roc_auc,roc_auc_ci_low_95,roc_auc_ci_high_95,partial_auc_fpr_0_01,partial_auc_fpr_0_01_ci_low_95,partial_auc_fpr_0_01_ci_high_95,threshold_at_fpr_0_01,tpr_at_fpr_0_01,fpr_at_threshold_0_01,false_positives_at_fpr_0_01,fpr_0_001_available,low_fpr_warning
+model_id,qwen2_5_7b_instruct_q4_k_m,384,192,192,96,True,1.0,1.0,1.0,1.0,1.0,1.0,0.8270687345176156,0.9791666666666666,0.0,0.0,False,test negatives do not support the requested empirical resolution
+codec_id,nonseg_ascii_b16,192,96,96,96,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+codec_id,nonseg_ascii_b8,192,96,96,96,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,aes256_gcm_base64,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,chacha20_poly1305_base64,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,ed25519_signature_base64,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,hmac_sha256_hex,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,nonce_96_bit_hex,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,sha256_hex,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,token_128_bit_hex,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,uuid_v4,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+representation_name,ascii_b16,192,96,96,96,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+representation_name,ascii_b8,192,96,96,96,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution

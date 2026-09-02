@@ -1,0 +1,14 @@
+dimension,level,row_count,positive_count,negative_count,group_count,available,roc_auc,roc_auc_ci_low_95,roc_auc_ci_high_95,partial_auc_fpr_0_01,partial_auc_fpr_0_01_ci_low_95,partial_auc_fpr_0_01_ci_high_95,threshold_at_fpr_0_01,tpr_at_fpr_0_01,fpr_at_threshold_0_01,false_positives_at_fpr_0_01,fpr_0_001_available,low_fpr_warning
+model_id,qwen2_5_7b_instruct_q4_k_m,384,192,192,96,True,0.9944118923611112,0.9899631076388888,0.9977762858072916,0.8297526041666666,0.7708333333333334,0.9427083333333334,0.5067657828330994,0.9479166666666666,0.026041666666666668,5.0,False,test negatives do not support the requested empirical resolution
+codec_id,nonseg_ascii_b16,192,96,96,96,True,0.9976128472222222,0.9932725694444444,1.0,0.8958333333333334,0.84375,1.0,,,,,False,test negatives do not support the requested empirical resolution
+codec_id,nonseg_ascii_b8,192,96,96,96,True,0.9887152777777778,0.9778618706597223,0.9963107638888888,0.75,0.6770833333333334,0.9270833333333334,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,aes256_gcm_base64,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,chacha20_poly1305_base64,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,ed25519_signature_base64,48,24,24,12,True,1.0,1.0,1.0,1.0,1.0,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,hmac_sha256_hex,48,24,24,12,True,0.9930555555555556,0.9739583333333334,1.0,0.9583333333333334,0.8750000000000001,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,nonce_96_bit_hex,48,24,24,12,True,0.9861111111111112,0.9565538194444444,1.0,0.8750000000000001,0.75,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,sha256_hex,48,24,24,12,True,0.9722222222222222,0.9427083333333334,1.0,0.7083333333333334,0.5416666666666666,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,token_128_bit_hex,48,24,24,12,True,0.9878472222222222,0.9583333333333334,1.0,0.8333333333333333,0.7083333333333334,1.0,,,,,False,test negatives do not support the requested empirical resolution
+payload_class,uuid_v4,48,24,24,12,True,0.9930555555555556,0.9791666666666666,1.0,0.9583333333333334,0.8750000000000001,1.0,,,,,False,test negatives do not support the requested empirical resolution
+representation_name,ascii_b16,192,96,96,96,True,0.9976128472222222,0.9930555555555556,1.0,0.8958333333333334,0.8333333333333333,1.0,,,,,False,test negatives do not support the requested empirical resolution
+representation_name,ascii_b8,192,96,96,96,True,0.9887152777777778,0.9780815972222222,0.9962022569444444,0.75,0.6666666666666666,0.9166666666666666,,,,,False,test negatives do not support the requested empirical resolution

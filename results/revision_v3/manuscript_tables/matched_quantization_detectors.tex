@@ -1,0 +1,19 @@
+\begin{table}
+\caption{Detector transfer across matched Q4_K_M and Q8_0 conditions.}
+\label{tab:matched-quantization-detectors}
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+detector\_label & evaluation\_id & test\_positive\_count & test\_negative\_count & roc\_auc & roc\_auc\_ci\_low\_95 & roc\_auc\_ci\_high\_95 & partial\_auc\_fpr\_0\_01 & tpr\_at\_fpr\_0\_01 & fpr\_at\_threshold\_0\_01 & false\_positives\_at\_fpr\_0\_01 \\
+\midrule
+DeBERTa-v3-base & pooled\_quantizations & 384 & 384 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.0078 & 3 \\
+Model-aware surprisal & pooled\_quantizations & 384 & 384 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.9948 & 0.0000 & 0 \\
+TextCNN & pooled\_quantizations & 384 & 384 & 0.9965 & 0.9936 & 0.9987 & 0.8257 & 0.9609 & 0.0234 & 9 \\
+DeBERTa-v3-base & q4\_to\_q8 & 192 & 192 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.0000 & 0 \\
+Model-aware surprisal & q4\_to\_q8 & 192 & 192 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.0000 & 0 \\
+TextCNN & q4\_to\_q8 & 192 & 192 & 0.9927 & 0.9854 & 0.9977 & 0.7539 & 0.9375 & 0.0365 & 7 \\
+DeBERTa-v3-base & q8\_to\_q4 & 192 & 192 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.0156 & 3 \\
+Model-aware surprisal & q8\_to\_q4 & 192 & 192 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.9792 & 0.0000 & 0 \\
+TextCNN & q8\_to\_q4 & 192 & 192 & 0.9944 & 0.9903 & 0.9979 & 0.8298 & 0.9479 & 0.0260 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}

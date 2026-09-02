@@ -1,17 +1,4 @@
 {
-  "blocked_generation": {
-    "entropy_gate": {
-      "planned_calibration_traces": 18,
-      "planned_new_evaluation_trials": 720,
-      "reason": "three exact Q4_K_M GGUF files and CUDA llama-cpp-python 0.3.23 are absent"
-    },
-    "matched_quantization": {
-      "planned_new_q8_trials": 1920,
-      "reason": "exact Q4_K_M/Q8_0 GGUF pair and CUDA llama-cpp-python 0.3.23 are absent",
-      "required_weight_bytes_if_none_present": 12781600128,
-      "reused_q4_trials": 1920
-    }
-  },
   "commands": [
     ".venv/bin/python human_study/controls/prepare_controls.py import --input /tmp/rankcloak_revision_v3_sources/databricks-dolly-15k.jsonl --source-id databricks_dolly_15k_v1_pinned --acquisition-date 2026-08-31 --output-dir /tmp/rankcloak_revision_v3_dolly_import",
     ".venv/bin/python scripts/prepare_revision_v3.py --human-candidates /tmp/rankcloak_revision_v3_dolly_import/human_control_candidates.jsonl",
@@ -23,9 +10,17 @@
     ".venv/bin/python -m pytest -q --junitxml=results/revision_v3/logs/pytest_full.xml",
     "julia --project=. -e 'using Pkg; Pkg.test()'",
     ".venv/bin/python scripts/finalize_revision_v3.py",
-    ".venv/bin/python scripts/validate_revision_v3.py"
+    ".venv/bin/python scripts/validate_revision_v3.py",
+    "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase entropy_calibration --model-id <each-q4-model> --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase entropy --model-id <each-q4-model> --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q8_0 --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    ".venv/bin/python scripts/analyze_revision_v3_generation.py",
+    ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only",
+    ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector <surprisal|textcnn|deberta>",
+    ".venv/bin/python -m pytest -q tests/test_revision_v3_*.py --junitxml=results/revision_v3/logs/pytest_v3_focused.xml"
   ],
-  "completion_time": "2026-09-01T02:37:22.361326+00:00",
+  "completion_time": "2026-09-02T14:42:12.942976+00:00",
   "configuration_files": [
     "configs/revision_v3/analysis.json",
     "configs/revision_v3/detectors.json",
@@ -85,9 +80,9 @@
     }
   },
   "detector_evaluations": 12,
-  "detector_fit_completed_at": "2026-09-01T01:55:55.203318+00:00",
-  "detector_fit_count": 12,
-  "detector_fit_elapsed_seconds_sum": 3747.0609959649883,
+  "detector_fit_completed_at": "2026-09-02T14:42:12.942976+00:00",
+  "detector_fit_count": 24,
+  "detector_fit_elapsed_seconds_sum": 5750.904778083917,
   "detector_fit_started_at": "2026-09-01T00:52:46.980881+00:00",
   "device_information": {
     "nvidia_smi": {
@@ -137,7 +132,7 @@
     {
       "experiment": "D",
       "name": "matched_quantization",
-      "status": "dry_run_complete_outcomes_unavailable_missing_models_backend"
+      "status": "completed_targeted_qwen_q4_q8"
     },
     {
       "experiment": "E",
@@ -152,7 +147,7 @@
     {
       "experiment": "G",
       "name": "entropy_gate",
-      "status": "implementation_tests_dry_run_complete_generation_unavailable"
+      "status": "completed_bounded_720_trial_matrix"
     },
     {
       "experiment": "H",
@@ -160,39 +155,348 @@
       "status": "completed"
     }
   ],
+  "generation_environment": {
+    "backend_installation_command": ".venv-generation-v3/bin/pip install --no-cache-dir --only-binary=:all: llama-cpp-python==0.3.23 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124",
+    "backend_installation_method": "exact official project cu124 binary wheel plus pinned NVIDIA CUDA 12.4 user-space runtime libraries",
+    "cpu_model": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+    "cuda_runtime_installation_command": ".venv-generation-v3/bin/pip install --no-cache-dir nvidia-cuda-runtime-cu12==12.4.127 nvidia-cublas-cu12==12.4.5.8",
+    "dedicated_environment": ".venv-generation-v3",
+    "deterministic_environment": {
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+      "CUDA_LAUNCH_BLOCKING": "1",
+      "CUDA_VISIBLE_DEVICES": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+      "GGML_CUDA_DISABLE_FUSION": "1",
+      "GGML_CUDA_DISABLE_GRAPHS": "1",
+      "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": "1"
+    },
+    "driver_reported_cuda_compatibility_version": "13.1",
+    "environment_creation_command": ".venv/bin/python -m venv .venv-generation-v3",
+    "execution_completed_at": "2026-09-02T08:13:13.445104+00:00",
+    "execution_git_commits": [
+      "4d9c61e46c27beee27da9cdb23654c7dd1a92e18",
+      "57e2e73e3abebbd6bc43f8b8e38882c204fb68dc",
+      "7b615cfe07d7f8dd55c9bc68dc5f7fd82e802c34",
+      "ab11f86e15aa3b9ca51fe7059e8feb45041a8dd5",
+      "ab6734007c5801f203f0ba7abd7f2b6eb61b5ad9",
+      "b7a77c5795e51f3fcca1305c5c1b34b4f36bfbc4",
+      "e57d138a06a03e875a59a7a8d74471789b895ff4"
+    ],
+    "execution_started_at": "2026-09-01T16:39:50.549167+00:00",
+    "gpu_inventory": {
+      "all_devices": [
+        {
+          "driver_version": "590.48.01",
+          "memory_total_mib": 4096,
+          "name": "Quadro T2000",
+          "nvidia_smi_index": 0,
+          "uuid": "GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04"
+        },
+        {
+          "driver_version": "590.48.01",
+          "memory_total_mib": 32760,
+          "name": "NVIDIA RTX 5000 Ada Generation",
+          "nvidia_smi_index": 1,
+          "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+        }
+      ],
+      "selected": {
+        "driver_version": "590.48.01",
+        "memory_total_mib": 32760,
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "nvidia_smi_index": 1,
+        "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+      }
+    },
+    "gpu_offload_supported": true,
+    "llama_cpp_system_info": "CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | ",
+    "logical_cpu_count": 12,
+    "matched_quantization_tokenizer_contract": {
+      "bos_token_id_exact": true,
+      "q4_model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "q8_model_id": "qwen2_5_7b_instruct_q8_0",
+      "rendered_context_ids_checked_per_trial": true,
+      "upstream_identifier_exact": true,
+      "vocabulary_size_exact": true
+    },
+    "model_artifact_total_bytes": 22075146400,
+    "model_artifacts": [
+      {
+        "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+        "local_paths": [
+          "/home/meow/Documents/repos/llm-rankcloak/models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf"
+        ],
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "quantization": "Q4_K_M",
+        "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+        "revision": "a06c33ec89c1e3402009fb47f466a89127c6d223",
+        "sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "size_bytes": 4920734272,
+        "verified_at": [
+          "2026-09-01T16:39:47.663486+00:00",
+          "2026-09-01T16:43:30.453705+00:00",
+          "2026-09-01T16:47:12.709424+00:00",
+          "2026-09-01T16:49:24.339893+00:00"
+        ]
+      },
+      {
+        "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "local_paths": [
+          "/home/meow/Documents/repos/llm-rankcloak/models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf"
+        ],
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "quantization": "Q4_K_M",
+        "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+        "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+        "sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "size_bytes": 4372812000,
+        "verified_at": [
+          "2026-09-01T16:40:23.888168+00:00",
+          "2026-09-01T16:44:31.528530+00:00",
+          "2026-09-01T16:47:38.365177+00:00",
+          "2026-09-01T17:24:53.628222+00:00"
+        ]
+      },
+      {
+        "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "local_paths": [
+          "/home/meow/Documents/repos/llm-rankcloak/models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf"
+        ],
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "quantization": "Q4_K_M",
+        "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+        "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+        "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "size_bytes": 4683074240,
+        "verified_at": [
+          "2026-09-01T16:40:48.185181+00:00",
+          "2026-09-01T16:41:50.529704+00:00",
+          "2026-09-01T16:45:15.650316+00:00",
+          "2026-09-01T16:48:15.267894+00:00",
+          "2026-09-01T17:56:04.269338+00:00",
+          "2026-09-01T18:55:20.576906+00:00"
+        ]
+      },
+      {
+        "filename": "Qwen2.5-7B-Instruct-Q8_0.gguf",
+        "local_paths": [
+          "/home/meow/Documents/repos/llm-rankcloak/models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q8_0.gguf"
+        ],
+        "model_id": "qwen2_5_7b_instruct_q8_0",
+        "quantization": "Q8_0",
+        "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+        "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+        "sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+        "size_bytes": 8098525888,
+        "verified_at": [
+          "2026-09-01T16:42:30.762776+00:00",
+          "2026-09-01T21:50:55.750047+00:00"
+        ]
+      }
+    ],
+    "model_download_commands": [
+      "huggingface-cli download QuantFactory/Meta-Llama-3-8B-Instruct-GGUF Meta-Llama-3-8B-Instruct.Q4_K_M.gguf --revision a06c33ec89c1e3402009fb47f466a89127c6d223 --local-dir models/llama3_8b",
+      "huggingface-cli download bartowski/Mistral-7B-Instruct-v0.3-GGUF Mistral-7B-Instruct-v0.3-Q4_K_M.gguf --revision 61fd4167fff3ab01ee1cfe0da183fa27a944db48 --local-dir models/mistral_7b_instruct_v0_3",
+      "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q4_K_M.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct",
+      "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q8_0.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct"
+    ],
+    "packages": {
+      "cryptography": "46.0.7",
+      "llama-cpp-python": "0.3.23",
+      "numpy": "2.2.6",
+      "nvidia-cublas-cu12": "12.4.5.8",
+      "nvidia-cuda-runtime-cu12": "12.4.127",
+      "pandas": "2.3.3"
+    },
+    "physical_memory_bytes": 100890898432,
+    "pip_freeze": [
+      "Jinja2==3.1.6",
+      "MarkupSafe==3.0.3",
+      "cffi==2.1.1",
+      "cryptography==46.0.7",
+      "diskcache==5.6.3",
+      "llama_cpp_python==0.3.23",
+      "numpy==2.2.6",
+      "nvidia-cublas-cu12==12.4.5.8",
+      "nvidia-cuda-runtime-cu12==12.4.127",
+      "pandas==2.3.3",
+      "pip==23.0.1",
+      "pycparser==3.0",
+      "python-dateutil==2.9.0.post0",
+      "pytz==2026.3.post1",
+      "setuptools==65.5.0",
+      "six==1.17.0",
+      "typing_extensions==4.16.0",
+      "tzdata==2026.3"
+    ],
+    "pip_freeze_command": ".venv-generation-v3/bin/python -m pip freeze --all",
+    "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+    "protocol_amendment_commits": [
+      "ece8e4a273e8e1c1b7de1d90693b131383b368a5"
+    ],
+    "python_implementation": "CPython",
+    "python_version": "3.10.13",
+    "real_model_smoke_execution_seconds_sum": 96.2469988209923,
+    "real_model_smoke_new_generation_count": 7,
+    "real_model_smoke_q4_replay_count": 1,
+    "real_model_smoke_record_count": 8,
+    "recorded_source_hashes": {
+      "configs/revision_v1/prompts.json": [
+        "e638d7fe3451f4779d192977f818544857df3b9ad87c2d8a92b2b9809b09d4c5"
+      ],
+      "configs/revision_v3/entropy_gate.json": [
+        "d0d5fb3123015da5ac80b140b4a98dcbca5060f026a69aea8ec6640be19b6873"
+      ],
+      "configs/revision_v3/generation_requirements.json": [
+        "9927d23e709dd8e784dca64d592b00cdc3411a3fb52c6059f6b0025583f09a54"
+      ],
+      "configs/revision_v3/quantization.json": [
+        "18ecd48a3bd77bc9e587acfaa567714f0e6899c1f240c4b3b1633e2bb4a3ce10"
+      ],
+      "rankcloak/revision_runner.py": [
+        "786904fe3f183216e5f831385bf36ba67b68595c26c45b4956532b3d63bba70c"
+      ],
+      "rankcloak/revision_v3_diagnostics.py": [
+        "687b0f1a3eccf1292b047bf89c70f0282aaa39327d59bb26029bfea9660e1b96"
+      ],
+      "rankcloak/revision_v3_entropy.py": [
+        "e3bd0c3047f4646816d53c6bcdbcc5aa9bfee4594f917ade196654763b54b88b"
+      ],
+      "rankcloak/revision_v3_generation.py": [
+        "675e964122d09176f3ca9be2ad11d6da7e4d06d418ff4286a8c2dc2fec29abe8",
+        "67ff6941e9ff360cc591f32496308f6093f7637b19148e024dd6d4f0610ed10e",
+        "f918bfc44ce69160b68c32d9bcc70247289ef5311a9f51acd99ce2f6c27b0a84"
+      ],
+      "results/revision_v3/provenance/entropy_calibration_plan.csv": [
+        "b3002e2dc9acf6ec2ba3a57135e0b360d4d5758364fbb0df9e4ca472a6793cf1"
+      ],
+      "results/revision_v3/provenance/entropy_generation_plan.csv": [
+        "e716319d0a97137ab865c3913beb1b939ac40a2355c8af938746f0dc5e11e2c0"
+      ],
+      "results/revision_v3/provenance/quantization_generation_plan.csv": [
+        "792b054323474ca014426abbc8b9a9975a3c0dcf028d20a3635b32043c014e54"
+      ],
+      "revision_docs/REVISION_V3_GENERATION_PROTOCOL_AMENDMENT.md": [
+        "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb"
+      ]
+    },
+    "remote_paid_compute_used": false,
+    "schema_version": "rankcloak-revision-v3-generation-environment-v1",
+    "source_build_unavailable_reason": "nvcc and cmake were not installed on the host",
+    "tokenizer_identifiers": [
+      {
+        "bos_token_id": 128000,
+        "gguf_artifact_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+        "gguf_general_name": "Models",
+        "identifier": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF@a06c33ec89c1e3402009fb47f466a89127c6d223:embedded_gguf_tokenizer",
+        "model_id": "llama3_8b_instruct_q4_k_m",
+        "source": "embedded_gguf_tokenizer",
+        "vocabulary_size": 128256
+      },
+      {
+        "bos_token_id": 1,
+        "gguf_artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+        "gguf_general_name": "Mistral-7B-Instruct-v0.3",
+        "identifier": "bartowski/Mistral-7B-Instruct-v0.3-GGUF@61fd4167fff3ab01ee1cfe0da183fa27a944db48:embedded_gguf_tokenizer",
+        "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+        "source": "embedded_gguf_tokenizer",
+        "vocabulary_size": 32768
+      },
+      {
+        "bos_token_id": 151643,
+        "gguf_artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+        "gguf_general_name": "Qwen2.5 7B Instruct",
+        "identifier": "bartowski/Qwen2.5-7B-Instruct-GGUF@8911e8a47f92bac19d6f5c64a2e2095bd2f7d031:embedded_gguf_tokenizer",
+        "model_id": "qwen2_5_7b_instruct_q4_k_m",
+        "source": "embedded_gguf_tokenizer",
+        "vocabulary_size": 152064
+      },
+      {
+        "bos_token_id": 151643,
+        "gguf_artifact_sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+        "gguf_general_name": "Qwen2.5 7B Instruct",
+        "identifier": "bartowski/Qwen2.5-7B-Instruct-GGUF@8911e8a47f92bac19d6f5c64a2e2095bd2f7d031:embedded_gguf_tokenizer",
+        "model_id": "qwen2_5_7b_instruct_q8_0",
+        "source": "embedded_gguf_tokenizer",
+        "vocabulary_size": 152064
+      }
+    ]
+  },
+  "generation_execution": {
+    "calibration_traces": 18,
+    "completed_at": "2026-09-02T08:13:13.445104+00:00",
+    "entropy_evaluations": 720,
+    "execution_git_commits": [
+      "4d9c61e46c27beee27da9cdb23654c7dd1a92e18",
+      "57e2e73e3abebbd6bc43f8b8e38882c204fb68dc",
+      "7b615cfe07d7f8dd55c9bc68dc5f7fd82e802c34",
+      "ab11f86e15aa3b9ca51fe7059e8feb45041a8dd5",
+      "ab6734007c5801f203f0ba7abd7f2b6eb61b5ad9",
+      "b7a77c5795e51f3fcca1305c5c1b34b4f36bfbc4",
+      "e57d138a06a03e875a59a7a8d74471789b895ff4"
+    ],
+    "failed_trial_count": 0,
+    "historical_q4_model_backed_replay_count": 1920,
+    "new_generation_trial_count": 2640,
+    "quantization_q4_replays": 1920,
+    "quantization_q8_generations": 1920,
+    "real_model_smoke_execution_seconds_sum": 96.2469988209923,
+    "real_model_smoke_record_count": 8,
+    "real_model_smoke_records": 8,
+    "remote_paid_compute_used": false,
+    "started_at": "2026-09-01T16:39:50.549167+00:00",
+    "sum_per_record_execution_seconds": 54804.113366161124
+  },
   "generation_plan_summary": {
     "entropy": {
       "analysis_rows": 720,
       "artifact_classes": 8,
       "calibration_traces": 18,
+      "experimental_cells": 120,
       "gate_levels": 3,
       "models": 3,
+      "ordinary_control_seed_count": 120,
       "planned_new_generation_rows": 720,
+      "rankcloak_seed_count": 120,
       "representation_cells": 20,
       "reused_rows": 0,
       "templates": 2
     },
-    "preflight_status": "blocked",
+    "preflight_status": "ready",
+    "protocol_amendment_sha256": "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb",
     "quantization": {
       "analysis_rows": 3840,
       "artifact_classes": 8,
       "codecs": 2,
+      "historical_seed_source": "raw Q4 ordinary_control record generation.sampling_seed",
       "payloads": 480,
       "planned_new_q8_rows": 1920,
       "quantizations": 2,
       "reused_q4_rows": 1920
     },
-    "schema_version": "rankcloak-revision-v3-generation-plan-summary-v1"
+    "schema_version": "rankcloak-revision-v3-generation-plan-summary-v2"
   },
-  "generation_preflight_status": "blocked",
-  "generation_requirements_sha256": "8521bd474ca223adf1668118435e923100aa9cd789bd413de128a79a201a8908",
+  "generation_preflight_status": "ready",
+  "generation_requirements_sha256": "9927d23e709dd8e784dca64d592b00cdc3411a3fb52c6059f6b0025583f09a54",
+  "git_commit_at_generation_analysis": "e5040a4a8429f321a6c6966b2ef4bc2ec49310d3",
   "git_commit_at_start": "5cdb22d3cb02480fb090946ef176325d3d107752",
   "inference_backends": {
     "current_generation": {
       "cuda_required": true,
-      "installation_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv/bin/pip install --no-cache-dir llama-cpp-python==0.3.23",
+      "dedicated_environment": ".venv-generation-v3",
+      "environment_creation_command": ".venv/bin/python -m venv .venv-generation-v3",
+      "installation_command": ".venv-generation-v3/bin/pip install --no-cache-dir --only-binary=:all: llama-cpp-python==0.3.23 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124",
+      "installation_method": "exact official project cu124 binary wheel plus pinned NVIDIA CUDA 12.4 user-space runtime libraries",
       "package": "llama-cpp-python",
-      "present_in_project_venv": false,
+      "present_in_dedicated_environment": true,
+      "prospective_source_build_command": "CMAKE_ARGS=-DGGML_CUDA=on .venv-generation-v3/bin/pip install --no-cache-dir llama-cpp-python==0.3.23",
+      "runtime_installation_command": ".venv-generation-v3/bin/pip install --no-cache-dir nvidia-cuda-runtime-cu12==12.4.127 nvidia-cublas-cu12==12.4.5.8",
+      "runtime_packages": {
+        "nvidia-cublas-cu12": "12.4.5.8",
+        "nvidia-cuda-runtime-cu12": "12.4.127"
+      },
+      "source_build_unavailable_reason": "nvcc and cmake were not installed on the host",
+      "verified_cuda_system_info_contains": "CUDA : ARCHS = 700,750,800,860,890,900",
       "version": "0.3.23"
     },
     "detector_torch": "2.5.1+cu124",
@@ -250,22 +554,186 @@
       "size_bytes": 8098525888
     }
   ],
+  "model_backed_device_information": {
+    "all_devices": [
+      {
+        "driver_version": "590.48.01",
+        "memory_total_mib": 4096,
+        "name": "Quadro T2000",
+        "nvidia_smi_index": 0,
+        "uuid": "GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04"
+      },
+      {
+        "driver_version": "590.48.01",
+        "memory_total_mib": 32760,
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "nvidia_smi_index": 1,
+        "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+      }
+    ],
+    "selected": {
+      "driver_version": "590.48.01",
+      "memory_total_mib": 32760,
+      "name": "NVIDIA RTX 5000 Ada Generation",
+      "nvidia_smi_index": 1,
+      "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+    }
+  },
+  "model_backed_inference_backend": {
+    "gpu_offload_supported": true,
+    "llama_cpp_system_info": "CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | ",
+    "packages": {
+      "cryptography": "46.0.7",
+      "llama-cpp-python": "0.3.23",
+      "numpy": "2.2.6",
+      "nvidia-cublas-cu12": "12.4.5.8",
+      "nvidia-cuda-runtime-cu12": "12.4.127",
+      "pandas": "2.3.3"
+    }
+  },
+  "model_backed_model_artifacts": [
+    {
+      "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "local_paths": [
+        "/home/meow/Documents/repos/llm-rankcloak/models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf"
+      ],
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "quantization": "Q4_K_M",
+      "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+      "revision": "a06c33ec89c1e3402009fb47f466a89127c6d223",
+      "sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "size_bytes": 4920734272,
+      "verified_at": [
+        "2026-09-01T16:39:47.663486+00:00",
+        "2026-09-01T16:43:30.453705+00:00",
+        "2026-09-01T16:47:12.709424+00:00",
+        "2026-09-01T16:49:24.339893+00:00"
+      ]
+    },
+    {
+      "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "local_paths": [
+        "/home/meow/Documents/repos/llm-rankcloak/models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf"
+      ],
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "quantization": "Q4_K_M",
+      "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+      "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+      "sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "size_bytes": 4372812000,
+      "verified_at": [
+        "2026-09-01T16:40:23.888168+00:00",
+        "2026-09-01T16:44:31.528530+00:00",
+        "2026-09-01T16:47:38.365177+00:00",
+        "2026-09-01T17:24:53.628222+00:00"
+      ]
+    },
+    {
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "local_paths": [
+        "/home/meow/Documents/repos/llm-rankcloak/models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf"
+      ],
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "quantization": "Q4_K_M",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "size_bytes": 4683074240,
+      "verified_at": [
+        "2026-09-01T16:40:48.185181+00:00",
+        "2026-09-01T16:41:50.529704+00:00",
+        "2026-09-01T16:45:15.650316+00:00",
+        "2026-09-01T16:48:15.267894+00:00",
+        "2026-09-01T17:56:04.269338+00:00",
+        "2026-09-01T18:55:20.576906+00:00"
+      ]
+    },
+    {
+      "filename": "Qwen2.5-7B-Instruct-Q8_0.gguf",
+      "local_paths": [
+        "/home/meow/Documents/repos/llm-rankcloak/models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q8_0.gguf"
+      ],
+      "model_id": "qwen2_5_7b_instruct_q8_0",
+      "quantization": "Q8_0",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+      "size_bytes": 8098525888,
+      "verified_at": [
+        "2026-09-01T16:42:30.762776+00:00",
+        "2026-09-01T21:50:55.750047+00:00"
+      ]
+    }
+  ],
+  "model_backed_tokenizers": [
+    {
+      "bos_token_id": 128000,
+      "gguf_artifact_sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "gguf_general_name": "Models",
+      "identifier": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF@a06c33ec89c1e3402009fb47f466a89127c6d223:embedded_gguf_tokenizer",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "source": "embedded_gguf_tokenizer",
+      "vocabulary_size": 128256
+    },
+    {
+      "bos_token_id": 1,
+      "gguf_artifact_sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "gguf_general_name": "Mistral-7B-Instruct-v0.3",
+      "identifier": "bartowski/Mistral-7B-Instruct-v0.3-GGUF@61fd4167fff3ab01ee1cfe0da183fa27a944db48:embedded_gguf_tokenizer",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "source": "embedded_gguf_tokenizer",
+      "vocabulary_size": 32768
+    },
+    {
+      "bos_token_id": 151643,
+      "gguf_artifact_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "gguf_general_name": "Qwen2.5 7B Instruct",
+      "identifier": "bartowski/Qwen2.5-7B-Instruct-GGUF@8911e8a47f92bac19d6f5c64a2e2095bd2f7d031:embedded_gguf_tokenizer",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "source": "embedded_gguf_tokenizer",
+      "vocabulary_size": 152064
+    },
+    {
+      "bos_token_id": 151643,
+      "gguf_artifact_sha256": "9c6a6e61664446321d9c0dd7ee28a0d03914277609e21bc0e1fce4abe780ce1b",
+      "gguf_general_name": "Qwen2.5 7B Instruct",
+      "identifier": "bartowski/Qwen2.5-7B-Instruct-GGUF@8911e8a47f92bac19d6f5c64a2e2095bd2f7d031:embedded_gguf_tokenizer",
+      "model_id": "qwen2_5_7b_instruct_q8_0",
+      "source": "embedded_gguf_tokenizer",
+      "vocabulary_size": 152064
+    }
+  ],
+  "new_model_backed_detector_fit_count": 12,
+  "new_model_backed_detector_fit_elapsed_seconds_sum": 2003.843782118929,
   "preparation_completion_time": "2026-09-01T00:52:21.959005+00:00",
   "random_seeds": [
     20260831,
     108979142,
+    171949248,
+    267850506,
     309852518,
     411954686,
+    597063697,
     692724505,
     800712015,
     1206874283,
     1302287460,
+    1405337665,
     1712197497,
+    1780052865,
     1850642311,
     2037162938,
     2142171086,
-    2408996087
+    2205604550,
+    2408996087,
+    2708171723,
+    3204817752,
+    3512172799,
+    3835113513,
+    4052855990,
+    4064916754
   ],
+  "run_duration_seconds": 136290.466442,
   "schema_version": "rankcloak-revision-v3-run-manifest-v1",
   "software_environment": {
     "packages": {
@@ -282,7 +750,7 @@
   },
   "source_inputs_sha256": "eaeba5ebb0100822d2c4ad5d8386696a2bfc8ca6a605406174f4b1c6764db64d",
   "start_time": "2026-09-01T00:50:42.476534+00:00",
-  "status": "complete_with_predeclared_generation_experiments_unavailable",
+  "status": "complete",
   "test_summary": {
     "errors": 0,
     "failure_nodeids": [
@@ -296,22 +764,22 @@
         "errors": 0,
         "failures": 3,
         "path": "logs/pytest_full.xml",
-        "sha256": "b6d397dbae06bf394199584087f9c542837c72837d46fd23ed68d936267f4889",
+        "sha256": "111fe4ce8ca5796a2bac20b7e5ad2199b4c93657c93ef56f65f541f32733f02b",
         "skipped": 0,
-        "tests": 673
+        "tests": 695
       },
       {
         "errors": 0,
         "failures": 0,
         "path": "logs/pytest_v3_focused.xml",
-        "sha256": "9fc7f628c734c421828ac8bbe5713d7063e63d4f9682c3377b5f9bc7be2b6cb3",
+        "sha256": "86074d97d75e98142ef82ddf78b5fec30ff5801defc3fa4dbdc1c0acd007f29a",
         "skipped": 0,
-        "tests": 27
+        "tests": 49
       }
     ],
     "skipped": 0,
     "status": "v3_pass_with_immutable_paperv2_contract_failures",
-    "tests": 700
+    "tests": 744
   },
   "tokenizers": [
     {
@@ -355,7 +823,15 @@
     "human_controls_selected": 250,
     "matched_quantization_q4_trials_reused": 1920,
     "matched_quantization_q8_trials_planned_new": 1920,
-    "new_model_generation_trials": 0,
+    "model_backed_historical_q4_replays": 1920,
+    "new_entropy_calibration_traces": 18,
+    "new_entropy_evaluation_generations": 720,
+    "new_matched_quantization_q8_generations": 1920,
+    "new_model_backed_detector_fits": 12,
+    "new_model_generation_trials": 2640,
+    "real_model_smoke_new_generation_records": 7,
+    "real_model_smoke_q4_replay_records": 1,
+    "real_model_smoke_records": 8,
     "reused_matched_ordinary_controls": 7920,
     "reused_rankcloak_trials": 6480,
     "topic_condition_pairs_reused": 720,

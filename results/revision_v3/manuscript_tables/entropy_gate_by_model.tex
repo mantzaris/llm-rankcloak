@@ -1,0 +1,46 @@
+\begin{table}
+\caption{Entropy-gated RankCloak generation outcomes by model family.}
+\label{tab:entropy-gate-by-model}
+\begin{tabular}{lllrrrrr}
+\toprule
+gate\_level & model\_id & metric & mean & ci\_low\_95 & ci\_high\_95 & observation\_count & group\_count \\
+\midrule
+moderate & llama3\_8b\_instruct\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 7.6062 & 7.3457 & 7.8613 & 40 & 16 \\
+moderate & llama3\_8b\_instruct\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.1113 & 1.0809 & 1.1387 & 40 & 16 \\
+moderate & llama3\_8b\_instruct\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+moderate & llama3\_8b\_instruct\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.7250 & 0.5385 & 0.8837 & 40 & 16 \\
+strict & llama3\_8b\_instruct\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 6.1322 & 5.5111 & 6.7152 & 40 & 16 \\
+strict & llama3\_8b\_instruct\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.7472 & 1.4920 & 2.0305 & 40 & 16 \\
+strict & llama3\_8b\_instruct\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+strict & llama3\_8b\_instruct\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.8500 & 0.7442 & 0.9460 & 40 & 16 \\
+ungated & llama3\_8b\_instruct\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 8.2108 & 7.9311 & 8.4823 & 40 & 16 \\
+ungated & llama3\_8b\_instruct\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+ungated & llama3\_8b\_instruct\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+ungated & llama3\_8b\_instruct\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.7250 & 0.5384 & 0.8837 & 40 & 16 \\
+moderate & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 5.0241 & 4.7842 & 5.2633 & 40 & 16 \\
+moderate & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.4250 & 1.3709 & 1.4811 & 40 & 16 \\
+moderate & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+moderate & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.0000 & 0.0000 & 0.0000 & 40 & 16 \\
+strict & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 2.9207 & 2.5895 & 3.3287 & 39 & 16 \\
+strict & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & length\_ratio\_vs\_ungated & 2.7241 & 2.3909 & 3.0606 & 40 & 16 \\
+strict & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & payload\_completion & 0.9750 & 0.9231 & 1.0000 & 40 & 16 \\
+strict & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.0000 & 0.0000 & 0.0000 & 40 & 16 \\
+ungated & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 6.8715 & 6.7409 & 6.9778 & 40 & 16 \\
+ungated & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+ungated & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+ungated & mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.0000 & 0.0000 & 0.0000 & 40 & 16 \\
+moderate & qwen2\_5\_7b\_instruct\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 4.7457 & 4.3219 & 5.2168 & 40 & 16 \\
+moderate & qwen2\_5\_7b\_instruct\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.5864 & 1.4759 & 1.6954 & 40 & 16 \\
+moderate & qwen2\_5\_7b\_instruct\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+moderate & qwen2\_5\_7b\_instruct\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.9000 & 0.7692 & 1.0000 & 40 & 16 \\
+strict & qwen2\_5\_7b\_instruct\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 2.9331 & 2.4069 & 3.6604 & 35 & 16 \\
+strict & qwen2\_5\_7b\_instruct\_q4\_k\_m & length\_ratio\_vs\_ungated & 3.8131 & 3.3069 & 4.2585 & 40 & 16 \\
+strict & qwen2\_5\_7b\_instruct\_q4\_k\_m & payload\_completion & 0.8750 & 0.7895 & 0.9524 & 40 & 16 \\
+strict & qwen2\_5\_7b\_instruct\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.8500 & 0.7568 & 0.9460 & 40 & 16 \\
+ungated & qwen2\_5\_7b\_instruct\_q4\_k\_m & fixed\_payload\_bits\_per\_generated\_token & 7.1179 & 6.9524 & 7.2716 & 40 & 16 \\
+ungated & qwen2\_5\_7b\_instruct\_q4\_k\_m & length\_ratio\_vs\_ungated & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+ungated & qwen2\_5\_7b\_instruct\_q4\_k\_m & payload\_completion & 1.0000 & 1.0000 & 1.0000 & 40 & 16 \\
+ungated & qwen2\_5\_7b\_instruct\_q4\_k\_m & visible\_text\_exact\_payload\_recovery & 0.8250 & 0.7073 & 0.9444 & 40 & 16 \\
+\bottomrule
+\end{tabular}
+\end{table}

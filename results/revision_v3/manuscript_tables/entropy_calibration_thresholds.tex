@@ -1,0 +1,13 @@
+\begin{table}
+\caption{Frozen model-specific entropy thresholds.}
+\label{tab:entropy-calibration-thresholds}
+\begin{tabular}{lrrrrrrllr}
+\toprule
+model\_id & trace\_count & development\_position\_count & moderate\_quantile & moderate\_threshold\_bits & strict\_quantile & strict\_threshold\_bits & quantile\_method & source & detector\_outcomes\_used \\
+\midrule
+llama3\_8b\_instruct\_q4\_k\_m & 6 & 768 & 0.5000 & 0.8033 & 0.7500 & 1.7055 & numpy\_linear & ordinary\_generation\_development\_traces\_only & False \\
+mistral\_7b\_instruct\_v0\_3\_q4\_k\_m & 6 & 768 & 0.5000 & 0.9669 & 0.7500 & 1.9176 & numpy\_linear & ordinary\_generation\_development\_traces\_only & False \\
+qwen2\_5\_7b\_instruct\_q4\_k\_m & 6 & 768 & 0.5000 & 1.3619 & 0.7500 & 2.4326 & numpy\_linear & ordinary\_generation\_development\_traces\_only & False \\
+\bottomrule
+\end{tabular}
+\end{table}

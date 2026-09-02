@@ -1,0 +1,55 @@
+{
+  "completed_at": "2026-09-02T14:11:15.988562+00:00",
+  "detector": "textcnn",
+  "elapsed_seconds": 17.928335267992225,
+  "evaluation_id": "q4_to_q8",
+  "fit": {
+    "detector_name": "published_textcnn_equivalent_v3",
+    "implementation_kind": "text_cnn",
+    "implementation_metadata": {
+      "architecture": "word_embedding_parallel_conv_relu_global_max_pool_dropout",
+      "batch_size": 64,
+      "device": "cuda:0",
+      "dropout": 0.5,
+      "embedding_dimension": 300,
+      "epochs": 10,
+      "filter_sizes": [
+        3,
+        5
+      ],
+      "filters_per_width": 100,
+      "maximum_length": 256,
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_schema_hash_algorithm": "rankcloak-torch-state-schema-v1",
+      "model_state_schema_sha256": "1fe46de401ceec2cdd665e635cde56c644023ac2f2019bcdb682cd66b07e8388",
+      "model_state_sha256": "8db1ed07bc92d8629db2bb0e80fefe966014ddd3aca2883c7e197013706a763a",
+      "phase_timings_seconds": {
+        "evaluation": 0.008477177005261183,
+        "initialization_and_preprocessing": 0.20495807600673288,
+        "total": 0.8659818000160158,
+        "trained_state_hashing": 0.03529082899331115,
+        "training": 0.6172499820240773
+      },
+      "test_tuning": false,
+      "torch_version": "2.5.1+cu124",
+      "vocabulary_size": 10181
+    },
+    "implementation_status": "complete",
+    "notes": "Prespecified detector completed without test-set tuning.",
+    "requested_kind": "text_cnn"
+  },
+  "generation_study": "quantization",
+  "schema_version": "rankcloak-revision-v3-model-backed-detector-fit-v1",
+  "seed": 597063697,
+  "source_hashes": {
+    "configs/revision_v3/analysis.json": "3793e14818d1720d164583202a285381740003988306be1e86df9927b0832116",
+    "configs/revision_v3/detectors.json": "11c9ed35aa974c9e36058b5d52d78fb4216d577503462d8776d76688a84ab006",
+    "results/revision_v3/generation/analysis/model_backed__q4_to_q8__deduplicated_corpus.csv": "6a16519f3414a50ba34e5a2d1e1c9c7ec1a19f7de15cd6e29bf52100889a135d",
+    "scripts/run_revision_v3_generation_detectors.py": "83aff92b085f285e57f7471cbb39b69a45479ca39406a817287499057193d88c"
+  },
+  "started_at": "2026-09-02T14:10:58.060212+00:00",
+  "test_row_count": 384,
+  "test_tuning": false,
+  "train_row_count": 1152,
+  "validation_row_count": 384
+}

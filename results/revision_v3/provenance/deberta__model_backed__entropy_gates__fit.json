@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-09-02T14:31:35.010930+00:00",
+  "detector": "deberta",
+  "elapsed_seconds": 1131.8081399439834,
+  "evaluation_id": "entropy_gates",
+  "fit": {
+    "detector_name": "deberta_v3_base_classifier_v3",
+    "implementation_kind": "pretrained_transformer",
+    "implementation_metadata": {
+      "artifact_verification": {
+        "artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+        "artifacts": [
+          {
+            "path": "config.json",
+            "sha256": "649f6a1ec33c6bdd9a6486d5c66019d461139e54957073eafe9bbc2d34c75b0b",
+            "size_bytes": 579
+          },
+          {
+            "path": "pytorch_model.bin",
+            "sha256": "691d48a2800b926a19e3051def466fc2cca4f59a15e42ce4a0cf7f1b380b5e33",
+            "size_bytes": 371146213
+          },
+          {
+            "path": "spm.model",
+            "sha256": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+            "size_bytes": 2464616
+          },
+          {
+            "path": "tokenizer_config.json",
+            "sha256": "3f3978e0c036f2c2588cac34a6047cbb0af0b0dc1814254e291028529805496d",
+            "size_bytes": 52
+          }
+        ],
+        "ignored_top_level_entries": [
+          ".cache"
+        ],
+        "model_directory": "/home/meow/Documents/repos/llm-rankcloak/models/detectors/deberta_v3_base",
+        "model_id": "microsoft/deberta-v3-base",
+        "policy": "exact_regular_files_no_symlinks_cache_metadata_ignored",
+        "schema_version": "rankcloak-model-artifact-pin-v1",
+        "upstream_revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+        "verification_status": "verified"
+      },
+      "batch_size": 8,
+      "configured_model_name_or_path": "microsoft/deberta-v3-base",
+      "device": "cuda:0",
+      "downloads_enabled": false,
+      "epochs": 3,
+      "local_files_only": true,
+      "maximum_length": 256,
+      "model_artifact_set_sha256": "dbb0a6e580e832b6e84a4f2815cdc867c879fb2789048a563791b42c1068a613",
+      "model_name_or_path": "/home/meow/Documents/repos/llm-rankcloak/models/detectors/deberta_v3_base",
+      "model_revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+      "model_state_hash_algorithm": "rankcloak-torch-state-v1",
+      "model_state_schema_hash_algorithm": "rankcloak-torch-state-schema-v1",
+      "model_state_schema_sha256": "a4a703a81644ff2162ef60c3ad7d2b6ffed39f0236ee884f8b8874677ef6c12d",
+      "model_state_sha256": "2551645d7422060825490b801c788311bce7a43d55533114a77578d73c59b510",
+      "phase_timings_seconds": {
+        "evaluation": 13.957060599001125,
+        "initialization_and_preprocessing": 10.715284027013695,
+        "total": 1096.4080949470226,
+        "trained_state_hashing": 2.083439027017448,
+        "training": 1069.6522970639926
+      },
+      "test_tuning": false,
+      "torch_version": "2.5.1+cu124",
+      "transformers_version": "4.46.3",
+      "upstream_model_id": "microsoft/deberta-v3-base",
+      "use_fast_tokenizer": false
+    },
+    "implementation_status": "complete",
+    "notes": "Prespecified detector completed without test-set tuning.",
+    "requested_kind": "pretrained_transformer"
+  },
+  "generation_study": "entropy",
+  "schema_version": "rankcloak-revision-v3-model-backed-detector-fit-v1",
+  "seed": 171949248,
+  "source_hashes": {
+    "configs/revision_v3/analysis.json": "3793e14818d1720d164583202a285381740003988306be1e86df9927b0832116",
+    "configs/revision_v3/detectors.json": "11c9ed35aa974c9e36058b5d52d78fb4216d577503462d8776d76688a84ab006",
+    "results/revision_v3/generation/analysis/model_backed__entropy_gates__deduplicated_corpus.csv": "f67ff2b4ddae31aafc61136307bb18050fa9b4449289cbf5f7b88c88040292b0",
+    "scripts/run_revision_v3_generation_detectors.py": "83aff92b085f285e57f7471cbb39b69a45479ca39406a817287499057193d88c"
+  },
+  "started_at": "2026-09-02T14:12:43.202767+00:00",
+  "test_row_count": 692,
+  "test_tuning": false,
+  "train_row_count": 9142,
+  "validation_row_count": 2880
+}

@@ -1,0 +1,55 @@
+{
+  "calibration_plan_sha256": "b3002e2dc9acf6ec2ba3a57135e0b360d4d5758364fbb0df9e4ca472a6793cf1",
+  "detector_outcomes_used": false,
+  "development_position_count": 768,
+  "entropy_config_sha256": "d0d5fb3123015da5ac80b140b4a98dcbca5060f026a69aea8ec6640be19b6873",
+  "frozen_at": "2026-09-01T16:46:02.345102+00:00",
+  "model_id": "qwen2_5_7b_instruct_q4_k_m",
+  "moderate_quantile": 0.5,
+  "moderate_threshold_bits": 1.3619193336989834,
+  "protocol_amendment_sha256": "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb",
+  "quantile_method": "numpy_linear",
+  "schema_version": "rankcloak-entropy-gate-v2",
+  "source": "ordinary_generation_development_traces_only",
+  "strict_quantile": 0.75,
+  "strict_threshold_bits": 2.4325573188780316,
+  "trace_count": 6,
+  "trace_records": [
+    {
+      "plan_id": "entropy_calibration__6806d05e97be0e7c385f34bb",
+      "position_count": 128,
+      "result_path": "results/revision_v3/generation/raw/entropy_calibration/qwen2_5_7b_instruct_q4_k_m/entropy_calibration__6806d05e97be0e7c385f34bb.json",
+      "result_sha256": "699c6b2bc6449dd48d2811dbc99c23fcab7139b4530e37d95ed3100fd5dfcb36"
+    },
+    {
+      "plan_id": "entropy_calibration__765239335d1f183de91ef3d9",
+      "position_count": 128,
+      "result_path": "results/revision_v3/generation/raw/entropy_calibration/qwen2_5_7b_instruct_q4_k_m/entropy_calibration__765239335d1f183de91ef3d9.json",
+      "result_sha256": "3f891e118ffa7b6367cb47645d5281b9b82e3eb334684c7754aaf7b1500744a5"
+    },
+    {
+      "plan_id": "entropy_calibration__90c588827d71b084d7a8a653",
+      "position_count": 128,
+      "result_path": "results/revision_v3/generation/raw/entropy_calibration/qwen2_5_7b_instruct_q4_k_m/entropy_calibration__90c588827d71b084d7a8a653.json",
+      "result_sha256": "51869eddd8fea54cd9e7a78135898c1d5443b792c1d5d7636e522a293dacb9d6"
+    },
+    {
+      "plan_id": "entropy_calibration__ae982080f6120e62177f60b3",
+      "position_count": 128,
+      "result_path": "results/revision_v3/generation/raw/entropy_calibration/qwen2_5_7b_instruct_q4_k_m/entropy_calibration__ae982080f6120e62177f60b3.json",
+      "result_sha256": "f70af46d84fca05650cb8be813b5cdaf547a4ee9cb89dd5bca90c75c598fc551"
+    },
+    {
+      "plan_id": "entropy_calibration__db6474faa0d865d902153cc9",
+      "position_count": 128,
+      "result_path": "results/revision_v3/generation/raw/entropy_calibration/qwen2_5_7b_instruct_q4_k_m/entropy_calibration__db6474faa0d865d902153cc9.json",
+      "result_sha256": "310e42c50206ef3499c72955ede92bd35f932ca6269be25db553f71650709d87"
+    },
+    {
+      "plan_id": "entropy_calibration__e1e24e304f5405231b31dbf3",
+      "position_count": 128,
+      "result_path": "results/revision_v3/generation/raw/entropy_calibration/qwen2_5_7b_instruct_q4_k_m/entropy_calibration__e1e24e304f5405231b31dbf3.json",
+      "result_sha256": "f196c1299c47841b921b1ce97955ffddba08a9bbb3f17ea2e43013079d488fe1"
+    }
+  ]
+}

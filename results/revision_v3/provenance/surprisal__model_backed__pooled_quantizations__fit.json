@@ -1,0 +1,88 @@
+{
+  "completed_at": "2026-09-02T14:12:11.975936+00:00",
+  "detector": "surprisal",
+  "elapsed_seconds": 40.39716676599346,
+  "evaluation_id": "pooled_quantizations",
+  "fit": {
+    "candidates": [
+      {
+        "C": 0.01,
+        "validation_roc_auc": 1.0
+      },
+      {
+        "C": 0.1,
+        "validation_roc_auc": 1.0
+      },
+      {
+        "C": 1.0,
+        "validation_roc_auc": 1.0
+      },
+      {
+        "C": 10.0,
+        "validation_roc_auc": 1.0
+      }
+    ],
+    "coefficient_by_feature": {
+      "surprisal_first_half_mean": 0.32033826733488546,
+      "surprisal_fraction_ge_10": 0.12049464474415646,
+      "surprisal_fraction_ge_2": 0.36535453516146454,
+      "surprisal_fraction_ge_4": 0.2738174194123815,
+      "surprisal_fraction_ge_6": 0.20966970920511085,
+      "surprisal_fraction_ge_8": 0.15687136880579047,
+      "surprisal_last_half_mean": 0.32467472439789696,
+      "surprisal_max": 0.3033903506211884,
+      "surprisal_mean": 0.32455391143584644,
+      "surprisal_mean_absolute_step": 0.2774785120449024,
+      "surprisal_min": 0.06760166350565311,
+      "surprisal_q10": 0.28140253792157666,
+      "surprisal_q25": 0.34465307533460826,
+      "surprisal_q50": 0.35359521205213346,
+      "surprisal_q75": 0.31743611311102604,
+      "surprisal_q90": 0.2872417337449345,
+      "surprisal_q95": 0.2851472722638056,
+      "surprisal_std": 0.2655444477213629,
+      "trace_token_count": 0.06449184997398666
+    },
+    "detector_name": "model_aware_surprisal_logistic",
+    "feature_columns": [
+      "surprisal_first_half_mean",
+      "surprisal_fraction_ge_10",
+      "surprisal_fraction_ge_2",
+      "surprisal_fraction_ge_4",
+      "surprisal_fraction_ge_6",
+      "surprisal_fraction_ge_8",
+      "surprisal_last_half_mean",
+      "surprisal_max",
+      "surprisal_mean",
+      "surprisal_mean_absolute_step",
+      "surprisal_min",
+      "surprisal_q10",
+      "surprisal_q25",
+      "surprisal_q50",
+      "surprisal_q75",
+      "surprisal_q90",
+      "surprisal_q95",
+      "surprisal_std",
+      "trace_token_count"
+    ],
+    "feature_version": "shared_generation_log_probability_summaries_v1",
+    "information_access": "saved per-token log probabilities from the exact generation model for both RankCloak and matched ordinary controls",
+    "intercept": 0.0932592974283726,
+    "selected_C": 0.01,
+    "test_tuning": false
+  },
+  "generation_study": "quantization",
+  "schema_version": "rankcloak-revision-v3-model-backed-detector-fit-v1",
+  "seed": 3204817752,
+  "source_hashes": {
+    "configs/revision_v3/analysis.json": "3793e14818d1720d164583202a285381740003988306be1e86df9927b0832116",
+    "configs/revision_v3/detectors.json": "11c9ed35aa974c9e36058b5d52d78fb4216d577503462d8776d76688a84ab006",
+    "results/revision_v3/generation/analysis/model_backed__pooled_quantizations__deduplicated_corpus.csv": "5cdbe539581944b07b7517c32644a93b09b8cf489611aa39a86d83a36198a840",
+    "scripts/run_revision_v3_generation_detectors.py": "83aff92b085f285e57f7471cbb39b69a45479ca39406a817287499057193d88c"
+  },
+  "started_at": "2026-09-02T14:11:31.578752+00:00",
+  "test_row_count": 768,
+  "test_tuning": false,
+  "train_row_count": 2304,
+  "validation_row_count": 768
+}

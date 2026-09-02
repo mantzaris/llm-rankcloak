@@ -1,0 +1,71 @@
+{
+  "checks": {
+    "dedup_cluster_id_cross_partition": 0,
+    "near_pair_cross_partition": 0,
+    "normalized_text_sha256_cross_partition": 0,
+    "pair_id_cross_partition": 0,
+    "payload_group_id_cross_partition": 0,
+    "row_id_cross_partition": 0
+  },
+  "conditions_unavailable_after_deduplication": [],
+  "cross_partition_component_actions": [],
+  "cross_partition_near_components_resolved": 0,
+  "deduplication_before_detector_feature_extraction": true,
+  "evaluation_id": "q8_to_q4",
+  "exact_duplicate_groups": 0,
+  "final_near_duplicate_pairs": 0,
+  "final_tfidf_feature_count": 47210,
+  "generation_study": "quantization",
+  "near_duplicate_method": "char_wb_tfidf_cosine_ngrams_3_5_min_df_2_v1",
+  "near_duplicate_threshold": 0.95,
+  "normalization": "unicode_nfkc_casefold_whitespace_collapse_v1",
+  "original_rows": 1920,
+  "pair_grouping": "entropy pairing_unit_id or historical reference_q4_pair_id",
+  "partition_priority": [
+    "test",
+    "validation",
+    "train"
+  ],
+  "payload_grouping": "payload_name",
+  "preliminary_near_duplicate_pairs": 0,
+  "preliminary_tfidf_feature_count": 47210,
+  "removed_pairs": 0,
+  "removed_payload_groups": 0,
+  "removed_rows": 0,
+  "retained_counts_by_partition_and_label": [
+    {
+      "label": 0,
+      "partition": "test",
+      "row_count": 192
+    },
+    {
+      "label": 1,
+      "partition": "test",
+      "row_count": 192
+    },
+    {
+      "label": 0,
+      "partition": "train",
+      "row_count": 576
+    },
+    {
+      "label": 1,
+      "partition": "train",
+      "row_count": 576
+    },
+    {
+      "label": 0,
+      "partition": "validation",
+      "row_count": 192
+    },
+    {
+      "label": 1,
+      "partition": "validation",
+      "row_count": 192
+    }
+  ],
+  "retained_rows": 1920,
+  "schema_version": "rankcloak-revision-v3-locked-dedup-v1",
+  "source_file_sha256": "e50320233c1f1cadfafc8d6573337b6faa8381f0358b9c21aac73ea8a7702830",
+  "status": "pass"
+}

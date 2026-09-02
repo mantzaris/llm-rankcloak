@@ -1,0 +1,36 @@
+{
+  "analysis_git_commit": "e5040a4a8429f321a6c6966b2ef4bc2ec49310d3",
+  "checks": {
+    "entropy_calibration_completed_count": 18,
+    "entropy_calibration_expected_count": 18,
+    "entropy_calibration_plan_identity_exact": true,
+    "entropy_calibration_record_validation_failures": [],
+    "entropy_completed_count": 720,
+    "entropy_control_prefix_failures": [],
+    "entropy_expected_count": 720,
+    "entropy_gate_invariant_failures": [],
+    "entropy_paired_seed_policy": true,
+    "entropy_plan_identity_exact": true,
+    "entropy_record_validation_failures": [],
+    "failure_record_count": 0,
+    "failure_record_paths": [],
+    "quantization_completed_count": 3840,
+    "quantization_expected_count": 3840,
+    "quantization_pair_contract_failures": [],
+    "quantization_plan_identity_exact": true,
+    "quantization_record_validation_failures": [],
+    "real_model_smoke_matrix_exact": true,
+    "real_model_smoke_record_count": 8,
+    "status": "pass"
+  },
+  "counts": {
+    "calibration_traces": 18,
+    "entropy_evaluations": 720,
+    "quantization_q4_replays": 1920,
+    "quantization_q8_generations": 1920,
+    "real_model_smoke_records": 8
+  },
+  "errors": [],
+  "schema_version": "rankcloak-revision-v3-generation-analysis-validation-v1",
+  "status": "pass"
+}

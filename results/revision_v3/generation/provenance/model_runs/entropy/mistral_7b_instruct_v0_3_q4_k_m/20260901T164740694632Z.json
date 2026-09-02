@@ -1,0 +1,99 @@
+{
+  "command": [
+    "/home/meow/Documents/repos/llm-rankcloak/.venv-generation-v3/bin/python",
+    "scripts/run_revision_v3_generation.py",
+    "--phase",
+    "entropy",
+    "--model-id",
+    "mistral_7b_instruct_v0_3_q4_k_m",
+    "--gpu-uuid",
+    "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "--smoke"
+  ],
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+  "model_manifest": {
+    "artifact": {
+      "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "path": "/home/meow/Documents/repos/llm-rankcloak/models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+      "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+      "sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "size_bytes": 4372812000,
+      "verified_at": "2026-09-01T16:47:38.365177+00:00"
+    },
+    "backend": {
+      "deterministic_environment": {
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+        "CUDA_LAUNCH_BLOCKING": "1",
+        "CUDA_VISIBLE_DEVICES": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "GGML_CUDA_DISABLE_FUSION": "1",
+        "GGML_CUDA_DISABLE_GRAPHS": "1",
+        "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": "1"
+      },
+      "gpu_inventory": {
+        "all_devices": [
+          {
+            "driver_version": "590.48.01",
+            "memory_total_mib": 4096,
+            "name": "Quadro T2000",
+            "nvidia_smi_index": 0,
+            "uuid": "GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04"
+          },
+          {
+            "driver_version": "590.48.01",
+            "memory_total_mib": 32760,
+            "name": "NVIDIA RTX 5000 Ada Generation",
+            "nvidia_smi_index": 1,
+            "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+          }
+        ],
+        "selected": {
+          "driver_version": "590.48.01",
+          "memory_total_mib": 32760,
+          "name": "NVIDIA RTX 5000 Ada Generation",
+          "nvidia_smi_index": 1,
+          "uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf"
+        }
+      },
+      "gpu_offload_supported": true,
+      "llama_cpp_system_info": "CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | ",
+      "packages": {
+        "cryptography": "46.0.7",
+        "llama-cpp-python": "0.3.23",
+        "numpy": "2.2.6",
+        "nvidia-cublas-cu12": "12.4.5.8",
+        "nvidia-cuda-runtime-cu12": "12.4.127",
+        "pandas": "2.3.3"
+      },
+      "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+      "python_implementation": "CPython",
+      "python_version": "3.10.13"
+    },
+    "bos_token_id": 1,
+    "gguf_general_name": "Mistral-7B-Instruct-v0.3",
+    "loaded_at": "2026-09-01T16:47:40.694518+00:00",
+    "logits_all": true,
+    "model_load_memory": {
+      "gpu_memory_latest_mib": 4939,
+      "gpu_memory_peak_mib": 4939
+    },
+    "model_load_seconds": 2.080018351000035,
+    "n_batch": 1,
+    "n_ctx": 4096,
+    "n_gpu_layers": -1,
+    "n_threads": 11,
+    "n_ubatch": 1,
+    "vocabulary_size": 32768
+  },
+  "phase": "entropy",
+  "plan_file": "results/revision_v3/provenance/entropy_generation_plan.csv",
+  "plan_file_sha256": "e716319d0a97137ab865c3913beb1b939ac40a2355c8af938746f0dc5e11e2c0",
+  "schema_version": "rankcloak-revision-v3-model-generation-v1",
+  "selected_plan_row_count": 1,
+  "smoke": true,
+  "started_at": "2026-09-01T16:47:29.627199+00:00"
+}
