@@ -15,6 +15,11 @@ from analyze_revision_v3_generation import (  # noqa: E402
     position_summary,
     record_validation_passes,
 )
+from finalize_revision_v3_model_backed import (  # noqa: E402
+    MODEL_BACKED_DESIGN_END,
+    MODEL_BACKED_DESIGN_START,
+    render_model_backed_experiment_design,
+)
 
 
 def test_calibration_negative_assertion_is_a_passing_validation():
@@ -122,3 +127,21 @@ def test_position_summary_reports_forced_token_rank_distribution():
     assert ranks["mean"] == pytest.approx(5.0)
     assert ranks["median"] == pytest.approx(5.0)
     assert ranks["p95"] == pytest.approx(8.7)
+
+
+def test_model_backed_experiment_design_is_idempotent():
+    original = """# Design
+
+Stable detector design.
+
+The bounded entropy-gate matrix is a dry-run plan.
+
+The recovery-mode comparison reuses 144 historical trials.
+"""
+    first = render_model_backed_experiment_design(original)
+    second = render_model_backed_experiment_design(first)
+    assert second == first
+    assert first.count(MODEL_BACKED_DESIGN_START) == 1
+    assert first.count(MODEL_BACKED_DESIGN_END) == 1
+    assert first.count("The entropy-gate matrix used") == 1
+    assert first.count("The recovery-mode comparison") == 1

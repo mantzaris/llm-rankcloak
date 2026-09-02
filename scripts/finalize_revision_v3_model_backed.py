@@ -25,6 +25,8 @@ DETECTOR_LABELS = {
     "surprisal": "Model-aware surprisal",
 }
 EVALUATIONS = ("entropy_gates", "q4_to_q8", "q8_to_q4", "pooled_quantizations")
+MODEL_BACKED_DESIGN_START = "<!-- revision-v3-model-backed-design:start -->"
+MODEL_BACKED_DESIGN_END = "<!-- revision-v3-model-backed-design:end -->"
 
 
 import sys
@@ -129,6 +131,46 @@ def save_figure(fig: object, stem: Path) -> None:
     plt.close(fig)
 
 
+def render_model_backed_experiment_design(design: str) -> str:
+    """Replace the model-backed design section without accumulating rerun text."""
+
+    recovery_anchor = "\nThe recovery-mode comparison"
+    if recovery_anchor not in design:
+        raise ValueError("experiment design lacks the recovery-mode anchor")
+    recovery_tail = design.split(recovery_anchor, 1)[1]
+    recovery_paragraph = (
+        "The recovery-mode comparison"
+        + recovery_tail.split("\n\n", 1)[0].rstrip()
+    )
+
+    if MODEL_BACKED_DESIGN_START in design:
+        prefix = design.split(MODEL_BACKED_DESIGN_START, 1)[0].rstrip()
+    elif "\nThe bounded entropy-gate matrix" in design:
+        prefix = design.split("\nThe bounded entropy-gate matrix", 1)[0].rstrip()
+    elif "\nThe entropy-gate matrix used" in design:
+        prefix = design.split("\nThe entropy-gate matrix used", 1)[0].rstrip()
+    else:
+        raise ValueError("experiment design lacks an entropy-design anchor")
+
+    model_backed = """The entropy-gate matrix used 120 paired experimental cells and three gate levels, producing 360 RankCloak and 360 length-matched ordinary-control generations. Eighteen independent ordinary top-p calibration traces fixed model-specific median and 75th-percentile thresholds before evaluation. Ineligible positions were ordinary top-p samples, not greedy or rank-1 choices. RankCloak and control seeds were each shared across gate levels within a cell. Both fixed-payload and fixed-token-budget estimands were computed from the same records.
+
+The matched quantization matrix used all 1,920 historical Qwen Q4 rows and 1,920 newly generated Q8 counterparts. Historical ordinary-control seeds were read from raw Q4 records. Non-quantization contracts were hash-bound across every pair. Predeclared payload splits support Q4-to-Q8, Q8-to-Q4, and pooled held-payload detector evaluations. Generated detector corpora were locked-partition deduplicated before feature extraction, with complete matched-pair and payload-group removal used to resolve any cross-boundary duplicate component.
+
+The two model-backed studies completed on the local RTX 5000 Ada with exact pinned GGUFs and CUDA-enabled llama-cpp-python 0.3.23. Every outcome, failure status, runtime, and peak-memory value is retained in atomic JSON ledgers; aggregate results are derived rather than manually copied."""
+    return (
+        prefix
+        + "\n\n"
+        + MODEL_BACKED_DESIGN_START
+        + "\n\n"
+        + model_backed
+        + "\n\n"
+        + MODEL_BACKED_DESIGN_END
+        + "\n\n"
+        + recovery_paragraph
+        + "\n"
+    )
+
+
 def write_detector_artifacts(
     output: Path,
     metrics: pd.DataFrame,
@@ -167,7 +209,7 @@ def write_detector_artifacts(
     gate_labels = ["Ungated", "Median", "75th percentile"]
     x = np.arange(len(gates), dtype=float)
     width = 0.24
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.0), sharex=True)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.4), sharex=True)
     for detector_index, detector in enumerate(DETECTORS):
         cell = entropy.loc[entropy["detector_label"].eq(DETECTOR_LABELS[detector])].set_index("level")
         for axis, metric, title in (
@@ -181,15 +223,16 @@ def write_detector_artifacts(
             axis.grid(axis="y", alpha=0.25)
     for axis in axes:
         axis.set_xticks(x, gate_labels, rotation=15, ha="right")
-    axes[1].legend(loc="lower right")
+    handles, labels = axes[1].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(0.5, 0.01), ncol=3)
     fig.suptitle("Entropy-gate detector performance")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.14, 1, 0.93))
     save_figure(fig, output / "figures/entropy_gate_detector_performance")
 
     evaluations = ["q4_to_q8", "q8_to_q4", "pooled_quantizations"]
     eval_labels = ["Q4→Q8", "Q8→Q4", "Pooled"]
     x = np.arange(len(evaluations), dtype=float)
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.0), sharex=True)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.4), sharex=True)
     for detector_index, detector in enumerate(DETECTORS):
         cell = metrics.loc[
             metrics["detector"].eq(detector) & metrics["evaluation_id"].isin(evaluations)
@@ -205,9 +248,10 @@ def write_detector_artifacts(
             axis.grid(axis="y", alpha=0.25)
     for axis in axes:
         axis.set_xticks(x, eval_labels, rotation=12, ha="right")
-    axes[1].legend(loc="lower right")
+    handles, labels = axes[1].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(0.5, 0.01), ncol=3)
     fig.suptitle("Matched-quantization detector transfer")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.14, 1, 0.93))
     save_figure(fig, output / "figures/matched_quantization_detector_transfer")
 
 
@@ -609,8 +653,8 @@ PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.p
 .venv/bin/python scripts/analyze_revision_v3_generation.py --output-dir /tmp/rankcloak_revision_v3_repro --generation-dir /tmp/rankcloak_revision_v3_repro/generation
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only --output-dir /tmp/rankcloak_revision_v3_repro
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector surprisal --output-dir /tmp/rankcloak_revision_v3_repro
-CUDA_VISIBLE_DEVICES=0 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector textcnn --output-dir /tmp/rankcloak_revision_v3_repro
-CUDA_VISIBLE_DEVICES=0 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector deberta --output-dir /tmp/rankcloak_revision_v3_repro
+CUDA_VISIBLE_DEVICES={gpu} .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector textcnn --output-dir /tmp/rankcloak_revision_v3_repro
+CUDA_VISIBLE_DEVICES={gpu} .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector deberta --output-dir /tmp/rankcloak_revision_v3_repro
 .venv/bin/python -m pytest -q tests/test_revision_v3_*.py --junitxml=/tmp/rankcloak_revision_v3_repro/logs/pytest_v3_focused.xml
 .venv/bin/python -m pytest -q --junitxml=/tmp/rankcloak_revision_v3_repro/logs/pytest_full.xml
 .venv/bin/python scripts/finalize_revision_v3.py --output-dir /tmp/rankcloak_revision_v3_repro
@@ -625,17 +669,7 @@ Re-running analysis and finalization from unchanged authoritative ledgers regene
 
     design_path = output / "experiment_design.md"
     design = design_path.read_text(encoding="utf-8")
-    design_prefix = design.split("\nThe bounded entropy-gate matrix", 1)[0].rstrip()
-    design_suffix = design.split("\nThe recovery-mode comparison", 1)[1]
-    design = design_prefix + """
-
-The entropy-gate matrix used 120 paired experimental cells and three gate levels, producing 360 RankCloak and 360 length-matched ordinary-control generations. Eighteen independent ordinary top-p calibration traces fixed model-specific median and 75th-percentile thresholds before evaluation. Ineligible positions were ordinary top-p samples, not greedy or rank-1 choices. RankCloak and control seeds were each shared across gate levels within a cell. Both fixed-payload and fixed-token-budget estimands were computed from the same records.
-
-The matched quantization matrix used all 1,920 historical Qwen Q4 rows and 1,920 newly generated Q8 counterparts. Historical ordinary-control seeds were read from raw Q4 records. Non-quantization contracts were hash-bound across every pair. Predeclared payload splits support Q4-to-Q8, Q8-to-Q4, and pooled held-payload detector evaluations. Generated detector corpora were locked-partition deduplicated before feature extraction, with complete matched-pair and payload-group removal used to resolve any cross-boundary duplicate component.
-
-The two model-backed studies completed on the local RTX 5000 Ada with exact pinned GGUFs and CUDA-enabled llama-cpp-python 0.3.23. Every outcome, failure status, runtime, and peak-memory value is retained in atomic JSON ledgers; aggregate results are derived rather than manually copied.
-
-The recovery-mode comparison""" + design_suffix
+    design = render_model_backed_experiment_design(design)
     atomic_text(design_path, design)
 
     dictionary_path = output / "data_dictionary.md"

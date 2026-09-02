@@ -339,6 +339,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not checks["model_backed_locked_dedup_all_pass"]:
         errors.append("one or more model-backed locked dedup audits is missing or failed")
 
+    experiment_design = (output / "experiment_design.md").read_text(encoding="utf-8")
+    checks["model_backed_experiment_design_section_exact"] = bool(
+        experiment_design.count("<!-- revision-v3-model-backed-design:start -->") == 1
+        and experiment_design.count("<!-- revision-v3-model-backed-design:end -->") == 1
+        and experiment_design.count("The entropy-gate matrix used") == 1
+        and experiment_design.count("The matched quantization matrix used") == 1
+        and experiment_design.count("The recovery-mode comparison") == 1
+    )
+    if not checks["model_backed_experiment_design_section_exact"]:
+        errors.append("model-backed experiment-design section is missing or duplicated")
+
     recovery = pd.read_csv(output / "source_tables/recovery_mode_comparison.csv")
     recovery_rates = recovery.set_index("replay_mode")["recovery_rate"].to_dict()
     checks["recovery_mode_source_valid"] = bool(
