@@ -1,0 +1,195 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{parskip}
+\usepackage{enumitem}
+
+\definecolor{commentgray}{gray}{0.25}
+\newcommand{\Status}[1]{\textbf{Status: #1.}}
+\newcommand{\Locations}[1]{\textbf{Locations:} #1}
+\newenvironment{reviewcomment}{\begin{quote}\color{commentgray}\itshape}{\end{quote}}
+
+\hypersetup{pdftitle={Response to reviewers for RankCloak Measures Recovery and Detectability of Synthetic Cryptographic Artifacts Encoded in Language Model Text},pdfauthor={Alexander V. Mantzaris}}
+\title{Response to the Editor and Reviewer\\[0.4em]\large RankCloak Measures Recovery and Detectability of Synthetic Cryptographic Artifacts Encoded in Language Model Text}
+\author{Submission ID: 0170c7b2-1065-4344-a5d5-b839b51ac22c}
+\date{}
+
+\begin{document}
+\maketitle
+
+Dear Dr.\ Yang,
+
+Thank you for the careful assessment and for recognizing the manuscript's systematic evaluation, reproducibility, and transparent reporting. We made a restrained revision using the completed V3 evidence. The title is synchronized, the practical interpretation is narrowed to a measurement and evaluation framework, and one compact Results subsection and table summarize the requested confirmatory analyses. Detailed methods, condition-level results, thresholds, exact counts, and limitations are in Supplementary Notes S11--S15. We have not claimed that the bounded additions eliminate all limitations.
+
+\section*{Submission context}
+
+\begin{reviewcomment}
+Your manuscript, \textquotedblleft RankCloak: Hiding Synthetic Cryptographic Artifacts in Plain English with Language Models\textquotedblright, has now been assessed.
+\end{reviewcomment}
+
+\noindent\textbf{Response.}
+We appreciate the continued assessment. The revised manuscript is now titled \emph{RankCloak Measures Recovery and Detectability of Synthetic Cryptographic Artifacts Encoded in Language Model Text}. The revision preserves the core formulation and completed V2 evaluation while integrating only the targeted V3 evidence requested below.
+
+\section*{In-house Editorial title request}
+
+\begin{reviewcomment}
+To aid our readers, and to maximize the accessibility of your manuscript, the title (title of manuscript) should have a clear, precise scientific meaning. Where possible, the title should be read as one concise sentence which is under 20 words long, should not contain punctuation (full stops, hyphen, semi-colons, colon, question mark) and should not be phrased as a question. Please could you re-write the title ensuring that it is informative and appropriate. After correcting the title please ensure that the title exactly matches on the tracking system, manuscript file and cover letter.
+\end{reviewcomment}
+
+\Status{Addressed in the files; tracking-system update remains manual}
+
+\noindent\textbf{Response.}
+We replaced the title with the exact 14-word title \emph{RankCloak Measures Recovery and Detectability of Synthetic Cryptographic Artifacts Encoded in Language Model Text}. It contains none of the prohibited punctuation, is not a question, and frames the contribution cautiously as measurement. The same title appears in the manuscript source and PDF metadata, Supplementary Information, response, cover letter, and pre-submission checklist. Because the repository cannot alter the journal tracking system, the checklist prominently requires the author to enter this exact title before submission.
+
+\Locations{Main manuscript p.~1; cover letter p.~1; \path{paperV3/PRESUBMISSION_CHECKLIST.md}.}
+
+\section*{Handling Editor}
+
+\subsection*{Recommendation}
+
+\begin{reviewcomment}
+Recommendation: Request Revision
+\end{reviewcomment}
+
+\noindent\textbf{Response.}
+We submit the requested targeted revision and point-by-point response.
+
+\subsection*{Revision and reporting instructions}
+
+\begin{reviewcomment}
+We invite you to revise your paper, carefully addressing the comments from the reviewers and the editor. Please ensure the results are accurately reported, any overstated conclusions are rewritten and the limitations of the work fully explained. When your revision is ready, please submit the updated manuscript and a point-by-point response. This will help us move to a swift decision.
+\end{reviewcomment}
+
+\noindent\textbf{Response.}
+We verified each added numerical statement against the validated V3 handoff, replaced the superseded detector results with strictly deduplicated estimates, and retained adverse outcomes prominently. The abstract, end of the Introduction, Discussion, limitations, and concluding language now consistently distinguish deterministic saved-token replay from ordinary visible-text communication. The revised text states that RankCloak does not demonstrate an undetectable, robust, secure, deployable, or practical covert channel.
+
+\Locations{Main manuscript Abstract and Introduction, pp.~1--2; \textquotedblleft Confirmatory controls, entropy gating, and quantization,\textquotedblright\ pp.~18--19 and Table~3, p.~19; Discussion, pp.~19--20; Responsible use and limitations, p.~20; Supplementary Notes S11--S15, pp.~20--30.}
+
+\subsection*{Code deposition}
+
+\begin{reviewcomment}
+Please note that if your manuscript uses any custom or bespoke computational tool or code, or reports a new algorithm, tool, software, or a pipeline (even if individual components are not new), the underlying code must be deposited in a recognised DOI-assigning repository (e.g. zenodo) and linked either from Methods or a dedicated Code Availability section.
+\end{reviewcomment}
+
+\Status{Existing DOI preserved; final V3 archival synchronization remains manual}
+
+\noindent\textbf{Response.}
+The Data and Code availability section retains the public GitHub repository and the existing valid Zenodo DOI, \url{https://doi.org/10.5281/zenodo.21987450}. It now states accurately that this is an earlier code-and-data release and does not assert that the existing DOI version contains the final V3 manuscript commit. The pre-submission checklist requires the author to archive the final accepted computational and manuscript revision in a recognized DOI-assigning repository, confirm or update the DOI/version, verify the cited code revision, and synchronize the final DOI wording before submission. No Zenodo record was created or modified during this manuscript task.
+
+\Locations{Main manuscript Data and Code availability, p.~20; paperV3 pre-submission checklist.}
+
+\subsection*{Practical interpretation and requested evaluations}
+
+\begin{reviewcomment}
+\textquotedblleft The manuscript has been substantially improved, and its systematic evaluation, reproducibility, and transparent reporting are appreciated. However, major concerns remain regarding the practical interpretation of RankCloak. Perfect recovery depends on saved-token replay, while visible-text recovery is limited and robustness under paraphrasing, format transfer, and cross-model decoding remains poor. In addition, the extremely high steganalysis performance requires stronger evaluation using human-written controls, unseen models and quantizations, adaptive detectors, low-FPR operating points, and strictly deduplicated training data. Entropy-aware embedding strategies should also be experimentally investigated. Suggested references are optional, and the authors may select appropriate recent literature. Reviewer comments should be preserved accurately in future revisions.\textquotedblright
+-Chun-Wei Yang
+\end{reviewcomment}
+
+\noindent\textbf{Response.}
+We agree with the practical boundary. The revised title and interpretation present RankCloak primarily as a measurement and evaluation framework. Saved-ID recovery is described as deterministic replay requiring the token IDs, exact model, tokenizer, quantization, prompt rendering, filters, and span boundaries; it is materially different from communication through ordinary visible text. The 88/144 visible-text recovery result and zero recovery under markdown transfer, paraphrase, and cross-model decoding remain prominent.
+
+The new bounded evaluation adds 250 human-authored Dolly controls as a secondary corpus comparison, not a human study; a complete pre-feature exact/near-duplicate component split with a zero-linkage audit; genuine leave-one-family-out tests; two data-adaptive text-only detectors; an exact-model-aware surprisal attacker; and validation-frozen 1\% and, only where sample size permits, 0.1\% operating points. It also adds entropy-gated embedding and matched Qwen Q4\_K\_M/Q8\_0 generation, recovery, and detector transfer. Strict entropy gating lowers text-only AUC in the tested matrix but lowers capacity, increases length, causes six completion failures, and leaves model-aware AUC 0.9904. Cross-quantization detection remains very strong. These results narrow rather than eliminate the concerns.
+
+\Locations{Main manuscript control Methods, p.~9, and detector Methods, pp.~11--12; Results Figure~5, p.~18, and Table~3, p.~19; Discussion, pp.~19--20; limitations, p.~20; Supplementary Notes S11--S15, pp.~20--30.}
+
+\section*{Reviewer 2}
+
+\subsection*{Overall assessment}
+
+\begin{reviewcomment}
+The paper presents RankCloak, a rank-based method for encoding synthetic cryptographic artifacts as LLM-generated text. Across 6,480 trials, recovery is perfect only under saved-token replay; visible-text recovery falls to 61.1\%, while paraphrasing, markdown transfer, and cross-model decoding fail completely. The work is best viewed as a careful measurement framework, not a practical covert channel.
+\end{reviewcomment}
+
+\noindent\textbf{Response.}
+We agree and adopted this interpretation throughout. The exact-copy result is explicitly restricted to saved-token replay under the recorded generation configuration. The abstract, Introduction, Discussion, limitations, and concluding sentence now describe a measurement and evaluation framework and retain the weaker visible-text and failed transformation outcomes. The added experiments refine the measured boundaries but do not establish practical covert communication.
+
+\Locations{Main manuscript Abstract and Introduction, pp.~1--2; \textquotedblleft Exact-copy replay and transmission fragility,\textquotedblright\ pp.~14--15; Discussion, pp.~19--20; Responsible use and limitations, p.~20.}
+
+\subsection*{Pros}
+
+\begin{reviewcomment}
+\textbf{Pros:}
+
+1) Clear formulation of direct-subword, byte, and hex-nibble codecs, with explicit capacity--rank-pressure trade-offs.
+
+2) Broad, reproducible evaluation across eight artifact classes, three model families, 18 English templates, and two secondary languages.
+
+3) Strong experimental hygiene: payload-grouped analyses, transformation-specific recovery tests, held-out detector splits, uncertainty estimates, and transparent reporting of unavailable cases.
+
+4) The paper appropriately separates forced-span metrics from full-message metrics and does not misrepresent natural tails as additional capacity.
+
+5) Negative findings are unusually candid: fragile transmission and near-perfect steganalysis performance sharply delimit the contribution.
+\end{reviewcomment}
+
+\noindent\textbf{Response.}
+Thank you for identifying these strengths. We preserved the equations, algorithms, codec definitions, capacity accounting, primary corpus, transformation-specific endpoints, forced-span/full-message separation, and negative findings. The V3 revision extends the same hygiene through pre-feature component-level deduplication, exact count reporting, validation-frozen thresholds, conditional capacity denominators, and paired quantization inference. It does not recast tails as capacity or adverse detector performance as a benefit.
+
+\Locations{Main manuscript Methods, pp.~2--12; existing Results, pp.~12--18; new Table~3, p.~19; Supplementary Notes S11--S15, pp.~20--30.}
+
+\subsection*{Cons}
+
+\begin{reviewcomment}
+\textbf{Cons:}
+\end{reviewcomment}
+
+\subsection*{Concern 1: Saved-token replay is not ordinary text communication}
+
+\begin{reviewcomment}
+1) The central recovery result is operationally weak: saved token IDs, exact model weights, tokenizer, quantization, prompt rendering, filters, and boundaries must all be shared. This is closer to deterministic replay than communication through ordinary text.
+\end{reviewcomment}
+
+\Status{Addressed by narrower interpretation and explicit replay requirements}
+
+\noindent\textbf{Response.}
+We agree. The manuscript now calls saved IDs an exact replay record, not an ordinary text channel. It explicitly lists the saved token IDs, relevant model artifact, tokenizer, quantization and backend, prompt rendering, rank rule, filters, codec, and span boundaries required for reconstruction. The revised abstract and Discussion juxtapose 6,480/6,480 primary saved-ID recovery with only 88/144 visible-text recovery in the bounded robustness sample. The Q4/Q8 analysis reinforces this distinction: saved-ID recovery is 960/960 in each condition, while visible-text recovery is 732/960 and 758/960. Paraphrasing, markdown transfer, format changes, and cross-model decoding remain fragile or unsuccessful. No practical-channel claim is made.
+
+\Locations{Main manuscript Abstract, p.~1; replay contract, pp.~2--3, and recovery Methods, p.~10; transmission fragility, pp.~14--15; Table~3, p.~19; Discussion, pp.~19--20; limitations, p.~20; Supplementary Notes S1, S4, S14, and S15, pp.~1--2, 8--10, and 26--30.}
+
+\subsection*{Concern 2: Controls, unseen conditions, adaptive detection, low FPR, and deduplication}
+
+\begin{reviewcomment}
+2) Detectability is devastatingly high (ROC-AUC 0.990/0.9998), yet controls are model-generated rather than human communication. Evaluation should include human text, unseen model families and quantizations, adaptive attackers, low-FPR operating points, and detector training on strictly deduplicated corpora.
+\end{reviewcomment}
+
+\Status{Addressed with bounded evaluations; generalization and threat-model limits remain}
+
+\noindent\textbf{Response.}
+We rebuilt the detector corpus before feature extraction. NFKC-normalized, case-folded, whitespace-collapsed exact duplicates triggered removal of a complete matched pair. Payload groups connected by any predeclared 0.95 character-\(n\)-gram TF-IDF near-duplicate edge became indivisible components. The retained 15,838 rows were assigned 9,904/2,952/2,982 to train/validation/test, and the audit found zero cross-partition payload, pair, normalized-text, component, or declared near-duplicate links.
+
+Matched ROC-AUC is 0.9868 for TextCNN, 0.9994 for DeBERTa-v3-base, and 0.999995 for the exact-model-aware surprisal attacker. Genuine leave-one-family-out ROC-AUC ranges are 0.9186--0.9784, 0.9972--1.0000, and 0.999943--1.000000. The 250 human-authored controls yield ROC-AUC 0.7537 and 0.9846, but at thresholds selected on ordinary-model validation controls, 152/250 and 97/250 human texts are false positives. We therefore present this as a secondary corpus analysis that can reflect generic machine-versus-human signal, not as a participant study or naturalness evidence.
+
+Low-FPR thresholds are selected on validation and frozen before test, with exact counts and no interpolation. The matched split has 1,491 test negatives and supports 0.1\% reporting. Family holdouts, human controls, entropy gates, and quantization tests have fewer than 1,000 negatives, so their empirical 0.1\% results are explicitly unavailable. Bidirectional Q4/Q8 detector transfer remains very strong; frozen 1\% thresholds show calibration drift in several tests. These adaptive and model-aware evaluations remain bounded rather than exhaustive.
+
+\Locations{Main manuscript detector Methods, pp.~11--12; Figure~5, p.~18; Table~3, p.~19; Discussion, pp.~19--20; limitations, p.~20; Supplementary Tables S18--S21, pp.~20--21; Figures S8--S9, pp.~22--23; Note S12, pp.~20--23; Note S14, pp.~26--29.}
+
+\subsection*{Concern 3: Entropy-aware embedding}
+
+\begin{reviewcomment}
+3) Entropy-aware token selection is especially relevant because RankCloak forces unlikely tokens and is readily detected. The authors should discuss and experimentally compare entropy-gated embedding, citing Cai et al., \textquotedblleft Entropy-Guided Watermarking for LLMs: A Test-Time Framework for Robust and Traceable Text Generation,\textquotedblright\ while clearly distinguishing watermark detection from payload-carrying steganography.
+\end{reviewcomment}
+
+\Status{Addressed experimentally within a bounded matrix}
+
+\noindent\textbf{Response.}
+We added the verified Cai, Ding, and Tao reference (arXiv:2504.12108; DOI \url{https://doi.org/10.48550/arXiv.2504.12108}) and distinguish the tasks explicitly: watermarking asks a detector to identify marked output, whereas payload-carrying steganography requires a receiver to recover an arbitrary message.
+
+The new replay-consistent experiment compares ungated, model-specific median-entropy, and 75th-percentile strict gates, with 120 RankCloak attempts and 120 length-matched controls per gate. Ineligible positions use ordinary top-\(p\) sampling and consume no payload rank; replay recomputes the gate without saved gate-position metadata. Strict gating completed 114/120 payloads, with six maximum-budget failures. Mean capacity fell from 7.4001 ungated to 4.0513 bits/token under the strict gate, and the latter is explicitly conditional on the 114 completed cases. Mean length rose 2.7615-fold. Visible-text recovery was 62/120, 65/120, and 68/120 across ungated, moderate, and strict gates.
+
+Strict-gate text-only ROC-AUC fell to 0.8850 for TextCNN and 0.8893 for DeBERTa, but exact-model-aware ROC-AUC remained 0.9904. Thus stricter gating reduces text-only detectability in this bounded matrix while lowering capacity, greatly increasing length, causing completion failures, and retaining a strong model-aware signal. We do not claim an undetectable channel.
+
+\Locations{Main manuscript Introduction, p.~1; detector/entropy Methods, pp.~11--12; Table~3, p.~19; Discussion, p.~19; limitations, p.~20; Supplementary Tables S22--S24, pp.~23--25; Figures S10--S11, pp.~25--26; Note S13, pp.~23--26.}
+
+\section*{Remaining limitations}
+
+The revision continues to acknowledge the absence of a human participant evaluation, real-world deployment testing, exhaustive attackers, broad quantization coverage, and larger or proprietary model evaluation. The human-authored controls cover a bounded Dolly subset; strict deduplication cannot detect every semantic paraphrase; low-FPR estimates remain unavailable where negative counts are insufficient; entropy thresholds and paired quantization results are limited to the tested matrices. The paired Q4/Q8 visible-recovery comparison was computed from existing Q4 records and the already completed V3 Q8 handoff without generating new Q4 covers, and its exact McNemar \(p=0.1582\) does not support a significant Q8 advantage.
+
+We believe these focused changes directly answer the editor and reviewer while preserving the paper's central negative findings and avoiding a broader rewrite.
+
+Sincerely,
+
+Alexander V. Mantzaris
+\end{document}

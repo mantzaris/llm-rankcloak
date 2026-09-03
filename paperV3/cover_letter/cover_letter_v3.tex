@@ -1,0 +1,32 @@
+\documentclass[10pt]{letter}
+\usepackage[letterpaper,margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+\hypersetup{pdftitle={Cover letter for RankCloak Measures Recovery and Detectability of Synthetic Cryptographic Artifacts Encoded in Language Model Text},pdfauthor={Alexander V. Mantzaris}}
+
+\begin{document}
+\begin{letter}{Dr.\ Chun-Wei Yang\\Handling Editor\\Scientific Reports}
+\opening{Dear Dr.\ Yang,}
+
+Please find the targeted revision of \emph{RankCloak Measures Recovery and Detectability of Synthetic Cryptographic Artifacts Encoded in Language Model Text} (submission 0170c7b2-1065-4344-a5d5-b839b51ac22c). Thank you and Reviewer 2 for the constructive assessment and for recognizing the manuscript's systematic evaluation, reproducibility, transparent reporting, and candid negative findings.
+
+The revision is deliberately limited. It presents RankCloak primarily as a measurement and evaluation framework, distinguishes saved-token replay from ordinary visible-text communication, and retains the poor paraphrase, format-transfer, cross-model, and steganalysis outcomes. It adds a human-authored secondary control corpus, pre-feature component-level deduplication and a zero-linkage audit, genuine leave-one-family-out evaluation, data-adaptive and exact-model-aware detectors, and validation-frozen low-FPR reporting only where the negative count supports it.
+
+We also add a bounded entropy-gating experiment and a matched Qwen Q4\_K\_M/Q8\_0 analysis. Stricter gating reduces text-only detectability in the tested matrix but reduces capacity, increases length, produces completion failures, and leaves a strong model-aware signal. Both quantizations recover 960/960 saved-ID records, while visible-text recovery is weaker and the paired difference is not statistically significant. Cross-quantization detection remains very strong. These additions refine the method's boundaries; they do not demonstrate a practical, robust, secure, deployable, or undetectable covert channel.
+
+Detailed methods and condition-level results are in the Supplementary Information, while the main manuscript adds one compact Results subsection and table. The existing repository and Zenodo DOI remain identified in Data and Code availability; final V3 archival/version synchronization is explicitly retained as a manual pre-submission item rather than claimed complete.
+
+Thank you for considering this restrained revision.
+
+Sincerely,
+
+Alexander V. Mantzaris, Associate Professor \\
+School of Data, Mathematical, and Statistical Sciences, UCF \\
+4000 University Blvd., Orlando, FL 32817, USA \\
+alexander.mantzaris@ucf.edu \\
+TCII 211C, +1-407-692-0280
+\end{letter}
+\end{document}

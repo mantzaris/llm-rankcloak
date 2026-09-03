@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+\urlstyle{rm}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname doiprefix\endcsname\relax\def\doiprefix{DOI: }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{Cai2025EntropyGuidedWatermarking}
+\bibinfo{author}{Cai, S.}, \bibinfo{author}{Ding, L.} \& \bibinfo{author}{Tao,
+  D.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Entropy-guided watermarking for
+  {LLMs}: A test-time framework for robust and traceable text generation}}.
+\newblock {\emph{\JournalTitle{arXiv preprint arXiv:2504.12108}}}
+  \doiprefix\url{10.48550/arXiv.2504.12108} (\bibinfo{year}{2025}).
+
+\end{thebibliography}

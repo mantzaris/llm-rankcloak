@@ -1,0 +1,40 @@
+Dear Dr Mantzaris,
+
+Your manuscript, "RankCloak: Hiding Synthetic Cryptographic Artifacts in Plain English with Language Models", has now been assessed.
+
+
+*****
+Handling Editor:
+Recommendation: Request Revision
+*****
+In house Editorial Comments:-
+To aid our readers, and to maximize the accessibility of your manuscript, the title (title of manuscript) should have a clear, precise scientific meaning. Where possible, the title should be read as one concise sentence which is under 20 words long, should not contain punctuation (full stops, hyphen, semi-colons, colon, question mark) and should not be phrased as a question. Please could you re-write the title ensuring that it is informative and appropriate. After correcting the title please ensure that the title exactly matches on the tracking system, manuscript file and cover letter.
+*****
+
+We invite you to revise your paper, carefully addressing the comments from the reviewers and the editor. Please ensure the results are accurately reported, any overstated conclusions are rewritten and the limitations of the work fully explained. When your revision is ready, please submit the updated manuscript and a point-by-point response. This will help us move to a swift decision.
+
+Please note that if your manuscript uses any custom or bespoke computational tool or code, or reports a new algorithm, tool, software, or a pipeline (even if individual components are not new), the underlying code must be deposited in a recognised DOI-assigning repository (e.g. zenodo) and linked either from Methods or a dedicated Code Availability section.
+
+Editor Comments
+
+"The manuscript has been substantially improved, and its systematic evaluation, reproducibility, and transparent reporting are appreciated. However, major concerns remain regarding the practical interpretation of RankCloak. Perfect recovery depends on saved-token replay, while visible-text recovery is limited and robustness under paraphrasing, format transfer, and cross-model decoding remains poor. In addition, the extremely high steganalysis performance requires stronger evaluation using human-written controls, unseen models and quantizations, adaptive detectors, low-FPR operating points, and strictly deduplicated training data. Entropy-aware embedding strategies should also be experimentally investigated. Suggested references are optional, and the authors may select appropriate recent literature. Reviewer comments should be preserved accurately in future revisions."
+-Chun-Wei Yang
+
+
+
+Reviewer 2
+
+The paper presents RankCloak, a rank-based method for encoding synthetic cryptographic artifacts as LLM-generated text. Across 6,480 trials, recovery is perfect only under saved-token replay; visible-text recovery falls to 61.1%, while paraphrasing, markdown transfer, and cross-model decoding fail completely. The work is best viewed as a careful measurement framework, not a practical covert channel.
+
+# Pros:
+1) Clear formulation of direct-subword, byte, and hex-nibble codecs, with explicit capacity–rank-pressure trade-offs.
+2) Broad, reproducible evaluation across eight artifact classes, three model families, 18 English templates, and two secondary languages.
+3) Strong experimental hygiene: payload-grouped analyses, transformation-specific recovery tests, held-out detector splits, uncertainty estimates, and transparent reporting of unavailable cases.
+4) The paper appropriately separates forced-span metrics from full-message metrics and does not misrepresent natural tails as additional capacity.
+5) Negative findings are unusually candid: fragile transmission and near-perfect steganalysis performance sharply delimit the contribution.
+
+# Cons:
+1) The central recovery result is operationally weak: saved token IDs, exact model weights, tokenizer, quantization, prompt rendering, filters, and boundaries must all be shared. This is closer to deterministic replay than communication through ordinary text.
+2) Detectability is devastatingly high (ROC-AUC 0.990/0.9998), yet controls are model-generated rather than human communication. Evaluation should include human text, unseen model families and quantizations, adaptive attackers, low-FPR operating points, and detector training on strictly deduplicated corpora.
+3) Entropy-aware token selection is especially relevant because RankCloak forces unlikely tokens and is readily detected. The authors should discuss and experimentally compare entropy-gated embedding, citing Cai et al., “Entropy-Guided Watermarking for LLMs: A Test-Time Framework for Robust and Traceable Text Generation,” while clearly distinguishing watermark detection from payload-carrying steganography.
+
