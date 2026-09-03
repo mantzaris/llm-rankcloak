@@ -57,7 +57,7 @@ entropy_overall,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,1.0,120,16
 entropy_overall,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,moderate,visible_text_exact_payload_recovery,0.5416666666666666,1.0,0.5003500175437415,0.4684234234234234,0.6046863988724451,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,moderate,eligible_position_fraction,0.7622504458206125,0.7712564543889846,0.15360991792716777,0.7359351231098117,0.7904980398334734,120,16,2000,payload_name,,,
-entropy_overall,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.792009268168002,5.106082036775106,3.2104489660126903,5.5699139319959485,6.029792123062224,120,16,2000,payload_name,,,
+entropy_overall,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.792009268168002,5.106082036775106,3.2104489660126903,5.570737909359247,6.03905965360923,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7518274870871421,0.765625,0.169731389642876,0.7272630151388388,0.7811726864126863,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,moderate,generated_token_count,95.73333333333333,78.0,60.544966737119275,78.89407407407407,113.38678090575274,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,moderate,added_tokens_vs_ungated,26.008333333333333,17.0,24.76426533404563,21.092880214101143,30.98333333333333,120,16,2000,payload_name,,,
@@ -83,7 +83,7 @@ entropy_overall,rankcloak,strict,payload_completion,0.95,1.0,0.21885876647707206
 entropy_overall,rankcloak,strict,saved_id_exact_payload_recovery,0.95,1.0,0.21885876647707206,0.9206349206349206,0.9819819819819819,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,strict,visible_text_exact_payload_recovery,0.5666666666666667,1.0,0.4976133515281193,0.5213414634146342,0.6111111111111112,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,strict,eligible_position_fraction,0.46813903841455873,0.4025157232704403,0.24372828085072468,0.4262286031335587,0.5148492211573833,120,16,2000,payload_name,,,
-entropy_overall,rankcloak,strict,fixed_payload_bits_per_generated_token,4.0513171862707935,2.9681408791504236,3.3954162855299237,3.703742769476903,4.441155486726927,114,16,2000,payload_name,,,
+entropy_overall,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,4.0513171862707935,2.9681408791504236,3.3954162855299237,3.712209328484564,4.441292400366355,114,16,2000,payload_name,,,
 entropy_overall,rankcloak,strict,fixed_token_budget_payload_fraction,0.4566915705249287,0.3726851851851852,0.2636230341607893,0.41267113074645734,0.508136843891891,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,strict,generated_token_count,206.01666666666668,148.0,189.60715616628974,164.13696220930234,245.1132113821138,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,strict,added_tokens_vs_ungated,136.29166666666666,85.5,158.9258796549185,105.1358822236871,168.57668191056908,120,16,2000,payload_name,,,
@@ -109,7 +109,7 @@ entropy_overall,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1.0,120,16,
 entropy_overall,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,ungated,visible_text_exact_payload_recovery,0.5166666666666667,1.0,0.5018174252567527,0.4358974358974359,0.5877192982456141,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,120,16,2000,payload_name,,,
-entropy_overall,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.400055922251531,8.0,3.1571357732415506,7.251325364981487,7.523949726395569,120,16,2000,payload_name,,,
+entropy_overall,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.400055922251531,8.0,3.1571357732415506,7.25790373922108,7.523191845990443,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,ungated,generated_token_count,69.725,60.5,43.223080221862325,56.12385912698413,84.0017543859649,120,16,2000,payload_name,,,
 entropy_overall,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,120,16,2000,payload_name,,,
@@ -297,7 +297,7 @@ entropy_by_model,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16
 entropy_by_model,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,visible_text_exact_payload_recovery,0.725,1.0,0.45220258677630265,0.5384615384615384,0.8837209302325582,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,eligible_position_fraction,0.906946972585972,0.9230769230769231,0.07835966595408829,0.8873095485061939,0.931360011723975,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
-entropy_by_model,rankcloak,moderate,fixed_payload_bits_per_generated_token,7.606231552206827,7.297941495124594,4.0105169972791765,7.345680841536602,7.861332845909727,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
+entropy_by_model,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,7.606231552206827,7.297941495124594,4.0105169972791765,7.3574240861913625,7.857016676057665,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,fixed_token_budget_payload_fraction,0.8993549070854414,0.9192708333333333,0.08836722050214786,0.8754239583169197,0.9251272673460824,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,generated_token_count,75.975,62.0,53.47920156472047,61.56445993031359,90.75032894736842,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,added_tokens_vs_ungated,8.925,2.5,11.960163578334237,5.867960526315789,11.801511627906969,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
@@ -323,7 +323,7 @@ entropy_by_model,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16
 entropy_by_model,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,moderate,visible_text_exact_payload_recovery,0.0,0.0,0.0,0.0,0.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,moderate,eligible_position_fraction,0.718603092015955,0.7029411764705882,0.11188303894016477,0.692423807850759,0.7450591439660152,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
-entropy_by_model,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.024103951917728,5.36140350877193,2.1609387018298163,4.78417062755951,5.263281639124537,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
+entropy_by_model,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.024103951917728,5.36140350877193,2.1609387018298163,4.791616808163487,5.281584688469167,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,moderate,fixed_token_budget_payload_fraction,0.706783096498761,0.6893229166666667,0.1190664328388819,0.6788959786557628,0.7335088951389077,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,moderate,generated_token_count,102.25,89.0,61.23253283119258,84.10833333333333,120.86111111111111,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,moderate,added_tokens_vs_ungated,30.6,30.0,22.83586922096295,25.178124999999998,36.36129385964912,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
@@ -349,7 +349,7 @@ entropy_by_model,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16
 entropy_by_model,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,visible_text_exact_payload_recovery,0.9,1.0,0.3038218101251,0.7692307692307693,1.0,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,eligible_position_fraction,0.6612012728599106,0.6632302405498282,0.13942522457588472,0.61913031670694,0.7090271376465692,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
-entropy_by_model,rankcloak,moderate,fixed_payload_bits_per_generated_token,4.74569230037945,3.6058126270892226,2.364775213744755,4.3218700568802495,5.216793108528482,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
+entropy_by_model,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,4.74569230037945,3.6058126270892226,2.364775213744755,4.337050166941233,5.220565957274933,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,fixed_token_budget_payload_fraction,0.6493444576772239,0.68359375,0.1753354751403956,0.5982302250181425,0.7011850063953114,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,generated_token_count,108.975,99.0,62.86350190527784,89.248125,129.40180555555554,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,moderate,added_tokens_vs_ungated,38.5,34.5,26.939628611834827,30.10672119487909,47.171341463414635,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
@@ -375,7 +375,7 @@ entropy_by_model,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16,2
 entropy_by_model,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,visible_text_exact_payload_recovery,0.85,1.0,0.36162028533978946,0.7441711389385808,0.9459815078236129,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,eligible_position_fraction,0.6740343435822503,0.6830799735624586,0.23714979519098042,0.6046388368884079,0.7484516297736238,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
-entropy_by_model,rankcloak,strict,fixed_payload_bits_per_generated_token,6.1321511098288495,4.271412680756396,4.357617878170009,5.511084210144635,6.715192472216483,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
+entropy_by_model,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,6.1321511098288495,4.271412680756396,4.357617878170009,5.510781385079808,6.7227094110523185,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,fixed_token_budget_payload_fraction,0.6814010218960634,0.75,0.2494183543015703,0.6157654250671685,0.7544298950750654,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,generated_token_count,132.625,72.5,136.03462747328297,98.66943452380953,171.58049932523616,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,added_tokens_vs_ungated,65.575,28.5,104.68117345981119,40.39010318949343,95.63595930232553,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
@@ -401,7 +401,7 @@ entropy_by_model,rankcloak,strict,payload_completion,0.975,1.0,0.158113883008418
 entropy_by_model,rankcloak,strict,saved_id_exact_payload_recovery,0.975,1.0,0.15811388300841897,0.9230769230769231,1.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,strict,visible_text_exact_payload_recovery,0.0,0.0,0.0,0.0,0.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,strict,eligible_position_fraction,0.4026553237412577,0.3726733344634684,0.13787301405002042,0.3547436400562251,0.45807906278028204,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
-entropy_by_model,rankcloak,strict,fixed_payload_bits_per_generated_token,2.9206776771582015,2.723404255319149,1.6336382294072378,2.5895432745228497,3.3287201727610713,39,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
+entropy_by_model,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,2.9206776771582015,2.723404255319149,1.6336382294072378,2.5691328287644026,3.3323709709037637,39,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,strict,fixed_token_budget_payload_fraction,0.31972245911763136,0.3012152777777778,0.1891108133869515,0.2498374866453147,0.39210499896379397,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,strict,generated_token_count,198.9,169.0,146.29243631533697,157.14285714285714,246.97954545454542,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,strict,added_tokens_vs_ungated,127.25,105.0,112.92333455570414,96.36295731707317,163.75898999374607,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
@@ -427,7 +427,7 @@ entropy_by_model,rankcloak,strict,payload_completion,0.875,1.0,0.334932063528541
 entropy_by_model,rankcloak,strict,saved_id_exact_payload_recovery,0.875,1.0,0.3349320635285418,0.7804878048780488,0.9512195121951219,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,visible_text_exact_payload_recovery,0.85,1.0,0.36162028533978946,0.7567567567567568,0.9459815078236129,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,eligible_position_fraction,0.3277274479201682,0.2650727333719618,0.19470203648523488,0.27272664535363433,0.39938704552745974,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
-entropy_by_model,rankcloak,strict,fixed_payload_bits_per_generated_token,2.9330767266441895,2.015748031496063,2.388488917080338,2.406868609727483,3.660413667031454,35,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
+entropy_by_model,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,2.9330767266441895,2.015748031496063,2.388488917080338,2.3944751603030396,3.604190125007625,35,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,fixed_token_budget_payload_fraction,0.3689512305610914,0.30965909090909094,0.187500530522078,0.3231367692006054,0.4220489142071243,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,generated_token_count,286.525,236.0,239.92744496233408,225.71148026315788,346.39920454545444,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,strict,added_tokens_vs_ungated,216.05,158.5,204.01055151193805,165.01849420849422,269.1502410663641,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
@@ -453,7 +453,7 @@ entropy_by_model,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16,
 entropy_by_model,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,visible_text_exact_payload_recovery,0.725,1.0,0.45220258677630265,0.5384146341463414,0.8837209302325582,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
-entropy_by_model,rankcloak,ungated,fixed_payload_bits_per_generated_token,8.21075646955104,8.0,3.9806853326199176,7.931088752801376,8.482313757917499,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
+entropy_by_model,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,8.21075646955104,8.0,3.9806853326199176,7.928902554806325,8.497515147147803,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,generated_token_count,67.05,54.5,45.21455971538825,53.85719512195122,80.48884920634919,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,40,16,2000,payload_name,llama3_8b_instruct_q4_k_m,,
@@ -479,7 +479,7 @@ entropy_by_model,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16,
 entropy_by_model,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,ungated,visible_text_exact_payload_recovery,0.0,0.0,0.0,0.0,0.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
-entropy_by_model,rankcloak,ungated,fixed_payload_bits_per_generated_token,6.871546365139649,8.0,2.451790771620749,6.7409181200553565,6.977774872386875,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
+entropy_by_model,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,6.871546365139649,8.0,2.451790771620749,6.730290350684199,6.982614266001754,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,ungated,generated_token_count,71.65,62.0,42.42009078920155,58.26160714285714,85.92565548780487,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
 entropy_by_model,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,40,16,2000,payload_name,mistral_7b_instruct_v0_3_q4_k_m,,
@@ -505,7 +505,7 @@ entropy_by_model,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1.0,40,16,
 entropy_by_model,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,visible_text_exact_payload_recovery,0.825,1.0,0.3848076442547927,0.7073170731707317,0.9444444444444444,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
-entropy_by_model,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.117864932063905,8.0,2.741221207918318,6.952410122278388,7.271587367899818,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
+entropy_by_model,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.117864932063905,8.0,2.741221207918318,6.969109800781199,7.271029790701182,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,generated_token_count,70.475,62.0,42.95315725239203,56.94886904761905,84.50131578947368,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
 entropy_by_model,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,40,16,2000,payload_name,qwen2_5_7b_instruct_q4_k_m,,
@@ -693,7 +693,7 @@ entropy_by_representation,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_representation,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,moderate,visible_text_exact_payload_recovery,0.6041666666666666,1.0,0.4942039949782704,0.5416666666666666,0.6666666666666666,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,moderate,eligible_position_fraction,0.7387321467387755,0.7272962066182405,0.12311504969479904,0.7098603314242611,0.7668336550629585,48,16,2000,payload_name,,ascii_b16,
-entropy_by_representation,rankcloak,moderate,fixed_payload_bits_per_generated_token,2.954928586955102,2.909184826472962,0.49246019877919617,2.841204444860132,3.0680043568798143,48,16,2000,payload_name,,ascii_b16,
+entropy_by_representation,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,2.954928586955102,2.909184826472962,0.49246019877919617,2.8377270786745155,3.069257848898966,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7213360821759259,0.70703125,0.1379249533175356,0.6885832198942551,0.7499823676215277,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,moderate,generated_token_count,148.89583333333334,159.0,54.39971823430368,123.95781249999999,172.8161458333333,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,moderate,added_tokens_vs_ungated,39.895833333333336,37.5,25.108479184338396,33.83229166666667,46.02135416666667,48,16,2000,payload_name,,ascii_b16,
@@ -719,7 +719,7 @@ entropy_by_representation,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_representation,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,moderate,visible_text_exact_payload_recovery,0.4583333333333333,0.0,0.5035336128708591,0.3541666666666667,0.5625,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,moderate,eligible_position_fraction,0.7955960014299465,0.8200431034482758,0.15685561090198022,0.7580995281434283,0.836689913107439,48,16,2000,payload_name,,direct_subword,
-entropy_by_representation,rankcloak,moderate,fixed_payload_bits_per_generated_token,8.554710852402428,8.395698924731182,2.9444846470213393,8.019372401750054,9.053895175601555,48,16,2000,payload_name,,direct_subword,
+entropy_by_representation,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,8.554710852402428,8.395698924731182,2.9444846470213393,8.037497809213148,9.07045823455026,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,moderate,fixed_token_budget_payload_fraction,0.8007022535974849,0.8350340136054422,0.1485388094726962,0.7653544588127095,0.8387152334135215,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,moderate,generated_token_count,55.75,49.0,25.922552409133157,46.518750000000004,65.39739583333332,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,moderate,added_tokens_vs_ungated,13.4375,9.0,14.228987867894219,9.624479166666667,17.645833333333332,48,16,2000,payload_name,,direct_subword,
@@ -745,7 +745,7 @@ entropy_by_representation,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_representation,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,moderate,visible_text_exact_payload_recovery,0.5833333333333334,1.0,0.5036101551853349,0.4583333333333333,0.6666666666666666,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,moderate,eligible_position_fraction,0.7425959327656185,0.8,0.1922368285026488,0.6862112002657582,0.8065332697577096,24,8,2000,payload_name,,hex_nibble,
-entropy_by_representation,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.940767462124948,6.4,1.5378946280211905,5.48993738111992,6.466031471657254,24,8,2000,payload_name,,hex_nibble,
+entropy_by_representation,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.940767462124948,6.4,1.5378946280211905,5.472682036910786,6.48547182796188,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,moderate,fixed_token_budget_payload_fraction,0.715060763888889,0.8125,0.23823798766143658,0.6358344184027778,0.8014485677083332,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,moderate,generated_token_count,69.375,72.0,39.823319037097285,47.123958333333334,92.0052083333333,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,moderate,added_tokens_vs_ungated,23.375,12.5,27.04555335950328,12.247916666666667,34.58645833333332,24,8,2000,payload_name,,hex_nibble,
@@ -771,7 +771,7 @@ entropy_by_representation,rankcloak,strict,payload_completion,0.875,1.0,0.334218
 entropy_by_representation,rankcloak,strict,saved_id_exact_payload_recovery,0.875,1.0,0.3342186823915959,0.7916666666666666,0.9375,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,strict,visible_text_exact_payload_recovery,0.5416666666666666,1.0,0.503533612870859,0.4583333333333333,0.625,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,strict,eligible_position_fraction,0.3688133130929159,0.35213271576907945,0.1809564414565083,0.3189687614573328,0.42163213011649453,48,16,2000,payload_name,,ascii_b16,
-entropy_by_representation,rankcloak,strict,fixed_payload_bits_per_generated_token,1.6097388360438063,1.4862901730791918,0.6714290848357366,1.454239425248467,1.772064472423097,42,16,2000,payload_name,,ascii_b16,
+entropy_by_representation,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,1.6097388360438063,1.4862901730791918,0.6714290848357366,1.4594642579999018,1.7714897756624866,42,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,strict,fixed_token_budget_payload_fraction,0.35044948179713803,0.30078125,0.18743914050180965,0.3066498316498317,0.3990097508285985,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,strict,generated_token_count,356.3333333333333,286.0,211.96620900243806,281.38854166666664,430.8770833333333,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,strict,added_tokens_vs_ungated,247.33333333333334,187.5,192.8738241875698,186.53697916666667,310.75416666666666,48,16,2000,payload_name,,ascii_b16,
@@ -797,7 +797,7 @@ entropy_by_representation,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.
 entropy_by_representation,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,strict,visible_text_exact_payload_recovery,0.5416666666666666,1.0,0.5035336128708591,0.4583333333333333,0.625,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,strict,eligible_position_fraction,0.589498338591507,0.5105675146771037,0.26241117065181435,0.5233663896729527,0.6579422444014028,48,16,2000,payload_name,,direct_subword,
-entropy_by_representation,rankcloak,strict,fixed_payload_bits_per_generated_token,6.517069281039014,4.826053243732231,3.7569670389069696,5.803398325449293,7.286195119557028,48,16,2000,payload_name,,direct_subword,
+entropy_by_representation,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,6.517069281039014,4.826053243732231,3.7569670389069696,5.79820141512578,7.260151039244225,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,strict,fixed_token_budget_payload_fraction,0.5825120834040728,0.5801282051282051,0.29140714002964113,0.5199153153463849,0.6469254819885422,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,strict,generated_token_count,92.9375,67.5,69.11181388987657,72.35364583333333,115.27395833333331,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,strict,added_tokens_vs_ungated,50.625,33.5,60.483029095033245,35.041666666666664,69.68802083333333,48,16,2000,payload_name,,direct_subword,
@@ -823,7 +823,7 @@ entropy_by_representation,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.
 entropy_by_representation,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,strict,visible_text_exact_payload_recovery,0.6666666666666666,1.0,0.48154341234307685,0.6666666666666666,0.6666666666666666,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,strict,eligible_position_fraction,0.42407188870394785,0.36630036630036633,0.21533419210561802,0.3847228951808921,0.46335007472006157,24,8,2000,payload_name,,hex_nibble,
-entropy_by_representation,rankcloak,strict,fixed_payload_bits_per_generated_token,3.392575109631583,2.9304029304029307,1.7226735368449442,3.0869538555360334,3.711211332475397,24,8,2000,payload_name,,hex_nibble,
+entropy_by_representation,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,3.392575109631583,2.9304029304029307,1.7226735368449442,3.07998421558297,3.7255750171863857,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,strict,fixed_token_budget_payload_fraction,0.41753472222222227,0.375,0.23675904366347073,0.3352864583333333,0.4943739149305555,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,strict,generated_token_count,131.54166666666666,127.0,69.31778062045068,98.62291666666667,166.04479166666664,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,strict,added_tokens_vs_ungated,85.54166666666667,74.5,58.73964601947099,63.829166666666666,106.96145833333331,24,8,2000,payload_name,,hex_nibble,
@@ -849,7 +849,7 @@ entropy_by_representation,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_representation,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,ungated,visible_text_exact_payload_recovery,0.4583333333333333,0.0,0.5035336128708591,0.3333333333333333,0.5625,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,ascii_b16,
-entropy_by_representation,rankcloak,ungated,fixed_payload_bits_per_generated_token,4.0,4.0,0.0,4.0,4.0,48,16,2000,payload_name,,ascii_b16,
+entropy_by_representation,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,4.0,4.0,0.0,4.0,4.0,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,ungated,generated_token_count,109.0,128.0,40.81301419473419,90.0,129.0,48,16,2000,payload_name,,ascii_b16,
 entropy_by_representation,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,48,16,2000,payload_name,,ascii_b16,
@@ -875,7 +875,7 @@ entropy_by_representation,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_representation,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,ungated,visible_text_exact_payload_recovery,0.5,0.5,0.5052911526399113,0.3958333333333333,0.6041666666666666,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,direct_subword,
-entropy_by_representation,rankcloak,ungated,fixed_payload_bits_per_generated_token,10.500139805628828,10.182236274791606,1.8524948208102185,10.168449300504406,10.772050341623942,48,16,2000,payload_name,,direct_subword,
+entropy_by_representation,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,10.500139805628828,10.182236274791606,1.8524948208102185,10.186105198304205,10.776154357401431,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,ungated,generated_token_count,42.3125,45.5,16.271834757733338,34.5,49.645833333333336,48,16,2000,payload_name,,direct_subword,
 entropy_by_representation,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,48,16,2000,payload_name,,direct_subword,
@@ -901,7 +901,7 @@ entropy_by_representation,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_representation,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,ungated,visible_text_exact_payload_recovery,0.6666666666666666,1.0,0.48154341234307685,0.6666666666666666,0.6666666666666666,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,24,8,2000,payload_name,,hex_nibble,
-entropy_by_representation,rankcloak,ungated,fixed_payload_bits_per_generated_token,8.0,8.0,0.0,8.0,8.0,24,8,2000,payload_name,,hex_nibble,
+entropy_by_representation,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,8.0,8.0,0.0,8.0,8.0,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,ungated,generated_token_count,46.0,48.0,18.612758597496924,33.0,59.0,24,8,2000,payload_name,,hex_nibble,
 entropy_by_representation,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,24,8,2000,payload_name,,hex_nibble,
@@ -1359,7 +1359,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.5,0.5,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.8274921872489861,0.8577879427633122,0.14001296963171964,0.8038320238197537,0.8511523506782185,12,2,2000,payload_name,,,aes256_gcm_base64
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,6.184471271242028,6.098263027295285,3.462308849924796,6.108220358824661,6.260722183659394,12,2,2000,payload_name,,,aes256_gcm_base64
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,6.184471271242028,6.098263027295285,3.462308849924796,6.108220358824661,6.260722183659394,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.811208675457996,0.8582589285714286,0.17017943000120345,0.767416351010101,0.8550009999058913,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,116.0,96.0,67.71598441619633,110.33333333333333,121.66666666666667,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,27.083333333333332,9.5,32.8203327591943,21.333333333333332,32.833333333333336,12,2,2000,payload_name,,,aes256_gcm_base64
@@ -1385,7 +1385,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.3333333333333333,0.6666666666666666,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.8325133165177965,0.8286637931034483,0.13443959962772958,0.7894266111815523,0.8756000218540406,12,2,2000,payload_name,,,chacha20_poly1305_base64
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,6.501366039385388,5.855072463768116,3.777232546396424,6.1113359896028925,6.891396089167885,12,2,2000,payload_name,,,chacha20_poly1305_base64
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,6.501366039385388,5.855072463768116,3.777232546396424,6.1113359896028925,6.891396089167885,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.8247000011217791,0.8414442700156985,0.14852606138104163,0.7830986583364301,0.8663013439071281,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,112.83333333333333,101.0,67.24424048785055,104.5,121.16666666666667,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,25.416666666666668,11.5,30.96760281717692,17.5,33.333333333333336,12,2,2000,payload_name,,,chacha20_poly1305_base64
@@ -1411,7 +1411,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.25,0.0,0.45226701686664544,0.16666666666666666,0.3333333333333333,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.8194619662120058,0.8327144199364682,0.13903404150418222,0.7789115962467023,0.8600123361773093,12,2,2000,payload_name,,,ed25519_signature_base64
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,6.072273802917837,5.076419863217366,3.294915151294366,5.701338355188753,6.4432092506469205,12,2,2000,payload_name,,,ed25519_signature_base64
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,6.072273802917837,5.076419863217366,3.294915151294366,5.701338355188753,6.4432092506469205,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7895348413891122,0.8153409090909092,0.16932041922803465,0.7364073426573426,0.8426623401208816,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,151.58333333333334,145.5,75.76213774143068,145.33333333333334,157.83333333333334,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,30.666666666666668,28.0,28.801304684252614,24.5,36.833333333333336,12,2,2000,payload_name,,,ed25519_signature_base64
@@ -1437,7 +1437,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.5555555555555556,1.0,0.5113099925649136,0.4444444444444444,0.6666666666666666,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.7278267410973983,0.7423242467718795,0.16068293925423843,0.7203236210134231,0.7353298611813734,18,2,2000,payload_name,,,hmac_sha256_hex
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.716676548215648,4.972748703441773,3.7780362919398733,5.489709659499294,5.943643436932001,18,2,2000,payload_name,,,hmac_sha256_hex
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.716676548215648,4.972748703441773,3.7780362919398733,5.489709659499294,5.943643436932001,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7035527786180009,0.7182291666666667,0.19175564739069298,0.6962384259259259,0.710867131310076,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,116.0,103.0,49.22935518331218,113.11111111111111,118.88888888888889,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,35.166666666666664,34.0,25.163582462617306,32.888888888888886,37.44444444444444,18,2,2000,payload_name,,,hmac_sha256_hex
@@ -1463,7 +1463,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.6666666666666666,1.0,0.48507125007266594,0.6666666666666666,0.6666666666666666,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.7429497477222369,0.780952380952381,0.18651072070818892,0.6910477527878531,0.7948517426566207,18,2,2000,payload_name,,,nonce_96_bit_hex
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.64917653980187,5.250554323725055,3.069318537650924,5.18134899967283,6.11700407993091,18,2,2000,payload_name,,,nonce_96_bit_hex
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.64917653980187,5.250554323725055,3.069318537650924,5.18134899967283,6.11700407993091,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7415243271221532,0.78125,0.18104392016579882,0.6953502415458938,0.7876984126984127,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,45.166666666666664,37.0,25.07459459528004,39.888888888888886,50.44444444444444,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,14.61111111111111,9.5,15.259091364856747,9.777777777777779,19.444444444444443,18,2,2000,payload_name,,,nonce_96_bit_hex
@@ -1489,7 +1489,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.5555555555555556,1.0,0.5113099925649136,0.4444444444444444,0.6666666666666666,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.7107293600076489,0.6837606837606838,0.14080322962432534,0.7046928110981274,0.7167659089171703,18,2,2000,payload_name,,,sha256_hex
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.357433918657086,4.923532131299122,2.8216427231681585,5.3151403951233585,5.399727442190813,18,2,2000,payload_name,,,sha256_hex
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.357433918657086,4.923532131299122,2.8216427231681585,5.3151403951233585,5.399727442190813,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7136474647156144,0.7109375,0.15788392522078493,0.6944491101270763,0.7328458193041525,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,118.94444444444444,104.0,53.28554844610886,116.44444444444444,121.44444444444444,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,37.72222222222222,37.0,24.828365077433123,35.333333333333336,40.111111111111114,18,2,2000,payload_name,,,sha256_hex
@@ -1515,7 +1515,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.6666666666666666,1.0,0.48507125007266594,0.6666666666666666,0.6666666666666666,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.758151862215673,0.7857142857142858,0.1357502199511573,0.7270032221393169,0.7893005022920292,18,2,2000,payload_name,,,token_128_bit_hex
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.85202338009448,5.691699604743083,2.950671946626653,5.491507060389036,6.212539699799924,18,2,2000,payload_name,,,token_128_bit_hex
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.85202338009448,5.691699604743083,2.950671946626653,5.491507060389036,6.212539699799924,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7455912489075047,0.7766203703703703,0.16703037645117474,0.7015567834816928,0.7896257143333167,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,55.611111111111114,45.0,27.343434288560214,53.22222222222222,58.0,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,15.38888888888889,12.0,12.984782445747742,13.222222222222221,17.555555555555557,18,2,2000,payload_name,,,token_128_bit_hex
@@ -1541,7 +1541,7 @@ entropy_by_artifact_class,rankcloak,moderate,payload_completion,1.0,1.0,0.0,1.0,
 entropy_by_artifact_class,rankcloak,moderate,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,moderate,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.5,0.5,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,moderate,eligible_position_fraction,0.7335504216629011,0.6792452830188679,0.15510534202496812,0.715350981969975,0.7517498613558269,12,2,2000,payload_name,,,uuid_v4
-entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token,5.2990159879811385,4.417582417582418,3.253863087754819,4.934788583199433,5.663243392762844,12,2,2000,payload_name,,,uuid_v4
+entropy_by_artifact_class,rankcloak,moderate,fixed_payload_bits_per_generated_token_conditional_on_completion,5.2990159879811385,4.417582417582418,3.253863087754819,4.934788583199433,5.663243392762844,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,moderate,fixed_token_budget_payload_fraction,0.7363576238576238,0.6944444444444444,0.15797711574302103,0.7061588103254769,0.7665564373897706,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,moderate,generated_token_count,73.33333333333333,67.0,38.1964618383653,71.5,75.16666666666667,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,moderate,added_tokens_vs_ungated,22.583333333333332,17.5,20.495934556231717,19.166666666666668,26.0,12,2,2000,payload_name,,,uuid_v4
@@ -1567,7 +1567,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5833333333333334,1.0,0.5149286505444373,0.5,0.6666666666666666,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.5532714024908191,0.5185432740050416,0.23871088583271804,0.5251568189550119,0.5813859860266266,12,2,2000,payload_name,,,aes256_gcm_base64
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,4.479958001140682,2.5506127569236705,3.6412048387850446,4.119476626711988,4.840439375569376,12,2,2000,payload_name,,,aes256_gcm_base64
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,4.479958001140682,2.5506127569236705,3.6412048387850446,4.119476626711988,4.840439375569376,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.47878852648602255,0.4265625,0.2853509704053918,0.42254165294246815,0.5350354000295771,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,210.33333333333334,206.5,156.21275313630522,199.0,221.66666666666666,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,121.41666666666667,115.0,123.82132165733694,110.16666666666667,132.66666666666666,12,2,2000,payload_name,,,aes256_gcm_base64
@@ -1593,7 +1593,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,0.9166666666666666
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,0.9166666666666666,1.0,0.28867513459481287,0.8333333333333334,1.0,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.3333333333333333,0.6666666666666666,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.6270212468290813,0.6446065407468238,0.27677939744875074,0.5201486655823077,0.733893828075855,12,2,2000,payload_name,,,chacha20_poly1305_base64
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,5.790022027095029,4.129032258064516,4.099096827589191,5.638381601082362,5.916389048772252,11,2,2000,payload_name,,,chacha20_poly1305_base64
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,5.790022027095029,4.129032258064516,4.099096827589191,5.638381601082362,5.916389048772252,11,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.5899017438055676,0.6265285326086957,0.3030954039851064,0.4636444931233363,0.7161589944877989,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,209.75,143.5,209.7423202624852,141.0,278.5,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,122.33333333333333,55.0,181.35466674865344,53.166666666666664,191.5,12,2,2000,payload_name,,,chacha20_poly1305_base64
@@ -1619,7 +1619,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.5,0.5,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.5611775443244903,0.48624460758344057,0.2601507101644702,0.5476615403334025,0.5746935483155778,12,2,2000,payload_name,,,ed25519_signature_base64
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,4.432689931805082,3.6108203806399546,3.5036913729341115,4.315772308688154,4.54960755492201,12,2,2000,payload_name,,,ed25519_signature_base64
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,4.432689931805082,3.6108203806399546,3.5036913729341115,4.315772308688154,4.54960755492201,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.5290997892784012,0.438780409731114,0.28922129673955005,0.4665582103082104,0.5916413682485923,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,284.9166666666667,197.0,229.78941281622232,281.3333333333333,288.5,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,164.0,78.5,190.52654312815218,160.5,167.5,12,2,2000,payload_name,,,ed25519_signature_base64
@@ -1645,7 +1645,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,0.8888888888888888
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,0.8888888888888888,1.0,0.3233808333817773,0.8888888888888888,0.8888888888888888,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5555555555555556,1.0,0.5113099925649136,0.5555555555555556,0.5555555555555556,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.38159985369470406,0.34362317058172426,0.2311668874265085,0.30363039993225177,0.45956930745715635,18,2,2000,payload_name,,,hmac_sha256_hex
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,3.8100756721285567,2.446447890371439,3.76652082857181,2.7907910993486174,4.8293602449084965,16,2,2000,payload_name,,,hmac_sha256_hex
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,3.8100756721285567,2.446447890371439,3.76652082857181,2.7907910993486174,4.8293602449084965,16,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.38143137932953736,0.33072916666666663,0.23376749453631804,0.285497997997998,0.4773647606610767,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,303.8333333333333,239.0,249.02616210303026,289.8888888888889,317.77777777777777,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,223.0,158.5,219.2275208142284,209.66666666666666,236.33333333333334,18,2,2000,payload_name,,,hmac_sha256_hex
@@ -1671,7 +1671,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.6666666666666666,1.0,0.48507125007266594,0.6666666666666666,0.6666666666666666,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.4761030940045822,0.39814814814814814,0.28062206947564755,0.46556432911092976,0.48664185889823464,18,2,2000,payload_name,,,nonce_96_bit_hex
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,3.8446782897512435,2.627038782167452,3.4498523714398224,3.8349071969485724,3.854449382553914,18,2,2000,payload_name,,,nonce_96_bit_hex
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,3.8446782897512435,2.627038782167452,3.4498523714398224,3.8349071969485724,3.854449382553914,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.46767310789049915,0.4173913043478261,0.29853283293403354,0.44722222222222224,0.48812399355877617,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,94.27777777777777,75.5,75.03160554103424,90.77777777777777,97.77777777777777,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,63.72222222222222,37.5,66.53774298719536,59.77777777777778,67.66666666666667,18,2,2000,payload_name,,,nonce_96_bit_hex
@@ -1697,7 +1697,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,0.8888888888888888
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,0.8888888888888888,1.0,0.3233808333817773,0.8888888888888888,0.8888888888888888,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5555555555555556,1.0,0.5113099925649136,0.5555555555555556,0.5555555555555556,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.38844101183951785,0.35024278047533863,0.21049622109194696,0.38236435668406654,0.3945176669949691,18,2,2000,payload_name,,,sha256_hex
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,3.5788106707833887,2.8949654996166627,3.0646945573474857,3.4222403400820802,3.7353810014846975,16,2,2000,payload_name,,,sha256_hex
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,3.5788106707833887,2.8949654996166627,3.0646945573474857,3.4222403400820802,3.7353810014846975,16,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.3648024398039111,0.30078125,0.21542684988801655,0.3432348132030335,0.38637006640478855,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,285.5,208.5,216.47422071760442,269.1111111111111,301.8888888888889,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,204.27777777777777,144.5,189.0548646030177,188.0,220.55555555555554,18,2,2000,payload_name,,,sha256_hex
@@ -1723,7 +1723,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,0.9444444444444444
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,0.9444444444444444,1.0,0.23570226039551584,0.8888888888888888,1.0,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5555555555555556,1.0,0.5113099925649136,0.4444444444444444,0.6666666666666666,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.4251964155226997,0.41045751633986927,0.20506077755938776,0.4018175665144829,0.4485752645309166,18,2,2000,payload_name,,,token_128_bit_hex
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,3.8005342823657497,3.011764705882353,3.2881335090202657,3.6924390397575966,3.9221414302999245,17,2,2000,payload_name,,,token_128_bit_hex
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,3.8005342823657497,3.011764705882353,3.2881335090202657,3.6924390397575966,3.9221414302999245,17,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.4527402753812439,0.4375,0.23087209172137063,0.40309961325728116,0.5023809375052065,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,124.22222222222223,92.5,91.59344669311328,107.33333333333333,141.11111111111111,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,84.0,61.5,78.71616920377697,66.88888888888889,101.11111111111111,18,2,2000,payload_name,,,token_128_bit_hex
@@ -1749,7 +1749,7 @@ entropy_by_artifact_class,rankcloak,strict,payload_completion,1.0,1.0,0.0,1.0,1.
 entropy_by_artifact_class,rankcloak,strict,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,strict,visible_text_exact_payload_recovery,0.5833333333333334,1.0,0.5149286505444373,0.5,0.6666666666666666,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,strict,eligible_position_fraction,0.432909627908941,0.38315217391304346,0.1777797056338627,0.4157349880994167,0.4500842677184653,12,2,2000,payload_name,,,uuid_v4
-entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token,3.264389019928727,2.3794369645042837,2.591623509947826,3.1915515411580984,3.3372264986993554,12,2,2000,payload_name,,,uuid_v4
+entropy_by_artifact_class,rankcloak,strict,fixed_payload_bits_per_generated_token_conditional_on_completion,3.264389019928727,2.3794369645042837,2.591623509947826,3.1915515411580984,3.3372264986993554,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,strict,fixed_token_budget_payload_fraction,0.46915484207150865,0.46084656084656084,0.2636596645183577,0.41200897867564534,0.5263007054673722,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,strict,generated_token_count,143.41666666666666,121.5,96.55564418635724,139.5,147.33333333333334,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,strict,added_tokens_vs_ungated,92.66666666666667,73.5,80.38015735845319,87.16666666666667,98.16666666666667,12,2,2000,payload_name,,,uuid_v4
@@ -1775,7 +1775,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.3333333333333333,0.6666666666666666,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,aes256_gcm_base64
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.166224803491883,6.654545454545454,3.3546862891600107,7.148084213922723,7.184365393061046,12,2,2000,payload_name,,,aes256_gcm_base64
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.166224803491883,6.654545454545454,3.3546862891600107,7.148084213922723,7.184365393061046,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,88.91666666666667,91.5,40.91778527138476,88.83333333333333,89.0,12,2,2000,payload_name,,,aes256_gcm_base64
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,12,2,2000,payload_name,,,aes256_gcm_base64
@@ -1801,7 +1801,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.5,0.5,0.5222329678670935,0.3333333333333333,0.6666666666666666,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,chacha20_poly1305_base64
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.486729793764316,6.923076923076923,3.6744513908582754,7.392394401090054,7.581065186438579,12,2,2000,payload_name,,,chacha20_poly1305_base64
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.486729793764316,6.923076923076923,3.6744513908582754,7.392394401090054,7.581065186438579,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,87.41666666666667,90.0,42.442385189879005,87.0,87.83333333333333,12,2,2000,payload_name,,,chacha20_poly1305_base64
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,12,2,2000,payload_name,,,chacha20_poly1305_base64
@@ -1827,7 +1827,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.25,0.0,0.45226701686664544,0.16666666666666666,0.3333333333333333,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,ed25519_signature_base64
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.368321856877357,6.888888888888889,3.552824252850609,7.358255102517398,7.378388611237316,12,2,2000,payload_name,,,ed25519_signature_base64
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.368321856877357,6.888888888888889,3.552824252850609,7.358255102517398,7.378388611237316,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,120.91666666666667,124.0,57.61700874715466,120.83333333333333,121.0,12,2,2000,payload_name,,,ed25519_signature_base64
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,12,2,2000,payload_name,,,ed25519_signature_base64
@@ -1853,7 +1853,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.3888888888888889,0.0,0.5016313257045503,0.3333333333333333,0.4444444444444444,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,hmac_sha256_hex
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.623926438000556,8.0,3.44945049646682,7.433833833833834,7.814019042167278,18,2,2000,payload_name,,,hmac_sha256_hex
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.623926438000556,8.0,3.44945049646682,7.433833833833834,7.814019042167278,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,80.83333333333333,64.0,35.488606290901146,80.22222222222223,81.44444444444444,18,2,2000,payload_name,,,hmac_sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,18,2,2000,payload_name,,,hmac_sha256_hex
@@ -1879,7 +1879,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.6111111111111112,1.0,0.5016313257045502,0.5555555555555556,0.6666666666666666,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,nonce_96_bit_hex
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.378053830227744,8.0,2.886861311839617,7.149758454106281,7.606349206349206,18,2,2000,payload_name,,,nonce_96_bit_hex
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.378053830227744,8.0,2.886861311839617,7.149758454106281,7.606349206349206,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,30.555555555555557,24.0,12.9987430262098,30.11111111111111,31.0,18,2,2000,payload_name,,,nonce_96_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,18,2,2000,payload_name,,,nonce_96_bit_hex
@@ -1905,7 +1905,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.5555555555555556,1.0,0.5113099925649136,0.4444444444444444,0.6666666666666666,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,sha256_hex
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.4009715245120145,8.0,2.8664724185234975,7.352038907594464,7.449904141429566,18,2,2000,payload_name,,,sha256_hex
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.4009715245120145,8.0,2.8664724185234975,7.352038907594464,7.449904141429566,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,81.22222222222223,64.0,34.76738761871627,81.11111111111111,81.33333333333333,18,2,2000,payload_name,,,sha256_hex
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,18,2,2000,payload_name,,,sha256_hex
@@ -1931,7 +1931,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.6666666666666666,1.0,0.48507125007266594,0.6666666666666666,0.6666666666666666,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,token_128_bit_hex
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.569191505468982,8.0,3.069544928854083,7.4937919511422235,7.644591059795737,18,2,2000,payload_name,,,token_128_bit_hex
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.569191505468982,8.0,3.069544928854083,7.4937919511422235,7.644591059795737,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,40.22222222222222,32.0,17.74179364748856,40.0,40.44444444444444,18,2,2000,payload_name,,,token_128_bit_hex
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,18,2,2000,payload_name,,,token_128_bit_hex
@@ -1957,7 +1957,7 @@ entropy_by_artifact_class,rankcloak,ungated,payload_completion,1.0,1.0,0.0,1.0,1
 entropy_by_artifact_class,rankcloak,ungated,saved_id_exact_payload_recovery,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,ungated,visible_text_exact_payload_recovery,0.5833333333333334,1.0,0.5149286505444373,0.5,0.6666666666666666,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,ungated,eligible_position_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,uuid_v4
-entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token,7.02106782106782,6.0,3.4012313807675247,6.482539682539682,7.55959595959596,12,2,2000,payload_name,,,uuid_v4
+entropy_by_artifact_class,rankcloak,ungated,fixed_payload_bits_per_generated_token_conditional_on_completion,7.02106782106782,6.0,3.4012313807675247,6.482539682539682,7.55959595959596,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,ungated,fixed_token_budget_payload_fraction,1.0,1.0,0.0,1.0,1.0,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,ungated,generated_token_count,50.75,54.0,22.482821725203284,49.166666666666664,52.333333333333336,12,2,2000,payload_name,,,uuid_v4
 entropy_by_artifact_class,rankcloak,ungated,added_tokens_vs_ungated,0.0,0.0,0.0,0.0,0.0,12,2,2000,payload_name,,,uuid_v4

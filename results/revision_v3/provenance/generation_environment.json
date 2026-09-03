@@ -15,7 +15,7 @@
   },
   "driver_reported_cuda_compatibility_version": "13.1",
   "environment_creation_command": ".venv/bin/python -m venv .venv-generation-v3",
-  "execution_completed_at": "2026-09-02T08:13:13.445104+00:00",
+  "execution_completed_at": "2026-09-03T14:54:58.112734+00:00",
   "execution_git_commits": [
     "4d9c61e46c27beee27da9cdb23654c7dd1a92e18",
     "57e2e73e3abebbd6bc43f8b8e38882c204fb68dc",
@@ -23,6 +23,7 @@
     "ab11f86e15aa3b9ca51fe7059e8feb45041a8dd5",
     "ab6734007c5801f203f0ba7abd7f2b6eb61b5ad9",
     "b7a77c5795e51f3fcca1305c5c1b34b4f36bfbc4",
+    "c3cc0d244dbbc74c3b2a0b0f3dce206de442a718",
     "e57d138a06a03e875a59a7a8d74471789b895ff4"
   ],
   "execution_started_at": "2026-09-01T16:39:50.549167+00:00",
@@ -117,7 +118,9 @@
         "2026-09-01T16:45:15.650316+00:00",
         "2026-09-01T16:48:15.267894+00:00",
         "2026-09-01T17:56:04.269338+00:00",
-        "2026-09-01T18:55:20.576906+00:00"
+        "2026-09-01T18:55:20.576906+00:00",
+        "2026-09-03T14:39:40.403145+00:00",
+        "2026-09-03T14:40:21.239928+00:00"
       ]
     },
     {
@@ -179,6 +182,9 @@
   ],
   "python_implementation": "CPython",
   "python_version": "3.10.13",
+  "q4_visible_recovery_execution_seconds_sum": 794.9812638157746,
+  "q4_visible_recovery_new_cover_generation_count": 0,
+  "q4_visible_recovery_record_count": 960,
   "real_model_smoke_execution_seconds_sum": 96.2469988209923,
   "real_model_smoke_new_generation_count": 7,
   "real_model_smoke_q4_replay_count": 1,
@@ -210,6 +216,9 @@
       "67ff6941e9ff360cc591f32496308f6093f7637b19148e024dd6d4f0610ed10e",
       "f918bfc44ce69160b68c32d9bcc70247289ef5311a9f51acd99ce2f6c27b0a84"
     ],
+    "rankcloak/revision_v3_q4_recovery.py": [
+      "a9b39efb713c31c3d1a540545c8170d118705d22262435f4b9bacb63d531b4bc"
+    ],
     "results/revision_v3/provenance/entropy_calibration_plan.csv": [
       "b3002e2dc9acf6ec2ba3a57135e0b360d4d5758364fbb0df9e4ca472a6793cf1"
     ],
@@ -221,6 +230,9 @@
     ],
     "revision_docs/REVISION_V3_GENERATION_PROTOCOL_AMENDMENT.md": [
       "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb"
+    ],
+    "scripts/run_revision_v3_q4_visible_recovery.py": [
+      "8df87d50bfd251a750d6fc99bfb2dc602516699ea4407dca8fcc2b8c2d850d43"
     ]
   },
   "remote_paid_compute_used": false,

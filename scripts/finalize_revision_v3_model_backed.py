@@ -36,6 +36,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from prepare_revision_v3 import atomic_csv, atomic_json, atomic_text, utc_now  # noqa: E402
 from rankcloak.revision_v3_analysis import file_sha256  # noqa: E402
+from rankcloak.revision_v3_artifacts import portable_artifact_files  # noqa: E402
 
 
 def load_metric_documents(output: Path) -> list[Mapping[str, object]]:
@@ -335,6 +336,12 @@ def write_handoff_docs(
         low_memory=False,
     )
     pairs = pd.read_csv(output / "source_tables/quantization_pair_summary.csv", low_memory=False)
+    recovery_pairs = pd.read_csv(
+        output / "source_tables/quantization_recovery_pairs.csv", low_memory=False
+    )
+    recovery_summary = pd.read_csv(
+        output / "source_tables/quantization_recovery_summary.csv", low_memory=False
+    )
     thresholds = pd.read_csv(output / "source_tables/entropy_calibration_thresholds.csv", low_memory=False)
     generation_audit = json.loads(
         (output / "provenance/generation_analysis_validation.json").read_text(encoding="utf-8")
@@ -362,9 +369,9 @@ The entropy-gated extension was informed by Cai, Ding, and Tao (arXiv:2504.12108
 
 At every embedding-span step, the encoder computed filtered next-token Shannon entropy. An eligible position consumed and forced the next payload rank. An ineligible position used ordinary top-p sampling under the same allowed-token mask and did not consume a payload rank. The replay-assisted decoder recomputed entropy before every observed token, consumed a rank only at eligible positions, ignored the observed rank at sampled skips, and appended every observed token to context; it received no saved gate-position metadata. Token roles were recorded as `payload` or `ordinary_sampled_skip`. The ungated, moderate, and strict conditions shared one stable RankCloak seed per experimental cell. Their length-matched ordinary controls shared a separate ordinary-generation seed, so shorter controls were deterministic prefixes of longer controls when target lengths differed.
 
-The entropy evaluation comprised 120 RankCloak trials per gate and 120 paired ordinary controls per gate across all three model families, eight artifact classes, all 20 supported artifact/representation cells, and two frozen templates. Fixed-payload generation continued until complete or the predeclared maximum; fixed-token-budget capacity was evaluated at the paired ungated span length. Saved-ID replay and independent visible-text detokenization/retokenization were both evaluated. Confidence intervals resampled complete payload instances, thereby retaining all repeated model and template observations for a selected payload in each bootstrap draw. The generated detector evaluation used an external locked test partition. Historical train and validation rows carrying any of the 16 entropy-study payload instances were excluded, then exact and 0.95-threshold near-duplicate auditing was rerun across fitting and test rows before tokenization or feature extraction. Complete matched pairs or payload groups were removed as needed to resolve leakage; the retained counts are in the audit.
+The entropy evaluation comprised 120 RankCloak trials per gate and 120 paired ordinary controls per gate across all three model families, eight artifact classes, all 20 supported artifact/representation cells, and two frozen templates. Fixed-payload generation continued until complete or the predeclared maximum; fixed-payload bits per generated token were defined only for completed payloads and are reported conditional on completion. Completion rate is reported separately. Fixed-token-budget capacity was evaluated at the paired ungated span length for every RankCloak trial. Saved-ID replay and independent visible-text detokenization/retokenization were both evaluated. Confidence intervals resampled complete payload instances, thereby retaining all repeated model and template observations for a selected payload in each bootstrap draw. The generated detector evaluation used an external locked test partition. Historical train and validation rows carrying any of the 16 entropy-study payload instances were excluded, then exact and 0.95-threshold near-duplicate auditing was rerun across fitting and test rows before tokenization or feature extraction. Complete matched pairs or payload groups were removed as needed to resolve leakage; the retained counts are in the audit.
 
-The matched-quantization analysis held Qwen2.5-7B-Instruct revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031, its embedded tokenizer, rendered prompt, payload, codec, token filter, target length, temperature, top-p, llama-cpp-python 0.3.23 backend, and historical ordinary-control seed fixed. It model-backed-replayed all 1,920 historical Q4_K_M rows and generated 1,920 paired Q8_0 rows. Each Q8 record also replayed the historical Q4 token path, allowing entropy, observed-rank, greedy-token, and rank-pressure changes to be compared at identical contexts and observed tokens. Q8 RankCloak saved-ID and visible-text recovery were evaluated independently.
+The matched-quantization analysis held Qwen2.5-7B-Instruct revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031, its embedded tokenizer, rendered prompt, payload, codec, token filter, target length, temperature, top-p, llama-cpp-python 0.3.23 backend, and historical ordinary-control seed fixed. It model-backed-replayed all 1,920 historical Q4_K_M rows and generated 1,920 paired Q8_0 rows. Each Q8 record also replayed the historical Q4 token path, allowing entropy, observed-rank, greedy-token, and rank-pressure changes to be compared at identical contexts and observed tokens. Visible-text recovery for the 960 historical Q4 RankCloak covers was computed without generating new covers: each recorded text was retokenized with the exact embedded Q4 tokenizer; exact token-ID matches reused the already validated saved-ID rank trace, whereas divergent retokenizations were rank-replayed through the pinned Q4 model using the saved span boundary rule. Q4 and Q8 RankCloak saved-ID and visible-text outcomes were then paired by the frozen pairing-unit identity.
 
 Quantization detector fits used the frozen payload train/validation/test assignment. Q4-to-Q8 trained and selected thresholds only on Q4, then tested Q8; Q8-to-Q4 reversed the direction; the pooled fit included both quantizations in train and validation and tested both only on held payloads. Every evaluation was exact- and near-duplicate audited before feature extraction. TextCNN and DeBERTa retained their predeclared architectures. The model-aware logistic attacker retained the same shared per-token surprisal feature definition for both labels. All detector thresholds were selected from validation data, then frozen for test; 0.1% results remained unavailable wherever validation or test had fewer than 1,000 negatives.
 """
@@ -382,7 +389,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
             gate_trials["visible_text_exact_payload_recovery"]
         )
         completion = summary_row(entropy, analysis_id="entropy_overall", metric="payload_completion", population="rankcloak", gate_level=gate)
-        capacity = summary_row(entropy, analysis_id="entropy_overall", metric="fixed_payload_bits_per_generated_token", population="rankcloak", gate_level=gate)
+        capacity = summary_row(entropy, analysis_id="entropy_overall", metric="fixed_payload_bits_per_generated_token_conditional_on_completion", population="rankcloak", gate_level=gate)
         budget = summary_row(entropy, analysis_id="entropy_overall", metric="fixed_token_budget_payload_fraction", population="rankcloak", gate_level=gate)
         length = summary_row(entropy, analysis_id="entropy_overall", metric="length_ratio_vs_ungated", population="rankcloak", gate_level=gate)
         saved = summary_row(entropy, analysis_id="entropy_overall", metric="saved_id_exact_payload_recovery", population="rankcloak", gate_level=gate)
@@ -415,7 +422,7 @@ Quantization detector fits used the frozen payload train/validation/test assignm
             token_role="payload",
         )
         entropy_lines.append(
-            f"{label}: payload completion {completed_count}/{len(gate_trials)} ({completion['mean']:.4f}; {len(gate_trials) - completed_count} maximum-budget failures; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity {capacity['mean']:.4f} bits/token, mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, all-position mean token surprisal {surprisal['mean']:.4f} nats and rank pressure {pressure['mean']:.4f} nats, forced-payload-token rank mean {forced_rank['mean']:.4f} (median {forced_rank['median']:.4f}, IQR {forced_rank['p25']:.4f}–{forced_rank['p75']:.4f}, p95 {forced_rank['p95']:.4f}, {int(forced_rank['position_count'])} positions), forced-token surprisal {forced_surprisal['mean']:.4f} nats, forced-token rank pressure {forced_pressure['mean']:.4f} nats, saved-ID exact recovery {saved_count}/{len(gate_trials)} ({saved['mean']:.4f}), and visible-text exact recovery {visible_count}/{len(gate_trials)} ({visible['mean']:.4f})."
+            f"{label}: payload completion {completed_count}/{len(gate_trials)} ({completion['mean']:.4f}; {len(gate_trials) - completed_count} maximum-budget failures; payload-group bootstrap 95% CI {completion['ci_low_95']:.4f}–{completion['ci_high_95']:.4f}), mean fixed-payload capacity conditional on completion {capacity['mean']:.4f} bits/token (n={int(capacity['observation_count'])}), mean fixed-budget payload fraction {budget['mean']:.4f}, mean length ratio versus ungated {length['mean']:.4f}, eligible-position fraction {eligibility['mean']:.4f}, all-position mean token surprisal {surprisal['mean']:.4f} nats and rank pressure {pressure['mean']:.4f} nats, forced-payload-token rank mean {forced_rank['mean']:.4f} (median {forced_rank['median']:.4f}, IQR {forced_rank['p25']:.4f}–{forced_rank['p75']:.4f}, p95 {forced_rank['p95']:.4f}, {int(forced_rank['position_count'])} positions), forced-token surprisal {forced_surprisal['mean']:.4f} nats, forced-token rank pressure {forced_pressure['mean']:.4f} nats, saved-ID exact recovery {saved_count}/{len(gate_trials)} ({saved['mean']:.4f}), and visible-text exact recovery {visible_count}/{len(gate_trials)} ({visible['mean']:.4f})."
         )
     quality_lines = []
     quality_metrics = (
@@ -509,6 +516,12 @@ Quantization detector fits used the frozen payload train/validation/test assignm
     q8_saved = summary_row(quantization, analysis_id="quantization_overall", metric="saved_id_exact_payload_recovery", quantization="Q8_0", population="rankcloak")
     q8_visible = summary_row(quantization, analysis_id="quantization_overall", metric="visible_text_exact_payload_recovery", quantization="Q8_0", population="rankcloak")
     q4_saved = summary_row(quantization, analysis_id="quantization_overall", metric="saved_id_exact_payload_recovery", quantization="Q4_K_M", population="rankcloak")
+    recovery_overall_rows = recovery_summary.loc[
+        recovery_summary["analysis_id"].eq("quantization_recovery_overall")
+    ]
+    if len(recovery_overall_rows) != 1:
+        raise ValueError("paired quantization recovery summary lacks one overall row")
+    recovery_overall = recovery_overall_rows.iloc[0].to_dict()
     entropy_change = summary_row(pairs, analysis_id="quantization_pair_overall", metric="mean_entropy_q8_minus_q4_bits", population="rankcloak")
     rank_change = summary_row(pairs, analysis_id="quantization_pair_overall", metric="observed_token_rank_changed_fraction", population="rankcloak")
     greedy_change = summary_row(pairs, analysis_id="quantization_pair_overall", metric="greedy_token_changed_fraction", population="rankcloak")
@@ -530,6 +543,9 @@ Quantization detector fits used the frozen payload train/validation/test assignm
     q8_visible_count = true_count(
         q8_rankcloak_trials["visible_text_exact_payload_recovery"]
     )
+    q4_visible_count = true_count(
+        q4_rankcloak_trials["visible_text_exact_payload_recovery"]
+    )
     quant_detector_lines = []
     for evaluation, label in (("q4_to_q8", "Q4→Q8"), ("q8_to_q4", "Q8→Q4"), ("pooled_quantizations", "pooled")):
         parts = []
@@ -549,7 +565,7 @@ All 18 entropy calibration traces and all 720 entropy evaluation generations com
 
 {' '.join(detector_lines)} The entropy detector corpus retained {entropy_dedup['retained_rows']:,}/{entropy_dedup['original_rows']:,} rows after locked pre-feature deduplication, with {entropy_dedup['removed_rows']} rows removed and zero audited cross-partition links. Conditions unavailable after this audit: {unavailable_conditions(entropy_dedup)}. Each gate subgroup had fewer than 1,000 test controls after deduplication, so 0.1% TPR was not estimated.
 
-All 1,920 historical Q4 rows were successfully replayed under the exact pinned Q4 model, and all 1,920 paired Q8 generations completed. Saved-ID recovery among RankCloak rows was {q4_saved_count}/{len(q4_rankcloak_trials)} ({q4_saved['mean']:.4f}) for Q4 replay and {q8_saved_count}/{len(q8_rankcloak_trials)} ({q8_saved['mean']:.4f}) for Q8; Q8 visible-text recovery was {q8_visible_count}/{len(q8_rankcloak_trials)} ({q8_visible['mean']:.4f}). On the identical historical Q4 token path for RankCloak rows, Q8 minus Q4 mean next-token entropy was {entropy_change['mean']:.4f} bits (95% CI {entropy_change['ci_low_95']:.4f}–{entropy_change['ci_high_95']:.4f}); the observed-token rank changed at a mean fraction {rank_change['mean']:.4f} of positions and the greedy token changed at {greedy_change['mean']:.4f}. Independently generated Q4/Q8 RankCloak outputs matched positionwise at mean fraction {token_match['mean']:.4f}. These are paired quantization sensitivities for one pinned Qwen model, not cross-family comparisons.
+All 1,920 historical Q4 rows were successfully replayed under the exact pinned Q4 model, and all 1,920 paired Q8 generations completed. Saved-ID recovery among RankCloak rows was {q4_saved_count}/{len(q4_rankcloak_trials)} ({q4_saved['mean']:.4f}) for Q4 replay and {q8_saved_count}/{len(q8_rankcloak_trials)} ({q8_saved['mean']:.4f}) for Q8. Across the {len(recovery_pairs)} frozen RankCloak pairs, visible-text exact recovery was {q4_visible_count}/{len(recovery_pairs)} ({recovery_overall['q4_visible_recovery_rate']:.4f}; payload-group bootstrap 95% CI {recovery_overall['q4_visible_recovery_ci_low_95']:.4f}–{recovery_overall['q4_visible_recovery_ci_high_95']:.4f}) for Q4 and {q8_visible_count}/{len(recovery_pairs)} ({recovery_overall['q8_visible_recovery_rate']:.4f}; 95% CI {recovery_overall['q8_visible_recovery_ci_low_95']:.4f}–{recovery_overall['q8_visible_recovery_ci_high_95']:.4f}) for Q8. The paired Q8-minus-Q4 rate difference was {recovery_overall['paired_rate_difference_q8_minus_q4']:.4f} (95% CI {recovery_overall['paired_difference_ci_low_95']:.4f}–{recovery_overall['paired_difference_ci_high_95']:.4f}); exact paired outcomes were both {int(recovery_overall['both_visible_recover_count'])}, Q4 only {int(recovery_overall['q4_only_visible_recover_count'])}, Q8 only {int(recovery_overall['q8_only_visible_recover_count'])}, and neither {int(recovery_overall['neither_visible_recovers_count'])}. Q4 visible text exactly reproduced saved token IDs in {int(recovery_overall['q4_exact_retokenization_count'])}/{len(recovery_pairs)} cases; the other {int(recovery_overall['q4_model_rank_replay_count'])} cases used model rank replay. On the identical historical Q4 token path for RankCloak rows, Q8 minus Q4 mean next-token entropy was {entropy_change['mean']:.4f} bits (95% CI {entropy_change['ci_low_95']:.4f}–{entropy_change['ci_high_95']:.4f}); the observed-token rank changed at a mean fraction {rank_change['mean']:.4f} of positions and the greedy token changed at {greedy_change['mean']:.4f}. Independently generated Q4/Q8 RankCloak outputs matched positionwise at mean fraction {token_match['mean']:.4f}. These are paired quantization sensitivities for one pinned Qwen model, not cross-family comparisons.
 
 {' '.join(quant_detector_lines)} Locked deduplication retained Q4→Q8 {quant_dedup['q4_to_q8']['retained_rows']:,}/{quant_dedup['q4_to_q8']['original_rows']:,}, Q8→Q4 {quant_dedup['q8_to_q4']['retained_rows']:,}/{quant_dedup['q8_to_q4']['original_rows']:,}, and pooled {quant_dedup['pooled_quantizations']['retained_rows']:,}/{quant_dedup['pooled_quantizations']['original_rows']:,} rows, with zero audited leakage. Conditions unavailable after deduplication were Q4→Q8: {unavailable_conditions(quant_dedup['q4_to_q8'])}; Q8→Q4: {unavailable_conditions(quant_dedup['q8_to_q4'])}; pooled: {unavailable_conditions(quant_dedup['pooled_quantizations'])}. None of these test sets contained 1,000 negatives, so 0.1% operating points were unavailable rather than interpolated.
 """
@@ -561,12 +577,15 @@ All 1,920 historical Q4 rows were successfully replayed under the exact pinned Q
         "- The model-aware detector is a bounded adaptive threat model",
         "- The entropy-gated protocol is implemented and unit-tested",
         "- The matched quantization experiment was not run",
+        "- The entropy study is a bounded 120-payload-cell comparison",
+        "- The quantization analysis isolates Q4_K_M versus Q8_0",
+        "- Model-backed low-FPR thresholds were validation-frozen",
     )
     retained = [line for line in lines if not line.startswith(stale_prefixes)]
     additions = [
         "- The model-aware detector remains a bounded adaptive threat model using shared exact-model surprisal summaries. The new generation traces also support descriptive entropy, rank, and rank-pressure analyses, but those RankCloak-process diagnostics do not constitute a comprehensive attacker model.",
-        "- The entropy study is a bounded 120-payload-cell comparison per gate using two templates and model-specific thresholds from 768 development positions. It estimates capacity, length, recovery, quality, and detector effects in that matrix only. Entropy eligibility does not eliminate exact-model replay dependence, and any visible-text failures remain failures.",
-        "- The quantization analysis isolates Q4_K_M versus Q8_0 only for one pinned Qwen2.5-7B-Instruct revision and llama-cpp-python 0.3.23. It does not generalize to other bit widths, quantizers, backends, base models, or hardware. Q4 visible-text recovery was not recomputed by the model-backed Q4 path audit and is unavailable in this comparison; Q8 visible-text recovery is reported separately.",
+        "- The entropy study is a bounded 120-payload-cell comparison per gate using two templates and model-specific thresholds from 768 development positions. Fixed-payload capacity is conditional on completion and excludes maximum-budget failures; completion rate and fixed-budget payload fraction must be considered separately. Entropy eligibility does not eliminate exact-model replay dependence, and any visible-text failures remain failures.",
+        "- The quantization analysis isolates Q4_K_M versus Q8_0 only for one pinned Qwen2.5-7B-Instruct revision and llama-cpp-python 0.3.23. It does not generalize to other bit widths, quantizers, backends, base models, or hardware. Q4 visible-text recovery reused existing covers and the saved embedding-span boundary; divergent retokenizations were replayed with the exact model. This remains replay-assisted recovery and does not establish recovery from visible text without the exact context and span contract.",
         "- Model-backed low-FPR thresholds were validation-frozen and exact-count based. The entropy and quantization test sets support 1% but not 0.1% empirical resolution; grouped bootstrap uncertainty cannot supply missing false-positive resolution.",
     ]
     retained.extend(additions)
@@ -581,6 +600,11 @@ def write_claim_matrix(output: Path) -> None:
                 "Matched quantization sensitivity",
                 "Entropy-gated RankCloak has replay-consistent protocol primitives",
                 "Entropy gating improves detectability, capacity, recovery, or quality",
+                "Entropy-gated RankCloak was evaluated under a replay-consistent ordinary-sampled-skip protocol",
+                "Entropy gating changes payload capacity, output length, recovery, quality, and detector behavior",
+                "Matched Q4_K_M versus Q8_0 sensitivity was isolated for one pinned Qwen revision",
+                "Paired Q4_K_M and Q8_0 visible-text recovery was measured on the frozen RankCloak pairs",
+                "Detector thresholds transfer across matched Q4 and Q8 quantizations",
             }
         )
     ]
@@ -603,6 +627,12 @@ def write_claim_matrix(output: Path) -> None:
                 "evidence_status": "fully_addressed_for_targeted_1920_pair_matrix",
                 "evidence_artifacts": "source_tables/quantization_pair_summary.csv;source_tables/model_backed_detector_metrics.csv;figures/matched_quantization_sensitivity.pdf",
                 "qualification": "One model revision, two quantizations, and one inference backend only",
+            },
+            {
+                "proposed_claim": "Paired Q4_K_M and Q8_0 visible-text recovery was measured on the frozen RankCloak pairs",
+                "evidence_status": "fully_addressed_for_targeted_960_pair_matrix",
+                "evidence_artifacts": "source_tables/quantization_recovery_pairs.csv;source_tables/quantization_recovery_summary.csv;manuscript_tables/matched_quantization_recovery.tex;figures/matched_quantization_recovery.pdf;provenance/generation_analysis_validation.json",
+                "qualification": "Q4 covers were not regenerated; recovery still requires the exact model, context, and saved span boundary",
             },
             {
                 "proposed_claim": "Detector thresholds transfer across matched Q4 and Q8 quantizations",
@@ -650,6 +680,7 @@ PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.p
 PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase entropy --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid {gpu} --output-dir /tmp/rankcloak_revision_v3_repro/generation
 PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid {gpu} --output-dir /tmp/rankcloak_revision_v3_repro/generation
 PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q8_0 --gpu-uuid {gpu} --output-dir /tmp/rankcloak_revision_v3_repro/generation
+PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_q4_visible_recovery.py --gpu-uuid {gpu} --output-dir /tmp/rankcloak_revision_v3_repro/generation
 .venv/bin/python scripts/analyze_revision_v3_generation.py --output-dir /tmp/rankcloak_revision_v3_repro --generation-dir /tmp/rankcloak_revision_v3_repro/generation
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only --output-dir /tmp/rankcloak_revision_v3_repro
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector surprisal --output-dir /tmp/rankcloak_revision_v3_repro
@@ -661,7 +692,7 @@ CUDA_VISIBLE_DEVICES={gpu} .venv/bin/python scripts/run_revision_v3_generation_d
 .venv/bin/python scripts/validate_revision_v3.py --output-dir /tmp/rankcloak_revision_v3_repro
 ```
 
-The Dolly checksum is `2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec`. The model sizes and hashes are recorded in `configs/revision_v3/generation_requirements.json` and verified again in `provenance/generation_preflight.json`. Generation is resumable: completed trial records are immutable and the runner refuses silent overwrite. Run Q4 model-backed quantization replay before Q8 because each Q8 record binds to the exact paired Q4 replay hash. No paid remote compute is part of this workflow.
+The Dolly checksum is `2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec`. The model sizes and hashes are recorded in `configs/revision_v3/generation_requirements.json` and verified again in `provenance/generation_preflight.json`. Generation is resumable: completed trial and recovery records are immutable and the runners refuse silent overwrite. Run Q4 model-backed quantization replay before Q8 because each Q8 record binds to the exact paired Q4 replay hash. The Q4 visible-recovery runner retokenizes and, when needed, rank-replays only the existing historical covers; it does not generate covers. No paid remote compute is part of this workflow.
 
 Re-running analysis and finalization from unchanged authoritative ledgers regenerates source tables, LaTeX, figures, prose, source maps, and checksums. `provenance/artifact_source_map.csv` maps every publication artifact to its source and command.
 """
@@ -687,7 +718,7 @@ Re-running analysis and finalization from unchanged authoritative ledgers regene
 - `token_surprisal_nats`: negative exact-model token log probability.
 - `rank_pressure_log_probability_gap_nats`: greedy log probability minus observed-token log probability.
 - `payload_completion`: whether all requested ranks were embedded before the maximum length.
-- `fixed_payload_bits_per_generated_token`: serialized payload bits divided by full generated-token count.
+- `fixed_payload_bits_per_generated_token_conditional_on_completion`: serialized payload bits divided by full generated-token count for completed payloads only; unavailable for maximum-budget failures, whose completion outcome is reported separately.
 - `fixed_token_budget_payload_fraction`: serialized payload fraction embedded within the paired ungated token budget.
 - `ordinary_sampled_skip`: an entropy-ineligible top-p sample that does not consume a payload symbol.
 - Ungated records retain the historical `forced_log_probabilities` field name; analysis aliases it to the same embedding-span trace represented by `embedding_log_probabilities` in gated records.
@@ -695,6 +726,9 @@ Re-running analysis and finalization from unchanged authoritative ledgers regene
 - `mean_entropy_q8_minus_q4_bits`: paired mean change when Q8 replays the identical historical Q4 token path.
 - `observed_token_rank_changed_fraction` / `greedy_token_changed_fraction`: fraction of identical-path positions whose observed-token rank or greedy token differs across quantizations.
 - `positionwise_generated_token_match_fraction`: same-position Q4/Q8 token agreement for independently generated paired outputs.
+- `q4_visible_full_token_ids_match` / `q8_visible_full_token_ids_match`: whether visible-text retokenization exactly reproduces the saved full token IDs.
+- `q4_model_rank_replay_performed`: whether divergent Q4 retokenization required exact-model rank replay instead of reuse of the validated saved-ID trace.
+- `both_visible_recover` / `q4_only_visible_recover` / `q8_only_visible_recover` / `neither_visible_recovers`: mutually exclusive outcomes for one frozen Q4/Q8 RankCloak pair.
 
 ## Model-backed detector evaluations
 
@@ -720,11 +754,12 @@ def write_source_map(output: Path) -> None:
         ("manuscript_tables/entropy_gate_paired_changes.tex", "source_tables/entropy_paired_difference_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/entropy_gate_detectors.tex", "source_tables/model_backed_detector_subgroups.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
         ("manuscript_tables/matched_quantization_generation.tex", "source_tables/quantization_generation_summary.csv;source_tables/quantization_pair_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
+        ("manuscript_tables/matched_quantization_recovery.tex", "source_tables/quantization_recovery_pairs.csv;source_tables/quantization_recovery_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("manuscript_tables/matched_quantization_detectors.tex", "source_tables/model_backed_detector_metrics.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
         ("figures/entropy_gate_capacity_recovery.pdf", "source_tables/entropy_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("figures/entropy_gate_detector_performance.pdf", "source_tables/model_backed_detector_subgroups.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
         ("figures/matched_quantization_sensitivity.pdf", "source_tables/quantization_pair_comparison.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
-        ("figures/matched_quantization_recovery.pdf", "source_tables/quantization_generation_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
+        ("figures/matched_quantization_recovery.pdf", "source_tables/quantization_recovery_pairs.csv;source_tables/quantization_recovery_summary.csv", ".venv/bin/python scripts/analyze_revision_v3_generation.py"),
         ("figures/matched_quantization_detector_transfer.pdf", "source_tables/model_backed_detector_metrics.csv", ".venv/bin/python scripts/finalize_revision_v3.py"),
     ]
     added = pd.DataFrame(rows, columns=existing.columns)
@@ -750,6 +785,7 @@ def update_manifest(output: Path) -> None:
         entropy_trials["execution_seconds"].sum()
         + quant_trials["execution_seconds"].sum()
         + calibration["execution_seconds"].sum()
+        + float(environment["q4_visible_recovery_execution_seconds_sum"])
     )
     experiment_status = [
         {"experiment": "A", "name": "strict_deduplication", "status": "completed"},
@@ -770,6 +806,11 @@ def update_manifest(output: Path) -> None:
             "new_matched_quantization_q8_generations": 1920,
             "model_backed_historical_q4_replays": 1920,
             "matched_quantization_q4_trials_reused": 1920,
+            "q4_visible_recovery_computations": int(
+                environment["q4_visible_recovery_record_count"]
+            ),
+            "q4_visible_recovery_new_cover_generations": 0,
+            "paired_quantization_recovery_pairs": 960,
             "real_model_smoke_records": int(
                 environment["real_model_smoke_record_count"]
             ),
@@ -787,6 +828,7 @@ def update_manifest(output: Path) -> None:
         "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase entropy --model-id <each-q4-model> --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
         "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
         "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q8_0 --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+        "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_q4_visible_recovery.py --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
         ".venv/bin/python scripts/analyze_revision_v3_generation.py",
         ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only",
         ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector <surprisal|textcnn|deberta>",
@@ -816,6 +858,11 @@ def update_manifest(output: Path) -> None:
                 **validation["counts"],
                 "new_generation_trial_count": 2640,
                 "historical_q4_model_backed_replay_count": 1920,
+                "q4_visible_recovery_record_count": int(
+                    environment["q4_visible_recovery_record_count"]
+                ),
+                "q4_visible_recovery_new_cover_generation_count": 0,
+                "q4_visible_recovery_execution_seconds_sum": float(environment["q4_visible_recovery_execution_seconds_sum"]),
                 "execution_git_commits": environment["execution_git_commits"],
                 "sum_per_record_execution_seconds": execution_seconds,
                 "real_model_smoke_record_count": int(
@@ -853,11 +900,8 @@ def update_manifest(output: Path) -> None:
 
 def artifact_manifest(output: Path) -> pd.DataFrame:
     rows = []
-    excluded = {"artifact_manifest.csv", "provenance/validation_report.json"}
-    for path in sorted(item for item in output.rglob("*") if item.is_file()):
+    for path in portable_artifact_files(output, PROJECT_ROOT):
         relative = str(path.relative_to(output))
-        if relative in excluded:
-            continue
         row_count = None
         if path.suffix == ".csv":
             try:

@@ -15,12 +15,13 @@
     "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase entropy --model-id <each-q4-model> --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
     "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
     "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q8_0 --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_q4_visible_recovery.py --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
     ".venv/bin/python scripts/analyze_revision_v3_generation.py",
     ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only",
     ".venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector <surprisal|textcnn|deberta>",
     ".venv/bin/python -m pytest -q tests/test_revision_v3_*.py --junitxml=results/revision_v3/logs/pytest_v3_focused.xml"
   ],
-  "completion_time": "2026-09-02T14:42:12.942976+00:00",
+  "completion_time": "2026-09-03T14:54:58.112734+00:00",
   "configuration_files": [
     "configs/revision_v3/analysis.json",
     "configs/revision_v3/detectors.json",
@@ -172,7 +173,7 @@
     },
     "driver_reported_cuda_compatibility_version": "13.1",
     "environment_creation_command": ".venv/bin/python -m venv .venv-generation-v3",
-    "execution_completed_at": "2026-09-02T08:13:13.445104+00:00",
+    "execution_completed_at": "2026-09-03T14:54:58.112734+00:00",
     "execution_git_commits": [
       "4d9c61e46c27beee27da9cdb23654c7dd1a92e18",
       "57e2e73e3abebbd6bc43f8b8e38882c204fb68dc",
@@ -180,6 +181,7 @@
       "ab11f86e15aa3b9ca51fe7059e8feb45041a8dd5",
       "ab6734007c5801f203f0ba7abd7f2b6eb61b5ad9",
       "b7a77c5795e51f3fcca1305c5c1b34b4f36bfbc4",
+      "c3cc0d244dbbc74c3b2a0b0f3dce206de442a718",
       "e57d138a06a03e875a59a7a8d74471789b895ff4"
     ],
     "execution_started_at": "2026-09-01T16:39:50.549167+00:00",
@@ -274,7 +276,9 @@
           "2026-09-01T16:45:15.650316+00:00",
           "2026-09-01T16:48:15.267894+00:00",
           "2026-09-01T17:56:04.269338+00:00",
-          "2026-09-01T18:55:20.576906+00:00"
+          "2026-09-01T18:55:20.576906+00:00",
+          "2026-09-03T14:39:40.403145+00:00",
+          "2026-09-03T14:40:21.239928+00:00"
         ]
       },
       {
@@ -336,6 +340,9 @@
     ],
     "python_implementation": "CPython",
     "python_version": "3.10.13",
+    "q4_visible_recovery_execution_seconds_sum": 794.9812638157746,
+    "q4_visible_recovery_new_cover_generation_count": 0,
+    "q4_visible_recovery_record_count": 960,
     "real_model_smoke_execution_seconds_sum": 96.2469988209923,
     "real_model_smoke_new_generation_count": 7,
     "real_model_smoke_q4_replay_count": 1,
@@ -367,6 +374,9 @@
         "67ff6941e9ff360cc591f32496308f6093f7637b19148e024dd6d4f0610ed10e",
         "f918bfc44ce69160b68c32d9bcc70247289ef5311a9f51acd99ce2f6c27b0a84"
       ],
+      "rankcloak/revision_v3_q4_recovery.py": [
+        "a9b39efb713c31c3d1a540545c8170d118705d22262435f4b9bacb63d531b4bc"
+      ],
       "results/revision_v3/provenance/entropy_calibration_plan.csv": [
         "b3002e2dc9acf6ec2ba3a57135e0b360d4d5758364fbb0df9e4ca472a6793cf1"
       ],
@@ -378,6 +388,9 @@
       ],
       "revision_docs/REVISION_V3_GENERATION_PROTOCOL_AMENDMENT.md": [
         "3b65613d182aebd536f487f3197cf75001135302345b8a2f1b26e04640917fbb"
+      ],
+      "scripts/run_revision_v3_q4_visible_recovery.py": [
+        "8df87d50bfd251a750d6fc99bfb2dc602516699ea4407dca8fcc2b8c2d850d43"
       ]
     },
     "remote_paid_compute_used": false,
@@ -424,7 +437,7 @@
   },
   "generation_execution": {
     "calibration_traces": 18,
-    "completed_at": "2026-09-02T08:13:13.445104+00:00",
+    "completed_at": "2026-09-03T14:54:58.112734+00:00",
     "entropy_evaluations": 720,
     "execution_git_commits": [
       "4d9c61e46c27beee27da9cdb23654c7dd1a92e18",
@@ -433,19 +446,24 @@
       "ab11f86e15aa3b9ca51fe7059e8feb45041a8dd5",
       "ab6734007c5801f203f0ba7abd7f2b6eb61b5ad9",
       "b7a77c5795e51f3fcca1305c5c1b34b4f36bfbc4",
+      "c3cc0d244dbbc74c3b2a0b0f3dce206de442a718",
       "e57d138a06a03e875a59a7a8d74471789b895ff4"
     ],
     "failed_trial_count": 0,
     "historical_q4_model_backed_replay_count": 1920,
     "new_generation_trial_count": 2640,
+    "q4_visible_recovery_execution_seconds_sum": 794.9812638157746,
+    "q4_visible_recovery_new_cover_generation_count": 0,
+    "q4_visible_recovery_record_count": 960,
     "quantization_q4_replays": 1920,
+    "quantization_q4_visible_recovery_records": 960,
     "quantization_q8_generations": 1920,
     "real_model_smoke_execution_seconds_sum": 96.2469988209923,
     "real_model_smoke_record_count": 8,
     "real_model_smoke_records": 8,
     "remote_paid_compute_used": false,
     "started_at": "2026-09-01T16:39:50.549167+00:00",
-    "sum_per_record_execution_seconds": 54804.113366161124
+    "sum_per_record_execution_seconds": 55599.0946299769
   },
   "generation_plan_summary": {
     "entropy": {
@@ -478,7 +496,7 @@
   },
   "generation_preflight_status": "ready",
   "generation_requirements_sha256": "9927d23e709dd8e784dca64d592b00cdc3411a3fb52c6059f6b0025583f09a54",
-  "git_commit_at_generation_analysis": "e5040a4a8429f321a6c6966b2ef4bc2ec49310d3",
+  "git_commit_at_generation_analysis": "c3cc0d244dbbc74c3b2a0b0f3dce206de442a718",
   "git_commit_at_start": "5cdb22d3cb02480fb090946ef176325d3d107752",
   "inference_backends": {
     "current_generation": {
@@ -645,7 +663,9 @@
         "2026-09-01T16:45:15.650316+00:00",
         "2026-09-01T16:48:15.267894+00:00",
         "2026-09-01T17:56:04.269338+00:00",
-        "2026-09-01T18:55:20.576906+00:00"
+        "2026-09-01T18:55:20.576906+00:00",
+        "2026-09-03T14:39:40.403145+00:00",
+        "2026-09-03T14:40:21.239928+00:00"
       ]
     },
     {
@@ -733,7 +753,7 @@
     4052855990,
     4064916754
   ],
-  "run_duration_seconds": 136290.466442,
+  "run_duration_seconds": 223455.6362,
   "schema_version": "rankcloak-revision-v3-run-manifest-v1",
   "software_environment": {
     "packages": {
@@ -764,22 +784,22 @@
         "errors": 0,
         "failures": 3,
         "path": "logs/pytest_full.xml",
-        "sha256": "111fe4ce8ca5796a2bac20b7e5ad2199b4c93657c93ef56f65f541f32733f02b",
+        "sha256": "832f986255075c20c6768a176cee0e3a7ac82350d74ad10a99a76b4f59fd3b11",
         "skipped": 0,
-        "tests": 695
+        "tests": 702
       },
       {
         "errors": 0,
         "failures": 0,
         "path": "logs/pytest_v3_focused.xml",
-        "sha256": "86074d97d75e98142ef82ddf78b5fec30ff5801defc3fa4dbdc1c0acd007f29a",
+        "sha256": "2e6d8de9e3dcd8bb525a0def78667c071c4386a10896a393d5ed4b642d86da21",
         "skipped": 0,
-        "tests": 49
+        "tests": 56
       }
     ],
     "skipped": 0,
     "status": "v3_pass_with_immutable_paperv2_contract_failures",
-    "tests": 744
+    "tests": 758
   },
   "tokenizers": [
     {
@@ -829,6 +849,9 @@
     "new_matched_quantization_q8_generations": 1920,
     "new_model_backed_detector_fits": 12,
     "new_model_generation_trials": 2640,
+    "paired_quantization_recovery_pairs": 960,
+    "q4_visible_recovery_computations": 960,
+    "q4_visible_recovery_new_cover_generations": 0,
     "real_model_smoke_new_generation_records": 7,
     "real_model_smoke_q4_replay_records": 1,
     "real_model_smoke_records": 8,

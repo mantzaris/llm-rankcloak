@@ -2,11 +2,12 @@
   "checks": {
     "all_numeric_recomputations_pass": true,
     "artifact_manifest_checksums_valid": true,
-    "artifact_manifest_entry_count": 4890,
+    "artifact_manifest_entry_count": 5833,
     "artifact_manifest_path_set_exact": true,
     "authoritative_detector_sha256_unchanged": true,
     "authoritative_trial_sha256_unchanged": true,
     "entropy_calibration_plan_valid": true,
+    "entropy_capacity_conditional_on_completion": true,
     "entropy_forced_token_distribution_complete": true,
     "entropy_plan_all_new": true,
     "entropy_plan_rows": 720,
@@ -21,12 +22,13 @@
     "model_backed_generation_validation_pass": true,
     "model_backed_locked_dedup_all_pass": true,
     "model_backed_locked_dedup_audit_count": 4,
+    "paired_quantization_recovery_source_valid": true,
     "prediction_file_count": 24,
     "quantization_plan_valid": true,
     "recovery_mode_source_valid": true,
     "run_manifest_self_contained": true
   },
-  "completed_at": "2026-09-02T15:32:36.682983+00:00",
+  "completed_at": "2026-09-03T16:45:03.521001+00:00",
   "errors": [],
   "schema_version": "rankcloak-revision-v3-validation-report-v1",
   "status": "pass"

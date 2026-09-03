@@ -34,6 +34,7 @@ from prepare_revision_v3 import (  # noqa: E402
     utc_now,
 )
 from rankcloak.revision_v3_analysis import file_sha256  # noqa: E402
+from rankcloak.revision_v3_artifacts import portable_artifact_files  # noqa: E402
 
 
 DEFAULT_OUTPUT = PROJECT_ROOT / "results/revision_v3"
@@ -699,13 +700,8 @@ def artifact_sources(output: Path) -> pd.DataFrame:
 
 def artifact_manifest(output: Path) -> pd.DataFrame:
     rows = []
-    # The manifest cannot checksum itself.  The validation report is also
-    # excluded because it validates the manifest and is written afterwards.
-    excluded = {"artifact_manifest.csv", "provenance/validation_report.json"}
-    for path in sorted(item for item in output.rglob("*") if item.is_file()):
+    for path in portable_artifact_files(output, PROJECT_ROOT):
         relative = str(path.relative_to(output))
-        if relative in excluded:
-            continue
         row_count = None
         if path.suffix == ".csv":
             try:

@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-09-03T14:54:58.155891+00:00",
+  "completed": 960,
+  "model_id": "qwen2_5_7b_instruct_q4_k_m",
+  "new_cover_generation_performed": false,
+  "phase": "quantization_q4_visible_recovery",
+  "planned": 960,
+  "schema_version": "rankcloak-revision-v3-q4-visible-recovery-v1"
+}

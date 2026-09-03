@@ -39,6 +39,9 @@ from rankcloak.revision_v3_generation import (  # noqa: E402
     file_sha256,
     load_csv,
 )
+from rankcloak.revision_v3_q4_recovery import (  # noqa: E402
+    SCHEMA_VERSION as Q4_RECOVERY_SCHEMA_VERSION,
+)
 
 
 DEFAULT_OUTPUT = PROJECT_ROOT / "results/revision_v3"
@@ -50,6 +53,7 @@ EXPECTED_COUNTS = {
     "entropy": 720,
     "quantization_q4": 1920,
     "quantization_q8": 1920,
+    "quantization_q4_visible_recovery": 960,
 }
 
 
@@ -239,7 +243,9 @@ def entropy_frames(records: Sequence[Mapping[str, object]]) -> tuple[pd.DataFram
                 "saved_id_exact_payload_recovery": saved_recovery,
                 "visible_text_exact_payload_recovery": visible_recovery,
                 "eligible_position_fraction": eligible_fraction,
-                "fixed_payload_bits_per_generated_token": bits_per_token,
+                "fixed_payload_bits_per_generated_token_conditional_on_completion": (
+                    bits_per_token
+                ),
                 "fixed_token_budget_payload_fraction": fixed_budget_fraction,
                 "mean_entropy_bits": safe_mean(entropies),
                 "mean_observed_rank": safe_mean(ranks),
@@ -307,8 +313,16 @@ def entropy_frames(records: Sequence[Mapping[str, object]]) -> tuple[pd.DataFram
 
 def quantization_frames(
     records: Sequence[Mapping[str, object]],
+    q4_visible_recovery_records: Sequence[Mapping[str, object]],
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Flatten paired Q4 replays and Q8 generations without losing pairing."""
+
+    q4_visible_by_plan: dict[str, Mapping[str, object]] = {}
+    for recovery in q4_visible_recovery_records:
+        plan_id = str(recovery["source_q4_plan_id"])
+        if plan_id in q4_visible_by_plan:
+            raise ValueError(f"duplicate Q4 visible-text recovery for {plan_id}")
+        q4_visible_by_plan[plan_id] = recovery
 
     by_pair: dict[str, dict[str, Mapping[str, object]]] = {}
     for record in records:
@@ -354,7 +368,28 @@ def quantization_frames(
                 trace = record["distribution_trace"]
                 summary = record["distribution_summary"]
                 saved_recovery = bool(record["rank_replay_exact"]) if population == "rankcloak" else None
-                visible_recovery = None
+                if population == "rankcloak":
+                    if record["plan_id"] not in q4_visible_by_plan:
+                        raise ValueError(
+                            f"Q4 visible-text recovery is missing for {record['plan_id']}"
+                        )
+                    visible_record = q4_visible_by_plan[record["plan_id"]]
+                    visible = visible_record["visible_text_retokenization"]
+                    visible_recovery = bool(visible["exact_payload_recovery"])
+                    visible_full_token_ids_match = bool(
+                        visible["diagnostic"]["full_token_ids_match"]
+                    )
+                    visible_retokenized_token_count = int(
+                        visible["retokenized_token_count"]
+                    )
+                    visible_model_rank_replay_performed = bool(
+                        visible["model_rank_replay_performed"]
+                    )
+                else:
+                    visible_recovery = None
+                    visible_full_token_ids_match = None
+                    visible_retokenized_token_count = None
+                    visible_model_rank_replay_performed = None
             else:
                 generation = record["generation"]
                 if population == "rankcloak":
@@ -362,10 +397,24 @@ def quantization_frames(
                     token_ids = list(map(int, generation["full_token_ids"]))
                     saved_recovery = bool(record["saved_token_id_decoded"]["exact_payload_recovery"])
                     visible_recovery = bool(record["visible_text_retokenization"]["exact_payload_recovery"])
+                    visible_full_token_ids_match = bool(
+                        record["visible_text_retokenization"]["diagnostic"][
+                            "full_token_ids_match"
+                        ]
+                    )
+                    visible_retokenized_token_count = len(
+                        record["visible_text_retokenization"]["diagnostic"][
+                            "retokenized_token_ids"
+                        ]
+                    )
+                    visible_model_rank_replay_performed = True
                 else:
                     text = str(generation["text"])
                     token_ids = list(map(int, generation["token_ids"]))
                     saved_recovery = visible_recovery = None
+                    visible_full_token_ids_match = None
+                    visible_retokenized_token_count = None
+                    visible_model_rank_replay_performed = None
                 trace = record["q8_own_path_distribution_trace"]
                 summary = record["q8_own_path_distribution_summary"]
             quality = surface_metrics(text, record["rendered_prompt"])
@@ -387,6 +436,11 @@ def quantization_frames(
                     "sampling_seed": int(plan["historical_control_sampling_seed"]),
                     "saved_id_exact_payload_recovery": saved_recovery,
                     "visible_text_exact_payload_recovery": visible_recovery,
+                    "visible_text_full_token_ids_match": visible_full_token_ids_match,
+                    "visible_text_retokenized_token_count": visible_retokenized_token_count,
+                    "visible_text_model_rank_replay_performed": (
+                        visible_model_rank_replay_performed
+                    ),
                     "mean_entropy_bits": summary["mean_entropy_bits"],
                     "mean_observed_rank": summary["mean_observed_rank"],
                     "mean_token_surprisal_nats": summary["mean_observed_surprisal_nats"],
@@ -464,7 +518,188 @@ def quantization_frames(
     positions = pd.DataFrame(position_rows).sort_values(
         ["pairing_unit_id", "path", "quantization", "position_zero_based"]
     ).reset_index(drop=True)
+    used_q4_visible = set(
+        trials.loc[
+            trials["quantization"].eq("Q4_K_M")
+            & trials["population"].eq("rankcloak"),
+            "plan_id",
+        ].astype(str)
+    )
+    if set(q4_visible_by_plan) != used_q4_visible:
+        raise ValueError("Q4 visible-text recovery ledger has stale or missing rows")
     return trials, pairs, positions
+
+
+def paired_quantization_recovery_table(
+    quantization_trials: pd.DataFrame,
+) -> pd.DataFrame:
+    """Build one exact paired Q4/Q8 recovery row per RankCloak condition."""
+
+    rankcloak = quantization_trials.loc[
+        quantization_trials["population"].eq("rankcloak")
+    ].copy()
+    if rankcloak.duplicated(["pairing_unit_id", "quantization"]).any():
+        raise ValueError("duplicate quantization recovery observation")
+    q4 = rankcloak.loc[rankcloak["quantization"].eq("Q4_K_M")].set_index(
+        "pairing_unit_id"
+    )
+    q8 = rankcloak.loc[rankcloak["quantization"].eq("Q8_0")].set_index(
+        "pairing_unit_id"
+    )
+    if set(q4.index) != set(q8.index) or not len(q4):
+        raise ValueError("paired Q4/Q8 recovery matrix is incomplete")
+    rows: list[dict[str, object]] = []
+    identity_fields = (
+        "payload_name",
+        "payload_class",
+        "payload_split",
+        "representation_name",
+        "codec_id",
+        "prompt_template_id",
+        "target_token_count",
+    )
+    for pair_id in sorted(q4.index):
+        left = q4.loc[pair_id]
+        right = q8.loc[pair_id]
+        differing = [
+            field for field in identity_fields if str(left[field]) != str(right[field])
+        ]
+        if differing:
+            raise ValueError(
+                f"paired recovery contract differs for {pair_id}: {differing}"
+            )
+        q4_saved = bool(left["saved_id_exact_payload_recovery"])
+        q8_saved = bool(right["saved_id_exact_payload_recovery"])
+        q4_visible = bool(left["visible_text_exact_payload_recovery"])
+        q8_visible = bool(right["visible_text_exact_payload_recovery"])
+        rows.append(
+            {
+                "pairing_unit_id": pair_id,
+                **{field: left[field] for field in identity_fields},
+                "q4_saved_id_exact_payload_recovery": q4_saved,
+                "q8_saved_id_exact_payload_recovery": q8_saved,
+                "q4_visible_text_exact_payload_recovery": q4_visible,
+                "q8_visible_text_exact_payload_recovery": q8_visible,
+                "visible_recovery_q8_minus_q4": int(q8_visible) - int(q4_visible),
+                "both_visible_recover": q4_visible and q8_visible,
+                "q4_only_visible_recover": q4_visible and not q8_visible,
+                "q8_only_visible_recover": q8_visible and not q4_visible,
+                "neither_visible_recovers": not q4_visible and not q8_visible,
+                "q4_visible_full_token_ids_match": bool(
+                    left["visible_text_full_token_ids_match"]
+                ),
+                "q8_visible_full_token_ids_match": bool(
+                    right["visible_text_full_token_ids_match"]
+                ),
+                "q4_model_rank_replay_performed": bool(
+                    left["visible_text_model_rank_replay_performed"]
+                ),
+                "q4_retokenized_token_count": int(
+                    left["visible_text_retokenized_token_count"]
+                ),
+                "q8_retokenized_token_count": int(
+                    right["visible_text_retokenized_token_count"]
+                ),
+            }
+        )
+    return pd.DataFrame(rows).sort_values("pairing_unit_id").reset_index(drop=True)
+
+
+def paired_quantization_recovery_summary(
+    pairs: pd.DataFrame,
+) -> pd.DataFrame:
+    """Summarize paired recovery with payload-grouped uncertainty."""
+
+    specifications = [
+        ("quantization_recovery_overall", []),
+        ("quantization_recovery_by_representation", ["representation_name"]),
+        ("quantization_recovery_by_artifact_class", ["payload_class"]),
+        ("quantization_recovery_by_template", ["prompt_template_id"]),
+    ]
+    rows: list[dict[str, object]] = []
+    for analysis_id, strata in specifications:
+        grouped: Iterable[tuple[object, pd.DataFrame]]
+        if strata:
+            grouped = pairs.groupby(strata[0], sort=True, dropna=False)
+        else:
+            grouped = [("overall", pairs)]
+        for key, cell in grouped:
+            difference_low, difference_high, payload_count = group_bootstrap_interval(
+                cell,
+                "visible_recovery_q8_minus_q4",
+                "payload_name",
+                seed_parts=(analysis_id, key, "visible_recovery_q8_minus_q4"),
+            )
+            q4_low, q4_high, _ = group_bootstrap_interval(
+                cell,
+                "q4_visible_text_exact_payload_recovery",
+                "payload_name",
+                seed_parts=(analysis_id, key, "q4_visible"),
+            )
+            q8_low, q8_high, _ = group_bootstrap_interval(
+                cell,
+                "q8_visible_text_exact_payload_recovery",
+                "payload_name",
+                seed_parts=(analysis_id, key, "q8_visible"),
+            )
+            row = {
+                "analysis_id": analysis_id,
+                "observation_count": int(len(cell)),
+                "payload_group_count": payload_count,
+                "analysis_unit": "paired RankCloak quantization condition",
+                "bootstrap_unit": "payload_name",
+                "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+                "q4_saved_id_successes": int(
+                    cell["q4_saved_id_exact_payload_recovery"].sum()
+                ),
+                "q8_saved_id_successes": int(
+                    cell["q8_saved_id_exact_payload_recovery"].sum()
+                ),
+                "q4_visible_successes": int(
+                    cell["q4_visible_text_exact_payload_recovery"].sum()
+                ),
+                "q8_visible_successes": int(
+                    cell["q8_visible_text_exact_payload_recovery"].sum()
+                ),
+                "q4_visible_recovery_rate": float(
+                    cell["q4_visible_text_exact_payload_recovery"].mean()
+                ),
+                "q4_visible_recovery_ci_low_95": q4_low,
+                "q4_visible_recovery_ci_high_95": q4_high,
+                "q8_visible_recovery_rate": float(
+                    cell["q8_visible_text_exact_payload_recovery"].mean()
+                ),
+                "q8_visible_recovery_ci_low_95": q8_low,
+                "q8_visible_recovery_ci_high_95": q8_high,
+                "paired_rate_difference_q8_minus_q4": float(
+                    cell["visible_recovery_q8_minus_q4"].mean()
+                ),
+                "paired_difference_ci_low_95": difference_low,
+                "paired_difference_ci_high_95": difference_high,
+                "both_visible_recover_count": int(cell["both_visible_recover"].sum()),
+                "q4_only_visible_recover_count": int(
+                    cell["q4_only_visible_recover"].sum()
+                ),
+                "q8_only_visible_recover_count": int(
+                    cell["q8_only_visible_recover"].sum()
+                ),
+                "neither_visible_recovers_count": int(
+                    cell["neither_visible_recovers"].sum()
+                ),
+                "q4_exact_retokenization_count": int(
+                    cell["q4_visible_full_token_ids_match"].sum()
+                ),
+                "q8_exact_retokenization_count": int(
+                    cell["q8_visible_full_token_ids_match"].sum()
+                ),
+                "q4_model_rank_replay_count": int(
+                    cell["q4_model_rank_replay_performed"].sum()
+                ),
+            }
+            if strata:
+                row[strata[0]] = key
+            rows.append(row)
+    return pd.DataFrame(rows)
 
 
 def summarize_metrics(
@@ -663,6 +898,7 @@ def validate_generation_ledgers(
     calibration_records: Sequence[Mapping[str, object]],
     entropy_records: Sequence[Mapping[str, object]],
     quantization_records: Sequence[Mapping[str, object]],
+    q4_visible_recovery_records: Sequence[Mapping[str, object]],
     smoke_records: Sequence[Mapping[str, object]],
 ) -> Mapping[str, object]:
     """Fail closed on completeness, pairing, sampler, replay, and gate invariants."""
@@ -698,6 +934,60 @@ def validate_generation_ledgers(
         checks[f"{name}_record_validation_failures"] = invalid
         if invalid:
             errors.append(f"{name} contains invalid completed records")
+
+    expected_q4_visible = {
+        str(row["plan_id"])
+        for row in plans["quantization"]
+        if row["quantization"] == "Q4_K_M"
+        and row["population"] == "rankcloak"
+    }
+    observed_q4_visible = [
+        str(record["source_q4_plan_id"])
+        for record in q4_visible_recovery_records
+    ]
+    checks["q4_visible_recovery_expected_count"] = len(expected_q4_visible)
+    checks["q4_visible_recovery_completed_count"] = len(observed_q4_visible)
+    checks["q4_visible_recovery_plan_identity_exact"] = bool(
+        len(observed_q4_visible) == len(set(observed_q4_visible))
+        and set(observed_q4_visible) == expected_q4_visible
+    )
+    q4_recovery_source_hashes = {
+        relative: file_sha256(PROJECT_ROOT / relative)
+        for relative in (
+            "rankcloak/revision_v3_q4_recovery.py",
+            "scripts/run_revision_v3_q4_visible_recovery.py",
+        )
+    }
+
+    invalid_q4_visible = [
+        str(record.get("source_q4_plan_id"))
+        for record in q4_visible_recovery_records
+        if record.get("schema_version") != Q4_RECOVERY_SCHEMA_VERSION
+        or record.get("record_type")
+        != "quantization_q4_visible_text_recovery"
+        or record.get("execution_status") != "completed"
+        or record.get("new_cover_generation_performed") is not False
+        or not record_validation_passes(record)
+        or not isinstance(
+            record.get("visible_text_retokenization", {}).get(
+                "exact_payload_recovery"
+            ),
+            bool,
+        )
+        or any(
+            record.get("source_hashes", {}).get(relative) != digest
+            for relative, digest in q4_recovery_source_hashes.items()
+        )
+    ]
+    checks["q4_visible_recovery_record_validation_failures"] = (
+        invalid_q4_visible
+    )
+    if not checks["q4_visible_recovery_plan_identity_exact"]:
+        errors.append(
+            "Q4 visible-text recovery records do not exactly cover RankCloak rows"
+        )
+    if invalid_q4_visible:
+        errors.append("Q4 visible-text recovery contains invalid completed records")
 
     expected_smoke = {
         ("entropy_calibration_trace", "llama3_8b_instruct_q4_k_m"),
@@ -822,6 +1112,7 @@ def validate_generation_ledgers(
         errors.append("length-matched entropy controls are not deterministic prefixes")
 
     pair_contract_errors: list[str] = []
+    q4_visible_contract_errors: list[str] = []
     q4_by_pair: dict[str, Mapping[str, object]] = {}
     q8_by_pair: dict[str, Mapping[str, object]] = {}
     for record in quantization_records:
@@ -847,9 +1138,43 @@ def validate_generation_ledgers(
             and q8["paired_q4_replay_sha256"] == canonical_sha256(q4)
         ):
             pair_contract_errors.append(pair_id)
+    q4_visible_by_pair: dict[str, Mapping[str, object]] = {}
+    for recovery in q4_visible_recovery_records:
+        pair_id = str(recovery["plan_row"]["pairing_unit_id"])
+        if pair_id in q4_visible_by_pair:
+            q4_visible_contract_errors.append(pair_id)
+        q4_visible_by_pair[pair_id] = recovery
+    expected_rankcloak_pairs = {
+        pair_id
+        for pair_id, q4 in q4_by_pair.items()
+        if q4["population"] == "rankcloak"
+    }
+    if set(q4_visible_by_pair) != expected_rankcloak_pairs:
+        q4_visible_contract_errors.append("pair_set")
+    for pair_id in sorted(expected_rankcloak_pairs & set(q4_visible_by_pair)):
+        q4 = q4_by_pair[pair_id]
+        recovery = q4_visible_by_pair[pair_id]
+        if not (
+            recovery["source_q4_plan_id"] == q4["plan_id"]
+            and recovery["source_q4_record_canonical_sha256"]
+            == canonical_sha256(q4)
+            and recovery["model_artifact_sha256"]
+            == q4["model_artifact_sha256"]
+            and recovery["historical_output_text_sha256"]
+            == hashlib.sha256(
+                str(q4["historical_output_text"]).encode("utf-8")
+            ).hexdigest()
+            and recovery["plan_row_sha256"] == q4["plan_row_sha256"]
+        ):
+            q4_visible_contract_errors.append(pair_id)
     checks["quantization_pair_contract_failures"] = sorted(set(pair_contract_errors))
     if pair_contract_errors:
         errors.append("matched-quantization pair contract failed")
+    checks["q4_visible_recovery_contract_failures"] = sorted(
+        set(q4_visible_contract_errors)
+    )
+    if q4_visible_contract_errors:
+        errors.append("Q4 visible-text recovery source contract failed")
 
     checks["status"] = "pass" if not errors else "fail"
     return {
@@ -861,6 +1186,9 @@ def validate_generation_ledgers(
             "entropy_evaluations": len(entropy_records),
             "quantization_q4_replays": len(q4_by_pair),
             "quantization_q8_generations": len(q8_by_pair),
+            "quantization_q4_visible_recovery_records": len(
+                q4_visible_recovery_records
+            ),
             "real_model_smoke_records": len(smoke_records),
         },
         "checks": checks,
@@ -1091,6 +1419,7 @@ def build_generation_figures(
     entropy_summary: pd.DataFrame,
     quantization_trials: pd.DataFrame,
     quantization_pairs: pd.DataFrame,
+    quantization_recovery_pairs: pd.DataFrame,
 ) -> None:
     plt.rcParams.update(
         {
@@ -1108,7 +1437,11 @@ def build_generation_figures(
     fig, axes = plt.subplots(2, 2, figsize=(7.2, 5.2))
     measures = (
         ("payload_completion", "Payload completion", (0.0, 1.05)),
-        ("fixed_payload_bits_per_generated_token", "Bits / generated token", None),
+        (
+            "fixed_payload_bits_per_generated_token_conditional_on_completion",
+            "Bits / generated token\n(completed payloads)",
+            None,
+        ),
         ("length_ratio_vs_ungated", "Length ratio vs ungated", None),
         ("visible_text_exact_payload_recovery", "Visible-text exact recovery", (0.0, 1.05)),
     )
@@ -1148,21 +1481,51 @@ def build_generation_figures(
     fig.tight_layout()
     save_figure(fig, output / "figures/matched_quantization_sensitivity")
 
-    q8_rank = quantization_trials.loc[
-        quantization_trials["quantization"].eq("Q8_0")
-        & quantization_trials["population"].eq("rankcloak")
-    ]
-    recovery = [
-        float(q8_rank["saved_id_exact_payload_recovery"].astype(float).mean()),
-        float(q8_rank["visible_text_exact_payload_recovery"].astype(float).mean()),
-    ]
-    fig, axis = plt.subplots(figsize=(3.8, 3.0))
-    bars = axis.bar(["Saved token IDs", "Visible text"], recovery, color=["#3b6ea8", "#d08c3c"])
-    axis.bar_label(bars, labels=[f"{value:.3f}" for value in recovery], padding=2)
+    recovery = np.asarray(
+        [
+            [
+                quantization_recovery_pairs[
+                    "q4_saved_id_exact_payload_recovery"
+                ].mean(),
+                quantization_recovery_pairs[
+                    "q4_visible_text_exact_payload_recovery"
+                ].mean(),
+            ],
+            [
+                quantization_recovery_pairs[
+                    "q8_saved_id_exact_payload_recovery"
+                ].mean(),
+                quantization_recovery_pairs[
+                    "q8_visible_text_exact_payload_recovery"
+                ].mean(),
+            ],
+        ],
+        dtype=float,
+    )
+    fig, axis = plt.subplots(figsize=(4.8, 3.2))
+    x = np.arange(2)
+    width = 0.36
+    q4_bars = axis.bar(
+        x - width / 2,
+        recovery[0],
+        width,
+        label="Q4_K_M",
+        color="#3b6ea8",
+    )
+    q8_bars = axis.bar(
+        x + width / 2,
+        recovery[1],
+        width,
+        label="Q8_0",
+        color="#d08c3c",
+    )
+    axis.bar_label(q4_bars, labels=[f"{value:.3f}" for value in recovery[0]], padding=2)
+    axis.bar_label(q8_bars, labels=[f"{value:.3f}" for value in recovery[1]], padding=2)
+    axis.set_xticks(x, ["Saved token IDs", "Visible text"])
     axis.set_ylim(0, 1.08)
     axis.set_ylabel("Exact payload recovery")
-    axis.set_title("Q8_0 recovery mode")
-    axis.tick_params(axis="x", rotation=12)
+    axis.set_title("Paired Q4_K_M and Q8_0 recovery")
+    axis.legend(loc="lower left")
     axis.grid(axis="y", alpha=0.25)
     fig.tight_layout()
     save_figure(fig, output / "figures/matched_quantization_recovery")
@@ -1190,6 +1553,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     calibration_records = load_records(generation_root / "raw/entropy_calibration")
     entropy_records = load_records(generation_root / "raw/entropy")
     quantization_records = load_records(generation_root / "raw/quantization")
+    q4_visible_recovery_records = load_records(
+        generation_root / "raw/quantization_q4_visible_recovery"
+    )
     smoke_records = [
         record
         for phase in ("entropy_calibration", "entropy", "quantization")
@@ -1200,6 +1566,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         calibration_records,
         entropy_records,
         quantization_records,
+        q4_visible_recovery_records,
         smoke_records,
     )
     if audit["status"] != "pass":
@@ -1209,7 +1576,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     calibration_traces, thresholds = calibration_tables(generation_root)
     entropy_trials, entropy_positions = entropy_frames(entropy_records)
     quantization_trials, quantization_pairs, quantization_positions = quantization_frames(
-        quantization_records
+        quantization_records, q4_visible_recovery_records
+    )
+    quantization_recovery_pairs = paired_quantization_recovery_table(
+        quantization_trials
+    )
+    quantization_recovery_summary = paired_quantization_recovery_summary(
+        quantization_recovery_pairs
     )
     entropy_differences = entropy_pair_differences(entropy_trials)
     entropy_control_difference = entropy_control_differences(entropy_trials)
@@ -1217,7 +1590,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     entropy_metrics = (
         "payload_completion", "saved_id_exact_payload_recovery",
         "visible_text_exact_payload_recovery", "eligible_position_fraction",
-        "fixed_payload_bits_per_generated_token", "fixed_token_budget_payload_fraction",
+        "fixed_payload_bits_per_generated_token_conditional_on_completion",
+        "fixed_token_budget_payload_fraction",
         "generated_token_count", "added_tokens_vs_ungated", "length_ratio_vs_ungated",
         "mean_entropy_bits", "mean_observed_rank", "mean_token_surprisal_nats",
         "mean_rank_pressure_log_probability_gap_nats", "word_count",
@@ -1352,6 +1726,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         source / "quantization_pair_comparison.csv": quantization_pairs,
         source / "quantization_generation_summary.csv": quantization_summary,
         source / "quantization_pair_summary.csv": quantization_pair_summary,
+        source / "quantization_recovery_pairs.csv": quantization_recovery_pairs,
+        source / "quantization_recovery_summary.csv": quantization_recovery_summary,
         source / "quantization_position_summary.csv": quantization_position_summary,
         analysis / "entropy_detector_corpus.csv": entropy_trials,
         analysis / "quantization_detector_corpus.csv": quantization_trials,
@@ -1366,6 +1742,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 *calibration_records,
                 *entropy_records,
                 *quantization_records,
+                *q4_visible_recovery_records,
             ]
         )
     )
@@ -1383,6 +1760,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             "real_model_smoke_execution_seconds_sum": float(
                 sum(float(record["execution_seconds"]) for record in smoke_records)
             ),
+            "q4_visible_recovery_record_count": len(
+                q4_visible_recovery_records
+            ),
+            "q4_visible_recovery_execution_seconds_sum": float(
+                sum(
+                    float(record["execution_seconds"])
+                    for record in q4_visible_recovery_records
+                )
+            ),
+            "q4_visible_recovery_new_cover_generation_count": sum(
+                record["new_cover_generation_performed"] is not False
+                for record in q4_visible_recovery_records
+            ),
         }
     )
     atomic_json(provenance / "generation_environment.json", environment)
@@ -1391,7 +1781,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         entropy_summary["analysis_id"].eq("entropy_overall")
         & entropy_summary["population"].eq("rankcloak")
         & entropy_summary["metric"].isin(
-            ["payload_completion", "fixed_payload_bits_per_generated_token", "length_ratio_vs_ungated", "saved_id_exact_payload_recovery", "visible_text_exact_payload_recovery"]
+            [
+                "payload_completion",
+                "fixed_payload_bits_per_generated_token_conditional_on_completion",
+                "length_ratio_vs_ungated",
+                "saved_id_exact_payload_recovery",
+                "visible_text_exact_payload_recovery",
+            ]
         )
     ][["gate_level", "metric", "mean", "ci_low_95", "ci_high_95", "observation_count", "group_count"]]
     quant_main = pd.concat(
@@ -1418,7 +1814,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         & entropy_summary["metric"].isin(
             [
                 "payload_completion",
-                "fixed_payload_bits_per_generated_token",
+                "fixed_payload_bits_per_generated_token_conditional_on_completion",
                 "length_ratio_vs_ungated",
                 "visible_text_exact_payload_recovery",
             ]
@@ -1539,8 +1935,34 @@ def main(argv: Sequence[str] | None = None) -> int:
         manuscript / "matched_quantization_generation.tex",
         latex_table(quant_main, "Matched Q4_K_M and Q8_0 generation outcomes.", "tab:matched-quantization-generation"),
     )
+    recovery_main = quantization_recovery_summary.loc[
+        quantization_recovery_summary["analysis_id"].eq(
+            "quantization_recovery_overall"
+        )
+    ].drop(
+        columns=[
+            "analysis_id",
+            "representation_name",
+            "payload_class",
+            "prompt_template_id",
+        ],
+        errors="ignore",
+    )
+    atomic_text(
+        manuscript / "matched_quantization_recovery.tex",
+        latex_table(
+            recovery_main,
+            "Paired Q4_K_M and Q8_0 saved-ID and visible-text recovery.",
+            "tab:matched-quantization-recovery",
+        ),
+    )
     build_generation_figures(
-        output, entropy_trials, entropy_summary, quantization_trials, quantization_pairs
+        output,
+        entropy_trials,
+        entropy_summary,
+        quantization_trials,
+        quantization_pairs,
+        quantization_recovery_pairs,
     )
 
     artifact_rows = []

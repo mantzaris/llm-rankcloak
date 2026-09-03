@@ -26,6 +26,7 @@ from rankcloak.revision_v3_metrics import (  # noqa: E402
     roc_auc,
     select_validation_threshold,
 )
+from rankcloak.revision_v3_artifacts import portable_artifact_files  # noqa: E402
 
 
 DEFAULT_OUTPUT = PROJECT_ROOT / "results/revision_v3"
@@ -219,6 +220,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         and generation_environment.get("remote_paid_compute_used") is False
         and len(generation_environment.get("execution_git_commits", [])) >= 1
         and float(run_manifest.get("run_duration_seconds", 0.0)) > 0.0
+        and generation_environment.get("q4_visible_recovery_record_count") == 960
+        and generation_environment.get(
+            "q4_visible_recovery_new_cover_generation_count"
+        )
+        == 0
+        and run_manifest.get("trial_counts", {}).get(
+            "q4_visible_recovery_computations"
+        )
+        == 960
+        and run_manifest.get("trial_counts", {}).get(
+            "q4_visible_recovery_new_cover_generations"
+        )
+        == 0
+        and run_manifest.get("generation_execution", {}).get(
+            "quantization_q4_visible_recovery_records"
+        )
+        == 960
     )
     if not checks["run_manifest_self_contained"]:
         errors.append("run manifest is missing a required self-contained provenance field")
@@ -293,7 +311,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         and generation_validation.get("counts", {}).get("entropy_evaluations") == 720
         and generation_validation.get("counts", {}).get("quantization_q4_replays") == 1920
         and generation_validation.get("counts", {}).get("quantization_q8_generations") == 1920
+        and generation_validation.get("counts", {}).get(
+            "quantization_q4_visible_recovery_records"
+        )
+        == 960
+        and generation_validation.get("checks", {}).get(
+            "q4_visible_recovery_plan_identity_exact"
+        ) is True
         and generation_validation.get("counts", {}).get("real_model_smoke_records") == 8
+        and not generation_validation.get("checks", {}).get("q4_visible_recovery_contract_failures")
         and generation_validation.get("checks", {}).get("real_model_smoke_matrix_exact")
         is True
     )
@@ -328,6 +354,96 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     if not checks["entropy_forced_token_distribution_complete"]:
         errors.append("forced-token rank/surprisal distribution artifact is incomplete")
+
+    entropy_summary = pd.read_csv(
+        output / "source_tables/entropy_generation_summary.csv", low_memory=False
+    )
+    entropy_trials = pd.read_csv(
+        output / "source_tables/entropy_generation_trials.csv", low_memory=False
+    )
+    conditional_metric = (
+        "fixed_payload_bits_per_generated_token_conditional_on_completion"
+    )
+    capacity_overall = entropy_summary.loc[
+        entropy_summary["analysis_id"].eq("entropy_overall")
+        & entropy_summary["population"].eq("rankcloak")
+        & entropy_summary["metric"].eq(conditional_metric)
+    ].set_index("gate_level")
+    completed_by_gate = (
+        entropy_trials.loc[entropy_trials["population"].eq("rankcloak")]
+        .assign(
+            completed=lambda frame: frame["payload_completion"]
+            .astype(str)
+            .str.lower()
+            .eq("true")
+        )
+        .groupby("gate_level")["completed"]
+        .sum()
+        .astype(int)
+        .to_dict()
+    )
+    checks["entropy_capacity_conditional_on_completion"] = bool(
+        "fixed_payload_bits_per_generated_token"
+        not in set(entropy_summary["metric"].astype(str))
+        and set(capacity_overall.index.astype(str))
+        == {"ungated", "moderate", "strict"}
+        and all(
+            int(capacity_overall.loc[gate, "observation_count"])
+            == completed_by_gate[gate]
+            for gate in completed_by_gate
+        )
+    )
+    if not checks["entropy_capacity_conditional_on_completion"]:
+        errors.append("entropy capacity is not labeled and counted conditional on completion")
+
+    recovery_pairs = pd.read_csv(
+        output / "source_tables/quantization_recovery_pairs.csv", low_memory=False
+    )
+    recovery_summary = pd.read_csv(
+        output / "source_tables/quantization_recovery_summary.csv", low_memory=False
+    )
+    outcome_columns = [
+        "both_visible_recover",
+        "q4_only_visible_recover",
+        "q8_only_visible_recover",
+        "neither_visible_recovers",
+    ]
+    outcome_flags = recovery_pairs[outcome_columns].apply(
+        lambda column: column.astype(str).str.lower().eq("true")
+    )
+    q4_visible = recovery_pairs["q4_visible_text_exact_payload_recovery"].astype(str).str.lower().eq("true")
+    q8_visible = recovery_pairs["q8_visible_text_exact_payload_recovery"].astype(str).str.lower().eq("true")
+    q4_exact_tokens = recovery_pairs["q4_visible_full_token_ids_match"].astype(str).str.lower().eq("true")
+    q4_model_replay = recovery_pairs["q4_model_rank_replay_performed"].astype(str).str.lower().eq("true")
+    overall_rows = recovery_summary.loc[
+        recovery_summary["analysis_id"].eq("quantization_recovery_overall")
+    ]
+    overall = overall_rows.iloc[0] if len(overall_rows) == 1 else None
+    checks["paired_quantization_recovery_source_valid"] = bool(
+        len(recovery_pairs) == 960
+        and recovery_pairs["pairing_unit_id"].nunique() == 960
+        and recovery_pairs["payload_name"].nunique() == 480
+        and outcome_flags.sum(axis=1).eq(1).all()
+        and (q4_exact_tokens != q4_model_replay).all()
+        and overall is not None
+        and int(overall["observation_count"]) == 960
+        and int(overall["payload_group_count"]) == 480
+        and int(overall["q4_visible_successes"]) == int(q4_visible.sum())
+        and int(overall["q8_visible_successes"]) == int(q8_visible.sum())
+        and close(overall["q4_visible_recovery_rate"], q4_visible.mean())
+        and close(overall["q8_visible_recovery_rate"], q8_visible.mean())
+        and close(
+            overall["paired_rate_difference_q8_minus_q4"],
+            q8_visible.mean() - q4_visible.mean(),
+        )
+        and sum(int(overall[column + "_count"]) for column in outcome_columns)
+        == 960
+        and (output / "manuscript_tables/matched_quantization_recovery.tex").is_file()
+    )
+    if not checks["paired_quantization_recovery_source_valid"]:
+        errors.append(
+            "paired Q4/Q8 recovery tables are incomplete or internally inconsistent"
+        )
     locked_audits = sorted(
         (output / "deduplication").glob("model_backed__*__leakage_audit.json")
     )
@@ -423,14 +539,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 errors.append("missing or empty figure {}".format(path.name))
     artifact_manifest = pd.read_csv(output / "artifact_manifest.csv")
     manifest_paths = set(artifact_manifest["path"].astype(str))
-    excluded_artifacts = {
-        "artifact_manifest.csv",
-        "provenance/validation_report.json",
-    }
     actual_paths = {
         str(path.relative_to(output))
-        for path in output.rglob("*")
-        if path.is_file() and str(path.relative_to(output)) not in excluded_artifacts
+        for path in portable_artifact_files(output, PROJECT_ROOT)
     }
     checks["artifact_manifest_path_set_exact"] = manifest_paths == actual_paths
     if not checks["artifact_manifest_path_set_exact"]:

@@ -30,6 +30,7 @@ PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.p
 PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase entropy --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf --output-dir /tmp/rankcloak_revision_v3_repro/generation
 PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q4_k_m --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf --output-dir /tmp/rankcloak_revision_v3_repro/generation
 PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_generation.py --phase quantization --model-id qwen2_5_7b_instruct_q8_0 --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf --output-dir /tmp/rankcloak_revision_v3_repro/generation
+PYTHONPATH=. .venv-generation-v3/bin/python scripts/run_revision_v3_q4_visible_recovery.py --gpu-uuid GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf --output-dir /tmp/rankcloak_revision_v3_repro/generation
 .venv/bin/python scripts/analyze_revision_v3_generation.py --output-dir /tmp/rankcloak_revision_v3_repro --generation-dir /tmp/rankcloak_revision_v3_repro/generation
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --prepare-only --output-dir /tmp/rankcloak_revision_v3_repro
 .venv/bin/python scripts/run_revision_v3_generation_detectors.py --study all --detector surprisal --output-dir /tmp/rankcloak_revision_v3_repro
@@ -41,6 +42,6 @@ CUDA_VISIBLE_DEVICES=GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf .venv/bin/python s
 .venv/bin/python scripts/validate_revision_v3.py --output-dir /tmp/rankcloak_revision_v3_repro
 ```
 
-The Dolly checksum is `2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec`. The model sizes and hashes are recorded in `configs/revision_v3/generation_requirements.json` and verified again in `provenance/generation_preflight.json`. Generation is resumable: completed trial records are immutable and the runner refuses silent overwrite. Run Q4 model-backed quantization replay before Q8 because each Q8 record binds to the exact paired Q4 replay hash. No paid remote compute is part of this workflow.
+The Dolly checksum is `2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec`. The model sizes and hashes are recorded in `configs/revision_v3/generation_requirements.json` and verified again in `provenance/generation_preflight.json`. Generation is resumable: completed trial and recovery records are immutable and the runners refuse silent overwrite. Run Q4 model-backed quantization replay before Q8 because each Q8 record binds to the exact paired Q4 replay hash. The Q4 visible-recovery runner retokenizes and, when needed, rank-replays only the existing historical covers; it does not generate covers. No paid remote compute is part of this workflow.
 
 Re-running analysis and finalization from unchanged authoritative ledgers regenerates source tables, LaTeX, figures, prose, source maps, and checksums. `provenance/artifact_source_map.csv` maps every publication artifact to its source and command.

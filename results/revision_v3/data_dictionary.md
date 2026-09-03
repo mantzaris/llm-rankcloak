@@ -58,7 +58,7 @@
 - `token_surprisal_nats`: negative exact-model token log probability.
 - `rank_pressure_log_probability_gap_nats`: greedy log probability minus observed-token log probability.
 - `payload_completion`: whether all requested ranks were embedded before the maximum length.
-- `fixed_payload_bits_per_generated_token`: serialized payload bits divided by full generated-token count.
+- `fixed_payload_bits_per_generated_token_conditional_on_completion`: serialized payload bits divided by full generated-token count for completed payloads only; unavailable for maximum-budget failures, whose completion outcome is reported separately.
 - `fixed_token_budget_payload_fraction`: serialized payload fraction embedded within the paired ungated token budget.
 - `ordinary_sampled_skip`: an entropy-ineligible top-p sample that does not consume a payload symbol.
 - Ungated records retain the historical `forced_log_probabilities` field name; analysis aliases it to the same embedding-span trace represented by `embedding_log_probabilities` in gated records.
@@ -66,6 +66,9 @@
 - `mean_entropy_q8_minus_q4_bits`: paired mean change when Q8 replays the identical historical Q4 token path.
 - `observed_token_rank_changed_fraction` / `greedy_token_changed_fraction`: fraction of identical-path positions whose observed-token rank or greedy token differs across quantizations.
 - `positionwise_generated_token_match_fraction`: same-position Q4/Q8 token agreement for independently generated paired outputs.
+- `q4_visible_full_token_ids_match` / `q8_visible_full_token_ids_match`: whether visible-text retokenization exactly reproduces the saved full token IDs.
+- `q4_model_rank_replay_performed`: whether divergent Q4 retokenization required exact-model rank replay instead of reuse of the validated saved-ID trace.
+- `both_visible_recover` / `q4_only_visible_recover` / `q8_only_visible_recover` / `neither_visible_recovers`: mutually exclusive outcomes for one frozen Q4/Q8 RankCloak pair.
 
 ## Model-backed detector evaluations
 

@@ -1,0 +1,11 @@
+\begin{table}
+\caption{Paired Q4_K_M and Q8_0 saved-ID and visible-text recovery.}
+\label{tab:matched-quantization-recovery}
+\begin{tabular}{rrllrrrrrrrrrrrrrrrrrrrrr}
+\toprule
+observation\_count & payload\_group\_count & analysis\_unit & bootstrap\_unit & bootstrap\_resamples & q4\_saved\_id\_successes & q8\_saved\_id\_successes & q4\_visible\_successes & q8\_visible\_successes & q4\_visible\_recovery\_rate & q4\_visible\_recovery\_ci\_low\_95 & q4\_visible\_recovery\_ci\_high\_95 & q8\_visible\_recovery\_rate & q8\_visible\_recovery\_ci\_low\_95 & q8\_visible\_recovery\_ci\_high\_95 & paired\_rate\_difference\_q8\_minus\_q4 & paired\_difference\_ci\_low\_95 & paired\_difference\_ci\_high\_95 & both\_visible\_recover\_count & q4\_only\_visible\_recover\_count & q8\_only\_visible\_recover\_count & neither\_visible\_recovers\_count & q4\_exact\_retokenization\_count & q8\_exact\_retokenization\_count & q4\_model\_rank\_replay\_count \\
+\midrule
+960 & 480 & paired RankCloak quantization condition & payload\_name & 2000 & 960 & 960 & 732 & 758 & 0.7625 & 0.7344 & 0.7896 & 0.7896 & 0.7635 & 0.8167 & 0.0271 & -0.0073 & 0.0635 & 588 & 144 & 170 & 58 & 732 & 758 & 228 \\
+\bottomrule
+\end{tabular}
+\end{table}

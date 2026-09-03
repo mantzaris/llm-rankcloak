@@ -1,5 +1,5 @@
 {
-  "analysis_git_commit": "e5040a4a8429f321a6c6966b2ef4bc2ec49310d3",
+  "analysis_git_commit": "c3cc0d244dbbc74c3b2a0b0f3dce206de442a718",
   "checks": {
     "entropy_calibration_completed_count": 18,
     "entropy_calibration_expected_count": 18,
@@ -14,6 +14,11 @@
     "entropy_record_validation_failures": [],
     "failure_record_count": 0,
     "failure_record_paths": [],
+    "q4_visible_recovery_completed_count": 960,
+    "q4_visible_recovery_contract_failures": [],
+    "q4_visible_recovery_expected_count": 960,
+    "q4_visible_recovery_plan_identity_exact": true,
+    "q4_visible_recovery_record_validation_failures": [],
     "quantization_completed_count": 3840,
     "quantization_expected_count": 3840,
     "quantization_pair_contract_failures": [],
@@ -27,6 +32,7 @@
     "calibration_traces": 18,
     "entropy_evaluations": 720,
     "quantization_q4_replays": 1920,
+    "quantization_q4_visible_recovery_records": 960,
     "quantization_q8_generations": 1920,
     "real_model_smoke_records": 8
   },
