@@ -1,0 +1,34 @@
+\documentclass[10pt]{letter}
+\usepackage[letterpaper,margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+\hypersetup{pdftitle={RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text},pdfauthor={Alexander V. Mantzaris}}
+
+\begin{document}
+\begin{letter}{Dr.\ Chun-Wei Yang\\Handling Editor\\Scientific Reports}
+\opening{Dear Dr.\ Yang,}
+
+Please find the focused revision of \emph{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text} (submission 0170c7b2-1065-4344-a5d5-b839b51ac22c). Thank you and Reviewer 2 for the constructive second assessment. We retained the first-round revisions and completed the additional experiments requested in this round.
+
+RankCloak addresses an artifact-specific problem: transforming recognizable synthetic cryptographic artifacts into context-dependent token choices so their hexadecimal, UUID, base64, nonce, tag, ciphertext-like, or signature surface form is not directly exposed in generated cover text, while an authorized receiver reconstructs the artifact under a shared protocol configuration. Steganalytic classification is a distinct endpoint. The new results show that current detectors can often identify encoded covers, but such detection does not itself reveal or recover the concealed artifact.
+
+The revision adds strict pre-feature deduplication with zero leakage under the declared audit, 250 human-authored secondary controls, genuine leave-one-model-family-out tests, data-adaptive text detectors, an exact-model-aware attacker, and validation-frozen low-FPR analysis with exact false-positive counts. It also adds entropy-gated embedding and matched Q4\_K\_M/Q8\_0 recovery and cross-quantization detection. The complete declared computational matrices and their validation finished successfully without generation execution failures. Adverse outcomes remain visible: human-control false positives reveal domain sensitivity, strict entropy gating lowers capacity and lengthens covers while leaving six payloads incomplete, model-aware detection remains strong, visible-text transport is weaker than token-preserving recovery, and the paired analysis does not support a Q8 recovery advantage.
+
+The main manuscript retains its artifact-hiding identity, equations, algorithms, primary results, and principal figures, with the new evidence summarized in one compact Results subsection and table. Condition-level methods, thresholds, counts, calibration, provenance, and limitations are provided in the Supplementary Information. The paper does not claim a cryptographic secrecy proof, universal undetectability, or robustness under every text transformation.
+
+The existing GitHub and Zenodo statements remain truthful. Final V3 Zenodo synchronization, archived-version confirmation, and DOI wording synchronization are listed as manual pre-submission steps and are not represented as already complete.
+
+Thank you for considering this revision.
+
+Sincerely,
+
+Alexander V. Mantzaris, Associate Professor \\
+School of Data, Mathematical, and Statistical Sciences, UCF \\
+4000 University Blvd., Orlando, FL 32817, USA \\
+alexander.mantzaris@ucf.edu \\
+TCII 211C, +1-407-692-0280
+\end{letter}
+\end{document}
