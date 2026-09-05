@@ -1,4 +1,7 @@
 \documentclass[fleqn,10pt]{wlscirep}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL paperV2/scientific_reports/supplementary2.tex   Wed Aug 19 22:43:19 2026
+%DIF ADD paperV3/scientific_reports/supplementary3.tex   Fri Sep  4 21:30:18 2026
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb}
@@ -24,21 +27,107 @@
 \renewcommand{\thealgorithm}{S\arabic{algorithm}}
 \modulolinenumbers[5]
 
-\hypersetup{pdftitle={RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text},pdfauthor={Alexander V. Mantzaris}}
-\title{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text}
+%DIF 27a27
+\hypersetup{pdftitle={RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text},pdfauthor={Alexander V. Mantzaris}} %DIF >
+%DIF -------
+\title{\DIFdel{Supplementary Information for RankCloak: Hiding Synthetic Cryptographic Artifacts in Plain English with Language Models}\\[0.6em]\DIFadd{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text}}
 
 \author[1,*]{Alexander V. Mantzaris}
 \affil[1]{School of Data, Mathematical, and Statistical Sciences, University of Central Florida, Orlando, FL, United States of America}
 \affil[*]{Correspondence: alexander.mantzaris@ucf.edu}
 
 \begin{abstract}
-This Supplementary Information provides detailed methods and supporting evidence for RankCloak. It explains how synthetic cryptographic artifacts are converted into language-model token choices, reconstructed by the receiver, and evaluated for capacity, robustness, text quality, and detectability. Additional analyses examine human-written comparison text, detector generalization across model families, lower- and higher-precision versions of the same model, and embedding at positions with several plausible next words. It also documents statistical procedures, reproducibility information, experimental provenance, and the limits of the evidence.
+\textbf{Deleted V2 abstract}\par
+\DIFdelbegin\DIFdel{This Supplementary Information supports the extended RankCloak methods and the evidence produced supporting the revised manuscript. It specifies deterministic rank ordering, payload codecs, segmented forced spans, replay contracts, filtering, corpus construction, prompt and model identities, and work-unit accounting. It reports recovery strata, multilingual secondary tests, controlled transmission perturbations, automated readability and model-based quality diagnostics, reviewer-relevant ablation contrasts and all topic contrasts, neural detector splits and leakage sensitivity, capacity and quality relationships, computational overhead, and worked examples. Evidence classifications and unresolved boundaries are retained explicitly. The material does not include human evaluation, deployment validation, broad multilingual naturalness evidence, cryptographic-security proof, or a claim of robust visible-text transmission.}\DIFdelend
+\par\medskip
+\textbf{Added final V3 abstract}\par
+\DIFaddbegin\DIFadd{This Supplementary Information provides detailed methods and supporting evidence for RankCloak. It explains how synthetic cryptographic artifacts are converted into language-model token choices, reconstructed by the receiver, and evaluated for capacity, robustness, text quality, and detectability. Additional analyses examine human-written comparison text, detector generalization across model families, lower- and higher-precision versions of the same model, and embedding at positions with several plausible next words. It also documents statistical procedures, reproducibility information, experimental provenance, and the limits of the evidence.}\DIFaddend
 \end{abstract}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
+\setlength{\emergencystretch}{3em}
+\sloppy
 \maketitle
-\begin{center}\large Supplementary Information\end{center}
-\linenumbers
+\DIFaddbegin \begin{center}\large \DIFadd{Supplementary Information}\end{center}
+\DIFaddend \linenumbers
 \raggedbottom
 
 \section*{Supplementary Note S1: Extended RankCloak methods}\label{si:s1}
@@ -67,11 +156,13 @@ The fixed sentence-tail policy of 20 to 60 tokens is Algorithm 3 in the main Met
 
 \subsection*{Replay modes and structured endpoints}
 
-The exact model revision, tokenizer, quantization and backend, prompt rendering, rank rule, filter, codec, span convention, and any segmentation, tail, or lead-in policy form a predeclared sender--receiver protocol configuration. Choosing this configuration is comparable to agreeing on a codec implementation and does not necessarily require renegotiation for each payload. A prompt phrase can be shared contextual information, but RankCloak does not define it as a cryptographic key.
+The \DIFaddbegin \DIFadd{exact model revision, tokenizer, quantization and backend, prompt rendering, rank rule, filter, codec, span convention, and any segmentation, tail, or lead-in policy form a predeclared sender--receiver protocol configuration. Choosing this configuration is comparable to agreeing on a codec implementation and does not necessarily require renegotiation for each payload. A prompt phrase can be shared contextual information, but RankCloak does not define it as a cryptographic key.
+}
 
-The main Algorithms 1 and 2 define the saved-token exact-copy condition. In the experiments, payload-bearing token IDs were retained in the generation records and supplied to the decoder to hold tokenization and history fixed; the decoder nevertheless recomputes contextual ranks and performs codec inversion. A token-preserving channel could transmit that exact stream, whereas detokenized-text replay renders the visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic; it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step, and cross-model replay uses a different declared model/tokenizer pair. Thus retaining IDs is neither irrelevant nor evidence that a separate secret copy of them must be transmitted for every message; it defines one evaluated recovery condition distinct from ordinary visible-text and transformed-text delivery.
+\DIFadd{The }\DIFaddend main Algorithms 1 and 2 define \DIFaddbegin \DIFadd{the }\DIFaddend saved-token exact-copy \DIFdelbegin \DIFdel{recovery. Detokenized-text replay instead renders the complete }\DIFdelend \DIFaddbegin \DIFadd{condition. In the experiments, payload-bearing token IDs were retained in the generation records and supplied to the decoder to hold tokenization and history fixed; the decoder nevertheless recomputes contextual ranks and performs codec inversion. A token-preserving channel could transmit that exact stream, whereas detokenized-text replay renders the }\DIFaddend visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic; it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step\DIFdelbegin \DIFdel{. Cross-model }\DIFdelend \DIFaddbegin \DIFadd{, and cross-model }\DIFaddend replay uses a different declared model/tokenizer pair. \DIFaddbegin \DIFadd{Thus retaining IDs is neither irrelevant nor evidence that a separate secret copy of them must be transmitted for every message; it defines one evaluated recovery condition distinct from ordinary visible-text and transformed-text delivery.
+}
 
-For every mode, the record distinguishes exact forced-rank replay, exact representation recovery, and exact serialized-payload recovery. The primary endpoint requires the last of these, including byte length and SHA-256 identity. Failures retain the first segment and forced position where available, expected and observed token IDs and ranks, the context digest, and boundary offsets. Payload group and model by payload group endpoints require all constituent trials to pass. Natural tails never enter any recovery endpoint.
+\DIFaddend For every mode, the record distinguishes exact forced-rank replay, exact representation recovery, and exact serialized-payload recovery. The primary endpoint requires the last of these, including byte length and SHA-256 identity. Failures retain the first segment and forced position where available, expected and observed token IDs and ranks, the context digest, and boundary offsets. Payload group and model by payload group endpoints require all constituent trials to pass. Natural tails never enter any recovery endpoint.
 
 \section*{Supplementary Note S2: Corpus, models, prompts, and work-unit accounting}\label{si:s2}
 
@@ -202,7 +293,7 @@ Hex nibble, segmented multi-topic & 720 & 720 & Forced spans decoded; tails igno
 \caption{\label{tab:primary-strata}Primary recovery by model and protocol. Every row uses the same exact serialized-payload endpoint. These overlapping summaries are descriptive strata, not additional independent trials.}
 \end{table}
 
-At the frozen trial endpoint, exact recovery was observed in all 6,480 trials (Wilson 95\% CI [0.9994075335, 1.0000000000]). At the strict payload endpoint, a payload passed only when every observed model, prompt, and protocol trial passed: 480/480, CI [0.9920605009, 1.0000000000]. At the endpoint grouped by model and payload, the result was 1,440/1,440, CI [0.9973394178, 1.0000000000]. Exact rank replay was retained as a diagnostic; the confirmatory outcome was the original serialized payload bytes and digest.
+At the frozen trial endpoint, \DIFdelbegin \DIFdel{6,480/}\DIFdelend \DIFaddbegin \DIFadd{exact recovery was observed in all }\DIFaddend 6,480 trials \DIFdelbegin \DIFdel{recovered, with }\DIFdelend \DIFaddbegin \DIFadd{(}\DIFaddend Wilson 95\% CI [0.9994075335, 1.0000000000]\DIFaddbegin \DIFadd{)}\DIFaddend . At the strict payload endpoint, a payload passed only when every observed model, prompt, and protocol trial passed: 480/480, CI [0.9920605009, 1.0000000000]. At the endpoint grouped by model and payload, the result was 1,440/1,440, CI [0.9973394178, 1.0000000000]. Exact rank replay was retained as a diagnostic; the confirmatory outcome was the original serialized payload bytes and digest.
 
 \begin{table}[H]
 \centering
@@ -225,7 +316,7 @@ These results do not test translation, code switching, cross-language decoding, 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/robustness_recovery.pdf}
+\includegraphics[width=0.97\textwidth]{figures/robustness_recovery.pdf}
 \caption{\label{fig:s1}\textbf{Complete recovery matrix and failure diagnostics.} The upper panels distinguish saved-token, visible-text, transformed-text, limited canonicalization, and cross-model replay. Intervals use source-cover Wilson calculations rather than treating two cross-model decoders as independent covers. The lower panels summarize first-divergence categories. Those categories identify the first recorded mismatch and are descriptive, not causal proof. Unavailable Mistral limited-mitigation cells are excluded rather than counted as failures.}
 \end{figure}
 
@@ -295,7 +386,7 @@ The computational stimulus design selected 504 rows balanced over seven conditio
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/automated_readability.pdf}
+\includegraphics[width=0.97\textwidth]{figures/automated_readability.pdf}
 \caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload natural tails. These measures are automated surface properties, not human ratings, evidence of human-perceived naturalness, or substitutes for a participant study; no participant was recruited and no rating was collected.}
 \end{figure}
 
@@ -334,7 +425,7 @@ Relative to dynamic stopping, no tail increased effective rate by 3.171551 bits 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ablation_summary.pdf}
+\includegraphics[width=0.97\textwidth]{figures/ablation_summary.pdf}
 \caption{\label{fig:ablation-full}\textbf{Ablation summary.} Selected paired level-minus-canonical estimates are shown with payload-bootstrap 95\% confidence intervals. Rows are exploratory/post-outcome evidence extraction from retained outputs. The Mistral roundtrip-stable-filter cell is unavailable for 48 work units; unavailable is not an execution failure. No-tail rate gains primarily reflect deletion of non-payload tokens and are not quality evidence.}
 \end{figure}
 
@@ -374,7 +465,7 @@ A separate exploratory subgroup display defines tail gain as full-message mean t
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/tail_gain_by_prompt_category.pdf}
+\includegraphics[width=0.97\textwidth]{figures/tail_gain_by_prompt_category.pdf}
 \caption{\label{fig:tail-gain}\textbf{Exploratory tail gain by prompt category.} Tail gain is full-message mean token log probability minus forced-span mean token log probability. The 8,280 paired segments arise from 1,440 segmented trials across three models, six prompt categories, and two topic schedules, yielding 36 displayed groups of 230 segments each. All group means are positive and range from +2.825721 to +3.652576. Uncertainty uses 2,000-resample payload-cluster bootstrapping stratified by payload class; independent payload-cluster counts are 40 for single-topic groups and 190 for multi-topic groups. This exploratory subgroup estimand is not the adjusted schedule contrast: adjusted source-quality contrasts range from -0.02214 to +0.01881, with Holm-adjusted \(p=1.0\) for all three models.}
 \end{figure}
 
@@ -406,19 +497,20 @@ Payload throughput & Qwen & -0.009378 & [-0.043829, 0.025073] & 0.595439 \\
 \bottomrule
 \end{longtable}
 
-\section*{Supplementary Note S7: Historical V2 neural steganalysis and leakage sensitivity}\label{si:s7}
+\section*{Supplementary Note S7: \DIFdelbegin \DIFdel{Neural }\DIFdelend \DIFaddbegin \DIFadd{Historical V2 neural }\DIFaddend steganalysis and leakage sensitivity}\label{si:s7}
 
 \subsection*{Corpus, architectures, and splits}
 
-This note preserves the historical V2 detector benchmark for continuity and work-unit provenance; its 15,840-row splits and results are not the current detector estimates and are superseded by the strictly deduplicated V3 analysis in Supplementary Notes S11--S12. The historical corpus contains 7,920 RankCloak covers and 7,920 matched ordinary controls, grouped by 480 payloads. Payload groups, rather than rows, were assigned to train, validation, and test sets. The TextCNN-equivalent implementation lowercases and tokenizes text into a 30,000-term vocabulary, truncates or pads to 256 tokens, uses 300-dimensional learned embeddings and 100 filters at each of widths 3 and 5, applies dropout 0.5, and optimizes with Adam at learning rate 0.001. The pretrained DeBERTa-v3-base classifier uses maximum length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs.
+\DIFdelbegin \DIFdel{The frozen corpus contains }\DIFdelend \DIFaddbegin \DIFadd{This note preserves the historical V2 detector benchmark for continuity and work-unit provenance; its }\DIFaddend 15,\DIFdelbegin \DIFdel{840 rows, }\DIFdelend \DIFaddbegin \DIFadd{840-row splits and results are not the current detector estimates and are superseded by the strictly deduplicated V3 analysis in Supplementary Notes S11--S12. The historical corpus contains }\DIFaddend 7,920 RankCloak covers and 7,920 matched ordinary controls, grouped by 480 payloads. Payload groups, rather than rows, were assigned to train, validation, and test sets. The TextCNN-equivalent implementation lowercases and tokenizes text into a 30,000-term vocabulary, truncates or pads to 256 tokens, uses 300-dimensional learned embeddings and 100 filters at each of widths 3 and 5, applies dropout 0.5, and optimizes with Adam at learning rate 0.001. The pretrained DeBERTa-v3-base classifier uses maximum length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs.
 For each architecture, the frozen design comprises one matched split, 18 held-out-template splits, three leave-one-model splits, and six leave-one-codec splits. Thus 28 fits per architecture and 56/56 fits overall completed, producing 55,440 prediction rows. No row-level reassignment was used to improve performance.
 
-For this historical benchmark, the reported endpoints were ROC-AUC and balanced accuracy. Precision, Brier score, and true-positive rate at false-positive rate at most 1\% were supplementary/exploratory post-freeze measures. All confidence intervals for an individual split use 2,000 payload-group bootstrap resamples. Ranges across heterogeneous held-out splits are descriptive minima and maxima, not confidence intervals. Every historical split-level estimate and interval remains in the machine-readable supplementary CSV (\path{supplementary_tables/detector_split_metrics.csv}).
+\DIFdelbegin \DIFdel{Primary reported endpoints are }\DIFdelend \DIFaddbegin \DIFadd{For this historical benchmark, the reported endpoints were }\DIFaddend ROC-AUC and balanced accuracy. Precision, Brier score, and true-positive rate at false-positive rate at most 1\% \DIFdelbegin \DIFdel{are explicitly }\DIFdelend \DIFaddbegin \DIFadd{were }\DIFaddend supplementary/exploratory post-freeze measures. All confidence intervals for an individual split use 2,000 payload-group bootstrap resamples. Ranges across heterogeneous held-out splits are descriptive minima and maxima, not confidence intervals. Every \DIFaddbegin \DIFadd{historical }\DIFaddend split-level estimate and interval \DIFdelbegin \DIFdel{for all retained metrics is supplied }\DIFdelend \DIFaddbegin \DIFadd{remains }\DIFaddend in the machine-readable supplementary CSV (\path{supplementary_tables/detector_split_metrics.csv}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/neural_detector_performance.pdf}
-\caption{\label{fig:detector-full}\textbf{Historical V2 neural-detector evaluation.} The six panels preserve the earlier frozen endpoints and supplementary exploratory metrics; current strictly deduplicated estimates are in Supplementary Note S12. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
+\includegraphics[width=0.97\textwidth]{figures/neural_detector_performance.pdf}
+\caption{\label{fig:detector-full}\DIFdelbeginFL \textbf{\DIFdelFL{Full neural-detector evaluation.}} %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{Historical V2 neural-detector evaluation.}} \DIFaddendFL The six panels \DIFdelbeginFL \DIFdelFL{report confirmatory }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{preserve the earlier }\DIFaddendFL frozen endpoints \DIFdelbeginFL \DIFdelFL{together with }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{and }\DIFaddendFL supplementary exploratory metrics\DIFaddbeginFL \DIFaddFL{; current strictly deduplicated estimates are in Supplementary Note S12}\DIFaddendFL . Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
 \end{figure}
 
 \begin{table}[H]
@@ -428,19 +520,19 @@ For this historical benchmark, the reported endpoints were ROC-AUC and balanced 
 \toprule
 Architecture & Matched metric & Estimate & Payload-bootstrap 95\% CI & Status \\
 \midrule
-TextCNN-equivalent & ROC-AUC & 0.990190 & [0.987740, 0.992682] & Historical V2 frozen \\
-TextCNN-equivalent & Balanced accuracy & 0.951010 & [0.943456, 0.958466] & Historical V2 frozen \\
+TextCNN-equivalent & ROC-AUC & 0.990190 & [0.987740, 0.992682] & \DIFdelbeginFL \DIFdelFL{Confirmatory }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Historical V2 }\DIFaddendFL frozen \\
+TextCNN-equivalent & Balanced accuracy & 0.951010 & [0.943456, 0.958466] & \DIFdelbeginFL \DIFdelFL{Confirmatory }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Historical V2 }\DIFaddendFL frozen \\
 TextCNN-equivalent & Precision & 0.954684 & [0.945891, 0.963421] & Supplementary exploratory \\
 TextCNN-equivalent & Brier score & 0.039320 & [0.033497, 0.045453] & Supplementary exploratory \\
 TextCNN-equivalent & TPR at FPR \(\leq1\%\) & 0.840909 & [0.806517, 0.889752] & Supplementary exploratory \\
-DeBERTa-v3-base & ROC-AUC & 0.999834 & [0.999696, 0.999939] & Historical V2 frozen \\
-DeBERTa-v3-base & Balanced accuracy & 0.991919 & [0.987654, 0.995665] & Historical V2 frozen \\
+DeBERTa-v3-base & ROC-AUC & 0.999834 & [0.999696, 0.999939] & \DIFdelbeginFL \DIFdelFL{Confirmatory }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Historical V2 }\DIFaddendFL frozen \\
+DeBERTa-v3-base & Balanced accuracy & 0.991919 & [0.987654, 0.995665] & \DIFdelbeginFL \DIFdelFL{Confirmatory }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Historical V2 }\DIFaddendFL frozen \\
 DeBERTa-v3-base & Precision & 0.999487 & [0.998393, 1.000000] & Supplementary exploratory \\
 DeBERTa-v3-base & Brier score & 0.007895 & [0.004432, 0.011787] & Supplementary exploratory \\
 DeBERTa-v3-base & TPR at FPR \(\leq1\%\) & 0.993434 & [0.988724, 0.998387] & Supplementary exploratory \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:detector-matched}Historical V2 matched detector endpoints, superseded for current claims by Supplementary Note S12. Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.}
+\caption{\label{tab:detector-matched}\DIFdelbeginFL \DIFdelFL{Matched }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Historical V2 matched }\DIFaddendFL detector endpoints\DIFaddbeginFL \DIFaddFL{, superseded for current claims by Supplementary Note S12}\DIFaddendFL . Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.}
 \end{table}
 
 \begin{table}[H]
@@ -458,12 +550,12 @@ DeBERTa-v3-base & Leave one model (3) & [0.996772, 0.999979] & [0.945455, 0.9704
 DeBERTa-v3-base & Leave one codec (6) & [0.997917, 1.000000] & [0.927778, 0.998611] \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:detector-ranges}Historical V2 ranges across heterogeneous frozen held-out splits. These ranges are not pooled confidence intervals; current leave-one-family-out results are in Supplementary Note S12.}
+\caption{\label{tab:detector-ranges}\DIFdelbeginFL \DIFdelFL{Ranges }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Historical V2 ranges }\DIFaddendFL across heterogeneous frozen held-out splits. These ranges are not pooled confidence intervals\DIFaddbeginFL \DIFaddFL{; current leave-one-family-out results are in Supplementary Note S12}\DIFaddendFL .}
 \end{table}
 
 \subsection*{Leakage, exclusion sensitivity, repeatability, and cost}
 
-In the historical V2 benchmark, exact train/test visible-text identity and exact tokenizer-sequence identity checks passed in all 28 frozen split definitions. A separate normalized character \(n\)-gram diagnostic found 53 train/test near-duplicate pairs, of which 44 crossed payload groups, affecting 16 splits. Excluding affected test payload groups without retraining changed ROC-AUC from -0.001925 to +0.004568 for TextCNN-equivalent and from -0.000038 to +0.000166 for DeBERTa-v3-base. Because that sensitivity did not rebuild training data, it motivated and is superseded by the pre-feature component construction and zero-linkage audit in Supplementary Note S11.
+\DIFdelbegin \DIFdel{Exact }\DIFdelend \DIFaddbegin \DIFadd{In the historical V2 benchmark, exact }\DIFaddend train/test visible-text identity and exact tokenizer-sequence identity checks passed in all 28 frozen split definitions. A separate normalized character \(n\)-gram diagnostic \DIFdelbegin \DIFdel{at its declared threshold }\DIFdelend found 53 train/test near-duplicate pairs, of which 44 crossed payload groups, affecting 16 splits. Excluding affected test payload groups without retraining changed ROC-AUC from -0.001925 to +0.004568 for TextCNN-equivalent and from -0.000038 to +0.000166 for DeBERTa-v3-base\DIFdelbegin \DIFdel{; other observed endpoint shifts were also small. This threshold-dependent sensitivity does }\DIFdelend \DIFaddbegin \DIFadd{. Because that sensitivity did }\DIFaddend not rebuild training data\DIFdelbegin \DIFdel{and therefore does not eliminate the design limitation}\DIFdelend \DIFaddbegin \DIFadd{, it motivated and is superseded by the pre-feature component construction and zero-linkage audit in Supplementary Note S11}\DIFaddend .
 
 Fixed-seed reruns on the same CUDA device produced exact metric equality for both architectures. This is evidence of same-device repeatability only. CPU neural training was infeasible in the retained run and no CPU result was substituted; the study makes no CPU/GPU equivalence claim. The representative CUDA benchmark recorded TextCNN wall/training times 91.358113/9.497936 seconds and peak allocated VRAM 306,247,680 bytes; DeBERTa values were 1,536.660910/1,425.063414 seconds and 6,380,851,200 bytes.
 
@@ -514,7 +606,7 @@ This theoretical validation asks whether the retained fields satisfy the declare
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/capacity_tail_validation.pdf}
+\includegraphics[width=0.97\textwidth]{figures/capacity_tail_validation.pdf}
 \caption{\label{fig:capacity-validation}\textbf{Theoretical capacity and tail validation.} Fixed-radix payload length and effective full-message rate are checked against their declared algebraic bounds, while the cover-length residual isolates tokens beyond the forced payload positions. Across 17,424 retained records, 7,008 were evaluable for the complete plotted capacity and supported quality-bound checks; no forced-position, rate-bound, or evaluated quality-bound violation occurred. Positive residuals in 2,976 records represent natural tails or other cover overhead. This validation tests retained-field identities and differs from the empirical common-support frontier in Main Fig. 2; neither analysis is evidence of human-perceived naturalness.}
 \end{figure}
 
@@ -545,7 +637,7 @@ Across the 18 cells, mean inclusive generation time ranged from 1.674368 to 16.0
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/computational_overhead.pdf}
+\includegraphics[width=0.97\textwidth]{figures/computational_overhead.pdf}
 \caption{\label{fig:overhead-full}\textbf{Complete computational overhead summary.} Primary model and protocol cells show payload-bootstrap summaries for inclusive generation, encoding setup, supported recovery, throughput, and effective rate. The setup panel uses a logarithmic axis because cells span several orders of magnitude. CPU time and repeated warm-up measurements were unavailable and wall time is not relabeled as CPU time.}
 \end{figure}
 
@@ -637,11 +729,11 @@ Exact-copy recovery & 6,480/6,480 primary serialized payloads recovered from sav
 Transmission & Controlled frozen perturbations reveal severe fragility; tail-only truncation preserves recovery when only ignored tokens are removed & Broad edit robustness or general mitigation \\
 Human evaluation & 504 computational stimuli have automated surface/model diagnostics & Human-perceived readability or naturalness; zero participants and ratings \\
 Deployment & No operational channel or deployment traffic was tested & Practical covert communication or real-world validation \\
-Detectability & Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers; high AUC is adverse & Undetectability or resistance to future detectors \\
-Multilingual scope & Exact-copy recovery in 288/288 Spanish and 288/288 Simplified Chinese secondary trials & Broad multilingual naturalness or cross-language generalization \\
+Detectability & Two \DIFdelbegin \DIFdel{neural architectures }\DIFdelend \DIFaddbegin \DIFadd{data-adaptive text-only detectors and an exact-model-aware attacker }\DIFaddend strongly distinguish evaluated covers; high AUC is adverse & Undetectability or resistance to future detectors \\
+Multilingual scope & \DIFaddbegin \DIFadd{Exact-copy recovery in }\DIFaddend 288/288 Spanish and 288/288 Simplified Chinese \DIFdelbegin \DIFdel{exact-copy secondary trials recovered }\DIFdelend \DIFaddbegin \DIFadd{secondary trials }\DIFaddend & Broad multilingual naturalness or cross-language generalization \\
 Unavailable work & 432 predeclared combinations lacked compatible retained outputs & Calling unavailable combinations experimental failures \\
 Model replay & Retained outputs are bound to model/configuration manifests & Fresh local generation replay while configured GGUF files are absent \\
-Detector leakage & Strict pre-feature component split has zero audited cross-partition links & Semantic paraphrases below the declared 0.95 threshold are not excluded \\
+Detector leakage & \DIFdelbegin \DIFdel{Exact identity checks passed; near-duplicate sensitivity shifts were small }\DIFdelend \DIFaddbegin \DIFadd{Strict pre-feature component split has zero audited cross-partition links }\DIFaddend & \DIFdelbegin \DIFdel{Elimination of the 53-pair/16-split lexical-overlap limitation }\DIFdelend \DIFaddbegin \DIFadd{Semantic paraphrases below the declared 0.95 threshold are not excluded }\DIFaddend \\
 Statistical models & Reported conditional estimates retain diagnostic warnings & Treating three singular mixed-model fits as unqualified evidence; substituting an undeclared fallback \\
 Exploratory analyses & Compact ablation, topic, and auxiliary detector analyses are labeled post-outcome/exploratory where applicable & Recasting them as preregistered confirmatory evidence \\
 Overhead & Retained inclusive wall-time and fixed CUDA benchmark scopes are reported & CPU time, warm-up stability, CPU/GPU equivalence, or hardware-general performance \\
@@ -650,60 +742,68 @@ Cryptography & The carrier can encode outputs from declared cryptographic algori
 \bottomrule
 \end{longtable}
 
-\section*{Supplementary Note S11: Strict detector splits and human-authored secondary controls}\label{si:s11}
+\DIFdelbegin %DIFDELCMD < \bibliographystyle{naturemag-doi}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \section*{\DIFadd{Supplementary Note S11: Strict detector splits and human-authored secondary controls}}\label{si:s11}
 
-\subsection*{Normalization, deduplication, and partition audit}
+\subsection*{\DIFadd{Normalization, deduplication, and partition audit}}
 
-All V3 detector corpora were deduplicated before feature extraction or tokenization. Visible text underwent Unicode NFKC normalization, case folding, Unicode-whitespace collapse, and SHA-256 hashing. If a normalized exact duplicate implicated either member of a RankCloak/control pair, the complete matched pair was removed so that class balance and pairing were preserved. Near duplicates were defined before splitting as cosine similarity at least 0.95 under L2-normalized character-boundary TF-IDF with 3--5 character \(n\)-grams and minimum document frequency two. Payload groups connected by any such edge formed immutable components.
+\DIFadd{All V3 detector corpora were deduplicated before feature extraction or tokenization. Visible text underwent Unicode NFKC normalization, case folding, Unicode-whitespace collapse, and SHA-256 hashing. If a normalized exact duplicate implicated either member of a RankCloak/control pair, the complete matched pair was removed so that class balance and pairing were preserved. Near duplicates were defined before splitting as cosine similarity at least 0.95 under L2-normalized character-boundary TF-IDF with 3--5 character \(n\)-grams and minimum document frequency two. Payload groups connected by any such edge formed immutable components.
+}
 
-One normalized exact-duplicate group implicated two rows in the 15,840-row source corpus. Removing that complete matched pair left 15,838 observations. The remaining audit found 52 near-duplicate pairs, including 44 that crossed payload groups. A deterministic seed-20260831 balancing procedure assigned whole connected components to train, validation, and test. The final audit found zero payload, matched-pair, normalized-text, component, or declared near-duplicate links between partitions (Table~\ref{tab:v3-dedup}). The statement of zero leakage is limited to these declared identities and thresholded edges; it cannot rule out semantic paraphrases below the threshold or guarantee real-world generalization.
+\DIFadd{One normalized exact-duplicate group implicated two rows in the 15,840-row source corpus. Removing that complete matched pair left 15,838 observations. The remaining audit found 52 near-duplicate pairs, including 44 that crossed payload groups. A deterministic seed-20260831 balancing procedure assigned whole connected components to train, validation, and test. The final audit found zero payload, matched-pair, normalized-text, component, or declared near-duplicate links between partitions (Table~\ref{tab:v3-dedup}). The statement of zero leakage is limited to these declared identities and thresholded edges; it cannot rule out semantic paraphrases below the threshold or guarantee real-world generalization.
+}
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{L{0.27\textwidth}r Y}
 \toprule
-Audit item & Count & Interpretation \\
+\DIFaddFL{Audit item }& \DIFaddFL{Count }& \DIFaddFL{Interpretation }\\
 \midrule
-Source observations & 15,840 & Balanced RankCloak and matched ordinary-model controls \\
-Normalized exact groups & 1 & One complete matched pair removed, two rows total \\
-Retained observations & 15,838 & 9,904 train; 2,952 validation; 2,982 test \\
-Declared near-duplicate pairs & 52 & 44 cross-payload; all connected groups kept in one partition \\
-Audited cross-partition links & 0 & Zero for payload, pair, normalized text, component, and declared near duplicate \\
+\DIFaddFL{Source observations }& \DIFaddFL{15,840 }& \DIFaddFL{Balanced RankCloak and matched ordinary-model controls }\\
+\DIFaddFL{Normalized exact groups }& \DIFaddFL{1 }& \DIFaddFL{One complete matched pair removed, two rows total }\\
+\DIFaddFL{Retained observations }& \DIFaddFL{15,838 }& \DIFaddFL{9,904 train; 2,952 validation; 2,982 test }\\
+\DIFaddFL{Declared near-duplicate pairs }& \DIFaddFL{52 }& \DIFaddFL{44 cross-payload; all connected groups kept in one partition }\\
+\DIFaddFL{Audited cross-partition links }& \DIFaddFL{0 }& \DIFaddFL{Zero for payload, pair, normalized text, component, and declared near duplicate }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-dedup}\textbf{Strict detector-corpus construction.} Counts are from the locked V3 deduplication audit. Zero audited leakage applies only under the stated normalization and similarity rule.}
+\caption{\label{tab:v3-dedup}\textbf{\DIFaddFL{Strict detector-corpus construction.}} \DIFaddFL{Counts are from the locked V3 deduplication audit. Zero audited leakage applies only under the stated normalization and similarity rule.}}
 \end{table}
 
-\subsection*{Human-authored control selection and scope}
+\subsection*{\DIFadd{Human-authored control selection and scope}}
 
-The secondary controls came from Databricks Dolly 15k v1.0, revision \texttt{\seqsplit{bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a}}, under CC BY-SA 3.0. Deterministic screening retained responses without automatic quality, personally identifiable information, or unsafe-content flags. The same exact and near-duplicate rules were applied within the human-authored candidates and against the primary corpus. Hungarian assignment matched candidates to RankCloak test texts within available prompt templates using relative word-count plus weighted character-count difference; relative word-count differences above 0.35 were rejected.
+\DIFadd{The secondary controls came from Databricks Dolly 15k v1.0, revision }\texttt{\seqsplit{bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a}}\DIFadd{, under CC BY-SA 3.0. Deterministic screening retained responses without automatic quality, personally identifiable information, or unsafe-content flags. The same exact and near-duplicate rules were applied within the human-authored candidates and against the primary corpus. Hungarian assignment matched candidates to RankCloak test texts within available prompt templates using relative word-count plus weighted character-count difference; relative word-count differences above 0.35 were rejected.
+}
 
-The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs, and no declared near-duplicate links to the primary corpus. Human labels never entered model fitting or threshold selection. The corpus is a bounded secondary computational control, not recruitment, a participant study, a user study, a human rating exercise, or proof of naturalness. Coverage is sparse or absent for several conversational, narrative, and professional templates, and detector performance can include generic machine-versus-human differences.
+\DIFadd{The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs, and no declared near-duplicate links to the primary corpus. Human labels never entered model fitting or threshold selection. The corpus is a bounded secondary computational control, not recruitment, a participant study, a user study, a human rating exercise, or proof of naturalness. Coverage is sparse or absent for several conversational, narrative, and professional templates, and detector performance can include generic machine-versus-human differences.
+}
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{L{0.28\textwidth}r Y}
 \toprule
-Human-control item & Result & Scope \\
+\DIFaddFL{Human-control item }& \DIFaddFL{Result }& \DIFaddFL{Scope }\\
 \midrule
-Selected responses & 250 & Frozen test negatives from Dolly; 16 templates represented \\
-Within-human exact links & 0 & Under NFKC/casefold/whitespace normalization \\
-Within-human near links & 0 & Under the declared 0.95 character-\(n\)-gram rule \\
-Human-to-primary near links & 0 & Same declared rule \\
-Labels used for fitting/thresholds & No & Thresholds came from matched ordinary-model validation controls \\
-Empirical 0.1\% FPR & Unavailable & Only 250 human negatives; at least 1,000 required \\
+\DIFaddFL{Selected responses }& \DIFaddFL{250 }& \DIFaddFL{Frozen test negatives from Dolly; 16 templates represented }\\
+\DIFaddFL{Within-human exact links }& \DIFaddFL{0 }& \DIFaddFL{Under NFKC/casefold/whitespace normalization }\\
+\DIFaddFL{Within-human near links }& \DIFaddFL{0 }& \DIFaddFL{Under the declared 0.95 character-\(n\)-gram rule }\\
+\DIFaddFL{Human-to-primary near links }& \DIFaddFL{0 }& \DIFaddFL{Same declared rule }\\
+\DIFaddFL{Labels used for fitting/thresholds }& \DIFaddFL{No }& \DIFaddFL{Thresholds came from matched ordinary-model validation controls }\\
+\DIFaddFL{Empirical 0.1\% FPR }& \DIFaddFL{Unavailable }& \DIFaddFL{Only 250 human negatives; at least 1,000 required }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-human-design}Human-authored secondary-control design and audit.}
+\caption{\label{tab:v3-human-design}\DIFaddFL{Human-authored secondary-control design and audit.}}
 \end{table}
 
-\section*{Supplementary Note S12: Deduplicated, unseen-family, model-aware, and low-FPR detection}\label{si:s12}
+\section*{\DIFadd{Supplementary Note S12: Deduplicated, unseen-family, model-aware, and low-FPR detection}}\label{si:s12}
 
-The text-only attackers reuse the fixed V1 TextCNN and pinned \path{microsoft/deberta-v3-base} revision \texttt{\seqsplit{8ccc9b6f36199bec6961081d44eb72fb3f7353f3}}. Their architectures and hyperparameters were not tuned on V3 test data. They are data-adaptive black-box attackers because they are fitted specifically to distinguish RankCloak from matched ordinary-model output. The model-aware logistic attacker instead receives saved token log probabilities from the exact generation model and uses summary surprisal features. Its L2 regularization value was chosen from 0.01, 0.1, 1, and 10 by validation ROC-AUC. Rank-only fields were excluded because ordinary-control ranks were not stored.
+\DIFadd{The text-only attackers reuse the fixed V1 TextCNN and pinned }\path{microsoft/deberta-v3-base} \DIFadd{revision }\texttt{\seqsplit{8ccc9b6f36199bec6961081d44eb72fb3f7353f3}}\DIFadd{. Their architectures and hyperparameters were not tuned on V3 test data. They are data-adaptive black-box attackers because they are fitted specifically to distinguish RankCloak from matched ordinary-model output. The model-aware logistic attacker instead receives saved token log probabilities from the exact generation model and uses summary surprisal features. Its L2 regularization value was chosen from 0.01, 0.1, 1, and 10 by validation ROC-AUC. Rank-only fields were excluded because ordinary-control ranks were not stored.
+}
 
-Matched fitting used 9,904 training and 2,952 validation observations; the test had 1,491 positives and 1,491 negatives. For each leave-one-family-out fit, the target family was absent from both training and validation, and evaluation used only its 497 positive and 497 negative observations in held test components. Table~\ref{tab:v3-detector-main} reports the adverse matched results and the range across the three genuine family holdouts.
+\DIFadd{Matched fitting used 9,904 training and 2,952 validation observations; the test had 1,491 positives and 1,491 negatives. For each leave-one-family-out fit, the target family was absent from both training and validation, and evaluation used only its 497 positive and 497 negative observations in held test components. Table~\ref{tab:v3-detector-main} reports the adverse matched results and the range across the three genuine family holdouts.
+}
 
 \begin{table}[H]
 \centering
@@ -711,17 +811,18 @@ Matched fitting used 9,904 training and 2,952 validation observations; the test 
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\textwidth}{L{0.22\textwidth}L{0.20\textwidth}L{0.23\textwidth}Y}
 \toprule
-Detector & Matched ROC-AUC (95\% CI) & Matched normalized 0--1\% pAUC & Leave-one-family-out ROC-AUC range \\
+\DIFaddFL{Detector }& \DIFaddFL{Matched ROC-AUC (95\% CI) }& \DIFaddFL{Matched normalized 0--1\% pAUC }& \DIFaddFL{Leave-one-family-out ROC-AUC range }\\
 \midrule
-TextCNN & 0.9868 [0.9819, 0.9913] & 0.6652 & [0.9186, 0.9784] \\
-DeBERTa-v3-base & 0.9994 [0.9984, 1.0000] & 0.9948 & [0.9972, 1.0000] \\
-Model-aware surprisal & 0.999995 [0.999970, 1.000000] & 0.999460 & [0.999943, 1.000000] \\
+\DIFaddFL{TextCNN }& \DIFaddFL{0.9868 }[\DIFaddFL{0.9819, 0.9913}] & \DIFaddFL{0.6652 }& [\DIFaddFL{0.9186, 0.9784}] \\
+\DIFaddFL{DeBERTa-v3-base }& \DIFaddFL{0.9994 }[\DIFaddFL{0.9984, 1.0000}] & \DIFaddFL{0.9948 }& [\DIFaddFL{0.9972, 1.0000}] \\
+\DIFaddFL{Model-aware surprisal }& \DIFaddFL{0.999995 }[\DIFaddFL{0.999970, 1.000000}] & \DIFaddFL{0.999460 }& [\DIFaddFL{0.999943, 1.000000}] \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-detector-main}\textbf{Detection on strictly deduplicated components.} The matched test has 1,491 observations per class. Ranges summarize three distinct held-family tests and are not pooled confidence intervals. Higher values are adverse for concealment.}
+\caption{\label{tab:v3-detector-main}\textbf{\DIFaddFL{Detection on strictly deduplicated components.}} \DIFaddFL{The matched test has 1,491 observations per class. Ranges summarize three distinct held-family tests and are not pooled confidence intervals. Higher values are adverse for concealment.}}
 \end{table}
 
-ROC-AUC used tie-aware empirical ranks. The normalized 0--1\% partial AUC was the exact empirical false-positive-budget step envelope divided by 0.01; no score or ROC vertex was interpolated. At target \(\alpha\), the validation threshold maximized TPR subject to no more than \(\lfloor\alpha n_{\rm neg}\rfloor\) false positives, with conservative tie breaking. The threshold was then frozen for test. A target was reported only if validation and test both contained at least \(1/\alpha\) negatives. Confidence intervals used 2,000 percentile bootstrap resamples of complete deduplication clusters.
+\DIFadd{ROC-AUC used tie-aware empirical ranks. The normalized 0--1\% partial AUC was the exact empirical false-positive-budget step envelope divided by 0.01; no score or ROC vertex was interpolated. At target \(\alpha\), the validation threshold maximized TPR subject to no more than \(\lfloor\alpha n_{\rm neg}\rfloor\) false positives, with conservative tie breaking. The threshold was then frozen for test. A target was reported only if validation and test both contained at least \(1/\alpha\) negatives. Confidence intervals used 2,000 percentile bootstrap resamples of complete deduplication clusters.
+}
 
 \begin{table}[H]
 \centering
@@ -729,61 +830,69 @@ ROC-AUC used tie-aware empirical ranks. The normalized 0--1\% partial AUC was th
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabularx}{\textwidth}{L{0.17\textwidth}L{0.14\textwidth}r r L{0.18\textwidth}L{0.18\textwidth}Y}
 \toprule
-Detector & Evaluation & Val.\ negatives & Test negatives & Test TPR/FPR at frozen 1\% threshold & Exact false positives & Frozen 0.1\% result \\
+\DIFaddFL{Detector }& \DIFaddFL{Evaluation }& \DIFaddFL{Val.\ negatives }& \DIFaddFL{Test negatives }& \DIFaddFL{Test TPR/FPR at frozen 1\% threshold }& \DIFaddFL{Exact false positives }& \DIFaddFL{Frozen 0.1\% result }\\
 \midrule
-TextCNN & Matched & 1,476 & 1,491 & 0.8317/0.0127 & 19/1,491 & TPR 0.4829; FPR 0.0013; 2/1,491 FP \\
-DeBERTa & Matched & 1,476 & 1,491 & 0.9913/0.0007 & 1/1,491 & TPR 0.9886; FPR 0.0007; 1/1,491 FP \\
-Model-aware & Matched & 1,476 & 1,491 & 0.9987/0.0020 & 3/1,491 & TPR 0.9987; FPR 0.0020; 3/1,491 FP \\
-TextCNN & Held family range & 984 & 497 & TPR 0.7103--0.8330; FPR 0.0201--0.0704 & 10--35/497 & Unavailable: fewer than 1,000 negatives \\
-DeBERTa & Held family range & 984 & 497 & TPR 0.9759--1.0000; FPR 0.0040--0.0563 & 2--28/497 & Unavailable: fewer than 1,000 negatives \\
-Model-aware & Held family range & 984 & 497 & TPR 0.9920--1.0000; FPR 0.0000--0.0060 & 0--3/497 & Unavailable: fewer than 1,000 negatives \\
+\DIFaddFL{TextCNN }& \DIFaddFL{Matched }& \DIFaddFL{1,476 }& \DIFaddFL{1,491 }& \DIFaddFL{0.8317/0.0127 }& \DIFaddFL{19/1,491 }& \DIFaddFL{TPR 0.4829; FPR 0.0013; 2/1,491 FP }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Matched }& \DIFaddFL{1,476 }& \DIFaddFL{1,491 }& \DIFaddFL{0.9913/0.0007 }& \DIFaddFL{1/1,491 }& \DIFaddFL{TPR 0.9886; FPR 0.0007; 1/1,491 FP }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Matched }& \DIFaddFL{1,476 }& \DIFaddFL{1,491 }& \DIFaddFL{0.9987/0.0020 }& \DIFaddFL{3/1,491 }& \DIFaddFL{TPR 0.9987; FPR 0.0020; 3/1,491 FP }\\
+\DIFaddFL{TextCNN }& \DIFaddFL{Held family range }& \DIFaddFL{984 }& \DIFaddFL{497 }& \DIFaddFL{TPR 0.7103--0.8330; FPR 0.0201--0.0704 }& \DIFaddFL{10--35/497 }& \DIFaddFL{Unavailable: fewer than 1,000 negatives }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Held family range }& \DIFaddFL{984 }& \DIFaddFL{497 }& \DIFaddFL{TPR 0.9759--1.0000; FPR 0.0040--0.0563 }& \DIFaddFL{2--28/497 }& \DIFaddFL{Unavailable: fewer than 1,000 negatives }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Held family range }& \DIFaddFL{984 }& \DIFaddFL{497 }& \DIFaddFL{TPR 0.9920--1.0000; FPR 0.0000--0.0060 }& \DIFaddFL{0--3/497 }& \DIFaddFL{Unavailable: fewer than 1,000 negatives }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-low-fpr}\textbf{Validation-frozen low-FPR operating points.} The observed test FPR can differ from the validation target. Exact counts, rather than interpolated rates, expose calibration drift and empirical resolution.}
+\caption{\label{tab:v3-low-fpr}\textbf{\DIFaddFL{Validation-frozen low-FPR operating points.}} \DIFaddFL{The observed test FPR can differ from the validation target. Exact counts, rather than interpolated rates, expose calibration drift and empirical resolution.}}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/detector_low_fpr.pdf}
-\caption{\label{fig:v3-low-fpr}\textbf{Low-FPR detection under frozen thresholds.} Thresholds were selected on validation and applied once to test. Missing 0.1\% family-holdout results reflect insufficient negative counts, not zero sensitivity.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/detector_low_fpr.pdf}
+}\caption{\label{fig:v3-low-fpr}\textbf{\DIFaddFL{Low-FPR detection under frozen thresholds.}} \DIFaddFL{Thresholds were selected on validation and applied once to test. Missing 0.1\% family-holdout results reflect insufficient negative counts, not zero sensitivity.}}
 \end{figure}
 
-Against the human-authored secondary controls, TextCNN ROC-AUC was 0.7537 (95\% CI [0.7141, 0.7918]) and DeBERTa ROC-AUC was 0.9846 (95\% CI [0.9771, 0.9910]). At the thresholds selected on ordinary-model validation controls for nominal 1\% FPR, TextCNN classified 152/250 human texts as positive (FPR 0.6080; grouped-bootstrap 95\% CI [0.5469, 0.6667]) and DeBERTa classified 97/250 as positive (FPR 0.3880; CI [0.3263, 0.4466]). These high false-positive rates show domain sensitivity and do not reverse the matched-control result.
+\DIFadd{Against the human-authored secondary controls, TextCNN ROC-AUC was 0.7537 (95\% CI }[\DIFadd{0.7141, 0.7918}]\DIFadd{) and DeBERTa ROC-AUC was 0.9846 (95\% CI }[\DIFadd{0.9771, 0.9910}]\DIFadd{). At the thresholds selected on ordinary-model validation controls for nominal 1\% FPR, TextCNN classified 152/250 human texts as positive (FPR 0.6080; grouped-bootstrap 95\% CI }[\DIFadd{0.5469, 0.6667}]\DIFadd{) and DeBERTa classified 97/250 as positive (FPR 0.3880; CI }[\DIFadd{0.3263, 0.4466}]\DIFadd{). These high false-positive rates show domain sensitivity and do not reverse the matched-control result.
+}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/human_control_false_positives.pdf}
-\caption{\label{fig:v3-human-controls}\textbf{Secondary human-authored control evaluation.} Human-authored labels were not used for fitting or threshold selection. The comparison may include general machine-versus-human signal and is not a human evaluation.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/human_control_false_positives.pdf}
+}\caption{\label{fig:v3-human-controls}\textbf{\DIFaddFL{Secondary human-authored control evaluation.}} \DIFaddFL{Human-authored labels were not used for fitting or threshold selection. The comparison may include general machine-versus-human signal and is not a human evaluation.}}
 \end{figure}
 
-The two learned detectors adapt to the observed training distribution; the likelihood-based detector represents an attacker with exact model access. Their strength makes the negative detectability conclusion more credible within the evaluated corpus, but none is a comprehensive adversarial search over all classifiers, prompts, post-processing, models, or deployment distributions.
+\DIFadd{The two learned detectors adapt to the observed training distribution; the likelihood-based detector represents an attacker with exact model access. Their strength makes the negative detectability conclusion more credible within the evaluated corpus, but none is a comprehensive adversarial search over all classifiers, prompts, post-processing, models, or deployment distributions.
+}
 
-\section*{Supplementary Note S13: Entropy-gated payload embedding}\label{si:s13}
+\section*{\DIFadd{Supplementary Note S13: Entropy-gated payload embedding}}\label{si:s13}
 
-\subsection*{Calibration and replay-consistent gate}
+\subsection*{\DIFadd{Calibration and replay-consistent gate}}
 
-The entropy-gated extension was informed by Cai, Ding, and Tao\cite{Cai2025EntropyGuidedWatermarking}, but the objectives differ. Their watermarking detector decides whether text carries a mark; a RankCloak receiver must reconstruct an arbitrary payload. Selective watermark insertion therefore does not by itself establish payload capacity, recoverability, or concealment.
+\DIFadd{The entropy-gated extension was informed by Cai, Ding, and Tao\mbox{%DIFAUXCMD
+\cite{Cai2025EntropyGuidedWatermarking}}\hskip0pt%DIFAUXCMD
+, but the objectives differ. Their watermarking detector decides whether text carries a mark; a RankCloak receiver must reconstruct an arbitrary payload. Selective watermark insertion therefore does not by itself establish payload capacity, recoverability, or concealment.
+}
 
-Six 128-position ordinary top-\(p\) traces per model used temperature 0.8, top-\(p\) 0.95, and the frozen serial sampler, yielding 768 development positions per model. Detector outcomes did not enter calibration. The median threshold defines the moderate gate and the 75th percentile defines the strict gate (Table~\ref{tab:v3-entropy-thresholds}).
+\DIFadd{Six 128-position ordinary top-\(p\) traces per model used temperature 0.8, top-\(p\) 0.95, and the frozen serial sampler, yielding 768 development positions per model. Detector outcomes did not enter calibration. The median threshold defines the moderate gate and the 75th percentile defines the strict gate (Table~\ref{tab:v3-entropy-thresholds}).
+}
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{L{0.34\textwidth}r r r}
 \toprule
-Model & Traces & Median threshold, bit & 75th-percentile threshold, bit \\
+\DIFaddFL{Model }& \DIFaddFL{Traces }& \DIFaddFL{Median threshold, bit }& \DIFaddFL{75th-percentile threshold, bit }\\
 \midrule
-Llama 3 8B Q4\_K\_M & 6 & 0.803259 & 1.705455 \\
-Mistral 7B Q4\_K\_M & 6 & 0.966861 & 1.917551 \\
-Qwen 2.5 7B Q4\_K\_M & 6 & 1.361919 & 2.432557 \\
+\DIFaddFL{Llama 3 8B Q4\_K\_M }& \DIFaddFL{6 }& \DIFaddFL{0.803259 }& \DIFaddFL{1.705455 }\\
+\DIFaddFL{Mistral 7B Q4\_K\_M }& \DIFaddFL{6 }& \DIFaddFL{0.966861 }& \DIFaddFL{1.917551 }\\
+\DIFaddFL{Qwen 2.5 7B Q4\_K\_M }& \DIFaddFL{6 }& \DIFaddFL{1.361919 }& \DIFaddFL{2.432557 }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-entropy-thresholds}Frozen entropy thresholds from ordinary-generation development traces.}
+\caption{\label{tab:v3-entropy-thresholds}\DIFaddFL{Frozen entropy thresholds from ordinary-generation development traces.}}
 \end{table}
 
-Before each embedding-span step, the encoder computed filtered next-token Shannon entropy. An eligible position consumed and forced the next payload rank. An ineligible position used ordinary top-\(p\) sampling under the same allowed-token mask and did not consume a payload rank. Replay recomputed entropy before each observed token, consumed a rank only at eligible positions, ignored observed ranks at sampled skips, and appended every observed token to context. It received no saved gate-position metadata. Gate-position agreement between encoder and replay was exact in the validation audit.
+\DIFadd{Before each embedding-span step, the encoder computed filtered next-token Shannon entropy. An eligible position consumed and forced the next payload rank. An ineligible position used ordinary top-\(p\) sampling under the same allowed-token mask and did not consume a payload rank. Replay recomputed entropy before each observed token, consumed a rank only at eligible positions, ignored observed ranks at sampled skips, and appended every observed token to context. It received no saved gate-position metadata. Gate-position agreement between encoder and replay was exact in the validation audit.
+}
 
-Each gate contained 120 RankCloak attempts and 120 paired length-matched ordinary controls across three model families, eight artifact classes, all 20 supported artifact/representation cells, and two templates. The ungated, moderate, and strict RankCloak conditions shared one stable seed per cell; controls used a separate shared ordinary-generation seed. Fixed-token-budget capacity was evaluated at the paired ungated span length for every attempt. Fixed-payload bits per generated token was defined only when the complete payload was embedded; completion rate and fixed-budget payload fraction are therefore separate endpoints.
+\DIFadd{Each gate contained 120 RankCloak attempts and 120 paired length-matched ordinary controls across three model families, eight artifact classes, all 20 supported artifact/representation cells, and two templates. The ungated, moderate, and strict RankCloak conditions shared one stable seed per cell; controls used a separate shared ordinary-generation seed. Fixed-token-budget capacity was evaluated at the paired ungated span length for every attempt. Fixed-payload bits per generated token was defined only when the complete payload was embedded; completion rate and fixed-budget payload fraction are therefore separate endpoints.
+}
 
 \begin{table}[H]
 \centering
@@ -791,27 +900,30 @@ Each gate contained 120 RankCloak attempts and 120 paired length-matched ordinar
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\textwidth}{L{0.13\textwidth}r r L{0.18\textwidth}r r r Y}
 \toprule
-Gate & Complete & Budget failures & Capacity, bit/token & Capacity \(n\) & Budget payload fraction & Length ratio & Saved-ID/visible recovery \\
+\DIFaddFL{Gate }& \DIFaddFL{Complete }& \DIFaddFL{Budget failures }& \DIFaddFL{Capacity, bit/token }& \DIFaddFL{Capacity \(n\) }& \DIFaddFL{Budget payload fraction }& \DIFaddFL{Length ratio }& \DIFaddFL{Saved-ID/visible recovery }\\
 \midrule
-Ungated & 120/120 & 0 & 7.4001, conditional & 120 & 1.0000 & 1.0000 & 120/120; 62/120 \\
-Moderate median & 120/120 & 0 & 5.7920, conditional & 120 & 0.7518 & 1.3743 & 120/120; 65/120 \\
-Strict 75th percentile & 114/120 & 6 & 4.0513, conditional & 114 & 0.4567 & 2.7615 & 114/120; 68/120 \\
+\DIFaddFL{Ungated }& \DIFaddFL{120/120 }& \DIFaddFL{0 }& \DIFaddFL{7.4001, conditional }& \DIFaddFL{120 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{120/120; 62/120 }\\
+\DIFaddFL{Moderate median }& \DIFaddFL{120/120 }& \DIFaddFL{0 }& \DIFaddFL{5.7920, conditional }& \DIFaddFL{120 }& \DIFaddFL{0.7518 }& \DIFaddFL{1.3743 }& \DIFaddFL{120/120; 65/120 }\\
+\DIFaddFL{Strict 75th percentile }& \DIFaddFL{114/120 }& \DIFaddFL{6 }& \DIFaddFL{4.0513, conditional }& \DIFaddFL{114 }& \DIFaddFL{0.4567 }& \DIFaddFL{2.7615 }& \DIFaddFL{114/120; 68/120 }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-entropy-generation}\textbf{Entropy-gate generation, capacity, length, and recovery.} Capacity is fixed-payload bits per generated token conditional on completion. In particular, strict-gate capacity excludes six incomplete cases and has \(n=114\). Completion and recovery retain all 120 attempts in their denominators.}
+\caption{\label{tab:v3-entropy-generation}\textbf{\DIFaddFL{Entropy-gate generation, capacity, length, and recovery.}} \DIFaddFL{Capacity is fixed-payload bits per generated token conditional on completion. In particular, strict-gate capacity excludes six incomplete cases and has \(n=114\). Completion and recovery retain all 120 attempts in their denominators.}}
 \end{table}
 
-Strict completion by model was 40/40 for Llama, 39/40 for Mistral, and 35/40 for Qwen. The corresponding strict conditional capacity estimates were 6.1322 (\(n=40\)), 2.9207 (\(n=39\)), and 2.9331 (\(n=35\)) bits/token. Visible-text recovery under ungated/moderate/strict conditions was 29/40, 29/40, and 34/40 for Llama; 0/40 in every Mistral condition; and 33/40, 36/40, and 34/40 for Qwen. The aggregate visible-text differences therefore do not establish a general gate benefit.
+\DIFadd{Strict completion by model was 40/40 for Llama, 39/40 for Mistral, and 35/40 for Qwen. The corresponding strict conditional capacity estimates were 6.1322 (\(n=40\)), 2.9207 (\(n=39\)), and 2.9331 (\(n=35\)) bits/token. Visible-text recovery under ungated/moderate/strict conditions was 29/40, 29/40, and 34/40 for Llama; 0/40 in every Mistral condition; and 33/40, 36/40, and 34/40 for Qwen. The aggregate visible-text differences therefore do not establish a general gate benefit.
+}
 
-Relative to ungated output, moderate gating added a mean 20.1083 words, changed unique-word fraction by \(-0.0338\), and changed repeated-bigram fraction by \(+0.0106\). Strict gating added 103.0083 words, changed unique-word fraction by \(-0.1431\), and changed repeated-bigram fraction by \(+0.0423\). These are surface heuristics, not participant judgments. At forced payload positions, mean rank was 88.0552 for ungated and moderate gates and 89.4915 for the strict gate; mean forced-token rank pressure declined from 3.8585 to 3.4276 and 3.0308 nats. Gating changes the contexts in which payload ranks are consumed but does not change the payload-rank distribution for completed paired cells.
+\DIFadd{Relative to ungated output, moderate gating added a mean 20.1083 words, changed unique-word fraction by \(-0.0338\), and changed repeated-bigram fraction by \(+0.0106\). Strict gating added 103.0083 words, changed unique-word fraction by \(-0.1431\), and changed repeated-bigram fraction by \(+0.0423\). These are surface heuristics, not participant judgments. At forced payload positions, mean rank was 88.0552 for ungated and moderate gates and 89.4915 for the strict gate; mean forced-token rank pressure declined from 3.8585 to 3.4276 and 3.0308 nats. Gating changes the contexts in which payload ranks are consumed but does not change the payload-rank distribution for completed paired cells.
+}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/entropy_gate_capacity_recovery.pdf}
-\caption{\label{fig:v3-entropy-capacity}\textbf{Entropy gating, capacity, length, completion, and recovery.} Fixed-payload capacity is conditional on completion; fixed-budget payload fraction and completion retain all attempts.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/entropy_gate_capacity_recovery.pdf}
+}\caption{\label{fig:v3-entropy-capacity}\textbf{\DIFaddFL{Entropy gating, capacity, length, completion, and recovery.}} \DIFaddFL{Fixed-payload capacity is conditional on completion; fixed-budget payload fraction and completion retain all attempts.}}
 \end{figure}
 
-The generated detector test was external to fitting. Historical train and validation rows carrying any of the 16 entropy-study payload instances were excluded, and exact/near-duplicate auditing was repeated before feature extraction. The audit retained 12,714/13,114 rows, removed 400, found zero cross-partition links, and left no condition unavailable. Gate-specific test controls numbered 117 ungated, 113 moderate, and 116 strict; none supports empirical 0.1\% resolution.
+\DIFadd{The generated detector test was external to fitting. Historical train and validation rows carrying any of the 16 entropy-study payload instances were excluded, and exact/near-duplicate auditing was repeated before feature extraction. The audit retained 12,714/13,114 rows, removed 400, found zero cross-partition links, and left no condition unavailable. Gate-specific test controls numbered 117 ungated, 113 moderate, and 116 strict; none supports empirical 0.1\% resolution.
+}
 
 \begin{table}[H]
 \centering
@@ -819,72 +931,77 @@ The generated detector test was external to fitting. Historical train and valida
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabularx}{\textwidth}{L{0.18\textwidth}L{0.12\textwidth}r r r L{0.18\textwidth}Y}
 \toprule
-Detector & Gate & Pos./neg. & ROC-AUC & 0--1\% pAUC & TPR/FPR at frozen 1\% threshold & Exact FP \\
+\DIFaddFL{Detector }& \DIFaddFL{Gate }& \DIFaddFL{Pos./neg. }& \DIFaddFL{ROC-AUC }& \DIFaddFL{0--1\% pAUC }& \DIFaddFL{TPR/FPR at frozen 1\% threshold }& \DIFaddFL{Exact FP }\\
 \midrule
-TextCNN & Ungated & 117/117 & 0.9953 & 0.8536 & 0.8718/0.0085 & 1/117 \\
-TextCNN & Moderate & 113/113 & 0.9825 & 0.7416 & 0.7965/0.0088 & 1/113 \\
-TextCNN & Strict & 116/116 & 0.8850 & 0.4138 & 0.4310/0.0172 & 2/116 \\
-DeBERTa & Ungated & 117/117 & 0.9999 & 0.9854 & 1.0000/0.0085 & 1/117 \\
-DeBERTa & Moderate & 113/113 & 0.9785 & 0.6878 & 0.8496/0.0177 & 2/113 \\
-DeBERTa & Strict & 116/116 & 0.8893 & 0.3484 & 0.4914/0.0259 & 3/116 \\
-Model-aware & Ungated & 117/117 & 1.0000 & 1.0000 & 1.0000/0.0000 & 0/117 \\
-Model-aware & Moderate & 113/113 & 0.9999 & 0.9922 & 0.9381/0.0000 & 0/113 \\
-Model-aware & Strict & 116/116 & 0.9904 & 0.7845 & 0.6552/0.0000 & 0/116 \\
+\DIFaddFL{TextCNN }& \DIFaddFL{Ungated }& \DIFaddFL{117/117 }& \DIFaddFL{0.9953 }& \DIFaddFL{0.8536 }& \DIFaddFL{0.8718/0.0085 }& \DIFaddFL{1/117 }\\
+\DIFaddFL{TextCNN }& \DIFaddFL{Moderate }& \DIFaddFL{113/113 }& \DIFaddFL{0.9825 }& \DIFaddFL{0.7416 }& \DIFaddFL{0.7965/0.0088 }& \DIFaddFL{1/113 }\\
+\DIFaddFL{TextCNN }& \DIFaddFL{Strict }& \DIFaddFL{116/116 }& \DIFaddFL{0.8850 }& \DIFaddFL{0.4138 }& \DIFaddFL{0.4310/0.0172 }& \DIFaddFL{2/116 }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Ungated }& \DIFaddFL{117/117 }& \DIFaddFL{0.9999 }& \DIFaddFL{0.9854 }& \DIFaddFL{1.0000/0.0085 }& \DIFaddFL{1/117 }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Moderate }& \DIFaddFL{113/113 }& \DIFaddFL{0.9785 }& \DIFaddFL{0.6878 }& \DIFaddFL{0.8496/0.0177 }& \DIFaddFL{2/113 }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Strict }& \DIFaddFL{116/116 }& \DIFaddFL{0.8893 }& \DIFaddFL{0.3484 }& \DIFaddFL{0.4914/0.0259 }& \DIFaddFL{3/116 }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Ungated }& \DIFaddFL{117/117 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000/0.0000 }& \DIFaddFL{0/117 }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Moderate }& \DIFaddFL{113/113 }& \DIFaddFL{0.9999 }& \DIFaddFL{0.9922 }& \DIFaddFL{0.9381/0.0000 }& \DIFaddFL{0/113 }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Strict }& \DIFaddFL{116/116 }& \DIFaddFL{0.9904 }& \DIFaddFL{0.7845 }& \DIFaddFL{0.6552/0.0000 }& \DIFaddFL{0/116 }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-entropy-detectors}\textbf{Detector behavior by entropy gate.} Thresholds are the single historical-validation-frozen nominal 1\% thresholds. Every gate has fewer than 1,000 test negatives, so empirical 0.1\% TPR is unavailable.}
+\caption{\label{tab:v3-entropy-detectors}\textbf{\DIFaddFL{Detector behavior by entropy gate.}} \DIFaddFL{Thresholds are the single historical-validation-frozen nominal 1\% thresholds. Every gate has fewer than 1,000 test negatives, so empirical 0.1\% TPR is unavailable.}}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/entropy_gate_detector_performance.pdf}
-\caption{\label{fig:v3-entropy-detectors}\textbf{Entropy-gate detector performance.} Stricter gating reduces text-only detectability in this bounded matrix but does not eliminate the strong exact-model-aware signal.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/entropy_gate_detector_performance.pdf}
+}\caption{\label{fig:v3-entropy-detectors}\textbf{\DIFaddFL{Entropy-gate detector performance.}} \DIFaddFL{Stricter gating reduces text-only detectability in this bounded matrix but does not eliminate the strong exact-model-aware signal.}}
 \end{figure}
 
-Taken together, stricter gating reduces text-only detection in the tested conditions while reducing capacity, substantially increasing length, producing six maximum-budget failures, and retaining exact-environment replay dependence. Model-aware ROC-AUC of 0.9904 under the strict gate is inconsistent with a claim of an undetectable channel.
+\DIFadd{Taken together, stricter gating reduces text-only detection in the tested conditions while reducing capacity, substantially increasing length, producing six maximum-budget failures, and retaining exact-environment replay dependence. Model-aware ROC-AUC of 0.9904 under the strict gate is inconsistent with a claim of an undetectable channel.
+}
 
-\section*{Supplementary Note S14: Matched Q4 and Q8 quantization analysis}\label{si:s14}
+\section*{\DIFadd{Supplementary Note S14: Matched Q4 and Q8 quantization analysis}}\label{si:s14}
 
-\subsection*{Pairing and recovery}
+\subsection*{\DIFadd{Pairing and recovery}}
 
-The quantization analysis holds Qwen2.5-7B-Instruct revision \path{8911e8a47f92bac19d6f5c64a2e2095bd2f7d031}, its embedded tokenizer, rendered prompt, payload, codec, safe-text filter, target length, temperature, top-\(p\), llama-cpp-python 0.3.23 backend, and historical ordinary-control seed fixed. It successfully model-replayed all 1,920 historical Q4\_K\_M rows and completed all 1,920 paired Q8\_0 generations. No additional Q4 covers were generated.
+\DIFadd{The quantization analysis holds Qwen2.5-7B-Instruct revision }\path{8911e8a47f92bac19d6f5c64a2e2095bd2f7d031}\DIFadd{, its embedded tokenizer, rendered prompt, payload, codec, safe-text filter, target length, temperature, top-\(p\), llama-cpp-python 0.3.23 backend, and historical ordinary-control seed fixed. It successfully model-replayed all 1,920 historical Q4\_K\_M rows and completed all 1,920 paired Q8\_0 generations. No additional Q4 covers were generated.
+}
 
-Visible-text recovery for the 960 historical Q4 RankCloak covers retokenized each recorded string under the exact embedded Q4 tokenizer. The 732 exact token-ID matches reused the validated saved-ID rank trace; the other 228 cases underwent rank replay through the pinned Q4 model with the saved embedding-span boundary. This remains replay-assisted and does not recover without the exact context and span contract. Q8 visible-text recovery used the corresponding exact model path. Pairing used frozen payload, representation, and prompt identities.
+\DIFadd{Visible-text recovery for the 960 historical Q4 RankCloak covers retokenized each recorded string under the exact embedded Q4 tokenizer. The 732 exact token-ID matches reused the validated saved-ID rank trace; the other 228 cases underwent rank replay through the pinned Q4 model with the saved embedding-span boundary. This remains replay-assisted and does not recover without the exact context and span contract. Q8 visible-text recovery used the corresponding exact model path. Pairing used frozen payload, representation, and prompt identities.
+}
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{L{0.32\textwidth}r r Y}
 \toprule
-Recovery item & Q4\_K\_M & Q8\_0 & Paired interpretation \\
+\DIFaddFL{Recovery item }& \DIFaddFL{Q4\_K\_M }& \DIFaddFL{Q8\_0 }& \DIFaddFL{Paired interpretation }\\
 \midrule
-Saved-ID exact recovery & 960/960 & 960/960 & Perfect only under exact saved-ID replay \\
-Visible-text exact recovery & 732/960 (0.7625) & 758/960 (0.7896) & Difference 0.0271; 95\% CI [-0.0073, 0.0635] \\
-Visible recovery 95\% CI & [0.7344, 0.7896] & [0.7635, 0.8167] & Payload-group bootstrap, 2,000 resamples \\
-Discordant outcomes & Q4 only 144 & Q8 only 170 & Exact two-sided McNemar \(p=0.1582\) \\
-Concordant outcomes & Both 588 & Neither 58 & No statistically supported Q8 advantage \\
+\DIFaddFL{Saved-ID exact recovery }& \DIFaddFL{960/960 }& \DIFaddFL{960/960 }& \DIFaddFL{Perfect only under exact saved-ID replay }\\
+\DIFaddFL{Visible-text exact recovery }& \DIFaddFL{732/960 (0.7625) }& \DIFaddFL{758/960 (0.7896) }& \DIFaddFL{Difference 0.0271; 95\% CI }[\DIFaddFL{-0.0073, 0.0635}] \\
+\DIFaddFL{Visible recovery 95\% CI }& [\DIFaddFL{0.7344, 0.7896}] & [\DIFaddFL{0.7635, 0.8167}] & \DIFaddFL{Payload-group bootstrap, 2,000 resamples }\\
+\DIFaddFL{Discordant outcomes }& \DIFaddFL{Q4 only 144 }& \DIFaddFL{Q8 only 170 }& \DIFaddFL{Exact two-sided McNemar \(p=0.1582\) }\\
+\DIFaddFL{Concordant outcomes }& \DIFaddFL{Both 588 }& \DIFaddFL{Neither 58 }& \DIFaddFL{No statistically supported Q8 advantage }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-quant-recovery}\textbf{Paired Q4 and Q8 recovery.} Rates use 960 frozen RankCloak pairs. The exact McNemar result is computed from the stored 144/170 discordant counts.}
+\caption{\label{tab:v3-quant-recovery}\textbf{\DIFaddFL{Paired Q4 and Q8 recovery.}} \DIFaddFL{Rates use 960 frozen RankCloak pairs. The exact McNemar result is computed from the stored 144/170 discordant counts.}}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/matched_quantization_recovery.pdf}
-\caption{\label{fig:v3-quant-recovery}\textbf{Paired saved-ID and visible-text recovery by quantization.} The grouped interval for the paired difference includes zero.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/matched_quantization_recovery.pdf}
+}\caption{\label{fig:v3-quant-recovery}\textbf{\DIFaddFL{Paired saved-ID and visible-text recovery by quantization.}} \DIFaddFL{The grouped interval for the paired difference includes zero.}}
 \end{figure}
 
-On the identical historical Q4 RankCloak token path, Q8 minus Q4 mean next-token entropy was \(-0.0154\) bits (95\% CI [-0.0187, -0.0120]); the observed-token rank changed at a mean fraction 0.4639 of positions and the greedy token changed at 0.0884. Independently generated Q4/Q8 RankCloak paths never matched exactly and had mean positionwise token match 0.0155. These differences show substantial path sensitivity; they are not evidence that either quantization is generally more recoverable.
+\DIFadd{On the identical historical Q4 RankCloak token path, Q8 minus Q4 mean next-token entropy was \(-0.0154\) bits (95\% CI }[\DIFadd{-0.0187, -0.0120}]\DIFadd{); the observed-token rank changed at a mean fraction 0.4639 of positions and the greedy token changed at 0.0884. Independently generated Q4/Q8 RankCloak paths never matched exactly and had mean positionwise token match 0.0155. These differences show substantial path sensitivity; they are not evidence that either quantization is generally more recoverable.
+}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/matched_quantization_sensitivity.pdf}
-\caption{\label{fig:v3-quant-sensitivity}\textbf{Matched quantization sensitivity.} Same-path likelihood/rank comparisons and independently generated token-path agreement are paired within one pinned Qwen revision.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/matched_quantization_sensitivity.pdf}
+}\caption{\label{fig:v3-quant-sensitivity}\textbf{\DIFaddFL{Matched quantization sensitivity.}} \DIFaddFL{Same-path likelihood/rank comparisons and independently generated token-path agreement are paired within one pinned Qwen revision.}}
 \end{figure}
 
-\subsection*{Cross-quantization detector transfer}
+\subsection*{\DIFadd{Cross-quantization detector transfer}}
 
-Quantization detectors used the frozen payload train/validation/test assignment. Q4-to-Q8 fit and selected thresholds on Q4 before testing Q8; Q8-to-Q4 reversed the direction; the pooled fit used both quantizations in training and validation and tested only held payloads. Exact and declared near-duplicate audits preceded feature extraction and retained every row: 1,920/1,920 in each directional corpus and 3,840/3,840 pooled, with zero audited leakage.
+\DIFadd{Quantization detectors used the frozen payload train/validation/test assignment. Q4-to-Q8 fit and selected thresholds on Q4 before testing Q8; Q8-to-Q4 reversed the direction; the pooled fit used both quantizations in training and validation and tested only held payloads. Exact and declared near-duplicate audits preceded feature extraction and retained every row: 1,920/1,920 in each directional corpus and 3,840/3,840 pooled, with zero audited leakage.
+}
 
 \begin{table}[H]
 \centering
@@ -892,60 +1009,64 @@ Quantization detectors used the frozen payload train/validation/test assignment.
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabularx}{\textwidth}{L{0.17\textwidth}L{0.14\textwidth}r r L{0.19\textwidth}Y}
 \toprule
-Detector & Transfer & ROC-AUC & 0--1\% pAUC & TPR/FPR at frozen 1\% threshold & Exact FP \\
+\DIFaddFL{Detector }& \DIFaddFL{Transfer }& \DIFaddFL{ROC-AUC }& \DIFaddFL{0--1\% pAUC }& \DIFaddFL{TPR/FPR at frozen 1\% threshold }& \DIFaddFL{Exact FP }\\
 \midrule
-TextCNN & Q4 to Q8 & 0.9927 & 0.7539 & 0.9375/0.0365 & 7/192 \\
-DeBERTa & Q4 to Q8 & 1.0000 & 1.0000 & 1.0000/0.0000 & 0/192 \\
-Model-aware & Q4 to Q8 & 1.0000 & 1.0000 & 1.0000/0.0000 & 0/192 \\
-TextCNN & Q8 to Q4 & 0.9944 & 0.8298 & 0.9479/0.0260 & 5/192 \\
-DeBERTa & Q8 to Q4 & 1.0000 & 1.0000 & 1.0000/0.0156 & 3/192 \\
-Model-aware & Q8 to Q4 & 1.0000 & 1.0000 & 0.9792/0.0000 & 0/192 \\
-TextCNN & Pooled & 0.9965 & 0.8257 & 0.9609/0.0234 & 9/384 \\
-DeBERTa & Pooled & 1.0000 & 1.0000 & 1.0000/0.0078 & 3/384 \\
-Model-aware & Pooled & 1.0000 & 1.0000 & 0.9948/0.0000 & 0/384 \\
+\DIFaddFL{TextCNN }& \DIFaddFL{Q4 to Q8 }& \DIFaddFL{0.9927 }& \DIFaddFL{0.7539 }& \DIFaddFL{0.9375/0.0365 }& \DIFaddFL{7/192 }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Q4 to Q8 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000/0.0000 }& \DIFaddFL{0/192 }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Q4 to Q8 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000/0.0000 }& \DIFaddFL{0/192 }\\
+\DIFaddFL{TextCNN }& \DIFaddFL{Q8 to Q4 }& \DIFaddFL{0.9944 }& \DIFaddFL{0.8298 }& \DIFaddFL{0.9479/0.0260 }& \DIFaddFL{5/192 }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Q8 to Q4 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000/0.0156 }& \DIFaddFL{3/192 }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Q8 to Q4 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{0.9792/0.0000 }& \DIFaddFL{0/192 }\\
+\DIFaddFL{TextCNN }& \DIFaddFL{Pooled }& \DIFaddFL{0.9965 }& \DIFaddFL{0.8257 }& \DIFaddFL{0.9609/0.0234 }& \DIFaddFL{9/384 }\\
+\DIFaddFL{DeBERTa }& \DIFaddFL{Pooled }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000/0.0078 }& \DIFaddFL{3/384 }\\
+\DIFaddFL{Model-aware }& \DIFaddFL{Pooled }& \DIFaddFL{1.0000 }& \DIFaddFL{1.0000 }& \DIFaddFL{0.9948/0.0000 }& \DIFaddFL{0/384 }\\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-cross-quant-detectors}\textbf{Cross-quantization and pooled detector behavior.} Frozen nominal thresholds can drift in test. No test has 1,000 negatives, so empirical 0.1\% results are unavailable.}
+\caption{\label{tab:v3-cross-quant-detectors}\textbf{\DIFaddFL{Cross-quantization and pooled detector behavior.}} \DIFaddFL{Frozen nominal thresholds can drift in test. No test has 1,000 negatives, so empirical 0.1\% results are unavailable.}}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/matched_quantization_detector_transfer.pdf}
-\caption{\label{fig:v3-cross-quant-detectors}\textbf{Detector transfer across Q4\_K\_M and Q8\_0.} Detection remains strong in both directions, while observed FPR can exceed the validation target.}
+\DIFaddFL{\includegraphics[width=0.97\textwidth]{figures/matched_quantization_detector_transfer.pdf}
+}\caption{\label{fig:v3-cross-quant-detectors}\textbf{\DIFaddFL{Detector transfer across Q4\_K\_M and Q8\_0.}} \DIFaddFL{Detection remains strong in both directions, while observed FPR can exceed the validation target.}}
 \end{figure}
 
-The analysis isolates two quantizations of one model revision under one inference backend. It does not generalize to other Qwen revisions, architectures, bit widths, quantizers, backends, or hardware. In particular, the data do not justify stating that Q8 is generally more recoverable than Q4.
+\DIFadd{The analysis isolates two quantizations of one model revision under one inference backend. It does not generalize to other Qwen revisions, architectures, bit widths, quantizers, backends, or hardware. In particular, the data do not justify stating that Q8 is generally more recoverable than Q4.
+}
 
-\section*{Supplementary Note S15: V3 provenance and remaining boundaries}\label{si:s15}
+\section*{\DIFadd{Supplementary Note S15: V3 provenance and remaining boundaries}}\label{si:s15}
 
-The V3 run manifest binds the detector inputs, model-backed generations, artifact hashes, backend, model and tokenizer identities, partitions, and validation status. The final validation report records \path{status: pass}, exact artifact-manifest path and checksum validation for 5,833 entries, 24 fit-metadata files, 24 prediction files, strict leakage-audit success, conditional entropy-capacity validation, and paired quantization-recovery source validation. The generation-analysis validation records 18/18 calibration traces, 720/720 entropy generations, 1,920/1,920 Q4 replays, 960/960 Q4 visible-recovery records, 1,920/1,920 Q8 generations, and zero failure records. Machine-readable tables and full provenance are retained under \path{results/revision_v3}; the manuscript reports from those sealed outputs rather than rerunning generation.
+\DIFadd{The V3 run manifest binds the detector inputs, model-backed generations, artifact hashes, backend, model and tokenizer identities, partitions, and validation status. The final validation report records }\path{status: pass}\DIFadd{, exact artifact-manifest path and checksum validation for 5,833 entries, 24 fit-metadata files, 24 prediction files, strict leakage-audit success, conditional entropy-capacity validation, and paired quantization-recovery source validation. The generation-analysis validation records 18/18 calibration traces, 720/720 entropy generations, 1,920/1,920 Q4 replays, 960/960 Q4 visible-recovery records, 1,920/1,920 Q8 generations, and zero failure records. Machine-readable tables and full provenance are retained under }\path{results/revision_v3}\DIFadd{; the manuscript reports from those sealed outputs rather than rerunning generation.
+}
 
 \begin{longtable}{L{0.23\textwidth}L{0.32\textwidth}L{0.36\textwidth}}
-\caption{\label{tab:v3-boundaries}Remaining boundaries after the targeted V3 evaluations.}\\
+\caption{\label{tab:v3-boundaries}\DIFadd{Remaining boundaries after the targeted V3 evaluations.}}\\
 \toprule
-Issue & Added evidence & Boundary that remains \\
+\DIFadd{Issue }& \DIFadd{Added evidence }& \DIFadd{Boundary that remains }\\
 \midrule
 \endfirsthead
 \toprule
-Issue & Added evidence & Boundary that remains \\
+\DIFadd{Issue }& \DIFadd{Added evidence }& \DIFadd{Boundary that remains }\\
 \midrule
 \endhead
-Saved-token condition & Perfect primary and paired-quantization recovery from the preserved token stream under recorded configurations & Tests token-preserving delivery or experimental retained IDs under the predeclared protocol; distinct from ordinary visible-text communication \\
-Visible-text transport & 88/144 historical robustness recovery; 732/960 Q4 and 758/960 Q8 in one paired matrix & Paraphrase, markdown/format transfer, cross-model decoding, and retokenization remain fragile or unsuccessful \\
-Strict deduplication & Component-safe split with zero declared cross-partition links & Does not detect semantic paraphrases below the 0.95 character-\(n\)-gram threshold \\
-Human-authored controls & 250 frozen Dolly negatives across 16 templates & Not a participant study; sparse genre coverage and generic machine/human signal remain \\
-Unseen families & Three leave-one-family-out tests & Not every architecture, training corpus, model size, proprietary system, or decoding stack \\
-Adaptive detection & Two data-adaptive text-only detectors and an exact-model-aware likelihood attacker & Strong but not exhaustive attackers or deployment distributions \\
-Low-FPR reporting & Exact counts and validation-frozen thresholds; matched 0.1\% estimates where supported & Human, family, entropy, and quantization tests have fewer than 1,000 negatives and no empirical 0.1\% resolution \\
-Entropy gating & 120 attempts per gate; capacity, length, recovery, quality, and detector outcomes & Two templates; thresholds from 768 positions/model; strict capacity conditional on 114 completions; exact-model AUC remains 0.9904 \\
-Quantization & Paired Q4\_K\_M/Q8\_0 recovery and bidirectional detector transfer & One pinned Qwen revision, two quantizations, one backend; no supported general Q8 advantage \\
-Naturalness & Automated surface/model diagnostics and a human-authored control corpus & No participants or human ratings; controls are not evidence of human-perceived naturalness \\
-Deployment/security & Failure surfaces and strong adverse detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
+\DIFadd{Saved-token condition }& \DIFadd{Perfect primary and paired-quantization recovery from the preserved token stream under recorded configurations }& \DIFadd{Tests token-preserving delivery or experimental retained IDs under the predeclared protocol; distinct from ordinary visible-text communication }\\
+\DIFadd{Visible-text transport }& \DIFadd{88/144 historical robustness recovery; 732/960 Q4 and 758/960 Q8 in one paired matrix }& \DIFadd{Paraphrase, markdown/format transfer, cross-model decoding, and retokenization remain fragile or unsuccessful }\\
+\DIFadd{Strict deduplication }& \DIFadd{Component-safe split with zero declared cross-partition links }& \DIFadd{Does not detect semantic paraphrases below the 0.95 character-\(n\)-gram threshold }\\
+\DIFadd{Human-authored controls }& \DIFadd{250 frozen Dolly negatives across 16 templates }& \DIFadd{Not a participant study; sparse genre coverage and generic machine/human signal remain }\\
+\DIFadd{Unseen families }& \DIFadd{Three leave-one-family-out tests }& \DIFadd{Not every architecture, training corpus, model size, proprietary system, or decoding stack }\\
+\DIFadd{Adaptive detection }& \DIFadd{Two data-adaptive text-only detectors and an exact-model-aware likelihood attacker }& \DIFadd{Strong but not exhaustive attackers or deployment distributions }\\
+\DIFadd{Low-FPR reporting }& \DIFadd{Exact counts and validation-frozen thresholds; matched 0.1\% estimates where supported }& \DIFadd{Human, family, entropy, and quantization tests have fewer than 1,000 negatives and no empirical 0.1\% resolution }\\
+\DIFadd{Entropy gating }& \DIFadd{120 attempts per gate; capacity, length, recovery, quality, and detector outcomes }& \DIFadd{Two templates; thresholds from 768 positions/model; strict capacity conditional on 114 completions; exact-model AUC remains 0.9904 }\\
+\DIFadd{Quantization }& \DIFadd{Paired Q4\_K\_M/Q8\_0 recovery and bidirectional detector transfer }& \DIFadd{One pinned Qwen revision, two quantizations, one backend; no supported general Q8 advantage }\\
+\DIFadd{Naturalness }& \DIFadd{Automated surface/model diagnostics and a human-authored control corpus }& \DIFadd{No participants or human ratings; controls are not evidence of human-perceived naturalness }\\
+\DIFadd{Deployment/security }& \DIFadd{Failure surfaces and strong adverse detectability are documented }& \DIFadd{No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability }\\
 \bottomrule
 \end{longtable}
 
-The bounded evaluations directly address the requested controls, leakage prevention, held-family transfer, adaptive and model-aware attackers, low-FPR reporting, entropy gating, and quantization sensitivity. They refine the evidence for an artifact-specific hiding and recovery method: the artifact surface form is concealed, exact recovery is configuration-dependent, visible-text transport is weaker, and current steganalysis often detects the encoding.
+\DIFadd{The bounded evaluations directly address the requested controls, leakage prevention, held-family transfer, adaptive and model-aware attackers, low-FPR reporting, entropy gating, and quantization sensitivity. They refine the evidence for an artifact-specific hiding and recovery method: the artifact surface form is concealed, exact recovery is configuration-dependent, visible-text transport is weaker, and current steganalysis often detects the encoding.
+}
 
 \bibliography{references}
+\DIFaddend
 
 \end{document}

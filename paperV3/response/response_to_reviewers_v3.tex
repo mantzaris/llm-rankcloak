@@ -72,7 +72,7 @@ We invite you to revise your paper, carefully addressing the comments from the r
 \noindent\textbf{Response.}
 Every added numerical statement was checked against the sealed V3 handoff, and the strictly deduplicated detector estimates now supersede the historical V2 estimates for current claims. The manuscript reports adverse and null results directly: detectability remains high, human-control false positives expose domain sensitivity, strict entropy gating leaves six payloads incomplete, and the paired quantization interval and exact McNemar test do not support a Q8 recovery advantage. The complete scope limitations are consolidated in the Responsible use and limitations section and Supplementary Note S15.
 
-\Locations{Main manuscript Methods and ``Human controls entropy gating and quantization'' Results subsection; Responsible use and limitations; Supplementary Notes S11--S15.}
+\Locations{Main manuscript Methods and ``Human controls, entropy gating, and quantization'' Results subsection; Responsible use and limitations; Supplementary Notes S11--S15.}
 
 \subsection*{Code deposition}
 
@@ -97,7 +97,7 @@ The Data and Code availability section retains the public GitHub repository and 
 \noindent\textbf{Response.}
 We retained the first revision's improvements and completed the additional requested analyses. The manuscript now states precisely that saved-token recovery is one evaluated recovery condition under a shared protocol definition, while visible-text and transformed-text delivery are stricter and empirically weaker conditions. It also adds 250 human-authored secondary controls, strict pre-feature component deduplication, genuine leave-one-model-family-out tests, data-adaptive learned detectors, an exact-model-aware attacker, validation-frozen low-FPR operating points with exact counts, entropy-gated embedding, paired Q4\_K\_M/Q8\_0 recovery, and bidirectional cross-quantization detector transfer.
 
-The practical interpretation distinguishes three outcomes. RankCloak can conceal the artifact's recognizable surface representation; an authorized receiver can recover the artifact under the supported configuration; and an observer can often classify the cover as encoded. High detection performance weakens channel stealth, but a detector's classification does not by itself expose the cryptographic artifact or reconstruct its original syntax. The paper therefore remains an artifact-hiding and recovery study while reporting detectability and transport limits without qualification.
+The practical interpretation distinguishes three outcomes. RankCloak can conceal the artifact's recognizable surface representation; an authorized receiver can recover the artifact under the supported configuration; and an observer can often classify the cover as encoded. High detection performance weakens channel stealth, but a detector's classification does not by itself expose the cryptographic artifact or reconstruct its original syntax. The paper therefore remains an artifact-hiding and recovery study while reporting the detectability and transport limitations directly and without minimizing them.
 
 \Locations{Main manuscript Introduction, recovery Methods, revised detector Results and Table~3, Discussion, and limitations; Supplementary Notes S1 and S11--S15.}
 
@@ -156,7 +156,7 @@ The main-manuscript response was intentionally limited: four clarifying Introduc
 
 \Locations{Main manuscript Introduction; recovery Methods; ``Exact-copy replay and transmission fragility'' Results; Discussion; Supplementary Notes S1, S4, and S15.}
 
-\subsection*{Concern 2: Controls unseen conditions adaptive detection low FPR and deduplication}
+\subsection*{Concern 2: Controls, unseen conditions, adaptive detection, low false-positive rates, and deduplication}
 
 \begin{reviewcomment}
 2) Detectability is devastatingly high (ROC-AUC 0.990/0.9998), yet controls are model-generated rather than human communication. Evaluation should include human text, unseen model families and quantizations, adaptive attackers, low-FPR operating points, and detector training on strictly deduplicated corpora.

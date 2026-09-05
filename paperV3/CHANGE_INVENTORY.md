@@ -20,4 +20,11 @@ Exact revised title: `RankCloak Conceals the Surface Form of Synthetic Cryptogra
 | Concern 3 Cai et al. and entropy gating | Adds the verified Cai–Ding–Tao citation, distinguishes watermark marking from chosen-payload recovery, and reports the capacity–length–detectability tradeoff | Note S13 provides calibration, replay-consistent gating, conditional capacity, six retained completion failures, and detector results | Entropy tables, figures, and generation validation |
 | Consolidated limitations | Retains no secrecy proof, no universal-undetectability claim, weaker visible transport, failed transformations, no participant study, bounded controls/families/quantizations/attackers, low-FPR limits, and entropy completion/capacity limits | Note S15 consolidates provenance and scope boundaries | `limitations_for_manuscript.md`, validation reports, run manifest |
 
+## Accessibility and author-review pass
+
+- Replaced the main and Supplementary Information abstracts with accessible high-level summaries while retaining the validated recovery, robustness, detection, and entropy tradeoff conclusions.
+- Defined the human-written Dolly comparison, low false-positive-rate terminology, generating-model-aware detector, and approximately 4-bit/8-bit quantized model formats at first use.
+- Applied normal punctuation to the affected Results and response headings and clarified the requested response and cover-letter wording.
+- Added `paperV3/diffs.pdf`, a clearly labeled internal author-review comparison of the complete V2 and final V3 main manuscript and Supplementary Information; reproducibility details are in `paperV3/diffs/README.md`.
+
 All new manuscript-package files are under `paperV3`; `paperV2`, `results/revision_v3`, computational code, tests, configurations, and provenance are outside the edit scope.
