@@ -116,7 +116,7 @@ Model ID & GGUF file & Size (bytes) & SHA-256 \\
 \path{mistral_7b_instruct_v0_3_q4_k_m} & \path{Mistral-7B-Instruct-v0.3-Q4_K_M.gguf} & 4,372,812,000 & \ttfamily\seqsplit{1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6} \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:models}Executed model artifacts. Repository revisions for Qwen and Mistral and all upstream identities are retained in the model manifest. The three configured GGUF files are not present in the current checkout, so no fresh local generation replay was attempted for this revision.}
+\caption{\label{tab:models}Executed model artifacts.}
 \end{table}
 
 \subsection*{English prompt identities}
@@ -219,7 +219,7 @@ Combined & 576/576 & 96/96 & Descriptive combined total & No human naturalness o
 \caption{\label{tab:multilingual}Secondary multilingual recovery. Each language's payload-group Wilson interval is [0.925900, 1.000000].}
 \end{table}
 
-These results do not test translation, code switching, cross-language decoding, or native-speaker judgments. They also remain conditional on the same model/tokenizer artifacts and exact saved tokens. The GGUF artifacts are absent from the current checkout; consequently the retained results can be integrity-checked against their manifests, but fresh generation or rank replay cannot be reproduced locally from this checkout alone.
+These results do not test translation, code switching, cross-language decoding, or native-speaker judgments. They also remain conditional on the same model/tokenizer artifacts and exact saved tokens. The GGUF not included in the respository, consequently the retained results can be integrity-checked against their manifests, but fresh generation or rank replay cannot be reproduced locally from this checkout alone.
 
 \section*{Supplementary Note S4: Robustness and failure analysis}\label{si:s4}
 
@@ -324,7 +324,7 @@ The human-study status manifest records recruitment authorized = false, survey d
 
 \subsection*{Locked ablation extraction}
 
-The ablation matrix paired 48 payload groups within each available model. The canonical setting was no lead-in, eight ranks per segment, the safe-text filter, and dynamic semantic stopping. Differences in Table~\ref{tab:all-ablations} are level minus canonical. These compact contrasts were extracted after outcomes were available, without fitting new models, and are classified as exploratory/post-outcome. Payload group is the pairing and 2,000-resample bootstrap unit. The printed table presents the reviewer-relevant contrasts; the complete 60-row machine-readable contrast table, including multiplicity fields and secondary outcomes, remains in the public repository.
+The ablation matrix paired 48 payload groups within each available model. The canonical setting was no lead-in, eight ranks per segment, the safe-text filter, and dynamic semantic stopping. Differences in Table~\ref{tab:all-ablations} are level minus canonical. These compact contrasts were extracted after outcomes were available, without fitting new models, and are classified as exploratory/post-outcome. Payload group is the pairing and 2,000-resample bootstrap unit. The printed table presents the relevant contrasts; the complete 60-row machine-readable contrast table, including multiplicity fields and secondary outcomes, remains in the public repository.
 
 Across the evaluated 2, 4, 8, 16, and 32 token conditions, lead-ins generally worsened likelihood, and longer lead-ins generally increased full-message length. The 32-token contrast had mean-log-probability difference -1.652327 (95\% CI, -1.749091 to -1.553103) and full-token-count difference +159.590278 (125.829861 to 191.030035). This is an adverse boundary/context result, but the paired contrast is not a causal decomposition. Segment-size changes altered efficiency and cover length: moving from 8 to 32 ranks increased effective rate by 1.231461 bits per full token (1.073116 to 1.388188) and decreased full-message length by 174.500000 tokens (-208.405035 to -140.573264). Forced-token count is codec-determined and unchanged; the length difference arises from fewer segment tails.
 
@@ -363,7 +363,7 @@ No tail & \shortstack[l]{0.000000\\{[0.000000, 0.000000]}} & \shortstack[l]{-254
 Fixed sentence tail & \shortstack[l]{0.000000\\{[0.000000, 0.000000]}} & \shortstack[l]{-65.708333\\{[-92.590451, -40.372917]}} & \shortstack[l]{-0.037921\\{[-0.113898, 0.033508]}} & Shorter than dynamic; rate interval includes zero \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:all-ablations}\textbf{Reviewer-relevant ablation contrasts.} Differences are level minus the canonical setting (no lead-in, eight ranks per segment, safe-text filter, and dynamic tail). Estimates pool three available models and 48 paired payloads per model except the stable-filter row, which contains two models because the 48-unit Mistral condition was unavailable. Intervals are payload-bootstrap 95\% intervals. Mean log probability is evaluated on payload-bearing forced positions; zero tail-policy differences arise because tail choice does not change those positions. All rows are exploratory/post-outcome.}
+\caption{\label{tab:all-ablations}\textbf{Relevant ablation contrasts.} Differences are level minus the canonical setting (no lead-in, eight ranks per segment, safe-text filter, and dynamic tail). Estimates pool three available models and 48 paired payloads per model except the stable-filter row, which contains two models because the 48-unit Mistral condition was unavailable. Intervals are payload-bootstrap 95\% intervals. Mean log probability is evaluated on payload-bearing forced positions; zero tail-policy differences arise because tail choice does not change those positions. All rows are exploratory/post-outcome.}
 \end{table}
 
 \subsection*{Prompt-topic contrasts}
@@ -406,19 +406,20 @@ Payload throughput & Qwen & -0.009378 & [-0.043829, 0.025073] & 0.595439 \\
 \bottomrule
 \end{longtable}
 
-\section*{Supplementary Note S7: Historical V2 neural steganalysis and leakage sensitivity}\label{si:s7}
+\section*{Supplementary Note S7: neural steganalysis and leakage sensitivity}\label{si:s7}
 
 \subsection*{Corpus, architectures, and splits}
 
-This note preserves the historical V2 detector benchmark for continuity and work-unit provenance; its 15,840-row splits and results are not the current detector estimates and are superseded by the strictly deduplicated V3 analysis in Supplementary Notes S11--S12. The historical corpus contains 7,920 RankCloak covers and 7,920 matched ordinary controls, grouped by 480 payloads. Payload groups, rather than rows, were assigned to train, validation, and test sets. The TextCNN-equivalent implementation lowercases and tokenizes text into a 30,000-term vocabulary, truncates or pads to 256 tokens, uses 300-dimensional learned embeddings and 100 filters at each of widths 3 and 5, applies dropout 0.5, and optimizes with Adam at learning rate 0.001. The pretrained DeBERTa-v3-base classifier uses maximum length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs.
+This auxiliary detector benchmark uses 15,840 rows with splits grouped by payload. It does not apply the stricter deduplication at the component level used for the primary detector analysis in Supplementary Notes S11 and S12. The corpus contains 7,920 RankCloak covers and 7,920 matched ordinary controls, grouped by 480 payloads.
+Payload groups, rather than rows, were assigned to train, validation, and test sets. The TextCNN-equivalent implementation lowercases and tokenizes text into a 30,000-term vocabulary, truncates or pads to 256 tokens, uses 300-dimensional learned embeddings and 100 filters at each of widths 3 and 5, applies dropout 0.5, and optimizes with Adam at learning rate 0.001. The pretrained DeBERTa-v3-base classifier uses maximum length 256, learning rate \(2\times10^{-5}\), weight decay 0.01, and three epochs.
 For each architecture, the frozen design comprises one matched split, 18 held-out-template splits, three leave-one-model splits, and six leave-one-codec splits. Thus 28 fits per architecture and 56/56 fits overall completed, producing 55,440 prediction rows. No row-level reassignment was used to improve performance.
 
-For this historical benchmark, the reported endpoints were ROC-AUC and balanced accuracy. Precision, Brier score, and true-positive rate at false-positive rate at most 1\% were supplementary/exploratory post-freeze measures. All confidence intervals for an individual split use 2,000 payload-group bootstrap resamples. Ranges across heterogeneous held-out splits are descriptive minima and maxima, not confidence intervals. Every historical split-level estimate and interval remains in the machine-readable supplementary CSV (\path{supplementary_tables/detector_split_metrics.csv}).
+For this auxiliary benchmark, the reported endpoints were ROC-AUC and balanced accuracy. Precision, Brier score, and true-positive rate at false-positive rate at most 1\% were supplementary/exploratory post-freeze measures. All confidence intervals for an individual split use 2,000 payload-group bootstrap resamples. Ranges across heterogeneous held-out splits are descriptive minima and maxima, not confidence intervals. Every  split-level estimate and interval remains in the machine-readable supplementary CSV (\path{supplementary_tables/detector_split_metrics.csv}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/neural_detector_performance.pdf}
-\caption{\label{fig:detector-full}\textbf{Historical V2 neural-detector evaluation.} The six panels preserve the earlier frozen endpoints and supplementary exploratory metrics; current strictly deduplicated estimates are in Supplementary Note S12. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
+\caption{\label{fig:detector-full}\textbf{Neural-detector evaluation.} The six panels report the auxiliary benchmark endpoints and supplementary exploratory metrics. The primary strictly deduplicated estimates are reported in Supplementary Note S12. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
 \end{figure}
 
 \begin{table}[H]
@@ -428,19 +429,19 @@ For this historical benchmark, the reported endpoints were ROC-AUC and balanced 
 \toprule
 Architecture & Matched metric & Estimate & Payload-bootstrap 95\% CI & Status \\
 \midrule
-TextCNN-equivalent & ROC-AUC & 0.990190 & [0.987740, 0.992682] & Historical V2 frozen \\
-TextCNN-equivalent & Balanced accuracy & 0.951010 & [0.943456, 0.958466] & Historical V2 frozen \\
+TextCNN-equivalent & ROC-AUC & 0.990190 & [0.987740, 0.992682] & Frozen benchmark endpoint \\
+TextCNN-equivalent & Balanced accuracy & 0.951010 & [0.943456, 0.958466] & Frozen benchmark endpoint \\
 TextCNN-equivalent & Precision & 0.954684 & [0.945891, 0.963421] & Supplementary exploratory \\
 TextCNN-equivalent & Brier score & 0.039320 & [0.033497, 0.045453] & Supplementary exploratory \\
 TextCNN-equivalent & TPR at FPR \(\leq1\%\) & 0.840909 & [0.806517, 0.889752] & Supplementary exploratory \\
-DeBERTa-v3-base & ROC-AUC & 0.999834 & [0.999696, 0.999939] & Historical V2 frozen \\
-DeBERTa-v3-base & Balanced accuracy & 0.991919 & [0.987654, 0.995665] & Historical V2 frozen \\
+DeBERTa-v3-base & ROC-AUC & 0.999834 & [0.999696, 0.999939] & Frozen benchmark endpoint \\
+DeBERTa-v3-base & Balanced accuracy & 0.991919 & [0.987654, 0.995665] & Frozen benchmark endpoint \\
 DeBERTa-v3-base & Precision & 0.999487 & [0.998393, 1.000000] & Supplementary exploratory \\
 DeBERTa-v3-base & Brier score & 0.007895 & [0.004432, 0.011787] & Supplementary exploratory \\
 DeBERTa-v3-base & TPR at FPR \(\leq1\%\) & 0.993434 & [0.988724, 0.998387] & Supplementary exploratory \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:detector-matched}Historical V2 matched detector endpoints, superseded for current claims by Supplementary Note S12. Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.}
+\caption{\label{tab:detector-matched} Auxiliary matched detector endpoints. The primary strictly deduplicated estimates are reported in Supplementary Note S12.   Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.}
 \end{table}
 
 \begin{table}[H]
@@ -458,12 +459,12 @@ DeBERTa-v3-base & Leave one model (3) & [0.996772, 0.999979] & [0.945455, 0.9704
 DeBERTa-v3-base & Leave one codec (6) & [0.997917, 1.000000] & [0.927778, 0.998611] \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:detector-ranges}Historical V2 ranges across heterogeneous frozen held-out splits. These ranges are not pooled confidence intervals; current leave-one-family-out results are in Supplementary Note S12.}
+\caption{\label{tab:detector-ranges} Auxiliary detector ranges across heterogeneous frozen held-out splits. These ranges are not pooled confidence intervals. The primary leave-one-family-out results are reported in Supplementary Note S12.}
 \end{table}
 
 \subsection*{Leakage, exclusion sensitivity, repeatability, and cost}
 
-In the historical V2 benchmark, exact train/test visible-text identity and exact tokenizer-sequence identity checks passed in all 28 frozen split definitions. A separate normalized character \(n\)-gram diagnostic found 53 train/test near-duplicate pairs, of which 44 crossed payload groups, affecting 16 splits. Excluding affected test payload groups without retraining changed ROC-AUC from -0.001925 to +0.004568 for TextCNN-equivalent and from -0.000038 to +0.000166 for DeBERTa-v3-base. Because that sensitivity did not rebuild training data, it motivated and is superseded by the pre-feature component construction and zero-linkage audit in Supplementary Note S11.
+In the auxiliary detector benchmark, exact train/test visible-text identity and exact tokenizer-sequence identity checks passed in all 28 frozen split definitions. A separate normalized character \(n\)-gram diagnostic found 53 train/test near-duplicate pairs, of which 44 crossed payload groups, affecting 16 splits. Excluding affected test payload groups without retraining changed ROC-AUC from -0.001925 to +0.004568 for TextCNN-equivalent and from -0.000038 to +0.000166 for DeBERTa-v3-base. Because this sensitivity analysis did not rebuild the training data, the primary detector analysis uses the pre-feature component construction and zero-linkage audit described in Supplementary Note S11.
 
 Fixed-seed reruns on the same CUDA device produced exact metric equality for both architectures. This is evidence of same-device repeatability only. CPU neural training was infeasible in the retained run and no CPU result was substituted; the study makes no CPU/GPU equivalence claim. The representative CUDA benchmark recorded TextCNN wall/training times 91.358113/9.497936 seconds and peak allocated VRAM 306,247,680 bytes; DeBERTa values were 1,536.660910/1,425.063414 seconds and 6,380,851,200 bytes.
 
@@ -539,7 +540,7 @@ Complete cascade traces & 0 & End-to-end proposition not directly trace-evaluabl
 
 \section*{Supplementary Note S9: Computational overhead}\label{si:s9}
 
-Primary-stage timing used 12,144 matched payload rows across the 18 model and protocol cells in Table~\ref{tab:overhead-cells}. Intervals are 2,000-resample payload-group bootstrap intervals. Generation time is retained inclusive wrapper wall time; representation, filter setup, model generation, and supported recovery fields are reported separately in the sealed tables but are not claimed to be perfectly isolated kernel timings. Encoding wrapper time and supported decoding measurements consequently should not be summed as independent hardware primitives.
+Primary-stage timing used 12,144 matched payload rows across the 18 model and protocol cells in Table~\ref{tab:overhead-cells}. Intervals are 2,000-resample payload-group bootstrap intervals. Generation time is retained inclusive wrapper wall time; representation, filter setup, model generation, and supported recovery fields are reported separately in the machine-readable tables but are not claimed to be perfectly isolated kernel timings. Encoding wrapper time and supported decoding measurements consequently should not be summed as independent hardware primitives.
 
 Across the 18 cells, mean inclusive generation time ranged from 1.674368 to 16.087628 seconds and payload throughput from 13.631855 to 100.851772 bits/s; effective payload rate ranged from 0.710004 to 7.322003 bits per full token. Direct-rank and hex-nibble protocols were generally faster than the byte-expanded conditions, while segmented protocols were generally slower because they repeated prompt and tail work. These retained inclusive wall-time measurements support computational accounting under the recorded hardware and harness, not universal hardware-performance claims.
 
@@ -624,7 +625,7 @@ For the SHA-256 example above, straight-to-smart quote conversion failed at segm
 \subsection*{Claim-boundary audit}
 
 \begin{longtable}{L{0.25\textwidth}L{0.31\textwidth}L{0.35\textwidth}}
-\caption{\label{tab:claim-boundaries}Claim boundaries applied throughout the revision.}\\
+\caption{\label{tab:claim-boundaries}Claim boundaries applied.}\\
 \toprule
 Issue & Supported statement & Prohibited or unresolved extension \\
 \midrule
@@ -654,7 +655,7 @@ Cryptography & The carrier can encode outputs from declared cryptographic algori
 
 \subsection*{Normalization, deduplication, and partition audit}
 
-All V3 detector corpora were deduplicated before feature extraction or tokenization. Visible text underwent Unicode NFKC normalization, case folding, Unicode-whitespace collapse, and SHA-256 hashing. If a normalized exact duplicate implicated either member of a RankCloak/control pair, the complete matched pair was removed so that class balance and pairing were preserved. Near duplicates were defined before splitting as cosine similarity at least 0.95 under L2-normalized character-boundary TF-IDF with 3--5 character \(n\)-grams and minimum document frequency two. Payload groups connected by any such edge formed immutable components.
+All detector corpora were deduplicated before feature extraction or tokenization. Visible text underwent Unicode NFKC normalization, case folding, Unicode-whitespace collapse, and SHA-256 hashing. If a normalized exact duplicate implicated either member of a RankCloak/control pair, the complete matched pair was removed so that class balance and pairing were preserved. Near duplicates were defined before splitting as cosine similarity at least 0.95 under L2-normalized character-boundary TF-IDF with 3--5 character \(n\)-grams and minimum document frequency two. Payload groups connected by any such edge formed immutable components.
 
 One normalized exact-duplicate group implicated two rows in the 15,840-row source corpus. Removing that complete matched pair left 15,838 observations. The remaining audit found 52 near-duplicate pairs, including 44 that crossed payload groups. A deterministic seed-20260831 balancing procedure assigned whole connected components to train, validation, and test. The final audit found zero payload, matched-pair, normalized-text, component, or declared near-duplicate links between partitions (Table~\ref{tab:v3-dedup}). The statement of zero leakage is limited to these declared identities and thresholded edges; it cannot rule out semantic paraphrases below the threshold or guarantee real-world generalization.
 
@@ -672,12 +673,12 @@ Declared near-duplicate pairs & 52 & 44 cross-payload; all connected groups kept
 Audited cross-partition links & 0 & Zero for payload, pair, normalized text, component, and declared near duplicate \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-dedup}\textbf{Strict detector-corpus construction.} Counts are from the locked V3 deduplication audit. Zero audited leakage applies only under the stated normalization and similarity rule.}
+\caption{\label{tab:v3-dedup}\textbf{Strict detector-corpus construction.} Counts are from the locked  deduplication audit. Zero audited leakage applies only under the stated normalization and similarity rule.}
 \end{table}
 
 \subsection*{Human-authored control selection and scope}
 
-The secondary controls came from Databricks Dolly 15k v1.0, revision \texttt{\seqsplit{bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a}}, under CC BY-SA 3.0. Deterministic screening retained responses without automatic quality, personally identifiable information, or unsafe-content flags. The same exact and near-duplicate rules were applied within the human-authored candidates and against the primary corpus. Hungarian assignment matched candidates to RankCloak test texts within available prompt templates using relative word-count plus weighted character-count difference; relative word-count differences above 0.35 were rejected.
+The secondary controls came from Databricks Dolly 15k v1.0 (under CC BY-SA 3.0). Deterministic screening retained responses without automatic quality, personally identifiable information, or unsafe-content flags. The same exact and near-duplicate rules were applied within the human-authored candidates and against the primary corpus. Hungarian assignment matched candidates to RankCloak test texts within available prompt templates using relative word-count plus weighted character-count difference; relative word-count differences above 0.35 were rejected.
 
 The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs, and no declared near-duplicate links to the primary corpus. Human labels never entered model fitting or threshold selection. The corpus is a bounded secondary computational control, not recruitment, a participant study, a user study, a human rating exercise, or proof of naturalness. Coverage is sparse or absent for several conversational, narrative, and professional templates, and detector performance can include generic machine-versus-human differences.
 
@@ -701,7 +702,7 @@ Empirical 0.1\% FPR & Unavailable & Only 250 human negatives; at least 1,000 req
 
 \section*{Supplementary Note S12: Deduplicated, unseen-family, model-aware, and low-FPR detection}\label{si:s12}
 
-The text-only attackers reuse the fixed V1 TextCNN and pinned \path{microsoft/deberta-v3-base} revision \texttt{\seqsplit{8ccc9b6f36199bec6961081d44eb72fb3f7353f3}}. Their architectures and hyperparameters were not tuned on V3 test data. They are data-adaptive black-box attackers because they are fitted specifically to distinguish RankCloak from matched ordinary-model output. The model-aware logistic attacker instead receives saved token log probabilities from the exact generation model and uses summary surprisal features. Its L2 regularization value was chosen from 0.01, 0.1, 1, and 10 by validation ROC-AUC. Rank-only fields were excluded because ordinary-control ranks were not stored.
+The text-only attackers use the fixed TextCNN architecture and pinned \path{microsoft/deberta-v3-base}. Their architectures and hyperparameters were not tuned on test data. They are data-adaptive black-box attackers because they are fitted specifically to distinguish RankCloak from matched ordinary-model output. The model-aware logistic attacker instead receives saved token log probabilities from the exact generation model and uses summary surprisal features. Its L2 regularization value was chosen from 0.01, 0.1, 1, and 10 by validation ROC-AUC. Rank-only fields were excluded because ordinary-control ranks were not stored.
 
 Matched fitting used 9,904 training and 2,952 validation observations; the test had 1,491 positives and 1,491 negatives. For each leave-one-family-out fit, the target family was absent from both training and validation, and evaluation used only its 497 positive and 497 negative observations in held test components. Table~\ref{tab:v3-detector-main} reports the adverse matched results and the range across the three genuine family holdouts.
 
@@ -811,7 +812,7 @@ Relative to ungated output, moderate gating added a mean 20.1083 words, changed 
 \caption{\label{fig:v3-entropy-capacity}\textbf{Entropy gating, capacity, length, completion, and recovery.} Fixed-payload capacity is conditional on completion; fixed-budget payload fraction and completion retain all attempts.}
 \end{figure}
 
-The generated detector test was external to fitting. Historical train and validation rows carrying any of the 16 entropy-study payload instances were excluded, and exact/near-duplicate auditing was repeated before feature extraction. The audit retained 12,714/13,114 rows, removed 400, found zero cross-partition links, and left no condition unavailable. Gate-specific test controls numbered 117 ungated, 113 moderate, and 116 strict; none supports empirical 0.1\% resolution.
+The generated detector test was external to fitting. Training and validation rows carrying any of the 16 entropy-study payload instances were excluded, and exact/near-duplicate auditing was repeated before feature extraction. The audit retained 12,714/13,114 rows, removed 400, found zero cross-partition links, and left no condition unavailable. Gate-specific test controls numbered 117 ungated, 113 moderate, and 116 strict; none supports empirical 0.1\% resolution.
 
 \begin{table}[H]
 \centering
@@ -832,7 +833,7 @@ Model-aware & Moderate & 113/113 & 0.9999 & 0.9922 & 0.9381/0.0000 & 0/113 \\
 Model-aware & Strict & 116/116 & 0.9904 & 0.7845 & 0.6552/0.0000 & 0/116 \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-entropy-detectors}\textbf{Detector behavior by entropy gate.} Thresholds are the single historical-validation-frozen nominal 1\% thresholds. Every gate has fewer than 1,000 test negatives, so empirical 0.1\% TPR is unavailable.}
+\caption{\label{tab:v3-entropy-detectors}\textbf{Detector behavior by entropy gate.} Thresholds are the single validation-frozen nominal 1\% thresholds. Every gate has fewer than 1,000 test negatives, so empirical 0.1\% TPR is unavailable.}
 \end{table}
 
 \begin{figure}[H]
@@ -847,9 +848,9 @@ Taken together, stricter gating reduces text-only detection in the tested condit
 
 \subsection*{Pairing and recovery}
 
-The quantization analysis holds Qwen2.5-7B-Instruct revision \path{8911e8a47f92bac19d6f5c64a2e2095bd2f7d031}, its embedded tokenizer, rendered prompt, payload, codec, safe-text filter, target length, temperature, top-\(p\), llama-cpp-python 0.3.23 backend, and historical ordinary-control seed fixed. It successfully model-replayed all 1,920 historical Q4\_K\_M rows and completed all 1,920 paired Q8\_0 generations. No additional Q4 covers were generated.
+The quantization analysis holds Qwen2.5-7B-Instruct, its embedded tokenizer, rendered prompt, payload, codec, safe-text filter, target length, temperature, top-\(p\), llama-cpp-python 0.3.23 backend, and the same ordinary-control seed fixed. It successfully model-replayed all 1,920 recorded Q4\_K\_M rows and completed all 1,920 paired Q8\_0 generations. No additional Q4 covers were generated.
 
-Visible-text recovery for the 960 historical Q4 RankCloak covers retokenized each recorded string under the exact embedded Q4 tokenizer. The 732 exact token-ID matches reused the validated saved-ID rank trace; the other 228 cases underwent rank replay through the pinned Q4 model with the saved embedding-span boundary. This remains replay-assisted and does not recover without the exact context and span contract. Q8 visible-text recovery used the corresponding exact model path. Pairing used frozen payload, representation, and prompt identities.
+Visible-text recovery for the 960 recorded Q4 RankCloak covers retokenized each recorded string under the exact embedded Q4 tokenizer. The 732 exact token-ID matches reused the validated saved-ID rank trace; the other 228 cases underwent rank replay through the pinned Q4 model with the saved embedding-span boundary. This remains replay-assisted and does not recover without the exact context and span contract. Q8 visible-text recovery used the corresponding exact model path. Pairing used frozen payload, representation, and prompt identities.
 
 \begin{table}[H]
 \centering
@@ -874,12 +875,12 @@ Concordant outcomes & Both 588 & Neither 58 & No statistically supported Q8 adva
 \caption{\label{fig:v3-quant-recovery}\textbf{Paired saved-ID and visible-text recovery by quantization.} The grouped interval for the paired difference includes zero.}
 \end{figure}
 
-On the identical historical Q4 RankCloak token path, Q8 minus Q4 mean next-token entropy was \(-0.0154\) bits (95\% CI [-0.0187, -0.0120]); the observed-token rank changed at a mean fraction 0.4639 of positions and the greedy token changed at 0.0884. Independently generated Q4/Q8 RankCloak paths never matched exactly and had mean positionwise token match 0.0155. These differences show substantial path sensitivity; they are not evidence that either quantization is generally more recoverable.
+On the identical recorded Q4 RankCloak token path, Q8 minus Q4 mean next-token entropy was \(-0.0154\) bits (95\% CI [-0.0187, -0.0120]); the observed-token rank changed at a mean fraction 0.4639 of positions and the greedy token changed at 0.0884. Independently generated Q4/Q8 RankCloak paths never matched exactly and had mean positionwise token match 0.0155. These differences show substantial path sensitivity; they are not evidence that either quantization is generally more recoverable.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/matched_quantization_sensitivity.pdf}
-\caption{\label{fig:v3-quant-sensitivity}\textbf{Matched quantization sensitivity.} Same-path likelihood/rank comparisons and independently generated token-path agreement are paired within one pinned Qwen revision.}
+\caption{\label{fig:v3-quant-sensitivity}\textbf{Matched quantization sensitivity.} Same-path likelihood/rank comparisons and independently generated token-path agreement are paired within one pinned Qwen.}
 \end{figure}
 
 \subsection*{Cross-quantization detector transfer}
@@ -914,37 +915,40 @@ Model-aware & Pooled & 1.0000 & 1.0000 & 0.9948/0.0000 & 0/384 \\
 \caption{\label{fig:v3-cross-quant-detectors}\textbf{Detector transfer across Q4\_K\_M and Q8\_0.} Detection remains strong in both directions, while observed FPR can exceed the validation target.}
 \end{figure}
 
-The analysis isolates two quantizations of one model revision under one inference backend. It does not generalize to other Qwen revisions, architectures, bit widths, quantizers, backends, or hardware. In particular, the data do not justify stating that Q8 is generally more recoverable than Q4.
+The analysis isolates two quantizations of one model under one inference backend. It does not generalize to other Qwen revisions, architectures, bit widths, quantizers, backends, or hardware. In particular, the data do not justify stating that Q8 is generally more recoverable than Q4.
 
-\section*{Supplementary Note S15: V3 provenance and remaining boundaries}\label{si:s15}
+\section*{Supplementary Note S15: provenance and remaining boundaries}\label{si:s15}
 
-The V3 run manifest binds the detector inputs, model-backed generations, artifact hashes, backend, model and tokenizer identities, partitions, and validation status. The final validation report records \path{status: pass}, exact artifact-manifest path and checksum validation for 5,833 entries, 24 fit-metadata files, 24 prediction files, strict leakage-audit success, conditional entropy-capacity validation, and paired quantization-recovery source validation. The generation-analysis validation records 18/18 calibration traces, 720/720 entropy generations, 1,920/1,920 Q4 replays, 960/960 Q4 visible-recovery records, 1,920/1,920 Q8 generations, and zero failure records. Machine-readable tables and full provenance are retained under \path{results/revision_v3}; the manuscript reports from those sealed outputs rather than rerunning generation.
+The run manifest binds the detector inputs, model-backed generations, artifact hashes, backend, model and tokenizer identities, partitions, and validation status. The final validation report records \path{status: pass}, exact artifact-manifest path and checksum validation for 5,833 entries, 24 fit-metadata files, 24 prediction files, strict leakage-audit success, conditional entropy-capacity validation, and paired quantization-recovery source validation. The generation-analysis validation records 18/18 calibration traces, 720/720 entropy generations, 1,920/1,920 Q4 replays, 960/960 Q4 visible-recovery records, 1,920/1,920 Q8 generations, and zero failure records. Machine-readable tables and full provenance are retained and the reported results are drawn from those validated outputs rather than rerunning generation.
 
 \begin{longtable}{L{0.23\textwidth}L{0.32\textwidth}L{0.36\textwidth}}
-\caption{\label{tab:v3-boundaries}Remaining boundaries after the targeted V3 evaluations.}\\
+\caption{\label{tab:v3-boundaries}Summary of evidence and remaining boundaries.}\\
 \toprule
-Issue & Added evidence & Boundary that remains \\
+Issue & Evidence & Boundary that remains \\
 \midrule
 \endfirsthead
 \toprule
-Issue & Added evidence & Boundary that remains \\
+Issue & Evidence & Boundary that remains \\
 \midrule
 \endhead
 Saved-token condition & Perfect primary and paired-quantization recovery from the preserved token stream under recorded configurations & Tests token-preserving delivery or experimental retained IDs under the predeclared protocol; distinct from ordinary visible-text communication \\
-Visible-text transport & 88/144 historical robustness recovery; 732/960 Q4 and 758/960 Q8 in one paired matrix & Paraphrase, markdown/format transfer, cross-model decoding, and retokenization remain fragile or unsuccessful \\
+Visible-text transport & 88/144 recovery in the robustness sample, 732/960 Q4 and 758/960 Q8 in one paired matrix & Paraphrase, markdown/format transfer, cross-model decoding, and retokenization remain fragile or unsuccessful \\
 Strict deduplication & Component-safe split with zero declared cross-partition links & Does not detect semantic paraphrases below the 0.95 character-\(n\)-gram threshold \\
 Human-authored controls & 250 frozen Dolly negatives across 16 templates & Not a participant study; sparse genre coverage and generic machine/human signal remain \\
 Unseen families & Three leave-one-family-out tests & Not every architecture, training corpus, model size, proprietary system, or decoding stack \\
 Adaptive detection & Two data-adaptive text-only detectors and an exact-model-aware likelihood attacker & Strong but not exhaustive attackers or deployment distributions \\
 Low-FPR reporting & Exact counts and validation-frozen thresholds; matched 0.1\% estimates where supported & Human, family, entropy, and quantization tests have fewer than 1,000 negatives and no empirical 0.1\% resolution \\
 Entropy gating & 120 attempts per gate; capacity, length, recovery, quality, and detector outcomes & Two templates; thresholds from 768 positions/model; strict capacity conditional on 114 completions; exact-model AUC remains 0.9904 \\
-Quantization & Paired Q4\_K\_M/Q8\_0 recovery and bidirectional detector transfer & One pinned Qwen revision, two quantizations, one backend; no supported general Q8 advantage \\
+Quantization & Paired Q4\_K\_M/Q8\_0 recovery and bidirectional detector transfer & One pinned Qwen, two quantizations, one backend; no supported general Q8 advantage \\
 Naturalness & Automated surface/model diagnostics and a human-authored control corpus & No participants or human ratings; controls are not evidence of human-perceived naturalness \\
 Deployment/security & Failure surfaces and strong adverse detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
 \bottomrule
 \end{longtable}
 
-The bounded evaluations directly address the requested controls, leakage prevention, held-family transfer, adaptive and model-aware attackers, low-FPR reporting, entropy gating, and quantization sensitivity. They refine the evidence for an artifact-specific hiding and recovery method: the artifact surface form is concealed, exact recovery is configuration-dependent, visible-text transport is weaker, and current steganalysis often detects the encoding.
+
+The bounded evaluations assess detector controls, leakage prevention, generalization to model families excluded from training, adaptive and model aware attackers, performance at low false positive rates, entropy gating, and quantization sensitivity. Together, they characterize the evidence for an artifact specific hiding and recovery method. The artifact surface form is concealed, exact recovery depends on the shared configuration, visible text transport is weaker, and the evaluated steganalysis methods often detect the encoding.
+
+
 
 \bibliography{references}
 
