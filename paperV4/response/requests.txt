@@ -1,0 +1,45 @@
+---
+Dear Dr Mantzaris,
+
+Your manuscript, "RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text", has now been assessed.
+
+We invite you to revise your paper, carefully addressing the comments from the reviewers and the editor. Please ensure the results are accurately reported, any overstated conclusions are rewritten and the limitations of the work fully explained. When your revision is ready, please submit the updated manuscript and a point-by-point response. This will help us move to a swift decision.
+
+Please note that if your manuscript uses any custom or bespoke computational tool or code, or reports a new algorithm, tool, software, or a pipeline (even if individual components are not new), the underlying code must be deposited in a recognised DOI-assigning repository (e.g. zenodo) and linked either from Methods or a dedicated Code Availability section.
+
+Editor Comments
+
+"The manuscript presents a technically interesting and systematically evaluated framework for embedding cryptographic payloads into language-model-generated text through deterministic token-rank manipulation. Reviewer 2 considers the previous concerns largely addressed. However, several substantive issues remain before the conclusions can be fully supported. In particular, the authors should clarify the robustness boundaries under text transformations and configuration desynchronization, analyze the implications of zero cross-model recovery, explain the near-perfect detectability under an exact-model-aware attacker, strengthen semantic-coherence validation, document all deterministic filtering rules, and provide deeper analyses of entropy-gating failures, computational complexity, and quantization-induced divergence. Suggested references are optional, and the authors may select appropriate recent peer-reviewed literature."
+-Chun-Wei Yang
+
+We recommend submitting all revisions within the mentioned deadline.
+
+If you need more time, please contact us and include your submission ID.
+
+Kind regards,
+
+Purva Dhamankar
+---
+
+Reviewer 2
+
+Thank the authors for addressing most of my concerns.
+
+Reviewer 1
+
+The manuscript proposes a steganographic method embedding cryptographic payloads into language model outputs via deterministic token rank manipulation. While demonstrating exact recovery under strictly controlled conditions, the framework exhibits fragility against text transformations and cross-model decoding, limiting its practical utility despite comprehensive evaluations of capacity and neural steganalysis detection.
+
+Overall, the study presents a reproducible measurement framework for linguistic steganography. However, its reliance on perfectly synchronized configurations and failure during standard markdown operations require deeper theoretical justification. Furthermore, near-perfect detectability by exact-model-aware attackers and the absence of perceptual validation weaken its broader claims. Significant revisions addressing robustness boundaries, theoretical limitations of detectability, and expanded discussions on quantization sensitivity are required before publication can be considered.
+
+Please do not arbitrarily simplify or rephrase the review comments, as this hinders the assessment of your revisions.
+
+1- In the abstract and introduction, the manuscript admits severe transmission fragility. While you explicitly scope this as a measurement framework, you must expand the theoretical discussion on why standard operations like markdown copy cause complete failure and discuss potential boundary mitigations.
+2- Within the bounded payload methods section, assuming perfectly synchronized model configurations is highly restrictive. Please introduce a theoretical discussion addressing how minor configuration desynchronization, such as slight tokenizer version updates, theoretically impacts the overall payload recovery rate.
+3- In the exact copy fragility evaluation, the zero percent recovery rate for cross-model decoding is a severe limitation. You should propose and discuss a conceptual error correction strategy or fallback mechanism to mitigate this lack of robustness during mismatched decoding.
+4- Throughout the segmented multi-cover method section, the distinction between payload-bearing spans and natural tails lacks perceptual validation. You must provide stronger automated semantic coherence metrics to prove that these generated transitions appear natural and logically connected to readers.
+5- Neural steganalysis results indicate near-perfect detection by the exact-model-aware attacker. Rather than a full redesign, you must deeply analyze the theoretical bottlenecks causing this glaring statistical detectability and clearly define the framework's security boundaries against this specific threat model.
+6- The discussion of entropy gating notes that the strict gate condition resulted in maximum-budget payload completion failures. You should investigate and report the exact linguistic contexts or token-level characteristics that triggered these specific failures during the generation loop.
+7- The computational overhead analysis reports significant performance bottlenecks. Instead of exhaustive hardware baselines, please provide a theoretical computational complexity analysis comparing your rank transcoding method against standard linguistic steganography tools to mathematically justify the observed processing costs.
+8- In the reference list, citation 16 is an unverified preprint. If formally published, update the citation; otherwise, provide detailed theoretical justification for relying on its entropy-guided watermarking claims, or replace it with a peer-reviewed publication to strengthen your foundation.
+9- The methods section describing the deterministic token filter leaves the rules for excluding markup fragments obscure. You must explicitly list these complete exclusion criteria in the main text so independent researchers can accurately replicate your experimental setup.
+10- The paired quantization experiment shows independently generated token paths diverging significantly despite identical inputs. Please expand this section to theoretically discuss how minor quantization errors in logits are amplified by the deterministic sorting process, triggering this avalanche effect.
