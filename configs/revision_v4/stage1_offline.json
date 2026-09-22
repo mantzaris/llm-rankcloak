@@ -1,0 +1,24 @@
+{
+  "schema_version": "rankcloak-v4-stage1-offline-v1",
+  "evidence_status": "exploratory_existing_data_analysis",
+  "seed": 20260922,
+  "entropy_source_table": "results/revision_v3/source_tables/entropy_generation_trials.csv",
+  "entropy_raw_root": "results/revision_v3/generation/raw/entropy",
+  "expected_failure_suffixes": {
+    "2b5e682d0007193b56249891": [128, 110, 768],
+    "941eed91360afbdc8a26bf09": [128, 116, 768],
+    "9ae150681b7e7347c8241d5a": [64, 54, 384],
+    "a9ff67133eeaa189fa8be8b1": [128, 106, 768],
+    "c4160dc01512e365fbecb170": [128, 59, 768],
+    "cbb747058efe6a8b1fbd18ec": [128, 116, 768]
+  },
+  "matched_levels": ["ungated", "moderate"],
+  "strict_success_selection": "For each distinct failed model_id, representation_name, prompt_template_id stratum, choose one completed strict run with smallest SHA256 of seed|plan_id. Select before examining its trajectory. Reuse a selected success across failures in the same stratum. These are descriptive comparators, not causal controls.",
+  "rolling_window_positions": 32,
+  "low_progress_maximum_ranks_per_full_window": 2,
+  "text_flank_tokens": 16,
+  "position_convention": "zero-based start-inclusive stop-exclusive",
+  "longest_run_tie_rule": "earliest start",
+  "alignment": "exact pinned GGUF vocabulary only, verify detokenized prefixes against full bytes, expand display windows to UTF-8 boundaries; otherwise mark pending",
+  "regenerate_historical_trials": false
+}

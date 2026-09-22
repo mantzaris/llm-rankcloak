@@ -1,0 +1,49 @@
+{
+  "schema_version": "rankcloak-v4-boundary-coherence-stage2-design-v1",
+  "status": "prospective_instrumentation_plan_no_scores_inspected",
+  "seed": 20260922,
+  "population": "All structurally eligible actual forced-span to tail boundaries in the 1440 primary segmented trials. Do not choose examples by quality.",
+  "source_inventory": "results/revision_v4/source_tables/boundary_inventory.csv",
+  "sampling_rule": "Use all eligible boundaries. If a measured pilot proves this infeasible, amend before scoring RankCloak outcomes and select payloads by SHA256(seed|payload_name), balanced by payload class, keeping every model and schedule for selected payloads.",
+  "windows": {
+    "left": "Up to 32 generator tokens immediately before the true boundary, restricted to visible message tokens. Canonical primary forced spans contain eight tokens.",
+    "right": "Up to 32 generator tokens immediately after the boundary.",
+    "minimum_words_each_side": 3,
+    "alignment": "Use exact pinned prefix detokenization and UTF-8 byte boundaries. Record empty, short, alignment-failed, and truncated cases separately, without outcome-based exclusions.",
+    "matching": "Match ordinary and shuffled right-window lengths to each recipient boundary. Apply identical word and truncation rules to every arm."
+  },
+  "arms": ["real_transition", "ordinary_pseudo_boundary", "same_prompt_shuffled_tail"],
+  "ordinary_controls": "Use retained full-message ordinary controls with the same generator and exact prompt context. Take a prefix and place a pseudo-boundary at the recipient forced length. A historical whole-trial control is not automatically a per-segment control when prompts rotate. Choose eligible donor by seeded identity hash, preferring no reuse, then record every reuse.",
+  "shuffled_controls": "Rotate eligible donor tails within generator, exact prompt, schedule, and forced-length strata in seeded hash order. Require a different payload and sufficient right-window length. Never pair a message with its own tail. Missing matches are unavailable, not cross-topic substitutions.",
+  "semantic_relatedness": {
+    "model": "microsoft/deberta-v3-base",
+    "revision": "8ccc9b6f36199bec6961081d44eb72fb3f7353f3",
+    "local_path": "models/detectors/deberta_v3_base",
+    "checkpoint": "Original pinned pretrained base encoder, never the fitted RankCloak detector head.",
+    "metric": "Cosine similarity of normalized attention-masked mean final-layer embeddings, excluding special tokens. This is a proposed semantic proxy and requires pilot validation, not a claim that DeBERTa is a sentence-similarity model.",
+    "maximum_encoder_tokens": 256,
+    "freeze_requirement": "Verify local weight, tokenizer, configuration, and dependency hashes before pilot. No score-driven pooling or layer search."
+  },
+  "conditional_compatibility": {
+    "evaluator_map": {"llama3_8b_instruct_q4_k_m": "qwen2_5_7b_instruct_q4_k_m", "qwen2_5_7b_instruct_q4_k_m": "mistral_7b_instruct_v0_3_q4_k_m", "mistral_7b_instruct_v0_3_q4_k_m": "llama3_8b_instruct_q4_k_m"},
+    "source": "rankcloak.revision_evaluator.EVALUATOR_BY_GENERATOR",
+    "metric": "Mean tail-token log probability given the rendered prompt and left window, with a prompt-only tail score as a within-pair reference. Retain both raw conditional score and context gain.",
+    "tokenization": "Freeze evaluator tokenization, join convention, tail byte offsets, boundary-straddling token treatment, and empty-tail rejection in tested instrumentation before pilot. Never reuse generator token IDs in another tokenizer."
+  },
+  "pilot": {
+    "selection": "Smallest SHA256(seed|boundary_id) in each generator by schedule by six-category cell, at most 36 boundary identities.",
+    "data": "Only ordinary versus same-prompt shuffled ordinary transitions for metric validation. RankCloak scores remain blinded and uncomputed.",
+    "maximum_transition_pairs": 72,
+    "validation_rule": "Ordinary transitions must exceed shuffled controls for each prespecified higher-is-better metric with a positive payload-bootstrap 95 percent interval. Record failure and amend instrumentation or metric choice before the full analysis if this check fails.",
+    "throughput": "Measure actual tokenizer lengths, elapsed CUDA scoring time, batches, and peak memory. Forecast full work from measured counts and length strata, not generation-smoke throughput."
+  },
+  "inference": {
+    "primary_unit": "Payload instance, preserving all model, message, schedule, and segment observations.",
+    "estimand": "Within-boundary paired differences to the declared fixed empirical control corpus. Average segments within trial and repeated observations within payload before the primary overall contrast.",
+    "bootstrap": "2000 payload-cluster resamples stratified by artifact class, seed 20260922. Retain the same payload draw across arms and models.",
+    "control_reuse": "Report donor reuse and donor-payload linkage. Primary intervals are conditional on the fixed reference corpus. Before population-level claims, add multiway recipient/donor payload uncertainty or declare insufficient independent donor support.",
+    "exemplars": "Select strongest, median, and weakest measured transitions using a declared metric order and seeded tie rule. Display all three and label them illustrative, not participant evidence."
+  },
+  "secondary": ["Repeated token and word n-grams", "Exploratory entity-reference continuity with exact extraction rules", "Cross-message topic continuity as a separate analysis because multi-topic prompts deliberately rotate"],
+  "claim_boundary": "Automated complementary measures cannot prove how readers perceive the transition. No participant claims and no whole-message likelihood substitution."
+}

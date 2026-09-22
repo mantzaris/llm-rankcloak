@@ -1,0 +1,11 @@
+\section*{Supplementary Note S16. V4 Stage 1 diagnostic evidence}\label{si:v4-stage1}
+\textbf{Internal working draft.} The initial offline analysis reuses the retained V3 records. All six strict-gate failures remain in the denominator of 120 strict attempts. The ungated and moderate conditions each retain 120 attempts. Twenty-one trajectories include the six failures, their twelve matched ungated and moderate runs, and three strict successes chosen by a fixed identity hash within the failed model, representation, and prompt strata.
+
+The complete tables and pinned-tokenizer text windows are retained under \path{results/revision_v4/source_tables}. The accompanying manifest records every raw input hash and the selection rules. These trajectories describe the capacity accounting and observed local contexts. They do not establish a causal linguistic explanation. Integration of the interpretation, complementary boundary-coherence results, and final reviewer responses remains pending.
+
+\input{supplementary_tables/entropy_six_failures.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/v4_entropy_failure_traces.pdf}
+\caption{Existing strict-gate failure trajectories. Entropy is measured before each token and compared with the frozen model threshold. Cumulative consumed ranks are normalized by the requested count. All six trajectories exhaust their token budgets before completion. This is exploratory evidence from retained records.}\label{fig:v4-entropy}
+\end{figure}

@@ -1,0 +1,6 @@
+# Rebuilt locally from the retained sources and bibliography.
+*.aux
+*.blg
+*.out
+*.log
+*.synctex.gz

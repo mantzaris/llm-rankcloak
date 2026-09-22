@@ -1,0 +1,276 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{parskip}
+\usepackage{enumitem}
+
+\definecolor{commentgray}{gray}{0.25}
+\newcommand{\Status}[1]{\textbf{Status: #1.}}
+\newcommand{\Locations}[1]{\textbf{Locations:} #1}
+\newenvironment{reviewcomment}{\begin{quote}\color{commentgray}\itshape}{\end{quote}}
+
+%\hypersetup{pdftitle={RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text},pdfauthor={Alexander V. Mantzaris}}
+
+\title{V4 response working draft}
+\author{Alexander V. Mantzaris}
+\date{}
+\begin{document}
+\maketitle
+\begin{center}\color{red}\bfseries INTERNAL PENDING WORK\end{center}
+This response is a Stage 1 scaffold for submission 0170c7b2-1065-4344-a5d5-b839b51ac22c.
+The manuscript title is \emph{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text}.
+The original review letter is preserved below. Pending responses are internal drafting instructions and must be resolved before submission.
+
+\section*{Editor letter}\label{resp:editor_letter}
+% BEGIN QUOTE editor_letter
+\begin{reviewcomment}
+---
+Dear Dr Mantzaris,
+
+Your manuscript, "RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text", has now been assessed.
+
+We invite you to revise your paper, carefully addressing the comments from the reviewers and the editor. Please ensure the results are accurately reported, any overstated conclusions are rewritten and the limitations of the work fully explained. When your revision is ready, please submit the updated manuscript and a point-by-point response. This will help us move to a swift decision.
+
+Please note that if your manuscript uses any custom or bespoke computational tool or code, or reports a new algorithm, tool, software, or a pipeline (even if individual components are not new), the underlying code must be deposited in a recognised DOI-assigning repository (e.g. zenodo) and linked either from Methods or a dedicated Code Availability section.
+
+Editor Comments
+
+"The manuscript presents a technically interesting and systematically evaluated framework for embedding cryptographic payloads into language-model-generated text through deterministic token-rank manipulation. Reviewer 2 considers the previous concerns largely addressed. However, several substantive issues remain before the conclusions can be fully supported. In particular, the authors should clarify the robustness boundaries under text transformations and configuration desynchronization, analyze the implications of zero cross-model recovery, explain the near-perfect detectability under an exact-model-aware attacker, strengthen semantic-coherence validation, document all deterministic filtering rules, and provide deeper analyses of entropy-gating failures, computational complexity, and quantization-induced divergence. Suggested references are optional, and the authors may select appropriate recent peer-reviewed literature."
+-Chun-Wei Yang
+
+We recommend submitting all revisions within the mentioned deadline.
+
+If you need more time, please contact us and include your submission ID.
+
+Kind regards,
+
+Purva Dhamankar
+---
+\end{reviewcomment}
+% END QUOTE editor_letter
+
+\textbf{Internal pending work for editor requirements.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\textbf{Internal pending work for code deposit and archive coverage.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\textbf{Internal pending work for editor technical assessment.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 2 acknowledgment}\label{resp:reviewer2}
+% BEGIN QUOTE reviewer2
+\begin{reviewcomment}
+Reviewer 2
+
+Thank the authors for addressing most of my concerns.
+\end{reviewcomment}
+% END QUOTE reviewer2
+
+\textbf{Internal pending work for reviewer2.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 general assessment and wording instruction}\label{resp:reviewer1_general}
+% BEGIN QUOTE reviewer1_general
+\begin{reviewcomment}
+Reviewer 1
+
+The manuscript proposes a steganographic method embedding cryptographic payloads into language model outputs via deterministic token rank manipulation. While demonstrating exact recovery under strictly controlled conditions, the framework exhibits fragility against text transformations and cross-model decoding, limiting its practical utility despite comprehensive evaluations of capacity and neural steganalysis detection.
+
+Overall, the study presents a reproducible measurement framework for linguistic steganography. However, its reliance on perfectly synchronized configurations and failure during standard markdown operations require deeper theoretical justification. Furthermore, near-perfect detectability by exact-model-aware attackers and the absence of perceptual validation weaken its broader claims. Significant revisions addressing robustness boundaries, theoretical limitations of detectability, and expanded discussions on quantization sensitivity are required before publication can be considered.
+
+Please do not arbitrarily simplify or rephrase the review comments, as this hinders the assessment of your revisions.
+\end{reviewcomment}
+% END QUOTE reviewer1_general
+
+\textbf{Internal pending work for general assessment.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\textbf{Internal pending work for verbatim wording preservation.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 1}\label{resp:R1-1}
+% BEGIN QUOTE R1.1
+\begin{reviewcomment}
+1- In the abstract and introduction, the manuscript admits severe transmission fragility. While you explicitly scope this as a measurement framework, you must expand the theoretical discussion on why standard operations like markdown copy cause complete failure and discuss potential boundary mitigations.
+\end{reviewcomment}
+% END QUOTE R1.1
+
+\textbf{Internal pending work for R1.1.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 2}\label{resp:R1-2}
+% BEGIN QUOTE R1.2
+\begin{reviewcomment}
+2- Within the bounded payload methods section, assuming perfectly synchronized model configurations is highly restrictive. Please introduce a theoretical discussion addressing how minor configuration desynchronization, such as slight tokenizer version updates, theoretically impacts the overall payload recovery rate.
+\end{reviewcomment}
+% END QUOTE R1.2
+
+\textbf{Internal pending work for R1.2.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 3}\label{resp:R1-3}
+% BEGIN QUOTE R1.3
+\begin{reviewcomment}
+3- In the exact copy fragility evaluation, the zero percent recovery rate for cross-model decoding is a severe limitation. You should propose and discuss a conceptual error correction strategy or fallback mechanism to mitigate this lack of robustness during mismatched decoding.
+\end{reviewcomment}
+% END QUOTE R1.3
+
+\textbf{Internal pending work for R1.3.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 4}\label{resp:R1-4}
+% BEGIN QUOTE R1.4
+\begin{reviewcomment}
+4- Throughout the segmented multi-cover method section, the distinction between payload-bearing spans and natural tails lacks perceptual validation. You must provide stronger automated semantic coherence metrics to prove that these generated transitions appear natural and logically connected to readers.
+\end{reviewcomment}
+% END QUOTE R1.4
+
+\textbf{Internal pending work for R1.4.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 5}\label{resp:R1-5}
+% BEGIN QUOTE R1.5
+\begin{reviewcomment}
+5- Neural steganalysis results indicate near-perfect detection by the exact-model-aware attacker. Rather than a full redesign, you must deeply analyze the theoretical bottlenecks causing this glaring statistical detectability and clearly define the framework's security boundaries against this specific threat model.
+\end{reviewcomment}
+% END QUOTE R1.5
+
+\textbf{Internal pending work for R1.5.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 6}\label{resp:R1-6}
+% BEGIN QUOTE R1.6
+\begin{reviewcomment}
+6- The discussion of entropy gating notes that the strict gate condition resulted in maximum-budget payload completion failures. You should investigate and report the exact linguistic contexts or token-level characteristics that triggered these specific failures during the generation loop.
+\end{reviewcomment}
+% END QUOTE R1.6
+
+\textbf{Internal pending work for R1.6.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 7}\label{resp:R1-7}
+% BEGIN QUOTE R1.7
+\begin{reviewcomment}
+7- The computational overhead analysis reports significant performance bottlenecks. Instead of exhaustive hardware baselines, please provide a theoretical computational complexity analysis comparing your rank transcoding method against standard linguistic steganography tools to mathematically justify the observed processing costs.
+\end{reviewcomment}
+% END QUOTE R1.7
+
+\textbf{Internal pending work for R1.7.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 8}\label{resp:R1-8}
+% BEGIN QUOTE R1.8
+\begin{reviewcomment}
+8- In the reference list, citation 16 is an unverified preprint. If formally published, update the citation; otherwise, provide detailed theoretical justification for relying on its entropy-guided watermarking claims, or replace it with a peer-reviewed publication to strengthen your foundation.
+\end{reviewcomment}
+% END QUOTE R1.8
+
+\textbf{Internal pending work for R1.8.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 9}\label{resp:R1-9}
+% BEGIN QUOTE R1.9
+\begin{reviewcomment}
+9- The methods section describing the deterministic token filter leaves the rules for excluding markup fragments obscure. You must explicitly list these complete exclusion criteria in the main text so independent researchers can accurately replicate your experimental setup.
+\end{reviewcomment}
+% END QUOTE R1.9
+
+\textbf{Internal pending work for R1.9.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\section*{Reviewer 1 comment 10}\label{resp:R1-10}
+% BEGIN QUOTE R1.10
+\begin{reviewcomment}
+10- The paired quantization experiment shows independently generated token paths diverging significantly despite identical inputs. Please expand this section to theoretically discuss how minor quantization errors in logits are amplified by the deterministic sorting process, triggering this avalanche effect.
+\end{reviewcomment}
+% END QUOTE R1.10
+
+\textbf{Internal pending work for R1.10.}
+
+\textbf{Direct answer pending.} Draft a direct answer after the relevant evidence and limitations have been checked.
+
+\textbf{Evidence and change pending.} Link retained or newly completed evidence and describe the actual change. Do not claim unperformed work is complete.
+
+\textbf{Location pending.} Insert final manuscript, supplement, and evidence locations after integration and compilation.
+
+\end{document}

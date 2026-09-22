@@ -1,0 +1,18 @@
+{
+  "boundaries": 8280,
+  "boundaries_without_ordinary_prefix": 0,
+  "inputs": {
+    "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+    "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+    "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a"
+  },
+  "maximum_transition_scores": 24840,
+  "payload_groups": 240,
+  "planned_transition_arms": 3,
+  "same_history_positions": 244440,
+  "same_history_q4_q8_pairs": 1920,
+  "same_history_rank_changes": 69528,
+  "segmented_trials": 1440,
+  "source_sha256": "91b09278df0f41f62b0d2d7b81b282dd5b04daee5b7fc4ea9cad5eecef04fb17",
+  "structurally_eligible": 8280
+}

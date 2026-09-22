@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://arxiv.org/abs/2504.12108",
+    "resolved_url": "https://arxiv.org/abs/2504.12108",
+    "checked_at_utc": "2026-09-22T20:13:25.033399+00:00",
+    "response_sha256": "39329c5cf4175b404106824f303d69f8ffab5bcb30a9dca87a2d27919fbf65ca",
+    "response_bytes": 40090,
+    "status": "retrieved"
+  },
+  {
+    "url": "https://aclanthology.org/2024.acl-long.268/",
+    "resolved_url": "https://aclanthology.org/2024.acl-long.268/",
+    "checked_at_utc": "2026-09-22T20:13:25.404748+00:00",
+    "response_sha256": "4d4d3aaa7991a5a5bcb36edaa81f7843e0500dbc992a8a5a07dbd281827cb85a",
+    "response_bytes": 42448,
+    "status": "retrieved"
+  },
+  {
+    "url": "https://zenodo.org/api/records/21987450/versions/latest",
+    "resolved_url": "https://zenodo.org/api/records/22555497",
+    "checked_at_utc": "2026-09-22T20:13:26.705786+00:00",
+    "response_sha256": "ed58428d3b8ce368e99ce8981942211ca7c30e22a5a6b74c956874580a91c22b",
+    "response_bytes": 4625,
+    "status": "retrieved",
+    "record_id": 22555497,
+    "doi": "10.5281/zenodo.22555497",
+    "conceptdoi": "10.5281/zenodo.21987449",
+    "metadata_version": "2.0.0"
+  },
+  {
+    "url": "https://zenodo.org/api/records/21987449",
+    "resolved_url": "https://zenodo.org/api/records/22555497",
+    "checked_at_utc": "2026-09-22T20:13:27.983721+00:00",
+    "response_sha256": "ed58428d3b8ce368e99ce8981942211ca7c30e22a5a6b74c956874580a91c22b",
+    "response_bytes": 4625,
+    "status": "retrieved",
+    "record_id": 22555497,
+    "doi": "10.5281/zenodo.22555497",
+    "conceptdoi": "10.5281/zenodo.21987449",
+    "metadata_version": "2.0.0"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "document": "paperV4/scientific_reports/main4.pdf",
+    "status": "compiled",
+    "unresolved_references": false,
+    "final_layout_warnings": [],
+    "elapsed_seconds": 3.286752751999302
+  },
+  {
+    "document": "paperV4/scientific_reports/supplementary4.pdf",
+    "status": "compiled",
+    "unresolved_references": false,
+    "final_layout_warnings": [
+      "Underfull \\hbox (badness 10000) in alignment at lines 789--789"
+    ],
+    "elapsed_seconds": 3.1579065939995417
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "status": "compiled",
+    "unresolved_references": false,
+    "final_layout_warnings": [],
+    "elapsed_seconds": 1.5604948649997823
+  },
+  {
+    "document": "paperV4/cover_letter/cover_letter_v4.pdf",
+    "status": "compiled",
+    "unresolved_references": false,
+    "final_layout_warnings": [],
+    "elapsed_seconds": 1.42333542400047
+  }
+]

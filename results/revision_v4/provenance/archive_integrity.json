@@ -1,0 +1,7 @@
+{
+  "current_source_comparisons": 111,
+  "different_current_sources": 1,
+  "listed_files_verified": 411,
+  "method": "Verify size and SHA-256 of every embedded PACKAGE_MANIFEST entry against ZIP bytes.",
+  "zip_sha256": "9c12079958b47426dfd26e1d6d6952ea6e41010132d5024ba2211140f666fea7"
+}

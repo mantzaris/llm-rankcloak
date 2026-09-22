@@ -1,0 +1,13 @@
+{
+  "author_plan_unchanged": true,
+  "document_draft_markers_verified": 4,
+  "failure_count": 6,
+  "offline_input_hashes_verified": 734,
+  "pending_response_sets": 16,
+  "position_rows": 6682,
+  "protected_files_unchanged": 7256,
+  "requests_sha256": "de663d74f7b91880f50b08836aa373022d5aaeddd281902a059c8d99db4136de",
+  "review_blocks_exact": 13,
+  "selected_entropy_runs": 21,
+  "status": "passed"
+}

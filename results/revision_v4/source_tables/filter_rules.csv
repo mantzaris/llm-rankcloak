@@ -1,0 +1,35 @@
+rule_id,criterion,literal_json
+empty,Reject an empty decoded piece.,
+replacement,Reject any occurrence of Unicode U+FFFD.,
+ascii_control,Reject any code point below 32 except LF (10) and TAB (9). CR (13) is rejected. DEL (127) and other Unicode controls are not rejected by this rule alone.,
+substring_01,Reject occurrence in piece.lower().,"""```"""
+substring_02,Reject occurrence in piece.lower().,"""`"""
+substring_03,Reject occurrence in piece.lower().,"""\\section"""
+substring_04,Reject occurrence in piece.lower().,"""\\frac"""
+substring_05,Reject occurrence in piece.lower().,"""{\\"""
+substring_06,Reject occurrence in piece.lower().,"""\\rm"""
+substring_07,Reject occurrence in piece.lower().,"""http"""
+substring_08,Reject occurrence in piece.lower().,"""www."""
+substring_09,Reject occurrence in piece.lower().,""".com"""
+substring_10,Reject occurrence in piece.lower().,"""&lt"""
+substring_11,Reject occurrence in piece.lower().,"""&gt"""
+substring_12,Reject occurrence in piece.lower().,"""&amp"""
+substring_13,Reject occurrence in piece.lower().,"""</"""
+substring_14,Reject occurrence in piece.lower().,"""<"""
+substring_15,Reject occurrence in piece.lower().,""">"""
+substring_16,Reject occurrence in piece.lower().,"""["""
+substring_17,Reject occurrence in piece.lower().,"""]"""
+substring_18,Reject occurrence in piece.lower().,"""___"""
+substring_19,Reject occurrence in piece.lower().,"""|||"""
+hash_start,Reject piece.strip().startswith('#') or startswith('##'). The second condition is redundant. No general whitespace exclusion.,
+backslashes,Reject two consecutive backslashes or at least two backslashes anywhere in the original piece.,
+individual_decoding,Decode each vocabulary token independently with safe_detokenize. Byte output is decoded as UTF-8 with replacement.,
+decoding_exceptions,A detokenization exception produces an angle-bracket marker rejected by the predicate. An exception reaching mask construction produces an empty rejected piece.,
+mask_cache,Cache the Boolean vocabulary mask by model object identity and filter name.,
+unmasked,"None, an empty filter name, and the literal name none return no mask.",
+mask_errors,"Unknown filter name, unavailable vocabulary size, all-rejected vocabulary, and incompatible mask length raise errors.",
+selection,"Convert scores to float64 and fully sort allowed token IDs by descending score, then ascending token ID. Rank is positive and one-indexed. Out-of-range requested ranks raise errors.",
+recovery,"Count strictly higher allowed scores and equal scores at lower allowed token IDs, then add one. Excluded or out-of-range target IDs raise errors.",
+score_domain,The historical helpers do not explicitly reject nonfinite logits. The stated inverse ordering contract assumes finite scores.,
+special_tokens,"Safe-text filtering has no implicit special-token-ID exclusion. Ordinary sampling separately excludes exposed BOS, EOS, and EOT IDs.",
+roundtrip_filter,"The isolated roundtrip filter is a distinct additional tokenization test, not part of safe_text_filter_v1.",

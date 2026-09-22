@@ -1,0 +1,28 @@
+{
+  "record_id": 21987450,
+  "doi": "10.5281/zenodo.21987450",
+  "conceptdoi": "10.5281/zenodo.21987449",
+  "public_created": "2026-08-20T17:08:35.796474+00:00",
+  "public_updated": "2026-08-20T17:25:26.059662+00:00",
+  "file": {
+    "id": "b3ca23be-62ca-4dd1-a805-8074c90cc1af",
+    "key": "rankcloak-code-data-v1.0.0.zip",
+    "size": 39160391,
+    "checksum": "md5:47a3f240f32d7cded11cdfdcb29b18b3",
+    "links": {
+      "self": "https://zenodo.org/api/records/21987450/files/rankcloak-code-data-v1.0.0.zip/content"
+    }
+  },
+  "verified_md5": "47a3f240f32d7cded11cdfdcb29b18b3",
+  "archive_entry_count": 462,
+  "prefix_entry_counts": {
+    "rankcloak/": 56,
+    "results/revision_v1/": 208,
+    "configs/revision_v3/": 0,
+    "results/revision_v3/": 0,
+    "paperV3/": 0,
+    "paperV4/": 0,
+    "results/revision_v4/": 0
+  },
+  "method": "Downloaded public archive to /tmp, verified published MD5, read ZIP directory and embedded package manifest. No extraction or external write."
+}

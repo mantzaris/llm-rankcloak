@@ -1,0 +1,20 @@
+{
+  "llama3_8b_instruct_q4_k_m": {
+    "allowed_token_count": 123534,
+    "filter_name": "safe_text_filter_v1",
+    "packed_mask_sha256": "4f62aa94f18f36332fa88e30607857b609816b8e6838bea1c53ad3f537807121",
+    "vocabulary_size": 128256
+  },
+  "mistral_7b_instruct_v0_3_q4_k_m": {
+    "allowed_token_count": 31464,
+    "filter_name": "safe_text_filter_v1",
+    "packed_mask_sha256": "a3e56644211ae003f439d98dec6628cc7506e4d0581fbfcf205795e70202c544",
+    "vocabulary_size": 32768
+  },
+  "qwen2_5_7b_instruct_q4_k_m": {
+    "allowed_token_count": 147076,
+    "filter_name": "safe_text_filter_v1",
+    "packed_mask_sha256": "6aed83392b00b157848cc36add151eaf3f11f44e8f987a8bf82f2951da3bbf3f",
+    "vocabulary_size": 152064
+  }
+}

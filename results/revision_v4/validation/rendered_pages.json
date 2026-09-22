@@ -1,0 +1,121 @@
+[
+  {
+    "document": "paperV4/scientific_reports/main4.pdf",
+    "page": 1,
+    "render_path": "/tmp/rankcloak-v4-rendered/main4_page1.jpg",
+    "document_sha256": "07f662dbe7ae1ad9ca16129959c6814fa4dcbf5ec305d0e9fdd750ba6e9774b5",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/main4.pdf",
+    "page": 6,
+    "render_path": "/tmp/rankcloak-v4-rendered/main4_page6.jpg",
+    "document_sha256": "07f662dbe7ae1ad9ca16129959c6814fa4dcbf5ec305d0e9fdd750ba6e9774b5",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/main4.pdf",
+    "page": 20,
+    "render_path": "/tmp/rankcloak-v4-rendered/main4_page20.jpg",
+    "document_sha256": "07f662dbe7ae1ad9ca16129959c6814fa4dcbf5ec305d0e9fdd750ba6e9774b5",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/supplementary4.pdf",
+    "page": 1,
+    "render_path": "/tmp/rankcloak-v4-rendered/supplementary4_page1.jpg",
+    "document_sha256": "eb980bec16277ca72c0a7be5a25c0d03e9ae191e42724d62d46882cf4c00f53a",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/supplementary4.pdf",
+    "page": 23,
+    "render_path": "/tmp/rankcloak-v4-rendered/supplementary4_page23.jpg",
+    "document_sha256": "eb980bec16277ca72c0a7be5a25c0d03e9ae191e42724d62d46882cf4c00f53a",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/supplementary4.pdf",
+    "page": 30,
+    "render_path": "/tmp/rankcloak-v4-rendered/supplementary4_page30.jpg",
+    "document_sha256": "eb980bec16277ca72c0a7be5a25c0d03e9ae191e42724d62d46882cf4c00f53a",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/supplementary4.pdf",
+    "page": 31,
+    "render_path": "/tmp/rankcloak-v4-rendered/supplementary4_page31.jpg",
+    "document_sha256": "eb980bec16277ca72c0a7be5a25c0d03e9ae191e42724d62d46882cf4c00f53a",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 1,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page1.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 2,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page2.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 3,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page3.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 6,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page6.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/cover_letter/cover_letter_v4.pdf",
+    "page": 1,
+    "render_path": "/tmp/rankcloak-v4-rendered/cover_letter_v4_page1.jpg",
+    "document_sha256": "ff9f54582f211661e3264a829b9432a142d9dac5241a58ffe8f2422be2250bc3",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/main4.pdf",
+    "page": 7,
+    "render_path": "/tmp/rankcloak-v4-rendered/main4_page7.jpg",
+    "document_sha256": "07f662dbe7ae1ad9ca16129959c6814fa4dcbf5ec305d0e9fdd750ba6e9774b5",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/scientific_reports/main4.pdf",
+    "page": 21,
+    "render_path": "/tmp/rankcloak-v4-rendered/main4_page21.jpg",
+    "document_sha256": "07f662dbe7ae1ad9ca16129959c6814fa4dcbf5ec305d0e9fdd750ba6e9774b5",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 4,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page4.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 5,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page5.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  },
+  {
+    "document": "paperV4/response/response_to_reviewers_v4.pdf",
+    "page": 7,
+    "render_path": "/tmp/rankcloak-v4-rendered/response_to_reviewers_v4_page7.jpg",
+    "document_sha256": "368ca4914b6bf32c6a16d8102db9857a25551cb4005197f0f855e494d535c4f0",
+    "visually_inspected": true
+  }
+]

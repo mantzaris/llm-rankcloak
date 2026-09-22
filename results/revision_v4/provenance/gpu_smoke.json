@@ -1,0 +1,172 @@
+{
+  "backend_packages": {
+    "llama-cpp-python": "0.3.23",
+    "nvidia-cublas-cu12": "12.4.5.8",
+    "nvidia-cuda-runtime-cu12": "12.4.127"
+  },
+  "context_token_ids": [
+    840,
+    20772,
+    1246,
+    264,
+    584,
+    6733,
+    17045,
+    1181,
+    3942,
+    13
+  ],
+  "deterministic_environment": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "CUDA_VISIBLE_DEVICES": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+    "GGML_CUDA_DISABLE_FUSION": "1",
+    "GGML_CUDA_DISABLE_GRAPHS": "1",
+    "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": "1"
+  },
+  "elapsed_seconds": 18.520598553000127,
+  "exact_rank_replay": true,
+  "execution_including_load_seconds": 4.027244698000231,
+  "generated_text": " A library plays many different vital parts that allow our neighborhoods (of differing communities around",
+  "generated_token_ids": [
+    362,
+    6733,
+    11088,
+    1657,
+    2155,
+    16198,
+    5479,
+    429,
+    2138,
+    1039,
+    32000,
+    320,
+    1055,
+    60369,
+    10744,
+    2163
+  ],
+  "gpu_inventory": "index, uuid, name, memory.total [MiB], memory.used [MiB], driver_version\n0, GPU-3f5529e2-cb0a-d0ae-42ef-900bb3b35e04, Quadro T2000, 4096 MiB, 79 MiB, 590.48.01\n1, GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf, NVIDIA RTX 5000 Ada Generation, 32760 MiB, 11 MiB, 590.48.01",
+  "gpu_memory_samples": [
+    {
+      "process_gpu_memory_mib": 310,
+      "seconds": 14.775119289000031
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 15.058588488000169
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 15.339975052000227
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 15.619252037000024
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 15.899933095000051
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 16.18142817900025
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 16.46135696300007
+    },
+    {
+      "process_gpu_memory_mib": 4480,
+      "seconds": 16.740754123999977
+    },
+    {
+      "process_gpu_memory_mib": 4498,
+      "seconds": 17.034194940999896
+    },
+    {
+      "process_gpu_memory_mib": 4530,
+      "seconds": 17.316090998000163
+    },
+    {
+      "process_gpu_memory_mib": 4530,
+      "seconds": 17.595419067999956
+    },
+    {
+      "process_gpu_memory_mib": 4530,
+      "seconds": 17.872329703000105
+    },
+    {
+      "process_gpu_memory_mib": 4530,
+      "seconds": 18.163079939
+    },
+    {
+      "process_gpu_memory_mib": 4530,
+      "seconds": 18.44107745800011
+    }
+  ],
+  "gpu_offload_supported": true,
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "historical_results_changed": false,
+  "llama_cpp_system_info": "CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | ",
+  "maximum_wall_seconds": 570,
+  "memory_scope": "nvidia-smi process allocation sampled every 0.25 seconds, not an allocator-exact peak",
+  "model": {
+    "download_command": "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q4_K_M.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct",
+    "expected_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "model_id": "qwen2_5_7b_instruct_q4_k_m",
+    "quantization": "Q4_K_M",
+    "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+    "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+    "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "size_bytes": 4683074240
+  },
+  "n_batch": 1,
+  "n_gpu_layers": -1,
+  "n_ubatch": 1,
+  "observed_model_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+  "other_compute_processes_before": [],
+  "pid": 96693,
+  "recovered_ranks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "requested_ranks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "sampled_peak_process_gpu_memory_mib": 4530,
+  "schema_version": "rankcloak-v4-gpu-smoke-v1",
+  "scope": "16 forced tokens and 16 replayed tokens, one Qwen Q4 model",
+  "source_sha256": "2a2caf628eaf69f1bdf91ffc71a4640987ce25f2f33044dd7910497b929659fe",
+  "status": "passed"
+}

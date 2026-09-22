@@ -1,0 +1,32 @@
+{
+  "record_id": 22555497,
+  "doi": "10.5281/zenodo.22555497",
+  "conceptdoi": "10.5281/zenodo.21987449",
+  "version": "2.0.0",
+  "public_created": "2026-09-06T22:13:31.132640+00:00",
+  "public_updated": "2026-09-06T22:13:31.329788+00:00",
+  "file": {
+    "id": "2ad67cd8-a637-40d8-9aed-a89848532cf5",
+    "key": "llm-rankcloak-ce853d42d6ba.zip",
+    "size": 332331547,
+    "checksum": "md5:7ad33c7c2a579789d1896f2bd91b41af",
+    "links": {
+      "self": "https://zenodo.org/api/records/22555497/files/llm-rankcloak-ce853d42d6ba.zip/content"
+    }
+  },
+  "verified_md5": "7ad33c7c2a579789d1896f2bd91b41af",
+  "zip_sha256": "40b6258f3297a63666b71b96cda473bcde1feae30fcbde5069fa9f5f0ca34282",
+  "source_commit": "ce853d42d6ba64065cb63c6bdfc0d825c62734cd",
+  "verified_git_blob_count": 8342,
+  "git_blob_mismatches": [],
+  "missing_git_tree_files": [],
+  "prefix_file_counts": {
+    "rankcloak/": 64,
+    "configs/revision_v3/": 6,
+    "results/revision_v3/": 5835,
+    "paperV3/": 65,
+    "paperV4/": 0,
+    "results/revision_v4/": 0
+  },
+  "method": "Downloaded public ZIP, verified size and published MD5, then compared every archive file to the named local Git commit using Git blob SHA-1. No extraction or external write."
+}

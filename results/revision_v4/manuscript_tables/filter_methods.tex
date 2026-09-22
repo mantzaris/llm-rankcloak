@@ -1,0 +1,25 @@
+\subsection*{Complete deterministic token filter specification}\label{sec:v4-filter}
+\textbf{V4 working draft.} This specification documents the existing filter without changing its behavior.
+For \code{safe_text_filter_v1}, the following rules apply to each individually decoded vocabulary token.
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{L{0.20\textwidth}Y}
+\toprule
+Rule & Exact exclusion criterion \\
+\midrule
+Empty or replacement & Empty string or any U+FFFD replacement character. \\
+Controls & Any code point below 32 except newline and tab. Carriage return is excluded. DEL and other Unicode controls are not excluded by this rule alone. \\
+Literal fragments & Any case insensitive occurrence of \texttt{\detokenize{```}}, \texttt{\detokenize{`}}, \texttt{\detokenize{\section}}, \texttt{\detokenize{\frac}}, \texttt{\{\textbackslash}, \texttt{\detokenize{\rm}}, \texttt{\detokenize{http}}, \texttt{\detokenize{www.}}, \texttt{\detokenize{.com}}, \texttt{\detokenize{&lt}}, \texttt{\detokenize{&gt}}, \texttt{\detokenize{&amp}}, \texttt{\detokenize{</}}, \texttt{\detokenize{<}}, \texttt{\detokenize{>}}, \texttt{\detokenize{[}}, \texttt{\detokenize{]}}, \texttt{\detokenize{___}}, \texttt{\detokenize{|||}}. \\
+Start rule & After stripping whitespace, a piece starting with \texttt{\#} or \texttt{\#\#}. The second check is redundant. \\
+Backslashes & Two consecutive backslashes or at least two backslashes anywhere in the piece. \\
+\bottomrule
+\end{tabularx}
+\caption{Complete exclusion rules of the retained safe-text filter. A piece is allowed only if none applies.}\label{tab:v4-filter}
+\end{table}
+The filter decodes one token at a time with \code{safe_detokenize}. Byte output uses UTF-8 replacement decoding. If detokenization raises an exception, the wrapper returns an angle-bracket token marker, which the filter rejects. Any exception that reaches mask construction instead yields an empty piece, which is also rejected. Whitespace alone is allowed unless it contains an excluded control. Filtering does not guarantee that concatenated pieces are free of markup or tokenization changes.
+
+The mask is cached by model object identity and filter name. No filter, the empty name, and \code{none} leave the vocabulary unmasked. Unknown names, missing vocabulary size, an entirely rejected vocabulary, incompatible mask length, unavailable requested ranks, and a target excluded by the mask raise errors. The selector validates positive one-indexed ranks. Masks are constructed with the model vocabulary length.
+
+Candidate scores are converted to float64. The stated inverse ordering contract assumes finite logits. The historical helpers do not explicitly reject nonfinite scores. Selection sorts all allowed candidates by descending logit and ascending token ID. Recovery of a known token counts greater logits and equal logits at lower IDs. Both operations use the same allowed set. The isolated roundtrip filter adds a separate tokenization test. Ordinary sampling separately excludes BOS, EOS, and EOT identifiers where exposed by the backend. These exclusions are not implicit safe-text rules.
+
+The \href{https://github.com/mantzaris/llm-rankcloak/blob/60d23fffe5962d4e0b652fa045d762ca10bc3dcc/rankcloak/token_filters.py}{versioned token-filter source} is available in the repository. Its exact version and SHA-256 are retained in the V4 filter audit.

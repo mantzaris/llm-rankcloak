@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "pages_inspected": 17,
+  "documents_inspected": 4,
+  "findings": [
+    "Draft markers and pending responses are conspicuous.",
+    "Complete filter rules and all new tables and plots are readable.",
+    "All seven response pages were inspected.",
+    "Supplement threshold table underfull warning has no observed clipping."
+  ],
+  "preview_location": "/tmp/rankcloak-v4-rendered",
+  "preview_retention": "Temporary previews. The four source PDFs are retained in paperV4."
+}

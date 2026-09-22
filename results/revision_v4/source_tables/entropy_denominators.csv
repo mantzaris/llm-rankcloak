@@ -1,0 +1,4 @@
+gate_level,rankcloak_attempts,ordinary_controls,completed_payloads
+ungated,120,120,120
+moderate,120,120,120
+strict,120,120,114

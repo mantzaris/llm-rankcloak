@@ -1,0 +1,36 @@
+{
+  "blocked_substrings": [
+    "```",
+    "`",
+    "\\section",
+    "\\frac",
+    "{\\",
+    "\\rm",
+    "http",
+    "www.",
+    ".com",
+    "&lt",
+    "&gt",
+    "&amp",
+    "</",
+    "<",
+    ">",
+    "[",
+    "]",
+    "___",
+    "|||"
+  ],
+  "filter_name": "safe_text_filter_v1",
+  "historical_behavior_modified": false,
+  "predicate_line": 16,
+  "rank_recovery": "count strictly higher scores and equal scores at lower token IDs",
+  "related_sources": {
+    "rankcloak/model_io.py": "9f2199f0ced1ef2b121bf82fc47e4618cdffd950039657632def97a21eda4d11",
+    "rankcloak/rank_codec.py": "c2687b1bb9edd6e7de928bf7fe3729d9f88de6b10cc99244302dc5ff35cbed40",
+    "rankcloak/revision_protocol.py": "3a0a13f47f6fb0c39691e33289b592c7f906bf651217e275a5944db4706856e0",
+    "rankcloak/revision_runner.py": "786904fe3f183216e5f831385bf36ba67b68595c26c45b4956532b3d63bba70c"
+  },
+  "selection": "np.lexsort((token_ids, -scores[token_ids])); full allowed-set sort",
+  "source_path": "rankcloak/token_filters.py",
+  "source_sha256": "8d09fdfd4670bead5d233cb9d7b4cb57ae465bf1decf37dd65b223c7d71808d8"
+}

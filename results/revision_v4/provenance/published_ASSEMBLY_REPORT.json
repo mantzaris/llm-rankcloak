@@ -1,0 +1,2205 @@
+{
+  "artifact_evidence_partitions": [
+    {
+      "destination": "rankcloak",
+      "evidence_role": "supporting_methodological_material",
+      "group": "source_code",
+      "included_file_count": 55,
+      "missing": false,
+      "note": "RankCloak implementation and deterministic analysis/verification modules.",
+      "required": true,
+      "source": "rankcloak",
+      "verification_status": null
+    },
+    {
+      "destination": "scripts",
+      "evidence_role": "supporting_methodological_material",
+      "group": "source_code",
+      "included_file_count": 45,
+      "missing": false,
+      "note": "Command-line analysis, verification, release, and reproducibility entry points.",
+      "required": true,
+      "source": "scripts",
+      "verification_status": null
+    },
+    {
+      "destination": "tools",
+      "evidence_role": "supporting_methodological_material",
+      "group": "source_code",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Publication and repository validation utilities.",
+      "required": true,
+      "source": "tools",
+      "verification_status": null
+    },
+    {
+      "destination": "tests",
+      "evidence_role": "supporting_methodological_material",
+      "group": "source_code",
+      "included_file_count": 66,
+      "missing": false,
+      "note": "Tracked non-network test suite and scientific-integrity assertions.",
+      "required": true,
+      "source": "tests",
+      "verification_status": null
+    },
+    {
+      "destination": "pyproject.toml",
+      "evidence_role": "supporting_methodological_material",
+      "group": "source_code",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Python package metadata and declared dependencies.",
+      "required": true,
+      "source": "pyproject.toml",
+      "verification_status": null
+    },
+    {
+      "destination": "configs/revision_v1",
+      "evidence_role": "supporting_methodological_material",
+      "group": "configs",
+      "included_file_count": 11,
+      "missing": false,
+      "note": "Frozen model, prompt, detector, robustness, ablation, multilingual, and statistics configurations.",
+      "required": true,
+      "source": "configs/revision_v1",
+      "verification_status": null
+    },
+    {
+      "destination": "release_inputs/revision_v1",
+      "evidence_role": "supporting_methodological_material",
+      "group": "public_payload_corpus",
+      "included_file_count": 2,
+      "missing": false,
+      "note": "Public deterministic 480-payload cryptographic test-vector corpus and its hash manifest.",
+      "required": true,
+      "source": "release_inputs/revision_v1",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/neural_detector/confirmatory_v2",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "raw_results",
+      "included_file_count": 6,
+      "missing": false,
+      "note": "Final 56-fit detector manifest, frozen splits, metrics, 55,440 prediction rows, and dataset manifest; model weights and checkpoints are excluded.",
+      "required": true,
+      "source": "results/revision_v1/neural_detector/confirmatory_v2",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/analysis_inputs/primary_v2",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "processed_results",
+      "included_file_count": 8,
+      "missing": false,
+      "note": "Authoritative primary trial, feature, runtime, availability, and preprocessing tables.",
+      "required": true,
+      "source": "results/revision_v1/analysis_inputs/primary_v2",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/analysis_inputs/ablation_v2",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "processed_results",
+      "included_file_count": 8,
+      "missing": false,
+      "note": "Authoritative ablation trial, feature, runtime, availability, and preprocessing tables.",
+      "required": true,
+      "source": "results/revision_v1/analysis_inputs/ablation_v2",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/analysis_inputs/robustness_v2",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "processed_results",
+      "included_file_count": 8,
+      "missing": false,
+      "note": "Authoritative robustness trial, feature, runtime, availability, and preprocessing tables.",
+      "required": true,
+      "source": "results/revision_v1/analysis_inputs/robustness_v2",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/analysis_inputs/multilingual_v2",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "processed_results",
+      "included_file_count": 8,
+      "missing": false,
+      "note": "Authoritative multilingual trial, feature, runtime, availability, and preprocessing tables.",
+      "required": true,
+      "source": "results/revision_v1/analysis_inputs/multilingual_v2",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/analysis_inputs/primary_heldout_join_v5",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "processed_results",
+      "included_file_count": 2,
+      "missing": false,
+      "note": "Final held-out evaluator feature join used by the reported quality analyses.",
+      "required": true,
+      "source": "results/revision_v1/analysis_inputs/primary_heldout_join_v5",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/final_progress_snapshot_v1.json",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "processed_results",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Immutable final 38,504-work-unit accounting snapshot.",
+      "required": true,
+      "source": "results/revision_v1/final_progress_snapshot_v1.json",
+      "verification_status": null
+    },
+    {
+      "destination": "analysis/revision_v1/evidence_specs",
+      "evidence_role": "supporting_methodological_material",
+      "group": "statistics_outputs",
+      "included_file_count": 8,
+      "missing": false,
+      "note": "Machine-readable endpoint, robustness, ablation, topic, and detector analysis specifications.",
+      "required": true,
+      "source": "analysis/revision_v1/evidence_specs",
+      "verification_status": null
+    },
+    {
+      "destination": "analysis/revision_v1/confirmatory_model_plan.json",
+      "evidence_role": "supporting_methodological_material",
+      "group": "statistics_outputs",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Declared statistical model and grouping plan.",
+      "required": true,
+      "source": "analysis/revision_v1/confirmatory_model_plan.json",
+      "verification_status": null
+    },
+    {
+      "destination": "analysis/revision_v1/detector_confirmatory_plan.json",
+      "evidence_role": "supporting_methodological_material",
+      "group": "statistics_outputs",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Frozen detector data, split, seed, architecture, and metric contract.",
+      "required": true,
+      "source": "analysis/revision_v1/detector_confirmatory_plan.json",
+      "verification_status": null
+    },
+    {
+      "destination": "analysis/revision_v1/mixed_effects_specs.json",
+      "evidence_role": "supporting_methodological_material",
+      "group": "statistics_outputs",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Mixed-effects model specifications used by the retained outputs.",
+      "required": true,
+      "source": "analysis/revision_v1/mixed_effects_specs.json",
+      "verification_status": null
+    },
+    {
+      "destination": "analysis/revision_v1/r_environment.lock.json",
+      "evidence_role": "supporting_methodological_material",
+      "group": "statistics_outputs",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Locked R package identities for the retained mixed-model analysis.",
+      "required": true,
+      "source": "analysis/revision_v1/r_environment.lock.json",
+      "verification_status": null
+    },
+    {
+      "destination": "results/revision_v1/final_experiment_package",
+      "evidence_role": "authoritative_final_evidence",
+      "group": "figure_table_outputs",
+      "included_file_count": 138,
+      "missing": false,
+      "note": "Portable derivative of the sealed final evidence package. Source hashes are retained while machine-local paths are rebased; duplicate raster previews and pre-final diagnostics are omitted.",
+      "required": true,
+      "source": "results/revision_v1/final_experiment_package",
+      "verification_status": null
+    },
+    {
+      "destination": "environment/revision_v1",
+      "evidence_role": "environment_reproduction_input",
+      "group": "environment_inputs",
+      "included_file_count": 11,
+      "missing": false,
+      "note": "Execution-time content-hashed Python, R, CUDA, hardware, determinism, and dependency-lock snapshot; historical source pins are provenance rather than a live-current-source attestation, and model binaries are not included.",
+      "required": true,
+      "source": "environment/revision_v1",
+      "verification_status": null
+    },
+    {
+      "destination": "project/README.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Project overview and user-facing repository documentation.",
+      "required": true,
+      "source": "README.md",
+      "verification_status": null
+    },
+    {
+      "destination": "release/revision_v1_template",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 2,
+      "missing": false,
+      "note": "Current offline code-and-data archive specification and local assembly instructions.",
+      "required": true,
+      "source": "release/revision_v1_template",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/CAPACITY_QUALITY_THEORY.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/CAPACITY_QUALITY_THEORY.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/COMPUTE_BUDGET_METHOD.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/COMPUTE_BUDGET_METHOD.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/DAIRSTEGA_COMPATIBILITY_AUDIT.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/DAIRSTEGA_COMPATIBILITY_AUDIT.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/DIRECT_SUBWORD_PAYLOAD_FIDELITY_INCIDENT.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/DIRECT_SUBWORD_PAYLOAD_FIDELITY_INCIDENT.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/DOI_RELEASE_PLAN.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/DOI_RELEASE_PLAN.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/HELDOUT_EVALUATOR.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/HELDOUT_EVALUATOR.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/INVALIDATION_PROTOCOL.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/INVALIDATION_PROTOCOL.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/LEGACY_INCURRED_GPU_LEDGER.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/LEGACY_INCURRED_GPU_LEDGER.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/MODEL_AND_LICENSE_PROVENANCE.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/MODEL_AND_LICENSE_PROVENANCE.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/PREPROCESSING_PIPELINE.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/PREPROCESSING_PIPELINE.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/PUBLISHED_COMPARATOR_AUDIT.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/PUBLISHED_COMPARATOR_AUDIT.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/REFERENCE_AUDIT.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Historical full reference-verification record; the final cited subset is paperV2/scientific_reports/references.bib.",
+      "required": true,
+      "source": "revision_docs/REFERENCE_AUDIT.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/REVISION_RUNNER.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/REVISION_RUNNER.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/STATISTICAL_MODEL_PLAN.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/STATISTICAL_MODEL_PLAN.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/SUBMITTED_ARTIFACT_HASHES.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/SUBMITTED_ARTIFACT_HASHES.md",
+      "verification_status": null
+    },
+    {
+      "destination": "revision_docs/TOKENIZER_PREFLIGHT.md",
+      "evidence_role": "documentation_not_scientific_result",
+      "group": "documentation",
+      "included_file_count": 1,
+      "missing": false,
+      "note": "Retained scientific or reproducibility documentation.",
+      "required": true,
+      "source": "revision_docs/TOKENIZER_PREFLIGHT.md",
+      "verification_status": null
+    }
+  ],
+  "authoritative_evidence_verification": {
+    "included_package_file_count": 138,
+    "manifest_path": "results/revision_v1/final_experiment_package/manifest.json",
+    "manifest_sha256": "338e9c2ee0e10367d4b8ccb9b6068f532d8fa961e5369a6097bb53820074f264",
+    "required": true,
+    "source_external_reference_count": 18,
+    "source_package_file_count": 215,
+    "status": "verified_complete",
+    "verified_external_reference_count": 14
+  },
+  "confirmatory_artifact_verification": {
+    "artifact_count": 0,
+    "index_path": null,
+    "manifest_sha256": null,
+    "required": false,
+    "status": "not_required"
+  },
+  "content_readiness": {
+    "blocker_count": 0,
+    "blockers": [],
+    "content_readiness": "final_ready_offline_candidate",
+    "doi_minted_or_reserved_by_assembler": false,
+    "external_action_performed": false,
+    "final_ready": true,
+    "notice_count": 1,
+    "notices": [
+      {
+        "code": "third_party_license_unresolved_reference_only_bytes_excluded",
+        "detail": "published_comparator_patient_huffman_acl2019"
+      }
+    ],
+    "publication_blocker_count": 1,
+    "publication_blockers": [
+      {
+        "code": "external_publication_authorization_absent",
+        "detail": "This offline assembler cannot upload, deposit, reserve a DOI, or publish."
+      }
+    ],
+    "publication_ready": false,
+    "release_status": "draft_external_action_prohibited"
+  },
+  "copied_allowlist_file_count": 402,
+  "copied_allowlist_size_bytes": 372137790,
+  "doi_minted_or_reserved_by_assembler": false,
+  "excluded_artifacts": [
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/__init__.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/baselines.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/bootstrap_statistics.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/cli.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/detection.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/experiments.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/metrics.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/model_io.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/paper_payloads.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/paper_suite.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/plotting.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/prompts.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/rank_codec.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/reproducibility.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_ablation_evidence.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_artifacts.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_change_inventory.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_compute.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_config.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_detection.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_detector_analysis.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_detector_benchmarks.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_detector_execution.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_detector_leakage.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_detector_reference.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_evaluator.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_evaluator_join.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_evidence_summary.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_figures.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_invalidation.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_multilingual_endpoint.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_overhead.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_package_index.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_payloads.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_preprocess.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_primary_endpoint.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_progress.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_protocol.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_readability.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_release.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_release_index.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_reporting.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_robustness.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_robustness_coverage.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_runner.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_statistics.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_theory.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_theory_empirical.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_tokenizer_preflight.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/revision_topic_effects.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/schemas.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/segmented_protocol.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/synthetic_payloads.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/token_filters.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "rankcloak",
+      "group": "source_code",
+      "path": "rankcloak/__pycache__/tokenization_audit.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/audit_published_comparator.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/build_detector_cuda_budget_gate.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/build_revision_environment_lock.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/build_revision_figures.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/build_revision_payload_manifest.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/build_revision_release.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/invalidate_revision_shard.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/manage_legacy_gpu_ledger.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/revise_revision_manuscripts.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/run_revision_detectors.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/supervise_confirmatory_v2.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/supervise_primary_v2.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "scripts",
+      "group": "source_code",
+      "path": "scripts/__pycache__/verify_revision_release.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tools",
+      "group": "source_code",
+      "path": "tools/__pycache__",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tools",
+      "group": "source_code",
+      "path": "tools/__pycache__/count_scientific_reports.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_bootstrap_statistics.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_bounded_rank_codec.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_confirmatory_v2_orchestrator.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_detector_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_detector_cuda_budget_gate.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_gpu_support.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_leadin_segmented_protocol.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_legacy_gpu_ledger_cli.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_paper_payloads.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_paper_schemas.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_paper_suite_resume.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_payload_granularity.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_primary_v2_supervisor.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_prompt_registry.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_prompts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_published_comparator_audit.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_rank_ordering.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_result_schema.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_ablation_evidence.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_artifacts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_change_inventory.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_compute.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_config.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_detection.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_detector_analysis.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_detector_benchmarks.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_detector_execution.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_detector_leakage.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_detector_reference.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_environment_lock.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_environment_lock.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_evaluator.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_evaluator_join.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_evidence_summary.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_figures.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_figures.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_invalidation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_manuscripts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_mixed_model_specs.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_multilingual_endpoint.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_overhead.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_package_index.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_payload_manifest.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_payloads.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_preprocess.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_primary_endpoint.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_progress.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_protocol.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_readability.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_references.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_references.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_release.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_release.cpython-310.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_release_index.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_reporting.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_robustness.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_robustness_coverage.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_runner.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_schemas.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_statistics.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_theory.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_theory_empirical.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_tokenizer_preflight.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_revision_topic_effects.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_run_revision_detectors.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_scientific_reports_word_count.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_segmented_protocol.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_segmented_quality_schema.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_synthetic_payloads.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_tail_policy.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "tests",
+      "group": "source_code",
+      "path": "tests/__pycache__/test_token_filters.cpython-310-pytest-9.1.1.pyc",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "configs/revision_v1",
+      "group": "configs",
+      "path": "configs/revision_v1/detectors",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/changed_and_generated_files.txt",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/changed_and_generated_files_manifest.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/detectors",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/detectors/analysis",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/detectors/leakage_audit",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/detectors/leakage_sensitivity",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/evidence_summary_prefinal_failure_20260816T1736Z.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/ablation_figure_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/ablation_summary.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/ablation_summary.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/ablation_technical_note.md",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/automated_readability.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/automated_readability.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/automated_readability_technical_note.md",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/capacity_tail_technical_note.md",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/capacity_tail_validation.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/capacity_tail_validation.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/computational_overhead.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/computational_overhead.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/computational_overhead_compact.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/computational_overhead_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/computational_overhead_technical_note.md",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/detector_compact_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/detector_figure_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/figure_inventory.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/figure_manifest.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/figure_validation.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/generation_commands.txt",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/neural_detector_performance.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/neural_detector_performance.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/neural_detector_performance_compact.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/neural_detector_performance_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/neural_detector_technical_note.md",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/overhead_compact_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/overhead_figure_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/ablation_summary.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/automated_readability.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/capacity_tail_validation.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/computational_overhead.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/computational_overhead_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/neural_detector_performance.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/neural_detector_performance_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/robustness_recovery.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_180mm/robustness_recovery_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/ablation_summary.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/automated_readability.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/capacity_tail_validation.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/computational_overhead.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/computational_overhead_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/neural_detector_performance.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/neural_detector_performance_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/robustness_recovery.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/pdf_renders_full/robustness_recovery_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/readability_figure_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_compact_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_figure_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_recovery.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_recovery.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_recovery_compact.pdf",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_recovery_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/robustness_technical_note.md",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figure_previews_v2/theory_figure_source.csv",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/ablation_summary.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/automated_readability.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/capacity_tail_validation.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/computational_overhead_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/empirical_capacity_quality_frontier.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/forced_span_full_message_quality.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/neural_detector_performance_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/payload_representation_rank_capacity.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/robustness_recovery_compact.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/figures/tail_gain_by_prompt_category.png",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/manifest.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/overhead",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/package_index_prefinal_failure_20260816T1746Z.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/readability",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/resource_and_process_audit.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/robustness",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/ablation_analysis",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/mixed_models",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/mixed_models_prefinal_failure_20260816T0855Z.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/mixed_models_prefinal_v3_correction_audit.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/python",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/statistics_predetector_failure_20260816T0950Z.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/test_suite",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/test_suite/full_suite_prefinal_diagnostic.json",
+      "reason": "archive_policy_omission",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/statistics/topic_effects",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/tables",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/tables/multilingual_recovery",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/tables/primary_recovery",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    },
+    {
+      "entry_source": "results/revision_v1/final_experiment_package",
+      "group": "figure_table_outputs",
+      "path": "results/revision_v1/final_experiment_package/theory",
+      "reason": "untracked_source_not_included",
+      "severity": "informational"
+    }
+  ],
+  "external_action_performed": false,
+  "group_file_counts": {
+    "configs": 11,
+    "documentation": 19,
+    "environment_inputs": 11,
+    "figure_table_outputs": 138,
+    "human_materials": 0,
+    "processed_results": 35,
+    "public_payload_corpus": 2,
+    "raw_results": 6,
+    "source_code": 168,
+    "statistics_outputs": 12
+  },
+  "missing_artifacts": [],
+  "network_access_used": false,
+  "portable_path_rewrite_count": 37,
+  "release_status": "draft_external_action_prohibited",
+  "schema_version": "1.0"
+}

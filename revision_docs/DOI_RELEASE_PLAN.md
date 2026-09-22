@@ -1,22 +1,25 @@
 # Code-and-data deposit workflow
 
-Reserved archive DOI: `10.5281/zenodo.21987450`
+The original published version 1.0.0 has DOI [10.5281/zenodo.21987450](https://doi.org/10.5281/zenodo.21987450). The latest published version checked on 22 September 2026 is version 2.0.0, DOI [10.5281/zenodo.22555497](https://doi.org/10.5281/zenodo.22555497). The shared concept DOI is [10.5281/zenodo.21987449](https://doi.org/10.5281/zenodo.21987449).
+
+The Stage 1 audit verified the original ZIP against its public checksum and all 411 files listed in its embedded manifest. That version lacks the V3 extension. The newer ZIP matches its public checksum and all 8,342 files in Git commit `ce853d42d6ba64065cb63c6bdfc0d825c62734cd`. It includes V3 code, configurations, results, and 65 files under `paperV3`. Neither version contains V4 evidence. The newer public description says manuscripts are excluded, but the archive contains manuscript files. A future deposit should correct that description.
+
+Metadata, archive inventories, checksums, and coverage findings are retained under `results/revision_v4/provenance`, including `archive_integrity.json` and `archive_v2_coverage.json`. Internal offline-candidate flags in the original archive describe its assembly state and do not negate its later publication.
 
 ## Scope
 
 The repository provides an offline assembler for the combined RankCloak
 code-and-data deposit. It stages a local candidate only and has no network,
-upload, publication, release, or DOI-minting capability. Zenodo has reserved
-the DOI above, but the draft record is not yet published; the journal article
-DOI will be a separate identifier.
+upload, publication, release, or DOI-minting capability. Both archive versions
+identified above are published. The journal article DOI is a separate identifier.
 
-The active specification is
+The earlier package specification is
 release/revision_v1_template/release_spec.json. Despite the retained directory
 name, it describes the completed computational revision rather than the earlier
 prospective confirmatory workflow. It depends on tracked canonical paths,
 the sealed final experiment package, excludes both paperV1 and paperV2, and
 does not depend on private manuscript staging or a legacy confirmatory release
-index.
+index. It is not yet a complete V4 release specification.
 
 ## Integrity model
 
@@ -53,7 +56,11 @@ paths, secrets, model weights, and inconsistent metadata.
 
 ## External action
 
-After author review, a separate authorized workflow must upload the
-independently verified candidate and publish the existing Zenodo draft. None of
-those actions is performed or assumed by the local assembler, and the reserved
-DOI may not resolve publicly until publication.
+A later authorized workflow should create a new version under the existing
+concept DOI, retain the V3 evidence, and add the completed V4 code, configurations,
+diagnostic inputs, derived tables, figures, environment records, model and license
+identities, reproduction commands, and verified portable manifests. Record the
+final source commit and make the public description agree with the actual file
+inventory. Verify the published version and contents before changing final
+availability claims. No external upload, publication, or submission is part of
+Stage 1.
