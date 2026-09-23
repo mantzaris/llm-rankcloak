@@ -1,0 +1,30 @@
+{
+  "cap_included_in_main_21600_seconds": true,
+  "check_context_limit": 4096,
+  "checks": 54,
+  "comparison_fields": [
+    "full_token_ids",
+    "full_text",
+    "tail_stop_reason",
+    "filter_sha256"
+  ],
+  "control_hashes": {
+    "results/revision_v4/coherence_replacement/raw/controls/llama3_8b_instruct_q4_k_m.jsonl": "bc514c8ab815d3a26517e83365d980408a2a3c62f00e7284c5b9ec5b776e7769",
+    "results/revision_v4/coherence_replacement/raw/controls/mistral_7b_instruct_v0_3_q4_k_m.jsonl": "fdacea4ee2b179fff0c0806682ea5f0b39c272851367010d8ded52424aad4122",
+    "results/revision_v4/coherence_replacement/raw/controls/qwen2_5_7b_instruct_q4_k_m.jsonl": "200e23c6783d9a62b3d7b712b6af7965e0eef5fd4bc8ceae5afaa82949f11430"
+  },
+  "decision_rule": "Retain every comparison and report disagreement. Never substitute a more favorable control or change the final sample, rubric or scores.",
+  "declared_utc": "2026-09-23T11:04:58.616770+00:00",
+  "gpu_forecast_seconds": 240,
+  "gpu_hard_reservation_seconds": 900,
+  "models": 3,
+  "reason": "Runtime audit found 4096 historical context allocation and 2048 new-control allocation. All actual prompts and full outputs fit both. Check allocation equivalence for the frozen control requests without changing study outputs.",
+  "requests_per_model": 18,
+  "source_context_limit": 2048,
+  "source_hashes": {
+    "rankcloak/model_io.py": "9f2199f0ced1ef2b121bf82fc47e4618cdffd950039657632def97a21eda4d11",
+    "rankcloak/revision_protocol.py": "3a0a13f47f6fb0c39691e33289b592c7f906bf651217e275a5944db4706856e0",
+    "rankcloak/token_filters.py": "8d09fdfd4670bead5d233cb9d7b4cb57ae465bf1decf37dd65b223c7d71808d8",
+    "scripts/check_revision_v4_contextual_control_capacity.py": "65ef00ab37fcb6f046e0c5e8e5a71aacbcfe243107708a6f50136dfe14de75b4"
+  }
+}

@@ -1,0 +1,1173 @@
+{
+  "completed_unique_requests": 1182,
+  "control_reuse": {
+    "maximum_reuse": 25,
+    "minimum_reuse": 3,
+    "reuse_counts": {
+      "03e71d6848a6d580cc1f25a7a32bef01c1a6c51479463455001fc31cdebef79e": 22,
+      "0f9896d7894d1deb3e3400eada69efa928633a7a422f2f5fea064f380efe8e7f": 5,
+      "1303c503ca98f2b41ec2273ba05723cd92cf62414383c0ea6666c154d4308061": 10,
+      "1a060022795a6625e625ad3f2c86b3ec3327ee93a04b7fe0ccd15c53c1549904": 8,
+      "1bbb23717cbf17848522e902bb9d4371b8b62ae4dd8ba6830cda454020c2b967": 25,
+      "1f02bde7c81ca61e51fee5dc9727a53041e3239ece5b7b889db978eb51816868": 9,
+      "29f2e1f6c6804bcfe254e40ad9236c5d2f2b92bdacb3f7a9baf4b612ae167d36": 17,
+      "311f35baf5f4151fe787d72a2644616057ef71d1e952ac664da3f0ed318c95b7": 9,
+      "382f9337059b42d7b2c18e2f44e7bd7d8305a5426b3d53f13c456580c9a9f0b6": 8,
+      "393dfe01835139e7ffed74ac8e6abc9493dc58358f49daf3d5aea38a8393c3fe": 9,
+      "3bab84b2b0b28242479ea463bc18bd48d00aacce6363335ff6942b7812a03506": 5,
+      "3dd33302f22d1b994cf7684afb8c7b3ef0fd70cbd3ac890e2670eb3a072b6248": 13,
+      "4123a3311eb569ce8618f6b0b5c4c38a1f847333733fe68eef9c8d663b5dbaf2": 7,
+      "41e49fadaad49cefc537e91979bff7e4d5117b4be3e3537a0026c104a5103aac": 14,
+      "421beccb337798300158bc5cbb103e59fe864c0bf4f92e6c1b78569087a90744": 7,
+      "45fc133513971eb6e2b11219b1bafe7089b9ccc357240d0cae70e82ee5b2fd55": 17,
+      "51bbe47485b9b42bdb6f304a767593ac3d814bdccf5e0cd6bd471d13de7bd132": 13,
+      "597f62f870390794f422aecaaa4c3d61c7c295276abe08084fef324ac679055c": 11,
+      "6096fa1af89d441096f567098d492d57329bdd04cda8b178b46d700821158db9": 5,
+      "611ae659a62f4fdff1b993c50a4c02744e68f623ce89fc83ae2e810277c3be3f": 10,
+      "67c8f4bf8355c103f8d1cff890a55fda44ea653783d596a2a4532758f3d7497d": 12,
+      "711761adea7fd748db014425240dda0cc87528a267cbebdf07a1be35455e58cd": 9,
+      "7169975a4fbe956ba769b8817215a093569195a677e0c5e3c3e289e182ad9c2d": 5,
+      "7926bfca2eb268f11e0d1b33c796b51ba2aab1d758db8e1787ab2ff2b44e66ec": 5,
+      "7a5dcd798848447eb577afda5a931330eec66aca45b42379555483d99dcbfc98": 3,
+      "7d1a85b947a80fd808e8bbdf52d1096c1ca518b54fb38f31c6286568becd8982": 11,
+      "8584fd3b670479dd49b9ed0a88c1d90c0e7acd0828af05170845704d08423364": 3,
+      "8616874e695de53e587201a2a8d69d271c2f2242d7ecacc20cbbcfb5d4d9a4a0": 7,
+      "8b94193784ef8ac563404cba0b3c6b0babf00b7401a0767233b7a05ec14c29ec": 7,
+      "8dd4aa2f6536257f853afd43dd3cfcb79ce5d173f3f1fe132f472db7e0d24c84": 11,
+      "949a5c60aa8e39cd1164885a512c6f033484bcbf150888d04d9feba2078dd24a": 7,
+      "979b787772dc455fd4d9e68d1ad17ba9725d5dfd17c07cfd3531002436cfb8ee": 11,
+      "9a28df80478557c47ac0ddddfaf6b6b1bd4c1a756ed00800f46eca5c59eddc4b": 16,
+      "9e88e7663497af027dedace7b825a658754587bb69d1698cbe8ff7e5df1e69fb": 12,
+      "a13a2561a18913b96f2911b2f921deca093c64c1f8480fcc166504d820c4e83c": 9,
+      "a587cc98209240c266e3864200ce30970ebf482fa5b2e7f91467af6e57b00906": 23,
+      "aad32794128d06a896b842d10406c78fe127e9e953a8ec9c1842023a78162a0f": 18,
+      "abda4936f1b23f1ceab5b2c2cfc552dbc7931ec82b25c7e84412601556541ae9": 6,
+      "ae4498c1af1454ff9971c96314d758df1c91a6f1a3b7dec18fedbb3d9e95affb": 6,
+      "b8e320927c592ad8103ea9281b1d54d08fdda66a1ea1a45793278ae2b80eca1b": 8,
+      "bcd35d1c80f37cc7f2464d7ea30288f3d857df487ed30781ecff6cc2123905a6": 9,
+      "c03729fa7c49e373d810fed62da9049963589216f6b349be02e13fec33d02dd3": 8,
+      "c5f25aaea91e4788608ad66e9c3e0b75fc9725b3c9bc7c0d7b09261535866828": 9,
+      "ceb0ec6c1b774c0fb8814c0e063bd6a95b335aca75eef375e669ce436dc67bbb": 17,
+      "d6fa630469971d6a02fd04fa0b9cbcc6f83e60a2d669e63c3dc83d7cc3eba1f8": 8,
+      "deb56d81290108dca40970f313f59330bdf825dfc59a3045d73ce4051c032f30": 13,
+      "df628139e4b4f1135a41a5e11422d9b5b11a477823ede3a50dc1816d0a4a5d03": 24,
+      "e1975acc0987abb1eb238507bd14d67213d8fd35ab174bf1d3f2b0360a91f7f9": 8,
+      "e647e1c708336a9eeb0e49109184f953de618fc431b873cd5b1ade3adaced058": 21,
+      "eab5ae1128f447586a5024c23734860e85531149eff84a22e4d36909d22c110a": 7,
+      "efb997819db50cbced1dc06637d514ca40cdbd8b1da7efd3ac8322bf333ce865": 4,
+      "f046671defb51d7de9f1480c81bae2b8ae11daf61ecd214c781e9680ce4acc55": 12,
+      "f24a714fcc578e761b8e4eb1545fabb5d950dac2e651fbd8e8825928095399b7": 17,
+      "f674919116b003628a978230f67ed4126ee7e3fb208e1a02d2dcacab267f5b53": 6
+    },
+    "unique_requests": 54
+  },
+  "encoded_messages": 576,
+  "inference": "Paired recipient-payload cluster bootstrap with 2000 shared class-stratified draws. Fixed control set. Physical judge and source generator are not fully crossed. Automated rubric scores, not human perception.",
+  "invalid_logical_scores": 43,
+  "invalid_unique_responses": 20,
+  "lengths": [
+    {
+      "arm": "encoded",
+      "cap_stops": 61,
+      "generator": "all",
+      "max_tokens": 264,
+      "mean_tokens": 55.770833333333336,
+      "median_tokens": 28.0,
+      "messages": 576,
+      "min_tokens": 16
+    },
+    {
+      "arm": "ordinary",
+      "cap_stops": 55,
+      "generator": "all",
+      "max_tokens": 264,
+      "mean_tokens": 56.39409722222222,
+      "median_tokens": 28.0,
+      "messages": 576,
+      "min_tokens": 16
+    },
+    {
+      "arm": "encoded",
+      "cap_stops": 28,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "max_tokens": 264,
+      "mean_tokens": 65.63020833333333,
+      "median_tokens": 29.5,
+      "messages": 192,
+      "min_tokens": 16
+    },
+    {
+      "arm": "ordinary",
+      "cap_stops": 39,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "max_tokens": 264,
+      "mean_tokens": 78.80208333333333,
+      "median_tokens": 27.0,
+      "messages": 192,
+      "min_tokens": 18
+    },
+    {
+      "arm": "encoded",
+      "cap_stops": 18,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "max_tokens": 264,
+      "mean_tokens": 54.458333333333336,
+      "median_tokens": 30.5,
+      "messages": 192,
+      "min_tokens": 16
+    },
+    {
+      "arm": "ordinary",
+      "cap_stops": 0,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "max_tokens": 184,
+      "mean_tokens": 38.614583333333336,
+      "median_tokens": 30.0,
+      "messages": 192,
+      "min_tokens": 19
+    },
+    {
+      "arm": "encoded",
+      "cap_stops": 15,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "max_tokens": 264,
+      "mean_tokens": 47.223958333333336,
+      "median_tokens": 26.5,
+      "messages": 192,
+      "min_tokens": 16
+    },
+    {
+      "arm": "ordinary",
+      "cap_stops": 16,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "max_tokens": 264,
+      "mean_tokens": 51.765625,
+      "median_tokens": 25.0,
+      "messages": 192,
+      "min_tokens": 16
+    }
+  ],
+  "logical_judge_units": 2304,
+  "missing_sensitivity": {
+    "difference_lower_missing": {
+      "estimate": -0.08072916666666666,
+      "lower": -0.10503472222222221,
+      "payloads": 48,
+      "upper": -0.057291666666666664
+    },
+    "difference_upper_missing": {
+      "estimate": -0.04340277777777777,
+      "lower": -0.07204861111111112,
+      "payloads": 48,
+      "upper": -0.012152777777777776
+    },
+    "encoded_lower_missing": {
+      "estimate": 0.8888888888888888,
+      "lower": 0.8697916666666666,
+      "payloads": 48,
+      "upper": 0.9071180555555555
+    },
+    "encoded_upper_missing": {
+      "estimate": 0.904513888888889,
+      "lower": 0.8862847222222222,
+      "payloads": 48,
+      "upper": 0.921875
+    },
+    "ordinary_lower_missing": {
+      "estimate": 0.9479166666666666,
+      "lower": 0.9253472222222222,
+      "payloads": 48,
+      "upper": 0.967013888888889
+    },
+    "ordinary_upper_missing": {
+      "estimate": 0.9696180555555555,
+      "lower": 0.9557291666666666,
+      "payloads": 48,
+      "upper": 0.9817708333333334
+    }
+  },
+  "raw_disruption_counts": [
+    {
+      "arm": "encoded",
+      "count": 34,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "0"
+    },
+    {
+      "arm": "encoded",
+      "count": 281,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "1"
+    },
+    {
+      "arm": "encoded",
+      "count": 58,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "2"
+    },
+    {
+      "arm": "encoded",
+      "count": 9,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "3"
+    },
+    {
+      "arm": "encoded",
+      "count": 2,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "missing"
+    },
+    {
+      "arm": "encoded",
+      "count": 63,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "0"
+    },
+    {
+      "arm": "encoded",
+      "count": 286,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "1"
+    },
+    {
+      "arm": "encoded",
+      "count": 25,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "2"
+    },
+    {
+      "arm": "encoded",
+      "count": 3,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "3"
+    },
+    {
+      "arm": "encoded",
+      "count": 7,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "missing"
+    },
+    {
+      "arm": "encoded",
+      "count": 29,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "0"
+    },
+    {
+      "arm": "encoded",
+      "count": 331,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "1"
+    },
+    {
+      "arm": "encoded",
+      "count": 13,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "2"
+    },
+    {
+      "arm": "encoded",
+      "count": 2,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "3"
+    },
+    {
+      "arm": "encoded",
+      "count": 9,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "missing"
+    },
+    {
+      "arm": "ordinary",
+      "count": 84,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "0"
+    },
+    {
+      "arm": "ordinary",
+      "count": 265,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "1"
+    },
+    {
+      "arm": "ordinary",
+      "count": 35,
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "score": "2"
+    },
+    {
+      "arm": "ordinary",
+      "count": 172,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "0"
+    },
+    {
+      "arm": "ordinary",
+      "count": 187,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "1"
+    },
+    {
+      "arm": "ordinary",
+      "count": 25,
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "score": "missing"
+    },
+    {
+      "arm": "ordinary",
+      "count": 137,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "0"
+    },
+    {
+      "arm": "ordinary",
+      "count": 247,
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "score": "1"
+    }
+  ],
+  "retries": 31,
+  "selected_payloads": 48,
+  "status": "complete",
+  "summaries": [
+    {
+      "complete_pairs": 537,
+      "difference": {
+        "estimate": -0.06345486111111111,
+        "lower": -0.08733289930555554,
+        "payloads": 48,
+        "upper": -0.038713107638888904
+      },
+      "encoded": {
+        "estimate": 0.9030381944444444,
+        "lower": 0.8838519965277777,
+        "payloads": 48,
+        "upper": 0.9211848958333333
+      },
+      "encoded_connectedness": {
+        "estimate": 3.603211805555556,
+        "lower": 3.5288172743055553,
+        "payloads": 48,
+        "upper": 3.6722287326388887
+      },
+      "encoded_disagreement": {
+        "estimate": 0.14583333333333334,
+        "lower": 0.11805555555555554,
+        "payloads": 48,
+        "upper": 0.1753472222222222
+      },
+      "encoded_score_0": {
+        "estimate": 0.1150173611111111,
+        "lower": 0.09331380208333333,
+        "payloads": 48,
+        "upper": 0.13758680555555555
+      },
+      "encoded_score_1": {
+        "estimate": 0.7880208333333334,
+        "lower": 0.7614583333333332,
+        "payloads": 48,
+        "upper": 0.8154557291666666
+      },
+      "encoded_score_2": {
+        "estimate": 0.08480902777777777,
+        "lower": 0.06840060763888889,
+        "payloads": 48,
+        "upper": 0.10217447916666664
+      },
+      "encoded_score_3": {
+        "estimate": 0.012152777777777776,
+        "lower": 0.006076388888888888,
+        "payloads": 48,
+        "upper": 0.019965277777777776
+      },
+      "group": "panel",
+      "message_pairs": 576,
+      "ordinary": {
+        "estimate": 0.9664930555555555,
+        "lower": 0.9503472222222222,
+        "payloads": 48,
+        "upper": 0.9809027777777777
+      },
+      "ordinary_connectedness": {
+        "estimate": 4.002951388888889,
+        "lower": 3.938715277777778,
+        "payloads": 48,
+        "upper": 4.0625
+      },
+      "ordinary_disagreement": {
+        "estimate": 0.06701388888888889,
+        "lower": 0.03819444444444445,
+        "payloads": 48,
+        "upper": 0.09930555555555555
+      },
+      "ordinary_score_0": {
+        "estimate": 0.3393229166666667,
+        "lower": 0.31353515625,
+        "payloads": 48,
+        "upper": 0.3670160590277778
+      },
+      "ordinary_score_1": {
+        "estimate": 0.6271701388888888,
+        "lower": 0.5898394097222223,
+        "payloads": 48,
+        "upper": 0.6619791666666667
+      },
+      "ordinary_score_2": {
+        "estimate": 0.03350694444444444,
+        "lower": 0.019097222222222224,
+        "payloads": 48,
+        "upper": 0.049652777777777775
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 288,
+      "value": "all"
+    },
+    {
+      "complete_pairs": 182,
+      "difference": {
+        "estimate": -0.08854166666666667,
+        "lower": -0.13020833333333334,
+        "payloads": 48,
+        "upper": -0.052083333333333336
+      },
+      "encoded": {
+        "estimate": 0.9114583333333334,
+        "lower": 0.8697916666666666,
+        "payloads": 48,
+        "upper": 0.9479166666666666
+      },
+      "encoded_connectedness": {
+        "estimate": 3.5911458333333335,
+        "lower": 3.4401041666666665,
+        "payloads": 48,
+        "upper": 3.734440104166666
+      },
+      "encoded_disagreement": {
+        "estimate": 0.07291666666666667,
+        "lower": 0.036458333333333336,
+        "payloads": 48,
+        "upper": 0.109375
+      },
+      "encoded_score_0": {
+        "estimate": 0.16927083333333334,
+        "lower": 0.125,
+        "payloads": 48,
+        "upper": 0.2109375
+      },
+      "encoded_score_1": {
+        "estimate": 0.7421875,
+        "lower": 0.6927083333333334,
+        "payloads": 48,
+        "upper": 0.7891276041666663
+      },
+      "encoded_score_2": {
+        "estimate": 0.07552083333333333,
+        "lower": 0.044270833333333336,
+        "payloads": 48,
+        "upper": 0.11197916666666667
+      },
+      "encoded_score_3": {
+        "estimate": 0.013020833333333334,
+        "lower": 0.0026041666666666665,
+        "payloads": 48,
+        "upper": 0.026041666666666668
+      },
+      "group": "generator",
+      "message_pairs": 192,
+      "ordinary": {
+        "estimate": 1.0,
+        "lower": 1.0,
+        "payloads": 48,
+        "upper": 1.0
+      },
+      "ordinary_connectedness": {
+        "estimate": 4.059895833333333,
+        "lower": 3.934830729166667,
+        "payloads": 48,
+        "upper": 4.1771484375
+      },
+      "ordinary_disagreement": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "ordinary_score_0": {
+        "estimate": 0.3072916666666667,
+        "lower": 0.234375,
+        "payloads": 48,
+        "upper": 0.3802083333333333
+      },
+      "ordinary_score_1": {
+        "estimate": 0.6927083333333334,
+        "lower": 0.6197916666666666,
+        "payloads": 48,
+        "upper": 0.765625
+      },
+      "ordinary_score_2": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 96,
+      "value": "llama3_8b_instruct_q4_k_m"
+    },
+    {
+      "complete_pairs": 191,
+      "difference": {
+        "estimate": -0.049479166666666664,
+        "lower": -0.09895833333333333,
+        "payloads": 48,
+        "upper": 0.0026041666666666665
+      },
+      "encoded": {
+        "estimate": 0.8776041666666666,
+        "lower": 0.8411458333333334,
+        "payloads": 48,
+        "upper": 0.9115234374999996
+      },
+      "encoded_connectedness": {
+        "estimate": 3.4244791666666665,
+        "lower": 3.2942708333333335,
+        "payloads": 48,
+        "upper": 3.5546875
+      },
+      "encoded_disagreement": {
+        "estimate": 0.234375,
+        "lower": 0.16666666666666666,
+        "payloads": 48,
+        "upper": 0.3020833333333333
+      },
+      "encoded_score_0": {
+        "estimate": 0.059895833333333336,
+        "lower": 0.036458333333333336,
+        "payloads": 48,
+        "upper": 0.08333333333333333
+      },
+      "encoded_score_1": {
+        "estimate": 0.8177083333333334,
+        "lower": 0.78125,
+        "payloads": 48,
+        "upper": 0.8515625
+      },
+      "encoded_score_2": {
+        "estimate": 0.10677083333333333,
+        "lower": 0.07805989583333334,
+        "payloads": 48,
+        "upper": 0.140625
+      },
+      "encoded_score_3": {
+        "estimate": 0.015625,
+        "lower": 0.005208333333333333,
+        "payloads": 48,
+        "upper": 0.028645833333333332
+      },
+      "group": "generator",
+      "message_pairs": 192,
+      "ordinary": {
+        "estimate": 0.9270833333333334,
+        "lower": 0.8880208333333334,
+        "payloads": 48,
+        "upper": 0.9609375
+      },
+      "ordinary_connectedness": {
+        "estimate": 3.7135416666666665,
+        "lower": 3.5780598958333334,
+        "payloads": 48,
+        "upper": 3.8229166666666665
+      },
+      "ordinary_disagreement": {
+        "estimate": 0.14583333333333334,
+        "lower": 0.078125,
+        "payloads": 48,
+        "upper": 0.22395833333333334
+      },
+      "ordinary_score_0": {
+        "estimate": 0.359375,
+        "lower": 0.3046875,
+        "payloads": 48,
+        "upper": 0.4166666666666667
+      },
+      "ordinary_score_1": {
+        "estimate": 0.5677083333333334,
+        "lower": 0.5130208333333334,
+        "payloads": 48,
+        "upper": 0.6197916666666666
+      },
+      "ordinary_score_2": {
+        "estimate": 0.07291666666666667,
+        "lower": 0.0390625,
+        "payloads": 48,
+        "upper": 0.11197916666666667
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 96,
+      "value": "mistral_7b_instruct_v0_3_q4_k_m"
+    },
+    {
+      "complete_pairs": 164,
+      "difference": {
+        "estimate": -0.05851063829787234,
+        "lower": -0.09114583333333333,
+        "payloads": 47,
+        "upper": -0.026595744680851064
+      },
+      "encoded": {
+        "estimate": 0.9228723404255319,
+        "lower": 0.8909574468085106,
+        "payloads": 47,
+        "upper": 0.9511129740980572
+      },
+      "encoded_connectedness": {
+        "estimate": 3.8111702127659575,
+        "lower": 3.694118582331175,
+        "payloads": 47,
+        "upper": 3.9270833333333335
+      },
+      "encoded_disagreement": {
+        "estimate": 0.13020833333333334,
+        "lower": 0.078125,
+        "payloads": 48,
+        "upper": 0.18229166666666666
+      },
+      "encoded_score_0": {
+        "estimate": 0.11170212765957446,
+        "lower": 0.07498670212765957,
+        "payloads": 47,
+        "upper": 0.15159574468085107
+      },
+      "encoded_score_1": {
+        "estimate": 0.8111702127659575,
+        "lower": 0.7632909463652483,
+        "payloads": 47,
+        "upper": 0.8567708333333334
+      },
+      "encoded_score_2": {
+        "estimate": 0.06914893617021277,
+        "lower": 0.0398936170212766,
+        "payloads": 47,
+        "upper": 0.10001358695652167
+      },
+      "encoded_score_3": {
+        "estimate": 0.007978723404255319,
+        "lower": 0.0,
+        "payloads": 47,
+        "upper": 0.020833333333333332
+      },
+      "group": "generator",
+      "message_pairs": 192,
+      "ordinary": {
+        "estimate": 0.9813829787234043,
+        "lower": 0.9592391304347826,
+        "payloads": 47,
+        "upper": 0.9973404255319149
+      },
+      "ordinary_connectedness": {
+        "estimate": 4.287234042553192,
+        "lower": 4.170212765957447,
+        "payloads": 47,
+        "upper": 4.3932388630319155
+      },
+      "ordinary_disagreement": {
+        "estimate": 0.03723404255319149,
+        "lower": 0.005319148936170213,
+        "payloads": 47,
+        "upper": 0.08152173913043478
+      },
+      "ordinary_score_0": {
+        "estimate": 0.3377659574468085,
+        "lower": 0.27393617021276595,
+        "payloads": 47,
+        "upper": 0.4122340425531915
+      },
+      "ordinary_score_1": {
+        "estimate": 0.6436170212765957,
+        "lower": 0.5679347826086957,
+        "payloads": 47,
+        "upper": 0.7074468085106383
+      },
+      "ordinary_score_2": {
+        "estimate": 0.018617021276595744,
+        "lower": 0.0026595744680851063,
+        "payloads": 47,
+        "upper": 0.04076086956521739
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 47,
+        "upper": 0.0
+      },
+      "trials": 96,
+      "value": "qwen2_5_7b_instruct_q4_k_m"
+    },
+    {
+      "complete_pairs": 269,
+      "difference": {
+        "estimate": -0.06336805555555555,
+        "lower": -0.09288194444444443,
+        "payloads": 48,
+        "upper": -0.03472222222222222
+      },
+      "encoded": {
+        "estimate": 0.9053819444444443,
+        "lower": 0.8802083333333334,
+        "payloads": 48,
+        "upper": 0.9288411458333333
+      },
+      "encoded_connectedness": {
+        "estimate": 3.615451388888889,
+        "lower": 3.527777777777778,
+        "payloads": 48,
+        "upper": 3.6953342013888886
+      },
+      "encoded_disagreement": {
+        "estimate": 0.13888888888888887,
+        "lower": 0.10069444444444443,
+        "payloads": 48,
+        "upper": 0.18055555555555555
+      },
+      "encoded_score_0": {
+        "estimate": 0.11197916666666667,
+        "lower": 0.08506944444444443,
+        "payloads": 48,
+        "upper": 0.13802083333333334
+      },
+      "encoded_score_1": {
+        "estimate": 0.7934027777777777,
+        "lower": 0.7621093749999999,
+        "payloads": 48,
+        "upper": 0.828125
+      },
+      "encoded_score_2": {
+        "estimate": 0.08420138888888888,
+        "lower": 0.06076388888888889,
+        "payloads": 48,
+        "upper": 0.10766059027777765
+      },
+      "encoded_score_3": {
+        "estimate": 0.010416666666666666,
+        "lower": 0.001736111111111111,
+        "payloads": 48,
+        "upper": 0.020833333333333332
+      },
+      "group": "schedule",
+      "message_pairs": 288,
+      "ordinary": {
+        "estimate": 0.96875,
+        "lower": 0.953125,
+        "payloads": 48,
+        "upper": 0.9809461805555554
+      },
+      "ordinary_connectedness": {
+        "estimate": 4.032986111111111,
+        "lower": 3.9722222222222228,
+        "payloads": 48,
+        "upper": 4.092013888888889
+      },
+      "ordinary_disagreement": {
+        "estimate": 0.0625,
+        "lower": 0.03810763888888889,
+        "payloads": 48,
+        "upper": 0.09375
+      },
+      "ordinary_score_0": {
+        "estimate": 0.3324652777777778,
+        "lower": 0.3055555555555556,
+        "payloads": 48,
+        "upper": 0.3620008680555555
+      },
+      "ordinary_score_1": {
+        "estimate": 0.6362847222222222,
+        "lower": 0.6041666666666666,
+        "payloads": 48,
+        "upper": 0.6666666666666666
+      },
+      "ordinary_score_2": {
+        "estimate": 0.03125,
+        "lower": 0.019053819444444446,
+        "payloads": 48,
+        "upper": 0.046875
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 144,
+      "value": "segmented_hex_multi_topic"
+    },
+    {
+      "complete_pairs": 268,
+      "difference": {
+        "estimate": -0.06163194444444444,
+        "lower": -0.09375,
+        "payloads": 48,
+        "upper": -0.028624131944444554
+      },
+      "encoded": {
+        "estimate": 0.9001736111111112,
+        "lower": 0.8715277777777778,
+        "payloads": 48,
+        "upper": 0.9253472222222223
+      },
+      "encoded_connectedness": {
+        "estimate": 3.5859375,
+        "lower": 3.483506944444444,
+        "payloads": 48,
+        "upper": 3.680555555555556
+      },
+      "encoded_disagreement": {
+        "estimate": 0.15277777777777776,
+        "lower": 0.1111111111111111,
+        "payloads": 48,
+        "upper": 0.19444444444444442
+      },
+      "encoded_score_0": {
+        "estimate": 0.1171875,
+        "lower": 0.08854166666666667,
+        "payloads": 48,
+        "upper": 0.14756944444444445
+      },
+      "encoded_score_1": {
+        "estimate": 0.7829861111111112,
+        "lower": 0.7456597222222223,
+        "payloads": 48,
+        "upper": 0.8194444444444445
+      },
+      "encoded_score_2": {
+        "estimate": 0.0859375,
+        "lower": 0.06163194444444444,
+        "payloads": 48,
+        "upper": 0.11284722222222221
+      },
+      "encoded_score_3": {
+        "estimate": 0.013888888888888888,
+        "lower": 0.005208333333333333,
+        "payloads": 48,
+        "upper": 0.024305555555555552
+      },
+      "group": "schedule",
+      "message_pairs": 288,
+      "ordinary": {
+        "estimate": 0.9618055555555557,
+        "lower": 0.9375,
+        "payloads": 48,
+        "upper": 0.982638888888889
+      },
+      "ordinary_connectedness": {
+        "estimate": 3.9635416666666665,
+        "lower": 3.8645833333333335,
+        "payloads": 48,
+        "upper": 4.050347222222222
+      },
+      "ordinary_disagreement": {
+        "estimate": 0.07638888888888888,
+        "lower": 0.03472222222222222,
+        "payloads": 48,
+        "upper": 0.125
+      },
+      "ordinary_score_0": {
+        "estimate": 0.3489583333333333,
+        "lower": 0.30902777777777773,
+        "payloads": 48,
+        "upper": 0.390625
+      },
+      "ordinary_score_1": {
+        "estimate": 0.6128472222222222,
+        "lower": 0.5555555555555555,
+        "payloads": 48,
+        "upper": 0.6666666666666666
+      },
+      "ordinary_score_2": {
+        "estimate": 0.03819444444444444,
+        "lower": 0.01736111111111111,
+        "payloads": 48,
+        "upper": 0.0625
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 144,
+      "value": "segmented_hex_single_topic"
+    },
+    {
+      "complete_pairs": 382,
+      "difference": {
+        "estimate": -0.08333333333333333,
+        "lower": -0.13541666666666666,
+        "payloads": 48,
+        "upper": -0.028645833333333332
+      },
+      "encoded": {
+        "estimate": 0.8255208333333334,
+        "lower": 0.7863932291666667,
+        "payloads": 48,
+        "upper": 0.8645833333333334
+      },
+      "encoded_connectedness": {
+        "estimate": 3.4973958333333335,
+        "lower": 3.3802083333333335,
+        "payloads": 48,
+        "upper": 3.6119791666666665
+      },
+      "encoded_score_0": {
+        "estimate": 0.08854166666666667,
+        "lower": 0.059895833333333336,
+        "payloads": 48,
+        "upper": 0.11979166666666667
+      },
+      "encoded_score_1": {
+        "estimate": 0.7369791666666666,
+        "lower": 0.6901041666666666,
+        "payloads": 48,
+        "upper": 0.7787109374999996
+      },
+      "encoded_score_2": {
+        "estimate": 0.15104166666666666,
+        "lower": 0.11197916666666667,
+        "payloads": 48,
+        "upper": 0.19010416666666666
+      },
+      "encoded_score_3": {
+        "estimate": 0.0234375,
+        "lower": 0.0078125,
+        "payloads": 48,
+        "upper": 0.041666666666666664
+      },
+      "group": "judge",
+      "message_pairs": 384,
+      "ordinary": {
+        "estimate": 0.9088541666666666,
+        "lower": 0.8671875,
+        "payloads": 48,
+        "upper": 0.9453125
+      },
+      "ordinary_connectedness": {
+        "estimate": 3.8255208333333335,
+        "lower": 3.734375,
+        "payloads": 48,
+        "upper": 3.906315104166666
+      },
+      "ordinary_score_0": {
+        "estimate": 0.21875,
+        "lower": 0.171875,
+        "payloads": 48,
+        "upper": 0.2734375
+      },
+      "ordinary_score_1": {
+        "estimate": 0.6901041666666666,
+        "lower": 0.6119791666666666,
+        "payloads": 48,
+        "upper": 0.7604166666666666
+      },
+      "ordinary_score_2": {
+        "estimate": 0.09114583333333333,
+        "lower": 0.0546875,
+        "payloads": 48,
+        "upper": 0.1328125
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 192,
+      "value": "llama3_8b_instruct_q4_k_m"
+    },
+    {
+      "complete_pairs": 352,
+      "difference": {
+        "estimate": -0.07465277777777778,
+        "lower": -0.10243055555555554,
+        "payloads": 48,
+        "upper": -0.05034722222222222
+      },
+      "encoded": {
+        "estimate": 0.9253472222222223,
+        "lower": 0.8975694444444445,
+        "payloads": 48,
+        "upper": 0.9496527777777778
+      },
+      "encoded_connectedness": {
+        "estimate": 3.881076388888889,
+        "lower": 3.764735243055555,
+        "payloads": 48,
+        "upper": 3.983506944444444
+      },
+      "encoded_score_0": {
+        "estimate": 0.17447916666666666,
+        "lower": 0.12934027777777776,
+        "payloads": 48,
+        "upper": 0.2222222222222222
+      },
+      "encoded_score_1": {
+        "estimate": 0.7508680555555555,
+        "lower": 0.7039930555555555,
+        "payloads": 48,
+        "upper": 0.7960286458333333
+      },
+      "encoded_score_2": {
+        "estimate": 0.06684027777777778,
+        "lower": 0.04340277777777777,
+        "payloads": 48,
+        "upper": 0.09375
+      },
+      "encoded_score_3": {
+        "estimate": 0.0078125,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.015625
+      },
+      "group": "judge",
+      "message_pairs": 384,
+      "ordinary": {
+        "estimate": 1.0,
+        "lower": 1.0,
+        "payloads": 48,
+        "upper": 1.0
+      },
+      "ordinary_connectedness": {
+        "estimate": 4.417534722222222,
+        "lower": 4.296006944444444,
+        "payloads": 48,
+        "upper": 4.531271701388889
+      },
+      "ordinary_score_0": {
+        "estimate": 0.486111111111111,
+        "lower": 0.42532552083333325,
+        "payloads": 48,
+        "upper": 0.548611111111111
+      },
+      "ordinary_score_1": {
+        "estimate": 0.5138888888888888,
+        "lower": 0.45138888888888884,
+        "payloads": 48,
+        "upper": 0.5746744791666666
+      },
+      "ordinary_score_2": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 192,
+      "value": "mistral_7b_instruct_v0_3_q4_k_m"
+    },
+    {
+      "complete_pairs": 375,
+      "difference": {
+        "estimate": -0.0390625,
+        "lower": -0.0625,
+        "payloads": 48,
+        "upper": -0.020833333333333332
+      },
+      "encoded": {
+        "estimate": 0.9609375,
+        "lower": 0.9375,
+        "payloads": 48,
+        "upper": 0.9791666666666666
+      },
+      "encoded_connectedness": {
+        "estimate": 3.453125,
+        "lower": 3.3567708333333335,
+        "payloads": 48,
+        "upper": 3.5390625
+      },
+      "encoded_score_0": {
+        "estimate": 0.078125,
+        "lower": 0.049479166666666664,
+        "payloads": 48,
+        "upper": 0.11197916666666667
+      },
+      "encoded_score_1": {
+        "estimate": 0.8828125,
+        "lower": 0.8489583333333334,
+        "payloads": 48,
+        "upper": 0.9166666666666666
+      },
+      "encoded_score_2": {
+        "estimate": 0.033854166666666664,
+        "lower": 0.015625,
+        "payloads": 48,
+        "upper": 0.052083333333333336
+      },
+      "encoded_score_3": {
+        "estimate": 0.005208333333333333,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.013020833333333334
+      },
+      "group": "judge",
+      "message_pairs": 384,
+      "ordinary": {
+        "estimate": 1.0,
+        "lower": 1.0,
+        "payloads": 48,
+        "upper": 1.0
+      },
+      "ordinary_connectedness": {
+        "estimate": 3.8385416666666665,
+        "lower": 3.7942708333333335,
+        "payloads": 48,
+        "upper": 3.8802083333333335
+      },
+      "ordinary_score_0": {
+        "estimate": 0.359375,
+        "lower": 0.3229166666666667,
+        "payloads": 48,
+        "upper": 0.3958333333333333
+      },
+      "ordinary_score_1": {
+        "estimate": 0.640625,
+        "lower": 0.6041666666666666,
+        "payloads": 48,
+        "upper": 0.6770833333333334
+      },
+      "ordinary_score_2": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "ordinary_score_3": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "payloads": 48,
+        "upper": 0.0
+      },
+      "trials": 192,
+      "value": "qwen2_5_7b_instruct_q4_k_m"
+    }
+  ],
+  "trials": 288,
+  "unique_judge_requests": 1182
+}

@@ -1,0 +1,92 @@
+{
+  "blinded_logical_unit_checks": 2304,
+  "boundary_character_alignment_available": 576,
+  "faithful_complete_text_checks": 576,
+  "frozen_source_hash_checks": 6,
+  "interpretation": "Old joint window eligibility does not restrict the new intact-message sample. Reasons may overlap.",
+  "matched_control_contract_checks": 576,
+  "new_missing_text": 0,
+  "old_eligibility_counts": [
+    {
+      "count": 187,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "reason": "previously_eligible"
+    },
+    {
+      "count": 5,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "reason": "previously_ineligible"
+    },
+    {
+      "count": 2,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "reason": "short_actual_words"
+    },
+    {
+      "count": 3,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "reason": "shuffled:evaluator_boundary_straddle"
+    },
+    {
+      "count": 26,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "reason": "actual:evaluator_boundary_straddle"
+    },
+    {
+      "count": 43,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "reason": "ordinary:evaluator_boundary_straddle"
+    },
+    {
+      "count": 123,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "reason": "previously_eligible"
+    },
+    {
+      "count": 69,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "reason": "previously_ineligible"
+    },
+    {
+      "count": 4,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "reason": "short_actual_words"
+    },
+    {
+      "count": 5,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "reason": "shuffled:evaluator_boundary_straddle"
+    },
+    {
+      "count": 1,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "reason": "actual:evaluator_boundary_straddle"
+    },
+    {
+      "count": 1,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "reason": "ordinary:evaluator_boundary_straddle"
+    },
+    {
+      "count": 181,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "reason": "previously_eligible"
+    },
+    {
+      "count": 11,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "reason": "previously_ineligible"
+    },
+    {
+      "count": 4,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "reason": "short_actual_words"
+    },
+    {
+      "count": 5,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "reason": "shuffled:evaluator_boundary_straddle"
+    }
+  ],
+  "previously_ineligible_messages_retained": 85
+}

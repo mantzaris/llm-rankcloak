@@ -1,0 +1,181 @@
+{
+  "control_request_use_distribution": {
+    "3": 2,
+    "4": 1,
+    "5": 5,
+    "6": 3,
+    "7": 6,
+    "8": 6,
+    "9": 7,
+    "10": 2,
+    "11": 4,
+    "12": 3,
+    "13": 3,
+    "14": 1,
+    "16": 1,
+    "17": 4,
+    "18": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1
+  },
+  "distinct_judge_requests_by_arm": {
+    "encoded": 1074,
+    "ordinary": 108
+  },
+  "logical_units_by_arm": {
+    "encoded": 1152,
+    "ordinary": 1152
+  },
+  "maximum_control_reuse": 25,
+  "minimum_control_reuse": 3,
+  "requests_shared_between_conditions": 0,
+  "selected_messages_by_generator_schedule_class": [
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "hmac_sha256_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "nonce_96_bit_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "sha256_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "token_128_bit_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "hmac_sha256_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "nonce_96_bit_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "sha256_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "token_128_bit_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "hmac_sha256_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "nonce_96_bit_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "sha256_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "token_128_bit_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "hmac_sha256_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "nonce_96_bit_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "sha256_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "messages": 24,
+      "payload_class": "token_128_bit_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "hmac_sha256_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "nonce_96_bit_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "sha256_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "token_128_bit_hex",
+      "schedule": "segmented_hex_multi_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "hmac_sha256_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "nonce_96_bit_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "sha256_hex",
+      "schedule": "segmented_hex_single_topic"
+    },
+    {
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "messages": 24,
+      "payload_class": "token_128_bit_hex",
+      "schedule": "segmented_hex_single_topic"
+    }
+  ]
+}

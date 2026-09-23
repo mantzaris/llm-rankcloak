@@ -1,0 +1,17 @@
+{
+  "generation_python": "3.10.13 (main, Feb 26 2026, 22:30:03) [GCC 13.3.0]",
+  "generation_packages": {
+    "llama-cpp-python": "0.3.23",
+    "numpy": "2.2.6",
+    "Jinja2": "3.1.6",
+    "diskcache": "5.6.3",
+    "typing_extensions": "4.16.0"
+  },
+  "analysis_python": "3.10.13 (main, Feb 26 2026, 22:30:03) [GCC 13.3.0]",
+  "analysis_packages": {
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.9",
+    "pillow": "12.3.0",
+    "pytest": "9.1.1"
+  }
+}

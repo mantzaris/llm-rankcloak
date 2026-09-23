@@ -1,0 +1,126 @@
+{
+  "claims": [
+    {
+      "claim_id": "encoded",
+      "estimand": "encoded",
+      "estimate": 0.9030381944444444,
+      "evidence_class": "new automated contextual rubric study",
+      "independent_check": "validation/score_audit.json",
+      "limitations": "Not human perception or indistinguishability. Judge and generator assignments not fully crossed.",
+      "lower": 0.8838519965277777,
+      "observed_population": {
+        "complete_message_pairs": 537,
+        "payloads": 48,
+        "trials": 280
+      },
+      "population": "Complete panel pairs from the selected outside-cohort payload stratum",
+      "selected_population": {
+        "message_pairs": 576,
+        "payloads": 48,
+        "trials": 288
+      },
+      "source": "analysis/summary.json",
+      "uncertainty": "2000 paired class-stratified recipient-payload bootstrap draws, fixed controls, complete-pair availability",
+      "units": "proportion",
+      "upper": 0.9211848958333333
+    },
+    {
+      "claim_id": "ordinary",
+      "estimand": "ordinary",
+      "estimate": 0.9664930555555555,
+      "evidence_class": "new automated contextual rubric study",
+      "independent_check": "validation/score_audit.json",
+      "limitations": "Not human perception or indistinguishability. Judge and generator assignments not fully crossed.",
+      "lower": 0.9503472222222222,
+      "observed_population": {
+        "complete_message_pairs": 537,
+        "payloads": 48,
+        "trials": 280
+      },
+      "population": "Complete panel pairs from the selected outside-cohort payload stratum",
+      "selected_population": {
+        "message_pairs": 576,
+        "payloads": 48,
+        "trials": 288
+      },
+      "source": "analysis/summary.json",
+      "uncertainty": "2000 paired class-stratified recipient-payload bootstrap draws, fixed controls, complete-pair availability",
+      "units": "proportion",
+      "upper": 0.9809027777777777
+    },
+    {
+      "claim_id": "difference",
+      "estimand": "difference",
+      "estimate": -0.06345486111111111,
+      "evidence_class": "new automated contextual rubric study",
+      "independent_check": "validation/score_audit.json",
+      "limitations": "Not human perception or indistinguishability. Judge and generator assignments not fully crossed.",
+      "lower": -0.08733289930555554,
+      "observed_population": {
+        "complete_message_pairs": 537,
+        "payloads": 48,
+        "trials": 280
+      },
+      "population": "Complete panel pairs from the selected outside-cohort payload stratum",
+      "selected_population": {
+        "message_pairs": 576,
+        "payloads": 48,
+        "trials": 288
+      },
+      "source": "analysis/summary.json",
+      "uncertainty": "2000 paired class-stratified recipient-payload bootstrap draws, fixed controls, complete-pair availability",
+      "units": "proportion",
+      "upper": -0.038713107638888904
+    },
+    {
+      "claim_id": "encoded_connectedness",
+      "estimand": "encoded_connectedness",
+      "estimate": 3.603211805555556,
+      "evidence_class": "new automated contextual rubric study",
+      "independent_check": "validation/score_audit.json",
+      "limitations": "Not human perception or indistinguishability. Judge and generator assignments not fully crossed.",
+      "lower": 3.5288172743055553,
+      "observed_population": {
+        "complete_message_pairs": 537,
+        "payloads": 48,
+        "trials": 280
+      },
+      "population": "Complete panel pairs from the selected outside-cohort payload stratum",
+      "selected_population": {
+        "message_pairs": 576,
+        "payloads": 48,
+        "trials": 288
+      },
+      "source": "analysis/summary.json",
+      "uncertainty": "2000 paired class-stratified recipient-payload bootstrap draws, fixed controls, complete-pair availability",
+      "units": "score from 1 to 5",
+      "upper": 3.6722287326388887
+    },
+    {
+      "claim_id": "ordinary_connectedness",
+      "estimand": "ordinary_connectedness",
+      "estimate": 4.002951388888889,
+      "evidence_class": "new automated contextual rubric study",
+      "independent_check": "validation/score_audit.json",
+      "limitations": "Not human perception or indistinguishability. Judge and generator assignments not fully crossed.",
+      "lower": 3.938715277777778,
+      "observed_population": {
+        "complete_message_pairs": 537,
+        "payloads": 48,
+        "trials": 280
+      },
+      "population": "Complete panel pairs from the selected outside-cohort payload stratum",
+      "selected_population": {
+        "message_pairs": 576,
+        "payloads": 48,
+        "trials": 288
+      },
+      "source": "analysis/summary.json",
+      "uncertainty": "2000 paired class-stratified recipient-payload bootstrap draws, fixed controls, complete-pair availability",
+      "units": "score from 1 to 5",
+      "upper": 4.0625
+    }
+  ],
+  "historical_claim_audit_retained": "results/revision_v4/stage3/claim_evidence.json",
+  "historical_result_scope": "Other recovery, transformation, entropy, quantization and detectability claims remain unchanged."
+}

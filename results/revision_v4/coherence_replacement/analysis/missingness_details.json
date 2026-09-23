@@ -1,0 +1,212 @@
+{
+  "complete_pairs": 537,
+  "complete_population_by_stratum": [
+    {
+      "complete_messages": 182,
+      "complete_payloads": 48,
+      "complete_trials": 96,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "schedule": "all",
+      "selected_messages": 192,
+      "selected_payloads": 48,
+      "selected_trials": 96
+    },
+    {
+      "complete_messages": 91,
+      "complete_payloads": 48,
+      "complete_trials": 48,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "schedule": "segmented_hex_multi_topic",
+      "selected_messages": 96,
+      "selected_payloads": 48,
+      "selected_trials": 48
+    },
+    {
+      "complete_messages": 91,
+      "complete_payloads": 48,
+      "complete_trials": 48,
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "schedule": "segmented_hex_single_topic",
+      "selected_messages": 96,
+      "selected_payloads": 48,
+      "selected_trials": 48
+    },
+    {
+      "complete_messages": 191,
+      "complete_payloads": 48,
+      "complete_trials": 96,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "schedule": "all",
+      "selected_messages": 192,
+      "selected_payloads": 48,
+      "selected_trials": 96
+    },
+    {
+      "complete_messages": 95,
+      "complete_payloads": 48,
+      "complete_trials": 48,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "schedule": "segmented_hex_multi_topic",
+      "selected_messages": 96,
+      "selected_payloads": 48,
+      "selected_trials": 48
+    },
+    {
+      "complete_messages": 96,
+      "complete_payloads": 48,
+      "complete_trials": 48,
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "schedule": "segmented_hex_single_topic",
+      "selected_messages": 96,
+      "selected_payloads": 48,
+      "selected_trials": 48
+    },
+    {
+      "complete_messages": 164,
+      "complete_payloads": 47,
+      "complete_trials": 88,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "schedule": "all",
+      "selected_messages": 192,
+      "selected_payloads": 48,
+      "selected_trials": 96
+    },
+    {
+      "complete_messages": 83,
+      "complete_payloads": 47,
+      "complete_trials": 47,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "schedule": "segmented_hex_multi_topic",
+      "selected_messages": 96,
+      "selected_payloads": 48,
+      "selected_trials": 48
+    },
+    {
+      "complete_messages": 81,
+      "complete_payloads": 41,
+      "complete_trials": 41,
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "schedule": "segmented_hex_single_topic",
+      "selected_messages": 96,
+      "selected_payloads": 48,
+      "selected_trials": 48
+    }
+  ],
+  "complete_trials": 280,
+  "disagreement_availability": {
+    "encoded": {
+      "binary_disagreements_unweighted_count": 83,
+      "both_judges_valid_messages": 562
+    },
+    "ordinary": {
+      "binary_disagreements_unweighted_count": 35,
+      "both_judges_valid_messages": 551
+    }
+  },
+  "encoded_lengths_by_pair_availability": [
+    {
+      "encoded_mean_tokens": 50.493482309124765,
+      "encoded_median_tokens": 28.0,
+      "pair_complete": true,
+      "pairs": 537
+    },
+    {
+      "encoded_mean_tokens": 128.43589743589743,
+      "encoded_median_tokens": 37.0,
+      "pair_complete": false,
+      "pairs": 39
+    }
+  ],
+  "incomplete_pairs": 39,
+  "interpretation": "Complete-pair estimates condition on availability. Missingness includes reused controls and longer encoded messages. All-slot bounds retain the full selected population.",
+  "invalid_logical_slots": 43,
+  "invalid_unique_responses": 20,
+  "missing_by_generator_class": [
+    {
+      "arm": "encoded",
+      "class": "nonce_96_bit_hex",
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "logical_slots": 7
+    },
+    {
+      "arm": "encoded",
+      "class": "sha256_hex",
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "logical_slots": 1
+    },
+    {
+      "arm": "encoded",
+      "class": "token_128_bit_hex",
+      "generator": "llama3_8b_instruct_q4_k_m",
+      "logical_slots": 5
+    },
+    {
+      "arm": "encoded",
+      "class": "hmac_sha256_hex",
+      "generator": "mistral_7b_instruct_v0_3_q4_k_m",
+      "logical_slots": 1
+    },
+    {
+      "arm": "encoded",
+      "class": "hmac_sha256_hex",
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 3
+    },
+    {
+      "arm": "ordinary",
+      "class": "hmac_sha256_hex",
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 6
+    },
+    {
+      "arm": "encoded",
+      "class": "nonce_96_bit_hex",
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 1
+    },
+    {
+      "arm": "ordinary",
+      "class": "nonce_96_bit_hex",
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 11
+    },
+    {
+      "arm": "ordinary",
+      "class": "sha256_hex",
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 4
+    },
+    {
+      "arm": "ordinary",
+      "class": "token_128_bit_hex",
+      "generator": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 4
+    }
+  ],
+  "missing_by_judge_arm": [
+    {
+      "arm": "encoded",
+      "judge": "llama3_8b_instruct_q4_k_m",
+      "logical_slots": 2,
+      "unique_requests": 2
+    },
+    {
+      "arm": "encoded",
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "logical_slots": 7,
+      "unique_requests": 7
+    },
+    {
+      "arm": "ordinary",
+      "judge": "mistral_7b_instruct_v0_3_q4_k_m",
+      "logical_slots": 25,
+      "unique_requests": 2
+    },
+    {
+      "arm": "encoded",
+      "judge": "qwen2_5_7b_instruct_q4_k_m",
+      "logical_slots": 9,
+      "unique_requests": 9
+    }
+  ]
+}

@@ -6,6 +6,7 @@
 \usepackage{array,booktabs,tabularx,longtable}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{fvextra}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{lineno}
@@ -947,7 +948,7 @@ Adaptive detection & Two data-adaptive text-only detectors and an exact-model-aw
 Low-FPR reporting & Exact counts and validation-frozen thresholds; matched 0.1\% estimates where supported & Human, family, entropy, and quantization tests have fewer than 1,000 negatives and no empirical 0.1\% resolution \\
 Entropy gating & 120 attempts per gate and complete diagnostics for all six strict failures & Serialized-payload rate is conditional on completion. Two templates and 768 calibration positions/model. Exact-model AUC remains 0.9904 \\
 Quantization & Paired within-quantization recovery, detector transfer and 0/960 fixed-message Q4-to-Q8 payload recovery & One pinned Qwen and one backend. No general Q8 advantage or reverse-direction payload result \\
-Naturalness & Automated diagnostics, human-authored controls and blinded boundary-control pilots & Semantic validation failed twice. Context gain separated pilot controls. No participants or human ratings \\
+Naturalness & Intact-message contextual rubric, supporting likelihood diagnostics and human-authored controls & Automated acceptance permits minor awkwardness. No participants or human ratings. Historical fragment assays remain in Note S17 \\
 Deployment/security & Failure surfaces and strong adverse detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
 \bottomrule
 \end{longtable}
@@ -960,6 +961,8 @@ The bounded evaluations assess detector controls, leakage prevention, generaliza
 \input{v4_stage1_entropy.tex}
 \input{v4_entropy_windows.tex}
 \input{v4_stage2_supplement.tex}
+\input{v4_contextual_supplement.tex}
+\input{v4_contextual_supporting.tex}
 
 \bibliography{references}
 

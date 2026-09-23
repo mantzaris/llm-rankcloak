@@ -1,0 +1,80 @@
+{
+  "abstract_words_whitespace": 192,
+  "additional_checks": [
+    "four disruption levels",
+    "all-slot missing bounds",
+    "complete and selected denominators",
+    "calibration class counts",
+    "exact example texts",
+    "historical semantic intervals retained",
+    "moved supporting figure reference"
+  ],
+  "archived_prior_claim_check": "results/revision_v4/stage3/claim_evidence.json",
+  "body_word_definition": "Introduction, Results, Discussion and limitations. TeXcount text words exclude Abstract, Methods, availability, references, headings and captions. Mathematics is counted separately.",
+  "documents": [
+    {
+      "bytes": 667983,
+      "pages": 25,
+      "pdf": "paperV4/scientific_reports/main4.pdf",
+      "pdf_sha256": "e56ffcaaf02bb534e1504897e0c87152b6e9e001240edd8e371d89083ca982bc",
+      "source_sha256": "d0f87e3e500865e6422b0405822d08dc160822bd80d42f820083d3cb5b20bf1d"
+    },
+    {
+      "bytes": 1055886,
+      "pages": 45,
+      "pdf": "paperV4/scientific_reports/supplementary4.pdf",
+      "pdf_sha256": "8c672d70932b37e7a79732300844fca51ed7edb82e7d20fecaf1df56c096ba5a",
+      "source_sha256": "f1507877326d674b11a2b52a730b10dff29b40324f39c42c92ba178d907e1895"
+    },
+    {
+      "bytes": 165162,
+      "pages": 9,
+      "pdf": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pdf_sha256": "cf48b8cdd762969b6e1545e4243c4c331ba016b7c87ccfe7f608a3b0469ebca6",
+      "source_sha256": "afde84f6b1acbcff4fa07272af20650c0c3f99309cf4f1472253165e040d2760"
+    },
+    {
+      "bytes": 90624,
+      "pages": 1,
+      "pdf": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pdf_sha256": "5f0435fdcc5ec2da69aabdb902c618baeb1e6d2b558488c1309cad0074d071d1",
+      "source_sha256": "cd112b9e35953b82231eca53aee239198d79bc179d5ab51d5f7f77798d687776"
+    }
+  ],
+  "independent_primary_estimate_check": "validation/score_audit.json",
+  "main_algorithms_separate": 3,
+  "main_figures": 5,
+  "main_references": 49,
+  "main_submission_source_sha256": "9d2f36be6b83a814a666252fb5ebdcdedbcd46e8b8dbaf192dc2a713d2047c93",
+  "main_tables": 3,
+  "numerical_prose_checks": [
+    "abstract_encoded_acceptance",
+    "results_encoded_acceptance",
+    "cover_encoded_acceptance",
+    "response_encoded_acceptance",
+    "abstract_ordinary_acceptance",
+    "results_ordinary_acceptance",
+    "cover_ordinary_acceptance",
+    "response_ordinary_acceptance",
+    "results_difference_interval",
+    "results_encoded_connectedness_interval",
+    "results_ordinary_connectedness_interval"
+  ],
+  "status": "passed",
+  "supplement_figures": 17,
+  "supplement_tables": 39,
+  "table_cells": "All acceptance and difference intervals for panel and generator rows match retained summaries",
+  "title_words": 14,
+  "word_counts_texcount": {
+    "body": {
+      "Words in headers": 69,
+      "Words in text": 4720,
+      "Words outside text (captions, etc.)": 625
+    },
+    "complete": {
+      "Words in headers": 143,
+      "Words in text": 10428,
+      "Words outside text (captions, etc.)": 703
+    }
+  }
+}

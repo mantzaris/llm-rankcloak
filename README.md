@@ -10,7 +10,9 @@ Exact saved-token recovery requires the same model, tokenizer, quantization, num
 
 ## V4 author-review candidate
 
-The current revision and complete written responses are under `paperV4`. Semantic control separation was not established in either pilot. The local likelihood study supports only limited conditional compatibility. See [the Stage 3 report](revision_docs/REVISION_V4_STAGE3_REPORT.md), [author actions](paperV4/ACTIONS_BEFORE_SUBMISSION.md) and [offline archive reproduction](release/v4/REPRODUCE.md). The published version 2.0.0 archive covers V3, not V4.
+The current revision and complete written responses are under `paperV4`. Its primary coherence evaluation now uses intact messages, authentic prompts, a lenient fixed rubric and two blinded local model judges per item. Panel-average acceptance is 90.3% for RankCloak and 96.6% for matched greedy ordinary output, using 537 complete pairs from 576 selected. The paired difference is −6.3 percentage points, with a 95% payload-cluster interval from −8.7 to −3.9. Missing-score bounds and judge differences are retained. These automated ratings do not measure human perception.
+
+See [the contextual study report](revision_docs/REVISION_V4_COHERENCE_REPLACEMENT_REPORT.md), [retained data and reproduction commands](results/revision_v4/coherence_replacement/README.md) and [author actions](paperV4/ACTIONS_BEFORE_SUBMISSION.md). The two earlier semantic pilots and limited local-likelihood findings remain in Supplementary Note S17 and their historical evidence directories. The published version 2.0.0 archive covers V3. The earlier local V4 archive candidate also predates the new contextual study.
 
 ## Setup
 

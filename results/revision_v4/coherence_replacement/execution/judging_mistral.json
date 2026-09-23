@@ -1,0 +1,14 @@
+{
+  "backend_version": "0.3.23",
+  "cached_before": 0,
+  "completed_new": 391,
+  "contract_sha256": "d6bd6f32a7385bce12834477128a6d39f0f11583d973acfe7b9314bb02d1b97c",
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "load_and_hash_seconds": 10.979405001002306,
+  "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+  "n_gpu_layers": -1,
+  "phase": "judging",
+  "planned_unique_requests": 391,
+  "status": "complete",
+  "worker_wall_seconds": 967.2523525020006
+}

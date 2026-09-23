@@ -12,6 +12,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Build artifacts
+*.fls
 build/
 dist/
 *.egg-info/

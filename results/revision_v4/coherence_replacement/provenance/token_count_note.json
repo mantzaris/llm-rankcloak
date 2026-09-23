@@ -1,0 +1,7 @@
+{
+  "issue": "The worker's diagnostic input_token_count requests BOS insertion while rendering templates already include their special tokens. For Llama this count is one above actual inference usage and emits a tokenizer warning.",
+  "scope": "Token-count diagnostic only. The pinned Jinja2ChatFormatter returns added_special=true. The actual chat handler tokenizes with add_bos=false and passes token IDs to completion, which adds no further BOS. Judge model inputs are not double-BOS inputs.",
+  "authoritative_actual_input_count": "result.attempts[].response.usage.prompt_tokens",
+  "action": "Preserve raw records. Analysis and forecasts use actual response usage. Tokenization-only workload preparation uses add_bos=false. Context admission from the worker count is conservatively larger. No scoring or rubric change and no rerun is required.",
+  "checked_backend": "llama-cpp-python 0.3.23 llama_chat_format.py Jinja2ChatFormatter and chat_formatter_to_chat_completion_handler; llama.py _create_completion"
+}

@@ -1,0 +1,28 @@
+File: expanded body
+Words in text: 4720
+Words in headers: 69
+Words outside text (captions, etc.): 625
+Number of headers: 17
+Number of floats/tables/figures: 7
+Number of math inlines: 40
+Number of math displayed: 0
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  793+1+0 (1/0/0/0) Section: Introduction}\label{sec:introduction
+  0+1+0 (1/0/0/0) Section: Results}\label{sec:results
+  281+5+0 (1/0/3/0) Subsection: Evaluation design and exact-copy recovery}\label{sec:results-recovery
+  347+7+181 (1/2/2/0) Subsection: Payload representation, rank pressure, and capacity tradeoff}\label{sec:results-capacity
+  183+5+111 (1/1/0/0) Subsection: Exact-copy replay and transmission fragility}\label{sec:results-robustness
+  121+5+0 (1/0/0/0) Subsection: Forced span versus full message}\label{sec:results-quality
+  357+6+0 (1/0/11/0) Subsection: Ablations, dynamic stopping, and prompt-topic effects}\label{sec:results-ablations
+  201+2+74 (1/1/3/0) Subsection: Neural steganalysis}\label{sec:results-detector
+  288+6+86 (1/1/2/0) Subsection: Human controls, entropy gating, and quantization}\label{sec:results-v3
+  359+5+173 (1/2/0/0) Subsection: Contextual acceptability of complete messages}\label{sec:v4-contextual-results}\label{sec:v4-results
+  115+4+0 (1/0/0/0) Subsection: Mechanisms of transmission failure}\label{sec:v4-transport-results
+  80+3+0 (1/0/0/0) Subsection: Strict-gate failure contexts}\label{sec:v4-entropy-results
+  115+3+0 (1/0/0/0) Subsection: Fixed-message cross-quantization decoding}\label{sec:v4-quant-results
+  376+4+0 (1/0/8/0) Subsection: Computational overhead and generalizability}\label{sec:results-overhead
+  574+1+0 (1/0/1/0) Section: Discussion}\label{sec:discussion
+  365+7+0 (1/0/10/0) Subsection: Configuration sensitivity, detection and a proposed fallback}\label{sec:v4-boundaries
+  165+4+0 (1/0/0/0) Section: Responsible use and limitations}\label{sec:limitations
+

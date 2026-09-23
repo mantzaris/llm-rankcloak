@@ -1,0 +1,20 @@
+[
+  {
+    "document": "main4",
+    "elapsed_seconds": 3.3174848570051836,
+    "pages": 25,
+    "pdf_sha256": "e56ffcaaf02bb534e1504897e0c87152b6e9e001240edd8e371d89083ca982bc",
+    "source_sha256": "d0f87e3e500865e6422b0405822d08dc160822bd80d42f820083d3cb5b20bf1d",
+    "unresolved_references": false,
+    "warnings": []
+  },
+  {
+    "document": "supplementary4",
+    "elapsed_seconds": 3.739355428995623,
+    "pages": 45,
+    "pdf_sha256": "8c672d70932b37e7a79732300844fca51ed7edb82e7d20fecaf1df56c096ba5a",
+    "source_sha256": "f1507877326d674b11a2b52a730b10dff29b40324f39c42c92ba178d907e1895",
+    "unresolved_references": false,
+    "warnings": []
+  }
+]

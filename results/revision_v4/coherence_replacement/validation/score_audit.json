@@ -1,0 +1,28 @@
+{
+  "disrupted_encoded_judge_slots": 110,
+  "disrupted_slots_with_boundary_crossing_quote": 73,
+  "disrupted_slots_with_literal_quote": 104,
+  "disrupted_slots_with_multiple_matches": 0,
+  "encoded_judge_slots": 1152,
+  "independently_recomputed_bootstrap_intervals": {
+    "difference": [
+      -0.08733289930555534,
+      -0.038713107638888744
+    ],
+    "encoded": [
+      0.8838519965277778,
+      0.9211848958333335
+    ],
+    "ordinary": [
+      0.9503472222222221,
+      0.9809027777777777
+    ]
+  },
+  "independently_recomputed_point_estimates": {
+    "difference": -0.0634548611111111,
+    "encoded": 0.9030381944444446,
+    "ordinary": 0.9664930555555556
+  },
+  "limitations": "Judges never received boundaries. Missing or nonliteral quotations do not establish absence of a defect. Repeated exact cached requests retain all inferential mappings.",
+  "mapping_rule": "Post-scoring non-overlapping literal substring matching, all recorded occurrences retained. A boundary crossing is strict interior containment, not proximity or causal attribution."
+}

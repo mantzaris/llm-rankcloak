@@ -423,12 +423,25 @@
   \bibinfo{pages}{378--400}, \doiprefix\url{10.32614/RJ-2017-066}
   (\bibinfo{year}{2017}).
 
-\bibitem{Reimers2019SentenceBERT}
-\bibinfo{author}{Reimers, N.} \& \bibinfo{author}{Gurevych, I.}
-\newblock \bibinfo{title}{Sentence-bert: Sentence embeddings using siamese
-  bert-networks}.
-\newblock In \emph{\bibinfo{booktitle}{Proceedings of EMNLP-IJCNLP}},
-  \bibinfo{pages}{3982--3992}, \doiprefix\url{10.18653/v1/D19-1410}
-  (\bibinfo{year}{2019}).
+\bibitem{Liu2023GEval}
+\bibinfo{author}{Liu, Y.} \emph{et~al.}
+\newblock \bibinfo{title}{{G}-eval: {NLG} evaluation using {GPT}-4 with better
+  human alignment}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2023 Conference on
+  Empirical Methods in Natural Language Processing}},
+  \bibinfo{pages}{2511--2522}, \doiprefix\url{10.18653/v1/2023.emnlp-main.153}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2023}).
+
+\bibitem{VanDerLee2019BestPractices}
+\bibinfo{author}{van~der Lee, C.}, \bibinfo{author}{Gatt, A.},
+  \bibinfo{author}{van Miltenburg, E.}, \bibinfo{author}{Wubben, S.} \&
+  \bibinfo{author}{Krahmer, E.}
+\newblock \bibinfo{title}{Best practices for the human evaluation of
+  automatically generated text}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 12th International
+  Conference on Natural Language Generation}}, \bibinfo{pages}{355--368},
+  \doiprefix\url{10.18653/v1/W19-8643} (\bibinfo{publisher}{Association for
+  Computational Linguistics}, \bibinfo{year}{2019}).
 
 \end{thebibliography}

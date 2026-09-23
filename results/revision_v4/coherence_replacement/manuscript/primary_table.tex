@@ -1,0 +1,11 @@
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrrrr}\toprule
+Source & Pairs & RankCloak & Ordinary & Difference & \multicolumn{2}{c}{Disagreement}\\
+ & & \% [95\% CI] & \% [95\% CI] & pp [95\% CI] & Enc.\% & Ord.\%\\\midrule
+Panel overall & 537 & \shortstack{90.3\\{}[88.4, 92.1]} & \shortstack{96.6\\{}[95.0, 98.1]} & \shortstack{-6.3\\{}[-8.7, -3.9]} & 14.6 & 6.7\\
+Llama & 182 & \shortstack{91.1\\{}[87.0, 94.8]} & \shortstack{100.0\\{}[100.0, 100.0]} & \shortstack{-8.9\\{}[-13.0, -5.2]} & 7.3 & 0.0\\
+Mistral & 191 & \shortstack{87.8\\{}[84.1, 91.2]} & \shortstack{92.7\\{}[88.8, 96.1]} & \shortstack{-4.9\\{}[-9.9, 0.3]} & 23.4 & 14.6\\
+Qwen & 164 & \shortstack{92.3\\{}[89.1, 95.1]} & \shortstack{98.1\\{}[95.9, 99.7]} & \shortstack{-5.9\\{}[-9.1, -2.7]} & 13.0 & 3.7\\
+\bottomrule\end{tabular}
+\caption{Intact-message contextual acceptability. Acceptance is disruption level 0 or 1. The equally weighted two-judge panel is averaged within trial and payload. The selected sample contains 48 payload clusters, with 288 trials overall and 96 per generator. Pairs counts complete panel-paired messages. Paired percentile intervals use 2,000 class-stratified payload draws and condition on the fixed greedy controls. The Qwen row has 47 observed payload clusters. Disagreement uses the same hierarchy on available pairs of judges within each arm, with 562 encoded and 551 ordinary messages overall. These are automated ratings, not human reading outcomes.}\label{tab:v4-contextual}
+\end{table}

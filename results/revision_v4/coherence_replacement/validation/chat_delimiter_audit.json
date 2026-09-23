@@ -1,0 +1,16 @@
+{
+  "literal_delimiter_occurrences": [],
+  "markers": [
+    "<|start_header_id|>",
+    "<|end_header_id|>",
+    "<|eot_id|>",
+    "<|im_start|>",
+    "<|im_end|>",
+    "[INST]",
+    "[/INST]",
+    "</s>",
+    "<s>"
+  ],
+  "requests": 1182,
+  "rule": "Observation only. The intact study inputs are never repaired or sanitized after freeze. JSON quoting and rubric mark them as evaluation data."
+}

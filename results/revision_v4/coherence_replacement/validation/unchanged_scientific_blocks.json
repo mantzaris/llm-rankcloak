@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "b7198d86a2765ff92fb67f83e1f55f40b49f4528",
+  "blocks": [
+    {
+      "block": "rank_and_protocol_methods",
+      "sha256": "b7acedbbc30ac76e0559221b355c0bf79fa30bec80cfdb5796fa77550bf9546a",
+      "unchanged": true
+    },
+    {
+      "block": "primary_recovery_and_capacity_results",
+      "sha256": "3e176fc757dce1105b449e1f1aa4586dbe109f864e9544093e2765a35384ff72",
+      "unchanged": true
+    },
+    {
+      "block": "ablation_and_detector_results",
+      "sha256": "c1a4507eec7b1fbc1ee1d04c1683f5d67589b8dd3b8f7b182089e89f40b6e926",
+      "unchanged": true
+    },
+    {
+      "block": "transport_entropy_and_quantization_results",
+      "sha256": "32b886c38a58b14f41fee9e9f4ff692b19fa1258f22356d7723a3a897bce1abe",
+      "unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "document": "response_to_reviewers_v4",
+    "elapsed_seconds": 1.7064574920004816,
+    "pages": 9,
+    "pdf_sha256": "cf48b8cdd762969b6e1545e4243c4c331ba016b7c87ccfe7f608a3b0469ebca6",
+    "source_sha256": "afde84f6b1acbcff4fa07272af20650c0c3f99309cf4f1472253165e040d2760",
+    "unresolved_references": false,
+    "warnings": []
+  },
+  {
+    "document": "cover_letter_v4",
+    "elapsed_seconds": 1.426587007001217,
+    "pages": 1,
+    "pdf_sha256": "5f0435fdcc5ec2da69aabdb902c618baeb1e6d2b558488c1309cad0074d071d1",
+    "source_sha256": "cd112b9e35953b82231eca53aee239198d79bc179d5ab51d5f7f77798d687776",
+    "unresolved_references": false,
+    "warnings": []
+  }
+]

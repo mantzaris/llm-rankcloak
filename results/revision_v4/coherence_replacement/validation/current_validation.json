@@ -1,0 +1,21 @@
+{
+  "actual_judging_tokens": {
+    "llama3_8b_instruct_q4_k_m_input": 224540,
+    "llama3_8b_instruct_q4_k_m_output": 31044,
+    "mistral_7b_instruct_v0_3_q4_k_m_input": 266922,
+    "mistral_7b_instruct_v0_3_q4_k_m_output": 33960,
+    "qwen2_5_7b_instruct_q4_k_m_input": 245261,
+    "qwen2_5_7b_instruct_q4_k_m_output": 29694
+  },
+  "baseline_commit": "b7198d86a2765ff92fb67f83e1f55f40b49f4528",
+  "empirical_coverage": "automated_contextual_evidence_supplied_human_perception_unmeasured",
+  "exact_review_blocks": 13,
+  "gpu_job_wall_seconds": 4781.415025736009,
+  "judge_attempts": 1213,
+  "one_gpu_process_at_a_time": true,
+  "protected_files_checked": 8940,
+  "published_current_study_coverage": false,
+  "status": "passed",
+  "unique_judge_requests": 1182,
+  "written_answers": 16
+}

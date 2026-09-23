@@ -1,0 +1,146 @@
+[
+  {
+    "calibration_id": "clear_0",
+    "construction": "clear",
+    "context": "Tell me how to water a houseplant.",
+    "intended_acceptable": true,
+    "intended_disruption": 0,
+    "message": "Check whether the top of the soil is dry. If it is, water slowly until a little drains from the bottom."
+  },
+  {
+    "calibration_id": "clear_1",
+    "construction": "clear",
+    "context": "Reply to a friend who invited you for coffee.",
+    "intended_acceptable": true,
+    "intended_disruption": 0,
+    "message": "Thanks for inviting me. I can meet you at the cafe at three."
+  },
+  {
+    "calibration_id": "clear_2",
+    "construction": "clear",
+    "context": "Explain where to return a library book.",
+    "intended_acceptable": true,
+    "intended_disruption": 0,
+    "message": "You can return it at the front desk or put it in the return box by the entrance."
+  },
+  {
+    "calibration_id": "clear_3",
+    "construction": "clear",
+    "context": "Give a brief update on the team report.",
+    "intended_acceptable": true,
+    "intended_disruption": 0,
+    "message": "The draft is ready. I will check the numbers this afternoon and send it tomorrow."
+  },
+  {
+    "calibration_id": "clear_4",
+    "construction": "clear",
+    "context": "Suggest an easy dinner.",
+    "intended_acceptable": true,
+    "intended_disruption": 0,
+    "message": "Pasta with tomato sauce is an easy option. You can add beans if you want a more filling meal."
+  },
+  {
+    "calibration_id": "clear_5",
+    "construction": "clear",
+    "context": "Say whether you can attend tomorrow.",
+    "intended_acceptable": true,
+    "intended_disruption": 0,
+    "message": "Yes, I can come tomorrow."
+  },
+  {
+    "calibration_id": "minor_0",
+    "construction": "minor",
+    "context": "Tell me how to water a houseplant.",
+    "intended_acceptable": true,
+    "intended_disruption": 1,
+    "message": "If the soil feel dry on top, give it a little water. Let the extra water drain away."
+  },
+  {
+    "calibration_id": "minor_1",
+    "construction": "minor",
+    "context": "Reply to a friend who invited you for coffee.",
+    "intended_acceptable": true,
+    "intended_disruption": 1,
+    "message": "Coffee sounds good, yeah. Three works for me, so see you then."
+  },
+  {
+    "calibration_id": "minor_2",
+    "construction": "minor",
+    "context": "Explain where to return a library book.",
+    "intended_acceptable": true,
+    "intended_disruption": 1,
+    "message": "Bring the book to the desk, the desk near the entrance. Staff there can take it."
+  },
+  {
+    "calibration_id": "minor_3",
+    "construction": "minor",
+    "context": "Give a brief update on the team report.",
+    "intended_acceptable": true,
+    "intended_disruption": 1,
+    "message": "The report is mostly done. I got a couple numbers still to check, then I can send it."
+  },
+  {
+    "calibration_id": "minor_4",
+    "construction": "minor",
+    "context": "Suggest an easy dinner.",
+    "intended_acceptable": true,
+    "intended_disruption": 1,
+    "message": "Maybe rice with eggs. Not fancy, but easy to make and it does the job."
+  },
+  {
+    "calibration_id": "minor_5",
+    "construction": "minor",
+    "context": "Say whether you can attend tomorrow.",
+    "intended_acceptable": true,
+    "intended_disruption": 1,
+    "message": "Yep, tomorrow work for me."
+  },
+  {
+    "calibration_id": "substantial_0",
+    "construction": "substantial",
+    "context": "Tell me how to water a houseplant.",
+    "intended_acceptable": false,
+    "intended_disruption": 2,
+    "message": "Water the dry soil until water drains out. The soil must stay completely dry while it is fully soaked; both must happen at the same time."
+  },
+  {
+    "calibration_id": "substantial_1",
+    "construction": "substantial",
+    "context": "Reply to a friend who invited you for coffee.",
+    "intended_acceptable": false,
+    "intended_disruption": 2,
+    "message": "I will meet you there at three. I will not be there at three. Both statements describe my same plan and neither is a correction."
+  },
+  {
+    "calibration_id": "substantial_2",
+    "construction": "substantial",
+    "context": "Explain where to return a library book.",
+    "intended_acceptable": false,
+    "intended_disruption": 2,
+    "message": "Take the book to the front desk. Purple subtraction eats the doorway because Tuesday is a spoon."
+  },
+  {
+    "calibration_id": "substantial_3",
+    "construction": "substantial",
+    "context": "Give a brief update on the team report.",
+    "intended_acceptable": false,
+    "intended_disruption": 2,
+    "message": "The report is finished, so none of it exists yet. The completed pages are unwritten and already sent, but were never made."
+  },
+  {
+    "calibration_id": "substantial_4",
+    "construction": "substantial",
+    "context": "Suggest an easy dinner.",
+    "intended_acceptable": false,
+    "intended_disruption": 2,
+    "message": "Cook rice for dinner. The train is my elbow, therefore the recipe votes upside down without food."
+  },
+  {
+    "calibration_id": "substantial_5",
+    "construction": "substantial",
+    "context": "Say whether you can attend tomorrow.",
+    "intended_acceptable": false,
+    "intended_disruption": 2,
+    "message": "Yesterday is tomorrow cannot attend yes neither chair."
+  }
+]

@@ -1,0 +1,402 @@
+{
+  "rubric_amendments": 0,
+  "models": {
+    "llama3_8b_instruct_q4_k_m": {
+      "examples": 18,
+      "invalid": 0,
+      "confusion_intended_rows_observed_columns": [
+        [
+          5,
+          1
+        ],
+        [
+          0,
+          12
+        ]
+      ],
+      "acceptable_by_construction": {
+        "clear": {
+          "acceptable": 6,
+          "total": 6
+        },
+        "minor": {
+          "acceptable": 6,
+          "total": 6
+        },
+        "substantial": {
+          "acceptable": 1,
+          "total": 6
+        }
+      },
+      "four_level_counts": {
+        "0": 9,
+        "1": 4,
+        "2": 4,
+        "3": 1
+      },
+      "basic_sanity_check_passed": true,
+      "seconds": 60.4547653020054,
+      "actual_prompt_tokens": 9299,
+      "completion_tokens": 1174,
+      "attempts": 18,
+      "costs": [
+        {
+          "input_tokens": 504,
+          "output_tokens": 43,
+          "seconds": 2.330339191998064
+        },
+        {
+          "input_tokens": 518,
+          "output_tokens": 72,
+          "seconds": 3.776483781002753
+        },
+        {
+          "input_tokens": 515,
+          "output_tokens": 74,
+          "seconds": 3.8964333800031454
+        },
+        {
+          "input_tokens": 519,
+          "output_tokens": 54,
+          "seconds": 2.678844902002311
+        },
+        {
+          "input_tokens": 525,
+          "output_tokens": 61,
+          "seconds": 3.1629720389973954
+        },
+        {
+          "input_tokens": 519,
+          "output_tokens": 68,
+          "seconds": 3.4857432169956155
+        },
+        {
+          "input_tokens": 514,
+          "output_tokens": 70,
+          "seconds": 3.680327894006041
+        },
+        {
+          "input_tokens": 519,
+          "output_tokens": 83,
+          "seconds": 4.290631474999827
+        },
+        {
+          "input_tokens": 517,
+          "output_tokens": 76,
+          "seconds": 3.9617669619983644
+        },
+        {
+          "input_tokens": 503,
+          "output_tokens": 47,
+          "seconds": 2.2515107779981918
+        },
+        {
+          "input_tokens": 518,
+          "output_tokens": 78,
+          "seconds": 3.9769395799958147
+        },
+        {
+          "input_tokens": 517,
+          "output_tokens": 43,
+          "seconds": 2.0836195620067883
+        },
+        {
+          "input_tokens": 518,
+          "output_tokens": 59,
+          "seconds": 2.9293872709968127
+        },
+        {
+          "input_tokens": 522,
+          "output_tokens": 80,
+          "seconds": 4.230944033995911
+        },
+        {
+          "input_tokens": 506,
+          "output_tokens": 61,
+          "seconds": 2.9833046089988784
+        },
+        {
+          "input_tokens": 511,
+          "output_tokens": 66,
+          "seconds": 3.2917657359939767
+        },
+        {
+          "input_tokens": 526,
+          "output_tokens": 72,
+          "seconds": 3.7840421440050704
+        },
+        {
+          "input_tokens": 528,
+          "output_tokens": 67,
+          "seconds": 3.4846139489964116
+        }
+      ],
+      "raw_sha256": "04b2c967f873ad98f104cb57c68267abe3b8d05fd734549c9f1ede0705f99b17"
+    },
+    "mistral_7b_instruct_v0_3_q4_k_m": {
+      "examples": 18,
+      "invalid": 0,
+      "confusion_intended_rows_observed_columns": [
+        [
+          5,
+          1
+        ],
+        [
+          0,
+          12
+        ]
+      ],
+      "acceptable_by_construction": {
+        "minor": {
+          "acceptable": 6,
+          "total": 6
+        },
+        "substantial": {
+          "acceptable": 1,
+          "total": 6
+        },
+        "clear": {
+          "acceptable": 6,
+          "total": 6
+        }
+      },
+      "four_level_counts": {
+        "0": 4,
+        "1": 9,
+        "2": 2,
+        "3": 3
+      },
+      "basic_sanity_check_passed": true,
+      "seconds": 34.29179762401327,
+      "actual_prompt_tokens": 10407,
+      "completion_tokens": 1244,
+      "attempts": 18,
+      "costs": [
+        {
+          "input_tokens": 581,
+          "output_tokens": 77,
+          "seconds": 2.168454266000481
+        },
+        {
+          "input_tokens": 577,
+          "output_tokens": 72,
+          "seconds": 1.9545631630026037
+        },
+        {
+          "input_tokens": 579,
+          "output_tokens": 75,
+          "seconds": 2.023523693998868
+        },
+        {
+          "input_tokens": 591,
+          "output_tokens": 69,
+          "seconds": 1.8676184089999879
+        },
+        {
+          "input_tokens": 579,
+          "output_tokens": 78,
+          "seconds": 2.1243529920029687
+        },
+        {
+          "input_tokens": 566,
+          "output_tokens": 61,
+          "seconds": 1.6707688690003124
+        },
+        {
+          "input_tokens": 566,
+          "output_tokens": 52,
+          "seconds": 1.4463000449977699
+        },
+        {
+          "input_tokens": 577,
+          "output_tokens": 77,
+          "seconds": 2.079102291005256
+        },
+        {
+          "input_tokens": 578,
+          "output_tokens": 81,
+          "seconds": 2.1746315870041144
+        },
+        {
+          "input_tokens": 584,
+          "output_tokens": 54,
+          "seconds": 1.50259595499665
+        },
+        {
+          "input_tokens": 587,
+          "output_tokens": 68,
+          "seconds": 1.8484030809995602
+        },
+        {
+          "input_tokens": 589,
+          "output_tokens": 66,
+          "seconds": 1.7931421999965096
+        },
+        {
+          "input_tokens": 576,
+          "output_tokens": 69,
+          "seconds": 1.9414706039970042
+        },
+        {
+          "input_tokens": 579,
+          "output_tokens": 90,
+          "seconds": 2.4142274700061535
+        },
+        {
+          "input_tokens": 563,
+          "output_tokens": 48,
+          "seconds": 1.3495105559995864
+        },
+        {
+          "input_tokens": 582,
+          "output_tokens": 75,
+          "seconds": 2.03226268599974
+        },
+        {
+          "input_tokens": 579,
+          "output_tokens": 75,
+          "seconds": 2.0293709489997127
+        },
+        {
+          "input_tokens": 574,
+          "output_tokens": 57,
+          "seconds": 1.5749756249933853
+        }
+      ],
+      "raw_sha256": "bc2633c019048d5c5aa6699847fd4e853b5b4285b1ae43ce9fd6c7a3632b6fe6"
+    },
+    "qwen2_5_7b_instruct_q4_k_m": {
+      "examples": 18,
+      "invalid": 0,
+      "confusion_intended_rows_observed_columns": [
+        [
+          6,
+          0
+        ],
+        [
+          0,
+          12
+        ]
+      ],
+      "acceptable_by_construction": {
+        "substantial": {
+          "acceptable": 0,
+          "total": 6
+        },
+        "minor": {
+          "acceptable": 6,
+          "total": 6
+        },
+        "clear": {
+          "acceptable": 6,
+          "total": 6
+        }
+      },
+      "four_level_counts": {
+        "0": 7,
+        "1": 5,
+        "2": 5,
+        "3": 1
+      },
+      "basic_sanity_check_passed": true,
+      "seconds": 51.32757596398733,
+      "actual_prompt_tokens": 9735,
+      "completion_tokens": 984,
+      "attempts": 18,
+      "costs": [
+        {
+          "input_tokens": 550,
+          "output_tokens": 61,
+          "seconds": 3.37899177899817
+        },
+        {
+          "input_tokens": 528,
+          "output_tokens": 43,
+          "seconds": 2.145202455998515
+        },
+        {
+          "input_tokens": 544,
+          "output_tokens": 56,
+          "seconds": 2.861793664000288
+        },
+        {
+          "input_tokens": 539,
+          "output_tokens": 57,
+          "seconds": 2.9491144439962227
+        },
+        {
+          "input_tokens": 542,
+          "output_tokens": 54,
+          "seconds": 2.728695431003871
+        },
+        {
+          "input_tokens": 541,
+          "output_tokens": 45,
+          "seconds": 2.2433686810036306
+        },
+        {
+          "input_tokens": 528,
+          "output_tokens": 73,
+          "seconds": 3.8575724309994257
+        },
+        {
+          "input_tokens": 543,
+          "output_tokens": 70,
+          "seconds": 3.648155015995144
+        },
+        {
+          "input_tokens": 526,
+          "output_tokens": 42,
+          "seconds": 2.0512647770010517
+        },
+        {
+          "input_tokens": 553,
+          "output_tokens": 63,
+          "seconds": 3.2654529760038713
+        },
+        {
+          "input_tokens": 542,
+          "output_tokens": 61,
+          "seconds": 3.149776837999525
+        },
+        {
+          "input_tokens": 542,
+          "output_tokens": 56,
+          "seconds": 2.8689170529978583
+        },
+        {
+          "input_tokens": 541,
+          "output_tokens": 42,
+          "seconds": 2.0689525739944656
+        },
+        {
+          "input_tokens": 538,
+          "output_tokens": 51,
+          "seconds": 2.5802793119946728
+        },
+        {
+          "input_tokens": 553,
+          "output_tokens": 48,
+          "seconds": 2.489556984997762
+        },
+        {
+          "input_tokens": 538,
+          "output_tokens": 47,
+          "seconds": 2.444504899001913
+        },
+        {
+          "input_tokens": 541,
+          "output_tokens": 58,
+          "seconds": 3.083224223002617
+        },
+        {
+          "input_tokens": 546,
+          "output_tokens": 57,
+          "seconds": 3.0561444650011254
+        }
+      ],
+      "raw_sha256": "593eeec32b723a8ee76704b8a4c08e9ab58ef7bee02f25adc2d42714ffa0cc4f"
+    }
+  },
+  "interpretation": "Constructed calibration checks interpretation and instrumentation, not equivalence to human readers."
+}

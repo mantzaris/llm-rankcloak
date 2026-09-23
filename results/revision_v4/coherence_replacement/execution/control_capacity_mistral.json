@@ -1,0 +1,12 @@
+{
+  "all_agree": true,
+  "backend_version": "0.3.23",
+  "checks": 18,
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "load_and_hash_seconds": 2.375773057996412,
+  "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+  "n_gpu_layers": -1,
+  "phase": "control_capacity_check",
+  "study_outputs_replaced": false,
+  "worker_wall_seconds": 29.399512855001376
+}

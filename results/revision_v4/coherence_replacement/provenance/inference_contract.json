@@ -1,0 +1,12 @@
+{
+  "backend_version": "0.3.23",
+  "config_sha256": "662ed091076537ba02b1ff46f672546924856976077062b17103dfe2638c0ae9",
+  "source_hashes": {
+    "rankcloak/model_io.py": "9f2199f0ced1ef2b121bf82fc47e4618cdffd950039657632def97a21eda4d11",
+    "rankcloak/rank_codec.py": "c2687b1bb9edd6e7de928bf7fe3729d9f88de6b10cc99244302dc5ff35cbed40",
+    "rankcloak/revision_protocol.py": "3a0a13f47f6fb0c39691e33289b592c7f906bf651217e275a5944db4706856e0",
+    "rankcloak/revision_v4_contextual_coherence.py": "4d12c2d7886f6bd4313b5267cfa6c1dbf342fc2a7f2b99b584c5d5b20e3a7dd2",
+    "rankcloak/token_filters.py": "8d09fdfd4670bead5d233cb9d7b4cb57ae465bf1decf37dd65b223c7d71808d8",
+    "scripts/run_revision_v4_contextual_coherence.py": "aff70be6754a431bb963544417ebbba6ec896e6a308958c335fafca529f15466"
+  }
+}

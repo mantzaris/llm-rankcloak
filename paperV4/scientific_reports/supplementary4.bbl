@@ -17,6 +17,14 @@
   (\bibinfo{publisher}{Association for Computational Linguistics},
   \bibinfo{address}{Bangkok, Thailand}, \bibinfo{year}{2024}).
 
+\bibitem{Reimers2019SentenceBERT}
+\bibinfo{author}{Reimers, N.} \& \bibinfo{author}{Gurevych, I.}
+\newblock \bibinfo{title}{Sentence-bert: Sentence embeddings using siamese
+  bert-networks}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of EMNLP-IJCNLP}},
+  \bibinfo{pages}{3982--3992}, \doiprefix\url{10.18653/v1/D19-1410}
+  (\bibinfo{year}{2019}).
+
 \bibitem{Ziegler2019NeuralLinguisticSteganography}
 \bibinfo{author}{Ziegler, Z.~M.}, \bibinfo{author}{Deng, Y.} \&
   \bibinfo{author}{Rush, A.~M.}

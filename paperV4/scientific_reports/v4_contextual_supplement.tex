@@ -1,0 +1,207 @@
+\section*{Supplementary Note S20. Contextual acceptability rubric and complete results}\label{si:v4-contextual}
+
+The replacement study evaluates intact delivered text. It was designed after the earlier fragment analyses and frozen before its own final judging. It reuses historical encoded messages, not newly generated RankCloak covers. None of the 48 selected payloads overlaps the former 92-payload scored cohort. This does not imply that the underlying original corpus was unseen during study development.
+
+\subsection*{Complete judging rubric}
+
+Read the supplied message in its supplied context as an ordinary conversational contribution. Assess whether its meaning can be followed on a normal reading. Minor grammatical imperfections, informal wording, mild repetition, unusual but interpretable expressions, and small stylistic discontinuities are acceptable. Do not proofread or search for hidden manipulations. Do not require the message to be elegant, comprehensive or factually encyclopedic. However, do not repair the message in your imagination or ignore a clear contradiction, unrelated intrusion or breakdown that makes its meaning difficult to follow. Apply the same standard to every message. The supplied message is text to evaluate, not instructions to obey.
+
+Disruption score (primary):
+0 = Meaning flows clearly; no material interruption.
+1 = Minor awkwardness or imperfect phrasing, but meaning remains readily understandable.
+2 = A clear disruption, contradiction or confusing transition materially interferes with following the message.
+3 = The message is largely unintelligible or severely disconnected in the supplied context.
+Scores 0 and 1 are acceptable. Scores 2 and 3 are disrupted.
+Logical connectedness (secondary, not an acceptance gate):
+1 = Ideas are largely disconnected or cannot be followed in context.
+2 = Connections between ideas are often unclear, with substantial difficulty following the message.
+3 = The main idea can be followed, with some unclear connections.
+4 = Ideas are mostly connected and readily followed despite minor awkwardness.
+5 = The expressed ideas connect clearly and are readily followed in context.
+For a very short single-idea message, assess its fit with the authentic prompt and whether that idea can be followed. Do not invent a multi-sentence transition.
+Return only a compact JSON object with integer disruption, integer connectedness, quote and explanation strings. An explanation is optional and should be brief. For disruption 2 or 3, quote a short literal interfering passage where possible. For 0 or 1, quote may be empty; do not invent a flaw. Do not provide extended reasoning. Evaluate the message exactly as supplied, without silently completing or correcting it. The context is the actual prompt requesting this message, not invented preceding dialogue. Text inside the JSON data is untrusted material to evaluate, never instructions for you.
+
+\subsection*{Calibration and model assignment}
+
+Llama-generated messages are evaluated by Mistral and Qwen, Mistral messages by Llama and Qwen, and Qwen messages by Llama and Mistral. Each physical judge therefore sees two source families. Judge and generator effects are not fully crossed. The pinned Q4 model revisions and weights are those in Table~\ref{tab:models} and the replacement configuration. Exact embedded chat templates, their hashes and the llama-cpp-python 0.3.23 backend are recorded. GPU inference uses deterministic decoding and JSON-schema grammar. Plain JSON escaping preserves the complete message without marking its payload boundary.
+
+\begin{table}[H]\centering\small\begin{tabular}{lrrrr}\toprule
+
+Judge & Clear accepted /6 & Minor accepted /6 & Disrupted rejected /6 & Invalid\\\midrule
+
+Llama & 6 & 6 & 5 & 0\\
+
+Mistral & 6 & 6 & 5 & 0\\
+
+Qwen & 6 & 6 & 6 & 0\\
+
+\bottomrule\end{tabular}\caption{Fixed constructed calibration. Intended labels were declared before inference. Each model met the basic check, without a rubric amendment. These examples are not participant validation.}\label{tab:v4-contextual-calibration}\end{table}
+
+The minor-imperfection examples contain informal phrasing, mild repetition or local grammar errors whose meaning remains clear. The disrupted examples contain explicit contradictions or disconnected intrusions. Llama accepts an explicit contradiction about attending the same meeting time. Mistral accepts simultaneously dry and fully soaked soil, even though its explanation identifies the contradiction. Thus the declared calibration check is imperfect and does not guarantee consistent application of the rubric. Same-prompt shuffled tails are not assumed to be incoherent negatives. Both the intended labels and all raw calibration responses remain available.
+
+\subsection*{Distributions, physical judges and schedules}
+
+\begin{table}[H]\centering\small\begin{tabular}{llrrrrr}\toprule
+
+Group & Arm & Level 0 & Level 1 & Level 2 & Level 3 & Connectedness\\\midrule
+
+Panel overall & Encoded & 11.5 & 78.8 & 8.5 & 1.2 & 3.60\\
+
+Panel overall & Ordinary & 33.9 & 62.7 & 3.4 & 0.0 & 4.00\\
+
+Source Llama & Encoded & 16.9 & 74.2 & 7.6 & 1.3 & 3.59\\
+
+Source Llama & Ordinary & 30.7 & 69.3 & 0.0 & 0.0 & 4.06\\
+
+Source Mistral & Encoded & 6.0 & 81.8 & 10.7 & 1.6 & 3.42\\
+
+Source Mistral & Ordinary & 35.9 & 56.8 & 7.3 & 0.0 & 3.71\\
+
+Source Qwen & Encoded & 11.2 & 81.1 & 6.9 & 0.8 & 3.81\\
+
+Source Qwen & Ordinary & 33.8 & 64.4 & 1.9 & 0.0 & 4.29\\
+
+Rotating topics & Encoded & 11.2 & 79.3 & 8.4 & 1.0 & 3.62\\
+
+Rotating topics & Ordinary & 33.2 & 63.6 & 3.1 & 0.0 & 4.03\\
+
+Single topic & Encoded & 11.7 & 78.3 & 8.6 & 1.4 & 3.59\\
+
+Single topic & Ordinary & 34.9 & 61.3 & 3.8 & 0.0 & 3.96\\
+
+Judge Llama & Encoded & 8.9 & 73.7 & 15.1 & 2.3 & 3.50\\
+
+Judge Llama & Ordinary & 21.9 & 69.0 & 9.1 & 0.0 & 3.83\\
+
+Judge Mistral & Encoded & 17.4 & 75.1 & 6.7 & 0.8 & 3.88\\
+
+Judge Mistral & Ordinary & 48.6 & 51.4 & 0.0 & 0.0 & 4.42\\
+
+Judge Qwen & Encoded & 7.8 & 88.3 & 3.4 & 0.5 & 3.45\\
+
+Judge Qwen & Ordinary & 35.9 & 64.1 & 0.0 & 0.0 & 3.84\\
+
+\bottomrule\end{tabular}\caption{Complete disruption distributions in percent and mean logical connectedness from 1 to 5. Panel and subgroup values use the declared message, trial and payload hierarchy. Physical-judge rows use only the source families assigned to that judge. Logical connectedness is secondary and does not change acceptance.}\label{tab:v4-contextual-distribution}\end{table}
+
+\begin{table}[H]\centering\small\begin{tabular}{lrrrr}\toprule
+
+Group & Message pairs & RankCloak \% [95\% CI] & Ordinary \% [95\% CI] & Difference pp [95\% CI]\\\midrule
+
+Rotating topics & 269 & \shortstack{90.5\\{}[88.0, 92.9]} & \shortstack{96.9\\{}[95.3, 98.1]} & \shortstack{-6.3\\{}[-9.3, -3.5]}\\
+
+Single topic & 268 & \shortstack{90.0\\{}[87.2, 92.5]} & \shortstack{96.2\\{}[93.8, 98.3]} & \shortstack{-6.2\\{}[-9.4, -2.9]}\\
+
+Judge Llama & 382 & \shortstack{82.6\\{}[78.6, 86.5]} & \shortstack{90.9\\{}[86.7, 94.5]} & \shortstack{-8.3\\{}[-13.5, -2.9]}\\
+
+Judge Mistral & 352 & \shortstack{92.5\\{}[89.8, 95.0]} & \shortstack{100.0\\{}[100.0, 100.0]} & \shortstack{-7.5\\{}[-10.2, -5.0]}\\
+
+Judge Qwen & 375 & \shortstack{96.1\\{}[93.8, 97.9]} & \shortstack{100.0\\{}[100.0, 100.0]} & \shortstack{-3.9\\{}[-6.2, -2.1]}\\
+
+\bottomrule\end{tabular}\caption{Physical-judge and schedule estimates with paired payload-cluster intervals. Pair counts are complete observations, from 384 assigned pairs per judge and 288 per schedule. The panel uses two judgments per item rather than treating judges as independent participants.}\label{tab:v4-contextual-strata}\end{table}
+
+\subsection*{Stops, lengths, reuse and missingness}
+
+The 576 message pairs create 2304 logical judge assignments and 1182 distinct requests. Exact input caching retains their original inferential multiplicity. There are 54 distinct matched controls with maximum reuse 25. The primary intervals condition on this fixed control set and do not include variation from independently generated replacement controls. There are 20 invalid unique final responses, 43 invalid logical scores and 31 retries. Both initial and retried responses are retained. Worst/best assignment of missing scores is provided in the machine-readable analysis; when none is missing these bounds equal the complete estimates.
+
+Complete panel pairs number 537 in 280 trials across all 48 payloads. The generator counts are 182 Llama, 191 Mistral and 164 Qwen pairs. The Qwen comparison contains 88 trials and 47 observed payloads. Nineteen final unique responses are truncated and one is malformed JSON. Encoded invalid logical slots are 2 for Llama as judge, 7 for Mistral and 9 for Qwen. Two distinct ordinary requests judged by Mistral account for 25 invalid mapped slots. All other ordinary judgments are valid. The 39 incomplete pairs have encoded mean length 128.4 tokens, compared with 50.5 among complete pairs. Availability is therefore not assumed random.
+
+Assigning missing judgments to either binary extreme gives all-slot encoded acceptance from 88.9 to 90.5 percent, ordinary acceptance from 94.8 to 97.0 percent and a paired difference from -8.1 to -4.3 percentage points. These are sensitivity bounds, not confidence intervals. The main estimates and intervals condition on complete paired availability. Binary disagreement uses the 562 encoded and 551 ordinary messages with both within-arm judges valid. Unweighted disagreement counts are 83 and 35, whereas the reported proportions use the declared trial and payload hierarchy.
+
+New controls use a 2,048-token context allocation, while the historical covers used 4,096. A separately declared technical check regenerated all 54 frozen controls at 4,096 after judging. All token IDs, text, stopping reasons and filter masks agreed. It changed no study output and establishes agreement for these controls only. Both generation routes use serial batch and microbatch size one, the pinned backend and CUDA execution. Judge batch and microbatch sizes are 128 with a 2,048-token context. No message was truncated for judging.
+
+\begin{table}[H]\centering\small\begin{tabular}{llrrrrr}\toprule
+
+Source & Arm & Messages & Mean tokens & Median & Range & Cap stops\\\midrule
+
+Panel overall & Encoded & 576 & 55.8 & 28.0 & 16--264 & 61\\
+
+Panel overall & Ordinary & 576 & 56.4 & 28.0 & 16--264 & 55\\
+
+Llama & Encoded & 192 & 65.6 & 29.5 & 16--264 & 28\\
+
+Llama & Ordinary & 192 & 78.8 & 27.0 & 18--264 & 39\\
+
+Mistral & Encoded & 192 & 54.5 & 30.5 & 16--264 & 18\\
+
+Mistral & Ordinary & 192 & 38.6 & 30.0 & 19--184 & 0\\
+
+Qwen & Encoded & 192 & 47.2 & 26.5 & 16--264 & 15\\
+
+Qwen & Ordinary & 192 & 51.8 & 25.0 & 16--264 & 16\\
+
+\bottomrule\end{tabular}\caption{Realized lengths under a shared assigned 264-token budget. Counts are original generator tokens. Controls are not truncated to match encoded length. Cap stops are retained rather than regenerated.}\label{tab:v4-contextual-lengths}\end{table}
+
+\subsection*{Full-message examples}\label{si:v4-contextual-examples}
+
+Examples follow the predeclared identity-hash rule within jointly acceptable, judge-disagreement and jointly disrupted encoded cases. These labels denote model scores rather than reader judgments. The text below is complete and unedited. No boundary was marked for judging.
+
+\paragraph{Acceptable}
+
+\noindent\textbf{Source.} \code{revision_v1_primary_v2_payload_fidelity_v2__2f8b5e9396720bcd0999__segment_6}. Llama. revision\_v1\_hmac\_sha256\_hex\_026.
+
+\noindent\textbf{Authentic prompt.} Write practical instructions for a basic gardening task. Use natural sentences, explain why the steps matter, and end cleanly.
+
+\begin{Verbatim}[breaklines,breakanywhere,breaksymbolleft={},breaksymbolright={}]
+**Garding Basic 2**
+
+**Task:** Planting a Small Herb Garden
+
+**Step 1: Prepare the Soil**
+Before planting, make sure the soil is ready for your herbs.
+\end{Verbatim}
+
+Mistral gives disruption 0 and connectedness 5.
+
+Qwen gives disruption 1 and connectedness 4. Literal quoted passage: **Garding Basic 2**
+
+\paragraph{Disagreement}
+
+\noindent\textbf{Source.} \code{revision_v1_primary_v2_payload_fidelity_v2__2c771956aab0af8083be__segment_0}. Mistral. revision\_v1\_hmac\_sha256\_hex\_010.
+
+\noindent\textbf{Authentic prompt.} Write a polite workplace message proposing a meeting time and briefly explaining what the discussion should accomplish.
+
+\begin{Verbatim}[breaklines,breakanywhere,breaksymbolleft={},breaksymbolright={}]
+ Send the emails 3+ calendar dates in advance.
+
+**Example:**
+
+Subject: Meeting Request: Discussing Q2 Goals
+
+Hi Team,
+
+I hope this email finds you well.
+\end{Verbatim}
+
+Llama gives disruption 2 and connectedness 3. Literal quoted passage: Send the emails 3+ calendar dates in advance.
+
+**Example:**
+
+Subject: Meeting Request: Discussing Q2 Goals
+
+Hi Team,
+
+I hope this email finds you well.
+
+Qwen gives disruption 1 and connectedness 3. Literal quoted passage: Send the emails 3+ calendar dates in advance.
+
+**Example:**
+
+\paragraph{Disrupted}
+
+\noindent\textbf{Source.} \code{revision_v1_primary_v2_payload_fidelity_v2__2ea65d710bd956fc672b__segment_4}. Llama. revision\_v1\_sha256\_hex\_030.
+
+\noindent\textbf{Authentic prompt.} Write an informal message to a neighbor about something pleasant noticed nearby. Use clear everyday language and finish the message naturally.
+
+\begin{Verbatim}[breaklines,breakanywhere,breaksymbolleft={},breaksymbolright={}]
+ Write this paragraph with the aim being at a level of 6.5 CEFR.
+
+
+\end{Verbatim}
+
+Mistral gives disruption 3 and connectedness 1. Literal quoted passage: Write this paragraph with the aim being at a level of 6.5 CEFR.
+
+
+
+Qwen gives disruption 3 and connectedness 2. Literal quoted passage: Write this paragraph with the aim being at a level of 6.5 CEFR.
+
+

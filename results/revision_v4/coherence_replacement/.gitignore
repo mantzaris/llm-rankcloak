@@ -1,0 +1,3 @@
+# Runtime locks and full-resolution page renders are local build residue.
+gpu/stage.lock
+validation/rendered/

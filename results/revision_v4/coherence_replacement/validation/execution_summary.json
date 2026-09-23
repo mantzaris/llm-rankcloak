@@ -1,0 +1,59 @@
+{
+  "all_capacity_checks_agree": true,
+  "capacity_check_generations": 54,
+  "ceiling_seconds": 21600,
+  "charged_gpu_job_wall_seconds": 4781.415025736009,
+  "failures": 0,
+  "gpu_jobs": 12,
+  "gpu_uuid": "GPU-10d1f16f-9e79-08bb-b2ba-3353c04422cf",
+  "ledger_sha256": "029939ca3673f97e497560e746b54f9e9703430bed6bf36840ffd47e3e7feb0a",
+  "model_work": {
+    "calibration": {
+      "api_completion_tokens": 3402,
+      "api_prompt_tokens": 29441,
+      "attempts": 54,
+      "response_call_seconds": 145.14591295098217,
+      "unique_requests": 54
+    },
+    "controls": {
+      "distinct_generations": 54,
+      "emitted_tokens": 2868,
+      "prompt_tokens": 1280
+    },
+    "judging": {
+      "api_completion_tokens": 94698,
+      "api_prompt_tokens": 736723,
+      "attempts": 1213,
+      "response_call_seconds": 4147.687659396026,
+      "unique_requests": 1182
+    }
+  },
+  "notes": [
+    "Job wall time includes process startup, hashes and model loading. It is not CUDA kernel active time.",
+    "Memory is peak observed nvidia-smi process memory sampled every two seconds.",
+    "Actual API usage is authoritative for judging token counts. The unused diagnostic tokenizer call overcounts BOS by one for Llama and Mistral.",
+    "Capacity-check worker load_and_hash_seconds measures post-hash loading only; the supervisory charge includes hashing."
+  ],
+  "phase_totals": {
+    "calibration": {
+      "jobs": 3,
+      "peak_observed_process_memory_mib": 5116,
+      "seconds": 188.5760520900003
+    },
+    "control_capacity": {
+      "jobs": 3,
+      "peak_observed_process_memory_mib": 5262,
+      "seconds": 156.99451133500406
+    },
+    "controls": {
+      "jobs": 3,
+      "peak_observed_process_memory_mib": 5006,
+      "seconds": 156.9187568960042
+    },
+    "judging": {
+      "jobs": 3,
+      "peak_observed_process_memory_mib": 5118,
+      "seconds": 4278.925705415
+    }
+  }
+}
