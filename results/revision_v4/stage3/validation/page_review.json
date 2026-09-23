@@ -1,0 +1,113 @@
+{
+  "status": "reviewed",
+  "method": "All 74 PDF pages inspected through rendered 900-pixel-wide page contact sheets. Grayscale compressed viewing copies retained the geometry. All ten pages changed by the final caption, location, date and table corrections were inspected again. Full-color original renderings are retained in page_sheets.",
+  "documents": [
+    {
+      "path": "paperV4/scientific_reports/main4.pdf",
+      "sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.pdf",
+      "sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "path": "paperV4/response/response_to_reviewers_v4.pdf",
+      "sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "path": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4",
+      "pages_reviewed": [
+        1
+      ]
+    }
+  ],
+  "blank_pages": 0,
+  "clipped_text_or_tables": 0,
+  "broken_figures": 0,
+  "stale_development_markers": 0,
+  "unresolved_references": 0,
+  "strongest_example": "Supplement page 38 retains malformed wording and the internal over|much boundary. Strong is explicitly a score label.",
+  "retained_layout": "Some algorithm, table and figure page breaks leave white space. No font shrinking or arbitrary page target was imposed.",
+  "final_latex_warnings": [],
+  "poppler_math_mapping": "Eight main and two supplement control-code glyph mappings were removed only for bbox XML parsing. They correspond to rendered math glyphs, not blank or broken PDF text. Unmodified full-text extraction is retained."
+}

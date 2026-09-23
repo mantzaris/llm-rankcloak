@@ -16,15 +16,14 @@
 
 %\hypersetup{pdftitle={RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text},pdfauthor={Alexander V. Mantzaris}}
 
-\title{V4 response working draft}
+\title{Response to the editor and reviewers}
 \author{Alexander V. Mantzaris}
 \date{}
 \begin{document}
 \maketitle
-\begin{center}\color{red}\bfseries INTERNAL PENDING WORK\end{center}
-This response is a Stage 2 working revision for submission 0170c7b2-1065-4344-a5d5-b839b51ac22c.
-The manuscript title is \emph{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text}.
-The original review letter is preserved below. Genuine pending items remain marked. In particular, semantic validation and final V4 archive coverage are unresolved.
+\begin{center}\bfseries V4 AUTHOR-REVIEW CANDIDATE\end{center}
+This response concerns submission 0170c7b2-1065-4344-a5d5-b839b51ac22c, \emph{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text}.
+The original review wording is quoted in full. The answers distinguish completed analyses from limitations of the evidence. In particular, the semantic and perceptual part of Reviewer 1 comment 4 is only partly supported, and the public archive does not yet cover V4.
 
 \section*{Editor letter}\label{resp:editor_letter}
 % BEGIN QUOTE editor_letter
@@ -55,37 +54,33 @@ Purva Dhamankar
 % END QUOTE editor_letter
 
 % BEGIN ANSWER editor_accuracy
-\textbf{editor\_accuracy response, complete.}
+\textbf{Accuracy and scope.}
 
-\textbf{Direct answer.} We have revised the claims to distinguish surface-form concealment, exact configured recovery, visible-text transport, detectability and reader-perceived naturalness. Adverse and inconclusive outcomes remain visible.
+\textbf{Answer.} We have revised the claims to distinguish surface-form concealment, exact configured recovery, visible-text transport, detectability and reader-perceived naturalness. Adverse and inconclusive outcomes remain visible.
 
-\textbf{Evidence and change.} The V4 text corrects the historical raw and limited unmodified references to saved-token recovery, documents the unfiltered sampled-skip entropy experiment, and separates the directional fixed-message quantization endpoint from free generation. The final numerical check links statements to retained tables.
+\textbf{Change and evidence.} The V4 text corrects the historical raw and limited unmodified references to saved-token recovery, documents the unfiltered sampled-skip entropy experiment, and separates the directional fixed-message quantization endpoint from free generation. The final numerical check links statements to retained tables.
 
-\textbf{Locations.} Abstract, main Results under Boundary validation and targeted diagnostics, Discussion, and Supplementary Notes S16 through S19.
+\textbf{Location.} Abstract, main Results under Local boundary compatibility and metric limitations, Discussion, and Supplementary Notes S16 through S19. Compiled locations main pages 19, 21 and Supplementary Information pages 39.
 % END ANSWER editor_accuracy
 
 % BEGIN ANSWER archive
-\textbf{archive response, pending.}
+\textbf{Code deposit.}
 
-\textbf{Direct answer.} The underlying code has a published DOI. Version 2.0.0 is 10.5281/zenodo.22555497 and covers V3, not the V4 work. We retain that correct published citation. A new V4 deposit has not been published.
+\textbf{Answer.} The underlying code is deposited as version 2.0.0, DOI 10.5281/zenodo.22555497. That published archive covers V3 and does not cover V4. This author-review candidate retains the correct published DOI and explicitly identifies the remaining coverage requirement.
 
-\textbf{Evidence and change.} The archive audit verified the published contents and found that its description incorrectly excludes manuscript files. We prepared a local inventory and a corrected description for a future version, including the V4 source, evidence and document files.
+\textbf{Change and evidence.} The revision package supplies a commit-based V4 assembly specification, a matching release description and reproducibility instructions. It includes the V4 code, retained evidence, unsuccessful pilots and author-review documents. The local candidate and its independent verification receipt accompany the handoff. Local verification does not satisfy the request for a published DOI archive. A new version under concept DOI 10.5281/zenodo.21987449 must be published and its files verified before its real version DOI is inserted into the final submission documents.
 
-\textbf{Locations.} Main Data and Code availability. Local release specification and prospective inventory.
-
-\textcolor{red}{INTERNAL PENDING WORK. Assemble from the exact finalized commit, verify the archive inventory, publish an authorized new version, and insert its real DOI only after coverage is checked. No deposit or submission was made in this stage.}
+\textbf{Location.} Main Data Availability and Code Availability. The accompanying author checklist states the deposit and final-document sequence. Compiled locations main pages 22.
 % END ANSWER archive
 
 % BEGIN ANSWER editor_technical
-\textbf{editor\_technical response, partial.}
+\textbf{Technical assessment.}
 
-\textbf{Direct answer.} The revision adds targeted transport and quantization endpoints, the full filter specification, all six entropy-failure diagnostics, a configuration compatibility check and source-based theoretical analysis. Semantic validation remains incomplete.
+\textbf{Answer.} We have expanded the theoretical and implementation analyses and narrowed the conclusions to artifact-specific surface-form concealment and configured inversion. The requested semantic and perceptual evidence remains incomplete. We report that limitation rather than treating the written response as full empirical satisfaction.
 
-\textbf{Evidence and change.} Both blinded pilots support conditional context gain but do not validate the semantic-relatedness metric. We retain that limitation and label the subsequent likelihood study exploratory. We do not claim that automated scores prove reader judgments.
+\textbf{Change and evidence.} Both control-only pilots failed the prospective semantic control-separation requirement. Conditional context gain passed its specified control check, and the frozen exploratory study supports only local fixed-token-path compatibility. Sampled ordinary controls and greedy RankCloak continuations prevent a causal boundary interpretation. The revised text retains exclusions, generator-specific nulls and unfavorable examples. No reader validation is claimed. R1.4 is answered substantively below, with the adequacy of this narrower evidence left to the author and editor. Public V4 archive coverage also remains outstanding.
 
-\textbf{Locations.} Main Methods under Boundary instrumentation and prospective control validation, targeted Results, and Supplementary Notes S16 through S19.
-
-\textcolor{red}{INTERNAL PENDING WORK. R1.4 remains partly unresolved because the prospective two-metric control-validation requirement was not met. Final archive coverage is also pending.}
+\textbf{Location.} Abstract, boundary Methods and Results, Discussion and limitations, Supplementary Notes S16 through S19, and response to Reviewer 1 comment 4. Compiled locations main pages 12 and Supplementary Information pages 35.
 % END ANSWER editor_technical
 
 \section*{Reviewer 2 acknowledgment}\label{resp:reviewer2}
@@ -98,13 +93,11 @@ Thank the authors for addressing most of my concerns.
 % END QUOTE reviewer2
 
 % BEGIN ANSWER reviewer2
-\textbf{reviewer2 response, complete.}
+\textbf{Answer.} We thank Reviewer 2 for acknowledging the earlier revisions.
 
-\textbf{Direct answer.} We thank Reviewer 2 for acknowledging the earlier revisions.
+\textbf{Change and evidence.} The acknowledgment is retained in full with the current reviewer label. This revision responds separately to the new editor and Reviewer 1 requests.
 
-\textbf{Evidence and change.} The acknowledgment is retained in full with the current reviewer label. This revision responds separately to the new editor and Reviewer 1 requests.
-
-\textbf{Locations.} This response, Reviewer 2 acknowledgment. No manuscript change is needed for this acknowledgment.
+\textbf{Location.} This response, Reviewer 2 acknowledgment. No manuscript change is needed for this acknowledgment.
 % END ANSWER reviewer2
 
 \section*{Reviewer 1 general assessment and wording instruction}\label{resp:reviewer1_general}
@@ -121,23 +114,23 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE reviewer1_general
 
 % BEGIN ANSWER general
-\textbf{general response, complete.}
+\textbf{General assessment.}
 
-\textbf{Direct answer.} We agree that recovery requires a synchronized configuration and that the observed transport and detection failures substantially restrict practical claims. The revision presents these as limitations, not as problems solved by a new robustness method.
+\textbf{Answer.} We agree that recovery requires a synchronized configuration and that the observed transport and detection failures substantially restrict practical claims. The revision presents these as limitations, not as problems solved by a new robustness method.
 
-\textbf{Evidence and change.} The discussion states that a fully configured attacker may decode, distinguishes trace-informed detection from visible-text scoring, and labels the block/ECC fallback as unimplemented. The unsuccessful semantic pilots remain visible. The additional transport diagnostics are illustrative rather than population estimates.
+\textbf{Change and evidence.} The discussion states that a fully configured attacker may decode, distinguishes trace-informed detection from visible-text scoring, and labels the block/ECC fallback as unimplemented. The unsuccessful semantic pilots remain visible. The additional transport diagnostics are illustrative rather than population estimates.
 
-\textbf{Locations.} Abstract, main Discussion under Configuration sensitivity, detection and a proposed fallback, limitations, and Supplementary Notes S17 through S19.
+\textbf{Location.} Abstract, main Discussion under Configuration sensitivity, detection and a proposed fallback, limitations, and Supplementary Notes S17 through S19. Compiled locations main pages 21, 22 and Supplementary Information pages 35.
 % END ANSWER general
 
 % BEGIN ANSWER wording
-\textbf{wording response, complete.}
+\textbf{Preservation of the review wording.}
 
-\textbf{Direct answer.} We have retained the complete review wording without simplification or paraphrase, including both general paragraphs and this instruction.
+\textbf{Answer.} We have retained the complete review wording without simplification or paraphrase, including both general paragraphs and this instruction.
 
-\textbf{Evidence and change.} The thirteen exact quote blocks reconstruct the original request file. The validator checks each escaped block against the unchanged source and checks the original file hash. Answers are separate from quoted comments.
+\textbf{Change and evidence.} All thirteen original quoted blocks are retained, including the editor letter, Reviewer 2 acknowledgment, both Reviewer 1 introductory paragraphs and the instruction to preserve wording. Answers remain separate from the original comments.
 
-\textbf{Locations.} All review-comment blocks in this response. The original requests file and exact-block ledger remain unchanged.
+\textbf{Location.} All review-comment blocks in this response. The original requests file and exact-block ledger remain unchanged.
 % END ANSWER wording
 
 \section*{Reviewer 1 comment 1}\label{resp:R1-1}
@@ -148,13 +141,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.1
 
 % BEGIN ANSWER R1.1
-\textbf{R1.1 response, complete.}
+\textbf{Answer.} The tested Markdown operation is a specific composite transform. It adds a blockquote prefix to each line and removes whitespace. The receiver then applies saved token offsets after retokenization. This can shift the forced span, change tokens and alter contextual ranks. It does not demonstrate failure for every Markdown workflow.
 
-\textbf{Direct answer.} The tested Markdown operation is a specific composite transform. It adds a blockquote prefix to each line and removes whitespace. The receiver then applies saved token offsets after retokenization. This can shift the forced span, change tokens and alter contextual ranks. It does not demonstrate failure for every Markdown workflow.
+\textbf{Change and evidence.} Five hash-selected sources give 25 decomposed arms and 135 segment instances. Exact reuse leaves 26 missing segment replays. We also checked all 53 reused segment inputs at the new context allocation, with identical rank and error outcomes. These checks add no logical cover arms. Prefix-only insertion recovers none of the five. All 27 selected segment instances are rejected at a prohibited first forced token before a rank sequence is returned. These endpoints do not measure downstream rank amplification. Declared wrapper removal recovers one originally failing Mistral case, but cannot restore removed whitespace. Byte edits, extracted spans, first rank differences, errors and recovered bytes are retained. Original composite recovery remains 0/144.
 
-\textbf{Evidence and change.} Five hash-selected sources give 25 decomposed arms and 135 segment instances. Exact reuse leaves 26 missing segment replays. We also checked all 53 reused segment inputs at the new context allocation, with identical rank and error outcomes. These checks add no logical cover arms. Prefix-only insertion recovers none of the five. Declared wrapper removal recovers one originally failing Mistral case, but cannot restore removed whitespace. Byte edits, extracted spans, first rank differences, errors and recovered bytes are retained. Original composite recovery remains 0/144.
-
-\textbf{Locations.} Main Methods under Decoder compatibility and bounded transport diagnostics, targeted Results, and Supplementary Note S18 with its illustrative recovery table.
+\textbf{Location.} Main Methods under Decoder compatibility and bounded transport diagnostics, Results under Mechanisms of transmission failure, and Supplementary Note S18 with its illustrative recovery table. Compiled locations main pages 13, 20 and Supplementary Information pages 38, 39.
 % END ANSWER R1.1
 
 \section*{Reviewer 1 comment 2}\label{resp:R1-2}
@@ -165,13 +156,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.2
 
 % BEGIN ANSWER R1.2
-\textbf{R1.2 response, complete.}
+\textbf{Answer.} A minor version change has no universal recovery-rate implication. It may preserve the relevant tokenization or change token identities, offsets and conditioning. Model or gate differences introduce other disagreement mechanisms. We state the required shared contract and conditional agreement argument explicitly.
 
-\textbf{Direct answer.} A minor version change has no universal recovery-rate implication. It may preserve the relevant tokenization or change token identities, offsets and conditioning. Model or gate differences introduce other disagreement mechanisms. We state the required shared contract and conditional agreement argument explicitly.
+\textbf{Change and evidence.} A new canonical configuration fingerprint includes eleven required contract components. Tests accept matching configurations, verify deterministic serialization and reject changes to every component. It is a compatibility API, not authentication or a robustness guarantee, and was not retroactively applied to the historical messages.
 
-\textbf{Evidence and change.} A new canonical configuration fingerprint includes eleven required contract components. Tests accept matching configurations, verify deterministic serialization and reject changes to every component. It is a compatibility API, not authentication or a robustness guarantee, and was not retroactively applied to the historical messages.
-
-\textbf{Locations.} Main Methods under Decoder compatibility and bounded transport diagnostics, main Discussion under Configuration sensitivity, detection and a proposed fallback, and Supplementary Note S19.
+\textbf{Location.} Main Methods under Decoder compatibility and bounded transport diagnostics, main Discussion under Configuration sensitivity, detection and a proposed fallback, and Supplementary Note S19. Compiled locations main pages 13, 21 and Supplementary Information pages 39.
 % END ANSWER R1.2
 
 \section*{Reviewer 1 comment 3}\label{resp:R1-3}
@@ -182,13 +171,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.3
 
 % BEGIN ANSWER R1.3
-\textbf{R1.3 response, complete.}
+\textbf{Answer.} Zero cross-model recovery remains a severe limitation. We propose configuration identification before decoding, independently framed blocks with context resets, integrity checks, bounded outer error/erasure correction and retransmission. This is a conceptual fallback, not an implemented improvement.
 
-\textbf{Direct answer.} Zero cross-model recovery remains a severe limitation. We propose configuration identification before decoding, independently framed blocks with context resets, integrity checks, bounded outer error/erasure correction and retransmission. This is a conceptual fallback, not an implemented improvement.
+\textbf{Change and evidence.} The argument states the minimum-distance condition 2e+s<d and its assumptions. ECC cannot reconstruct an arbitrary wrong model codebook or repair persistent synchronization loss. Reliable framing, a supported configuration and overhead for redundancy and retries remain necessary. Retransmission under an unresolved mismatch is ineffective.
 
-\textbf{Evidence and change.} The argument states the minimum-distance condition 2e+s<d and its assumptions. ECC cannot reconstruct an arbitrary wrong model codebook or repair persistent synchronization loss. Reliable framing, a supported configuration and overhead for redundancy and retries remain necessary. Retransmission under an unresolved mismatch is ineffective.
-
-\textbf{Locations.} Main Discussion under Configuration sensitivity, detection and a proposed fallback, and Supplementary Note S19.
+\textbf{Location.} Main Discussion under Configuration sensitivity, detection and a proposed fallback, and Supplementary Note S19. Compiled locations main pages 21 and Supplementary Information pages 39.
 % END ANSWER R1.3
 
 \section*{Reviewer 1 comment 4}\label{resp:R1-4}
@@ -199,15 +186,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.4
 
 % BEGIN ANSWER R1.4
-\textbf{R1.4 response, partial.}
+\textbf{Answer.} We attempted the requested complementary automated evaluations prospectively. Semantic relatedness was not established because the semantic metric failed the specified control-separation requirement in both control-only pilots. This does not imply that every RankCloak transition is incoherent. Conditional context gain passed its control-separation check, but neither that result nor a positive RankCloak likelihood contrast proves that transitions appear natural or logically connected to readers. We have removed that implication from the paper.
 
-\textbf{Direct answer.} We tested complementary semantic-relatedness and independent-model conditional-compatibility metrics. The semantic metric did not pass the prospective control-separation requirement in either of two blinded pilots. Context gain did pass. We therefore cannot claim that the requested transitions are proven natural or logically connected to readers.
+\textbf{Change and evidence.} Each pilot selected 36 identities without inspecting RankCloak scores. Initial ordinary-minus-shuffled semantic cosine separation was 0.0078 with 95\% interval [-0.0416, 0.0572]. The sole predeclared amendment shortened the right window to 16 tokens and used controls disjoint in recipient and donor payloads. It gave -0.0106 [-0.0728, 0.0519]. Context-gain differences were 2.2200 [1.7784, 2.6777] and 2.0612 [1.7378, 2.4109] nats per evaluator tail token. The frozen exploratory study selected 92 payloads and 3,174 structural boundaries. Joint eligibility left 2,750 boundaries in 550 scored trials. Actual-minus-ordinary context gain was 0.1575 [0.1098, 0.2066], and actual-minus-shuffled gain was 2.3265 [2.2705, 2.3912]. These recipient-payload bootstrap intervals condition on the fixed control corpus. Mistral excludes 341 of 1,058 selected structural boundaries. Secondary raw conditional-likelihood intervals include zero for Mistral and Qwen. Ordinary continuations are sampled while RankCloak tails are greedy, so the contrast does not isolate a causal payload-boundary effect. The strongest score-selected example retains its internal word boundary and malformed wording. We now use the operational term non-payload greedy continuations and explicitly state that semantic coherence and reader-perceived naturalness were not established. This completes our explanation for this candidate, with partial empirical coverage. The editor may judge that additional evidence is required.
 
-\textbf{Evidence and change.} The pilots each cover 36 identities. Initial semantic separation was 0.0078 with interval [-0.0416, 0.0572]. The one predeclared 16-token amendment on disjoint recipient and donor payloads gave -0.0106 [-0.0728, 0.0519]. Both context-gain intervals were positive. The frozen exploratory study completed 2,750 boundaries across 92 payloads. Actual minus ordinary context gain was 0.1575 nats per tail token, with a 95\% interval [0.1098, 0.2066]. Actual minus shuffled gain was 2.3265 [2.2705, 2.3912]. Eligibility, fixed-corpus intervals, donor reuse and influence, and predeclared weak, typical and strong examples are reported. The ordinary comparison also differs in continuation policy, sampled controls versus greedy RankCloak tails. It does not isolate a causal boundary effect. This is not a completed two-metric coherence evaluation.
-
-\textbf{Locations.} Main Methods under Boundary instrumentation and prospective control validation, targeted Results and its context-gain table, and Supplementary Note S17.
-
-\textcolor{red}{INTERNAL PENDING WORK. Semantic and perceptual support remains unresolved. No further metric search was undertaken after the allowed amendment. Any future design needs a new prospective rationale or reader study, not relabeling this negative validation as success.}
+\textbf{Location.} Main Boundary instrumentation and prospective control validation, Local boundary compatibility and metric limitations, Discussion and Responsible use and limitations. Supplementary Note S17 gives both pilots, exclusions, donor support, subgroup effects and exact examples. Compiled locations main pages 12, 19 and Supplementary Information pages 35.
 % END ANSWER R1.4
 
 \section*{Reviewer 1 comment 5}\label{resp:R1-5}
@@ -218,13 +201,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.5
 
 % BEGIN ANSWER R1.5
-\textbf{R1.5 response, complete.}
+\textbf{Answer.} The evaluated model-aware attack is trace informed and exposes a strong statistical limitation. Its features come from saved token likelihoods under the generating model. Reproducing them requires the original token path, model/backend, prompts, boundaries, resets and probability convention. A visible-text-only scorer is a distinct condition.
 
-\textbf{Direct answer.} The evaluated model-aware attack is trace informed and exposes a strong statistical limitation. Its features come from saved token likelihoods under the generating model. Reproducing them requires the original token path, model/backend, prompts, boundaries, resets and probability convention. A visible-text-only scorer is a distinct condition.
+\textbf{Change and evidence.} The added discussion explains that payload-rank distributions need not match ordinary sampling. It distinguishes untempered full-vocabulary scores from the temperature-0.8 top-p-0.95 sampler and states the support conditions for a sequence-KL argument. AUC is not converted to KL, and no unique causal feature attribution is claimed. An attacker with the complete receiver configuration may decode. No confidentiality or informed-attacker indistinguishability is asserted.
 
-\textbf{Evidence and change.} The added discussion explains that payload-rank distributions need not match ordinary sampling. It distinguishes untempered full-vocabulary scores from the temperature-0.8 top-p-0.95 sampler and states the support conditions for a sequence-KL argument. AUC is not converted to KL, and no unique causal feature attribution is claimed. An attacker with the complete receiver configuration may decode. No confidentiality or informed-attacker indistinguishability is asserted.
-
-\textbf{Locations.} Main steganalysis Methods and Discussion under Configuration sensitivity, detection and a proposed fallback. The source-based argument is in the Stage 2 theory audit.
+\textbf{Location.} Main Neural steganalysis, statistical analysis, and computational overhead, Configuration sensitivity, detection and a proposed fallback, and Supplementary Notes S12 and S19. Compiled locations main pages 11, 21.
 % END ANSWER R1.5
 
 \section*{Reviewer 1 comment 6}\label{resp:R1-6}
@@ -235,13 +216,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.6
 
 % BEGIN ANSWER R1.6
-\textbf{R1.6 response, complete.}
+\textbf{Answer.} All six strict-gate failures are retained and analyzed at their original budgets. Five are Qwen and one Mistral, all ASCII B16. They consume 110/128, 116/128, 54/64, 106/128, 59/128 and 116/128 ranks. Strict completion remains 114/120.
 
-\textbf{Direct answer.} All six strict-gate failures are retained and analyzed at their original budgets. Five are Qwen and one Mistral, all ASCII B16. They consume 110/128, 116/128, 54/64, 106/128, 59/128 and 116/128 ranks. Strict completion remains 114/120.
+\textbf{Change and evidence.} The supplement reports exact pinned-tokenizer windows, longest below-threshold runs of 50, 163, 39, 35, 267 and 51 positions, rolling progress, margins and rank pressure. The longest runs contain 30 to 157 distinct token IDs, at most three identical IDs consecutively, and rank-one frequencies of 85.7 to 98.8 percent. All 605 positions remain ordinary sampled skips with no payload progress. Twelve matched ungated/moderate trajectories and three hash-selected strict successes are retained. Observed contexts include formatted public-service and project-update passages, but low-entropy runs also occur in successes. These are descriptive associations, not established linguistic causes. The trajectories used no token filter and sampled ordinary skips, not greedy skips.
 
-\textbf{Evidence and change.} The supplement reports exact pinned-tokenizer windows, longest below-threshold runs of 50, 163, 39, 35, 267 and 51 positions, rolling progress, margins and rank pressure. The longest runs contain 30 to 157 distinct token IDs, at most three identical IDs consecutively, and rank-one frequencies of 85.7 to 98.8 percent. All 605 positions remain ordinary sampled skips with no payload progress. Twelve matched ungated/moderate trajectories and three hash-selected strict successes are retained. Observed contexts include formatted public-service and project-update passages, but low-entropy runs also occur in successes. These are descriptive associations, not established linguistic causes. The trajectories used no token filter and sampled ordinary skips, not greedy skips.
-
-\textbf{Locations.} Main targeted Results and Supplementary Notes S13 and S16, including the six-case table, trajectory figure and exact local windows.
+\textbf{Location.} Main Results under Strict-gate failure contexts and Supplementary Notes S13 and S16, including the six-case table, trajectory figure and exact local windows. Compiled locations main pages 20 and Supplementary Information pages 25, 32, 34.
 % END ANSWER R1.6
 
 \section*{Reviewer 1 comment 7}\label{resp:R1-7}
@@ -252,13 +231,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.7
 
 % BEGIN ANSWER R1.7
-\textbf{R1.7 response, complete.}
+\textbf{Answer.} The new comparison separates model work from sorting, rank counting, probability passes and coding operations. Rank selection sorts all allowed candidates, whereas recovery of a known token counts greater logits and lower-ID ties.
 
-\textbf{Direct answer.} The new comparison separates model work from sorting, rank counting, probability passes and coding operations. Rank selection sorts all allowed candidates, whereas recovery of a known token counts greater logits and lower-ID ties.
+\textbf{Change and evidence.} The analysis inspects the primary arithmetic-coding and SAAC implementations and ADG grouping algorithm. It includes repeated diagnostic sorts, finite-precision cumulative tables, grouping search/removal, prompt prefills, KV state, logits\_all storage, tails, sampled skips, segmentation and payload-side direct-subword passes. Bounds are implementation-specific and imply no cross-backend wall-time superiority.
 
-\textbf{Evidence and change.} The analysis inspects the primary arithmetic-coding and SAAC implementations and ADG grouping algorithm. It includes repeated diagnostic sorts, finite-precision cumulative tables, grouping search/removal, prompt prefills, KV state, logits\_all storage, tails, sampled skips, segmentation and payload-side direct-subword passes. Bounds are implementation-specific and imply no cross-backend wall-time superiority.
-
-\textbf{Locations.} Main Computational overhead and generalizability and Supplementary Note S19, implementation-specific operation-count table.
+\textbf{Location.} Main Computational overhead and generalizability and Supplementary Note S19, implementation-specific operation-count table. Compiled locations main pages 20 and Supplementary Information pages 39, 40.
 % END ANSWER R1.7
 
 \section*{Reviewer 1 comment 8}\label{resp:R1-8}
@@ -269,13 +246,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.8
 
 % BEGIN ANSWER R1.8
-\textbf{R1.8 response, complete.}
+\textbf{Answer.} The bibliography key Cai2025EntropyGuidedWatermarking refers to the previous reference 16, arXiv:2504.12108. The inspected primary record lists no journal reference. We have replaced its role in the V4 argument with the peer-reviewed Lee and colleagues ACL 2024 paper on entropy-threshold selective watermarking.
 
-\textbf{Direct answer.} The bibliography key Cai2025EntropyGuidedWatermarking refers to the previous reference 16, arXiv:2504.12108. The inspected primary record lists no journal reference. We have replaced its role in the V4 argument with the peer-reviewed Lee and colleagues ACL 2024 paper on entropy-threshold selective watermarking.
+\textbf{Change and evidence.} The V4 prose now cites Lee2024SWEET for the limited thresholding precedent. It distinguishes detecting a watermark from recovering a chosen payload. Neither a watermark theorem nor the unverified preprint is used as a RankCloak recovery guarantee. The historical experiment itself is still documented by its original configuration and data.
 
-\textbf{Evidence and change.} The V4 prose now cites Lee2024SWEET for the limited thresholding precedent. It distinguishes detecting a watermark from recovering a chosen payload. Neither a watermark theorem nor the unverified preprint is used as a RankCloak recovery guarantee. The historical experiment itself is still documented by its original configuration and data.
-
-\textbf{Locations.} Main Introduction, Supplementary Note S13 and the V4 bibliography.
+\textbf{Location.} Main Introduction, Supplementary Note S13 and the V4 bibliography. Compiled locations main pages 1 and Supplementary Information pages 25.
 % END ANSWER R1.8
 
 \section*{Reviewer 1 comment 9}\label{resp:R1-9}
@@ -286,13 +261,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.9
 
 % BEGIN ANSWER R1.9
-\textbf{R1.9 response, complete.}
+\textbf{Answer.} The main Methods now give the complete deterministic token filter specification, including every literal blocked substring and all other exclusion criteria. The historical filter is unchanged.
 
-\textbf{Direct answer.} The main Methods now list every literal blocked substring and every other safe\_text\_filter\_v1 exclusion criterion from the actual unchanged code.
+\textbf{Change and evidence.} The specification covers empty and replacement pieces, ASCII controls and exceptions, whitespace/start rules, backslashes, individual-token decoding and exceptions, mask application, special-token distinctions and stable tie-breaking. It distinguishes full selection sorting from counted rank recovery and notes limitations for concatenated markup and nonfinite logits. The versioned source link and source hash are retained in the audit, with focused edge-case tests.
 
-\textbf{Evidence and change.} The specification covers empty and replacement pieces, ASCII controls and exceptions, whitespace/start rules, backslashes, individual-token decoding and exceptions, mask application, special-token distinctions and stable tie-breaking. It distinguishes full selection sorting from counted rank recovery and notes limitations for concatenated markup and nonfinite logits. The versioned source link and source hash are retained in the audit, with focused edge-case tests.
-
-\textbf{Locations.} Main Methods under Complete deterministic token filter specification and its complete rule table.
+\textbf{Location.} Main Methods under Complete deterministic token filter specification and its complete rule table. Compiled locations main pages 6, 7.
 % END ANSWER R1.9
 
 \section*{Reviewer 1 comment 10}\label{resp:R1-10}
@@ -303,13 +276,11 @@ Please do not arbitrarily simplify or rephrase the review comments, as this hind
 % END QUOTE R1.10
 
 % BEGIN ANSWER R1.10
-\textbf{R1.10 response, complete.}
+\textbf{Answer.} We separate same-history logit perturbations from subsequent feedback when independently generated token paths split. For a fixed history and allowed set, pairwise gaps above twice a uniform absolute perturbation bound preserve order. Smaller gaps and ties have no such protection. This is a conditional bound, not a measured quantization-error distribution.
 
-\textbf{Direct answer.} We separate same-history logit perturbations from subsequent feedback when independently generated token paths split. For a fixed history and allowed set, pairwise gaps above twice a uniform absolute perturbation bound preserve order. Smaller gaps and ties have no such protection. This is a conditional bound, not a measured quantization-error distribution.
+\textbf{Change and evidence.} The audit reconciles 69,528 rank changes across 244,440 positions in 1,920 pairs. Encoded messages contribute 56,321/122,220 and ordinary controls 13,207/122,220. The distinct offline fixed-message endpoint gives zero exact Q4-to-Q8 payload recoveries in 960 supported rows, with 766 invalid-rank trials and 194 valid but wrong decoded payloads. It supports no reverse-direction claim. Observed-token replay feeds received cover tokens, not decoded payload symbols, back into the model. Existing evidence supports these claims without new neighboring-logit replay.
 
-\textbf{Evidence and change.} The audit reconciles 69,528 rank changes across 244,440 positions in 1,920 pairs. Encoded messages contribute 56,321/122,220 and ordinary controls 13,207/122,220. The distinct offline fixed-message endpoint gives zero exact Q4-to-Q8 payload recoveries in 960 supported rows, with 766 invalid-rank trials and 194 valid but wrong decoded payloads. It supports no reverse-direction claim. Observed-token replay feeds received cover tokens, not decoded payload symbols, back into the model. Existing evidence supports these claims without new neighboring-logit replay.
-
-\textbf{Locations.} Main targeted Results and Supplementary Notes S14, S18 under Directional cross-quantization endpoint, and S19.
+\textbf{Location.} Main Results under Fixed-message cross-quantization decoding and Supplementary Notes S14, S18 under Directional cross-quantization endpoint, and S19. Compiled locations main pages 20 and Supplementary Information pages 28, 39.
 % END ANSWER R1.10
 
 \end{document}

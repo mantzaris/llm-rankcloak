@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/meow/.pyenv/versions/3.10.13/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/meow/.pyenv/versions/3.10.13/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/meow/Documents/repos/llm-rankcloak/scripts/audit_revision_v4_stage3_linkage.py", line 68, in <module>
+    if __name__=='__main__':main()
+  File "/home/meow/Documents/repos/llm-rankcloak/scripts/audit_revision_v4_stage3_linkage.py", line 51, in main
+    if excerpt.replace('\n','\\n').replace('\t','\\t')!=w['text']:raise ValueError('entropy display bytes differ '+w['plan_id'])
+ValueError: entropy display bytes differ entropy_trial__2b5e682d0007193b56249891

@@ -1,0 +1,589 @@
+{
+  "schema": "rankcloak.stage3.claims.v1",
+  "claims": [
+    {
+      "id": "primary",
+      "claim": "Configured saved-token byte inversion",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/recovery.json",
+        "results/revision_v1/primary_v2"
+      ],
+      "population": "480 payloads, eight classes, three generators",
+      "quantity": "6480/6480",
+      "units": "payload trials",
+      "uncertainty": "Wilson 95% intervals reported separately for trials and strict payload/model groups",
+      "evidence_class": "retained experiment independently reconciled",
+      "limitations": "Saved tokens and exact configuration held fixed. Repeated trials are not independent artifacts.",
+      "manuscript_locations": "Abstract; main recovery Results; Supplementary S3; editor answer"
+    },
+    {
+      "id": "visible",
+      "claim": "Unmodified visible-retokenization recovery",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/recovery.json",
+        "results/revision_v1/robustness_v2"
+      ],
+      "population": "144 covers",
+      "quantity": "88/144",
+      "units": "cover payload endpoints",
+      "uncertainty": "Wilson by cover",
+      "evidence_class": "retained executed replay",
+      "limitations": "Historical raw and limited unmodified aliases reference saved-ID endpoints with no new decode.",
+      "manuscript_locations": "Abstract; robustness Results/Figure 3; Supplementary S4; R1.1"
+    },
+    {
+      "id": "transforms",
+      "claim": "Frozen transformations and cross-model failures",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/recovery.json"
+      ],
+      "population": "144 covers, two alternate decoders for cross-model",
+      "quantity": "NFKC 82/144; quotes 56/144; trim 28/144; composite Markdown 0/144; paraphrase 0/144; cross-model 0/288 outcomes",
+      "units": "cover or decoder outcomes as stated",
+      "uncertainty": "Wilson cover intervals, 144 independent source covers for cross-model",
+      "evidence_class": "retained executed replay",
+      "limitations": "Specific operations and saved-offset extraction. No survey of Markdown workflows.",
+      "manuscript_locations": "Abstract; robustness Results/Figure 3; Supplementary S4; R1.1/R1.3"
+    },
+    {
+      "id": "pilot_initial",
+      "claim": "Control-only metric selection",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/reconstructed_effects.csv",
+        "results/revision_v4/stage2/plans/pilot_initial",
+        "results/revision_v4/stage2/raw"
+      ],
+      "population": "36 hash-selected identities, 36 recipient payload clusters",
+      "quantity": [
+        {
+          "ci_high": 2.6776725081876016,
+          "ci_low": 1.778380661719148,
+          "contrast": "pilot_ordinary minus pilot_shuffled",
+          "effect": 2.2200350920682435,
+          "metric": "context_gain",
+          "model": "all",
+          "plan": "pilot_initial"
+        },
+        {
+          "ci_high": 2.9279553801218365,
+          "ci_low": 1.816735693121501,
+          "contrast": "pilot_ordinary minus pilot_shuffled",
+          "effect": 2.3368389698142975,
+          "metric": "conditional_logp",
+          "model": "all",
+          "plan": "pilot_initial"
+        },
+        {
+          "ci_high": 0.05717843704995698,
+          "ci_low": -0.04155951792077692,
+          "contrast": "pilot_ordinary minus pilot_shuffled",
+          "effect": 0.007780430872062215,
+          "metric": "semantic_cosine",
+          "model": "all",
+          "plan": "pilot_initial"
+        }
+      ],
+      "units": "semantic cosine and nats/evaluator tail token",
+      "uncertainty": "2000 percentile recipient-payload bootstrap draws stratified by artifact class",
+      "evidence_class": "prospective control-only pilot",
+      "limitations": "Both semantic intervals cross zero. Context gain passed the specified control-separation check. Single amendment, disjoint recipients and donors. No reader validation.",
+      "manuscript_locations": "Boundary Results; Supplementary S17; R1.4; editor synthesis; cover letter"
+    },
+    {
+      "id": "pilot_amendment1",
+      "claim": "Control-only metric selection",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/reconstructed_effects.csv",
+        "results/revision_v4/stage2/plans/pilot_amendment1",
+        "results/revision_v4/stage2/raw"
+      ],
+      "population": "36 hash-selected identities, 35 recipient payload clusters",
+      "quantity": [
+        {
+          "ci_high": 2.4109219822057306,
+          "ci_low": 1.7378146305806113,
+          "contrast": "pilot_ordinary minus pilot_shuffled",
+          "effect": 2.0612099193465805,
+          "metric": "context_gain",
+          "model": "all",
+          "plan": "pilot_amendment1"
+        },
+        {
+          "ci_high": 2.3182483115728423,
+          "ci_low": 1.587220031292549,
+          "contrast": "pilot_ordinary minus pilot_shuffled",
+          "effect": 1.9454730047290756,
+          "metric": "conditional_logp",
+          "model": "all",
+          "plan": "pilot_amendment1"
+        },
+        {
+          "ci_high": 0.05187945162947121,
+          "ci_low": -0.07282189270056663,
+          "contrast": "pilot_ordinary minus pilot_shuffled",
+          "effect": -0.010621690576621684,
+          "metric": "semantic_cosine",
+          "model": "all",
+          "plan": "pilot_amendment1"
+        }
+      ],
+      "units": "semantic cosine and nats/evaluator tail token",
+      "uncertainty": "2000 percentile recipient-payload bootstrap draws stratified by artifact class",
+      "evidence_class": "prospective control-only pilot",
+      "limitations": "Both semantic intervals cross zero. Context gain passed the specified control-separation check. Single amendment, disjoint recipients and donors. No reader validation.",
+      "manuscript_locations": "Boundary Results; Supplementary S17; R1.4; editor synthesis; cover letter"
+    },
+    {
+      "id": "boundary_selection",
+      "claim": "Structural-to-scored chain",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/boundary_counts.json",
+        "results/revision_v4/stage2/plans/coherence_study/freeze.json"
+      ],
+      "population": "240 segmented payloads in four hex classes, broader ordinary donor corpus eight classes",
+      "quantity": "8280 original; 92 selected payloads; 3174 selected structural; 2750 eligible; 550 scored trials; 8250 arm units",
+      "units": "different nested units, never interchangeable",
+      "uncertainty": "Identity-hash selection, 23/class before actual scoring",
+      "evidence_class": "prospectively selected exploratory sample",
+      "limitations": "552 planned trials, two have no eligible boundary. Mistral excludes 341/1058, Llama 43/1058, Qwen 40/1058.",
+      "manuscript_locations": "Boundary Methods/Results; Supplementary S17; R1.4"
+    },
+    {
+      "id": "context_gain",
+      "claim": "Limited fixed-path local compatibility",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/reconstructed_effects.csv",
+        "results/revision_v4/stage2/raw",
+        "results/revision_v4/stage2/plans/coherence_study/unit_requests.jsonl"
+      ],
+      "population": "92 recipient payloads, 550 trials, 2750 boundaries",
+      "quantity": [
+        {
+          "ci_high": 0.20655505697642101,
+          "ci_low": 0.1098391187552732,
+          "contrast": "actual minus ordinary",
+          "effect": 0.1574783962488552,
+          "metric": "context_gain",
+          "model": "all",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.3501785138400994,
+          "ci_low": 0.1716744709995279,
+          "contrast": "actual minus ordinary",
+          "effect": 0.26321663705123893,
+          "metric": "context_gain",
+          "model": "llama3_8b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.21120706546628584,
+          "ci_low": 0.009823668715816641,
+          "contrast": "actual minus ordinary",
+          "effect": 0.10758438671321653,
+          "metric": "context_gain",
+          "model": "mistral_7b_instruct_v0_3_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.16558402099768763,
+          "ci_low": 0.02723144771250592,
+          "contrast": "actual minus ordinary",
+          "effect": 0.09780865181582109,
+          "metric": "context_gain",
+          "model": "qwen2_5_7b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.09808040121560785,
+          "ci_low": 0.02771442544199887,
+          "contrast": "actual minus ordinary",
+          "effect": 0.061900655991121385,
+          "metric": "conditional_logp",
+          "model": "all",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.24276905216985525,
+          "ci_low": 0.10250905787205539,
+          "contrast": "actual minus ordinary",
+          "effect": 0.171551119474421,
+          "metric": "conditional_logp",
+          "model": "llama3_8b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.06817353950987771,
+          "ci_low": -0.083970342443707,
+          "contrast": "actual minus ordinary",
+          "effect": -0.008944431982241858,
+          "metric": "conditional_logp",
+          "model": "mistral_7b_instruct_v0_3_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 0.08629718587452946,
+          "ci_low": -0.018375867353473487,
+          "contrast": "actual minus ordinary",
+          "effect": 0.032163769788920125,
+          "metric": "conditional_logp",
+          "model": "qwen2_5_7b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.3911966740182353,
+          "ci_low": 2.2705022244942965,
+          "contrast": "actual minus shuffled",
+          "effect": 2.3265121008350307,
+          "metric": "context_gain",
+          "model": "all",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.48834589389187,
+          "ci_low": 2.2945235274992037,
+          "contrast": "actual minus shuffled",
+          "effect": 2.3902877472422155,
+          "metric": "context_gain",
+          "model": "llama3_8b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.5903005246249466,
+          "ci_low": 2.323431938455848,
+          "contrast": "actual minus shuffled",
+          "effect": 2.4493414969601197,
+          "metric": "context_gain",
+          "model": "mistral_7b_instruct_v0_3_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.2182294674258722,
+          "ci_low": 2.0640936296016563,
+          "contrast": "actual minus shuffled",
+          "effect": 2.141422906166116,
+          "metric": "context_gain",
+          "model": "qwen2_5_7b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.3905408453572363,
+          "ci_low": 2.2619399599505923,
+          "contrast": "actual minus shuffled",
+          "effect": 2.325668592562281,
+          "metric": "conditional_logp",
+          "model": "all",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.5007000865546645,
+          "ci_low": 2.320433734493696,
+          "contrast": "actual minus shuffled",
+          "effect": 2.406973896793738,
+          "metric": "conditional_logp",
+          "model": "llama3_8b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.52919894652357,
+          "ci_low": 2.2535878773425915,
+          "contrast": "actual minus shuffled",
+          "effect": 2.386468028667374,
+          "metric": "conditional_logp",
+          "model": "mistral_7b_instruct_v0_3_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.2702899413806064,
+          "ci_low": 2.1062943742369495,
+          "contrast": "actual minus shuffled",
+          "effect": 2.1892840111012357,
+          "metric": "conditional_logp",
+          "model": "qwen2_5_7b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.2215442831603665,
+          "ci_low": 2.1184947187031793,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.1690337045861745,
+          "metric": "context_gain",
+          "model": "all",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.2132349074806026,
+          "ci_low": 2.040048937790016,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.127071110190977,
+          "metric": "context_gain",
+          "model": "llama3_8b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.4575457327990886,
+          "ci_low": 2.2369213794403406,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.3417571102469035,
+          "metric": "context_gain",
+          "model": "mistral_7b_instruct_v0_3_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.1159910216073765,
+          "ci_low": 1.9677614915842632,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.043614254350294,
+          "metric": "context_gain",
+          "model": "qwen2_5_7b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.3294771035750417,
+          "ci_low": 2.2024056629548454,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.26376793657116,
+          "metric": "conditional_logp",
+          "model": "all",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.330058693902314,
+          "ci_low": 2.1455356452913565,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.235422777319318,
+          "metric": "conditional_logp",
+          "model": "llama3_8b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.5455773371136488,
+          "ci_low": 2.256147816236589,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.3954124606496157,
+          "metric": "conditional_logp",
+          "model": "mistral_7b_instruct_v0_3_q4_k_m",
+          "plan": "coherence_study"
+        },
+        {
+          "ci_high": 2.2401168041783523,
+          "ci_low": 2.0711799393575467,
+          "contrast": "ordinary minus shuffled",
+          "effect": 2.157120241312316,
+          "metric": "conditional_logp",
+          "model": "qwen2_5_7b_instruct_q4_k_m",
+          "plan": "coherence_study"
+        }
+      ],
+      "units": "nats per evaluator tail token",
+      "uncertainty": "2000 shared stratified recipient-payload draws after segment then trial aggregation",
+      "evidence_class": "exploratory retained-score study independently recomputed",
+      "limitations": "Intervals condition on fixed donors. Sampled ordinary versus greedy actual tails confounds boundary effect. Mistral and Qwen secondary raw-likelihood intervals include zero.",
+      "manuscript_locations": "Main boundary table; Supplementary subgroup table and figure; abstract; discussion; R1.4; cover letter"
+    },
+    {
+      "id": "fixed_tail_path",
+      "claim": "Conditional and reference share targets",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/boundary_counts.json",
+        "results/revision_v4/stage2/plans/coherence_study/units.jsonl",
+        "results/revision_v4/stage2/raw"
+      ],
+      "population": "8250 arm units",
+      "quantity": "3057 standalone-right tokenizations differ",
+      "units": "scoring units",
+      "uncertainty": "Descriptive complete-unit count",
+      "evidence_class": "implementation and retained input audit",
+      "limitations": "Joint evaluator left/right tokenization with straddles excluded. P+L and P score same suffix IDs, not independently retokenized strings.",
+      "manuscript_locations": "Equation 17; boundary Methods; Supplementary S17; R1.4"
+    },
+    {
+      "id": "donors",
+      "claim": "Reference support and influence",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/boundary_counts.json",
+        "results/revision_v4/stage2/analysis/coherence_study/donor_sensitivity.csv"
+      ],
+      "population": "2750 paired boundaries",
+      "quantity": "ordinary 411 payloads/2398 identities max reuse 18/2; shuffled 240/2354 max 32/4; G leave-one ranges .1504-.1643 and 2.3210-2.3363",
+      "units": "payloads, source identities and effect ranges",
+      "uncertainty": "Leave-one-donor ranges are influence diagnostics, not population confidence intervals",
+      "evidence_class": "fixed-corpus sensitivity",
+      "limitations": "Primary intervals omit random donor-corpus uncertainty. No broad donor-population inference.",
+      "manuscript_locations": "Supplementary S17; R1.4"
+    },
+    {
+      "id": "examples",
+      "claim": "Metric-ranked examples preserve adverse wording",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/examples.json",
+        "results/revision_v4/stage2/analysis/coherence_study/examples.json"
+      ],
+      "population": "all 2750 eligible actual units",
+      "quantity": "G -0.2986, 1.8772, 7.7527",
+      "units": "nats/evaluator tail token",
+      "uncertainty": "Minimum, upper-middle, maximum with SHA256 identity tie rule",
+      "evidence_class": "predeclared illustration",
+      "limitations": "Strong means score only. Highest example contains over|much and malformed wording.",
+      "manuscript_locations": "Supplementary S17; R1.4"
+    },
+    {
+      "id": "transport",
+      "claim": "Illustrative decomposed transport recovery",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/transport.json",
+        "results/revision_v4/stage2/transport/segment_diagnostics.jsonl"
+      ],
+      "population": "five identity-selected source covers, no eligible Mistral success",
+      "quantity": "25 logical arms; 135 segment instances; 26 new requests; 53 capacity checks; prefix/outer/trailing/LF/unwrap successes 0/1/1/2/1 of five",
+      "units": "logical covers and computational requests distinguished",
+      "uncertainty": "No population intervals for this mechanism selection",
+      "evidence_class": "bounded diagnostic experiment",
+      "limitations": "All 27 prefix instances reject first forced token. No downstream avalanche observed. No general repair claim.",
+      "manuscript_locations": "Transport Results; Supplementary S18; R1.1"
+    },
+    {
+      "id": "quantization",
+      "claim": "Q4 path replayed with saved Q8 ranks",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/quantization.json",
+        "results/revision_v3/generation/raw/quantization",
+        "results/revision_v4/stage2/quantization/q4_to_q8_fixed_message_decode.jsonl"
+      ],
+      "population": "960 encoded plus 960 ordinary shared-history pairs",
+      "quantity": "encoded 56321/122220 changed ranks; ordinary 13207/122220; exact bytes 0/960; invalid ranks 766; accepted wrong bytes 194",
+      "units": "positions and payload trials distinguished",
+      "uncertainty": "Descriptive census of retained pairs",
+      "evidence_class": "offline byte reconstruction independently implemented",
+      "limitations": "One Qwen revision. No reverse-direction decoding. Accepted decoder strips padding unchecked, including one wrong case with nonzero terminal padding.",
+      "manuscript_locations": "Fixed-message Results; Supplementary S14/S18/S19; abstract; R1.10; cover letter"
+    },
+    {
+      "id": "entropy",
+      "claim": "Six original strict failures and comparators",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/entropy.json",
+        "results/revision_v4/source_tables/entropy_positions.csv",
+        "results/revision_v4/source_tables/entropy_text_windows.csv",
+        "results/revision_v4/stage2/entropy/failure_comparators.csv"
+      ],
+      "population": "120 strict attempts, six failures, 12 matched ungated/moderate plus three selected strict-success comparators",
+      "quantity": "114/120 completion; requested/consumed 128/110,128/116,64/54,128/106,128/59,128/116; budgets 768 except384; longest runs50,163,39,35,267,51",
+      "units": "payload attempts, token positions",
+      "uncertainty": "Descriptive retained trajectories and matched comparators",
+      "evidence_class": "offline trace audit",
+      "limitations": "Unfiltered, ordinary sampled skips. Text contexts do not identify causes. Successes also contain low-entropy runs.",
+      "manuscript_locations": "Gate Results and table; Supplementary S13/S16 exact windows; R1.6"
+    },
+    {
+      "id": "serialized_rate",
+      "claim": "Entropy rate definition",
+      "source_artifacts": [
+        "results/revision_v4/stage2/entropy/serialized_rate_audit.json",
+        "rankcloak/revision_v3_generation.py"
+      ],
+      "population": "120/120/114 completed ungated/moderate/strict trials",
+      "quantity": "7.4001/5.7920/4.0513",
+      "units": "8 times serialized payload bytes/generated tokens",
+      "uncertainty": "Conditioned on completion, not all-attempt capacity",
+      "evidence_class": "retained accounting",
+      "limitations": "Not Shannon capacity or four-bits-per-hex-character artifact accounting.",
+      "manuscript_locations": "Gate Methods/Results table; Supplementary S13; R1.6"
+    },
+    {
+      "id": "detector",
+      "claim": "Trace-informed discrimination and access",
+      "source_artifacts": [
+        "results/revision_v4/stage3/audit/linkage.json",
+        "results/revision_v3/detector_predictions",
+        "rankcloak/revision_v3_analysis.py",
+        "revision_docs/REVISION_V4_STAGE2_THEORY.md"
+      ],
+      "population": "strict matched test 1491 positives and1491 negatives",
+      "quantity": "TextCNN AUC .9868; DeBERTa .9994; trace-informed .999995",
+      "units": "ROC-AUC",
+      "uncertainty": "2000 deduplication-cluster percentile draws in retained analysis",
+      "evidence_class": "retained statistical evidence and theory",
+      "limitations": "Saved original IDs, scores, exact model/backend/prompts/resets. Untempered scoring differs from top-p sampling. AUC not KL. Full receiver configuration may decode.",
+      "manuscript_locations": "Detector Results/Figure5; discussion; abstract; R1.5"
+    },
+    {
+      "id": "filter",
+      "claim": "Exact unchanged filtering and ordering",
+      "source_artifacts": [
+        "rankcloak/token_filters.py",
+        "rankcloak/rank_codec.py",
+        "results/revision_v4/provenance/filter_contract.json"
+      ],
+      "population": "individually decoded vocabulary pieces",
+      "quantity": "Complete literal rules in main Methods",
+      "units": "deterministic rules",
+      "uncertainty": "No statistical uncertainty",
+      "evidence_class": "source-code contract",
+      "limitations": "Concatenated text need not inherit isolated safety or roundtrip stability. Special-token sampling exclusions separate.",
+      "manuscript_locations": "Main Methods Table1; R1.9"
+    },
+    {
+      "id": "theory",
+      "claim": "Costs, configuration sensitivity and rank margins",
+      "source_artifacts": [
+        "revision_docs/REVISION_V4_STAGE2_THEORY.md",
+        "results/revision_v4/stage2/provenance/primary_sources/manifest.json",
+        "rankcloak/revision_v4_compatibility.py"
+      ],
+      "population": "declared fixed-history/mask/order model and algorithm implementations",
+      "quantity": "selection O(V+A log A); rank counting O(V+A); uniform 2epsilon sufficient pairwise gap",
+      "units": "operation counts and sufficient bounds",
+      "uncertainty": "Conditional proofs, not observed timing superiority or estimated epsilon",
+      "evidence_class": "theory and code inspection",
+      "limitations": "Model calls, prefills, repeated sorts, probability passes, KV/logits_all, tails/skips, direct-subword passes included.",
+      "manuscript_locations": "Overhead/discussion; Supplementary S19; R1.2/R1.7/R1.10"
+    },
+    {
+      "id": "fallback",
+      "claim": "Independent blocks, integrity, ECC, retransmission",
+      "source_artifacts": [
+        "revision_docs/REVISION_V4_STAGE2_THEORY.md"
+      ],
+      "population": "hypothetical correctly framed supported configuration",
+      "quantity": "2e+s<d sufficient unique correction condition",
+      "units": "errors and located erasures",
+      "uncertainty": "Theoretical channel assumptions",
+      "evidence_class": "unimplemented proposal",
+      "limitations": "Cannot repair arbitrary wrong codebook or persistent synchronization loss. Compatibility header not authentication.",
+      "manuscript_locations": "Discussion; Supplementary S19; R1.3"
+    },
+    {
+      "id": "bibliography",
+      "claim": "Entropy threshold precedent",
+      "source_artifacts": [
+        "revision_docs/REFERENCE_AUDIT.md",
+        "revision_docs/REVISION_V4_STAGE2_THEORY.md",
+        "paperV4/scientific_reports/references.bib"
+      ],
+      "population": "former reference16 Cai2025EntropyGuidedWatermarking",
+      "quantity": "Lee2024SWEET ACL2024 replaces its active role",
+      "units": "citation claim scope",
+      "uncertainty": "Primary publication metadata verified",
+      "evidence_class": "source audit",
+      "limitations": "Watermark detection is not arbitrary payload recovery. Cai remains an unused historical bibliography entry.",
+      "manuscript_locations": "Introduction; Supplementary S13; R1.8"
+    },
+    {
+      "id": "archive",
+      "claim": "Published deposit does not cover V4",
+      "source_artifacts": [
+        "results/revision_v4/provenance/archive_v2_coverage.json",
+        "results/revision_v4/stage3/provenance/zenodo_v2.json",
+        "release/v4/assembly_policy.json"
+      ],
+      "population": "published2.0.0 DOI22555497",
+      "quantity": "8342 archived files,65paperV3,zeroV4,source ce853d42d6ba64065cb63c6bdfc0d825c62734cd",
+      "units": "archive members",
+      "uncertainty": "Archive checksum and inventory verification",
+      "evidence_class": "published-record audit",
+      "limitations": "Local verified V4 candidate is separate. Final public DOI and document update remain.",
+      "manuscript_locations": "Availability; archive response; cover letter; checklist"
+    }
+  ]
+}

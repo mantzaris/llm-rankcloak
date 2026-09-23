@@ -1,0 +1,20 @@
+[
+  {
+    "boundary_id": "revision_v1_primary_v2_payload_fidelity_v2__60c7c024bb462f543873__segment_1",
+    "context_gain": -0.29864084590402984,
+    "left": "**)\nHere's how I came:",
+    "right": " I was walking by your garden yesterday and noticed how beautiful the flowers are!"
+  },
+  {
+    "boundary_id": "revision_v1_primary_v2_payload_fidelity_v2__339ba03e74127c1632ff__segment_0",
+    "context_gain": 1.8772405697977401,
+    "left": " \n\nEmail:\nRecieved Date & Client",
+    "right": " Name: 2023-10-15, ABC Corp"
+  },
+  {
+    "boundary_id": "revision_v1_primary_v2_payload_fidelity_v2__5cb9b4336f971271f1d1__segment_1",
+    "context_gain": 7.752691443803197,
+    "left": " Be creative; don\\'d worry over",
+    "right": "much about grammar.\n\n"
+  }
+]

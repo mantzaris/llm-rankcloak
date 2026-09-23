@@ -1,0 +1,8 @@
+{
+  "effects_reconstructed": 48,
+  "gpu_execution_seconds": 0,
+  "independent_of_stage2_analysis_helpers": true,
+  "input_files": 4592,
+  "limitations": "Retained token scores are audited and reaggregated, not recomputed by a model. Rank and byte endpoints use original records. No new empirical coherence claim.",
+  "status": "passed"
+}

@@ -1,0 +1,102 @@
+{
+  "documents": [
+    {
+      "document": "paperV4/scientific_reports/main4.pdf",
+      "pages": 25,
+      "bytes": 672893,
+      "sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf",
+      "nonblank_pages": 25,
+      "text_outside_page": 0,
+      "stale_markers": 0,
+      "poppler_xml_control_glyphs": 8,
+      "review_sheets": [
+        "results/revision_v4/stage3/validation/page_sheets/main4_01-04.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/main4_05-08.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/main4_09-12.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/main4_13-16.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/main4_17-20.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/main4_21-24.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/main4_25-25.jpg"
+      ]
+    },
+    {
+      "document": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 40,
+      "bytes": 1013737,
+      "sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a",
+      "nonblank_pages": 40,
+      "text_outside_page": 0,
+      "stale_markers": 0,
+      "poppler_xml_control_glyphs": 2,
+      "review_sheets": [
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_01-04.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_05-08.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_09-12.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_13-16.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_17-20.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_21-24.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_25-28.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_29-32.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_33-36.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/supplementary4_37-40.jpg"
+      ]
+    },
+    {
+      "document": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "bytes": 162214,
+      "sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e",
+      "nonblank_pages": 8,
+      "text_outside_page": 0,
+      "stale_markers": 0,
+      "poppler_xml_control_glyphs": 0,
+      "review_sheets": [
+        "results/revision_v4/stage3/validation/page_sheets/response_to_reviewers_v4_01-04.jpg",
+        "results/revision_v4/stage3/validation/page_sheets/response_to_reviewers_v4_05-08.jpg"
+      ]
+    },
+    {
+      "document": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "bytes": 89702,
+      "sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4",
+      "nonblank_pages": 1,
+      "text_outside_page": 0,
+      "stale_markers": 0,
+      "poppler_xml_control_glyphs": 0,
+      "review_sheets": [
+        "results/revision_v4/stage3/validation/page_sheets/cover_letter_v4_01-01.jpg"
+      ]
+    }
+  ],
+  "word_counts_texcount": {
+    "body": {
+      "Words in text": 4457,
+      "Words in headers": 70,
+      "Words outside text (captions, etc.)": 572
+    },
+    "complete": {
+      "Words in text": 9903,
+      "Words in headers": 147,
+      "Words outside text (captions, etc.)": 650
+    }
+  },
+  "title_words": 14,
+  "abstract_words_whitespace": 194,
+  "main_figures": 5,
+  "main_tables": 3,
+  "main_algorithms_reported_separately": 3,
+  "main_references": 48,
+  "main_figure_paths": [
+    "figures/payload_representation_rank_capacity.pdf",
+    "figures/empirical_capacity_quality_frontier.pdf",
+    "figures/robustness_recovery_compact.pdf",
+    "figures/forced_span_full_message_quality.pdf",
+    "figures/detector_model_family_generalization.pdf"
+  ],
+  "supplement_figures": 16,
+  "supplement_tables": 34,
+  "body_word_definition": "Introduction, Results, Discussion and limitations. TeXcount text words exclude abstract, Methods, availability, references, headers and captions. Mathematical expressions are counted separately by TeXcount.",
+  "visual_inspection_status": "contact sheets generated, review recorded separately",
+  "pdf_rebuild_identity": "Packaged bytes checked exactly. Fresh-build PDF timestamps may differ."
+}

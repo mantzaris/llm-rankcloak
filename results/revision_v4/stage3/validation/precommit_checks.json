@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-09-23T04:21:38.799663+00:00",
+  "branch": "main",
+  "base_commit": "b3509bfa8ba254a6f56f5c467f8dacb3497be9aa",
+  "git_diff_check": "Source/editorial paths passed. Verbatim tool logs retain trailing spaces and final blank lines produced by TeX and pdfinfo.",
+  "portable_scientific_input_union": 4596,
+  "excluded_or_missing_reconstruction_inputs": 0,
+  "focused_tests_passed": 51,
+  "gpu_job_seconds": 0,
+  "source_snapshot_precondition": "All source, evidence, metadata and author-review PDF bytes are finalized. Postassembly receipts are administrative and excluded from the package."
+}

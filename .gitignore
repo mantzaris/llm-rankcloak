@@ -55,3 +55,6 @@ results/**/*.tar.gz
 
 .agent
 .codex
+
+# Local V4 archive candidates. Tracked receipts name their source snapshot.
+release_artifacts/

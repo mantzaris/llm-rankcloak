@@ -1,0 +1,9 @@
+{
+  "requested_url": "https://zenodo.org/api/records/22555497/versions/latest",
+  "resolved_url": "https://zenodo.org/api/records/22555497",
+  "id": 22555497,
+  "doi": "10.5281/zenodo.22555497",
+  "conceptdoi": "10.5281/zenodo.21987449",
+  "version": "2.0.0",
+  "sha256": "ed58428d3b8ce368e99ce8981942211ca7c30e22a5a6b74c956874580a91c22b"
+}

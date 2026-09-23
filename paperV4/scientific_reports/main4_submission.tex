@@ -1,0 +1,1109 @@
+% Generated from main4.tex and included sources by prepare_revision_v4_stage3_handoff.py.
+% V4 author-review candidate. Historical evidence remains unchanged.
+\documentclass[fleqn,10pt]{wlscirep}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array,booktabs,tabularx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{lineno}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{seqsplit}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\DeclareRobustCommand{\code}[1]{{\normalfont\path{#1}}}
+\newcommand{\Rank}{\operatorname{rank}}
+\newcommand{\tok}{\operatorname{token}}
+\newcommand{\Enc}{\operatorname{Enc}}
+\newcommand{\Dec}{\operatorname{Dec}}
+\newcommand{\RankOf}{\operatorname{rank\_of}}
+\newcommand{\Encode}{\operatorname{encode}}
+\newcommand{\Decode}{\operatorname{decode}}
+\newcommand{\Tokenize}{\operatorname{tokenize}}
+\newcommand{\Detokenize}{\operatorname{detokenize}}
+\newcommand{\NextLogits}{\operatorname{next\_logits}}
+\modulolinenumbers[5]
+
+\title{RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text}
+\hypersetup{pdftitle={RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text},pdfauthor={Alexander V. Mantzaris}}
+
+\author[1,*]{Alexander V. Mantzaris}
+\affil[1]{School of Data, Mathematical, and Statistical Sciences, University of Central Florida, Orlando, FL, United States of America}
+\affil[*]{Correspondence: alexander.mantzaris@ucf.edu}
+
+\keywords{linguistic steganography, large language models, rank transcoding, exact-copy replay, neural steganalysis}
+
+\begin{abstract}
+Cryptographic artifacts such as hashes, nonces and ciphertexts are conspicuous in their usual textual forms. RankCloak represents synthetic artifacts through language model token choices that conceal their original syntax. We evaluated 480 deterministic artifacts from eight classes with three model families and 18 English prompts. All 6,480 primary trials recovered the original bytes when token sequences and configurations were preserved. Visible-text retokenization recovered 88 of 144 covers. The tested blockquote and trimming operation, paraphrasing and cross-model decoding failed. Strong detector performance after deduplication, including under withheld model families and generating-model trace access, limits stealth. Entropy gating reduced some detection signals but lowered serialized-payload rates and left six strict-gate payloads incomplete. Two control-only pilots did not establish semantic relatedness. Conditional context gain passed the specified control-separation check and supported a limited exploratory likelihood study, with sampled ordinary controls and greedy RankCloak continuations. None of 960 fixed Q4-generated payloads recovered using saved Q8 ranks for one Qwen revision. These results demonstrate artifact-specific surface-form concealment and configured inversion, with transmission and detectability limitations. They establish neither semantic coherence nor reader-perceived naturalness. An observer with the full receiver configuration may decode, so surface concealment does not establish confidentiality.
+\end{abstract}
+
+\begin{document}
+\maketitle
+\begin{center}
+\fcolorbox{red}{white}{\parbox{0.91\linewidth}{\centering\bfseries\color{red}
+V4 AUTHOR-REVIEW CANDIDATE}}
+\end{center}
+\linenumbers
+\raggedbottom
+\raggedright
+
+\section*{Introduction}\label{sec:introduction}
+
+Generative language models provide a new medium for text steganography because a prompt can define a next-token distribution and a topic direction in which generated text appears. In the Calgacus rank-transcoding construction\cite{NorelliBronstein2026Calgacus}, a sender tokenizes an arbitrary hidden text, records each token's context-dependent rank, and generates a cover text by selecting the correspondingly ranked tokens under a shared cover prompt, the receiver reverses these steps under the same contexts. Calgacus thereby transcodes one hidden-text token into one cover-text token. RankCloak retains that rank transfer mechanism but also maps exact serialized cryptographic artifacts through direct subword and bounded codecs, for which payload and cover token counts need not equal the Calgacus baseline. This mechanism connects classical work on covert channels, information theoretic steganography, information hiding, and provably secure steganography\cite{Simmons1984Prisoners,Cachin1998InformationTheoretic,Hopper2002ProvablySecureSteganography,Petitcolas1999InformationHidingSurvey} with neural and LLM-based linguistic steganography, where hidden information is embedded through choices made during language generation\cite{Fang2017GeneratingSteganographicTextLSTMs,Yang2019RNNStega,Ziegler2019NeuralLinguisticSteganography,DaiCai2019NearImperceptible,Shen2020SelfAdjustingArithmetic,Zhang2021ProvablySecureGenerative,Wang2025DAIRStega,Wu2024GenerativeTextSteganographyLLM,Lin2024ZeroShotGLS}. Related work on LLM watermarking also treats token selection as a carrier of hidden signals, although watermarking generally asks whether text carries a detectable mark rather than whether a chosen payload can be recovered\cite{Kirchenbauer2023WatermarkLLM}. Selective watermarking can restrict marking and detection to positions above an entropy threshold\cite{Lee2024SWEET}. This provides a peer-reviewed precedent for selective marking. RankCloak defines and evaluates its own payload gate. The watermarking precedent supplies no guarantee of arbitrary-payload recovery.
+
+A long-running goal in this area is to make arbitrary, encrypted, or otherwise high-entropy data appear as ordinary communication. Early mimic-function work used statistical source models and inverse compression ideas to generate outputs with distributional properties similar to a target source\cite{Wayner1992MimicFunctions,Wayner1995StrongTheoreticalSteganography}. Hiding the Hidden and related linguistic-steganography systems transformed ciphertext into innocuous natural language text that could later be transformed back into the original ciphertext\cite{ChapmanDavida1997HidingHidden,Bennett2004LinguisticSteganography}. Other text methods carried bits through synonym choice or contextual word substitution\cite{ChangClark2014PracticalLinguisticSteganography}, while network camouflage systems generalized a similar objective to protocol formats by making encrypted traffic resemble allowed or innocuous traffic\cite{Weinberg2012StegoTorus,Dyer2013FormatTransformingEncryption}. RankCloak follows this same broad goal in an LLM setting. Instead of using a fixed grammar, synonym table, or protocol template, it uses the token choices made by a shared language model. The payload is first converted into ranks, and the cover prompt determines which English tokens occupy those ranks at each step. This also makes the method useful as a measurement tool since it exposes how a hidden artifact changes rank pressure, generated text quality, and the traces available for later detection.
+
+This measurement focus also has defensive value for detecting the presence of such hidden encodings. If hashes, nonces, UUID-like values, or ciphertext strings are carried by generated tokens rather than displayed in their original syntax, surface scanners cannot rely only on visible hexadecimal, base64, UUID, or credential-shaped patterns. Detection must therefore look for indirect evidence, such as low-probability forced tokens, tokenizer artifacts, formatting fragments, unusually regular token choices, segmentation patterns, or differences between payload bearing spans and non-payload continuations. Covert-channel and stegomalware surveys emphasize that hiding the existence of communication creates detection, capacity-limitation, and countermeasure problems across text and network media\cite{Zander2007CovertChannelsCountermeasures,Badar2025StegomalwareSurvey}. Text steganalysis and generated-text detection work similarly shows that statistical, neural, graph-based, and probability-based features can reveal some generated or steganographic text, while also showing that robust detection is setting-dependent and vulnerable to distribution shift or paraphrase\cite{Wen2019CNNTextSteganalysis,Wu2021GNNLinguisticSteganalysis,Wang2023FewShotLinguisticSteganalysis,Gehrmann2019GLTR,Mitchell2023DetectGPT,Sadasivan2025AIDetection}. The same issue is relevant to AI-safety monitoring, where hidden message passing and secret collusion among agents have been studied as ways that generated text might evade oversight\cite{Motwani2024SecretCollusion,Zolkowski2026EarlySigns}. RankCloak evaluates these as distinct endpoints. Artifact concealment asks whether the cryptographic artifact and its recognizable syntax are directly visible in the cover text. Payload recovery asks whether an authorized receiver using the shared recovery configuration can reconstruct that artifact, whereas steganalysis asks whether an observer can classify the cover as likely encoded. A positive steganalysis decision does not itself display or recover the concealed artifact, although high detectability weakens covert-channel stealth.
+
+RankCloak studies synthetic hashes, authentication tags, nonces, identifiers, ciphertexts and signatures\cite{NIST2015SecureHashStandard,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}. Direct subword tokenization can represent these strings compactly, but poorly predicted payload tokens can impose large contextual ranks\cite{Sennrich2016SubwordUnits,KudoRichardson2018SentencePiece}. We compare direct subword rank measurement with bounded ASCII-byte and hex-nibble codecs. Smaller rank alphabets constrain forced choices while increasing cover length. Segmentation distributes ranks across prompt contexts and appends non-payload greedy continuations. Forced-span and full-message diagnostics remain separate because adding a continuation can raise the full-message average without changing any payload-bearing token.
+
+The contribution is an artifact-specific representation and measurement framework for surface-form concealment and configured inversion. Saved-token replay fixes tokenization and history. Visible-text and transformed-text replay test stronger transport assumptions. We evaluate these endpoints alongside detectability, entropy gating, quantization and local transition diagnostics. Semantic relatedness and reader-perceived coherence were not established. A receiver configuration is a compatibility contract rather than a cryptographic secret.
+
+\section*{Methods}\label{sec:methods}
+
+RankCloak measures whether synthetic artifacts that do not normally look like language can be represented as LLM token ranks and then expressed as generated cover text while remaining exactly recoverable under a declared replay contract. The motivating examples are hashes, authentication tags, nonces, hexadecimal tokens, UUID identifiers, authenticated-encryption outputs, and signatures. In their original visible forms, many of these strings are recognizable by simple pattern matching (even by humans), but RankCloak asks whether the same serialized artifact can instead be carried by the token choices of an LLM-generated message. Conceptually, the method proceeds in four steps. First, the payload is converted into a sequence of integer ranks. Second, a cover prompt defines the next-token distribution used for public-text generation. Third, the sender emits the token at each required rank under that cover context. Fourth, the receiver replays the same cover context and recovers the rank of each exact saved token, following the rank-transcoding idea described by Norelli and Bronstein\cite{NorelliBronstein2026Calgacus}. If the recovered rank sequence matches the encoded payload ranks and the codec reconstructs the declared serialized bytes, the payload has been decoded exactly. The algorithms below implement two RankCloak procedures, a non-segmented procedure that maps one payload into one cover sequence and decodes the complete generated sequence, and a segmented procedure that maps a hex-like payload into several short payload-bearing spans, appends non-payload greedy continuations, and decodes only the forced spans. These procedures support both construction-side and detection-side measurement because they provide exact-copy recovery tests, rank-pressure measurements, cover-quality proxies, labeled cover examples, and rank-derived features that can be audited by steganalysis methods.
+
+Sender and receiver are assumed to share a common overall LLM configuration, denoted as \(K_{\mathrm{common}}\). It specifies the exact model revision, tokenizer, quantization and backend, prompt rendering, deterministic rank rule, payload codec, token filter, span convention, and any segmentation, tail, or lead-in policy. Selecting such a configuration is analogous to selecting a common codec or protocol implementation and need not create a new per-message negotiation; a prompt phrase may be shared contextual information, but it is not treated as a formal cryptographic key. In the saved-token experimental condition, retained payload-bearing token IDs hold tokenization and generation history fixed while the decoder still reconstructs every contextual rank and inverts the selected payload representation; visible-text and transformed-text conditions separately test transport without preserving that original token sequence.
+
+
+The exact-copy assumptions used throughout the experiments are:
+\begin{itemize}
+\item Shared configuration: sender and receiver use the same pinned protocol definition, including model revision, tokenizer, quantization and backend, prompt rendering, rank rule, codec, filters, span convention, segmentation policy, and tail or lead-in policy.
+\item Deterministic rank ordering: ranks are one-indexed and computed from descending logits with token-ID tie-breaking.
+\item Payload codecs: ASCII-byte fixed-radix coding applies to exact serialized bytes; hex-nibble coding applies only to canonical lowercase hexadecimal payloads.
+\item Non-segmented decoding: the receiver replays the complete saved cover-token sequence.
+\item Segmented decoding: the receiver decodes only the saved payload-bearing forced spans; non-payload greedy continuations are public text but carry no payload ranks.
+\item Endpoint validation: rank recovery, representation recovery, serialized byte length, and SHA-256 identity are recorded separately, with exact serialized-payload equality as the primary endpoint.
+\end{itemize}
+The reader-facing protocol labels distinguish non-segmented variants, where recovery replays the complete generated cover-token sequence, from segmented variants, where recovery decodes only the payload-bearing forced span and ignores non-payload tails.
+
+
+\subsection*{Basic rank definition}\label{sec:rank-method}
+
+Rank-transcoding uses the rank of a token in an LLM next-token ordering as the transferable object. A rank is defined by sorting candidate tokens under a model context. Exact recovery is possible only when the sender and receiver replay the same model, tokenizer, prompt, rank rule, and generated tokens.
+Let \(M\) denote an autoregressive language model with vocabulary \(\mathcal{V}\). For a token context \(h\), let \(z_M(v\mid h)\) be the next-token logit for token \(v\in\mathcal{V}\), and let \(\operatorname{id}(v)\) be its deterministic token id. The model probability is:
+\begin{equation}
+p_M(v\mid h)=
+\frac{\exp z_M(v\mid h)}
+{\sum_{u\in\mathcal V}\exp z_M(u\mid h)}.
+\label{eq:next-token-prob}
+\end{equation}
+Ranks are one-indexed; token ID breaks ties deterministically:
+\begin{equation}
+u \prec_h v
+\Longleftrightarrow
+z_M(u\mid h)>z_M(v\mid h)
+\ \text{or}\
+\left[z_M(u\mid h)=z_M(v\mid h)\ \text{and}\ \operatorname{id}(u)<\operatorname{id}(v)\right].
+\label{eq:rank-order}
+\end{equation}
+The rank of a token and the inverse rank selector are,
+\begin{equation}
+\rho_h(v)=1+\left|\{u\in\mathcal V:u\prec_h v\}\right|,
+\qquad
+\operatorname{token}_h(r)=v\ \text{such that}\ \rho_h(v)=r.
+\label{eq:rank-function}
+\end{equation}
+Here \(\operatorname{token}_h(r)\) means the token at rank \(r\) in the deterministic ordering for context \(h\). Because softmax is order-preserving, the released implementation computes this order directly from 64-bit logit values and breaks exact ties by increasing token ID.
+
+\subsection*{Calgacus rank-transcoding baseline}\label{sec:calgacus-method}
+
+The starting point is the Calgacus rank-transcoding construction, in which ranks rather than token identities are transferred between contexts\cite{NorelliBronstein2026Calgacus}. In the Calgacus procedure, a hidden text can be tokenized as \(e_1,e_2,\ldots\). For each hidden-text token \(e_i\), the sender computes its rank under a payload-side context \(g_i\), where \(g_i\) is determined by the preceding hidden-text tokens and any payload-side conditioning used by the protocol. The sender then emits a cover token by selecting the token with the same rank under a cover-side context \(h_i\), where \(h_i\) is determined by the cover prompt or key and the previously emitted cover tokens.
+
+For hidden-text token \(e_i\), payload-side context \(g_i\), cover-side context \(h_i\), emitted cover token \(y_i\), and transferred rank \(r_i\), the baseline rank-transcoding step is:
+\begin{equation}
+r_i=\rho_{g_i}(e_i),
+\qquad
+y_i=\operatorname{token}_{h_i}(r_i),
+\qquad
+\hat r_i=\rho_{h_i}(y_i).
+\label{eq:calgacus-rank-transcoding}
+\end{equation}
+Under exact replay with the same model, tokenizer, prompt configuration, and deterministic rank rule, the recovered rank satisfies \(\hat r_i=r_i\). The receiver can then replay the payload-side context and reconstruct the hidden-text token as \(\hat e_i=\operatorname{token}_{g_i}(\hat r_i)\). This is a same-token-length arbitrary-text baseline; one hidden-text token determines one cover token. The construction shows that a rank sequence can be carried by generated text without directly emitting the hidden tokens. Direct application to cryptographic-artifact strings, however, can impose high rank pressure. Such strings are often poorly predicted by a language model, so their payload-side tokens can occupy low-probability, high-rank positions, and selecting those same ranks under a cover prompt can degrade model-likelihood and surface diagnostics even when recovery remains exact.
+
+RankCloak keeps the cover-side rank-transfer idea from Calgacus but changes the payload-side representation. Instead of relying only on direct LLM tokenization of the displayed artifact, RankCloak maps serialized artifact strings into explicit bounded rank sequences. In the RankCloak notation used below, the displayed artifact is \(x\), the payload codec is \(C\), and the encoded rank sequence is \(R=C(x)\). Recovery therefore proceeds by reconstructing \(\hat R\) from the cover tokens and decoding \(\hat{x}=C^{-1}(\hat R)\), rather than by replaying a natural-language hidden-text stream token by token. The direct-subword condition retains the Calgacus payload-side ranks as a separate measurement arm. The contribution relative to the baseline is the measurement framework around artifact-specific representations: direct subword rank diagnostics, bounded ASCII-byte and hex-nibble codecs, deterministic token filtering, segmented forced spans, non-payload tails, and separate forced-span versus full-message metrics.
+
+\subsection*{RankCloak bounded payload-codec methods}\label{sec:payload-method}
+
+RankCloak changes the payload side by applying explicit codecs to displayed synthetic payload strings. The goal is to avoid treating a hash-like or ciphertext serialization as an ordinary natural-language token sequence. Instead, the displayed artifact is converted into a controlled sequence of ranks before cover generation begins. This makes rank pressure measurable by design. A codec can trade cover length against rank magnitude so that smaller rank alphabets constrain forced token choices but require more generated tokens, while more compact representations can reduce length but may impose larger rank pressure.
+For payload string \(x\), codec \(C\), encoded rank sequence \(R\), and recovered rank sequence \(\hat R\),
+\begin{equation}
+R=C(x)=(r_1,\ldots,r_n),
+\qquad
+\hat x=C^{-1}(\hat R).
+\label{eq:rankcloak-codec}
+\end{equation}
+The direct-subword arm is not folded into Eq.~\eqref{eq:rankcloak-codec}; it tokenizes the literal serialization under the Calgacus payload context and retains the resulting ranks without imposing a fixed rank alphabet. The released implementation disables special-token insertion and accepts only a reversible tokenization whose detokenization differs from the literal UTF-8 payload by an explicitly recorded leading-space prefix. Any other affix or payload-byte change makes that representation unavailable before generation; complete framing metadata appears in Supplementary Note S1.
+
+Non-segmented cover generation and replay recovery then use the same rank selector as the Calgacus baseline, but the ranks come from the payload codec rather than only from direct payload-side LLM token ranks:
+\begin{equation}
+y_i=\operatorname{token}_{h_i}(r_i),
+\qquad
+\hat r_i=\rho_{h_i}(y_i),
+\qquad
+\hat R=(\hat r_1,\ldots,\hat r_n).
+\label{eq:rankcloak-nonseg}
+\end{equation}
+Codec-level exact recovery requires both rank recovery and an invertible codec for the displayed payload:
+\begin{equation}
+\hat x=x
+\quad\text{when}\quad
+\hat R=R
+\quad\text{and}\quad
+C^{-1}(C(x))=x.
+\label{eq:codec-exact-recovery}
+\end{equation}
+
+Hex-nibble coding applies to canonical lowercase hexadecimal payloads. It maps each displayed hexadecimal character to one bounded rank:
+\begin{equation}
+\texttt{0}\mapsto 1,\quad
+\texttt{1}\mapsto 2,\quad
+\ldots,\quad
+\texttt{9}\mapsto 10,\quad
+\texttt{a}\mapsto 11,\quad
+\ldots,\quad
+\texttt{f}\mapsto 16.
+\label{eq:hex-nibble-map}
+\end{equation}
+Thus each lowercase hex character maps to one rank in \(1,\ldots,16\). A 64-character SHA-256 hexadecimal serialization becomes 64 ranks under this codec. Base64 and hyphenated UUID display forms are rejected rather than silently normalized. The bounded alphabet controls maximum requested rank while increasing the number of forced positions; its relationship to observed cover diagnostics is evaluated rather than assumed.
+ASCII-byte fixed-radix coding applies to arbitrary displayed payload strings. It first expresses the displayed UTF-8 byte string as base-\(B\) digits \(d_i\), then maps each digit to rank \(d_i+1\),
+\begin{equation}
+d_i\in\{0,\ldots,B-1\},
+\qquad
+r_i=d_i+1.
+\label{eq:ascii-radix-map}
+\end{equation}
+The released codec concatenates the complete serialized byte bitstream, appends zero bits only at its end to reach a multiple of \(\log_2B\), and records the original byte length and terminal-padding count. Decoding subtracts one from each rank, validates the digit range, removes only that recorded padding, and reconstructs exactly the declared number of bytes. Consequently, the \(B=8\) condition uses \(\lceil8m/3\rceil\) ranks for \(m\) serialized bytes rather than independently padding every byte; the \(B=16\) condition uses two ranks per byte. Supplementary Note S1 gives the complete metadata and edge cases.
+
+When a deterministic token filter is configured, ranks are computed within the allowed token set \(A_h\):
+\begin{equation}
+\rho^F_h(v)=1+\left|\{u\in A_h:u\prec_h v\}\right|,
+\qquad
+A_h\subseteq\mathcal V.
+\label{eq:filtered-rank}
+\end{equation}
+Here \(A_h\) is the allowed token set after filtering. If no filter is configured, \(A_h=\mathcal V\). The inverse selector \(\operatorname{token}_h^F(r)\) denotes the token at rank \(r\) in the same ordered allowed set. Sender and receiver must apply the identical mask and ordering because removing one candidate shifts every lower choice, a trial is unavailable if the allowed set cannot supply a requested rank.
+
+Algorithm~\ref{alg:nonseg} gives the non-segmented bounded-codec RankCloak procedure. The algorithm first encodes the displayed artifact into ranks. It then generates one cover token per rank under the cover prompt. Recovery replays the same prompt and exact saved token sequence, recomputes each token's rank, and decodes the recovered ranks back to the displayed payload. This algorithm is the basic measurement unit for the non-segmented cover-generation trials.
+
+\begin{algorithm}[H]
+\caption{Non-segmented RankCloak bounded-codec trial for encoding a displayed synthetic artifact as ranks, generating one cover token per rank, and recovering by exact-copy replay.}
+\label{alg:nonseg}
+\begin{algorithmic}[1]
+\Require Synthetic payload \(x\); model \(M\); cover prompt \(p\); payload codec \(C\); optional deterministic token filter \(F\); shared configuration \(K_{\mathrm{common}}\).
+\Ensure Cover text, recovered payload \(\hat{x}\), exact-recovery flag, and recorded cover metrics.
+\State \(R \gets C.\Encode(x)\)
+\State \(\mathrm{context} \gets \Tokenize(p)\)
+\State \(\mathrm{cover\_tokens} \gets [\,]\)
+\For{each rank \(r_i \in R\)}
+    \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+    \If{\(F\) is configured}
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+    \Else
+        \State \(\mathrm{allowed\_tokens} \gets \mathrm{vocabulary}(M)\)
+    \EndIf
+    \State \(y_i \gets\) token with one-indexed rank \(r_i\) among \(\mathrm{allowed\_tokens}\)
+    \State append \(y_i\) to \(\mathrm{cover\_tokens}\)
+    \State append \(y_i\) to \(\mathrm{context}\)
+\EndFor
+\State \(\mathrm{cover\_text} \gets \Detokenize(\mathrm{cover\_tokens})\)
+\Statex
+\State \(\mathrm{context} \gets \Tokenize(p)\)
+\State \(\mathrm{recovered\_ranks} \gets [\,]\)
+\For{each exact saved token \(y_i\) in \(\mathrm{cover\_tokens}\)}
+    \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+    \If{\(F\) is configured}
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+    \Else
+        \State \(\mathrm{allowed\_tokens} \gets \mathrm{vocabulary}(M)\)
+    \EndIf
+    \State append \(\RankOf(y_i,\mathrm{logits},\mathrm{allowed\_tokens})\) to \(\mathrm{recovered\_ranks}\)
+    \State append \(y_i\) to \(\mathrm{context}\)
+\EndFor
+\State \(\hat{x} \gets C.\Decode(\mathrm{recovered\_ranks})\)
+\State \(\mathrm{exact\_recovery} \gets (\hat{x}=x)\)
+\State \Return \(\mathrm{cover\_text}, \hat{x}, \mathrm{exact\_recovery}\)
+\end{algorithmic}
+\end{algorithm}
+
+Before Algorithm~\ref{alg:nonseg} is executed, the selected representation validates payload syntax, exact byte length, codec applicability, and the source digest. The retained record saves the requested ranks, cover-token IDs, prompt and configuration identities, codec metadata, and failure position where applicable. After decoding, exact rank and representation equality are distinguished from exact serialized-payload equality, which additionally requires the declared byte length, bytes, syntax, and SHA-256 digest to match. The same generation and replay loop also applies when the validated direct-subword representation supplies \(R\); its payload-side reconstruction and framing checks are detailed in Supplementary Note S1.
+
+\subsection*{Complete deterministic token filter specification}\label{sec:v4-filter}
+This specification documents the existing filter without changing its behavior.
+For \code{safe_text_filter_v1}, the following rules apply to each individually decoded vocabulary token.
+
+The filter decodes one token at a time with \code{safe_detokenize}. Byte output uses UTF-8 replacement decoding. If detokenization raises an exception, the wrapper returns an angle-bracket token marker, which the filter rejects. Any exception that reaches mask construction instead yields an empty piece, which is also rejected. Whitespace alone is allowed unless it contains an excluded control. Filtering does not guarantee that concatenated pieces are free of markup or tokenization changes.
+
+The mask is cached by model object identity and filter name. No filter, the empty name, and \code{none} leave the vocabulary unmasked. Unknown names, missing vocabulary size, an entirely rejected vocabulary, incompatible mask length, unavailable requested ranks, and a target excluded by the mask raise errors. The selector validates positive one-indexed ranks. Masks are constructed with the model vocabulary length.
+
+Candidate scores are converted to float64. The stated inverse ordering contract assumes finite logits. The historical helpers do not explicitly reject nonfinite scores. Selection sorts all allowed candidates by descending logit and ascending token ID. Recovery of a known token counts greater logits and equal logits at lower IDs. Both operations use the same allowed set. The isolated roundtrip filter adds a separate tokenization test. Ordinary sampling separately excludes BOS, EOS, and EOT identifiers where exposed by the backend. These exclusions are not implicit safe-text rules.
+
+The \href{https://github.com/mantzaris/llm-rankcloak/blob/60d23fffe5962d4e0b652fa045d762ca10bc3dcc/rankcloak/token_filters.py}{versioned token-filter source} is available in the repository. Its exact version and SHA-256 are retained in the V4 filter audit.
+
+
+\subsection*{RankCloak segmented multi-cover method}\label{sec:encoding-method}
+
+The segmented multi-cover method extends RankCloak from one cover sequence to several shorter public messages. Long sequences of forced ranks can accumulate topic drift, formatting artifacts, or low-probability continuations. Segmentation restarts the cover context for each chunk, allowing the effect of distributing the payload across several messages to be measured without claiming that those messages are human-natural. The method is also useful analytically because it separates the payload-bearing forced span from the rest of the public message.
+
+For a full rank sequence \(R\), segmentation splits the payload into \(m\) chunks:
+\begin{equation}
+R = R^{(1)}\Vert R^{(2)}\Vert \cdots \Vert R^{(m)}.
+\label{eq:rank-segmentation}
+\end{equation}
+Here \(\Vert\) denotes sequence concatenation, and each \(R^{(j)}\) is an ordered, non-overlapping rank chunk. The completed design includes frozen segmented schedules and an ablation over 4-, 8-, 16-, and 32-rank chunks rather than treating one chunk size as universally preferred.
+
+For segment \(j\), the forced span emits one token per payload rank. Recovery uses only those forced tokens:
+\begin{equation}
+y^{(j)}_k=
+\operatorname{token}_{h^{(j)}_k}\left(r^{(j)}_k\right),
+\qquad
+\hat r^{(j)}_k=
+\rho_{h^{(j)}_k}\left(y^{(j)}_k\right).
+\label{eq:segmented-forced-span}
+\end{equation}
+When a filter is configured, both operations use the filtered ordering defined after Eq.~\eqref{eq:filtered-rank}. After the forced span \(y^{(j)}\), the sender appends a greedy non-payload tail \(z^{(j)}\). The public message is the tokenizer rendering of the concatenated token sequence \(y^{(j)}\Vert z^{(j)}\). The receiver ignores \(z^{(j)}\) and decodes only \(y^{(j)}\):
+\begin{equation}
+m_j=\operatorname{text}\left(y^{(j)}\Vert z^{(j)}\right),
+\qquad
+\hat R=\hat R^{(1)}\Vert\cdots\Vert\hat R^{(m)}.
+\label{eq:segmented-message}
+\end{equation}
+Here \(\operatorname{text}(\cdot)\) means ordinary tokenizer rendering of the token sequence; it is not an additional cryptographic operation. The canonical expression in Eq.~\eqref{eq:segmented-message} has no lead-in. For the evaluated lead-in extension, a non-payload prefix is generated before \(y^{(j)}\), and the record stores exact lead-in, forced, tail, and full token-ID arrays, a token-role mask, and half-open forced-span offsets. The decoder uses those declared offsets and does not infer a payload boundary from visible prose.
+
+A core component of this method is the forced-span and tail separation. The payload is carried only by the forced span, while the tail is a greedy continuation whose effect on the complete public message is measured separately. This distinction prevents a misleading quality result, full-message diagnostics can change because of the non-payload tail even if the payload-bearing forced span remains low probability or exhibits surface artifacts. For that reason, the Results report forced-span metrics and full-message metrics separately.
+
+Algorithm~\ref{alg:segmented} describes the segmented multi-cover protocol. It encodes the hex-like payload, splits the rank sequence into short chunks, generates one forced span per chunk, appends the selected tail-policy output after each forced span, and recovers the payload by replaying only the forced spans. Each segment is its own replay component: generation starts from its declared prompt, and recovery reads the exact saved token IDs within its declared forced-span boundary.
+
+\begin{algorithm}[H]
+\caption{Segmented multi-cover RankCloak trial for distributing a hex-nibble payload across payload-bearing forced spans with non-payload greedy continuations.}
+\label{alg:segmented}
+\begin{algorithmic}[1]
+\Require Synthetic hex-like payload \(x\); model \(M\); hex-nibble codec \(C_{\mathrm{hex}}\); segment size \(s\); prompt schedule \(P=(p_1,\ldots,p_m)\); deterministic token filter \(F\); tail policy \(T\); shared configuration \(K_{\mathrm{common}}\).
+\Ensure Public messages \((\mathrm{message}_1,\ldots,\mathrm{message}_m)\), recovered payload \(\hat{x}\), exact-recovery flag, forced-span metrics, and full-message metrics.
+\State \(R \gets C_{\mathrm{hex}}.\Encode(x)\)
+\State split \(R\) into chunks \((R_1,\ldots,R_m)\), each with at most \(s\) ranks
+\For{each segment \(j=1,\ldots,m\)}
+    \State \(\mathrm{context} \gets \Tokenize(P[j])\)
+    \State \(\mathrm{forced\_tokens}_j \gets [\,]\)
+    \For{each rank \(r \in R_j\)}
+        \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+        \State \(y \gets\) token with one-indexed rank \(r\) among \(\mathrm{allowed\_tokens}\)
+        \State append \(y\) to \(\mathrm{forced\_tokens}_j\)
+        \State append \(y\) to \(\mathrm{context}\)
+    \EndFor
+    \State \(\mathrm{tail\_tokens}_j \gets \Call{TailPolicy}{M,\mathrm{context},F,T}\)
+    \State \(\mathrm{message}_j \gets \Detokenize(\operatorname{concat}(\mathrm{forced\_tokens}_j,\mathrm{tail\_tokens}_j))\)
+\EndFor
+\State emit public messages \((\mathrm{message}_1,\ldots,\mathrm{message}_m)\)
+\Statex
+\State \(\mathrm{recovered\_chunks} \gets [\,]\)
+\For{each segment \(j=1,\ldots,m\)}
+    \State \(\mathrm{context} \gets \Tokenize(P[j])\)
+    \State read the exact saved tokens within the declared forced-span boundary for \(R_j\)
+    \State ignore all tail tokens
+    \State \(\mathrm{segment\_ranks} \gets [\,]\)
+    \For{each forced token \(y\) in the payload-bearing span}
+        \State \(\mathrm{logits} \gets M.\NextLogits(\mathrm{context})\)
+        \State \(\mathrm{allowed\_tokens} \gets F(\mathrm{logits})\)
+        \State append \(\RankOf(y,\mathrm{logits},\mathrm{allowed\_tokens})\) to \(\mathrm{segment\_ranks}\)
+        \State append \(y\) to \(\mathrm{context}\)
+    \EndFor
+    \State append \(\mathrm{segment\_ranks}\) to \(\mathrm{recovered\_chunks}\)
+\EndFor
+\State \(\hat{x} \gets C_{\mathrm{hex}}.\Decode(\mathrm{concat}(\mathrm{recovered\_chunks}))\)
+\State \(\mathrm{exact\_recovery} \gets (\hat{x}=x)\)
+\State \Return \((\mathrm{message}_1,\ldots,\mathrm{message}_m),\hat{x},\mathrm{exact\_recovery}\)
+\end{algorithmic}
+\end{algorithm}
+
+The non-lead-in form in Algorithm~\ref{alg:segmented} supplies the canonical segment layout. The lead-in extension inserts a rank-1 prefix before the forced span; its exact token IDs must be replayed before forced-rank recovery, and its saved length shifts the half-open forced boundary. Lead-in lengths 2, 4, 8, 16, and 32 were compared with the no-lead-in condition. Single-topic segmentation reuses its assigned prompt, whereas multi-topic segmentation rotates deterministically through the declared prompt categories. Segment order, prompts, boundaries, and token roles are retained metadata rather than information inferred by the decoder.
+
+Algorithm~\ref{alg:tail} implements the fixed greedy-continuation policy available to Algorithm~\ref{alg:segmented}. The tail is generated greedily, begins only after the payload-bearing forced span, and is not decoded. Its purpose is to measure how a non-payload continuation changes the complete public message while preserving a separate measurement of the forced span. This tail extension is a sentence-completion step rather than part of the hidden payload. A forced span can end abruptly because its tokens were selected to carry payload ranks, not necessarily to finish a phrase or sentence. The minimum length and sentence-boundary rule allow a continuation before the hard cap prevents non-payload text from growing without bound; no claim of human-perceived completeness follows from this proposed heuristic.
+
+\begin{algorithm}[H]
+\caption{Greedy continuation policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder.}
+\label{alg:tail}
+\begin{algorithmic}[1]
+\Require Model \(M\); current context after the forced span; deterministic token filter \(F\).
+\Ensure Non-payload tail tokens.
+\State \(\mathrm{tail\_tokens} \gets [\,]\)
+\While{\(|\mathrm{tail\_tokens}| < 60\)}
+    \State choose the rank-1 token \(z\) under \(M.\NextLogits(\mathrm{context})\) among tokens allowed by \(F\)
+    \State append \(z\) to \(\mathrm{tail\_tokens}\)
+    \State append \(z\) to \(\mathrm{context}\)
+    \If{\(|\mathrm{tail\_tokens}| \geq 20\) and \(\Detokenize(\mathrm{tail\_tokens})\) ends at a sentence boundary}
+        \State \textbf{break}
+    \EndIf
+\EndWhile
+\State \Return \(\mathrm{tail\_tokens}\)
+\end{algorithmic}
+\end{algorithm}
+
+Algorithm~\ref{alg:tail} realizes \textsc{TailPolicy} as a fixed sentence completion of \(20\) to \(60\) tokens. The completed primary matrix uses a separately frozen dynamic condition as its reference level: after at least eight greedy tokens, stopping requires terminal punctuation or a double newline, balanced delimiters, and no declared dangling connective or punctuation, with a 256-token emergency cap recorded as censoring. A no-tail condition returns an empty tail and all three policies are non-payload conditions ignored during decoding (their complete stopping definitions appear in Supplementary Note S1).
+
+\subsection*{Evaluation corpus, controls, and metrics}\label{sec:design-method}\label{sec:quality-method}
+
+The experiments use deterministic synthetic payloads that resemble cryptographic or operational artifacts while avoiding real secret material. The corpus contains 480 public deterministic test vectors, 60 in each of eight algorithm-defined classes; SHA-256 hexadecimal digests, HMAC-SHA256 hexadecimal tags, deterministic 96-bit nonces, 128-bit hexadecimal tokens, UUIDv4 identifiers, AES-256-GCM base64 outputs, ChaCha20-Poly1305 base64 outputs, and Ed25519 base64 signatures\cite{NIST2015SecureHashStandard,Krawczyk1997RFC2104,NIST2007GCM,NirLangley2018RFC8439,JosefssonLiusvaara2017RFC8032,Josefsson2006RFC4648,DavisPeabodyLeach2024RFC9562}. Authenticated-encryption and signature rows are genuine outputs of the declared algorithms under reproducible public test inputs. No real credentials, API keys, private keys, account identifiers, operational secrets, commands, private user data, or deployed traffic are used.
+
+Each payload is evaluated first as a representation problem and then, where applicable, as a cover-generation problem. The representation diagnostics measure how the exact serialization behaves under direct subword tokenization and how many ranks are required by the bounded codecs. Cover-generation conditions include direct subword ranks, ASCII-byte fixed-radix coding with \(B=8\), ASCII-byte fixed-radix coding with \(B=16\), raw hex-nibble coding for eligible lowercase hexadecimal payloads, and single- and multi-topic segmented hex-nibble protocols. All generation, recovery, and diagnostic rows use the deterministic rank-ordering rule in Eqs.~\eqref{eq:rank-order} and \eqref{eq:rank-function} as part of the shared replay configuration.
+
+Generation used Meta-Llama-3-8B-Instruct, Qwen2.5-7B-Instruct, and Mistral-7B-Instruct-v0.3 in pinned Q4\_K\_M configurations, an approximately 4-bit quantized format, with their embedded GGUF tokenizers. Eighteen English templates span six prompt categories. Secondary Spanish and Simplified Chinese conditions evaluate saved-token recovery but do not establish multilingual human naturalness. The primary matrix contains 14,400 generated units; 6,480 RankCloak payload trials and 7,920 prompt, model, representation, and length-matched ordinary controls. The complete ledger reconciles 38,504 declared work units across the primary, robustness, ablation, multilingual, evaluator, and detector stages. Complete corpus construction, model and tokenizer identities and hashes, prompt schedules, and work-unit accounting appear in Supplementary Note S2.
+
+The protocol variants define how encoded ranks become public text. Non-segmented trials use Algorithm~\ref{alg:nonseg} and replay the complete saved cover-token sequence. Segmented trials use Algorithm~\ref{alg:segmented}, Algorithm~\ref{alg:tail} or another declared tail condition follows each forced span, while recovery uses only the saved forced tokens. Prompt-matched controls provide comparison text for automated diagnostics and detector training, they are not human-written naturalness baselines. The deterministic safe-text filter rejects declared control, replacement, code, markup, URL, escape, and formatting fragments. The ablation compares it with no filter and an isolated roundtrip-stable filter, lead-in lengths 0, 2, 4, 8, 16, and 32, chunk sizes 4, 8, 16, and 32, dynamic, fixed, and no-tail policies, and frozen single- versus multi-topic schedules.
+
+The Results report exact serialized-payload recovery, representation and rank diagnostics, cover length, requested-rank pressure, token log probability, deterministic surface artifacts, and automated readability diagnostics. A balanced 504-stimulus subset covers seven generation conditions and all 18 English templates, its surface measures include Flesch Reading Ease\cite{Flesch1948Readability}, frozen artifact flags, and TF-IDF prompt similarity, with intervals bootstrapped over prompt templates. Source-model and held-out-evaluator likelihoods are reported as model diagnostics, not participant ratings. No human study was performed.
+
+For segmented rows, every cover-quality measurement is assigned to one of two scopes. Forced-span metrics are computed only over payload-bearing tokens decoded by the receiver. Full-message metrics are computed over the complete rendered message, including non-payload tails and any experimental lead-in. This scope distinction is necessary because tails can change full-message proxies while carrying no payload ranks. Declared unavailable combinations are excluded from the applicable estimand and reported separately rather than classified as observed failures. Complete metric definitions, transformation coverage, ablation schedules, and exclusion rules appear in Supplementary Notes S3 through S6.
+
+For paired segmented trials, tail gain is the full-message mean token log probability minus the forced-span mean token log probability, \(G_{\mathrm{tail}}=\bar\ell_{\mathrm{full}}-\bar\ell_{\mathrm{forced}}\). Positive values mean that averaging in the non-payload continuation raises the full-message model score; they do not imply a change in the payload-bearing span. The empirical frontier reports forced-span and full-message views separately on the four-class common hexadecimal support, with payload-bootstrap uncertainty and automated surface-flag burden detailed in Supplementary Note S5.
+
+\subsection*{Recovery, robustness, and capacity endpoints}\label{sec:replay-method}\label{sec:capacity-method}\label{sec:endpoint-method}
+
+The saved-token endpoint supplies the retained payload-bearing token sequence to the decoder under \(K_{\mathrm{common}}\), thereby testing exact contextual rank reconstruction and codec inversion while tokenization fidelity and generation history are held fixed; retaining IDs does not make those inverse computations unnecessary or expose the payload serialization. Visible-text replay instead detokenizes and retokenizes the rendered string, and controlled transformed-text tests additionally apply final-tail truncation, Unicode NFKC, quote conversion, whitespace and line-ending changes, deterministic character and token edits, markdown copy/paste, paraphrase, limited canonicalization, or cross-model decoding\cite{YanMurawaki2025TokenizationInconsistency}. These are distinct transmission conditions: token-preserving delivery can retain the exact token stream, ordinary rendered-text delivery does not, and paraphrased delivery changes the visible string. Final-tail truncation removes only declared non-payload tokens and is not evidence of arbitrary truncation tolerance; first-divergence labels localize the first recorded mismatch but do not establish its cause.
+
+
+For a bounded representation containing \(H\) source bits and a rank alphabet of size \(B\), the minimum fixed-radix forced length and nominal forced-position rate are
+\begin{equation}
+n_B=\left\lceil\frac{H}{\log_2B}\right\rceil,
+\qquad
+R_B=\frac{H}{n_B}\le\log_2B.
+\label{eq:capacity}
+\end{equation}
+Here \(H\) is the declared input bit width of that codec, eight bits per exact serialized byte for the byte codecs and four bits per canonical hexadecimal character for the nibble codec. For the byte bitstream, \(n_B=\lceil8m/\log_2B\rceil\), consistent with Eq.~\eqref{eq:ascii-radix-map}. Direct subword ranks do not have a fixed \(B\) and are excluded from this bounded-capacity identity.
+
+For representation comparisons on a common artifact support, we additionally report effective artifact bits per forced token, \(R_{\mathrm{art}}=H_{\mathrm{art}}/n_{\mathrm{forced}}\). Here \(H_{\mathrm{art}}\) is held fixed across representations, four bits per canonical hexadecimal character in the common-hex analysis, rather than set to the codec's serialized input width. This descriptive rate permits direct and bounded representations to be compared on the same artifacts; it is not a cryptographic-security capacity.
+
+If segment \(j\) has \(\ell_j\) lead-in tokens and \(t_j\) tail tokens, and \(\delta\ge0\) denotes any other counted non-payload extension under the retained accounting convention, full cover length and effective rate are,
+\begin{equation}
+N_{\mathrm{full}}
+=n_{\mathrm{forced}}+\sum_{j=1}^{J}(\ell_j+t_j)+\delta,
+\qquad
+R_{\mathrm{eff}}=\frac{H}{N_{\mathrm{full}}}
+\le\frac{H}{n_{\mathrm{forced}}}=R_B
+\quad(n_{\mathrm{forced}}=n_B).
+\label{eq:effective-rate}
+\end{equation}
+Segmentation changes context resets and auxiliary text, not the number of forced codec positions. Positive cover-length residuals are overhead rather than payload capacity.
+
+For eligible-token probabilities \(p_{(1)}(h)\ge\cdots\ge p_{(B)}(h)\), any bounded selection \(r\le B\) obeys the same-context conditional quality relation
+\begin{equation}
+-\log p_{(1)}(h)
+\le-\log p_{(r)}(h)
+\le-\log p_{(B)}(h),\qquad
+Q_B=\frac{1}{n_B}\sum_{i=1}^{n_B}-\log p_M(y_i\mid h_i).
+\label{eq:quality-bound}
+\end{equation}
+Some tables report mean log probability \(\bar\ell=-Q_B\), for which larger values are less negative. These bounds concern model likelihood under identical filtered histories; they are not statements about grammar, meaning, human naturalness, security, or detectability.
+
+The confirmatory endpoint is exact equality between the decoded serialized payload bytes and the declared source, including length, syntax, and SHA-256 digest. Exact rank and representation equality are retained as diagnostics. Trial-level Wilson 95\% intervals are reported\cite{Wilson1927Interval}, a strict payload group passes only if every constituent prompt, model, and eligible protocol trial succeeds, and a group defined by model and payload applies the same rule within one model. Segments are never counted as independent payload trials. Grouped bootstrap procedures use payload or prompt template as the resampling unit according to the estimand. Declared unavailable combinations never enter a failure denominator.
+
+\subsection*{Neural steganalysis, statistical analysis, and computational overhead}\label{sec:detector-method}\label{sec:statistics-method}
+
+Strict corpus preparation preceded feature extraction and tokenization. Unicode NFKC normalization, case folding, Unicode-whitespace collapse, and hashing identified one normalized exact-duplicate group; its complete matched pair was removed from the 15,840-row source corpus, leaving 15,838 observations. Declared near duplicates had cosine similarity at least 0.95 under L2-normalized character-boundary TF-IDF with 3--5 character \(n\)-grams and minimum document frequency two. Payload groups connected by an exact or near-duplicate edge formed immutable components assigned to 9,904 training, 2,952 validation, and 2,982 test observations. The audit found zero payload, pair, normalized-text, component, or declared near-duplicate links across partitions; it cannot identify semantic paraphrases below the normalization and threshold rule.
+
+TextCNN and a pinned DeBERTa-v3-base revision were trained specifically on RankCloak versus matched ordinary model controls using the predeclared architectures. An exact-model-aware logistic detector, representing an attacker with likelihood information from the same model that generated the text, used summary surprisal features computed from saved token log probabilities for both labels, with regularization selected by validation ROC-AUC; ordinary-control ranks were unavailable and therefore excluded. 'Leave one family out' fits excluded the target model family from both training and validation. A secondary test selected 250 human-written responses from the Databricks Dolly corpus across 16 available templates without using human labels for fitting or threshold selection, it is a corpus comparison, not a participant study or naturalness rating.
+
+ROC-AUC used tie-aware empirical ranks. Thresholds for low false positive rate operating points (low-FPR) maximized validation sensitivity subject to the exact allowed false-positive count, were conservatively tie-broken, and were frozen before test evaluation; empirical 1\% or 0.1\% results required at least 100 or 1,000 validation and test negatives, respectively, and unavailable estimates were not interpolated. Confidence intervals used 2,000 resamples of complete deduplication clusters. The entropy extension fixed ungated, median gate, and 75th percentile strict gate thresholds from ordinary top-\(p\) development traces before evaluation and consumed payload ranks only at eligible positions. The retained entropy trajectories used no token filter and ordinary sampled skips at ineligible positions. Their serialized-payload rate counts eight bits per retained payload byte and is conditional on completion. This accounting rate is not a Shannon channel capacity. The paired quantization experiment held one pinned Qwen2.5-7B-Instruct revision, tokenizer, prompt, payload, codec, filter, target length, sampler, and backend fixed while comparing Q4\_K\_M and Q8\_0, approximately 4-bit and 8-bit quantized versions of the same pinned Qwen model; paired recovery, grouped bootstrap, exact McNemar, and bidirectional cross quantization detector transfer were prespecified. Supplementary Notes S11-S15 gives the complete calibration, partition, threshold, count, and provenance details.
+
+
+Statistical inference respects payload and prompt template grouping, with segments nested within covers. Paired ablations use payload as the pairing and bootstrap unit. Mixed models include payload and prompt grouping where supported, negative-binomial models for overdispersed artifact counts, and Gaussian models for continuous outcomes\cite{Bates2015lme4,Brooks2017glmmTMB}. Holm adjustment controls selected contrast families; Benjamini-Hochberg values accompany exploratory families. Convergence, dispersion, zero-inflation, singularity, and residual diagnostics are retained. Three of five fitted mixed models were singular, no undeclared fixed-effects fallback was substituted, and compact ablation, topic, auxiliary detector, and near duplicate analyses remain labeled exploratory or post outcome where applicable. Complete model formulas, bootstrap seeds, split definitions, diagnostics, and multiplicity details are in Supplementary Notes S5 through S7.
+
+Generation overhead uses inclusive wrapper wall time retained by the harness, including the reported setup, generation, and supported replay scopes. Payload throughput is representation bits divided by generation time, and effective rate follows Eq.~\eqref{eq:effective-rate}. Detector benchmarks report fixed-device CUDA wall/training time and peak allocated VRAM. CPU time, repeated warm-up measurements, and cross-device hardware generalization were unavailable and were not inferred. Complete timing cells and component scopes appear in Supplementary Note S9.
+
+
+
+
+\subsection*{Boundary instrumentation and prospective control validation}\label{sec:v4-boundary-method}
+We audited 8,280 forced-span to tail boundaries in 1,440 segmented trials from 240 payloads in four hexadecimal artifact classes. Every structural boundary remains in the inventory. We froze byte alignment, control assignment and exclusions before scoring. Actual transitions were paired with ordinary pseudo-boundaries at the same generator-token offset and with shuffled tails from a different payload under the exact same prompt. Ordinary matching retains the generator, exact prompt context, forced-stop offset and available right-window length. Shuffled tails additionally match schedule and forced length. Shuffled donor tails identical to their recipient tail were skipped under a declared rule even if their identities differed. No cross-topic donors were substituted. The retained RankCloak tails are greedy continuations, whereas ordinary controls use temperature 0.8 and top-\(p\) 0.95 sampling. This protocol comparison does not isolate the forced boundary from continuation policy.
+
+The left window contains up to 32 generator tokens before the boundary. The initial right cap was 32, reduced to 16 in the sole predeclared pilot amendment. The selected corpus supplies eight left tokens and eight to sixteen right tokens. Short tails retain their available length, matched across arms. Each side needs three words. Full-prefix decoding locates exact UTF-8 byte boundaries. Each language-model evaluator tokenizes the joint visible window independently. A token that straddles the boundary makes that unit unavailable. A recorded single leading-space rendering prefix in the Mistral tokenizer is accounted for explicitly. The generator's token IDs are never interpreted using another tokenizer.
+
+Semantic relatedness uses the purpose-trained \code{sentence-transformers/all-MiniLM-L6-v2} encoder and its official attention-mask mean pooling, L2 normalization and 256-token truncation\cite{Reimers2019SentenceBERT}. The pinned local revision, all required file hashes, Apache 2.0 license and float32 runtime are archived. No fitted RankCloak detector supplies embeddings. The complementary metric uses the existing evaluator map, Llama text scored by Qwen, Qwen by Mistral and Mistral by Llama. For the same evaluator tail-token path \(y_{1:n}\), it measures
+\begin{equation}
+G=\frac{1}{n}\sum_{i=1}^{n}\left[\log p_E(y_i\mid P,L,y_{<i})-\log p_E(y_i\mid P,y_{<i})\right],
+\label{eq:v4-context-gain}
+\end{equation}
+where \(P\) is the evaluator-tokenized rendered prompt, including its declared BOS policy, and \(L\) is the evaluator-token prefix of the joint visible left/right window. The sequence \(y_{1:n}\) is the remaining suffix of that joint tokenization. Both contexts append these exact target IDs and share denominator \(n\). The prompt-only pass reuses these tail IDs even if standalone tail tokenization differs. Raw mean conditional tail log likelihood is retained as a secondary measure. This is a fixed-token-path contrast, not the difference between independently tokenized string likelihoods. Whole-message likelihood is not substituted for a boundary measure.
+
+Each control-only pilot selected 36 identities by a frozen SHA256 rule across generator, schedule and prompt category. The validation requirement was a positive lower 95\% payload-cluster interval for ordinary minus shuffled ordinary transitions on both primary metrics. The amendment used fresh recipient and donor payloads. RankCloak metric outcomes were unavailable during those decisions. Following the failed semantic validation, the subsequent study is explicitly exploratory and uses the context-gain measure that passed the specified control-separation check. A conservative measured-cost forecast selected 23 payloads per artifact class by identity hash before RankCloak scoring. All three models, both schedules and eligible boundaries of each selected trial were retained. Segments are averaged within trial and trials within payload. The 2,000 bootstrap draws resample payloads within artifact class and are identical across arms and models. These unadjusted exploratory intervals condition on the fixed control corpus. Donor reuse and leave-one-donor-payload-out influence are reported separately. Neither proxy establishes reader judgments or coherence between messages whose prompts deliberately rotate.
+
+\subsection*{Decoder compatibility and bounded transport diagnostics}\label{sec:v4-compatibility}
+The canonical configuration fingerprint includes model and tokenizer identities, quantization and backend, prompt rendering, BOS/EOS policy, ordering, filter, codec/framing, gate, and boundary/reset contract. The new compatibility API accepts a matching canonical header and rejects incomplete, corrupted or mismatched configurations. Tests change each component independently. This is a compatibility check, not authentication, error correction or proof of confidentiality. It was not retroactively added to the historical covers.
+
+The transport diagnostic selects at most one original visible-text success and failure per source model by identity hash. An audit found that the historical raw ``unmodified'' reference points to saved-token recovery. Visible baseline labels therefore come from executed historical text-transform replays only when every observed byte equals the source text. The historical references and composite Markdown outcomes remain unchanged. Missing strata are unavailable. Five selected covers support at most 25 decomposed arms. We add only missing model-input replays for per-line prefix insertion, outer trimming, trailing trimming, line-ending normalization and removal of the declared blockquote wrapper. Wrapper removal strips exactly the declared prefix and cannot inspect payloads or search for a successful offset. Source bytes, retokenized IDs, saved-offset spans, recovered ranks and bytes are retained in Supplementary Note S18.
+
+
+\subsection*{Revision assistance}\label{sec:revision-assistance}
+OpenAI Codex assisted with code development, retained-data analysis, validation and drafting of the revision. Reported computational results trace to the pinned model runs and retained records. The author is responsible for reviewing these analyses and the final text.
+
+
+\section*{Results}\label{sec:results}
+
+\subsection*{Evaluation design and exact-copy recovery}\label{sec:results-recovery}
+
+The completed primary design produced 14,400 work units across three model families and 18 English prompt templates. Of these 6,480 were payload bearing RankCloak trials spanning the six protocol/codec configurations and 7,920 were ordinary controls. All 6,480 decoded serialized payloads exactly under saved-token replay (1.000000; Wilson 95\% CI \([0.999408, 1.000000]\)). The stricter aggregation also passed for all 480 payload groups (CI \([0.992061, 1.000000]\)) and all 1,440 groups defined by model and payload (CI \([0.997339, 1.000000]\)). These grouped endpoints prevent repeated prompts and protocols from inflating the apparent number of independently generated artifacts.
+
+The recovery question was whether codec inversion remained exact after forcing the ranks into cover contexts, rather than whether emitted ranks could merely be read back from the same loop. Success was defined at the original serialization and digest, and every model and eligible protocol stratum reached that endpoint. The all success result therefore supports deterministic implementation fidelity across the evaluated prompt/model matrix. Its uncertainty is one sided in substance, the data bound the rate of error under this completed design but cannot show that an unobserved replay environment or transmission channel would also be error-free.
+
+Secondary exact-copy tests recovered 288/288 Spanish trials and 288/288 Simplified Chinese trials, or 576/576 in total. They establish recovery for those retained prompts under the same saved-token contract; they do not establish multilingual naturalness or robustness to ordinary text transfer. Across primary, ablation, robustness, multilingual, evaluator, and detector work, the historical ledger reconciled 38,504/38,504 units: 38,072 succeeded and 432 were declared unavailable. No unit remained and none was classified as an execution failure. Recovery strata and secondary-language endpoints appear in Supplementary Tables S5 and S6.
+
+
+
+\subsection*{Payload representation, rank pressure, and capacity tradeoff}\label{sec:results-capacity}
+
+Figure~\ref{fig:capacity} compares payload representations across 480 unique artifacts in eight classes and three models. The 1,440 direct observations across payloads and models contained 60,861 direct rank positions. Direct subword representations required 11 to 77 forced symbols, with class medians ranging from 20 to 66, and the largest observed direct rank was 145,498. These counts and ranks depend on the model and tokenizer rather than defining a fixed alphabet.
+The deterministic codecs instead imposed rank ceilings of 8 or 16 while generally increasing forced length. On the four-class common hexadecimal support, median effective artifact rates were approximately 4.571 for direct subword, 4.000 for hex nibble, 2.000 for ASCII \(B=16\), and 1.497 for ASCII \(B=8\) artifact bits per forced token. These descriptive rates compare representations on identical eligible artifacts; they are not cryptographic-security capacities.
+The whiskers in Fig.~\ref{fig:capacity} are observed 5th to 95th percentiles, not confidence intervals. The detailed theoretical capacity and tail validation tests a different question of whether retained records satisfy the declared algebraic identities and conditional bounds (in Supplementary Fig. S6 and Table S14). The common support empirical capacity and quality frontier follows in Fig.~\ref{fig:empirical-frontier}.
+
+
+
+Figure~\ref{fig:empirical-frontier} compares mean token count with mean source model token log probability over 4,320 trials on the four class common hexadecimal support. Three models and six protocols form 18 model and protocol cells, and separate forced span and full message views give 36 plotted cells. Compact direct subword spans generally occupy the low length region but can have poorer source model likelihood, whereas bounded protocols trade longer forced spans for controlled rank alphabets. Segmented full message points move toward better full message likelihood by adding non-payload continuation length, this movement is not improved likelihood on the payload-bearing forced span. Higher mean token log probability is better, point area represents mean automated surface flag burden, and uncertainty uses 2,000 resample payload-bootstrap 95\% confidence intervals. The complete primary matrix contains no lead-in condition, so exploratory lead-in rows were not pooled. These automated diagnostics are not human-perceived judgments, and the empirical frontier is distinct from the theoretical capacity and tail validation.
+
+
+
+\subsection*{Exact-copy replay and transmission fragility}\label{sec:results-robustness}
+
+Replay mode materially changed recovery (Fig.~\ref{fig:robustness}). Saved token replay recovered 144/144 robustness covers, whereas detokenizing the same covers and retokenizing their visible text recovered 88/144 (0.611111). So even an unedited visible string did not guarantee the original token sequence. The historical raw unmodified row reports 144/144 by reference to saved-token recovery and is not another executed visible-text trial. Common transformations were damaging. Unicode NFKC recovered 82/144 (0.569444), quote conversion 56/144 (0.388889), and whitespace trimming 28/144 (0.194444). Markdown copy/paste and paraphrase recovered 0/144, and the two cross-model decoder outcomes for each cover recovered 0/288.
+
+
+Deleting only the declared final 10\% of a message recovered 144/144 because that operation was constrained to non-payload tail tokens. It is not evidence of arbitrary truncation tolerance, removing a forced token or earlier context would change the decoded sequence. The broader matrix also showed low recovery after token or character edits and line-ending conversion (Supplementary Note S4). The limited-canonicalization unmodified row also references saved-token recovery. Its executed transformed cells all failed, so they did not demonstrate a general mitigation.
+
+
+
+
+
+\subsection*{Forced span versus full message}\label{sec:results-quality}
+
+Across 1,440 paired segmented trials, overall forced-span mean token log probability was -5.090904 and overall full message mean token log probability was -1.424774, for an overall paired gain of +3.666130 (Fig.~\ref{fig:forced-full}). Each of the six model and topic schedule cells contained 240 paired trials, and all six 2,000 resample paired payload bootstrap confidence intervals for the gain excluded zero.
+
+Non-payload greedy continuations contain no payload ranks and add no payload capacity. The higher full message average therefore reflects the inclusion of non payload greedy continuations and must not be interpreted as improved quality on the payload bearing forced span. Automated readability and surface diagnostics remain in Supplementary Fig. S2 and Note S5; they are not human evaluation.
+
+
+
+\subsection*{Ablations, dynamic stopping, and prompt-topic effects}\label{sec:results-ablations}
+
+The locked compact ablation extraction compared 48 paired payload groups across three models and is exploratory/post-outcome (Supplementary Notes S6 and S9). A 32-token lead-in, relative to no lead-in, reduced mean log probability by 1.652327 (95\% CI \([-1.749091,\allowbreak -1.553103]\)) and added 159.590278 full-message tokens (CI \([125.829861,\allowbreak 191.030035]\)). This adverse result is consistent with added context and boundary cost, the contrast does not prove a single failure mechanism. Increasing the segment size from 8 to 32 ranks increased effective rate by 1.231461 bits per full token (CI \([1.073116,\allowbreak 1.388188]\)) and reduced full length by 174.500000 tokens (CI \([-208.405035,\allowbreak -140.573264]\)), trading fewer tails for longer forced spans.
+The lead-in and segment results locate different costs. A leadin precedes the forced span, consumes visible tokens, and changes the distribution used for every encoded rank; it therefore cannot be treated as a harmless stylistic prefix. Larger segments keep the forced count fixed but require fewer prompt resets and tail opportunities. Their higher effective rate is consistent with reduced overhead, while the forced span itself lasts longer before an ordinary greedy continuation begins.
+
+Removing the safe-text filter changed mean log probability by approximately -0.0018 (canonical CSV estimate -0.001797; CI \([-0.037738, 0.035394]\)) and effective rate by -0.062969 bits per full token (CI \([-0.134265, 0.007651]\)), both intervals included zero. The Mistral roundtrip stable filter cell was unavailable for 48 work units, although the no-filter contrast included all three models. The filter results therefore do not establish a quality benefit.
+Compared with dynamic stopping, no tail increased effective rate by 3.171551 bits per full token and shortened messages by 254.951389 tokens. This arithmetic consequence of removing non-payload text is not evidence of better cover quality. A fixed sentence-tail policy of \(20\) to \(60\) tokens shortened messages by 65.708333 tokens relative to dynamic stopping, whereas its selected effective-rate interval included zero. Dynamic stopping remains a declared heuristic with an emergency cap, not a semantic judgment by readers.
+
+Across 15 locked topic contrasts, one Llama artifact-count comparison excluded the null; multi-topic versus single-topic expected count ratio 1.276361 (95\% CI \([1.114743, 1.461409]\), Holm-adjusted \(p=0.003294\)). The other 14 adjusted \(p\)-values were at least 0.396248. This compact extraction was performed post outcome without refitting models and is exploratory as it does not support a general prompt-topic advantage.
+
+
+
+\subsection*{Neural steganalysis}\label{sec:results-detector}
+
+On the strictly deduplicated matched test, TextCNN ROC-AUC was 0.9868 (95\% CI \([0.9819,0.9913]\)), DeBERTa-v3-base was 0.9994 (CI \([0.9984,1.0000]\)), and the exact-model-aware surprisal attacker was 0.999995 (CI \([0.999970,1.000000]\); Fig.~\ref{fig:detector}). Their normalized empirical 0--1\% partial AUCs were 0.6652, 0.9948, and 0.999460. These values show that the encoding is often detectable; classification of a cover does not reveal the concealed artifact or restore its recognizable surface syntax.
+
+Leave one family out ROC-AUC ranged from 0.9186 to 0.9784 for TextCNN, 0.9972 to 1.0000 for DeBERTa, and 0.999943 to 1.000000 for the model aware detector. These fits exclude the target family from training and validation and test unseen family transfer within the three-family corpus, not arbitrary future models. At validation frozen nominal 1\% FPR thresholds, matched test TPR/observed FPR was 0.8317/0.0127 (19/1,491 false positives), 0.9913/0.0007 (1/1,491), and 0.9987/0.0020 (3/1,491), respectively. The matched validation and test sizes support empirical 0.1\% reporting, at that target the corresponding TPRs were 0.4829, 0.9886, and 0.9987, with 2, 1, and 3 observed false positives. Family holdouts had only 497 test negatives and did not support 0.1\% estimates; at frozen 1\% thresholds their observed false-positive counts reached 35, 28, and 3, showing calibration drift.
+
+
+
+\subsection*{Human controls, entropy gating, and quantization}\label{sec:results-v3}
+
+The bounded human-authored secondary analysis selected 250 Dolly responses across 16 available templates, with no exact or declared near-duplicate links within that corpus or to the primary corpus. Against these negatives, ROC-AUC was 0.7537 for TextCNN and 0.9846 for DeBERTa. At thresholds selected only on matched ordinary-model validation controls, 152/250 and 97/250 human texts were false positives. These high rates reveal detector domain sensitivity and may reflect generic 'machine versus human' differences, the analysis is not a participant study, human naturalness rating, or evidence that readers cannot notice RankCloak covers.
+
+Entropy gating produced a tradeoff among payload rate, length and detectability (Table~\ref{tab:v3-summary}). From ungated through median and strict gates, mean serialized-payload rate conditional on completion declined from 7.4001 to 5.7920 and 4.0513 bits/token, while mean length ratio increased from 1.0000 to 1.3743 and 2.7615. The strict condition completed 114/120 payloads, its six maximum-budget failures are retained outcomes, and its rate denominator is the 114 completed cases. Text only ROC-AUC declined under the strict gate to 0.8850 and 0.8893, but exact-model-aware ROC-AUC remained 0.9904. Visible-text recovery was 62/120, 65/120, and 68/120 across the three conditions, so gating neither established undetectability nor reliable visible text transport.
+
+For the single pinned Qwen revision, saved-ID recovery was 960/960 for both Q4\_K\_M and Q8\_0, whereas visible text recovery was 732/960 (76.25\%) and 758/960 (78.96\%). The paired Q8-minus-Q4 difference was 2.71 percentage points (grouped-bootstrap 95\% CI \([-0.73,6.35]\)), paired outcomes were 588 both, 144 Q4 only, 170 Q8 only, and 58 neither, with exact two-sided McNemar \(p=0.1582\). Thus there was no statistically supported Q8 recovery advantage. Independently generated paths diverged substantially (mean positionwise match 0.0155), while cross-quantization detection remained very strong in both directions.
+
+
+
+\subsection*{Local boundary compatibility and metric limitations}\label{sec:v4-results}
+
+The initial control-only pilot gave an ordinary-minus-shuffled semantic cosine difference of 0.0078 (95\% interval [\(-0.0416\), 0.0572]) and context gain of 2.2200 nats per tail token [1.7784, 2.6777]. The sole amendment shortened the right cap to 16 tokens and used controls disjoint in recipient and donor payloads. Semantic cosine remained inconclusive at \(-0.0106\) [\(-0.0728\), 0.0519], while context gain was 2.0612 [1.7378, 2.4109]. Thus the planned two-metric validation was not achieved. The following boundary study is exploratory, using the context-gain measure that passed the specified control-separation check.
+
+The frozen selection comprises 92 of 240 payloads across four hexadecimal classes. Its 3,174 structural boundaries yield 2,750 jointly eligible boundaries in 550 scored trials. Exclusions are especially concentrated in Mistral, with 341 of 1,058 boundaries excluded, compared with 43 for Llama and 40 for Qwen. Results therefore do not generalize to all structural boundaries. Actual minus ordinary context gain was 0.1575 nats per tail token (95\% interval [0.1098, 0.2066]). Actual minus shuffled gain was 2.3265 [2.2705, 2.3912]. These contrasts concern short within-message transitions under the selected evaluator map. They do not validate sentence-level semantic coherence, reader judgments or transitions between deliberately rotated prompts.
+
+
+
+
+The secondary actual-minus-ordinary conditional-likelihood difference was 0.0619 nats per tail token [0.0277, 0.0981]. Generator-specific conditional intervals included zero for Mistral and Qwen. RankCloak tails use greedy continuation, while ordinary controls are sampled. The comparison therefore includes a continuation-policy difference and does not isolate a causal boundary effect.
+
+\subsection*{Mechanisms of transmission failure}\label{sec:v4-transport-results}
+The 25 decomposed transport arms across five identity-selected covers required 26 missing segment replays and 53 context-capacity checks of reused historical inputs. All reused ranks and error outcomes agreed at the new allocation capacity. These 79 distinct segment inputs remain within the same 25 logical arms. Prefix-only insertion recovered none of the five covers. All 27 selected segment instances presented a prohibited first forced token and were rejected before rank recovery. They do not measure a downstream rank avalanche. Declared wrapper removal recovered one originally failing Mistral case but did not supply a general repair. The original 0/144 composite-Markdown endpoint remains unchanged. Byte, span, token and rank evidence is retained in Supplementary Note S18.
+
+\subsection*{Strict-gate failure contexts}\label{sec:v4-entropy-results}
+The six strict-gate failures all use ASCII B16 without a token filter. Five are Qwen trials and one is Mistral. They consume 59 to 116 of 128 requested ranks, or 54 of 64, at their original budgets. Longest below-threshold runs range from 35 to 267 positions. Matched ungated and moderate runs complete, while successful strict runs can also contain extended low-entropy stretches. The aligned text windows and progress evidence describe associations without identifying a causal linguistic trigger (Supplementary Note S16).
+
+\subsection*{Fixed-message cross-quantization decoding}\label{sec:v4-quant-results}
+The quantization audit separates 56,321 changed observed ranks at 122,220 encoded positions from 13,207 at 122,220 ordinary positions. A distinct offline Q4-to-Q8 fixed-message endpoint recovers zero of 960 original payloads. Of these trials, 766 contain invalid bounded ranks and 194 decode valid but incorrect bytes. This uses saved Q8 ranks on the historical Q4 token path and establishes no reverse-direction result. For identical histories and allowed sets, a logit gap greater than twice a uniform absolute perturbation bound preserves a pairwise ordering. This sufficient condition does not estimate the actual quantization error. Independent free-generation divergence introduces different histories, whereas observed-token replay continues to feed received cover tokens, not recovered payload symbols.
+
+
+\subsection*{Computational overhead and generalizability}\label{sec:results-overhead}
+
+Across the 18 primary model and protocol cells, mean inclusive generation time ranged from 1.674368 to 16.087628 seconds. Mean payload throughput ranged from 13.631855 to 100.851772 bits/s, and effective rate from 0.710004 to 7.322003 bits per full token. These saved wall times include wrapper setup and decoding scope defined by the harness, CPU time and repeated warm-up measurements were not retained.
+
+The approximately order of magnitude spread across cells shows that representation and model choice materially affect operational cost in the retained environment. Compact direct ranks can reduce forced work, whereas byte expansion and repeated segmented continuations increase it. Throughput and effective rate answer different questions: the first normalizes payload bits by wall time, while the second normalizes by visible full-message tokens. Neither is a deployment benchmark outside the recorded wrapper and device.
+On the fixed CUDA benchmark, representative TextCNN wall/training times were 91.358/9.498 seconds with 306.25 MB peak allocated VRAM, DeBERTa-v3-base times were 1,536.661/1,425.063 seconds with 6.38 GB. Those device-specific measurements do not generalize across hardware. Evaluation across three model families and exact-copy Spanish and Simplified Chinese trials broadens the controlled design.% It does not validate very-large proprietary models, broad multilingual cover quality, operational channels, or real-world deployment.
+
+
+
+
+
+The implementation separates sorting from rank recovery. For vocabulary size \(V\) and allowed-set size \(A\), selecting a requested rank performs a full stable sort in \(O(A\log A)\), plus \(O(V)\) array and mask work. Recovering a known token's rank counts greater scores and lower-ID ties in \(O(A)\). Full-vocabulary probabilities and entropy require additional vocabulary passes. Greedy lead-ins, tails, diagnostic rank-one choices and rank-\(B\) quality checks also invoke sorting, so one sort per payload symbol understates the executed work.
+
+The inspected arithmetic-coding implementation sorts before truncation and then constructs and scans finite-precision cumulative intervals\cite{Ziegler2019NeuralLinguisticSteganography}. SAAC also sorts the full vocabulary before adapting its retained set\cite{Shen2020SelfAdjustingArithmetic}. ADG sorts, searches and removes candidates while forming groups, then recurses in the selected group\cite{Zhang2021ProvablySecureGenerative}. Its cost depends on the data structures used for removal and mass updates. All methods additionally incur their language-model calls. RankCloak segmentation repeats prefills, direct-subword transcoding adds payload-side model passes, and skips and tails consume work without adding payload digits. Memory includes weights, KV state, vocabulary temporaries and \(O(CV)\) score storage for context limit \(C\) with \code{logits_all=True}. Supplementary Note S19 gives the implementation-specific comparison. These bounds do not imply a wall-time advantage across different backends.
+
+
+\section*{Discussion}\label{sec:discussion}
+
+RankCloak provides a reproducible method for converting serialized cryptographic artifacts into language-model next-token ranks and realizing those ranks as cover text. Its representation choices expose a central tradeoff that direct subwords can be compact but leave rank pressure uncontrolled, whereas ASCII-byte and hex-nibble codecs bound the permitted rank by spending more forced positions. Segmentation redistributes those positions across contexts, and non-payload greedy continuations add non-payload length. The formal and empirical capacity relationships make these costs explicit rather than treating longer cover text as additional payload capacity.
+
+The principal demonstrated transformation is that the recognizable surface representation of a synthetic cryptographic artifact can be absent from the generated cover while an authorized receiver reconstructs it under the supported shared configuration. In the saved-token condition, retaining the token stream isolates tokenization fidelity, but recovery still requires contextual rank reconstruction and codec inversion; ordinary visible-text transfer is the stricter and materially less reliable condition. Steganalysis addresses another endpoint: a detector can often flag the presence of encoding, weakening covert-channel stealth, without thereby observing the original artifact or recovering its serialization.
+
+Cover-quality evidence remained protocol-dependent. Full-message mean log probability was higher than forced-span mean across paired segmented trials, but the added non-payload greedy continuations carry no ranks and the gain does not improve the payload-bearing positions or add capacity. Automated readability, surface diagnostics, and model-based contrasts remain computational proxies rather than human judgments, and no participant evidence supports a claim of human-perceived naturalness. Larger segments improved efficiency by reducing repeated tail overhead, while lead-ins worsened likelihood and length in the selected contrasts; removing tails mechanically improved rate but did not test perceived quality.
+
+Strict pre-feature component deduplication found zero leakage under the declared exact and character-\(n\)-gram rules, yet matched, unseen-family, and exact-model-aware detectors remained strong. Validation-frozen low-FPR results show that high ranking performance does not ensure threshold calibration after family or quantization shift. The human-authored comparison is informative but secondary: its high false-positive rates expose control-domain sensitivity and may reflect general machine-versus-human cues.
+
+Entropy gating reduced text-only detectability in the tested matrix, but lower serialized-payload rates, greater cover length, six strict-gate completion failures, and continued strong exact-model-aware detection prevent treating it as a uniformly superior protocol. Likewise, both tested quantizations preserved saved-ID inversion, but visible-text recovery remained weaker, independently generated token paths diverged, and the paired analysis did not support a Q8 recovery advantage. These studies identify measurable design tradeoffs rather than eliminating detectability or transport limitations.
+
+RankCloak therefore contributes an artifact specific method, evaluation methodology, and empirical evidence about concealing and recovering synthetic cryptographic artifacts whose original syntax would be conspicuous. The experiments do not establish a cryptographic secrecy proof, universal steganographic security, or robustness under every text transformation. They define when configured artifact recovery succeeds, when visible transport fails, and how the evaluated attackers detect encoded covers. The boundary pilots did not establish semantic relatedness. Conditional context gain supports only local fixed-path compatibility, with no reader-perceived coherence claim.
+
+
+\subsection*{Configuration sensitivity, detection and a proposed fallback}\label{sec:v4-boundaries}
+Small configuration changes have no universal recovery rate. A tokenizer update may preserve a string's tokenization or split and merge tokens, changing saved span offsets and later conditioning. Weight or quantization changes can reorder candidates even on an identical received history. A gate disagreement changes which positions consume payload digits. For a declared message ensemble, let \(p_t\) be the conditional probability of rank disagreement at position \(t\) given earlier agreement. Complete rank agreement then has probability \(\prod_t(1-p_t)\). This identity does not estimate the \(p_t\) from a version label, and byte recovery further depends on framing and codec checks.
+
+The evaluated model-aware detector is trace informed. It consumes summaries of retained untempered full-vocabulary token log probabilities. Reproducing those features requires the exact model and numerical backend, original token IDs, prompts, boundaries and reset schedule. Scoring only visible text after retokenization is a distinct, unvalidated access condition. The ordinary sampler instead uses temperature 0.8 and top-\(p\) 0.95. Payload-induced rank choices need not follow that sampler, and bounded ranks do not enforce distribution matching. Temporal structure and serialized payload digits may also supply detection cues. These are plausible mechanisms consistent with the adverse results, not identified causal contributions. Sequence KL decomposes into conditional terms only under its support and integrability conditions. A top-\(p\) reference can give a forced token zero probability, so finite-KL claims require care. AUC is not a KL estimate. An observer possessing the complete receiver configuration may also decode the payload. Surface-form concealment establishes neither confidentiality nor indistinguishability against this attacker.
+
+A possible future fallback would identify a supported configuration, frame independently decodable blocks with explicit resets and integrity checks, apply bounded outer error or erasure correction, and request retransmission when repair fails. For minimum distance \(d\), a conventional code requires \(2e+s<d\) for unique correction of \(e\) errors and \(s\) located erasures under its channel assumptions. Reliable boundaries and a correct decoder codebook remain prerequisites. ECC cannot repair an arbitrary wrong model codebook or persistent synchronization loss, and retransmitting under the same unresolved mismatch does not solve it. Metadata, redundancy, checks and retries consume length and compute and may add detector cues. This proposal is not implemented and supplies no new recovery result. Supplementary Note S19 provides the conditional arguments and operation counts.
+
+
+\section*{Responsible use and limitations}\label{sec:limitations}
+
+RankCloak can encode sensitive looking artifacts, but it does not itself provide encryption, authentication, confidentiality or a cryptographic security proof. Protected payloads require an external cryptographic system and an explicit threat model. Perfect primary recovery was demonstrated under the preserved-token replay contract. Visible-text transmission and common transformations are fragile, and the tested perturbations do not establish broad edit robustness. Human-perceived naturalness, broad multilingual behavior, real-world deployment and performance across arbitrary future models or communication channels were not established. Neither semantic pilot met the prospective control-separation criterion. This does not show that all transitions are incoherent. The likelihood study concerns short local token paths and cannot establish reader judgments. Detector performance is limited to the evaluated corpus. Detailed boundaries appear in Supplementary Table S17 and Notes S16 through S19.
+
+
+
+
+\section*{Data Availability}\label{sec:data-code}
+
+The source code and retained computational data are available at \url{https://github.com/mantzaris/llm-rankcloak}. Published version 2.0.0, DOI \url{https://doi.org/10.5281/zenodo.22555497}, covers V3 and does not include the V4 revision evidence. The concept DOI is \url{https://doi.org/10.5281/zenodo.21987449}. A local V4 archive candidate includes the code, data, reproducibility records and author-review documents. Its source snapshot and verification receipt accompany this revision package. Public DOI archive coverage of V4 remains a requirement before journal submission.
+
+\section*{Code Availability}
+The custom generation, replay and analysis code accompanies these data in the same repository and local V4 archive candidate. The published V3 version and the outstanding public V4 deposit are distinguished above.
+
+\begin{thebibliography}{10}
+\urlstyle{rm}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname doiprefix\endcsname\relax\def\doiprefix{DOI: }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{NorelliBronstein2026Calgacus}
+\bibinfo{author}{Norelli, A.} \& \bibinfo{author}{Bronstein, M.~M.}
+\newblock \bibinfo{title}{{LLM}s can hide text in other text of the same
+  length}.
+\newblock In \emph{\bibinfo{booktitle}{The Fourteenth International Conference
+  on Learning Representations}} (\bibinfo{year}{2026}).
+
+\bibitem{Simmons1984Prisoners}
+\bibinfo{author}{Simmons, G.~J.}
+\newblock \bibinfo{title}{The prisoners' problem and the subliminal channel}.
+\newblock In \emph{\bibinfo{booktitle}{Advances in Cryptology: Proceedings of
+  {CRYPTO} '83}}, \bibinfo{pages}{51--67},
+  \doiprefix\url{10.1007/978-1-4684-4730-9_5} (\bibinfo{publisher}{Springer},
+  \bibinfo{year}{1984}).
+
+\bibitem{Cachin1998InformationTheoretic}
+\bibinfo{author}{Cachin, C.}
+\newblock \bibinfo{title}{An information-theoretic model for steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Information Hiding}},
+  \bibinfo{pages}{306--318}, \doiprefix\url{10.1007/3-540-49380-8_21}
+  (\bibinfo{publisher}{Springer}, \bibinfo{year}{1998}).
+
+\bibitem{Hopper2002ProvablySecureSteganography}
+\bibinfo{author}{Hopper, N.~J.}, \bibinfo{author}{Langford, J.} \&
+  \bibinfo{author}{von Ahn, L.}
+\newblock \bibinfo{title}{Provably secure steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Advances in Cryptology -- {CRYPTO}
+  2002}}, \bibinfo{pages}{77--92}, \doiprefix\url{10.1007/3-540-45708-9_6}
+  (\bibinfo{publisher}{Springer}, \bibinfo{year}{2002}).
+
+\bibitem{Petitcolas1999InformationHidingSurvey}
+\bibinfo{author}{Petitcolas, F. A.~P.}, \bibinfo{author}{Anderson, R.~J.} \&
+  \bibinfo{author}{Kuhn, M.~G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Information hiding: A survey}}.
+\newblock {\emph{\JournalTitle{Proceedings of the IEEE}}}
+  \textbf{\bibinfo{volume}{87}}, \bibinfo{pages}{1062--1078},
+  \doiprefix\url{10.1109/5.771065} (\bibinfo{year}{1999}).
+
+\bibitem{Fang2017GeneratingSteganographicTextLSTMs}
+\bibinfo{author}{Fang, T.}, \bibinfo{author}{Jaggi, M.} \&
+  \bibinfo{author}{Argyraki, K.}
+\newblock \bibinfo{title}{Generating steganographic text with {LSTM}s}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of {ACL} 2017, Student
+  Research Workshop}}, \bibinfo{pages}{100--106},
+  \doiprefix\url{10.18653/v1/P17-3017} (\bibinfo{publisher}{Association for
+  Computational Linguistics}, \bibinfo{year}{2017}).
+
+\bibitem{Yang2019RNNStega}
+\bibinfo{author}{Yang, Z.-L.}, \bibinfo{author}{Guo, X.-Q.},
+  \bibinfo{author}{Chen, Z.-M.}, \bibinfo{author}{Huang, Y.-F.} \&
+  \bibinfo{author}{Zhang, Y.-J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{RNN-Stega}: Linguistic
+  steganography based on recurrent neural networks}}.
+\newblock {\emph{\JournalTitle{IEEE Transactions on Information Forensics and
+  Security}}} \textbf{\bibinfo{volume}{14}}, \bibinfo{pages}{1280--1295},
+  \doiprefix\url{10.1109/TIFS.2018.2871746} (\bibinfo{year}{2019}).
+
+\bibitem{Ziegler2019NeuralLinguisticSteganography}
+\bibinfo{author}{Ziegler, Z.~M.}, \bibinfo{author}{Deng, Y.} \&
+  \bibinfo{author}{Rush, A.~M.}
+\newblock \bibinfo{title}{Neural linguistic steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2019 Conference on
+  Empirical Methods in Natural Language Processing and the 9th International
+  Joint Conference on Natural Language Processing}},
+  \bibinfo{pages}{1210--1215}, \doiprefix\url{10.18653/v1/D19-1115}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2019}).
+
+\bibitem{DaiCai2019NearImperceptible}
+\bibinfo{author}{Dai, F.~Z.} \& \bibinfo{author}{Cai, Z.}
+\newblock \bibinfo{title}{Towards near-imperceptible steganographic text}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 57th Annual Meeting
+  of the Association for Computational Linguistics}},
+  \bibinfo{pages}{4303--4308}, \doiprefix\url{10.18653/v1/P19-1422}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2019}).
+
+\bibitem{Shen2020SelfAdjustingArithmetic}
+\bibinfo{author}{Shen, J.}, \bibinfo{author}{Ji, H.} \& \bibinfo{author}{Han,
+  J.}
+\newblock \bibinfo{title}{Near-imperceptible neural linguistic steganography
+  via self-adjusting arithmetic coding}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2020 Conference on
+  Empirical Methods in Natural Language Processing}},
+  \bibinfo{pages}{303--313}, \doiprefix\url{10.18653/v1/2020.emnlp-main.22}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2020}).
+
+\bibitem{Zhang2021ProvablySecureGenerative}
+\bibinfo{author}{Zhang, S.}, \bibinfo{author}{Yang, Z.}, \bibinfo{author}{Yang,
+  J.} \& \bibinfo{author}{Huang, Y.}
+\newblock \bibinfo{title}{Provably secure generative linguistic steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Findings of the Association for
+  Computational Linguistics: {ACL-IJCNLP} 2021}}, \bibinfo{pages}{3046--3055},
+  \doiprefix\url{10.18653/v1/2021.findings-acl.268}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2021}).
+
+\bibitem{Wang2025DAIRStega}
+\bibinfo{author}{Wang, Y.}, \bibinfo{author}{Song, R.}, \bibinfo{author}{Li,
+  L.}, \bibinfo{author}{Zhang, R.} \& \bibinfo{author}{Liu, J.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Dynamically allocated
+  interval-based generative linguistic steganography with roulette wheel}}.
+\newblock {\emph{\JournalTitle{Applied Soft Computing}}}
+  \textbf{\bibinfo{volume}{176}}, \bibinfo{pages}{113101},
+  \doiprefix\url{10.1016/j.asoc.2025.113101} (\bibinfo{year}{2025}).
+
+\bibitem{Wu2024GenerativeTextSteganographyLLM}
+\bibinfo{author}{Wu, J.}, \bibinfo{author}{Wu, Z.}, \bibinfo{author}{Xue, Y.},
+  \bibinfo{author}{Wen, J.} \& \bibinfo{author}{Peng, W.}
+\newblock \bibinfo{title}{Generative text steganography with large language
+  model}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 32nd {ACM}
+  International Conference on Multimedia}}, \bibinfo{pages}{10345--10353},
+  \doiprefix\url{10.1145/3664647.3680562} (\bibinfo{publisher}{Association for
+  Computing Machinery}, \bibinfo{year}{2024}).
+
+\bibitem{Lin2024ZeroShotGLS}
+\bibinfo{author}{Lin, K.}, \bibinfo{author}{Luo, Y.}, \bibinfo{author}{Zhang,
+  Z.} \& \bibinfo{author}{Luo, P.}
+\newblock \bibinfo{title}{Zero-shot generative linguistic steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2024 Conference of
+  the North American Chapter of the Association for Computational Linguistics:
+  Human Language Technologies}}, \bibinfo{pages}{5168--5182},
+  \doiprefix\url{10.18653/v1/2024.naacl-long.289}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2024}).
+
+\bibitem{Kirchenbauer2023WatermarkLLM}
+\bibinfo{author}{Kirchenbauer, J.} \emph{et~al.}
+\newblock \bibinfo{title}{A watermark for large language models}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 40th International
+  Conference on Machine Learning}}, vol. \bibinfo{volume}{202} of
+  \emph{\bibinfo{series}{Proceedings of Machine Learning Research}},
+  \bibinfo{pages}{17061--17084} (\bibinfo{publisher}{{PMLR}},
+  \bibinfo{year}{2023}).
+
+\bibitem{Lee2024SWEET}
+\bibinfo{author}{Lee, T.} \emph{et~al.}
+\newblock \bibinfo{title}{Who wrote this code? watermarking for code
+  generation}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 62nd Annual Meeting
+  of the Association for Computational Linguistics (Volume 1: Long Papers)}},
+  \bibinfo{pages}{4890--4911}, \doiprefix\url{10.18653/v1/2024.acl-long.268}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{address}{Bangkok, Thailand}, \bibinfo{year}{2024}).
+
+\bibitem{Wayner1992MimicFunctions}
+\bibinfo{author}{Wayner, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Mimic functions}}.
+\newblock {\emph{\JournalTitle{Cryptologia}}} \textbf{\bibinfo{volume}{16}},
+  \bibinfo{pages}{193--214}, \doiprefix\url{10.1080/0161-119291866883}
+  (\bibinfo{year}{1992}).
+
+\bibitem{Wayner1995StrongTheoreticalSteganography}
+\bibinfo{author}{Wayner, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Strong theoretical steganography}}.
+\newblock {\emph{\JournalTitle{Cryptologia}}} \textbf{\bibinfo{volume}{19}},
+  \bibinfo{pages}{285--299}, \doiprefix\url{10.1080/0161-119591883962}
+  (\bibinfo{year}{1995}).
+
+\bibitem{ChapmanDavida1997HidingHidden}
+\bibinfo{author}{Chapman, M.} \& \bibinfo{author}{Davida, G.~I.}
+\newblock \bibinfo{title}{Hiding the hidden: A software system for concealing
+  ciphertext as innocuous text}.
+\newblock In \emph{\bibinfo{booktitle}{Information and Communications Security:
+  First International Conference, {ICICS} 1997}}, vol. \bibinfo{volume}{1334}
+  of \emph{\bibinfo{series}{Lecture Notes in Computer Science}},
+  \bibinfo{pages}{335--345}, \doiprefix\url{10.1007/BFb0028489}
+  (\bibinfo{publisher}{Springer}, \bibinfo{year}{1997}).
+
+\bibitem{Bennett2004LinguisticSteganography}
+\bibinfo{author}{Bennett, K.}
+\newblock \bibinfo{title}{Linguistic steganography: Survey, analysis, and
+  robustness concerns for hiding information in text}.
+\newblock \bibinfo{type}{Tech. Rep.} \bibinfo{number}{CERIAS TR 2004-13},
+  \bibinfo{institution}{Purdue University, Center for Education and Research in
+  Information Assurance and Security} (\bibinfo{year}{2004}).
+
+\bibitem{ChangClark2014PracticalLinguisticSteganography}
+\bibinfo{author}{Chang, C.-Y.} \& \bibinfo{author}{Clark, S.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Practical linguistic steganography
+  using contextual synonym substitution and a novel vertex coding method}}.
+\newblock {\emph{\JournalTitle{Computational Linguistics}}}
+  \textbf{\bibinfo{volume}{40}}, \bibinfo{pages}{403--448},
+  \doiprefix\url{10.1162/COLI_a_00176} (\bibinfo{year}{2014}).
+
+\bibitem{Weinberg2012StegoTorus}
+\bibinfo{author}{Weinberg, Z.} \emph{et~al.}
+\newblock \bibinfo{title}{{StegoTorus}: A camouflage proxy for the {Tor}
+  anonymity system}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2012 {ACM} Conference
+  on Computer and Communications Security}}, \bibinfo{pages}{109--120},
+  \doiprefix\url{10.1145/2382196.2382211} (\bibinfo{publisher}{Association for
+  Computing Machinery}, \bibinfo{year}{2012}).
+
+\bibitem{Dyer2013FormatTransformingEncryption}
+\bibinfo{author}{Dyer, K.~P.}, \bibinfo{author}{Coull, S.~E.},
+  \bibinfo{author}{Ristenpart, T.} \& \bibinfo{author}{Shrimpton, T.}
+\newblock \bibinfo{title}{Protocol misidentification made easy with
+  format-transforming encryption}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2013 {ACM} {SIGSAC}
+  Conference on Computer and Communications Security}},
+  \bibinfo{pages}{61--72}, \doiprefix\url{10.1145/2508859.2516657}
+  (\bibinfo{publisher}{Association for Computing Machinery},
+  \bibinfo{year}{2013}).
+
+\bibitem{Zander2007CovertChannelsCountermeasures}
+\bibinfo{author}{Zander, S.}, \bibinfo{author}{Armitage, G.} \&
+  \bibinfo{author}{Branch, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A survey of covert channels and
+  countermeasures in computer network protocols}}.
+\newblock {\emph{\JournalTitle{IEEE Communications Surveys and Tutorials}}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{44--57},
+  \doiprefix\url{10.1109/COMST.2007.4317620} (\bibinfo{year}{2007}).
+
+\bibitem{Badar2025StegomalwareSurvey}
+\bibinfo{author}{Badar, L.~T.}, \bibinfo{author}{Carminati, B.} \&
+  \bibinfo{author}{Ferrari, E.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A comprehensive survey on
+  stegomalware detection in digital media, research challenges and future
+  directions}}.
+\newblock {\emph{\JournalTitle{Signal Processing}}}
+  \textbf{\bibinfo{volume}{231}}, \bibinfo{pages}{109888},
+  \doiprefix\url{10.1016/j.sigpro.2025.109888} (\bibinfo{year}{2025}).
+
+\bibitem{Wen2019CNNTextSteganalysis}
+\bibinfo{author}{Wen, J.}, \bibinfo{author}{Zhou, X.}, \bibinfo{author}{Zhong,
+  P.} \& \bibinfo{author}{Xue, Y.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Convolutional neural network based
+  text steganalysis}}.
+\newblock {\emph{\JournalTitle{IEEE Signal Processing Letters}}}
+  \textbf{\bibinfo{volume}{26}}, \bibinfo{pages}{460--464},
+  \doiprefix\url{10.1109/LSP.2019.2895286} (\bibinfo{year}{2019}).
+
+\bibitem{Wu2021GNNLinguisticSteganalysis}
+\bibinfo{author}{Wu, H.}, \bibinfo{author}{Yi, B.}, \bibinfo{author}{Ding, F.},
+  \bibinfo{author}{Feng, G.} \& \bibinfo{author}{Zhang, X.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Linguistic steganalysis with graph
+  neural networks}}.
+\newblock {\emph{\JournalTitle{IEEE Signal Processing Letters}}}
+  \textbf{\bibinfo{volume}{28}}, \bibinfo{pages}{558--562},
+  \doiprefix\url{10.1109/LSP.2021.3062233} (\bibinfo{year}{2021}).
+
+\bibitem{Wang2023FewShotLinguisticSteganalysis}
+\bibinfo{author}{Wang, H.}, \bibinfo{author}{Yang, Z.}, \bibinfo{author}{Yang,
+  J.}, \bibinfo{author}{Chen, C.} \& \bibinfo{author}{Huang, Y.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Linguistic steganalysis in few-shot
+  scenario}}.
+\newblock {\emph{\JournalTitle{IEEE Transactions on Information Forensics and
+  Security}}} \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{4870--4882},
+  \doiprefix\url{10.1109/TIFS.2023.3298210} (\bibinfo{year}{2023}).
+
+\bibitem{Gehrmann2019GLTR}
+\bibinfo{author}{Gehrmann, S.}, \bibinfo{author}{Strobelt, H.} \&
+  \bibinfo{author}{Rush, A.}
+\newblock \bibinfo{title}{{GLTR}: Statistical detection and visualization of
+  generated text}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 57th Annual Meeting
+  of the Association for Computational Linguistics: System Demonstrations}},
+  \bibinfo{pages}{111--116}, \doiprefix\url{10.18653/v1/P19-3019}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2019}).
+
+\bibitem{Mitchell2023DetectGPT}
+\bibinfo{author}{Mitchell, E.}, \bibinfo{author}{Lee, Y.},
+  \bibinfo{author}{Khazatsky, A.}, \bibinfo{author}{Manning, C.~D.} \&
+  \bibinfo{author}{Finn, C.}
+\newblock \bibinfo{title}{{DetectGPT}: Zero-shot machine-generated text
+  detection using probability curvature}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 40th International
+  Conference on Machine Learning}}, vol. \bibinfo{volume}{202} of
+  \emph{\bibinfo{series}{Proceedings of Machine Learning Research}},
+  \bibinfo{pages}{24950--24962} (\bibinfo{publisher}{PMLR},
+  \bibinfo{year}{2023}).
+
+\bibitem{Sadasivan2025AIDetection}
+\bibinfo{author}{Sadasivan, V.~S.}, \bibinfo{author}{Kumar, A.},
+  \bibinfo{author}{Balasubramanian, S.}, \bibinfo{author}{Wang, W.} \&
+  \bibinfo{author}{Feizi, S.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Can {AI}-generated text be reliably
+  detected? stress testing {AI} text detectors under various attacks}}.
+\newblock {\emph{\JournalTitle{Transactions on Machine Learning Research}}}
+  (\bibinfo{year}{2025}).
+
+\bibitem{Motwani2024SecretCollusion}
+\bibinfo{author}{Motwani, S.~R.} \emph{et~al.}
+\newblock \bibinfo{title}{Secret collusion among {AI} agents: Multi-agent
+  deception via steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Advances in Neural Information
+  Processing Systems}}, vol.~\bibinfo{volume}{37},
+  \bibinfo{pages}{73439--73486}, \doiprefix\url{10.52202/079017-2336}
+  (\bibinfo{publisher}{Curran Associates, Inc.}, \bibinfo{year}{2024}).
+
+\bibitem{Zolkowski2026EarlySigns}
+\bibinfo{author}{Zolkowski, A.}, \bibinfo{author}{Nishimura-Gasparian, K.},
+  \bibinfo{author}{McCarthy, R.}, \bibinfo{author}{Zimmermann, R.~S.} \&
+  \bibinfo{author}{Lindner, D.}
+\newblock \bibinfo{title}{Early signs of steganographic capabilities in
+  frontier {LLM}s}.
+\newblock In \emph{\bibinfo{booktitle}{The Fourteenth International Conference
+  on Learning Representations}} (\bibinfo{year}{2026}).
+
+\bibitem{NIST2015SecureHashStandard}
+\bibinfo{author}{{National Institute of Standards and Technology}}.
+\newblock \bibinfo{title}{Secure hash standard ({SHS})}.
+\newblock \bibinfo{type}{Federal Information Processing Standards Publication}
+  \bibinfo{number}{180-4}, \bibinfo{institution}{National Institute of
+  Standards and Technology} (\bibinfo{year}{2015}).
+\newblock \doiprefix\url{10.6028/NIST.FIPS.180-4}.
+
+\bibitem{Josefsson2006RFC4648}
+\bibinfo{author}{Josefsson, S.}
+\newblock \bibinfo{title}{The base16, base32, and base64 data encodings}.
+\newblock \bibinfo{howpublished}{{RFC} 4648}, \doiprefix\url{10.17487/RFC4648}
+  (\bibinfo{year}{2006}).
+
+\bibitem{DavisPeabodyLeach2024RFC9562}
+\bibinfo{author}{Davis, K.}, \bibinfo{author}{Peabody, B.} \&
+  \bibinfo{author}{Leach, P.}
+\newblock \bibinfo{title}{Universally unique {IDentifiers} ({UUIDs})}.
+\newblock \bibinfo{howpublished}{{RFC} 9562}, \doiprefix\url{10.17487/RFC9562}
+  (\bibinfo{year}{2024}).
+
+\bibitem{Sennrich2016SubwordUnits}
+\bibinfo{author}{Sennrich, R.}, \bibinfo{author}{Haddow, B.} \&
+  \bibinfo{author}{Birch, A.}
+\newblock \bibinfo{title}{Neural machine translation of rare words with subword
+  units}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 54th Annual Meeting
+  of the Association for Computational Linguistics}},
+  \bibinfo{pages}{1715--1725}, \doiprefix\url{10.18653/v1/P16-1162}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2016}).
+
+\bibitem{KudoRichardson2018SentencePiece}
+\bibinfo{author}{Kudo, T.} \& \bibinfo{author}{Richardson, J.}
+\newblock \bibinfo{title}{{SentencePiece}: A simple and language independent
+  subword tokenizer and detokenizer for neural text processing}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2018 Conference on
+  Empirical Methods in Natural Language Processing: System Demonstrations}},
+  \bibinfo{pages}{66--71}, \doiprefix\url{10.18653/v1/D18-2012}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2018}).
+
+\bibitem{Krawczyk1997RFC2104}
+\bibinfo{author}{Krawczyk, H.}, \bibinfo{author}{Bellare, M.} \&
+  \bibinfo{author}{Canetti, R.}
+\newblock \bibinfo{title}{{HMAC}: Keyed-hashing for message authentication}.
+\newblock \bibinfo{howpublished}{{RFC} 2104}, \doiprefix\url{10.17487/RFC2104}
+  (\bibinfo{year}{1997}).
+
+\bibitem{NIST2007GCM}
+\bibinfo{author}{Dworkin, M.}
+\newblock \bibinfo{title}{Recommendation for block cipher modes of operation:
+  {Galois/Counter Mode} ({GCM}) and {GMAC}}.
+\newblock \bibinfo{type}{Special Publication} \bibinfo{number}{800-38D},
+  \bibinfo{institution}{National Institute of Standards and Technology}
+  (\bibinfo{year}{2007}).
+\newblock \doiprefix\url{10.6028/NIST.SP.800-38D}.
+
+\bibitem{NirLangley2018RFC8439}
+\bibinfo{author}{Nir, Y.} \& \bibinfo{author}{Langley, A.}
+\newblock \bibinfo{title}{{ChaCha20} and {Poly1305} for {IETF} protocols}.
+\newblock \bibinfo{howpublished}{{RFC} 8439}, \doiprefix\url{10.17487/RFC8439}
+  (\bibinfo{year}{2018}).
+
+\bibitem{JosefssonLiusvaara2017RFC8032}
+\bibinfo{author}{Josefsson, S.} \& \bibinfo{author}{Liusvaara, I.}
+\newblock \bibinfo{title}{Edwards-curve digital signature algorithm ({EdDSA})}.
+\newblock \bibinfo{howpublished}{{RFC} 8032}, \doiprefix\url{10.17487/RFC8032}
+  (\bibinfo{year}{2017}).
+
+\bibitem{Flesch1948Readability}
+\bibinfo{author}{Flesch, R.}
+\newblock \bibinfo{journal}{\bibinfo{title}{A new readability yardstick}}.
+\newblock {\emph{\JournalTitle{Journal of Applied Psychology}}}
+  \textbf{\bibinfo{volume}{32}}, \bibinfo{pages}{221--233},
+  \doiprefix\url{10.1037/h0057532} (\bibinfo{year}{1948}).
+
+\bibitem{YanMurawaki2025TokenizationInconsistency}
+\bibinfo{author}{Yan, R.} \& \bibinfo{author}{Murawaki, Y.}
+\newblock \bibinfo{title}{Addressing tokenization inconsistency in
+  steganography and watermarking based on large language models}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2025 Conference on
+  Empirical Methods in Natural Language Processing}},
+  \bibinfo{pages}{7076--7098}, \doiprefix\url{10.18653/v1/2025.emnlp-main.361}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2025}).
+
+\bibitem{Wilson1927Interval}
+\bibinfo{author}{Wilson, E.~B.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Probable inference, the law of
+  succession, and statistical inference}}.
+\newblock {\emph{\JournalTitle{Journal of the American Statistical
+  Association}}} \textbf{\bibinfo{volume}{22}}, \bibinfo{pages}{209--212},
+  \doiprefix\url{10.1080/01621459.1927.10502953} (\bibinfo{year}{1927}).
+
+\bibitem{Bates2015lme4}
+\bibinfo{author}{Bates, D.}, \bibinfo{author}{M{\"a}chler, M.},
+  \bibinfo{author}{Bolker, B.} \& \bibinfo{author}{Walker, S.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Fitting linear mixed-effects models
+  using {lme4}}}.
+\newblock {\emph{\JournalTitle{Journal of Statistical Software}}}
+  \textbf{\bibinfo{volume}{67}}, \bibinfo{pages}{1--48},
+  \doiprefix\url{10.18637/jss.v067.i01} (\bibinfo{year}{2015}).
+
+\bibitem{Brooks2017glmmTMB}
+\bibinfo{author}{Brooks, M.~E.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{glmmTMB} balances speed and
+  flexibility among packages for zero-inflated generalized linear mixed
+  modeling}}.
+\newblock {\emph{\JournalTitle{The R Journal}}} \textbf{\bibinfo{volume}{9}},
+  \bibinfo{pages}{378--400}, \doiprefix\url{10.32614/RJ-2017-066}
+  (\bibinfo{year}{2017}).
+
+\bibitem{Reimers2019SentenceBERT}
+\bibinfo{author}{Reimers, N.} \& \bibinfo{author}{Gurevych, I.}
+\newblock \bibinfo{title}{Sentence-bert: Sentence embeddings using siamese
+  bert-networks}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of EMNLP-IJCNLP}},
+  \bibinfo{pages}{3982--3992}, \doiprefix\url{10.18653/v1/D19-1410}
+  (\bibinfo{year}{2019}).
+
+\end{thebibliography}
+
+
+\section*{Acknowledgements}
+
+NA
+
+\section*{Author contributions}
+
+A.V.M. is the sole author and is responsible for the study and the final manuscript.
+
+\section*{Funding}
+
+NA
+
+\section*{Additional Information}
+Supplementary Information accompanies this manuscript. Correspondence should be addressed to A.V.M.
+\subsection*{Competing interests}
+
+The author declares no competing interests.
+
+\section*{Figure legends}
+\begin{figure}[H]
+\caption{\label{fig:capacity}\textbf{Payload representation, rank pressure, and capacity tradeoff.} Direct-subword symbol counts and rank pressure are summarized for 1,440 observations across payloads and models comprising 60,861 direct rank positions. Their values are tokenizer and model dependent. Bounded codecs constrain requested ranks to at most 8 or 16, at the cost of more forced positions. Effective artifact-rate comparisons use the four class common hexadecimal support and are descriptive rather than cryptographic-security capacities. Whiskers show observed 5th to 95th percentiles, not confidence intervals.}
+\end{figure}
+\begin{figure}[H]
+\caption{\label{fig:empirical-frontier}\textbf{Empirical capacity and quality frontier.} Mean token count is shown against mean source-model token log probability for 4,320 trials on four-class common hexadecimal support, spanning three models, six protocols, 18 model and protocol cells, and 36 forced-span or full message cells. Higher mean token log probability is better; point area represents mean automated surface-flag burden. Error bars are 2,000 resample payload-bootstrap 95\% confidence intervals. The primary matrix contains no leadin condition. Likelihood and surface flags are automated diagnostics, not human judgments, and this empirical frontier is distinct from the theoretical capacity and tail validation in Supplementary Fig. S6.}
+\end{figure}
+\begin{figure}[H]
+\caption{\label{fig:robustness}\textbf{Exact-copy fragility.} Recovery proportions and Wilson 95\% intervals are shown for the principal replay and transmission conditions. Saved token IDs preserve the strongest replay contract. The plotted unchanged transmission text is the historical saved-ID reference, not another visible-text replay. Visible text detokenization and retokenization already reduce recovery. NFKC normalization, quote conversion, and trimming reduce it further, while the tested composite Markdown operation, paraphrase, and cross-model decoding yield no successful payloads. Final 10\% tail truncation removes only declared non payload tail tokens and must not be interpreted as arbitrary truncation tolerance. The full transformation matrix, denominators, limited canonicalization cells, and first divergence diagnostics appear in Supplementary Figure S1 and Supplementary Note S4.}
+\end{figure}
+\begin{figure}[H]
+\caption{\label{fig:forced-full}\textbf{Forced span versus full message.} Mean token log probability is paired within 1,440 segmented trials across three models and single-topic or multi-topic schedules, with 240 trials per model schedule cell. Error bars are 2,000 resample paired payload bootstrap 95\% confidence intervals, all six intervals for the 'full minus forced' gain exclude zero. Non-payload greedy continuations contain no payload ranks and add no payload capacity, so the improved full-message average is not an improvement to the payload-bearing forced span.}
+\end{figure}
+\begin{figure}[H]
+\caption{\label{fig:detector}\textbf{Strictly deduplicated detector evaluation.} Matched and leave-one-family-out ROC-AUC results are shown for two data adaptive text-only detectors and the exact-model-aware surprisal attacker. Higher performance indicates that encoded covers can be distinguished from matched controls. Components connected by declared exact or near-duplicate relations do not cross partitions, the rule does not detect semantic paraphrases below its threshold. Supplementary Note S12 reports full split counts, validation-frozen low-FPR operating points, exact false-positive counts, and unavailable 0.1\% conditions.}
+\end{figure}
+
+\section*{Tables}
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{L{0.20\textwidth}Y}
+\toprule
+Rule & Exact exclusion criterion \\
+\midrule
+Empty or replacement & Empty string or any U+FFFD replacement character. \\
+Controls & Any code point below 32 except newline and tab. Carriage return is excluded. DEL and other Unicode controls are not excluded by this rule alone. \\
+Literal fragments & Any case insensitive occurrence of \texttt{\detokenize{```}}, \texttt{\detokenize{`}}, \texttt{\detokenize{\section}}, \texttt{\detokenize{\frac}}, \texttt{\{\textbackslash}, \texttt{\detokenize{\rm}}, \texttt{\detokenize{http}}, \texttt{\detokenize{www.}}, \texttt{\detokenize{.com}}, \texttt{\detokenize{&lt}}, \texttt{\detokenize{&gt}}, \texttt{\detokenize{&amp}}, \texttt{\detokenize{</}}, \texttt{\detokenize{<}}, \texttt{\detokenize{>}}, \texttt{\detokenize{[}}, \texttt{\detokenize{]}}, \texttt{\detokenize{___}}, \texttt{\detokenize{|||}}. \\
+Start rule & After stripping whitespace, a piece starting with \texttt{\#} or \texttt{\#\#}. The second check is redundant. \\
+Backslashes & Two consecutive backslashes or at least two backslashes anywhere in the piece. \\
+\bottomrule
+\end{tabularx}
+\caption{Complete exclusion rules of the retained safe-text filter. A piece is allowed only if none applies.}\label{tab:v4-filter}
+\end{table}
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{L{0.17\textwidth}L{0.25\textwidth}L{0.24\textwidth}Y}
+\toprule
+Analysis or condition & Recovery or completion & Payload rate and length & Detection or paired inference \\
+\midrule
+Strict detector split & 15,838 retained rows; 9,904/2,952/2,982 train/validation/test & Deduplication before features; zero declared cross-partition leakage & Matched AUC 0.9868/0.9994/0.999995 \\
+Human-authored controls & 250 frozen test negatives; no human labels used for fitting & Length-matched within 16 available templates & TextCNN/DeBERTa AUC 0.7537/0.9846; false positives 152/250 and 97/250 \\
+Entropy ungated & Complete/saved ID 120/120; visible 62/120 & 7.4001 bit/token, \(n=120\), conditional on completion; length ratio 1.0000 & AUC TextCNN/DeBERTa/model-aware 0.9953/0.9999/1.0000 \\
+Entropy median gate & Complete/saved ID 120/120; visible 65/120 & 5.7920 bit/token, \(n=120\), conditional on completion; length ratio 1.3743 & AUC 0.9825/0.9785/0.9999 \\
+Entropy strict gate & Complete/saved ID 114/120; visible 68/120; six budget failures & 4.0513 bit/token, \(n=114\), conditional on completion; length ratio 2.7615 & AUC 0.8850/0.8893/0.9904 \\
+Q4\_K\_M versus Q8\_0 & Saved ID 960/960 each; visible 732/960 versus 758/960 & Independent-path position match 0.0155 & Difference 2.71 points, CI \([-0.73,6.35]\); McNemar \(p=0.1582\) \\
+Cross-quantization detection & Q4-to-Q8 and Q8-to-Q4 held-payload tests & One Qwen revision; two quantizations & AUC TextCNN 0.9927/0.9944; DeBERTa and model-aware 1.0000/1.0000 \\
+\bottomrule
+\end{tabularx}
+\caption{\label{tab:v3-summary}\textbf{Summary of detector, entropy and quantization analyses.} The entropy rate counts eight bits per serialized payload byte per generated token and is conditional on completion. It is not a Shannon channel capacity. Entropy recovery proportions use all 120 attempts. Detector triples are TextCNN, DeBERTa-v3-base, and exact model aware surprisal. Empirical 0.1\% operating points are unavailable for the 250-negative human comparison and every entropy and quantization subgroup because each has fewer than 1,000 negatives. Detailed denominators, intervals, thresholds, and condition-level results appear in Supplementary Notes S11-S15.}
+\end{table}
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrr}\toprule
+Contrast & Difference & Lower 95\% & Upper 95\% \\ \midrule
+actual minus ordinary & 0.1575 & 0.1098 & 0.2066 \\
+actual minus shuffled & 2.3265 & 2.2705 & 2.3912 \\
+ordinary minus shuffled & 2.1690 & 2.1185 & 2.2215 \\
+\bottomrule\end{tabular}
+\caption{Exploratory paired context-gain differences in nats per evaluator tail token for the completed frozen sample. Segments are averaged within trials and trials within payloads. Intervals use 2,000 payload-cluster draws within artifact class and condition on the fixed donor corpus.}\label{tab:v4-coherence}
+\end{table}
+\end{document}

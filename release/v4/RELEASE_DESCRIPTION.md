@@ -1,0 +1,13 @@
+# RankCloak V4 archive candidate
+
+Proposed public version 3.0.0. Local candidate 3.0.0-rc1. This is a prepared description for a new version under Zenodo concept DOI 10.5281/zenodo.21987449. It does not identify a published V4 version. The current published version is 2.0.0 at DOI 10.5281/zenodo.22555497.
+
+RankCloak research code and retained computational evidence for surface-form concealment of synthetic cryptographic artifacts in language-model-generated text. This package includes historical V1 through V3 materials and the V4 author-review revision. It includes manuscript and supplement sources, style and bibliography dependencies, compiled PDFs, reviewer response, cover letter, original review wording, frozen configurations, analysis code, model acquisition identities and hashes, environment records, raw and derived data, figures, tests, execution logs and validation records.
+
+V4 evidence includes six strict-gate failure diagnostics, both control-only pilots with unsuccessful semantic separation, the frozen exploratory local likelihood study, bounded transport decomposition, a configuration compatibility API and fixed-message Q4-to-Q8 byte reconstruction. Scientific results and adverse outcomes are retained. The work establishes neither cryptographic confidentiality nor general transport robustness, statistical indistinguishability, semantic coherence or reader-perceived naturalness. Ordinary controls are sampled and RankCloak continuations are greedy.
+
+The included source is precisely the commit and tree identified by ARCHIVE_SOURCE.json and the external package manifest. Later handoff records and DOI-only document changes are not silently incorporated into that snapshot. The local archive is an author-review candidate and does not imply journal submission or acceptance.
+
+The package excludes pretrained weights, environments, credentials, caches, incidental build intermediates, nested historical ZIP archives and downloaded third-party source or paper snapshots. Primary-source URLs, revisions and checksums remain included. The public synthetic artifacts are not operational credentials. No participant judgments were collected. The historical human-authored control corpus is a licensed Dolly subset and is identified separately in THIRD_PARTY_NOTICE.md.
+
+License metadata should identify the repository MIT license with the third-party exceptions in the included notice. Model licenses apply on separate acquisition. This description explicitly includes manuscript files and corrects the contradictory manuscript-exclusion wording in the older record. The upload must use the verified candidate and matching manifest, never an unverified worktree export.

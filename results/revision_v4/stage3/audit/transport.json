@@ -1,0 +1,15 @@
+{
+  "capacity_checks": 53,
+  "exact_by_arm": {
+    "declared_wrapper_removal": 1,
+    "line_endings_only": 2,
+    "outer_trim_only": 1,
+    "prefix_only": 0,
+    "trailing_trim_only": 1
+  },
+  "logical_arms": 25,
+  "new_requests": 26,
+  "prefix_first_token_rejections": 27,
+  "segment_instances": 135,
+  "sources": 5
+}

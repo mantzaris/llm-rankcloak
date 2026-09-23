@@ -1,0 +1,23 @@
+{
+  "schema": "rankcloak.release-metadata.v4.1",
+  "state": "unpublished_local_author_review_candidate",
+  "candidate_version": "3.0.0-rc1",
+  "proposed_public_version": "3.0.0",
+  "new_version_doi": null,
+  "existing_concept_doi": "10.5281/zenodo.21987449",
+  "current_published_version": "2.0.0",
+  "current_published_version_doi": "10.5281/zenodo.22555497",
+  "title": "RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text. Research code and data",
+  "creators": [
+    {
+      "name": "Mantzaris, Alexander V.",
+      "affiliation": "University of Central Florida"
+    }
+  ],
+  "resource_type": "software",
+  "access": "open",
+  "license": "MIT, with third-party material retaining its stated license as detailed in THIRD_PARTY_NOTICE.md",
+  "description_file": "RELEASE_DESCRIPTION.md",
+  "source_identity": "ARCHIVE_SOURCE.json and the external PACKAGE_MANIFEST.json generated after the source snapshot commit",
+  "publication_date": "Set to the actual publication date only when publishing in a later authorized stage."
+}

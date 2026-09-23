@@ -1,0 +1,19 @@
+{
+  "ordinary_control": {
+    "exact": 0,
+    "invalid_trials": 0,
+    "pairs": 960,
+    "positions": 122220,
+    "rank_changes": 13207,
+    "valid_wrong": 0
+  },
+  "rankcloak": {
+    "accepted_nonzero_terminal_padding": 1,
+    "exact": 0,
+    "invalid_trials": 766,
+    "pairs": 960,
+    "positions": 122220,
+    "rank_changes": 56321,
+    "valid_wrong": 194
+  }
+}

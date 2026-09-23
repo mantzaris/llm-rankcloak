@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "boundary_source_byte_windows_checked": 16500,
+  "same_prompt_pairs_checked": 8250,
+  "exact_identical_right_pairs": {},
+  "sampled_ordinary_source_ids": 2398,
+  "actual_and_donor_source_trials": 1263,
+  "greedy_policy_source": "rankcloak/revision_protocol.py tail loop chooses allowed rank one; source unchanged",
+  "entropy_source_text_windows_checked": 28,
+  "entropy_token_alignment_limit": "No tokenizer rerun. Declared byte offsets independently match the original visible text; pinned-token prefix alignment proof and token positions remain protected Stage 1 evidence.",
+  "detector_auc": {
+    "textcnn": {
+      "positive": 1491,
+      "negative": 1491,
+      "auc_pairwise_independent": 0.9868216677664916
+    },
+    "deberta": {
+      "positive": 1491,
+      "negative": 1491,
+      "auc_pairwise_independent": 0.9994296204231875
+    },
+    "surprisal": {
+      "positive": 1491,
+      "negative": 1491,
+      "auc_pairwise_independent": 0.9999946020860239
+    }
+  },
+  "input_hashes": {
+    "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+    "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+    "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a",
+    "results/revision_v4/stage2/plans/coherence_study/units.jsonl": "d5dd480f2b08a571571c6bc5ed38882c484595ca4c68bbff97c5692426a94e5d",
+    "results/revision_v4/source_tables/entropy_text_windows.csv": "3c9529ce441d5283c978cc0ca4759b7c16308528c5a73f0100f4ca4fb9b89ec4",
+    "results/revision_v3/generation/raw/entropy/mistral_7b_instruct_v0_3_q4_k_m/entropy_trial__448d04f6e62e4c75b366b814.json": "bc02b99ee5532fe5601ef6f485e6b4d65fe9b31e3ab6994b77c463e35b639682",
+    "results/revision_v3/generation/raw/entropy/mistral_7b_instruct_v0_3_q4_k_m/entropy_trial__c979f719898a6f70c3dcbb9c.json": "b02de5545de80b3515a6327d22b0eb509621bc0190632d62b5424b6aa5bb40b5",
+    "results/revision_v3/generation/raw/entropy/mistral_7b_instruct_v0_3_q4_k_m/entropy_trial__2b5e682d0007193b56249891.json": "f3d87a8e52c0e5dfec5efe7f53b9a1cc8e230dd7e671d3291519e0da8a388563",
+    "results/revision_v3/generation/raw/entropy/mistral_7b_instruct_v0_3_q4_k_m/entropy_trial__8aee3f48293ad5394ea38525.json": "7732950c28bbba87f4db6a6e790b54bda85768008d452362803cf78a6c78d011",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__ab3521d3c492336682b70695.json": "7903a3694ad9a00bc6d96fd7b5aed48eef63374e99f70eacb7b5be4892c90364",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__1019b5cade7e5b86277d14f8.json": "573ee2e6ee331b877e96599b806ed774f12c6489a1f118da1ac91a30f96c80c9",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__c21384a6f6d4d87efd47211f.json": "e2e083cfcde07eb77c4b556ab00933fe2d102aade60208c060d6fe4d4705706e",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__4260abe0ff9d9bb19b971362.json": "03100cac70749c77b7674592927959849190b6c7438003ed294a2a2aaa1ea92a",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__9ae150681b7e7347c8241d5a.json": "0f04a42b4d8d8f4ae346ce2456eaa586a4d6ec4fac6d01b56ac766e53be28362",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__383f9a8c5997f522387af4d9.json": "7cc20390b43ac731567e1a9fc9945f0b4018a453435beabb1b66c45ffc5e0320",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__cbb747058efe6a8b1fbd18ec.json": "2a9c069080ed9b0a82af3f391b12ea670bb18a56dc3bb8edbb1c1fd3c8a6d672",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__a2981193f295f0c404dba3c5.json": "347c364eafbc035ea3baa53835d166227f10ae87b891b53b572d67252b04bb24",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__7a501c8e9eb327d50bad30d9.json": "2fe98a5c0374849aeefd551d7903856761210f1dd388fee27719b3a284d1f9de",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__46aecf56a25cd045b329f0ef.json": "7597fa40fa5cea1008b8d2feb5060560400737fad3b1abf1a865954d69129567",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__3e728079d9569def3018a4fe.json": "4c5516c4543ca578f2ed24e41d893671a84c8b7567b90b4ce37cd945b3cb2148",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__a9ff67133eeaa189fa8be8b1.json": "14e0e1e29a2f3ee18c6af1a0044dec10af3cdedcda232a52d4decf4a02c83ba8",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__941eed91360afbdc8a26bf09.json": "e786f8d4f1678fb20305fc29fd428d8f2811b215b3307dc55bcf330673f14734",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__68a19cb7863d84e222e9545c.json": "44d6aaf73d9a8f0e3cbeb8a7fa32a0d1644ef50be424c72278deb050b449e270",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__c4160dc01512e365fbecb170.json": "c829757bea029b2764d40458334131915f8e0b6a6c8c2e5677bf0bad252c8846",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__65fa991a5caba02457a5ff2a.json": "6e5d60ddaf6bd0c6b9836370f3ff41bcb95f3035f7223b174d48b57c768859d8",
+    "results/revision_v3/generation/raw/entropy/qwen2_5_7b_instruct_q4_k_m/entropy_trial__93aee317cd29dda082df9e36.json": "301f052c3f345efb1ebcd56a411c96476db7fbcf7d4f77f401b4a705c13db132",
+    "results/revision_v3/detector_predictions/textcnn__matched.csv": "c8ede09f54576a7f2f22fa95d71a6586334b2f6b6cc3cbd840267ad9465fdb75",
+    "results/revision_v3/detector_predictions/deberta__matched.csv": "d40c6ce7888800065cf9f80281163b62b9c51b56ac900624284bc315a5614048",
+    "results/revision_v3/detector_predictions/surprisal__matched.csv": "bf96f4e5c2a0e1ebec6b974f1df3a34064282d2faa5b9f6693c6a525063883dd"
+  }
+}

@@ -1,0 +1,42 @@
+                                                                                               September 23, 2026
+
+
+Scientific Reports
+
+Dear Dr. Yang,
+
+                                  V4 AUTHOR-REVIEW CANDIDATE
+
+This revision prepared for author review concerns RankCloak Conceals the Surface Form of Synthetic Cryptographic
+Artifacts in Language Model Generated Text (submission 0170c7b2-1065-4344-a5d5-b839b51ac22c).
+The V4 revision addresses the editor’s technical assessment and Reviewer 1’s ten points while retaining Reviewer 2’s
+acknowledgment and all original review wording. It adds complete token-filter documentation, six strict-gate failure
+analyses with exact text windows and matched comparators, bounded transport decomposition, a configuration
+compatibility check, source-based complexity analysis and a directional fixed-message quantization endpoint. The
+conceptual block, integrity, ECC and retransmission fallback is explicitly unimplemented.
+The adverse findings remain central. All 960 fixed Q4 messages fail exact recovery when decoded from saved
+Q8 ranks. The transport decompositions do not establish general robustness. Neither of two control-only pilots
+meets the prospective semantic control-separation requirement. Context gain passes its specified control check.
+The subsequent frozen likelihood study supports limited local compatibility. Ordinary controls are sampled and
+RankCloak continuations are greedy, so the contrast does not isolate a causal boundary effect. Semantic coherence
+and reader-perceived naturalness remain unestablished. The response to Reviewer 1 comment 4 is complete as a
+scientific explanation, with partial empirical coverage for the editor to assess. RankCloak concerns surface-form
+concealment under a shared configuration and does not establish confidentiality or indistinguishability against the
+evaluated trace-informed attacker.
+The work is appropriate for Scientific Reports as a reproducible computational study of artifact representation,
+configured inversion and measurable failure boundaries. The revision retains adverse and null results and makes
+no claim of a robust or confidential communication channel.
+Published version 2.0.0, DOI https://doi.org/10.5281/zenodo.22555497, covers V3 but not V4. The local V4
+archive candidate is tied to a named source snapshot and accompanied by a verification receipt. Its public deposit
+and the corresponding DOI update remain required before resubmission. This letter is prepared for author review
+and records no new deposit, resubmission or acceptance.
+
+Sincerely,
+
+
+
+
+Alexander V. Mantzaris
+School of Data, Mathematical, and Statistical Sciences
+University of Central Florida
+alexander.mantzaris@ucf.edu

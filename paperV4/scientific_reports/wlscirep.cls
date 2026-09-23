@@ -18,11 +18,12 @@
 \AtEndOfClass{\RequirePackage{microtype}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions*
+\RequirePackage{fix-cm}
 \LoadClass{article}
 \RequirePackage{amsmath,amsfonts,amssymb}
-\RequirePackage{mathptmx}   % Loads the Times-Roman Math Fonts
-\RequirePackage{helvet}
-\RequirePackage{courier}
+% V4 revised-manuscript guidance requires default Computer Modern fonts.
+
+
 \RequirePackage{ifpdf}
 
 \RequirePackage{graphicx,xcolor}
@@ -31,8 +32,8 @@
 % Settings for the author block
 \RequirePackage{authblk}
 \setlength{\affilsep}{1.5em}
-\renewcommand\Authfont{\fontsize{12}{12}\usefont{OT1}{phv}{b}{n}}
-\renewcommand\Affilfont{\fontsize{10}{12}\usefont{OT1}{phv}{m}{n}}
+\renewcommand\Authfont{\fontsize{12}{12}\usefont{OT1}{cmss}{bx}{n}}
+\renewcommand\Affilfont{\fontsize{10}{12}\usefont{OT1}{cmss}{m}{n}}
 
 \RequirePackage[left=2cm,%
                 right=2cm,%
@@ -50,7 +51,7 @@
 % Set up of the bibliography style
 
 % \RequirePackage[numbers]{natbib}
-\RequirePackage[superscript,biblabel,nomove]{cite}
+\RequirePackage{cite} % Numerical square brackets required by the revision checklist.
 %% Nov 3, 2016: Support DOI
 \bibliographystyle{naturemag-doi}
 

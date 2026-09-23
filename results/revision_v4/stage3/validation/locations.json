@@ -1,0 +1,534 @@
+{
+  "sec:introduction": {
+    "document": "main4",
+    "page": 1
+  },
+  "sec:methods": {
+    "document": "main4",
+    "page": 2
+  },
+  "sec:rank-method": {
+    "document": "main4",
+    "page": 3
+  },
+  "eq:next-token-prob": {
+    "document": "main4",
+    "page": 3
+  },
+  "eq:rank-order": {
+    "document": "main4",
+    "page": 3
+  },
+  "eq:rank-function": {
+    "document": "main4",
+    "page": 3
+  },
+  "sec:calgacus-method": {
+    "document": "main4",
+    "page": 3
+  },
+  "eq:calgacus-rank-transcoding": {
+    "document": "main4",
+    "page": 4
+  },
+  "sec:payload-method": {
+    "document": "main4",
+    "page": 4
+  },
+  "eq:rankcloak-codec": {
+    "document": "main4",
+    "page": 4
+  },
+  "eq:rankcloak-nonseg": {
+    "document": "main4",
+    "page": 4
+  },
+  "eq:codec-exact-recovery": {
+    "document": "main4",
+    "page": 4
+  },
+  "eq:hex-nibble-map": {
+    "document": "main4",
+    "page": 4
+  },
+  "eq:ascii-radix-map": {
+    "document": "main4",
+    "page": 5
+  },
+  "eq:filtered-rank": {
+    "document": "main4",
+    "page": 5
+  },
+  "alg:nonseg": {
+    "document": "main4",
+    "page": 6
+  },
+  "sec:v4-filter": {
+    "document": "main4",
+    "page": 6
+  },
+  "tab:v4-filter": {
+    "document": "main4",
+    "page": 7
+  },
+  "sec:encoding-method": {
+    "document": "main4",
+    "page": 7
+  },
+  "eq:rank-segmentation": {
+    "document": "main4",
+    "page": 7
+  },
+  "eq:segmented-forced-span": {
+    "document": "main4",
+    "page": 7
+  },
+  "eq:segmented-message": {
+    "document": "main4",
+    "page": 7
+  },
+  "alg:segmented": {
+    "document": "main4",
+    "page": 8
+  },
+  "alg:tail": {
+    "document": "main4",
+    "page": 9
+  },
+  "sec:design-method": {
+    "document": "main4",
+    "page": 9
+  },
+  "sec:quality-method": {
+    "document": "main4",
+    "page": 9
+  },
+  "sec:replay-method": {
+    "document": "main4",
+    "page": 10
+  },
+  "sec:capacity-method": {
+    "document": "main4",
+    "page": 10
+  },
+  "sec:endpoint-method": {
+    "document": "main4",
+    "page": 10
+  },
+  "eq:capacity": {
+    "document": "main4",
+    "page": 10
+  },
+  "eq:effective-rate": {
+    "document": "main4",
+    "page": 11
+  },
+  "eq:quality-bound": {
+    "document": "main4",
+    "page": 11
+  },
+  "sec:detector-method": {
+    "document": "main4",
+    "page": 11
+  },
+  "sec:statistics-method": {
+    "document": "main4",
+    "page": 11
+  },
+  "sec:v4-boundary-method": {
+    "document": "main4",
+    "page": 12
+  },
+  "eq:v4-context-gain": {
+    "document": "main4",
+    "page": 12
+  },
+  "sec:v4-compatibility": {
+    "document": "main4",
+    "page": 13
+  },
+  "sec:revision-assistance": {
+    "document": "main4",
+    "page": 13
+  },
+  "sec:results": {
+    "document": "main4",
+    "page": 13
+  },
+  "sec:results-recovery": {
+    "document": "main4",
+    "page": 13
+  },
+  "sec:results-capacity": {
+    "document": "main4",
+    "page": 13
+  },
+  "fig:capacity": {
+    "document": "main4",
+    "page": 14
+  },
+  "fig:empirical-frontier": {
+    "document": "main4",
+    "page": 15
+  },
+  "sec:results-robustness": {
+    "document": "main4",
+    "page": 15
+  },
+  "fig:robustness": {
+    "document": "main4",
+    "page": 16
+  },
+  "sec:results-quality": {
+    "document": "main4",
+    "page": 16
+  },
+  "fig:forced-full": {
+    "document": "main4",
+    "page": 17
+  },
+  "sec:results-ablations": {
+    "document": "main4",
+    "page": 17
+  },
+  "sec:results-detector": {
+    "document": "main4",
+    "page": 18
+  },
+  "fig:detector": {
+    "document": "main4",
+    "page": 18
+  },
+  "sec:results-v3": {
+    "document": "main4",
+    "page": 18
+  },
+  "tab:v3-summary": {
+    "document": "main4",
+    "page": 19
+  },
+  "sec:v4-results": {
+    "document": "main4",
+    "page": 19
+  },
+  "tab:v4-coherence": {
+    "document": "main4",
+    "page": 20
+  },
+  "sec:v4-transport-results": {
+    "document": "main4",
+    "page": 20
+  },
+  "sec:v4-entropy-results": {
+    "document": "main4",
+    "page": 20
+  },
+  "sec:v4-quant-results": {
+    "document": "main4",
+    "page": 20
+  },
+  "sec:results-overhead": {
+    "document": "main4",
+    "page": 20
+  },
+  "sec:discussion": {
+    "document": "main4",
+    "page": 21
+  },
+  "sec:v4-boundaries": {
+    "document": "main4",
+    "page": 21
+  },
+  "sec:limitations": {
+    "document": "main4",
+    "page": 22
+  },
+  "sec:data-code": {
+    "document": "main4",
+    "page": 22
+  },
+  "LastPage": {
+    "document": "supplementary4",
+    "page": 40
+  },
+  "si:s1": {
+    "document": "supplementary4",
+    "page": 1
+  },
+  "si:s2": {
+    "document": "supplementary4",
+    "page": 2
+  },
+  "tab:payloads": {
+    "document": "supplementary4",
+    "page": 3
+  },
+  "tab:models": {
+    "document": "supplementary4",
+    "page": 3
+  },
+  "tab:prompts": {
+    "document": "supplementary4",
+    "page": 3
+  },
+  "tab:ledger": {
+    "document": "supplementary4",
+    "page": 4
+  },
+  "si:s3": {
+    "document": "supplementary4",
+    "page": 5
+  },
+  "tab:primary-strata": {
+    "document": "supplementary4",
+    "page": 5
+  },
+  "tab:multilingual": {
+    "document": "supplementary4",
+    "page": 5
+  },
+  "si:s4": {
+    "document": "supplementary4",
+    "page": 6
+  },
+  "fig:s1": {
+    "document": "supplementary4",
+    "page": 6
+  },
+  "tab:robustness": {
+    "document": "supplementary4",
+    "page": 6
+  },
+  "tab:coverage": {
+    "document": "supplementary4",
+    "page": 7
+  },
+  "si:s5": {
+    "document": "supplementary4",
+    "page": 8
+  },
+  "fig:readability-full": {
+    "document": "supplementary4",
+    "page": 8
+  },
+  "tab:readability": {
+    "document": "supplementary4",
+    "page": 8
+  },
+  "si:s6": {
+    "document": "supplementary4",
+    "page": 9
+  },
+  "fig:ablation-full": {
+    "document": "supplementary4",
+    "page": 10
+  },
+  "tab:all-ablations": {
+    "document": "supplementary4",
+    "page": 11
+  },
+  "fig:tail-gain": {
+    "document": "supplementary4",
+    "page": 12
+  },
+  "tab:all-topic": {
+    "document": "supplementary4",
+    "page": 12
+  },
+  "si:s7": {
+    "document": "supplementary4",
+    "page": 13
+  },
+  "fig:detector-full": {
+    "document": "supplementary4",
+    "page": 14
+  },
+  "tab:detector-matched": {
+    "document": "supplementary4",
+    "page": 15
+  },
+  "tab:detector-ranges": {
+    "document": "supplementary4",
+    "page": 15
+  },
+  "si:s8": {
+    "document": "supplementary4",
+    "page": 15
+  },
+  "fig:capacity-validation": {
+    "document": "supplementary4",
+    "page": 17
+  },
+  "tab:theory-validation": {
+    "document": "supplementary4",
+    "page": 17
+  },
+  "si:s9": {
+    "document": "supplementary4",
+    "page": 17
+  },
+  "fig:overhead-full": {
+    "document": "supplementary4",
+    "page": 18
+  },
+  "tab:overhead-cells": {
+    "document": "supplementary4",
+    "page": 19
+  },
+  "tab:detector-cost": {
+    "document": "supplementary4",
+    "page": 19
+  },
+  "si:s10": {
+    "document": "supplementary4",
+    "page": 19
+  },
+  "tab:claim-boundaries": {
+    "document": "supplementary4",
+    "page": 20
+  },
+  "si:s11": {
+    "document": "supplementary4",
+    "page": 21
+  },
+  "tab:v3-dedup": {
+    "document": "supplementary4",
+    "page": 21
+  },
+  "tab:v3-human-design": {
+    "document": "supplementary4",
+    "page": 22
+  },
+  "si:s12": {
+    "document": "supplementary4",
+    "page": 22
+  },
+  "tab:v3-detector-main": {
+    "document": "supplementary4",
+    "page": 22
+  },
+  "tab:v3-low-fpr": {
+    "document": "supplementary4",
+    "page": 23
+  },
+  "fig:v3-low-fpr": {
+    "document": "supplementary4",
+    "page": 24
+  },
+  "fig:v3-human-controls": {
+    "document": "supplementary4",
+    "page": 25
+  },
+  "si:s13": {
+    "document": "supplementary4",
+    "page": 25
+  },
+  "tab:v3-entropy-thresholds": {
+    "document": "supplementary4",
+    "page": 25
+  },
+  "tab:v3-entropy-generation": {
+    "document": "supplementary4",
+    "page": 26
+  },
+  "fig:v3-entropy-capacity": {
+    "document": "supplementary4",
+    "page": 27
+  },
+  "tab:v3-entropy-detectors": {
+    "document": "supplementary4",
+    "page": 27
+  },
+  "fig:v3-entropy-detectors": {
+    "document": "supplementary4",
+    "page": 28
+  },
+  "si:s14": {
+    "document": "supplementary4",
+    "page": 28
+  },
+  "tab:v3-quant-recovery": {
+    "document": "supplementary4",
+    "page": 28
+  },
+  "fig:v3-quant-recovery": {
+    "document": "supplementary4",
+    "page": 29
+  },
+  "fig:v3-quant-sensitivity": {
+    "document": "supplementary4",
+    "page": 30
+  },
+  "tab:v3-cross-quant-detectors": {
+    "document": "supplementary4",
+    "page": 30
+  },
+  "fig:v3-cross-quant-detectors": {
+    "document": "supplementary4",
+    "page": 31
+  },
+  "si:s15": {
+    "document": "supplementary4",
+    "page": 31
+  },
+  "tab:v3-boundaries": {
+    "document": "supplementary4",
+    "page": 31
+  },
+  "si:v4-stage1": {
+    "document": "supplementary4",
+    "page": 32
+  },
+  "tab:v4-failures": {
+    "document": "supplementary4",
+    "page": 33
+  },
+  "fig:v4-entropy": {
+    "document": "supplementary4",
+    "page": 33
+  },
+  "tab:v4-entropy-runs": {
+    "document": "supplementary4",
+    "page": 34
+  },
+  "si:v4-coherence": {
+    "document": "supplementary4",
+    "page": 35
+  },
+  "tab:v4-boundary-eligibility": {
+    "document": "supplementary4",
+    "page": 36
+  },
+  "tab:v4-pilot": {
+    "document": "supplementary4",
+    "page": 36
+  },
+  "fig:v4-coherence": {
+    "document": "supplementary4",
+    "page": 37
+  },
+  "tab:v4-coherence-models": {
+    "document": "supplementary4",
+    "page": 37
+  },
+  "si:v4-transport": {
+    "document": "supplementary4",
+    "page": 38
+  },
+  "tab:v4-transport": {
+    "document": "supplementary4",
+    "page": 39
+  },
+  "si:v4-fixed-quant": {
+    "document": "supplementary4",
+    "page": 39
+  },
+  "si:v4-theory": {
+    "document": "supplementary4",
+    "page": 39
+  },
+  "tab:v4-complexity": {
+    "document": "supplementary4",
+    "page": 40
+  }
+}

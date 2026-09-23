@@ -6,7 +6,11 @@ RankCloak is a research codebase for LLM rank-transcoding steganography over det
 
 RankCloak is a concealment and measurement study under exact-copy conditions. It is not encryption, key exchange, authentication, credential handling, or a claim of cryptographic security. All payloads are deterministic synthetic examples; do not add real API keys, credentials, private keys, accounts, services, or operational secrets.
 
-Exact recovery requires the same model, tokenizer, quantization, deterministic rank ordering, prompt, and unmodified generated text.
+Exact saved-token recovery requires the same model, tokenizer, quantization, numerical backend, rank ordering, prompt and span contract, together with the original payload-bearing token path. An unchanged visible string alone does not guarantee that path. The V4 revision documents the weaker visible-text endpoint and transformation failures.
+
+## V4 author-review candidate
+
+The current revision and complete written responses are under `paperV4`. Semantic control separation was not established in either pilot. The local likelihood study supports only limited conditional compatibility. See [the Stage 3 report](revision_docs/REVISION_V4_STAGE3_REPORT.md), [author actions](paperV4/ACTIONS_BEFORE_SUBMISSION.md) and [offline archive reproduction](release/v4/REPRODUCE.md). The published version 2.0.0 archive covers V3, not V4.
 
 ## Setup
 

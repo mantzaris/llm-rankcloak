@@ -1,0 +1,78 @@
+{
+  "conditions": {
+    "moderate": {
+      "attempts": 120,
+      "complete": 120
+    },
+    "strict": {
+      "attempts": 120,
+      "complete": 114
+    },
+    "ungated": {
+      "attempts": 120,
+      "complete": 120
+    }
+  },
+  "failures": [
+    {
+      "budget": 768,
+      "consumed": 110,
+      "longest": 50,
+      "model": "mistral_7b_instruct_v0_3_q4_k_m",
+      "plan_id": "entropy_trial__2b5e682d0007193b56249891",
+      "requested": 128,
+      "start": 382,
+      "stop": 432
+    },
+    {
+      "budget": 768,
+      "consumed": 116,
+      "longest": 163,
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "plan_id": "entropy_trial__941eed91360afbdc8a26bf09",
+      "requested": 128,
+      "start": 419,
+      "stop": 582
+    },
+    {
+      "budget": 384,
+      "consumed": 54,
+      "longest": 39,
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "plan_id": "entropy_trial__9ae150681b7e7347c8241d5a",
+      "requested": 64,
+      "start": 36,
+      "stop": 75
+    },
+    {
+      "budget": 768,
+      "consumed": 106,
+      "longest": 35,
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "plan_id": "entropy_trial__a9ff67133eeaa189fa8be8b1",
+      "requested": 128,
+      "start": 322,
+      "stop": 357
+    },
+    {
+      "budget": 768,
+      "consumed": 59,
+      "longest": 267,
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "plan_id": "entropy_trial__c4160dc01512e365fbecb170",
+      "requested": 128,
+      "start": 501,
+      "stop": 768
+    },
+    {
+      "budget": 768,
+      "consumed": 116,
+      "longest": 51,
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "plan_id": "entropy_trial__cbb747058efe6a8b1fbd18ec",
+      "requested": 128,
+      "start": 350,
+      "stop": 401
+    }
+  ]
+}

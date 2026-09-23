@@ -1,9 +1,9 @@
 cff-version: 1.2.0
-message: "If you use RankCloak, please cite the software and the associated manuscript."
+message: "This citation identifies the published V3 archive. The V4 author-review candidate is not yet deposited. Cite the version actually used and the associated manuscript."
 type: software
 title: "RankCloak: Rank transcoding of cryptographic artifacts in language-model cover text"
-version: 1.0.0
-doi: 10.5281/zenodo.21987450
+version: 2.0.0
+doi: 10.5281/zenodo.22555497
 authors:
   - family-names: Mantzaris
     given-names: Alexander V.

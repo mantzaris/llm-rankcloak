@@ -1,0 +1,39 @@
+{
+  "arm_units": 8250,
+  "by_generator": {
+    "llama3_8b_instruct_q4_k_m": {
+      "excluded": 43,
+      "structural": 1058
+    },
+    "mistral_7b_instruct_v0_3_q4_k_m": {
+      "excluded": 341,
+      "structural": 1058
+    },
+    "qwen2_5_7b_instruct_q4_k_m": {
+      "excluded": 40,
+      "structural": 1058
+    }
+  },
+  "donors": {
+    "ordinary": {
+      "identities": 2398,
+      "max_identity_reuse": 2,
+      "max_payload_reuse": 18,
+      "payloads": 411
+    },
+    "shuffled": {
+      "identities": 2354,
+      "max_identity_reuse": 4,
+      "max_payload_reuse": 32,
+      "payloads": 240
+    }
+  },
+  "eligible_boundaries": 2750,
+  "original_structural": 8280,
+  "pilot_payload_overlap": 0,
+  "planned_trials": 552,
+  "scored_trials": 550,
+  "selected_payloads": 92,
+  "selected_structural": 3174,
+  "standalone_right_tokenization_differs": 3057
+}

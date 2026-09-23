@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "source": "paperV4/scientific_reports/main4_submission.tex",
+  "source_sha256": "79b2a8d9f19665246eb61f7e04cc9a68f34d9bad0970b0e37ae81fa8ee3aecc8",
+  "pages": 23,
+  "passes": 3,
+  "warnings": [],
+  "unresolved_references": false,
+  "scope": "Self-contained main text and compiled bibliography. Separate figure uploads and end legends/tables. Author-review PDF retains in-place figures.",
+  "review_pdf": "paperV4/scientific_reports/main4.pdf"
+}

@@ -1,0 +1,206 @@
+{
+  "payloads": 480,
+  "primary_exact": 6480,
+  "primary_trials": 6480,
+  "robustness": [
+    {
+      "denominator": 288,
+      "family": "cross_model_mismatch",
+      "mode": "cross_model_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "unmodified"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "line_endings"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "markdown_copy_paste"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "quote_conversion"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "unicode_normalization"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 96,
+      "record_type": "robustness_reference",
+      "transformation": "unmodified"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "whitespace_collapse"
+    },
+    {
+      "denominator": 96,
+      "family": "limited_mitigation",
+      "mode": "canonicalized_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "whitespace_trim"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 18,
+      "record_type": "robustness_decode",
+      "transformation": "character_deletion"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 18,
+      "record_type": "robustness_decode",
+      "transformation": "character_insertion"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 16,
+      "record_type": "robustness_decode",
+      "transformation": "character_substitution"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 16,
+      "record_type": "robustness_decode",
+      "transformation": "line_endings"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "markdown_copy_paste"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 0,
+      "record_type": "robustness_decode",
+      "transformation": "paraphrase"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 56,
+      "record_type": "robustness_decode",
+      "transformation": "quote_conversion"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 34,
+      "record_type": "robustness_decode",
+      "transformation": "token_deletion"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 144,
+      "record_type": "robustness_decode",
+      "transformation": "truncation"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 82,
+      "record_type": "robustness_decode",
+      "transformation": "unicode_normalization"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 144,
+      "record_type": "robustness_reference",
+      "transformation": "unmodified"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 21,
+      "record_type": "robustness_decode",
+      "transformation": "whitespace_collapse"
+    },
+    {
+      "denominator": 144,
+      "family": "raw_transmission",
+      "mode": "transformed_text_retokenized",
+      "numerator": 28,
+      "record_type": "robustness_decode",
+      "transformation": "whitespace_trim"
+    },
+    {
+      "denominator": 144,
+      "family": "replay_modes",
+      "mode": "detokenized_text_retokenized",
+      "numerator": 88,
+      "record_type": "robustness_decode",
+      "transformation": "unmodified"
+    },
+    {
+      "denominator": 144,
+      "family": "replay_modes",
+      "mode": "greedy_leadin_regeneration",
+      "numerator": 144,
+      "record_type": "robustness_decode",
+      "transformation": "unmodified"
+    },
+    {
+      "denominator": 144,
+      "family": "replay_modes",
+      "mode": "saved_token_ids",
+      "numerator": 144,
+      "record_type": "robustness_reference",
+      "transformation": "unmodified"
+    }
+  ],
+  "segmented_classes": {
+    "hmac_sha256_hex": 60,
+    "nonce_96_bit_hex": 60,
+    "sha256_hex": 60,
+    "token_128_bit_hex": 60
+  },
+  "structural_boundaries": 8280
+}
