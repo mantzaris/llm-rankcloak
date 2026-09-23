@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-09-23T04:55:52.469770+00:00",
+  "authenticated_connection_available": false,
+  "connector_or_browser_tool_available": false,
+  "relevant_environment_variable_names": [],
+  "configured_credential_found": false,
+  "checked_locations": [
+    "repository .env",
+    "~/.netrc",
+    "~/.config/zenodo",
+    "~/.zenodo.json",
+    "~/.zenodorc",
+    "Zenodo-named immediate entries in home, .config, .local/share and repository"
+  ],
+  "private_drafts": "not_accessible_without_authentication",
+  "credential_values_printed": false,
+  "api_mutations": 0,
+  "publication_authorization": "explicit Stage 4 user instruction",
+  "fallback": "release/v4/STAGE4_MANUAL_PUBLISH.md",
+  "unauthenticated_depositions_http_status": 403
+}

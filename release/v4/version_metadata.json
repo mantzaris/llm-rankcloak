@@ -1,6 +1,6 @@
 {
   "schema": "rankcloak.release-metadata.v4.1",
-  "state": "unpublished_local_author_review_candidate",
+  "state": "author_approved_awaiting_authenticated_publication",
   "candidate_version": "3.0.0-rc1",
   "proposed_public_version": "3.0.0",
   "new_version_doi": null,
@@ -19,5 +19,7 @@
   "license": "MIT, with third-party material retaining its stated license as detailed in THIRD_PARTY_NOTICE.md",
   "description_file": "RELEASE_DESCRIPTION.md",
   "source_identity": "ARCHIVE_SOURCE.json and the external PACKAGE_MANIFEST.json generated after the source snapshot commit",
-  "publication_date": "Set to the actual publication date only when publishing in a later authorized stage."
+  "publication_date": "Use the actual publication date. Prepared metadata is not a submitted or published record.",
+  "author_approval": "Explicit Stage 4 user instruction approves scientific interpretation, partial R1.4 coverage, author details, assistance disclosure and full existing package scope.",
+  "stage4_publication_manifest": "results/revision_v4/stage4/publication/publication_manifest.json"
 }

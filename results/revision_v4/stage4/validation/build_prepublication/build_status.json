@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "mode": "pending",
+  "builds": [
+    {
+      "name": "main4_submission",
+      "pages": 23,
+      "warnings": [],
+      "input_paths_checked": 185,
+      "elapsed_seconds": 3.1129573760044877,
+      "pdf_sha256": "6125b09de20492b00ff1bdd0af591019239350ed8d0735891f159c774c1dde80"
+    },
+    {
+      "name": "main4",
+      "pages": 25,
+      "warnings": [],
+      "input_paths_checked": 197,
+      "elapsed_seconds": 3.1907648109990987,
+      "pdf_sha256": "011edbbbbe892205eb170800ad0b0c83ed340374bc63df8256a720d5e49f59c4",
+      "source_pdf_sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf",
+      "text_layout_equal_to_current_pdf": true
+    },
+    {
+      "name": "supplementary4",
+      "pages": 40,
+      "warnings": [],
+      "input_paths_checked": 222,
+      "elapsed_seconds": 3.626079514004232,
+      "pdf_sha256": "4f6d3c3f5feb0b4eb5fdc69d2d7a88f78ff14f3f19c72fe93ecae3d4013d199f",
+      "source_pdf_sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a",
+      "text_layout_equal_to_current_pdf": true
+    },
+    {
+      "name": "response_to_reviewers_v4",
+      "pages": 8,
+      "warnings": [],
+      "input_paths_checked": 80,
+      "elapsed_seconds": 1.5519979529999546,
+      "pdf_sha256": "4fe8dc04cabe4b06cb3a3b9fb323e22717fa45342f397f60e3fd10a5a1ab480e",
+      "source_pdf_sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e",
+      "text_layout_equal_to_current_pdf": true
+    },
+    {
+      "name": "cover_letter_v4",
+      "pages": 1,
+      "warnings": [],
+      "input_paths_checked": 64,
+      "elapsed_seconds": 1.3882364290038822,
+      "pdf_sha256": "06b5ac6476c58ccdcb0ab6ac054612b3b89b662bb23459a6537945479a38d988",
+      "source_pdf_sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4",
+      "text_layout_equal_to_current_pdf": true
+    }
+  ],
+  "science_rerun": false,
+  "gpu_jobs": 0,
+  "pdf_hash_caveat": "Fresh TeX timestamps may differ. All four text layouts exactly match the current PDFs."
+}

@@ -1,0 +1,24 @@
+{
+  "status": "passed_pending_external_publication",
+  "historical_files_unchanged": 8911,
+  "existing_administrative_files_changed": [
+    "paperV4/ACTIONS_BEFORE_SUBMISSION.md",
+    "paperV4/REVIEW_RESPONSE_MATRIX.md",
+    "release/v4/UPLOAD_CHECKLIST.md",
+    "release/v4/version_metadata.json"
+  ],
+  "exact_review_blocks": 13,
+  "complete_written_answers": 16,
+  "R1_4_empirical_coverage": "partial",
+  "author_decision": "approved",
+  "editor_judgment": "unknown",
+  "approved_upload_files_verified": 4,
+  "bundle_payload_files": 16,
+  "clean_builds": 5,
+  "document_byte_changes_from_source": 0,
+  "gpu_jobs": 0,
+  "public_v4_deposit_verified": false,
+  "final_upload_package_prepared": false,
+  "pending_upload_bundle_prepared": true,
+  "journal_submission_performed": false
+}

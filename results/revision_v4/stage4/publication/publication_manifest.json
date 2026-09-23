@@ -1,0 +1,74 @@
+{
+  "schema": "rankcloak.stage4.publication-manifest.v1",
+  "status": "prepared_not_submitted",
+  "prepared_at_utc": "2026-09-23T04:54:33.976021+00:00",
+  "source_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "source_tree": "bcea80173eea5c98bcf588642f58e70edd42c573",
+  "concept_doi": "10.5281/zenodo.21987449",
+  "intended_version": "3.0.0",
+  "internal_candidate_version": "3.0.0-rc1",
+  "files": [
+    {
+      "filename": "llm-rankcloak-v4-7f48ae2ef2fb.zip",
+      "size_bytes": 367904213,
+      "sha256": "1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/llm-rankcloak-v4-7f48ae2ef2fb.zip"
+    },
+    {
+      "filename": "PACKAGE_MANIFEST.json",
+      "size_bytes": 2960592,
+      "sha256": "a0f45ecd26de211e3108e7ba739ace4251bb019a2ba1844e12af823a84a7665d",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/PACKAGE_MANIFEST.json"
+    },
+    {
+      "filename": "PACKAGE_MANIFEST.csv",
+      "size_bytes": 2010833,
+      "sha256": "5224380ae240725a152efc44dce22934857706e863d59c7cec71f8938a8467aa",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/PACKAGE_MANIFEST.csv"
+    },
+    {
+      "filename": "SHA256SUMS",
+      "size_bytes": 188,
+      "sha256": "5dc483baca52aa91aa0a3225513dbed27440f0f7d8ad55af178e718d819541dc",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/SHA256SUMS"
+    }
+  ],
+  "prepared_metadata": {
+    "title": "RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text. Research code and data",
+    "upload_type": "software",
+    "version": "3.0.0",
+    "publication_date": "2026-09-23",
+    "description": "<p>RankCloak research code and retained computational evidence for surface-form concealment of synthetic cryptographic artifacts in language-model-generated text. Version 3.0.0 contains the V4 author-review scientific snapshot and historical V1 through V3 materials. Manuscript and supplement sources, compiled PDFs, styles, bibliographies, figures, exact review correspondence, reviewer responses and cover letters are included.</p>\n<p>The package includes generation and analysis code, frozen configurations and selections, raw and derived data, both unsuccessful semantic control-only pilots, execution and test records, reproducibility instructions, model acquisition identities and hashes, and license notices. It retains the six strict-gate failure diagnostics, exploratory local conditional-likelihood study, bounded transport diagnostics, configuration compatibility check and directional fixed-message Q4-to-Q8 byte reconstruction.</p>\n<p>Neither semantic pilot met its prospective control-separation criterion. Conditional context gain passed its specified control-separation check and supports only limited local conditional compatibility under the retained scoring contract. Ordinary controls were sampled and RankCloak continuations were greedy. Semantic coherence and reader-perceived naturalness were not established. The results do not establish cryptographic confidentiality, statistical indistinguishability or general transport robustness. The complete written response to Reviewer 1 comment 4 has partial empirical coverage. No participant judgments were collected, and this release makes no claim of journal submission or acceptance.</p>\n<p>The immutable scientific source is Git commit <code>7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0</code>, tree <code>bcea80173eea5c98bcf588642f58e70edd42c573</code>. The archived internal candidate label is <code>3.0.0-rc1</code>. The public release version is <code>3.0.0</code>. The original candidate ZIP is unchanged. Its SHA256 is <code>1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625</code>. The JSON and CSV manifests list all 8,856 payload files, including <code>ARCHIVE_SOURCE.json</code>. The checksum companion covers the ZIP and JSON manifest. Later administrative handoff records and DOI-updated submission documents are not inside this ZIP. Availability statements inside the historical snapshot describe the state at assembly.</p>\n<p>Pretrained model weights, virtual environments, credentials, caches, incidental build intermediates, nested historical ZIP bundles and downloaded third-party source or paper snapshots are excluded. Primary-source URLs, revisions and checksums remain. The public synthetic artifacts are not operational credentials. The repository code uses the MIT license. Third-party materials retain their own terms as documented in <code>release/v4/THIRD_PARTY_NOTICE.md</code>, including the Dolly control subset under CC BY-SA 3.0, template notices and manuscript/review material that is not relicensed as MIT code. Model licenses apply on separate acquisition.</p>\n<p>This version belongs under concept DOI <a href=\"https://doi.org/10.5281/zenodo.21987449\">10.5281/zenodo.21987449</a>. Historical version 2.0.0, DOI <a href=\"https://doi.org/10.5281/zenodo.22555497\">10.5281/zenodo.22555497</a>, covers V3. This description explicitly includes the manuscript materials and corrects the older record's contradictory manuscript-exclusion description. Source and later administrative updates are available in the <a href=\"https://github.com/mantzaris/llm-rankcloak\">repository</a>. The packaged offline reproduction instructions identify portable inputs and distinguish historical machine paths from runtime requirements.</p>",
+    "creators": [
+      {
+        "name": "Mantzaris, Alexander V.",
+        "affiliation": "University of Central Florida",
+        "orcid": "0000-0002-0026-5725"
+      }
+    ],
+    "access_right": "open",
+    "license": "mit-license",
+    "keywords": [
+      "language models",
+      "rank transcoding",
+      "synthetic cryptographic artifacts",
+      "reproducible research"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/mantzaris/llm-rankcloak",
+        "relation": "isSupplementTo",
+        "scheme": "url"
+      },
+      {
+        "identifier": "https://github.com/mantzaris/llm-rankcloak/tree/7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+        "relation": "isDerivedFrom",
+        "scheme": "url"
+      }
+    ],
+    "notes": "MIT applies to repository code. Third-party exceptions are documented in release/v4/THIRD_PARTY_NOTICE.md. The archived candidate is 3.0.0-rc1. Later DOI-updated submission documents are outside this immutable snapshot."
+  },
+  "submitted_metadata": null,
+  "date_rule": "Set publication_date to the actual publication date. Preparation is not publication.",
+  "workflow": "New version of record 22555497 under the existing concept. Check current latest and drafts first."
+}

@@ -1,0 +1,428 @@
+{
+  "source_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "edition": "Unchanged approved Stage 3 snapshot pending publication",
+  "files": [
+    {
+      "path": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "size_bytes": 89702,
+      "sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4",
+      "archived_sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/cover_letter/cover_letter_v4.tex",
+      "size_bytes": 3108,
+      "sha256": "399fc1076fb88fbd44226bf9ec4ca7ca8a48a6de8c2c935695054b1ea5455245",
+      "archived_sha256": "399fc1076fb88fbd44226bf9ec4ca7ca8a48a6de8c2c935695054b1ea5455245",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/response/response_to_reviewers_v4.pdf",
+      "size_bytes": 162214,
+      "sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e",
+      "archived_sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/response/response_to_reviewers_v4.tex",
+      "size_bytes": 27236,
+      "sha256": "34807e00dcd0625c457411166cdefe31651ebabe71545f8f2f3dfeb67d0af58a",
+      "archived_sha256": "34807e00dcd0625c457411166cdefe31651ebabe71545f8f2f3dfeb67d0af58a",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/ablation_summary.pdf",
+      "size_bytes": 22852,
+      "sha256": "ed234d911f8d2b5a772cebd58613e971692535c65bcc10db862277e42081cbc7",
+      "archived_sha256": "ed234d911f8d2b5a772cebd58613e971692535c65bcc10db862277e42081cbc7",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/automated_readability.pdf",
+      "size_bytes": 27627,
+      "sha256": "a6b85f79f9bc4964cf4d77cab23242ed18effe772b54d8a445824ac3045b18a1",
+      "archived_sha256": "a6b85f79f9bc4964cf4d77cab23242ed18effe772b54d8a445824ac3045b18a1",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/capacity_tail_validation.pdf",
+      "size_bytes": 25042,
+      "sha256": "8a145258b0b29902d552e896406c97e7fae641f1b51933b90cff75d5fbe3a6ce",
+      "archived_sha256": "8a145258b0b29902d552e896406c97e7fae641f1b51933b90cff75d5fbe3a6ce",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/computational_overhead.pdf",
+      "size_bytes": 31335,
+      "sha256": "d9ff4346189b3084da36dda3f75ccbe5779d45740c26e9357cbb69a58117d800",
+      "archived_sha256": "d9ff4346189b3084da36dda3f75ccbe5779d45740c26e9357cbb69a58117d800",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/detector_low_fpr.pdf",
+      "size_bytes": 13671,
+      "sha256": "76204f3906b2196c28c69ef3b4b475cf0118966142f399de4140ed0e2b656b1e",
+      "archived_sha256": "76204f3906b2196c28c69ef3b4b475cf0118966142f399de4140ed0e2b656b1e",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/detector_model_family_generalization.pdf",
+      "size_bytes": 15918,
+      "sha256": "4066dccbe990d2bf392c2eec228564bedee3ccab94efa041201aacb31526a8a9",
+      "archived_sha256": "4066dccbe990d2bf392c2eec228564bedee3ccab94efa041201aacb31526a8a9",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/empirical_capacity_quality_frontier.pdf",
+      "size_bytes": 32930,
+      "sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d",
+      "archived_sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/entropy_gate_capacity_recovery.pdf",
+      "size_bytes": 15742,
+      "sha256": "7a094413ecfb17024cff918c1c85b69483b7fc3f2184f75c8e93ed2756e0947d",
+      "archived_sha256": "7a094413ecfb17024cff918c1c85b69483b7fc3f2184f75c8e93ed2756e0947d",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/entropy_gate_detector_performance.pdf",
+      "size_bytes": 15576,
+      "sha256": "6b6e0686d2be56c54a34ff9da999210af435457f615efd9d4c061bb0246efe11",
+      "archived_sha256": "6b6e0686d2be56c54a34ff9da999210af435457f615efd9d4c061bb0246efe11",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/forced_span_full_message_quality.pdf",
+      "size_bytes": 24645,
+      "sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91",
+      "archived_sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/human_control_false_positives.pdf",
+      "size_bytes": 13714,
+      "sha256": "ea615084afe9e958ac7d967419861e79354c843e1d551c4efa99d3e683b76e76",
+      "archived_sha256": "ea615084afe9e958ac7d967419861e79354c843e1d551c4efa99d3e683b76e76",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/matched_quantization_detector_transfer.pdf",
+      "size_bytes": 15011,
+      "sha256": "428c6ee030427fde7dab01b5e5d85ca78e5cbc0ca0b0c55c6466d4cb9b9c578b",
+      "archived_sha256": "428c6ee030427fde7dab01b5e5d85ca78e5cbc0ca0b0c55c6466d4cb9b9c578b",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/matched_quantization_recovery.pdf",
+      "size_bytes": 12311,
+      "sha256": "b1cd6d397a7e8a7e5b807dc76668f446a964054a255643186ae7515f7d4d993e",
+      "archived_sha256": "b1cd6d397a7e8a7e5b807dc76668f446a964054a255643186ae7515f7d4d993e",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/matched_quantization_sensitivity.pdf",
+      "size_bytes": 14733,
+      "sha256": "0a4da83f5ec7ff1750e38f6f242a32a2e97cdebda31851bf396b205ecad89ca1",
+      "archived_sha256": "0a4da83f5ec7ff1750e38f6f242a32a2e97cdebda31851bf396b205ecad89ca1",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/neural_detector_performance.pdf",
+      "size_bytes": 32073,
+      "sha256": "5abfff283fad532f22be033c86eb49dc3a1b11d5e7bf2315fb4c27ad972ec6f4",
+      "archived_sha256": "5abfff283fad532f22be033c86eb49dc3a1b11d5e7bf2315fb4c27ad972ec6f4",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/payload_representation_rank_capacity.pdf",
+      "size_bytes": 36606,
+      "sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08",
+      "archived_sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/robustness_recovery.pdf",
+      "size_bytes": 28938,
+      "sha256": "fe47daa66d07aa6173e45bf757dd1d81a07b5d459f4b1556c868d68004f785fc",
+      "archived_sha256": "fe47daa66d07aa6173e45bf757dd1d81a07b5d459f4b1556c868d68004f785fc",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/robustness_recovery_compact.pdf",
+      "size_bytes": 24316,
+      "sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797",
+      "archived_sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/tail_gain_by_prompt_category.pdf",
+      "size_bytes": 26301,
+      "sha256": "25f5d03d5a5b0f651b30f58a83e874669806fef8da3dc43704710d2fd1956ee1",
+      "archived_sha256": "25f5d03d5a5b0f651b30f58a83e874669806fef8da3dc43704710d2fd1956ee1",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/topic_conditioned_cover_variability.pdf",
+      "size_bytes": 13166,
+      "sha256": "ddc9cebdfa8b81ad49feefab012ff16647a1da626686ea9b0063e2315320ca73",
+      "archived_sha256": "ddc9cebdfa8b81ad49feefab012ff16647a1da626686ea9b0063e2315320ca73",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/v4_boundary_coherence.pdf",
+      "size_bytes": 14190,
+      "sha256": "bd82777ea79cba33fa0ba635e96443f73c44834a36e1bb6a7cddcf5cae58c8a4",
+      "archived_sha256": "bd82777ea79cba33fa0ba635e96443f73c44834a36e1bb6a7cddcf5cae58c8a4",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/figures/v4_entropy_failure_traces.pdf",
+      "size_bytes": 65223,
+      "sha256": "ce271afa7ef794186050c7eeeb18118f213372e3b96b5d093c7f5a030e8efc60",
+      "archived_sha256": "ce271afa7ef794186050c7eeeb18118f213372e3b96b5d093c7f5a030e8efc60",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/jabbrv-ltwa-all.ldf",
+      "size_bytes": 49105,
+      "sha256": "847e16e9784aaeba4e6535a6f4f73e70e5c364c70d41968cc051f10651b9fedc",
+      "archived_sha256": "847e16e9784aaeba4e6535a6f4f73e70e5c364c70d41968cc051f10651b9fedc",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/jabbrv-ltwa-en.ldf",
+      "size_bytes": 268655,
+      "sha256": "27fb2fd7907ac91aca0defcbd74b923dde05c90c12190b0250764acda6180c5a",
+      "archived_sha256": "27fb2fd7907ac91aca0defcbd74b923dde05c90c12190b0250764acda6180c5a",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/jabbrv.sty",
+      "size_bytes": 15468,
+      "sha256": "597972a978abf3e1e7f9b25e8926b2899eb79ae5d08710f5a653a0f5de8f9b2c",
+      "archived_sha256": "597972a978abf3e1e7f9b25e8926b2899eb79ae5d08710f5a653a0f5de8f9b2c",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/main4.bbl",
+      "size_bytes": 21652,
+      "sha256": "93516c995d963610139126d6f93ac481c050b7bf09163cef391c5ab524410e0a",
+      "archived_sha256": "93516c995d963610139126d6f93ac481c050b7bf09163cef391c5ab524410e0a",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/main4.pdf",
+      "size_bytes": 672893,
+      "sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf",
+      "archived_sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/main4.tex",
+      "size_bytes": 79494,
+      "sha256": "400df5f77fa54c0e3f8558d60e07b3a76526eaa9d9638ee9b1013a8a7f83113c",
+      "archived_sha256": "400df5f77fa54c0e3f8558d60e07b3a76526eaa9d9638ee9b1013a8a7f83113c",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/main4_submission.tex",
+      "size_bytes": 119256,
+      "sha256": "79b2a8d9f19665246eb61f7e04cc9a68f34d9bad0970b0e37ae81fa8ee3aecc8",
+      "archived_sha256": "79b2a8d9f19665246eb61f7e04cc9a68f34d9bad0970b0e37ae81fa8ee3aecc8",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/naturemag-doi.bst",
+      "size_bytes": 36147,
+      "sha256": "a480c2e36b9647191f221962d4a47d3a17e2bb648b9ea001a617596dee4eef40",
+      "archived_sha256": "a480c2e36b9647191f221962d4a47d3a17e2bb648b9ea001a617596dee4eef40",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/references.bib",
+      "size_bytes": 19448,
+      "sha256": "403c62be65be54db7f14c4e50c6d2419261499583b44baac57265c571e5cbad7",
+      "archived_sha256": "403c62be65be54db7f14c4e50c6d2419261499583b44baac57265c571e5cbad7",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/submission_figures/Figure1.pdf",
+      "size_bytes": 36606,
+      "sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08",
+      "archived_sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/submission_figures/Figure2.pdf",
+      "size_bytes": 32930,
+      "sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d",
+      "archived_sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/submission_figures/Figure3.pdf",
+      "size_bytes": 24316,
+      "sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797",
+      "archived_sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/submission_figures/Figure4.pdf",
+      "size_bytes": 24645,
+      "sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91",
+      "archived_sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/submission_figures/Figure5.pdf",
+      "size_bytes": 15918,
+      "sha256": "4066dccbe990d2bf392c2eec228564bedee3ccab94efa041201aacb31526a8a9",
+      "archived_sha256": "4066dccbe990d2bf392c2eec228564bedee3ccab94efa041201aacb31526a8a9",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.bbl",
+      "size_bytes": 2523,
+      "sha256": "ec580d35fcd7dcd68ff8fe99143c3085ff5f671fff96690d9c03175369f56953",
+      "archived_sha256": "ec580d35fcd7dcd68ff8fe99143c3085ff5f671fff96690d9c03175369f56953",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.pdf",
+      "size_bytes": 1013737,
+      "sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a",
+      "archived_sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "size_bytes": 90375,
+      "sha256": "c2b3acff7cdff9214c9f104a25f876bbebfba7772449a62a20b213ee62501dcb",
+      "archived_sha256": "c2b3acff7cdff9214c9f104a25f876bbebfba7772449a62a20b213ee62501dcb",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/entropy_six_failures.tex",
+      "size_bytes": 672,
+      "sha256": "6371d8f2b48addaaf4588eefd6b07f7a2540fb24a56042b6d3ae1ca5bbfa2d7d",
+      "archived_sha256": "6371d8f2b48addaaf4588eefd6b07f7a2540fb24a56042b6d3ae1ca5bbfa2d7d",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_boundary_eligibility.tex",
+      "size_bytes": 773,
+      "sha256": "8399ef9ae14585267e1ae5f8367470e7b3ef27476de0d53909fa64e818789753",
+      "archived_sha256": "8399ef9ae14585267e1ae5f8367470e7b3ef27476de0d53909fa64e818789753",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_coherence.tex",
+      "size_bytes": 631,
+      "sha256": "89724fc54c1ae40ab0a76781359d7f484f7dbcd737ac3b1729cf100e9020ba00",
+      "archived_sha256": "89724fc54c1ae40ab0a76781359d7f484f7dbcd737ac3b1729cf100e9020ba00",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_coherence_models.tex",
+      "size_bytes": 1133,
+      "sha256": "5831112cb198f7ab98db706775ca0492ef5197b8396eff9c1c63648ed55ae26a",
+      "archived_sha256": "5831112cb198f7ab98db706775ca0492ef5197b8396eff9c1c63648ed55ae26a",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_entropy_runs.tex",
+      "size_bytes": 867,
+      "sha256": "1d3f8edc412f4a5abf65d6c384999acdffe175212836553c7c2b69fb59c4cc30",
+      "archived_sha256": "1d3f8edc412f4a5abf65d6c384999acdffe175212836553c7c2b69fb59c4cc30",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_pilots.tex",
+      "size_bytes": 644,
+      "sha256": "0985cf4c781a5781b02c0822b670ce19f0ff6932c2f034a500de58b8c56722eb",
+      "archived_sha256": "0985cf4c781a5781b02c0822b670ce19f0ff6932c2f034a500de58b8c56722eb",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_transport.tex",
+      "size_bytes": 856,
+      "sha256": "7154fb3a3bb1d4492251e1ecb68d47eda5781bf26340031ab3a9beade247164e",
+      "archived_sha256": "7154fb3a3bb1d4492251e1ecb68d47eda5781bf26340031ab3a9beade247164e",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_coherence_supplement_results.tex",
+      "size_bytes": 4380,
+      "sha256": "673c183eb7eb273d31a18443d70cb9cf70548ac4bc1df94a98ed93aa76e12d0d",
+      "archived_sha256": "673c183eb7eb273d31a18443d70cb9cf70548ac4bc1df94a98ed93aa76e12d0d",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_entropy_windows.tex",
+      "size_bytes": 9011,
+      "sha256": "7f3538119a2acf384383a60d7098d11198fe47a0194afd73375b47a4a960cff3",
+      "archived_sha256": "7f3538119a2acf384383a60d7098d11198fe47a0194afd73375b47a4a960cff3",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_filter_methods.tex",
+      "size_bytes": 3366,
+      "sha256": "fe351d546caa0e2026b0a89bb5e761e1674e68c7c8febf9ac6793ac37565d250",
+      "archived_sha256": "fe351d546caa0e2026b0a89bb5e761e1674e68c7c8febf9ac6793ac37565d250",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_stage1_entropy.tex",
+      "size_bytes": 2295,
+      "sha256": "8c931da3dadd37846940515734f3258c54ca399f1913fc8943c659b32740a5ef",
+      "archived_sha256": "8c931da3dadd37846940515734f3258c54ca399f1913fc8943c659b32740a5ef",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_stage2_complexity.tex",
+      "size_bytes": 1569,
+      "sha256": "736e4fa4712c85986f25a93b3381bed0b3ee2122a5be039fa968724efde0c490",
+      "archived_sha256": "736e4fa4712c85986f25a93b3381bed0b3ee2122a5be039fa968724efde0c490",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_stage2_methods.tex",
+      "size_bytes": 5980,
+      "sha256": "6676b69963f511310cde392c8ff2d9cccfe575c4a1a7fb8d1f4ce7fc3c495b86",
+      "archived_sha256": "6676b69963f511310cde392c8ff2d9cccfe575c4a1a7fb8d1f4ce7fc3c495b86",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_stage2_results.tex",
+      "size_bytes": 4266,
+      "sha256": "d81453aa382d3717c686e96d3a10d5955ae38a6aee40e2f068b904a58c0bd238",
+      "archived_sha256": "d81453aa382d3717c686e96d3a10d5955ae38a6aee40e2f068b904a58c0bd238",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_stage2_supplement.tex",
+      "size_bytes": 14196,
+      "sha256": "a2b4f93edf18094c489b1d62fb55d7b53d2fd4088e08105bab8a76acb1210d5e",
+      "archived_sha256": "a2b4f93edf18094c489b1d62fb55d7b53d2fd4088e08105bab8a76acb1210d5e",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/v4_stage2_theory.tex",
+      "size_bytes": 2838,
+      "sha256": "2f398ded520b899aa08afc27a0ca8cb5ac1399b3fbb7e4017ba58ec2772e1f14",
+      "archived_sha256": "2f398ded520b899aa08afc27a0ca8cb5ac1399b3fbb7e4017ba58ec2772e1f14",
+      "differs_from_archived_snapshot": false
+    },
+    {
+      "path": "paperV4/scientific_reports/wlscirep.cls",
+      "size_bytes": 5804,
+      "sha256": "4e574c677f338b207450d69e051b7ebfaa11b17e86f9d9d3c0339e5365b33072",
+      "archived_sha256": "4e574c677f338b207450d69e051b7ebfaa11b17e86f9d9d3c0339e5365b33072",
+      "differs_from_archived_snapshot": false
+    }
+  ],
+  "document_byte_changes": 0,
+  "doi_updated_final_documents": false
+}

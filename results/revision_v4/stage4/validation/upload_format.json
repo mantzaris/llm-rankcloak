@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "title_words": 14,
+  "abstract_words": 194,
+  "main_and_upload_abstract_identical": true,
+  "main_supplement_upload_title_author_affiliation_contact_match": true,
+  "separate_figure_label_scan": "no Figure N or Fig. N found in five unchanged figure PDFs",
+  "changed_pdf_pages": 0,
+  "visual_review_reused_reason": "All packaged PDF and figure bytes equal the independently reviewed Stage 3 snapshot. Clean rebuilds have identical text layouts and page counts. No manuscript or figure edit occurred."
+}

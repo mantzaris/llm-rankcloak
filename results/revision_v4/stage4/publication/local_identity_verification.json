@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-09-23T04:54:33.977394+00:00",
+  "source_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "source_tree": "bcea80173eea5c98bcf588642f58e70edd42c573",
+  "files": [
+    {
+      "filename": "llm-rankcloak-v4-7f48ae2ef2fb.zip",
+      "size_bytes": 367904213,
+      "sha256": "1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/llm-rankcloak-v4-7f48ae2ef2fb.zip"
+    },
+    {
+      "filename": "PACKAGE_MANIFEST.json",
+      "size_bytes": 2960592,
+      "sha256": "a0f45ecd26de211e3108e7ba739ace4251bb019a2ba1844e12af823a84a7665d",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/PACKAGE_MANIFEST.json"
+    },
+    {
+      "filename": "PACKAGE_MANIFEST.csv",
+      "size_bytes": 2010833,
+      "sha256": "5224380ae240725a152efc44dce22934857706e863d59c7cec71f8938a8467aa",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/PACKAGE_MANIFEST.csv"
+    },
+    {
+      "filename": "SHA256SUMS",
+      "size_bytes": 188,
+      "sha256": "5dc483baca52aa91aa0a3225513dbed27440f0f7d8ad55af178e718d819541dc",
+      "local_path": "release_artifacts/v4/7f48ae2ef2fb/SHA256SUMS"
+    }
+  ],
+  "zip_rebuilt": false,
+  "zip_modified": false,
+  "prior_independent_verification": "results/revision_v4/stage3/release/VERIFICATION_RECEIPT.json"
+}

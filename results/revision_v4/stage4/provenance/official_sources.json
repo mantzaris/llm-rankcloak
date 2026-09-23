@@ -1,0 +1,54 @@
+[
+  {
+    "id": "zenodo_versions",
+    "url": "https://help.zenodo.org/docs/deposit/manage-versions/",
+    "checked_at_utc": "2026-09-23T05:02:26.924159+00:00",
+    "status": 200,
+    "final_url": "https://help.zenodo.org/docs/deposit/manage-versions/",
+    "bytes": 16739,
+    "sha256": "ce9dc8be3f5f416b937cceafdcd1d36c51bdd861b36bfb29a92c658a8e8e2c47"
+  },
+  {
+    "id": "zenodo_doi",
+    "url": "https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/",
+    "checked_at_utc": "2026-09-23T05:02:27.176272+00:00",
+    "status": 200,
+    "final_url": "https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/",
+    "bytes": 16571,
+    "sha256": "aa750d22e4cbb9ae0c1c9ccec8e988bd04c76af87cdeeb78915821ada0c1fccd"
+  },
+  {
+    "id": "zenodo_api",
+    "url": "https://developers.zenodo.org/",
+    "checked_at_utc": "2026-09-23T05:02:27.315556+00:00",
+    "status": 200,
+    "final_url": "https://developers.zenodo.org/",
+    "bytes": 174410,
+    "sha256": "0d160d7491206d3f014549194fa6f18235b1b96e889f57b36356e93acc3476dc"
+  },
+  {
+    "id": "journal_revision_checklist",
+    "url": "https://www.nature.com/documents/srep-checklist-for-revised-submissions.pdf",
+    "checked_at_utc": "2026-09-23T05:02:27.684704+00:00",
+    "status": 200,
+    "final_url": "https://www.nature.com/documents/srep-checklist-for-revised-submissions.pdf",
+    "bytes": 3038,
+    "sha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+    "body_is_requested_document": false,
+    "http_status_limit": "HTTP 200 carried a 3038-byte access/interstitial page, not the requested document. Do not treat this checksum as the journal PDF or guideline body.",
+    "alternative_checked": "Web tool obtained the complete three-page revision checklist. The primary Scientific Reports guideline search result was checked. Prior full Stage 3 source audit retained."
+  },
+  {
+    "id": "journal_guidance",
+    "url": "https://www.nature.com/srep/author-instructions/submission-guidelines",
+    "checked_at_utc": "2026-09-23T05:02:27.876966+00:00",
+    "status": 200,
+    "final_url": "https://www.nature.com/srep/author-instructions/submission-guidelines",
+    "bytes": 3038,
+    "sha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+    "contains_submission_guidance": false,
+    "body_is_requested_document": false,
+    "http_status_limit": "HTTP 200 carried a 3038-byte access/interstitial page, not the requested document. Do not treat this checksum as the journal PDF or guideline body.",
+    "alternative_checked": "Web tool obtained the complete three-page revision checklist. The primary Scientific Reports guideline search result was checked. Prior full Stage 3 source audit retained."
+  }
+]

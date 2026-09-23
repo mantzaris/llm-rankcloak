@@ -1,0 +1,121 @@
+{
+  "status": "pending",
+  "public_v4_verified": false,
+  "journal_submission_performed": false,
+  "bundle_directory": "/home/meow/Documents/repos/llm-rankcloak/release_artifacts/v4/stage4/prepublication/submission_pending_publication",
+  "source_snapshot_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "files": [
+    {
+      "filename": "main4_submission.tex",
+      "portal_role": "Editable revised manuscript",
+      "source": "paperV4/scientific_reports/main4_submission.tex",
+      "size_bytes": 119256,
+      "sha256": "79b2a8d9f19665246eb61f7e04cc9a68f34d9bad0970b0e37ae81fa8ee3aecc8"
+    },
+    {
+      "filename": "wlscirep.cls",
+      "portal_role": "LaTeX dependency",
+      "source": "paperV4/scientific_reports/wlscirep.cls",
+      "size_bytes": 5804,
+      "sha256": "4e574c677f338b207450d69e051b7ebfaa11b17e86f9d9d3c0339e5365b33072"
+    },
+    {
+      "filename": "naturemag-doi.bst",
+      "portal_role": "LaTeX dependency",
+      "source": "paperV4/scientific_reports/naturemag-doi.bst",
+      "size_bytes": 36147,
+      "sha256": "a480c2e36b9647191f221962d4a47d3a17e2bb648b9ea001a617596dee4eef40"
+    },
+    {
+      "filename": "jabbrv.sty",
+      "portal_role": "LaTeX dependency",
+      "source": "paperV4/scientific_reports/jabbrv.sty",
+      "size_bytes": 15468,
+      "sha256": "597972a978abf3e1e7f9b25e8926b2899eb79ae5d08710f5a653a0f5de8f9b2c"
+    },
+    {
+      "filename": "jabbrv-ltwa-all.ldf",
+      "portal_role": "LaTeX dependency",
+      "source": "paperV4/scientific_reports/jabbrv-ltwa-all.ldf",
+      "size_bytes": 49105,
+      "sha256": "847e16e9784aaeba4e6535a6f4f73e70e5c364c70d41968cc051f10651b9fedc"
+    },
+    {
+      "filename": "jabbrv-ltwa-en.ldf",
+      "portal_role": "LaTeX dependency",
+      "source": "paperV4/scientific_reports/jabbrv-ltwa-en.ldf",
+      "size_bytes": 268655,
+      "sha256": "27fb2fd7907ac91aca0defcbd74b923dde05c90c12190b0250764acda6180c5a"
+    },
+    {
+      "filename": "main4.bbl",
+      "portal_role": "Compiled bibliography companion, already embedded in main source",
+      "source": "paperV4/scientific_reports/main4.bbl",
+      "size_bytes": 21652,
+      "sha256": "93516c995d963610139126d6f93ac481c050b7bf09163cef391c5ab524410e0a"
+    },
+    {
+      "filename": "figures/payload_representation_rank_capacity.pdf",
+      "portal_role": "Main Figure 1, separate single-page upload",
+      "source": "paperV4/scientific_reports/figures/payload_representation_rank_capacity.pdf",
+      "size_bytes": 36606,
+      "sha256": "3a7da1934a56f6a77f3c33bf7dfd16e70a5762c1cdc503447d7a67d7b92c9e08"
+    },
+    {
+      "filename": "figures/empirical_capacity_quality_frontier.pdf",
+      "portal_role": "Main Figure 2, separate single-page upload",
+      "source": "paperV4/scientific_reports/figures/empirical_capacity_quality_frontier.pdf",
+      "size_bytes": 32930,
+      "sha256": "f6b0e89505eb31888212555cab070f23e8956b42d41d67abe7f3bc7f2f77af1d"
+    },
+    {
+      "filename": "figures/robustness_recovery_compact.pdf",
+      "portal_role": "Main Figure 3, separate single-page upload",
+      "source": "paperV4/scientific_reports/figures/robustness_recovery_compact.pdf",
+      "size_bytes": 24316,
+      "sha256": "7f299c6863973b2f794ab5aa64bcf6b226189503b3f026eade5794f6544d6797"
+    },
+    {
+      "filename": "figures/forced_span_full_message_quality.pdf",
+      "portal_role": "Main Figure 4, separate single-page upload",
+      "source": "paperV4/scientific_reports/figures/forced_span_full_message_quality.pdf",
+      "size_bytes": 24645,
+      "sha256": "f65ce8d2b9083a626b18def6db5f80d13d467e86b993ffb1ef93fbd7568a6b91"
+    },
+    {
+      "filename": "figures/detector_model_family_generalization.pdf",
+      "portal_role": "Main Figure 5, separate single-page upload",
+      "source": "paperV4/scientific_reports/figures/detector_model_family_generalization.pdf",
+      "size_bytes": 15918,
+      "sha256": "4066dccbe990d2bf392c2eec228564bedee3ccab94efa041201aacb31526a8a9"
+    },
+    {
+      "filename": "main4.pdf",
+      "portal_role": "Author reference only, not the editable manuscript slot",
+      "source": "paperV4/scientific_reports/main4.pdf",
+      "size_bytes": 672893,
+      "sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf"
+    },
+    {
+      "filename": "supplementary4.pdf",
+      "portal_role": "Supplementary Information",
+      "source": "paperV4/scientific_reports/supplementary4.pdf",
+      "size_bytes": 1013737,
+      "sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a"
+    },
+    {
+      "filename": "response_to_reviewers_v4.pdf",
+      "portal_role": "Response to Reviewers, single file",
+      "source": "paperV4/response/response_to_reviewers_v4.pdf",
+      "size_bytes": 162214,
+      "sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e"
+    },
+    {
+      "filename": "cover_letter_v4.pdf",
+      "portal_role": "Cover letter",
+      "source": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "size_bytes": 89702,
+      "sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4"
+    }
+  ]
+}

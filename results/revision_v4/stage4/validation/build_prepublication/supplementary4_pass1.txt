@@ -1,0 +1,389 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./supplementary4.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(./wlscirep.cls
+Document Class: wlscirep 08/08/2020, v1.4
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-english.tex)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/fleqn.clo)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifpdf.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/preprint/authblk.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage2e.sty
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) 
+)) (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titletoc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex))) (./jabbrv.sty
+(./jabbrv-ltwa-all.ldf) (./jabbrv-ltwa-en.ldf))
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/seqsplit/seqsplit.sty)
+No file supplementary4.aux.
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1{/var/lib/texm
+f/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/cm-super
+/cm-super-t1.enc}]
+
+LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 108.
+
+[2]
+
+LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 163.
+
+[3]
+
+LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 188.
+
+[4]
+
+LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 238.
+
+[5]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table S7 on input line 270.
+
+
+LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 270.
+
+[6 <./figures/robustness_recovery.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 298.
+
+[7]
+
+LaTeX Warning: Reference `LastPage' on page 8 undefined on input line 328.
+
+[8 <./figures/automated_readability.pdf>]
+
+LaTeX Warning: Reference `tab:all-ablations' on page 9 undefined on input line 
+334.
+
+
+LaTeX Warning: Reference `LastPage' on page 9 undefined on input line 347.
+
+[9]
+
+LaTeX Warning: Reference `LastPage' on page 10 undefined on input line 375.
+
+[10 <./figures/ablation_summary.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 11 undefined on input line 387.
+
+[11]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table S11 on input line 414.
+
+
+LaTeX Warning: Reference `LastPage' on page 12 undefined on input line 423.
+
+[12 <./figures/tail_gain_by_prompt_category.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 13 undefined on input line 431.
+
+[13]
+
+LaTeX Warning: Reference `LastPage' on page 14 undefined on input line 453.
+
+[14 <./figures/neural_detector_performance.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 15 undefined on input line 482.
+
+[15]
+
+LaTeX Warning: Reference `LastPage' on page 16 undefined on input line 528.
+
+[16]
+
+LaTeX Warning: Reference `tab:overhead-cells' on page 17 undefined on input lin
+e 550.
+
+
+LaTeX Warning: Reference `LastPage' on page 17 undefined on input line 553.
+
+[17 <./figures/capacity_tail_validation.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 18 undefined on input line 592.
+
+[18 <./figures/computational_overhead.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 19 undefined on input line 625.
+
+[19]
+
+LaTeX Warning: Reference `LastPage' on page 20 undefined on input line 659.
+
+[20]
+
+LaTeX Warning: Reference `tab:v3-dedup' on page 21 undefined on input line 667.
+
+
+
+LaTeX Warning: Reference `LastPage' on page 21 undefined on input line 709.
+
+[21]
+
+LaTeX Warning: Reference `tab:v3-detector-main' on page 22 undefined on input l
+ine 714.
+
+
+LaTeX Warning: Reference `LastPage' on page 22 undefined on input line 752.
+
+[22]
+
+LaTeX Warning: Reference `LastPage' on page 23 undefined on input line 758.
+
+[23]
+
+LaTeX Warning: Reference `LastPage' on page 24 undefined on input line 766.
+
+[24 <./figures/detector_low_fpr.pdf>]
+
+LaTeX Warning: Citation `Lee2024SWEET' on page 25 undefined on input line 773.
+
+
+LaTeX Warning: Reference `tab:v3-entropy-thresholds' on page 25 undefined on in
+put line 775.
+
+
+LaTeX Warning: Reference `LastPage' on page 25 undefined on input line 793.
+
+[25 <./figures/human_control_false_positives.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 26 undefined on input line 821.
+
+[26]
+
+LaTeX Warning: Reference `LastPage' on page 27 undefined on input line 851.
+
+[27 <./figures/entropy_gate_capacity_recovery.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 28 undefined on input line 884.
+
+[28 <./figures/entropy_gate_detector_performance.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 29 undefined on input line 892.
+
+[29 <./figures/matched_quantization_recovery.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 30 undefined on input line 924.
+
+[30 <./figures/matched_quantization_sensitivity.pdf>]
+
+LaTeX Warning: Reference `LastPage' on page 31 undefined on input line 953.
+
+[31 <./figures/matched_quantization_detector_transfer.pdf>]
+(./v4_stage1_entropy.tex (./supplementary_tables/entropy_six_failures.tex)
+
+LaTeX Warning: Reference `LastPage' on page 32 undefined on input line 13.
+
+[32]) (./v4_entropy_windows.tex
+
+LaTeX Warning: Reference `LastPage' on page 33 undefined on input line 4.
+
+[33 <./figures/v4_entropy_failure_traces.pdf>]
+(./supplementary_tables/v4_entropy_runs.tex)
+
+LaTeX Warning: Reference `LastPage' on page 34 undefined on input line 38.
+
+[34]) (./v4_stage2_supplement.tex
+
+LaTeX Warning: Reference `LastPage' on page 35 undefined on input line 5.
+
+[35] (./supplementary_tables/v4_boundary_eligibility.tex)
+
+LaTeX Warning: Reference `tab:v4-pilot' on page 36 undefined on input line 12.
+
+(./supplementary_tables/v4_pilots.tex)
+
+LaTeX Warning: Reference `LastPage' on page 36 undefined on input line 17.
+
+[36] (./v4_coherence_supplement_results.tex
+(./supplementary_tables/v4_coherence_models.tex)
+
+LaTeX Warning: Reference `LastPage' on page 37 undefined on input line 19.
+
+[37 <./figures/v4_boundary_coherence.pdf>])
+(./supplementary_tables/v4_transport.tex)
+
+LaTeX Warning: Reference `LastPage' on page 38 undefined on input line 28.
+
+[38]
+
+LaTeX Warning: Reference `tab:v4-complexity' on page 39 undefined on input line
+ 43.
+
+
+LaTeX Warning: Citation `Ziegler2019NeuralLinguisticSteganography' on page 39 u
+ndefined on input line 57.
+
+
+LaTeX Warning: Citation `Shen2020SelfAdjustingArithmetic' on page 39 undefined 
+on input line 57.
+
+
+LaTeX Warning: Citation `Zhang2021ProvablySecureGenerative' on page 39 undefine
+d on input line 57.
+
+
+LaTeX Warning: Citation `Ziegler2019NeuralLinguisticSteganography' on page 39 u
+ndefined on input line 57.
+
+
+LaTeX Warning: Citation `Shen2020SelfAdjustingArithmetic' on page 39 undefined 
+on input line 57.
+
+
+LaTeX Warning: Citation `Zhang2021ProvablySecureGenerative' on page 39 undefine
+d on input line 57.
+
+
+LaTeX Warning: Reference `LastPage' on page 39 undefined on input line 59.
+
+[39]) (./supplementary4.bbl)
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
+
+LaTeX Warning: Reference `LastPage' on page 40 undefined on input line 966.
+
+[40] 
+enddocument/afterlastpage: lastpage setting LastPage.
+(./supplementary4.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `supplementary4.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+
+Package lastpage Warning: Rerun to get the references right on input line 966.
+
+ )</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/cm-sup
+er/sfbx0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></us
+r/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/
+type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-supe
+r/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr
+/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/t
+ype1/public/cm-super/sfss0800.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfss0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx0900.pfb></usr/
+share/texmf/fonts/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf/fonts/ty
+pe1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/
+sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/s
+hare/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on supplementary4.pdf (40 pages, 1015772 bytes).
+Transcript written on supplementary4.log.
