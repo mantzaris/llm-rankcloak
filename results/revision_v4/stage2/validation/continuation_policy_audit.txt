@@ -1,0 +1,1 @@
+{'ordinary_source_identities': 2398, 'rankcloak_source_trials': 1263, 'ordinary_sampler_counts': {'numpy_pcg64_serial_top_p_v1_token_id_tiebreak': 2398}, 'rankcloak_tail_policies': ['dynamic_completion_v1']}

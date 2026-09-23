@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/meow/.pyenv/versions/3.10.13/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/meow/.pyenv/versions/3.10.13/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_v4_transport.py", line 148, in <module>
+    if a.action=='prepare':prepare()
+  File "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_v4_transport.py", line 46, in prepare
+    hist=[r for r in records if r['source_trial_id']==winner['source_trial_id'] and r['model_id']==r['source_model_id'] and (r['robustness_family']=='raw_transmission' and r['transformation_id'] in ['unmodified','markdown_copy_paste','line_endings','whitespace_trim'])]
+  File "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_v4_transport.py", line 46, in <listcomp>
+    hist=[r for r in records if r['source_trial_id']==winner['source_trial_id'] and r['model_id']==r['source_model_id'] and (r['robustness_family']=='raw_transmission' and r['transformation_id'] in ['unmodified','markdown_copy_paste','line_endings','whitespace_trim'])]
+KeyError: 'model_id'

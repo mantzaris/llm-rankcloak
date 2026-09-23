@@ -1,0 +1,7 @@
+plan_id,model_id,start,stop,positions,distinct_token_ids,most_frequent_token_id,most_frequent_token_count,longest_identical_id_streak,observed_rank_available,rank_one_count,rank_one_fraction,zero_byte_increment_positions,byte_alignment_available,mean_entropy_bits,mean_margin_bits,token_roles,payload_ranks_consumed
+entropy_trial__2b5e682d0007193b56249891,mistral_7b_instruct_v0_3_q4_k_m,382,432,50,43,1122,3,2,50,45,0.9,0,50,0.3971860678084398,-1.5203644361805884,{'ordinary_sampled_skip': 50},0
+entropy_trial__941eed91360afbdc8a26bf09,qwen2_5_7b_instruct_q4_k_m,419,582,163,118,12,5,1,163,161,0.9877300613496932,0,163,0.07316348889310487,-2.359393829984927,{'ordinary_sampled_skip': 163},0
+entropy_trial__9ae150681b7e7347c8241d5a,qwen2_5_7b_instruct_q4_k_m,36,75,39,33,11,2,1,39,35,0.8974358974358975,0,39,0.8641366028569012,-1.5684207160211303,{'ordinary_sampled_skip': 39},0
+entropy_trial__a9ff67133eeaa189fa8be8b1,qwen2_5_7b_instruct_q4_k_m,322,357,35,30,11,3,1,35,30,0.8571428571428571,0,35,0.8883366830027744,-1.5442206358752573,{'ordinary_sampled_skip': 35},0
+entropy_trial__c4160dc01512e365fbecb170,qwen2_5_7b_instruct_q4_k_m,501,768,267,157,279,15,3,267,260,0.9737827715355806,0,267,0.11109272694972888,-2.3214645919283026,{'ordinary_sampled_skip': 267},0
+entropy_trial__cbb747058efe6a8b1fbd18ec,qwen2_5_7b_instruct_q4_k_m,350,401,51,41,264,3,1,51,46,0.9019607843137255,0,51,0.7447027229886728,-1.6878545958893587,{'ordinary_sampled_skip': 51},0

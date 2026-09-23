@@ -1,0 +1,17 @@
+{
+  "environment": ".venv",
+  "new_dependencies_installed": false,
+  "packages": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pytest": "9.1.1",
+    "safetensors": "0.8.0",
+    "scipy": "1.15.3",
+    "tokenizers": "0.20.3",
+    "torch": "2.5.1+cu124",
+    "transformers": "4.46.3"
+  },
+  "platform": "Linux-6.17.0-22-generic-x86_64-with-glibc2.39",
+  "python": "3.10.13 (main, Feb 26 2026, 22:30:03) [GCC 13.3.0]"
+}

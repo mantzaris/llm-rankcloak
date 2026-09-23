@@ -1,0 +1,48 @@
+{
+  "coherence_study": {
+    "comparisons": [
+      {
+        "contrast": "actual versus ordinary",
+        "identical_complete_windows": 0,
+        "identical_right_strings": 0,
+        "pairs": 2750
+      },
+      {
+        "contrast": "actual versus shuffled",
+        "identical_complete_windows": 0,
+        "identical_right_strings": 0,
+        "pairs": 2750
+      },
+      {
+        "contrast": "ordinary versus shuffled",
+        "identical_complete_windows": 0,
+        "identical_right_strings": 0,
+        "pairs": 2750
+      }
+    ],
+    "source_sha256": "d5dd480f2b08a571571c6bc5ed38882c484595ca4c68bbff97c5692426a94e5d"
+  },
+  "pilot_amendment1": {
+    "comparisons": [
+      {
+        "contrast": "pilot_ordinary versus pilot_shuffled",
+        "identical_complete_windows": 0,
+        "identical_right_strings": 0,
+        "pairs": 36
+      }
+    ],
+    "source_sha256": "a300f0c2ccb2f26a49961b7a7aed5415eb9067f5ab5f2e3576cd5fa2e1cb2e2a"
+  },
+  "pilot_initial": {
+    "comparisons": [
+      {
+        "contrast": "pilot_ordinary versus pilot_shuffled",
+        "identical_complete_windows": 0,
+        "identical_right_strings": 0,
+        "pairs": 36
+      }
+    ],
+    "source_sha256": "9076d487357df23d22ff6b9523c3426a5352424454f8474c33989403c2da6d9e"
+  },
+  "scope": "Construction audit only. The frozen shuffle rule skips identical donor tails relative to their recipient. Ordinary matched windows are otherwise retained by the frozen assignment. No scoring outcome or selection change is involved."
+}

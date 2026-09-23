@@ -1,0 +1,50 @@
+{
+  "additional_cover_arms": 0,
+  "constituent_segments": 0,
+  "files": {
+    "historical_outcomes.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "requests.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reused_replays.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "selected_covers.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "historical_reused_segment_requests": 0,
+  "inputs": {
+    "results/revision_v1/robustness_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "7fd88a04775237e56de11a96c56bc0accc8408530e948b37bcdea9c871cff5d3",
+    "results/revision_v1/robustness_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "4afbd421e8db3c87bb1a1f22dbbd8710abddd3913fbb02d8af08edc301c14080",
+    "results/revision_v1/robustness_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "ba4b6bce6faa60dca7d1ff227b795fdab9d5597a7069f749de119d853c153710"
+  },
+  "model_counts": {},
+  "model_pins": {},
+  "seed": 20260922,
+  "selected_source_covers": 0,
+  "selection": "Lowest SHA256(seed|source_trial_id) in each model by executed unchanged-visible-text success stratum. Use historical line-ending replay only when every observed segment exactly equals its source bytes. The unmodified reference aliases saved-ID success and is retained but not relabeled as visible-text execution. No replacement for unavailable strata.",
+  "source_sha256": "f5bde90ed135010feb202d52f2a260cfcfad06fc855ab4af1e3505fa6a69dddd",
+  "unavailable_strata": [
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "visible_text_success": true
+    },
+    {
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "visible_text_success": false
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "visible_text_success": true
+    },
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "visible_text_success": false
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "visible_text_success": true
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "visible_text_success": false
+    }
+  ],
+  "unique_new_segment_replays": 0,
+  "wrapper_rule": "Remove exactly the declared > space prefix from every line after the retained composite operation. No payload consultation or offset search."
+}

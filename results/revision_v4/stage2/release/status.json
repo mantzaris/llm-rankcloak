@@ -1,0 +1,14 @@
+{
+  "assembly_source": "current tracked files plus Stage 2 deliverables, including author Stage 2 plan",
+  "base_commit": "b964b938a0b2578501edf60555da8eff5ed4eddd",
+  "concept_doi": "10.5281/zenodo.21987449",
+  "contains_paperV3": true,
+  "contains_paperV4": true,
+  "file_count": 8779,
+  "final_commit_assembly_pending": true,
+  "inventory_sha256": "4623bdb5a334f275a56901db6c44fe648b827fe86a1e8362d9d30f145e3c56fe",
+  "published_doi": "10.5281/zenodo.22555497",
+  "published_version": "2.0.0",
+  "status": "local prospective inventory only, no archive assembled or published",
+  "v4_covered_by_published_doi": false
+}

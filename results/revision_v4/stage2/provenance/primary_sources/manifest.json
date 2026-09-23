@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/harvardnlp/NeuralSteganography/14e982564aeaf9a33f7b4de440deda2184d17f12/arithmetic.py",
+    "commit": "14e982564aeaf9a33f7b4de440deda2184d17f12",
+    "sha256": "90a34b06d46b5e67660a1a70104ff1ba6fd80ea2ba6d77cbdb759ee6adae0dba",
+    "bytes": 12271
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mickeystroller/StegaText/125f1b23b2ff0316320ad5aa3a7db1f029129a1d/saac.py",
+    "commit": "125f1b23b2ff0316320ad5aa3a7db1f029129a1d",
+    "sha256": "6cc14e1413bdea45b49e9d00578be85c6d72bdcb692ae6a75d7edcc64f640e24",
+    "bytes": 13601
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mickeystroller/StegaText/125f1b23b2ff0316320ad5aa3a7db1f029129a1d/arithmetic_baseline.py",
+    "commit": "125f1b23b2ff0316320ad5aa3a7db1f029129a1d",
+    "sha256": "3df9d30f6fadbac6917e951962d9a55c37295cfb72190228b31e27bc8e55a09c",
+    "bytes": 12876
+  }
+]

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/meow/Documents/repos/llm-rankcloak/scripts/freeze_revision_v4_stage2_study.py", line 15, in <module>
+    assert len(classes)==240 and len(strata)==8
+AssertionError

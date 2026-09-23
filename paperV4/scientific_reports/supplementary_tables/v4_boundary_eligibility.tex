@@ -1,0 +1,12 @@
+\begin{table}[H]\centering\small
+\begin{tabular}{llrrr}\toprule
+Generator & Schedule & Structural & Eligible & Excluded \\ \midrule
+Llama & Multi-topic & 529 & 507 & 22 \\
+Llama & Single-topic & 529 & 508 & 21 \\
+Mistral & Multi-topic & 529 & 362 & 167 \\
+Mistral & Single-topic & 529 & 355 & 174 \\
+Qwen & Multi-topic & 529 & 511 & 18 \\
+Qwen & Single-topic & 529 & 507 & 22 \\
+\bottomrule\end{tabular}
+\caption{Selected structural boundaries before scoring. All models and both schedules are retained for every selected payload. Joint three-arm eligibility removes 424 boundaries, including two trials with no scorable boundary. Detailed artifact-class and overlapping-reason counts remain in the frozen eligibility table.}\label{tab:v4-boundary-eligibility}
+\end{table}

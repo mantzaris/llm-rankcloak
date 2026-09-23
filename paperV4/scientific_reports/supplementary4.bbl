@@ -7,14 +7,6 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{Cai2025EntropyGuidedWatermarking}
-\bibinfo{author}{Cai, S.}, \bibinfo{author}{Ding, L.} \& \bibinfo{author}{Tao,
-  D.}
-\newblock \bibinfo{journal}{\bibinfo{title}{Entropy-guided watermarking for
-  {LLMs}: A test-time framework for robust and traceable text generation}}.
-\newblock {\emph{\JournalTitle{arXiv preprint arXiv:2504.12108}}}
-  \doiprefix\url{10.48550/arXiv.2504.12108} (\bibinfo{year}{2025}).
-
 \bibitem{Lee2024SWEET}
 \bibinfo{author}{Lee, T.} \emph{et~al.}
 \newblock \bibinfo{title}{Who wrote this code? watermarking for code
@@ -24,5 +16,37 @@
   \bibinfo{pages}{4890--4911}, \doiprefix\url{10.18653/v1/2024.acl-long.268}
   (\bibinfo{publisher}{Association for Computational Linguistics},
   \bibinfo{address}{Bangkok, Thailand}, \bibinfo{year}{2024}).
+
+\bibitem{Ziegler2019NeuralLinguisticSteganography}
+\bibinfo{author}{Ziegler, Z.~M.}, \bibinfo{author}{Deng, Y.} \&
+  \bibinfo{author}{Rush, A.~M.}
+\newblock \bibinfo{title}{Neural linguistic steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2019 Conference on
+  Empirical Methods in Natural Language Processing and the 9th International
+  Joint Conference on Natural Language Processing}},
+  \bibinfo{pages}{1210--1215}, \doiprefix\url{10.18653/v1/D19-1115}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2019}).
+
+\bibitem{Shen2020SelfAdjustingArithmetic}
+\bibinfo{author}{Shen, J.}, \bibinfo{author}{Ji, H.} \& \bibinfo{author}{Han,
+  J.}
+\newblock \bibinfo{title}{Near-imperceptible neural linguistic steganography
+  via self-adjusting arithmetic coding}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2020 Conference on
+  Empirical Methods in Natural Language Processing}},
+  \bibinfo{pages}{303--313}, \doiprefix\url{10.18653/v1/2020.emnlp-main.22}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2020}).
+
+\bibitem{Zhang2021ProvablySecureGenerative}
+\bibinfo{author}{Zhang, S.}, \bibinfo{author}{Yang, Z.}, \bibinfo{author}{Yang,
+  J.} \& \bibinfo{author}{Huang, Y.}
+\newblock \bibinfo{title}{Provably secure generative linguistic steganography}.
+\newblock In \emph{\bibinfo{booktitle}{Findings of the Association for
+  Computational Linguistics: {ACL-IJCNLP} 2021}}, \bibinfo{pages}{3046--3055},
+  \doiprefix\url{10.18653/v1/2021.findings-acl.268}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2021}).
 
 \end{thebibliography}

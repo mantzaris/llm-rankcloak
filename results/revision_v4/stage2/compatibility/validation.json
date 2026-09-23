@@ -1,0 +1,11 @@
+{
+  "changed_quantization_rejected": true,
+  "context_capacity": 512,
+  "deterministic_reverse_key_order": true,
+  "example_configuration_sha256": "0448a6f7c1ac3e350127472936ca3e2cce732d44cfeabade3b6da38f71e491f1",
+  "matching_accepted": true,
+  "mismatch_error": "decoder configuration mismatch: quantization",
+  "scope": "Example compatibility API, not added to historical messages and not authentication",
+  "source_sha256": "08faaaf47925efa4e2da68b8a42f4cebdae4ab7aa9f99107b11b187bc3e68788",
+  "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+}

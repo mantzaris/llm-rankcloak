@@ -1,0 +1,530 @@
+{
+  "boundaries": 2750,
+  "classes": {
+    "hmac_sha256_hex": 23,
+    "nonce_96_bit_hex": 23,
+    "sha256_hex": 23,
+    "token_128_bit_hex": 23
+  },
+  "donor_sensitivity": [
+    {
+      "contrast": "actual minus ordinary",
+      "interpretation": "Fixed corpus influence diagnostic, not a two-way population confidence interval.",
+      "maximum_leave_one_donor_out_effect": 0.16430137796445302,
+      "metric": "context_gain",
+      "minimum_leave_one_donor_out_effect": 0.1504020613355422,
+      "removed_donor_payloads": 411
+    },
+    {
+      "contrast": "actual minus ordinary",
+      "interpretation": "Fixed corpus influence diagnostic, not a two-way population confidence interval.",
+      "maximum_leave_one_donor_out_effect": 0.06870503857855366,
+      "metric": "conditional_logp",
+      "minimum_leave_one_donor_out_effect": 0.057156715155879806,
+      "removed_donor_payloads": 411
+    },
+    {
+      "contrast": "actual minus shuffled",
+      "interpretation": "Fixed corpus influence diagnostic, not a two-way population confidence interval.",
+      "maximum_leave_one_donor_out_effect": 2.3362637706922977,
+      "metric": "context_gain",
+      "minimum_leave_one_donor_out_effect": 2.3210333960578304,
+      "removed_donor_payloads": 240
+    },
+    {
+      "contrast": "actual minus shuffled",
+      "interpretation": "Fixed corpus influence diagnostic, not a two-way population confidence interval.",
+      "maximum_leave_one_donor_out_effect": 2.331965718668775,
+      "metric": "conditional_logp",
+      "minimum_leave_one_donor_out_effect": 2.3158782591716376,
+      "removed_donor_payloads": 240
+    }
+  ],
+  "effects": [
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.20655505697642101,
+      "ci_low": 0.10983911875527323,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.15747839624885526,
+      "metric": "context_gain",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.3501785138400994,
+      "ci_low": 0.17167447099952796,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.26321663705123893,
+      "metric": "context_gain",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.21120706546628581,
+      "ci_low": 0.009823668715816568,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.10758438671321648,
+      "metric": "context_gain",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.16558402099768765,
+      "ci_low": 0.02723144771250599,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.09780865181582118,
+      "metric": "context_gain",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.09808040121560785,
+      "ci_low": 0.02771442544199887,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.06190065599112142,
+      "metric": "conditional_logp",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.24276905216985525,
+      "ci_low": 0.10250905787205539,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.17155111947442103,
+      "metric": "conditional_logp",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.06817353950987771,
+      "ci_low": -0.083970342443707,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": -0.008944431982241865,
+      "metric": "conditional_logp",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.08629718587452943,
+      "ci_low": -0.018375867353473487,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.032163769788920125,
+      "metric": "conditional_logp",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.3911966740182353,
+      "ci_low": 2.2705022244942965,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.3265121008350307,
+      "metric": "context_gain",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.48834589389187,
+      "ci_low": 2.2945235274992037,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.390287747242216,
+      "metric": "context_gain",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.5903005246249458,
+      "ci_low": 2.323431938455848,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.4493414969601197,
+      "metric": "context_gain",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.2182294674258722,
+      "ci_low": 2.0640936296016563,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.141422906166116,
+      "metric": "context_gain",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.3905408453572363,
+      "ci_low": 2.2619399599505923,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.325668592562281,
+      "metric": "conditional_logp",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.5007000865546645,
+      "ci_low": 2.320433734493696,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.4069738967937386,
+      "metric": "conditional_logp",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.52919894652357,
+      "ci_low": 2.2535878773425915,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.386468028667374,
+      "metric": "conditional_logp",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.2702899413806064,
+      "ci_low": 2.1062943742369495,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.1892840111012357,
+      "metric": "conditional_logp",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.2215442831603665,
+      "ci_low": 2.1184947187031793,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.1690337045861754,
+      "metric": "context_gain",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.213234907480602,
+      "ci_low": 2.040048937790016,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.127071110190977,
+      "metric": "context_gain",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.4575457327990886,
+      "ci_low": 2.2369213794403406,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.341757110246904,
+      "metric": "context_gain",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.115991021607376,
+      "ci_low": 1.9677614915842632,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.043614254350295,
+      "metric": "context_gain",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.3294771035750417,
+      "ci_low": 2.202405662954845,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.26376793657116,
+      "metric": "conditional_logp",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.3300586939023145,
+      "ci_low": 2.1455356452913565,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.235422777319318,
+      "metric": "conditional_logp",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.5455773371136488,
+      "ci_low": 2.256147816236589,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.395412460649616,
+      "metric": "conditional_logp",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.2401168041783523,
+      "ci_low": 2.0711799393575467,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.1571202413123154,
+      "metric": "conditional_logp",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    }
+  ],
+  "missing_planned_requests": 0,
+  "ordinary_donor_support": {
+    "max_payload_reuse": 18,
+    "max_source_reuse": 2,
+    "payloads": 411,
+    "source_identities": 2398
+  },
+  "payload_clusters": 92,
+  "plan": "results/revision_v4/stage2/plans/coherence_study",
+  "plan_freeze_sha256": "78df3c0d72d28b9105806725d653435bd8875b708be08e9dec70185b9025f4ad",
+  "primary_intervals_condition_on_fixed_control_corpus": true,
+  "scoring_units": 8250,
+  "semantic_truncated_units": 0,
+  "shuffled_donor_support": {
+    "max_payload_reuse": 32,
+    "max_source_reuse": 4,
+    "payloads": 240,
+    "source_identities": 2354
+  },
+  "standalone_right_tokenization_differs_units": 3057,
+  "trials": 550,
+  "window_token_counts": {
+    "actual": {
+      "evaluator_tail_max": 34,
+      "evaluator_tail_min": 4,
+      "left_generator_distribution": {
+        "8": 2750
+      },
+      "right_generator_distribution": {
+        "8": 204,
+        "9": 114,
+        "10": 125,
+        "11": 140,
+        "12": 126,
+        "13": 120,
+        "14": 91,
+        "15": 95,
+        "16": 1735
+      }
+    },
+    "ordinary": {
+      "evaluator_tail_max": 28,
+      "evaluator_tail_min": 4,
+      "left_generator_distribution": {
+        "8": 2750
+      },
+      "right_generator_distribution": {
+        "8": 204,
+        "9": 114,
+        "10": 125,
+        "11": 140,
+        "12": 126,
+        "13": 120,
+        "14": 91,
+        "15": 95,
+        "16": 1735
+      }
+    },
+    "shuffled": {
+      "evaluator_tail_max": 31,
+      "evaluator_tail_min": 5,
+      "left_generator_distribution": {
+        "8": 2750
+      },
+      "right_generator_distribution": {
+        "8": 204,
+        "9": 114,
+        "10": 125,
+        "11": 140,
+        "12": 126,
+        "13": 120,
+        "14": 91,
+        "15": 95,
+        "16": 1735
+      }
+    }
+  }
+}

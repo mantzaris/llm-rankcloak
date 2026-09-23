@@ -1,0 +1,49 @@
+{
+  "checks": [
+    "Draft banners and genuine pending items remain conspicuous.",
+    "Main result table and model-specific supplementary intervals agree with generated values.",
+    "Wrapped figure labels are fully visible.",
+    "Source IDs, exact boundaries and entropy excerpts fit the page.",
+    "Reviewer quotations and response paragraphs render without overflow."
+  ],
+  "documents": [
+    {
+      "document": "paperV4/scientific_reports/main4.pdf",
+      "inspected_pages": [
+        1,
+        20
+      ],
+      "pages": 25,
+      "sha256": "37664798dcf0856d2c87f6f4cefc8372e903afec01fe4dd384cc054d5e1cd2ac"
+    },
+    {
+      "document": "paperV4/scientific_reports/supplementary4.pdf",
+      "inspected_pages": [
+        32,
+        35,
+        36
+      ],
+      "pages": 38,
+      "sha256": "ebd172c1cdb137979363baa22ff32bc94e39b111ce8353a6488af8ebab9a6f7b"
+    },
+    {
+      "document": "paperV4/response/response_to_reviewers_v4.pdf",
+      "inspected_pages": [
+        5,
+        7
+      ],
+      "pages": 8,
+      "sha256": "fb44e3c1b36dabb40ee0a9feeb3539630574783d63ecb93e5995eb6ef148503b"
+    },
+    {
+      "document": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "inspected_pages": [
+        1
+      ],
+      "pages": 1,
+      "sha256": "f2377735ab3707f7602f8dbfec6cb4507e3e752096b61d7593a40fe147b90f77"
+    }
+  ],
+  "remaining_layout_warning": "One inherited underfull alignment in supplementary4.tex at line 789. No overfull boxes or unresolved references.",
+  "status": "passed"
+}

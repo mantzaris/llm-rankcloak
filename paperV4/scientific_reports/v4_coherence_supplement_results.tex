@@ -1,0 +1,65 @@
+The measured-cost admission selected 92 of 240 payloads, with 23 per class, preserving all models and schedules. The selected structural inventory contains 3,174 boundaries in 552 trials. The completed analysis contains 2,750 eligible boundaries, 8,250 arm-specific units and 550 trials. Every planned request completed. Selection used no RankCloak metric scores. The sample supports the reported precision only, not a guaranteed effect or a claim about excluded boundaries.
+
+\begin{figure}[H]\centering\includegraphics[width=\textwidth]{figures/v4_boundary_coherence.pdf}\caption{Paired boundary metric differences with payload-cluster 95\% intervals. Context gain is the validated exploratory metric. Raw conditional likelihood is secondary. These automated results do not establish perceived naturalness.}\label{fig:v4-coherence}\end{figure}
+
+\input{supplementary_tables/v4_coherence_models.tex}
+
+The ordinary arm uses 411 donor payloads across 2398 source identities. Maximum donor-payload reuse is 18 and maximum source-identity reuse is 2.
+
+The shuffled arm uses 240 donor payloads across 2354 source identities. Maximum donor-payload reuse is 32 and maximum source-identity reuse is 4.
+
+For actual minus ordinary, deleting each reference donor payload in turn gives point estimates from 0.1504 to 0.1643. This is a donor-influence diagnostic, not a population interval incorporating two-way donor sampling.
+
+For actual minus shuffled, deleting each reference donor payload in turn gives point estimates from 2.3210 to 2.3363. This is a donor-influence diagnostic, not a population interval incorporating two-way donor sampling.
+
+All scored windows have eight generator tokens on the left and eight to sixteen on the right. These short contexts limit interpretation beyond local transitions.
+
+Standalone tail tokenization differed from the retained joint-tail path in 3057 units. The conditional and reference passes nevertheless scored the same IDs and denominator for each comparison. All exact source mappings and per-model effects remain in the joined tables.
+
+\subsection*{Predeclared illustrative boundaries}
+
+The weak, typical and strong examples use the minimum, upper-middle and maximum actual context gains, with identity-hash tie breaks. The marker shows the exact boundary. Literal newline markers retain formatting.
+
+\noindent\begin{minipage}{\linewidth}
+
+\paragraph{Weak context gain.}
+
+The score is -0.2986 nats per tail token. Both windows use the following source.
+
+\begin{flushleft}\small Source \code{revision_v1_primary_v2_payload_fidelity_v2__60c7c024bb462f543873__segment_1}\\ Evaluator \code{qwen2_5_7b_instruct_q4_k_m}.\end{flushleft}
+
+Left source bytes are [0, 22). Right source bytes are [22, 104).
+
+\begin{quote}\small **)\textbackslash{}nHere's how I came:\textbf{ [BOUNDARY] } I was walking by your garden yesterday and noticed how beautiful the flowers are!\end{quote}
+
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}{\linewidth}
+
+\paragraph{Typical context gain.}
+
+The score is 1.8772 nats per tail token. Both windows use the following source.
+
+\begin{flushleft}\small Source \code{revision_v1_primary_v2_payload_fidelity_v2__339ba03e74127c1632ff__segment_0}\\ Evaluator \code{mistral_7b_instruct_v0_3_q4_k_m}.\end{flushleft}
+
+Left source bytes are [0, 32). Right source bytes are [32, 59).
+
+\begin{quote}\small  \textbackslash{}n\textbackslash{}nEmail:\textbackslash{}nRecieved Date \& Client\textbf{ [BOUNDARY] } Name: 2023-10-15, ABC Corp\end{quote}
+
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}{\linewidth}
+
+\paragraph{Strong context gain.}
+
+The score is 7.7527 nats per tail token. Both windows use the following source.
+
+\begin{flushleft}\small Source \code{revision_v1_primary_v2_payload_fidelity_v2__5cb9b4336f971271f1d1__segment_1}\\ Evaluator \code{llama3_8b_instruct_q4_k_m}.\end{flushleft}
+
+Left source bytes are [0, 31). Right source bytes are [31, 52).
+
+\begin{quote}\small  Be creative; don\textbackslash{}'d worry over\textbf{ [BOUNDARY] }much about grammar.\textbackslash{}n\textbackslash{}n\end{quote}
+
+\end{minipage}\par\medskip
+
+The highest context-gain example contains the word-internal join \code{over[BOUNDARY]much} and retains malformed wording. The labels refer only to the predeclared metric ordering. They are not ratings of grammaticality or meaning.

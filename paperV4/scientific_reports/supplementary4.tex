@@ -1,4 +1,4 @@
-% V4 Stage 1 working copy. Historical V3 source remains unchanged.
+% V4 Stage 2 working revision. Historical V3 source remains unchanged.
 \documentclass[fleqn,10pt]{wlscirep}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -42,7 +42,7 @@ This Supplementary Information provides detailed methods and supporting evidence
 \begin{center}
 \fcolorbox{red}{white}{\parbox{0.91\linewidth}{\centering\bfseries\color{red}
 V4 INTERNAL WORKING DRAFT\par
-Stage 1 scaffold based on V3. New evidence and responses remain pending.\par
+Stage 2 evidence integrated. Semantic validation and final archive coverage remain pending.\par
 Not ready for journal submission.}}
 \end{center}
 \begin{center}\large Supplementary Information\end{center}
@@ -234,7 +234,7 @@ These results do not test translation, code switching, cross-language decoding, 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/robustness_recovery.pdf}
-\caption{\label{fig:s1}\textbf{Complete recovery matrix and failure diagnostics.} The upper panels distinguish saved-token, visible-text, transformed-text, limited canonicalization, and cross-model replay. Intervals use source-cover Wilson calculations rather than treating two cross-model decoders as independent covers. The lower panels summarize first-divergence categories. Those categories identify the first recorded mismatch and are descriptive, not causal proof. Unavailable Mistral limited-mitigation cells are excluded rather than counted as failures.}
+\caption{\label{fig:s1}\textbf{Complete recovery matrix and failure diagnostics.} The upper panels distinguish saved-token, visible-text, transformed-text, limited canonicalization, and cross-model replay. Intervals use source-cover Wilson calculations rather than treating two cross-model decoders as independent covers. The lower panels summarize first-divergence categories. Those categories identify the first recorded mismatch and are descriptive, not causal proof. Unavailable Mistral limited-mitigation cells are excluded rather than counted as failures. The historical raw and limited unmodified entries are saved-token references, not separately executed visible-text replays.}
 \end{figure}
 
 \setlength{\tabcolsep}{3pt}
@@ -251,7 +251,7 @@ Family/replay & Condition & Success & Total & Wilson 95\% CI \\
 Replay: saved IDs & Unmodified & 144 & 144 & [0.974016, 1.000000] \\
 Replay: detokenize/retokenize & Unmodified & 88 & 144 & [0.529589, 0.686859] \\
 Replay: greedy lead-in regeneration & Unmodified & 144 & 144 & [0.974016, 1.000000] \\
-Raw transmission & Unmodified & 144 & 144 & [0.974016, 1.000000] \\
+Raw reference & Saved-token endpoint & 144 & 144 & [0.974016, 1.000000] \\
 Raw transmission & Final 10\% tail-only truncation & 144 & 144 & [0.974016, 1.000000] \\
 Raw transmission & Unicode NFKC & 82 & 144 & [0.487804, 0.647476] \\
 Raw transmission & Quote conversion & 56 & 144 & [0.313141, 0.470411] \\
@@ -265,12 +265,12 @@ Raw transmission & LF-to-CRLF line endings & 16 & 144 & [0.069559, 0.172872] \\
 Raw transmission & Markdown blockquote copy/paste & 0 & 144 & [0.000000, 0.025984] \\
 Raw transmission & Deterministic paraphrase & 0 & 144 & [0.000000, 0.025984] \\
 Cross-model retokenized & Unmodified, two alternate decoders & 0 & 288 outcomes/144 covers & source-cover CI [0.000000, 0.025984] \\
-Limited canonicalization & Unmodified & 96 & 96 & [0.961524, 1.000000] \\
+Limited reference & Saved-token endpoint & 96 & 96 & [0.961524, 1.000000] \\
 Limited canonicalization & Each of six available transformed cells & 0 & 96 per cell & [0.000000, 0.038476] \\
 \bottomrule
 \end{longtable}
 
-The limited canonicalization cells covered line endings, markdown copy/paste, quote conversion, NFKC, whitespace collapse, and whitespace trim. Each had 96 observations and 48 unavailable Mistral source conditions. The all-zero transformed results do not support a mitigation claim.
+The raw and limited unmodified rows reference the source saved-token endpoint with no new decode. They are not independent visible-text or canonicalization successes. The limited canonicalization cells covered line endings, markdown copy/paste, quote conversion, NFKC, whitespace collapse, and whitespace trim. Each had 96 observations and 48 unavailable Mistral source conditions. The all-zero transformed results do not support a mitigation claim.
 
 \begin{table}[H]
 \centering
@@ -649,7 +649,7 @@ Deployment & No operational channel or deployment traffic was tested & Practical
 Detectability & Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers; high AUC is adverse & Undetectability or resistance to future detectors \\
 Multilingual scope & Exact-copy recovery in 288/288 Spanish and 288/288 Simplified Chinese secondary trials & Broad multilingual naturalness or cross-language generalization \\
 Unavailable work & 432 predeclared combinations lacked compatible retained outputs & Calling unavailable combinations experimental failures \\
-Model replay & Retained outputs are bound to model/configuration manifests & Fresh local generation replay while configured GGUF files are absent \\
+Model replay & Retained outputs are bound to model/configuration manifests & Replay with unverified weights or a different numerical configuration \\
 Detector leakage & Strict pre-feature component split has zero audited cross-partition links & Semantic paraphrases below the declared 0.95 threshold are not excluded \\
 Statistical models & Reported conditional estimates retain diagnostic warnings & Treating three singular mixed-model fits as unqualified evidence; substituting an undeclared fallback \\
 Exploratory analyses & Compact ablation, topic, and auxiliary detector analyses are labeled post-outcome/exploratory where applicable & Recasting them as preregistered confirmatory evidence \\
@@ -771,7 +771,7 @@ The two learned detectors adapt to the observed training distribution; the likel
 
 \subsection*{Calibration and replay-consistent gate}
 
-The entropy-gated extension had historical motivation in the preprint by Cai, Ding, and Tao\cite{Cai2025EntropyGuidedWatermarking}. A peer-reviewed precedent for entropy-threshold selective watermarking is Lee et al.\cite{Lee2024SWEET}. These watermarking methods and the RankCloak payload gate are distinct algorithms. Watermark detection asks whether a mark is present. RankCloak must reconstruct a chosen payload, whose capacity and recovery require separate analysis.
+A peer-reviewed precedent for selective watermarking at higher-entropy positions is Lee et al.\cite{Lee2024SWEET}. These watermarking methods and the RankCloak payload gate are distinct algorithms. Watermark detection asks whether a mark is present. RankCloak must reconstruct a chosen payload, whose capacity and recovery require separate analysis.
 
 Six 128-position ordinary top-\(p\) traces per model used temperature 0.8, top-\(p\) 0.95, and the frozen serial sampler, yielding 768 development positions per model. Detector outcomes did not enter calibration. The median threshold defines the moderate gate and the 75th percentile defines the strict gate (Table~\ref{tab:v3-entropy-thresholds}).
 
@@ -790,9 +790,9 @@ Qwen 2.5 7B Q4\_K\_M & 6 & 1.361919 & 2.432557 \\
 \caption{\label{tab:v3-entropy-thresholds}Frozen entropy thresholds from ordinary-generation development traces.}
 \end{table}
 
-Before each embedding-span step, the encoder computed filtered next-token Shannon entropy. An eligible position consumed and forced the next payload rank. An ineligible position used ordinary top-\(p\) sampling under the same allowed-token mask and did not consume a payload rank. Replay recomputed entropy before each observed token, consumed a rank only at eligible positions, ignored observed ranks at sampled skips, and appended every observed token to context. It received no saved gate-position metadata. Gate-position agreement between encoder and replay was exact in the validation audit.
+Before each embedding-span step, the encoder computed next-token Shannon entropy. The retained entropy trajectories use no token filter. An eligible position consumed and forced the next payload rank. An ineligible position used ordinary top-\(p\) sampling under the frozen ordinary sampler and did not consume a payload rank. Replay recomputed entropy before each observed token, consumed a rank only at eligible positions, ignored observed ranks at sampled skips, and appended every observed token to context. It received no saved gate-position metadata. Gate-position agreement between encoder and replay was exact in the validation audit.
 
-Each gate contained 120 RankCloak attempts and 120 paired length-matched ordinary controls across three model families, eight artifact classes, all 20 supported artifact/representation cells, and two templates. The ungated, moderate, and strict RankCloak conditions shared one stable seed per cell; controls used a separate shared ordinary-generation seed. Fixed-token-budget capacity was evaluated at the paired ungated span length for every attempt. Fixed-payload bits per generated token was defined only when the complete payload was embedded; completion rate and fixed-budget payload fraction are therefore separate endpoints.
+Each gate contained 120 RankCloak attempts and 120 paired length-matched ordinary controls across three model families, eight artifact classes, all 20 supported artifact/representation cells, and two templates. The ungated, moderate, and strict RankCloak conditions shared one stable seed per cell; controls used a separate shared ordinary-generation seed. Fixed-budget payload progress was evaluated at the paired ungated span length for every attempt. The fixed-payload rate is eight times the serialized payload byte length divided by generated-token count. This input-width accounting is not Shannon channel capacity and differs from the four-bit-per-hex-character artifact accounting in the main common-support comparison. It was defined only when the complete payload was embedded. Completion rate and fixed-budget payload fraction are therefore separate endpoints.
 
 \begin{table}[H]
 \centering
@@ -800,24 +800,24 @@ Each gate contained 120 RankCloak attempts and 120 paired length-matched ordinar
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\textwidth}{L{0.13\textwidth}r r L{0.18\textwidth}r r r Y}
 \toprule
-Gate & Complete & Budget failures & Capacity, bit/token & Capacity \(n\) & Budget payload fraction & Length ratio & Saved-ID/visible recovery \\
+Gate & Complete & Budget failures & Payload rate, bit/token & Rate \(n\) & Budget payload fraction & Length ratio & Saved-ID/visible recovery \\
 \midrule
 Ungated & 120/120 & 0 & 7.4001, conditional & 120 & 1.0000 & 1.0000 & 120/120; 62/120 \\
 Moderate median & 120/120 & 0 & 5.7920, conditional & 120 & 0.7518 & 1.3743 & 120/120; 65/120 \\
 Strict 75th percentile & 114/120 & 6 & 4.0513, conditional & 114 & 0.4567 & 2.7615 & 114/120; 68/120 \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-entropy-generation}\textbf{Entropy-gate generation, capacity, length, and recovery.} Capacity is fixed-payload bits per generated token conditional on completion. In particular, strict-gate capacity excludes six incomplete cases and has \(n=114\). Completion and recovery retain all 120 attempts in their denominators.}
+\caption{\label{tab:v3-entropy-generation}\textbf{Entropy-gate generation, payload rate, length, and recovery.} Rate counts eight bits per serialized payload byte per generated token, conditional on completion. In particular, the strict-gate rate excludes six incomplete cases and has \(n=114\). Completion and recovery retain all 120 attempts in their denominators.}
 \end{table}
 
-Strict completion by model was 40/40 for Llama, 39/40 for Mistral, and 35/40 for Qwen. The corresponding strict conditional capacity estimates were 6.1322 (\(n=40\)), 2.9207 (\(n=39\)), and 2.9331 (\(n=35\)) bits/token. Visible-text recovery under ungated/moderate/strict conditions was 29/40, 29/40, and 34/40 for Llama; 0/40 in every Mistral condition; and 33/40, 36/40, and 34/40 for Qwen. The aggregate visible-text differences therefore do not establish a general gate benefit.
+Strict completion by model was 40/40 for Llama, 39/40 for Mistral, and 35/40 for Qwen. The corresponding strict conditional serialized-payload rates were 6.1322 (\(n=40\)), 2.9207 (\(n=39\)), and 2.9331 (\(n=35\)) bits/token. Visible-text recovery under ungated/moderate/strict conditions was 29/40, 29/40, and 34/40 for Llama; 0/40 in every Mistral condition; and 33/40, 36/40, and 34/40 for Qwen. The aggregate visible-text differences therefore do not establish a general gate benefit.
 
 Relative to ungated output, moderate gating added a mean 20.1083 words, changed unique-word fraction by \(-0.0338\), and changed repeated-bigram fraction by \(+0.0106\). Strict gating added 103.0083 words, changed unique-word fraction by \(-0.1431\), and changed repeated-bigram fraction by \(+0.0423\). These are surface heuristics, not participant judgments. At forced payload positions, mean rank was 88.0552 for ungated and moderate gates and 89.4915 for the strict gate; mean forced-token rank pressure declined from 3.8585 to 3.4276 and 3.0308 nats. Gating changes the contexts in which payload ranks are consumed but does not change the payload-rank distribution for completed paired cells.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/entropy_gate_capacity_recovery.pdf}
-\caption{\label{fig:v3-entropy-capacity}\textbf{Entropy gating, capacity, length, completion, and recovery.} Fixed-payload capacity is conditional on completion; fixed-budget payload fraction and completion retain all attempts.}
+\caption{\label{fig:v3-entropy-capacity}\textbf{Entropy gating, capacity, length, completion, and recovery.} The historical capacity label denotes serialized-payload rate conditional on completion. It is not Shannon channel capacity. Fixed-budget payload fraction and completion retain all attempts.}
 \end{figure}
 
 The generated detector test was external to fitting. Training and validation rows carrying any of the 16 entropy-study payload instances were excluded, and exact/near-duplicate auditing was repeated before feature extraction. The audit retained 12,714/13,114 rows, removed 400, found zero cross-partition links, and left no condition unavailable. Gate-specific test controls numbered 117 ungated, 113 moderate, and 116 strict; none supports empirical 0.1\% resolution.
@@ -850,7 +850,7 @@ Model-aware & Strict & 116/116 & 0.9904 & 0.7845 & 0.6552/0.0000 & 0/116 \\
 \caption{\label{fig:v3-entropy-detectors}\textbf{Entropy-gate detector performance.} Stricter gating reduces text-only detectability in this bounded matrix but does not eliminate the strong exact-model-aware signal.}
 \end{figure}
 
-Taken together, stricter gating reduces text-only detection in the tested conditions while reducing capacity, substantially increasing length, producing six maximum-budget failures, and retaining exact-environment replay dependence. Model-aware ROC-AUC of 0.9904 under the strict gate is inconsistent with a claim of an undetectable channel.
+Taken together, stricter gating reduces text-only detection in the tested conditions while reducing serialized-payload rate, substantially increasing length, producing six maximum-budget failures, and retaining exact-environment replay dependence. Model-aware ROC-AUC of 0.9904 under the strict gate is inconsistent with a claim of an undetectable channel.
 
 \section*{Supplementary Note S14: Matched Q4 and Q8 quantization analysis}\label{si:s14}
 
@@ -946,9 +946,9 @@ Human-authored controls & 250 frozen Dolly negatives across 16 templates & Not a
 Unseen families & Three leave-one-family-out tests & Not every architecture, training corpus, model size, proprietary system, or decoding stack \\
 Adaptive detection & Two data-adaptive text-only detectors and an exact-model-aware likelihood attacker & Strong but not exhaustive attackers or deployment distributions \\
 Low-FPR reporting & Exact counts and validation-frozen thresholds; matched 0.1\% estimates where supported & Human, family, entropy, and quantization tests have fewer than 1,000 negatives and no empirical 0.1\% resolution \\
-Entropy gating & 120 attempts per gate; capacity, length, recovery, quality, and detector outcomes & Two templates; thresholds from 768 positions/model; strict capacity conditional on 114 completions; exact-model AUC remains 0.9904 \\
-Quantization & Paired Q4\_K\_M/Q8\_0 recovery and bidirectional detector transfer & One pinned Qwen, two quantizations, one backend; no supported general Q8 advantage \\
-Naturalness & Automated surface/model diagnostics and a human-authored control corpus & No participants or human ratings; controls are not evidence of human-perceived naturalness \\
+Entropy gating & 120 attempts per gate and complete diagnostics for all six strict failures & Serialized-payload rate is conditional on completion. Two templates and 768 calibration positions/model. Exact-model AUC remains 0.9904 \\
+Quantization & Paired within-quantization recovery, detector transfer and 0/960 fixed-message Q4-to-Q8 payload recovery & One pinned Qwen and one backend. No general Q8 advantage or reverse-direction payload result \\
+Naturalness & Automated diagnostics, human-authored controls and blinded boundary-control pilots & Semantic validation failed twice. Context gain separated pilot controls. No participants or human ratings \\
 Deployment/security & Failure surfaces and strong adverse detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
 \bottomrule
 \end{longtable}
@@ -959,6 +959,8 @@ The bounded evaluations assess detector controls, leakage prevention, generaliza
 
 
 \input{v4_stage1_entropy.tex}
+\input{v4_entropy_windows.tex}
+\input{v4_stage2_supplement.tex}
 
 \bibliography{references}
 

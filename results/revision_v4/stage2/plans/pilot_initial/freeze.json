@@ -1,0 +1,17 @@
+{
+  "config_sha256": "8a4e10661d2cdd3f371bdea0d5359df22d6bc10d677aa8702dd6098008e2823d",
+  "files": {
+    "requests.jsonl": "aef9b23be7bb060eab1428c610507e89f264c8794b8798cccb5401a2dfee0b2a",
+    "scoring_contracts.json": "ff163a9ab415ec250bde3bf7108d954cf46efc0d6b82f35f4c9c2fe6c85f79de",
+    "unit_requests.jsonl": "3d02123cecf1a0ff0f936103943513534d2edb0013afc96dc60a799018b5c9f1",
+    "units.jsonl": "9076d487357df23d22ff6b9523c3426a5352424454f8474c33989403c2da6d9e"
+  },
+  "frozen_at_utc": "2026-09-22T21:24:24.007284+00:00",
+  "inventory_manifest_sha256": "2783bdb8a6045471ca54527e2139ad96ffeff6c2373c80bbb6dc2d837cba30b0",
+  "lm_requests": 144,
+  "rankcloak_scores_computed": false,
+  "semantic_requests": 108,
+  "stage": "blinded_control_only_pilot",
+  "unique_requests": 252,
+  "units_sha256": "9076d487357df23d22ff6b9523c3426a5352424454f8474c33989403c2da6d9e"
+}

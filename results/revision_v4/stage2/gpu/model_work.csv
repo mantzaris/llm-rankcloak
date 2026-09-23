@@ -1,0 +1,12 @@
+plan,kind,model,new_requests,context_and_target_tokens,semantic_nonpadding_tokens,source
+pilot_initial,lm,llama3_8b_instruct_q4_k_m,48,2050,0,results/revision_v4/stage2/plans/pilot_initial/lm_execution_llama3_8b_instruct_q4_k_m.json
+pilot_initial,lm,mistral_7b_instruct_v0_3_q4_k_m,48,2410,0,results/revision_v4/stage2/plans/pilot_initial/lm_execution_mistral_7b_instruct_v0_3_q4_k_m.json
+pilot_initial,lm,qwen2_5_7b_instruct_q4_k_m,48,2310,0,results/revision_v4/stage2/plans/pilot_initial/lm_execution_qwen2_5_7b_instruct_q4_k_m.json
+pilot_initial,semantic,all-MiniLM-L6-v2,108,0,1852,results/revision_v4/stage2/plans/pilot_initial/semantic_execution.json
+pilot_amendment1,lm,llama3_8b_instruct_q4_k_m,48,1768,0,results/revision_v4/stage2/plans/pilot_amendment1/lm_execution_llama3_8b_instruct_q4_k_m.json
+pilot_amendment1,lm,mistral_7b_instruct_v0_3_q4_k_m,48,2144,0,results/revision_v4/stage2/plans/pilot_amendment1/lm_execution_mistral_7b_instruct_v0_3_q4_k_m.json
+pilot_amendment1,lm,qwen2_5_7b_instruct_q4_k_m,48,2018,0,results/revision_v4/stage2/plans/pilot_amendment1/lm_execution_qwen2_5_7b_instruct_q4_k_m.json
+pilot_amendment1,semantic,all-MiniLM-L6-v2,107,0,1454,results/revision_v4/stage2/plans/pilot_amendment1/semantic_execution.json
+coherence_study,lm,llama3_8b_instruct_q4_k_m,3857,148030,0,results/revision_v4/stage2/plans/coherence_study/lm_execution_llama3_8b_instruct_q4_k_m.json
+coherence_study,lm,mistral_7b_instruct_v0_3_q4_k_m,5500,255009,0,results/revision_v4/stage2/plans/coherence_study/lm_execution_mistral_7b_instruct_v0_3_q4_k_m.json
+coherence_study,lm,qwen2_5_7b_instruct_q4_k_m,5378,225569,0,results/revision_v4/stage2/plans/coherence_study/lm_execution_qwen2_5_7b_instruct_q4_k_m.json

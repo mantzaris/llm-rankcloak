@@ -1,0 +1,11 @@
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrrrrr}\toprule
+Case & Visible & Composite & Prefix & Outer & Trailing & LF & Unwrap \\ \midrule
+Llama failure & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+Mistral failure & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\
+Qwen failure & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+Qwen success & 1 & 0 & 0 & 0 & 1 & 1 & 0 \\
+Llama success & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+\bottomrule\end{tabular}
+\caption{Illustrative exact byte recovery. One denotes success and zero failure. Visible baselines are executed historical transformations that left every source byte unchanged. The historical unmodified reference itself aliases saved-ID recovery. The five decompositions use saved offsets and no payload-informed repair. Mistral has no eligible successful visible baseline. These cases do not estimate population rates.}\label{tab:v4-transport}
+\end{table}

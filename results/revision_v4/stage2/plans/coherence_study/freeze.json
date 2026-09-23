@@ -1,0 +1,1473 @@
+{
+  "all_sample_forecasts": [
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 5608,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11876,
+        "qwen2_5_7b_instruct_q4_k_m": 10586
+      },
+      "forecast_gpu_seconds": 1148.4008167408167,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 251.85911449037596,
+        "mistral_7b_instruct_v0_3_q4_k_m": 466.384544276806,
+        "qwen2_5_7b_instruct_q4_k_m": 430.1571579736347
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 145,
+        "mistral_7b_instruct_v0_3_q4_k_m": 253,
+        "qwen2_5_7b_instruct_q4_k_m": 252
+      },
+      "payloads": 4,
+      "payloads_per_class": 1,
+      "uncached_requests": 650,
+      "unique_requests": 652
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 10333,
+        "mistral_7b_instruct_v0_3_q4_k_m": 23547,
+        "qwen2_5_7b_instruct_q4_k_m": 20599
+      },
+      "forecast_gpu_seconds": 2142.676623757406,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 438.7857043561088,
+        "mistral_7b_instruct_v0_3_q4_k_m": 895.2363475990195,
+        "qwen2_5_7b_instruct_q4_k_m": 808.6545718022777
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 268,
+        "mistral_7b_instruct_v0_3_q4_k_m": 499,
+        "qwen2_5_7b_instruct_q4_k_m": 494
+      },
+      "payloads": 8,
+      "payloads_per_class": 2,
+      "uncached_requests": 1261,
+      "unique_requests": 1263
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 17323,
+        "mistral_7b_instruct_v0_3_q4_k_m": 34943,
+        "qwen2_5_7b_instruct_q4_k_m": 30809
+      },
+      "forecast_gpu_seconds": 3223.900332276531,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 715.3183738082715,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1313.98325451873,
+        "qwen2_5_7b_instruct_q4_k_m": 1194.5987039495294
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 456,
+        "mistral_7b_instruct_v0_3_q4_k_m": 751,
+        "qwen2_5_7b_instruct_q4_k_m": 739
+      },
+      "payloads": 12,
+      "payloads_per_class": 3,
+      "uncached_requests": 1946,
+      "unique_requests": 1950
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 24833,
+        "mistral_7b_instruct_v0_3_q4_k_m": 46579,
+        "qwen2_5_7b_instruct_q4_k_m": 41925
+      },
+      "forecast_gpu_seconds": 4368.7620188006795,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 1012.4228584414244,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1741.5489801169874,
+        "qwen2_5_7b_instruct_q4_k_m": 1614.7901802422675
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 651,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1004,
+        "qwen2_5_7b_instruct_q4_k_m": 999
+      },
+      "payloads": 16,
+      "payloads_per_class": 4,
+      "uncached_requests": 2654,
+      "unique_requests": 2660
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 31160,
+        "mistral_7b_instruct_v0_3_q4_k_m": 58206,
+        "qwen2_5_7b_instruct_q4_k_m": 52139
+      },
+      "forecast_gpu_seconds": 5432.395978344551,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 1262.7264635378224,
+        "mistral_7b_instruct_v0_3_q4_k_m": 2168.784000014798,
+        "qwen2_5_7b_instruct_q4_k_m": 2000.88551479193
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 812,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1255,
+        "qwen2_5_7b_instruct_q4_k_m": 1250
+      },
+      "payloads": 20,
+      "payloads_per_class": 5,
+      "uncached_requests": 3317,
+      "unique_requests": 3323
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 38145,
+        "mistral_7b_instruct_v0_3_q4_k_m": 69922,
+        "qwen2_5_7b_instruct_q4_k_m": 62282
+      },
+      "forecast_gpu_seconds": 6522.647665612866,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 1539.0613270747842,
+        "mistral_7b_instruct_v0_3_q4_k_m": 2599.289331839239,
+        "qwen2_5_7b_instruct_q4_k_m": 2384.2970066988432
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 995,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1509,
+        "qwen2_5_7b_instruct_q4_k_m": 1498
+      },
+      "payloads": 24,
+      "payloads_per_class": 6,
+      "uncached_requests": 4002,
+      "unique_requests": 4009
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 44257,
+        "mistral_7b_instruct_v0_3_q4_k_m": 81362,
+        "qwen2_5_7b_instruct_q4_k_m": 72608
+      },
+      "forecast_gpu_seconds": 7575.138308516787,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 1780.8592778175043,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3019.6530221833477,
+        "qwen2_5_7b_instruct_q4_k_m": 2774.6260085159356
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 1160,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1751,
+        "qwen2_5_7b_instruct_q4_k_m": 1745
+      },
+      "payloads": 28,
+      "payloads_per_class": 7,
+      "uncached_requests": 4656,
+      "unique_requests": 4663
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 50907,
+        "mistral_7b_instruct_v0_3_q4_k_m": 92450,
+        "qwen2_5_7b_instruct_q4_k_m": 82278
+      },
+      "forecast_gpu_seconds": 8611.181406506254,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 2043.9411450359435,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3427.082445132251,
+        "qwen2_5_7b_instruct_q4_k_m": 3140.1578163380586
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 1330,
+        "mistral_7b_instruct_v0_3_q4_k_m": 1984,
+        "qwen2_5_7b_instruct_q4_k_m": 1982
+      },
+      "payloads": 32,
+      "payloads_per_class": 8,
+      "uncached_requests": 5296,
+      "unique_requests": 5303
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 56858,
+        "mistral_7b_instruct_v0_3_q4_k_m": 103597,
+        "qwen2_5_7b_instruct_q4_k_m": 92241
+      },
+      "forecast_gpu_seconds": 9632.814773118733,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 2279.3697453091695,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3836.6798276729687,
+        "qwen2_5_7b_instruct_q4_k_m": 3516.765200136594
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 1483,
+        "mistral_7b_instruct_v0_3_q4_k_m": 2228,
+        "qwen2_5_7b_instruct_q4_k_m": 2220
+      },
+      "payloads": 36,
+      "payloads_per_class": 9,
+      "uncached_requests": 5931,
+      "unique_requests": 5938
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 62854,
+        "mistral_7b_instruct_v0_3_q4_k_m": 115092,
+        "qwen2_5_7b_instruct_q4_k_m": 102851
+      },
+      "forecast_gpu_seconds": 10693.472668641454,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 2516.5785988192074,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4259.064497297576,
+        "qwen2_5_7b_instruct_q4_k_m": 3917.8295725246708
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 1635,
+        "mistral_7b_instruct_v0_3_q4_k_m": 2476,
+        "qwen2_5_7b_instruct_q4_k_m": 2463
+      },
+      "payloads": 40,
+      "payloads_per_class": 10,
+      "uncached_requests": 6574,
+      "unique_requests": 6582
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 70265,
+        "mistral_7b_instruct_v0_3_q4_k_m": 126302,
+        "qwen2_5_7b_instruct_q4_k_m": 112977
+      },
+      "forecast_gpu_seconds": 11781.341800294107,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 2809.766526331364,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4670.976819741407,
+        "qwen2_5_7b_instruct_q4_k_m": 4300.598454221335
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 1827,
+        "mistral_7b_instruct_v0_3_q4_k_m": 2722,
+        "qwen2_5_7b_instruct_q4_k_m": 2702
+      },
+      "payloads": 44,
+      "payloads_per_class": 11,
+      "uncached_requests": 7251,
+      "unique_requests": 7261
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 76983,
+        "mistral_7b_instruct_v0_3_q4_k_m": 137346,
+        "qwen2_5_7b_instruct_q4_k_m": 122942
+      },
+      "forecast_gpu_seconds": 12829.609452483524,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 3075.538553996547,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5076.789459265912,
+        "qwen2_5_7b_instruct_q4_k_m": 4677.281439221066
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2005,
+        "mistral_7b_instruct_v0_3_q4_k_m": 2959,
+        "qwen2_5_7b_instruct_q4_k_m": 2932
+      },
+      "payloads": 48,
+      "payloads_per_class": 12,
+      "uncached_requests": 7896,
+      "unique_requests": 7907
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 84396,
+        "mistral_7b_instruct_v0_3_q4_k_m": 148282,
+        "qwen2_5_7b_instruct_q4_k_m": 132288
+      },
+      "forecast_gpu_seconds": 13878.005086707939,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 3368.8056038747904,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5478.633630385056,
+        "qwen2_5_7b_instruct_q4_k_m": 5030.565852448092
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2199,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3188,
+        "qwen2_5_7b_instruct_q4_k_m": 3157
+      },
+      "payloads": 52,
+      "payloads_per_class": 13,
+      "uncached_requests": 8544,
+      "unique_requests": 8559
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 90698,
+        "mistral_7b_instruct_v0_3_q4_k_m": 158946,
+        "qwen2_5_7b_instruct_q4_k_m": 142684
+      },
+      "forecast_gpu_seconds": 14912.144216037686,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 3618.120179395183,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5870.483140335185,
+        "qwen2_5_7b_instruct_q4_k_m": 5423.540896307319
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2360,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3422,
+        "qwen2_5_7b_instruct_q4_k_m": 3400
+      },
+      "payloads": 56,
+      "payloads_per_class": 14,
+      "uncached_requests": 9182,
+      "unique_requests": 9202
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 96381,
+        "mistral_7b_instruct_v0_3_q4_k_m": 169586,
+        "qwen2_5_7b_instruct_q4_k_m": 151695
+      },
+      "forecast_gpu_seconds": 15868.559259363708,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 3842.946382613585,
+        "mistral_7b_instruct_v0_3_q4_k_m": 6261.450768417463,
+        "qwen2_5_7b_instruct_q4_k_m": 5764.16210833266
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2507,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3656,
+        "qwen2_5_7b_instruct_q4_k_m": 3613
+      },
+      "payloads": 60,
+      "payloads_per_class": 15,
+      "uncached_requests": 9776,
+      "unique_requests": 9798
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 102892,
+        "mistral_7b_instruct_v0_3_q4_k_m": 180550,
+        "qwen2_5_7b_instruct_q4_k_m": 161355
+      },
+      "forecast_gpu_seconds": 16894.168957253936,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 4100.529245389408,
+        "mistral_7b_instruct_v0_3_q4_k_m": 6664.323801715778,
+        "qwen2_5_7b_instruct_q4_k_m": 6129.315910148751
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2688,
+        "mistral_7b_instruct_v0_3_q4_k_m": 3894,
+        "qwen2_5_7b_instruct_q4_k_m": 3842
+      },
+      "payloads": 64,
+      "payloads_per_class": 16,
+      "uncached_requests": 10424,
+      "unique_requests": 10446
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 107954,
+        "mistral_7b_instruct_v0_3_q4_k_m": 190594,
+        "qwen2_5_7b_instruct_q4_k_m": 170767
+      },
+      "forecast_gpu_seconds": 17819.27448036828,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 4300.787953939747,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7033.391363412997,
+        "qwen2_5_7b_instruct_q4_k_m": 6485.095163015534
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2815,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4115,
+        "qwen2_5_7b_instruct_q4_k_m": 4070
+      },
+      "payloads": 68,
+      "payloads_per_class": 17,
+      "uncached_requests": 11000,
+      "unique_requests": 11025
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 115186,
+        "mistral_7b_instruct_v0_3_q4_k_m": 201246,
+        "qwen2_5_7b_instruct_q4_k_m": 179047
+      },
+      "forecast_gpu_seconds": 18809.778498117652,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 4586.894429687683,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7424.799932429208,
+        "qwen2_5_7b_instruct_q4_k_m": 6798.084136000761
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 2999,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4340,
+        "qwen2_5_7b_instruct_q4_k_m": 4271
+      },
+      "payloads": 72,
+      "payloads_per_class": 18,
+      "uncached_requests": 11610,
+      "unique_requests": 11640
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 120751,
+        "mistral_7b_instruct_v0_3_q4_k_m": 211551,
+        "qwen2_5_7b_instruct_q4_k_m": 187913
+      },
+      "forecast_gpu_seconds": 19743.73463368549,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 4807.052413307332,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7803.457959439356,
+        "qwen2_5_7b_instruct_q4_k_m": 7133.224260938801
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 3150,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4568,
+        "qwen2_5_7b_instruct_q4_k_m": 4476
+      },
+      "payloads": 76,
+      "payloads_per_class": 19,
+      "uncached_requests": 12194,
+      "unique_requests": 12228
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 126368,
+        "mistral_7b_instruct_v0_3_q4_k_m": 222541,
+        "qwen2_5_7b_instruct_q4_k_m": 197357
+      },
+      "forecast_gpu_seconds": 20726.76707623111,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 5029.267578445075,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8207.28636476119,
+        "qwen2_5_7b_instruct_q4_k_m": 7490.213133024846
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 3300,
+        "mistral_7b_instruct_v0_3_q4_k_m": 4805,
+        "qwen2_5_7b_instruct_q4_k_m": 4704
+      },
+      "payloads": 80,
+      "payloads_per_class": 20,
+      "uncached_requests": 12809,
+      "unique_requests": 12845
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 133773,
+        "mistral_7b_instruct_v0_3_q4_k_m": 233899,
+        "qwen2_5_7b_instruct_q4_k_m": 207181
+      },
+      "forecast_gpu_seconds": 21808.421330922098,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 5322.218138858985,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8624.636958723451,
+        "qwen2_5_7b_instruct_q4_k_m": 7861.566233339663
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 3492,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5047,
+        "qwen2_5_7b_instruct_q4_k_m": 4939
+      },
+      "payloads": 84,
+      "payloads_per_class": 21,
+      "uncached_requests": 13478,
+      "unique_requests": 13514
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 140929,
+        "mistral_7b_instruct_v0_3_q4_k_m": 244095,
+        "qwen2_5_7b_instruct_q4_k_m": 215848
+      },
+      "forecast_gpu_seconds": 22793.79177570416,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 5605.31796469585,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8999.28977225042,
+        "qwen2_5_7b_instruct_q4_k_m": 8189.184038757892
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 3676,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5265,
+        "qwen2_5_7b_instruct_q4_k_m": 5152
+      },
+      "payloads": 88,
+      "payloads_per_class": 22,
+      "uncached_requests": 14093,
+      "unique_requests": 14129
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 148030,
+        "mistral_7b_instruct_v0_3_q4_k_m": 255009,
+        "qwen2_5_7b_instruct_q4_k_m": 225569
+      },
+      "forecast_gpu_seconds": 23843.211154333578,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 5886.241925465493,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9400.32555165737,
+        "qwen2_5_7b_instruct_q4_k_m": 8556.643677210715
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 3857,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5500,
+        "qwen2_5_7b_instruct_q4_k_m": 5378
+      },
+      "payloads": 92,
+      "payloads_per_class": 23,
+      "uncached_requests": 14735,
+      "unique_requests": 14775
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 153776,
+        "mistral_7b_instruct_v0_3_q4_k_m": 265248,
+        "qwen2_5_7b_instruct_q4_k_m": 234473
+      },
+      "forecast_gpu_seconds": 24783.339111717996,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 6113.560483215442,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9776.558403530915,
+        "qwen2_5_7b_instruct_q4_k_m": 8893.22022497164
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 4006,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5720,
+        "qwen2_5_7b_instruct_q4_k_m": 5591
+      },
+      "payloads": 96,
+      "payloads_per_class": 24,
+      "uncached_requests": 15317,
+      "unique_requests": 15360
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 159211,
+        "mistral_7b_instruct_v0_3_q4_k_m": 275892,
+        "qwen2_5_7b_instruct_q4_k_m": 243045
+      },
+      "forecast_gpu_seconds": 25713.495498297027,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 6328.575513039835,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10167.673011924506,
+        "qwen2_5_7b_instruct_q4_k_m": 9217.246973332687
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 4147,
+        "mistral_7b_instruct_v0_3_q4_k_m": 5952,
+        "qwen2_5_7b_instruct_q4_k_m": 5792
+      },
+      "payloads": 100,
+      "payloads_per_class": 25,
+      "uncached_requests": 15891,
+      "unique_requests": 15934
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 166142,
+        "mistral_7b_instruct_v0_3_q4_k_m": 286136,
+        "qwen2_5_7b_instruct_q4_k_m": 251085
+      },
+      "forecast_gpu_seconds": 26668.02746405322,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 6602.774072692631,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10544.089589187217,
+        "qwen2_5_7b_instruct_q4_k_m": 9521.16380217337
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 4327,
+        "mistral_7b_instruct_v0_3_q4_k_m": 6166,
+        "qwen2_5_7b_instruct_q4_k_m": 5986
+      },
+      "payloads": 104,
+      "payloads_per_class": 26,
+      "uncached_requests": 16479,
+      "unique_requests": 16522
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 172577,
+        "mistral_7b_instruct_v0_3_q4_k_m": 296224,
+        "qwen2_5_7b_instruct_q4_k_m": 260298
+      },
+      "forecast_gpu_seconds": 27641.544955386566,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 6857.350285557385,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10914.773934308849,
+        "qwen2_5_7b_instruct_q4_k_m": 9869.420735520333
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 4493,
+        "mistral_7b_instruct_v0_3_q4_k_m": 6385,
+        "qwen2_5_7b_instruct_q4_k_m": 6208
+      },
+      "payloads": 108,
+      "payloads_per_class": 27,
+      "uncached_requests": 17086,
+      "unique_requests": 17130
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 178315,
+        "mistral_7b_instruct_v0_3_q4_k_m": 306651,
+        "qwen2_5_7b_instruct_q4_k_m": 268551
+      },
+      "forecast_gpu_seconds": 28563.656306946243,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 7084.352353843016,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11297.914860813933,
+        "qwen2_5_7b_instruct_q4_k_m": 10181.389092289293
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 4649,
+        "mistral_7b_instruct_v0_3_q4_k_m": 6615,
+        "qwen2_5_7b_instruct_q4_k_m": 6401
+      },
+      "payloads": 112,
+      "payloads_per_class": 28,
+      "uncached_requests": 17665,
+      "unique_requests": 17710
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 184634,
+        "mistral_7b_instruct_v0_3_q4_k_m": 317291,
+        "qwen2_5_7b_instruct_q4_k_m": 277748
+      },
+      "forecast_gpu_seconds": 29552.26317439795,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 7334.339469475102,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11688.882488896223,
+        "qwen2_5_7b_instruct_q4_k_m": 10529.041216026628
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 4817,
+        "mistral_7b_instruct_v0_3_q4_k_m": 6852,
+        "qwen2_5_7b_instruct_q4_k_m": 6624
+      },
+      "payloads": 116,
+      "payloads_per_class": 29,
+      "uncached_requests": 18293,
+      "unique_requests": 18341
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 191957,
+        "mistral_7b_instruct_v0_3_q4_k_m": 327819,
+        "qwen2_5_7b_instruct_q4_k_m": 286617
+      },
+      "forecast_gpu_seconds": 30564.07542390806,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 7624.046012879725,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12075.734668261852,
+        "qwen2_5_7b_instruct_q4_k_m": 10864.294742766482
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5012,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7076,
+        "qwen2_5_7b_instruct_q4_k_m": 6831
+      },
+      "payloads": 120,
+      "payloads_per_class": 30,
+      "uncached_requests": 18919,
+      "unique_requests": 18967
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 197086,
+        "mistral_7b_instruct_v0_3_q4_k_m": 336772,
+        "qwen2_5_7b_instruct_q4_k_m": 295449
+      },
+      "forecast_gpu_seconds": 31429.818318027334,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 7826.95532069377,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12404.713350049507,
+        "qwen2_5_7b_instruct_q4_k_m": 11198.149647284055
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5147,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7271,
+        "qwen2_5_7b_instruct_q4_k_m": 7036
+      },
+      "payloads": 124,
+      "payloads_per_class": 31,
+      "uncached_requests": 19454,
+      "unique_requests": 19502
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 202384,
+        "mistral_7b_instruct_v0_3_q4_k_m": 347254,
+        "qwen2_5_7b_instruct_q4_k_m": 303555
+      },
+      "forecast_gpu_seconds": 32330.987040041226,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 8036.550468441639,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12789.875255835066,
+        "qwen2_5_7b_instruct_q4_k_m": 11504.56131576452
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5288,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7501,
+        "qwen2_5_7b_instruct_q4_k_m": 7229
+      },
+      "payloads": 128,
+      "payloads_per_class": 32,
+      "uncached_requests": 20018,
+      "unique_requests": 20067
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 208500,
+        "mistral_7b_instruct_v0_3_q4_k_m": 356377,
+        "qwen2_5_7b_instruct_q4_k_m": 311586
+      },
+      "forecast_gpu_seconds": 33211.74520396971,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 8278.506663916523,
+        "mistral_7b_instruct_v0_3_q4_k_m": 13125.100600853366,
+        "qwen2_5_7b_instruct_q4_k_m": 11808.137939199818
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5444,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7694,
+        "qwen2_5_7b_instruct_q4_k_m": 7423
+      },
+      "payloads": 132,
+      "payloads_per_class": 33,
+      "uncached_requests": 20561,
+      "unique_requests": 20612
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 214690,
+        "mistral_7b_instruct_v0_3_q4_k_m": 366099,
+        "qwen2_5_7b_instruct_q4_k_m": 319949
+      },
+      "forecast_gpu_seconds": 34129.9909964616,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 8523.390386936398,
+        "mistral_7b_instruct_v0_3_q4_k_m": 13482.33624749019,
+        "qwen2_5_7b_instruct_q4_k_m": 12124.264362035012
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5608,
+        "mistral_7b_instruct_v0_3_q4_k_m": 7902,
+        "qwen2_5_7b_instruct_q4_k_m": 7623
+      },
+      "payloads": 136,
+      "payloads_per_class": 34,
+      "uncached_requests": 21133,
+      "unique_requests": 21186
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 219096,
+        "mistral_7b_instruct_v0_3_q4_k_m": 376482,
+        "qwen2_5_7b_instruct_q4_k_m": 329113
+      },
+      "forecast_gpu_seconds": 35032.22641593562,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 8697.696959412264,
+        "mistral_7b_instruct_v0_3_q4_k_m": 13863.860390570873,
+        "qwen2_5_7b_instruct_q4_k_m": 12470.669065952481
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5724,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8131,
+        "qwen2_5_7b_instruct_q4_k_m": 7842
+      },
+      "payloads": 140,
+      "payloads_per_class": 35,
+      "uncached_requests": 21697,
+      "unique_requests": 21750
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 222868,
+        "mistral_7b_instruct_v0_3_q4_k_m": 385956,
+        "qwen2_5_7b_instruct_q4_k_m": 337931
+      },
+      "forecast_gpu_seconds": 35862.8997618087,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 8846.921741840531,
+        "mistral_7b_instruct_v0_3_q4_k_m": 14211.983257906533,
+        "qwen2_5_7b_instruct_q4_k_m": 12803.994762061633
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5822,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8333,
+        "qwen2_5_7b_instruct_q4_k_m": 8045
+      },
+      "payloads": 144,
+      "payloads_per_class": 36,
+      "uncached_requests": 22200,
+      "unique_requests": 22255
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 228407,
+        "mistral_7b_instruct_v0_3_q4_k_m": 395180,
+        "qwen2_5_7b_instruct_q4_k_m": 346777
+      },
+      "forecast_gpu_seconds": 36755.34986547414,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 9066.051134701136,
+        "mistral_7b_instruct_v0_3_q4_k_m": 14550.919855785382,
+        "qwen2_5_7b_instruct_q4_k_m": 13138.378874987624
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 5969,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8532,
+        "qwen2_5_7b_instruct_q4_k_m": 8249
+      },
+      "payloads": 148,
+      "payloads_per_class": 37,
+      "uncached_requests": 22750,
+      "unique_requests": 22806
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 233192,
+        "mistral_7b_instruct_v0_3_q4_k_m": 404225,
+        "qwen2_5_7b_instruct_q4_k_m": 355316
+      },
+      "forecast_gpu_seconds": 37599.78868381127,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 9255.35139554929,
+        "mistral_7b_instruct_v0_3_q4_k_m": 14883.279084733178,
+        "qwen2_5_7b_instruct_q4_k_m": 13461.1582035288
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6097,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8732,
+        "qwen2_5_7b_instruct_q4_k_m": 8449
+      },
+      "payloads": 152,
+      "payloads_per_class": 38,
+      "uncached_requests": 23278,
+      "unique_requests": 23337
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 238343,
+        "mistral_7b_instruct_v0_3_q4_k_m": 414283,
+        "qwen2_5_7b_instruct_q4_k_m": 363051
+      },
+      "forecast_gpu_seconds": 38465.53797609613,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 9459.131049390231,
+        "mistral_7b_instruct_v0_3_q4_k_m": 15252.861077520016,
+        "qwen2_5_7b_instruct_q4_k_m": 13753.545849185883
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6229,
+        "mistral_7b_instruct_v0_3_q4_k_m": 8945,
+        "qwen2_5_7b_instruct_q4_k_m": 8640
+      },
+      "payloads": 156,
+      "payloads_per_class": 39,
+      "uncached_requests": 23814,
+      "unique_requests": 23875
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 243642,
+        "mistral_7b_instruct_v0_3_q4_k_m": 423687,
+        "qwen2_5_7b_instruct_q4_k_m": 371668
+      },
+      "forecast_gpu_seconds": 39346.45117230296,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 9668.765758321153,
+        "mistral_7b_instruct_v0_3_q4_k_m": 15598.41178940778,
+        "qwen2_5_7b_instruct_q4_k_m": 14079.273624574023
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6372,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9149,
+        "qwen2_5_7b_instruct_q4_k_m": 8844
+      },
+      "payloads": 160,
+      "payloads_per_class": 40,
+      "uncached_requests": 24365,
+      "unique_requests": 24426
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 247811,
+        "mistral_7b_instruct_v0_3_q4_k_m": 433643,
+        "qwen2_5_7b_instruct_q4_k_m": 379759
+      },
+      "forecast_gpu_seconds": 40183.060398718124,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 9833.696330416442,
+        "mistral_7b_instruct_v0_3_q4_k_m": 15964.24578425623,
+        "qwen2_5_7b_instruct_q4_k_m": 14385.118284045451
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6480,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9371,
+        "qwen2_5_7b_instruct_q4_k_m": 9031
+      },
+      "payloads": 164,
+      "payloads_per_class": 41,
+      "uncached_requests": 24882,
+      "unique_requests": 24945
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 251073,
+        "mistral_7b_instruct_v0_3_q4_k_m": 444025,
+        "qwen2_5_7b_instruct_q4_k_m": 387674
+      },
+      "forecast_gpu_seconds": 40992.78812956421,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 9962.744909494117,
+        "mistral_7b_instruct_v0_3_q4_k_m": 16345.733182259122,
+        "qwen2_5_7b_instruct_q4_k_m": 14684.310037810965
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6561,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9591,
+        "qwen2_5_7b_instruct_q4_k_m": 9220
+      },
+      "payloads": 168,
+      "payloads_per_class": 42,
+      "uncached_requests": 25372,
+      "unique_requests": 25435
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 256805,
+        "mistral_7b_instruct_v0_3_q4_k_m": 453471,
+        "qwen2_5_7b_instruct_q4_k_m": 396072
+      },
+      "forecast_gpu_seconds": 41884.09627976445,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 10189.509610681505,
+        "mistral_7b_instruct_v0_3_q4_k_m": 16692.827187415645,
+        "qwen2_5_7b_instruct_q4_k_m": 15001.759481667304
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6712,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9798,
+        "qwen2_5_7b_instruct_q4_k_m": 9420
+      },
+      "payloads": 172,
+      "payloads_per_class": 43,
+      "uncached_requests": 25930,
+      "unique_requests": 25993
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 261795,
+        "mistral_7b_instruct_v0_3_q4_k_m": 462246,
+        "qwen2_5_7b_instruct_q4_k_m": 404003
+      },
+      "forecast_gpu_seconds": 42703.74120444543,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 10386.919914052942,
+        "mistral_7b_instruct_v0_3_q4_k_m": 17015.265245350067,
+        "qwen2_5_7b_instruct_q4_k_m": 15301.556045042424
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6839,
+        "mistral_7b_instruct_v0_3_q4_k_m": 9982,
+        "qwen2_5_7b_instruct_q4_k_m": 9612
+      },
+      "payloads": 176,
+      "payloads_per_class": 44,
+      "uncached_requests": 26433,
+      "unique_requests": 26496
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 266714,
+        "mistral_7b_instruct_v0_3_q4_k_m": 470890,
+        "qwen2_5_7b_instruct_q4_k_m": 411864
+      },
+      "forecast_gpu_seconds": 43513.11763789309,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 10581.521373428515,
+        "mistral_7b_instruct_v0_3_q4_k_m": 17332.889698089133,
+        "qwen2_5_7b_instruct_q4_k_m": 15598.706566375444
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 6969,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10164,
+        "qwen2_5_7b_instruct_q4_k_m": 9795
+      },
+      "payloads": 180,
+      "payloads_per_class": 45,
+      "uncached_requests": 26928,
+      "unique_requests": 26991
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 272373,
+        "mistral_7b_instruct_v0_3_q4_k_m": 479342,
+        "qwen2_5_7b_instruct_q4_k_m": 419608
+      },
+      "forecast_gpu_seconds": 44340.291621577286,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 10805.398108253961,
+        "mistral_7b_instruct_v0_3_q4_k_m": 17643.459095885344,
+        "qwen2_5_7b_instruct_q4_k_m": 15891.434417437982
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7115,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10339,
+        "qwen2_5_7b_instruct_q4_k_m": 9984
+      },
+      "payloads": 184,
+      "payloads_per_class": 46,
+      "uncached_requests": 27438,
+      "unique_requests": 27501
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 278704,
+        "mistral_7b_instruct_v0_3_q4_k_m": 488831,
+        "qwen2_5_7b_instruct_q4_k_m": 427009
+      },
+      "forecast_gpu_seconds": 45219.189759964975,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 11055.859958082534,
+        "mistral_7b_instruct_v0_3_q4_k_m": 17992.133139388447,
+        "qwen2_5_7b_instruct_q4_k_m": 16171.196662493998
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7280,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10542,
+        "qwen2_5_7b_instruct_q4_k_m": 10158
+      },
+      "payloads": 188,
+      "payloads_per_class": 47,
+      "uncached_requests": 27980,
+      "unique_requests": 28045
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 284263,
+        "mistral_7b_instruct_v0_3_q4_k_m": 498248,
+        "qwen2_5_7b_instruct_q4_k_m": 434899
+      },
+      "forecast_gpu_seconds": 46083.38551313632,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 11275.780574603925,
+        "mistral_7b_instruct_v0_3_q4_k_m": 18338.161537287964,
+        "qwen2_5_7b_instruct_q4_k_m": 16469.44340124444
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7421,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10734,
+        "qwen2_5_7b_instruct_q4_k_m": 10354
+      },
+      "payloads": 192,
+      "payloads_per_class": 48,
+      "uncached_requests": 28509,
+      "unique_requests": 28576
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 289594,
+        "mistral_7b_instruct_v0_3_q4_k_m": 507286,
+        "qwen2_5_7b_instruct_q4_k_m": 441599
+      },
+      "forecast_gpu_seconds": 46879.65221736148,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 11486.681241392125,
+        "mistral_7b_instruct_v0_3_q4_k_m": 18670.26355069095,
+        "qwen2_5_7b_instruct_q4_k_m": 16722.707425278408
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7568,
+        "mistral_7b_instruct_v0_3_q4_k_m": 10933,
+        "qwen2_5_7b_instruct_q4_k_m": 10510
+      },
+      "payloads": 196,
+      "payloads_per_class": 49,
+      "uncached_requests": 29011,
+      "unique_requests": 29080
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 295179,
+        "mistral_7b_instruct_v0_3_q4_k_m": 515938,
+        "qwen2_5_7b_instruct_q4_k_m": 448593
+      },
+      "forecast_gpu_seconds": 47682.89723861454,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 11707.63044867258,
+        "mistral_7b_instruct_v0_3_q4_k_m": 18988.1819640526,
+        "qwen2_5_7b_instruct_q4_k_m": 16987.084825889357
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7711,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11121,
+        "qwen2_5_7b_instruct_q4_k_m": 10674
+      },
+      "payloads": 200,
+      "payloads_per_class": 50,
+      "uncached_requests": 29506,
+      "unique_requests": 29578
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 300462,
+        "mistral_7b_instruct_v0_3_q4_k_m": 524309,
+        "qwen2_5_7b_instruct_q4_k_m": 456324
+      },
+      "forecast_gpu_seconds": 48491.72845836371,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 11916.632178674843,
+        "mistral_7b_instruct_v0_3_q4_k_m": 19295.775010544792,
+        "qwen2_5_7b_instruct_q4_k_m": 17279.321269144075
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7849,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11302,
+        "qwen2_5_7b_instruct_q4_k_m": 10856
+      },
+      "payloads": 204,
+      "payloads_per_class": 51,
+      "uncached_requests": 30007,
+      "unique_requests": 30084
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 306333,
+        "mistral_7b_instruct_v0_3_q4_k_m": 532639,
+        "qwen2_5_7b_instruct_q4_k_m": 463552
+      },
+      "forecast_gpu_seconds": 49303.301403446865,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 12148.895884304833,
+        "mistral_7b_instruct_v0_3_q4_k_m": 19601.8615088461,
+        "qwen2_5_7b_instruct_q4_k_m": 17552.54401029593
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 7996,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11479,
+        "qwen2_5_7b_instruct_q4_k_m": 11018
+      },
+      "payloads": 208,
+      "payloads_per_class": 52,
+      "uncached_requests": 30493,
+      "unique_requests": 30570
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 312506,
+        "mistral_7b_instruct_v0_3_q4_k_m": 541189,
+        "qwen2_5_7b_instruct_q4_k_m": 471791
+      },
+      "forecast_gpu_seconds": 50173.1221501389,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 12393.107067213023,
+        "mistral_7b_instruct_v0_3_q4_k_m": 19916.031924269355,
+        "qwen2_5_7b_instruct_q4_k_m": 17863.983158656523
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8157,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11663,
+        "qwen2_5_7b_instruct_q4_k_m": 11218
+      },
+      "payloads": 212,
+      "payloads_per_class": 53,
+      "uncached_requests": 31038,
+      "unique_requests": 31115
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 318579,
+        "mistral_7b_instruct_v0_3_q4_k_m": 550021,
+        "qwen2_5_7b_instruct_q4_k_m": 479271
+      },
+      "forecast_gpu_seconds": 51020.65823461724,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 12633.36213181718,
+        "mistral_7b_instruct_v0_3_q4_k_m": 20240.564451639926,
+        "qwen2_5_7b_instruct_q4_k_m": 18146.73165116014
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8309,
+        "mistral_7b_instruct_v0_3_q4_k_m": 11851,
+        "qwen2_5_7b_instruct_q4_k_m": 11396
+      },
+      "payloads": 216,
+      "payloads_per_class": 54,
+      "uncached_requests": 31556,
+      "unique_requests": 31633
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 323099,
+        "mistral_7b_instruct_v0_3_q4_k_m": 558405,
+        "qwen2_5_7b_instruct_q4_k_m": 486037
+      },
+      "forecast_gpu_seconds": 51763.30437813738,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 12812.178679159648,
+        "mistral_7b_instruct_v0_3_q4_k_m": 20548.635184143885,
+        "qwen2_5_7b_instruct_q4_k_m": 18402.49051483385
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8425,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12031,
+        "qwen2_5_7b_instruct_q4_k_m": 11558
+      },
+      "payloads": 220,
+      "payloads_per_class": 55,
+      "uncached_requests": 32014,
+      "unique_requests": 32091
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 328339,
+        "mistral_7b_instruct_v0_3_q4_k_m": 566979,
+        "qwen2_5_7b_instruct_q4_k_m": 492475
+      },
+      "forecast_gpu_seconds": 52529.01754123626,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 13019.479278291179,
+        "mistral_7b_instruct_v0_3_q4_k_m": 20863.687481435023,
+        "qwen2_5_7b_instruct_q4_k_m": 18645.85078151006
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8558,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12225,
+        "qwen2_5_7b_instruct_q4_k_m": 11707
+      },
+      "payloads": 224,
+      "payloads_per_class": 56,
+      "uncached_requests": 32490,
+      "unique_requests": 32567
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 332850,
+        "mistral_7b_instruct_v0_3_q4_k_m": 574854,
+        "qwen2_5_7b_instruct_q4_k_m": 499638
+      },
+      "forecast_gpu_seconds": 53267.611227933834,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 13197.939774986233,
+        "mistral_7b_instruct_v0_3_q4_k_m": 21153.054969324825,
+        "qwen2_5_7b_instruct_q4_k_m": 18916.616483622773
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8676,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12387,
+        "qwen2_5_7b_instruct_q4_k_m": 11877
+      },
+      "payloads": 228,
+      "payloads_per_class": 57,
+      "uncached_requests": 32940,
+      "unique_requests": 33017
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 336960,
+        "mistral_7b_instruct_v0_3_q4_k_m": 583557,
+        "qwen2_5_7b_instruct_q4_k_m": 506655
+      },
+      "forecast_gpu_seconds": 54015.24691698543,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 13360.536237282151,
+        "mistral_7b_instruct_v0_3_q4_k_m": 21472.847381655676,
+        "qwen2_5_7b_instruct_q4_k_m": 19181.863298047607
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8785,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12577,
+        "qwen2_5_7b_instruct_q4_k_m": 12037
+      },
+      "payloads": 232,
+      "payloads_per_class": 58,
+      "uncached_requests": 33399,
+      "unique_requests": 33476
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 341433,
+        "mistral_7b_instruct_v0_3_q4_k_m": 592886,
+        "qwen2_5_7b_instruct_q4_k_m": 514691
+      },
+      "forecast_gpu_seconds": 54838.764546214064,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 13537.493409021716,
+        "mistral_7b_instruct_v0_3_q4_k_m": 21815.642212706418,
+        "qwen2_5_7b_instruct_q4_k_m": 19485.62892448593
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8901,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12778,
+        "qwen2_5_7b_instruct_q4_k_m": 12223
+      },
+      "payloads": 236,
+      "payloads_per_class": 59,
+      "uncached_requests": 33902,
+      "unique_requests": 33981
+    },
+    {
+      "context_and_target_tokens": {
+        "llama3_8b_instruct_q4_k_m": 345281,
+        "mistral_7b_instruct_v0_3_q4_k_m": 600673,
+        "qwen2_5_7b_instruct_q4_k_m": 520896
+      },
+      "forecast_gpu_seconds": 55511.68262633038,
+      "forecast_gpu_seconds_by_model": {
+        "llama3_8b_instruct_q4_k_m": 13689.724841361054,
+        "mistral_7b_instruct_v0_3_q4_k_m": 22101.776133747473,
+        "qwen2_5_7b_instruct_q4_k_m": 19720.181651221857
+      },
+      "model_request_counts": {
+        "llama3_8b_instruct_q4_k_m": 8999,
+        "mistral_7b_instruct_v0_3_q4_k_m": 12942,
+        "qwen2_5_7b_instruct_q4_k_m": 12366
+      },
+      "payloads": 240,
+      "payloads_per_class": 60,
+      "uncached_requests": 34307,
+      "unique_requests": 34386
+    }
+  ],
+  "analysis_status": "limited exploratory analysis using validated context gain; R1.4 partly unresolved",
+  "charged_gpu_seconds_at_admission": 422.6472010990019,
+  "context_and_target_tokens": {
+    "llama3_8b_instruct_q4_k_m": 148030,
+    "mistral_7b_instruct_v0_3_q4_k_m": 255009,
+    "qwen2_5_7b_instruct_q4_k_m": 225569
+  },
+  "cost_rates_seconds_per_context_or_target_token": {
+    "llama3_8b_instruct_q4_k_m": 0.022606390308780935,
+    "mistral_7b_instruct_v0_3_q4_k_m": 0.02099718732987568,
+    "qwen2_5_7b_instruct_q4_k_m": 0.021600343201189445
+  },
+  "created_utc": "2026-09-22T21:47:05.960082+00:00",
+  "files": {
+    "requests.jsonl": "e50fedcabdcff6919bd5d563e5549c2570b611065d1fa412d55d383b8feeac51",
+    "scoring_contracts.json": "ff163a9ab415ec250bde3bf7108d954cf46efc0d6b82f35f4c9c2fe6c85f79de",
+    "unit_requests.jsonl": "0e42e6d66ffeea4d4e837e697be0267f58fa925a297a9c2efeb874d10111e3cd",
+    "units.jsonl": "d5dd480f2b08a571571c6bc5ed38882c484595ca4c68bbff97c5692426a94e5d"
+  },
+  "forecast_gpu_seconds": 23843.211154333578,
+  "forecast_gpu_seconds_by_model": {
+    "llama3_8b_instruct_q4_k_m": 5886.241925465493,
+    "mistral_7b_instruct_v0_3_q4_k_m": 9400.32555165737,
+    "qwen2_5_7b_instruct_q4_k_m": 8556.643677210715
+  },
+  "forecast_multiplier": 1.75,
+  "inventory_manifest_sha256": "2894b2b984929fc7eb8331bac4241a6df43b6d8d71404f98a8738986456071e5",
+  "lm_requests": 14775,
+  "model_request_counts": {
+    "llama3_8b_instruct_q4_k_m": 3857,
+    "mistral_7b_instruct_v0_3_q4_k_m": 5500,
+    "qwen2_5_7b_instruct_q4_k_m": 5378
+  },
+  "payloads_per_class": 23,
+  "pilot_summary_sha256": "8b177894215f45d883510ec7ebc7f0edda2957bb5c515967099258c1372fcf58",
+  "plan_config_sha256": "a4b0311fc31551729b407c3dd3da5026eab4b4830912eccdba3294bef6d06946",
+  "rankcloak_scores_seen_at_freeze": false,
+  "remaining_for_study_seconds": 24777.352798900996,
+  "reserved_seconds": 3600,
+  "scored_metrics": [
+    "context_gain"
+  ],
+  "selected_eligible_boundaries": 2750,
+  "selected_payload_names": [
+    "revision_v1_hmac_sha256_hex_000",
+    "revision_v1_hmac_sha256_hex_001",
+    "revision_v1_hmac_sha256_hex_002",
+    "revision_v1_hmac_sha256_hex_003",
+    "revision_v1_hmac_sha256_hex_006",
+    "revision_v1_hmac_sha256_hex_009",
+    "revision_v1_hmac_sha256_hex_013",
+    "revision_v1_hmac_sha256_hex_016",
+    "revision_v1_hmac_sha256_hex_021",
+    "revision_v1_hmac_sha256_hex_022",
+    "revision_v1_hmac_sha256_hex_025",
+    "revision_v1_hmac_sha256_hex_028",
+    "revision_v1_hmac_sha256_hex_029",
+    "revision_v1_hmac_sha256_hex_031",
+    "revision_v1_hmac_sha256_hex_034",
+    "revision_v1_hmac_sha256_hex_038",
+    "revision_v1_hmac_sha256_hex_044",
+    "revision_v1_hmac_sha256_hex_047",
+    "revision_v1_hmac_sha256_hex_048",
+    "revision_v1_hmac_sha256_hex_050",
+    "revision_v1_hmac_sha256_hex_054",
+    "revision_v1_hmac_sha256_hex_056",
+    "revision_v1_hmac_sha256_hex_059",
+    "revision_v1_nonce_96_bit_hex_003",
+    "revision_v1_nonce_96_bit_hex_004",
+    "revision_v1_nonce_96_bit_hex_005",
+    "revision_v1_nonce_96_bit_hex_008",
+    "revision_v1_nonce_96_bit_hex_009",
+    "revision_v1_nonce_96_bit_hex_010",
+    "revision_v1_nonce_96_bit_hex_012",
+    "revision_v1_nonce_96_bit_hex_014",
+    "revision_v1_nonce_96_bit_hex_015",
+    "revision_v1_nonce_96_bit_hex_017",
+    "revision_v1_nonce_96_bit_hex_020",
+    "revision_v1_nonce_96_bit_hex_023",
+    "revision_v1_nonce_96_bit_hex_026",
+    "revision_v1_nonce_96_bit_hex_029",
+    "revision_v1_nonce_96_bit_hex_030",
+    "revision_v1_nonce_96_bit_hex_032",
+    "revision_v1_nonce_96_bit_hex_041",
+    "revision_v1_nonce_96_bit_hex_045",
+    "revision_v1_nonce_96_bit_hex_047",
+    "revision_v1_nonce_96_bit_hex_050",
+    "revision_v1_nonce_96_bit_hex_055",
+    "revision_v1_nonce_96_bit_hex_056",
+    "revision_v1_nonce_96_bit_hex_057",
+    "revision_v1_sha256_hex_000",
+    "revision_v1_sha256_hex_001",
+    "revision_v1_sha256_hex_002",
+    "revision_v1_sha256_hex_006",
+    "revision_v1_sha256_hex_014",
+    "revision_v1_sha256_hex_015",
+    "revision_v1_sha256_hex_017",
+    "revision_v1_sha256_hex_022",
+    "revision_v1_sha256_hex_024",
+    "revision_v1_sha256_hex_025",
+    "revision_v1_sha256_hex_026",
+    "revision_v1_sha256_hex_028",
+    "revision_v1_sha256_hex_032",
+    "revision_v1_sha256_hex_033",
+    "revision_v1_sha256_hex_035",
+    "revision_v1_sha256_hex_038",
+    "revision_v1_sha256_hex_040",
+    "revision_v1_sha256_hex_047",
+    "revision_v1_sha256_hex_049",
+    "revision_v1_sha256_hex_052",
+    "revision_v1_sha256_hex_056",
+    "revision_v1_sha256_hex_057",
+    "revision_v1_sha256_hex_059",
+    "revision_v1_token_128_bit_hex_000",
+    "revision_v1_token_128_bit_hex_001",
+    "revision_v1_token_128_bit_hex_002",
+    "revision_v1_token_128_bit_hex_007",
+    "revision_v1_token_128_bit_hex_008",
+    "revision_v1_token_128_bit_hex_009",
+    "revision_v1_token_128_bit_hex_012",
+    "revision_v1_token_128_bit_hex_015",
+    "revision_v1_token_128_bit_hex_016",
+    "revision_v1_token_128_bit_hex_017",
+    "revision_v1_token_128_bit_hex_025",
+    "revision_v1_token_128_bit_hex_028",
+    "revision_v1_token_128_bit_hex_034",
+    "revision_v1_token_128_bit_hex_038",
+    "revision_v1_token_128_bit_hex_039",
+    "revision_v1_token_128_bit_hex_042",
+    "revision_v1_token_128_bit_hex_045",
+    "revision_v1_token_128_bit_hex_046",
+    "revision_v1_token_128_bit_hex_049",
+    "revision_v1_token_128_bit_hex_050",
+    "revision_v1_token_128_bit_hex_051",
+    "revision_v1_token_128_bit_hex_054",
+    "revision_v1_token_128_bit_hex_057"
+  ],
+  "selected_payloads": 92,
+  "selected_planned_trials": 552,
+  "selected_scoring_trials": 550,
+  "selected_structural_boundaries": 3174,
+  "selection_is_full": false,
+  "selection_rule": "Use all eligible boundaries if the conservative deduplicated workload forecast fits after reserves. Otherwise choose the largest balanced count per payload class that fits, using SHA256(seed|payload_name), and retain all three generators and both schedules for every chosen payload. Freeze before RankCloak scoring.",
+  "semantic_requests": 0,
+  "uncached_requests": 14735,
+  "unique_requests": 14775,
+  "validated_metrics": [
+    "context_gain"
+  ]
+}

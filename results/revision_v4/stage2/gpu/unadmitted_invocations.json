@@ -1,0 +1,11 @@
+{
+  "accounting": "Add this conservative command time to the ledger after all workers have finished, under the same lock. No active unrelated GPU job was interrupted.",
+  "invocations": [
+    {
+      "conservatively_charged_command_wall_seconds": 0.086243987,
+      "gpu_model_started": false,
+      "name": "transport_reuse_check_queue_refusal",
+      "reason": "Nonblocking supervisor lock refused a concurrent launch before any second GPU process was started. The dispatcher was changed to wait for completion of all three coherence jobs."
+    }
+  ]
+}

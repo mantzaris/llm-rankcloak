@@ -1,0 +1,33 @@
+{
+  "config_path": "configs/revision_v4/stage2_coherence.json",
+  "config_sha256": "7304ad66e06c8f9fad4b9379ad9da4d023b3fc70e4bb33f6d1d6d4e6ec66ca84",
+  "eligible_boundaries": 4456,
+  "excluded_pilot_payloads": [],
+  "exclusion_reason_counts": {
+    "actual:evaluator_boundary_straddle": 361,
+    "actual:evaluator_roundtrip": 2740,
+    "ordinary:evaluator_boundary_straddle": 535,
+    "ordinary:evaluator_roundtrip": 2760,
+    "short_actual_words": 119,
+    "shuffled:evaluator_boundary_straddle": 210,
+    "shuffled:evaluator_roundtrip": 2740
+  },
+  "files": {
+    "boundaries.jsonl": "99573317d02414f8947a6fd00bbd4c0e0e665870c941fb7a619f935f948e8fb7",
+    "full_eligible_units.jsonl": "a9a9e0a13c535d573c7ca834ac450e1b48cafda470087bb7e658835fa31ddd78",
+    "pilot_units.jsonl": "266f8d915c0e3f66522e40f9a14dc529b0e7e69ffa4f4463356b13f4edc545c3"
+  },
+  "instrumentation_source_sha256": "1c5bff5fd06f9291124a67628c4dd5ff1543ac47f13e886e20d1945bb5d9fc4f",
+  "metrics_scored": false,
+  "payload_groups": 240,
+  "pilot_identities": 24,
+  "pilot_strata": 24,
+  "segmented_trials": 1440,
+  "source_hashes": {
+    "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+    "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+    "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a"
+  },
+  "source_inventory_sha256": "2cba0d0a086f2890f4196c200a126ef44ee8c0c353cfcb2bb56652e15ab5e8c7",
+  "structural_boundaries": 8280
+}

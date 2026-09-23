@@ -1,0 +1,30 @@
+{
+  "config_path": "configs/revision_v4/stage2_coherence.json",
+  "config_sha256": "8a4e10661d2cdd3f371bdea0d5359df22d6bc10d677aa8702dd6098008e2823d",
+  "eligible_boundaries": 7113,
+  "excluded_pilot_payloads": [],
+  "exclusion_reason_counts": {
+    "actual:evaluator_boundary_straddle": 384,
+    "ordinary:evaluator_boundary_straddle": 553,
+    "short_actual_words": 119,
+    "shuffled:evaluator_boundary_straddle": 254
+  },
+  "files": {
+    "boundaries.jsonl": "1a3aee9732171f47027f82953cccbe83c115e627e004d740580636d4d0845ebf",
+    "full_eligible_units.jsonl": "42f0273923c8b2a9faf13c4512872e18e0960c55475fecf6641d03707b6c4de9",
+    "pilot_units.jsonl": "9076d487357df23d22ff6b9523c3426a5352424454f8474c33989403c2da6d9e"
+  },
+  "instrumentation_source_sha256": "ab80f9993fe46574b3716bc42ea7c2739792c431d99514cf5e6a4aff270417f0",
+  "metrics_scored": false,
+  "payload_groups": 240,
+  "pilot_identities": 36,
+  "pilot_strata": 36,
+  "segmented_trials": 1440,
+  "source_hashes": {
+    "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+    "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+    "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a"
+  },
+  "source_inventory_sha256": "2cba0d0a086f2890f4196c200a126ef44ee8c0c353cfcb2bb56652e15ab5e8c7",
+  "structural_boundaries": 8280
+}

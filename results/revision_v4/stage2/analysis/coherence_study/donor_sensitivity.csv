@@ -1,0 +1,5 @@
+contrast,metric,removed_donor_payloads,minimum_leave_one_donor_out_effect,maximum_leave_one_donor_out_effect,interpretation
+actual minus ordinary,context_gain,411,0.1504020613355422,0.16430137796445302,"Fixed corpus influence diagnostic, not a two-way population confidence interval."
+actual minus ordinary,conditional_logp,411,0.057156715155879806,0.06870503857855366,"Fixed corpus influence diagnostic, not a two-way population confidence interval."
+actual minus shuffled,context_gain,240,2.3210333960578304,2.3362637706922977,"Fixed corpus influence diagnostic, not a two-way population confidence interval."
+actual minus shuffled,conditional_logp,240,2.3158782591716376,2.331965718668775,"Fixed corpus influence diagnostic, not a two-way population confidence interval."

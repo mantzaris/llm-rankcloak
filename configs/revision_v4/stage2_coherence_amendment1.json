@@ -1,0 +1,51 @@
+{
+  "schema_version": "rankcloak-v4-stage2-coherence-v1",
+  "seed": 20260922,
+  "prospective_parent": "configs/revision_v4/boundary_coherence_plan.json",
+  "amendment_before_any_scores": "Use purpose-trained all-MiniLM-L6-v2 with its official pooling definition instead of the proposed DeBERTa proxy. No model acquisition is needed.",
+  "right_generator_tokens": 16,
+  "left_generator_tokens": 32,
+  "minimum_words_each_side": 3,
+  "word_rule": "Unicode regex \\b\\w+\\b",
+  "alignment": "Pinned full-prefix detokenization. Require exact UTF-8 and prefix-stable byte offsets at every selected boundary. Exclude code-point splits and replacement characters. No whitespace trimming or inserted join separator.",
+  "ordinary_rule": "Exact generator and original context IDs. Pseudo-boundary at recipient forced-stop index. Sufficient generator tokens for the same right-window length. Select a different-payload eligible control with minimum prior donor reuse, then SHA256(seed|boundary_id|control_id). Record every reuse.",
+  "shuffled_rule": "Rotate boundary IDs in seeded order within generator, exact prompt/context, schedule, and forced-length strata. Select the first different-payload donor with sufficient right length and a nonidentical exact right string. No cross-topic substitution.",
+  "identical_control_rule": "Skip exact-identical right strings even when identities differ, retain skipped counts, and mark unavailable if no distinct same-prompt donor exists. Never exclude merely similar text.",
+  "complete_pair_rule": "Primary full analysis requires all three arms to pass the same generator-window and evaluator-alignment rules. Retain every structural boundary and all exclusion reasons. Control pilot eligibility depends only on its ordinary arms, not RankCloak metric outcomes.",
+  "semantic_encoder": "configs/revision_v4/stage2_semantic_encoder.json",
+  "semantic_metric": "Cosine of attention-mask mean-pooled final-layer embeddings, including nonpadding special tokens, L2-normalized as in the official MiniLM inference definition. Float32, 256-token truncation, batch 64.",
+  "evaluator_map": {
+    "llama3_8b_instruct_q4_k_m": "qwen2_5_7b_instruct_q4_k_m",
+    "qwen2_5_7b_instruct_q4_k_m": "mistral_7b_instruct_v0_3_q4_k_m",
+    "mistral_7b_instruct_v0_3_q4_k_m": "llama3_8b_instruct_q4_k_m"
+  },
+  "lm_tokenization": "Apply the evaluator tokenizer to exact left+right text with add_bos=False. Locate the boundary by decoded-prefix bytes. Exclude a unit if an evaluator token straddles the boundary or exact roundtrip fails. Prompt uses existing make_context_token_ids, with its recorded BOS policy. No generator token IDs enter this scoring path. The existing Mistral tokenizer adds exactly one ASCII space in detokenization. Permit only this identified leading rendering prefix, retain its hex value, and shift prefix byte offsets by one. Other roundtrip differences remain excluded.",
+  "lm_metric": "Mean log p of the identical evaluator tail-token path given prompt+left, minus its mean log p given prompt alone, in nats per evaluator tail token. Reuse the joint-tokenization tail IDs for both passes even if standalone right tokenization differs. Retain that difference flag and raw conditional mean as secondary data.",
+  "lm_context_limit": 512,
+  "lm_optimization": {
+    "candidate_batch": 128,
+    "maximum_per_token_logp_difference_nats": 0.001,
+    "maximum_mean_logp_difference_nats": 0.0002,
+    "rule": "Validate fixed nonstudy English fixtures against the established serial scorer for each evaluator before using batched evaluation. Otherwise retain serial batch 1. No KV reuse across requests."
+  },
+  "pilot_rule": "Smallest SHA256(seed|boundary_id) with eligible ordinary and shuffled-ordinary controls in each generator by schedule by prompt-category cell, at most 36 identities. Only these ordinary arms may be scored before the pilot decision.",
+  "pilot_primary_metrics": [
+    "semantic_cosine",
+    "context_gain"
+  ],
+  "pilot_validation": "Ordinary-minus-shuffled effect has a positive lower 95% payload-cluster bootstrap bound for each metric. Cluster by the actual ordinary-recipient payload. This validates separation of these controls only.",
+  "maximum_pilot_amendments": 1,
+  "predeclared_optional_amendment": "If initial separation is absent or inconclusive, shorten the right window to 16 generator tokens to emphasize the boundary. Keep the models, pooling, metric, and threshold unchanged. Validate on fresh controls disjoint in actual recipient and donor payloads where feasible. If this fails, retain the unvalidated metric and keep R1.4 partly unresolved.",
+  "bootstrap_draws": 2000,
+  "full_estimand": "Within-boundary paired differences, averaged over segments within trial and repeated trials within recipient payload, then equally over recipient payloads. Stratify payload bootstrap draws by artifact class and share draws across arms/models.",
+  "donor_inference": "Primary intervals condition on the fixed empirical reference corpus. Report donor identities, reuse, support, and leave-one-donor-payload-out influence ranges. Do not claim population-wide reader coherence.",
+  "budget_seconds": 28800,
+  "transport_reserve_seconds": 1800,
+  "safety_reserve_seconds": 1800,
+  "forecast_multiplier": 1.75,
+  "sample_rule": "Use all eligible boundaries if the conservative deduplicated workload forecast fits after reserves. Otherwise choose the largest balanced count per payload class that fits, using SHA256(seed|payload_name), and retain all three generators and both schedules for every chosen payload. Freeze before RankCloak scoring.",
+  "example_rule": "Among completed actual transitions, order by semantic cosine if validated, otherwise context gain. Select minimum, median, and maximum with SHA256(seed|boundary_id) ties. Show exact left and right strings and all source IDs. Illustrations are not reader evidence.",
+  "unscored_instrumentation_resolution": "The initial tokenization-only inventory exposed Mistral\u2019s known single-space rendering prefix. This was resolved before any metric scores. The first inventory is retained as initial_unscored_roundtrip_preflight. No pilot amendment has been used.",
+  "pilot_amendment_used": 1,
+  "pilot_amendment_reason": "Initial semantic ordinary-minus-shuffled interval did not have a positive lower bound. Apply the one predeclared 16-token boundary-focused right-window amendment on fresh control payloads. No RankCloak metric outcomes were computed or inspected."
+}

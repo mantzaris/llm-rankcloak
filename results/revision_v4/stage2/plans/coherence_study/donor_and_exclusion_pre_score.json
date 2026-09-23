@@ -1,0 +1,24 @@
+{
+  "all_eligible_boundaries": 7133,
+  "all_structural_boundaries": 8280,
+  "exact_identical_actual_donor_candidates_skipped": 4,
+  "exact_identical_pilot_donor_candidates_skipped": 38,
+  "no_eligible_boundaries_trials": [
+    "revision_v1_primary_v2_payload_fidelity_v2__33fe328155e18072cd2c",
+    "revision_v1_primary_v2_payload_fidelity_v2__45cf96169511a7922672",
+    "revision_v1_primary_v2_payload_fidelity_v2__9374ea18be2f00fca0cb",
+    "revision_v1_primary_v2_payload_fidelity_v2__9e8162c7b7391b901809",
+    "revision_v1_primary_v2_payload_fidelity_v2__e037fb0b94d3f89d90e9",
+    "revision_v1_primary_v2_payload_fidelity_v2__e3de5d5a29f9de3a5873",
+    "revision_v1_primary_v2_payload_fidelity_v2__e5cedceef555833280c1",
+    "revision_v1_primary_v2_payload_fidelity_v2__e5d6512428b20c5c3676",
+    "revision_v1_primary_v2_payload_fidelity_v2__eac1d019cac99767f7a8",
+    "revision_v1_primary_v2_payload_fidelity_v2__f4f257ee947e761e23f5"
+  ],
+  "reason_counts_overlap": {
+    "actual:evaluator_boundary_straddle": 384,
+    "ordinary:evaluator_boundary_straddle": 539,
+    "short_actual_words": 124,
+    "shuffled:evaluator_boundary_straddle": 238
+  }
+}

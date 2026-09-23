@@ -1,0 +1,88 @@
+{
+  "basis": "Controls share the exact prompt and can retain topic relevance. Short left spans are not complete sentences. These design facts limit the interpretation of a sentence embedding proxy but do not identify a unique cause of its failed separation.",
+  "decision": "No further amendment. Context-gain exploratory study only. Semantic and perceptual support unresolved.",
+  "pilots": [
+    {
+      "donor_payloads": 69,
+      "identical_right_pairs": 0,
+      "left_generator_token_counts": {
+        "8": 72
+      },
+      "left_median_words": 6.5,
+      "missing_planned_requests": 0,
+      "pilot": "pilot_initial",
+      "recipient_artifact_class_counts": {
+        "aes256_gcm_base64": 3,
+        "chacha20_poly1305_base64": 5,
+        "ed25519_signature_base64": 6,
+        "hmac_sha256_hex": 3,
+        "nonce_96_bit_hex": 5,
+        "sha256_hex": 6,
+        "token_128_bit_hex": 6,
+        "uuid_v4": 2
+      },
+      "recipient_payloads": 36,
+      "right_generator_token_counts": {
+        "8": 8,
+        "9": 4,
+        "10": 2,
+        "11": 2,
+        "12": 4,
+        "13": 2,
+        "14": 6,
+        "16": 4,
+        "17": 2,
+        "18": 2,
+        "19": 4,
+        "20": 4,
+        "22": 2,
+        "25": 2,
+        "27": 2,
+        "28": 2,
+        "31": 4,
+        "32": 16
+      },
+      "same_prompt_shuffled_pairs": true,
+      "strata": 36,
+      "truncated_units": 0,
+      "units": 72
+    },
+    {
+      "donor_payloads": 62,
+      "identical_right_pairs": 0,
+      "left_generator_token_counts": {
+        "8": 72
+      },
+      "left_median_words": 7.0,
+      "missing_planned_requests": 0,
+      "pilot": "pilot_amendment1",
+      "recipient_artifact_class_counts": {
+        "aes256_gcm_base64": 3,
+        "chacha20_poly1305_base64": 3,
+        "ed25519_signature_base64": 4,
+        "hmac_sha256_hex": 6,
+        "nonce_96_bit_hex": 8,
+        "sha256_hex": 6,
+        "token_128_bit_hex": 4,
+        "uuid_v4": 1
+      },
+      "recipient_payloads": 35,
+      "right_generator_token_counts": {
+        "8": 6,
+        "9": 2,
+        "10": 2,
+        "11": 4,
+        "12": 4,
+        "13": 2,
+        "14": 8,
+        "15": 2,
+        "16": 42
+      },
+      "same_prompt_shuffled_pairs": true,
+      "strata": 36,
+      "truncated_units": 0,
+      "units": 72
+    }
+  ],
+  "rankcloak_scores_inspected_for_decision": false
+}

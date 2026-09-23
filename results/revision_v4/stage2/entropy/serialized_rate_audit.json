@@ -1,0 +1,8 @@
+{
+  "denominator": "generated_count",
+  "interpretation": "Serialized input-width accounting rate, not Shannon channel capacity. All historical numerical values and denominators retained.",
+  "numerator": "len(representation.payload_bytes) * 8",
+  "reported_when": "completed and generated_count",
+  "source": "rankcloak/revision_v3_generation.py",
+  "source_sha256": "675e964122d09176f3ca9be2ad11d6da7e4d06d418ff4286a8c2dc2fec29abe8"
+}

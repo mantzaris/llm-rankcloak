@@ -1,0 +1,10 @@
+{
+  "all_primary_validated": false,
+  "decision": "Continue a frozen exploratory context-gain study. Retain semantic validation failure. No human-naturalness or completed two-metric claim.",
+  "decision_utc": "2026-09-22T21:47:07.482125+00:00",
+  "further_amendments": 0,
+  "rankcloak_scores_seen": false,
+  "validated_metrics": [
+    "context_gain"
+  ]
+}

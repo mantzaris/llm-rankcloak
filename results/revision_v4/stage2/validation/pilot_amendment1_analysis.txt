@@ -1,0 +1,1 @@
+{'boundaries': 36, 'payload_clusters': 35, 'validated_metrics': ['context_gain'], 'all_primary_validated': False, 'strata_coverage': 36}

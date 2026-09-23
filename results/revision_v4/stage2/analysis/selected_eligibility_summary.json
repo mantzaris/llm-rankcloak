@@ -1,0 +1,44 @@
+[
+  {
+    "eligible": 507,
+    "excluded": 22,
+    "model_id": "llama3_8b_instruct_q4_k_m",
+    "schedule": "segmented_hex_multi_topic",
+    "structural": 529
+  },
+  {
+    "eligible": 508,
+    "excluded": 21,
+    "model_id": "llama3_8b_instruct_q4_k_m",
+    "schedule": "segmented_hex_single_topic",
+    "structural": 529
+  },
+  {
+    "eligible": 362,
+    "excluded": 167,
+    "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+    "schedule": "segmented_hex_multi_topic",
+    "structural": 529
+  },
+  {
+    "eligible": 355,
+    "excluded": 174,
+    "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+    "schedule": "segmented_hex_single_topic",
+    "structural": 529
+  },
+  {
+    "eligible": 511,
+    "excluded": 18,
+    "model_id": "qwen2_5_7b_instruct_q4_k_m",
+    "schedule": "segmented_hex_multi_topic",
+    "structural": 529
+  },
+  {
+    "eligible": 507,
+    "excluded": 22,
+    "model_id": "qwen2_5_7b_instruct_q4_k_m",
+    "schedule": "segmented_hex_single_topic",
+    "structural": 529
+  }
+]

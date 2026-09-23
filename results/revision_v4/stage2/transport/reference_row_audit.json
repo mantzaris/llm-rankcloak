@@ -1,0 +1,10 @@
+{
+  "decode_performed": false,
+  "executor": "execute_robustness_reference",
+  "interpretation": "Both unmodified reference rows retain historical saved-token endpoints, not new visible-text or mitigation successes. Counts are unchanged.",
+  "limited_unmodified": "reference=True when transformation_id is unmodified",
+  "raw_unmodified": "reference=True when transformation_id is unmodified",
+  "reference_field": "saved_token_id_replay.exact_recovery",
+  "source": "rankcloak/revision_runner.py",
+  "source_sha256": "786904fe3f183216e5f831385bf36ba67b68595c26c45b4956532b3d63bba70c"
+}

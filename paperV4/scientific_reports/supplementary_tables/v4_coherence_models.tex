@@ -1,0 +1,12 @@
+\begin{table}[H]\centering\small
+\begin{tabular}{llrr}\toprule
+Generator & Contrast & Context gain [95\% interval] & Conditional [95\% interval] \\ \midrule
+Llama & actual minus ordinary & 0.2632 [0.1717, 0.3502] & 0.1716 [0.1025, 0.2428] \\
+Llama & actual minus shuffled & 2.3903 [2.2945, 2.4883] & 2.4070 [2.3204, 2.5007] \\
+Qwen & actual minus ordinary & 0.0978 [0.0272, 0.1656] & 0.0322 [-0.0184, 0.0863] \\
+Qwen & actual minus shuffled & 2.1414 [2.0641, 2.2182] & 2.1893 [2.1063, 2.2703] \\
+Mistral & actual minus ordinary & 0.1076 [0.0098, 0.2112] & -0.0089 [-0.0840, 0.0682] \\
+Mistral & actual minus shuffled & 2.4493 [2.3234, 2.5903] & 2.3865 [2.2536, 2.5292] \\
+\bottomrule\end{tabular}
+\caption{Generator-specific paired effects under the fixed cross-family evaluator map. Values are in nats per evaluator tail token. Context gain is exploratory and raw conditional likelihood is secondary. Each interval uses the same 2,000 stratified payload draws as the pooled analysis. The evaluator and tokenization vary with generator, limiting interpretation of differences across rows.}\label{tab:v4-coherence-models}
+\end{table}

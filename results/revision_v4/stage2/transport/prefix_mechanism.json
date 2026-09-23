@@ -1,0 +1,251 @@
+{
+  "all_change_token_zero": true,
+  "all_reject_first_forced_token": true,
+  "details": [
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 0,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 1,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 2,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 3,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 4,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 5,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 6,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 7,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 0,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__3d8e737071055655598d"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 1,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__3d8e737071055655598d"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 2,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__3d8e737071055655598d"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "rejected_token_id": 1644,
+      "saved_forced_start": 0,
+      "segment_index": 0,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__70422a061f8a57dfacd2"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "rejected_token_id": 1644,
+      "saved_forced_start": 0,
+      "segment_index": 1,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__70422a061f8a57dfacd2"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "rejected_token_id": 1644,
+      "saved_forced_start": 0,
+      "segment_index": 2,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__70422a061f8a57dfacd2"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "rejected_token_id": 1644,
+      "saved_forced_start": 0,
+      "segment_index": 3,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__70422a061f8a57dfacd2"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 0,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 1,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 2,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 3,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 4,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 5,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 6,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 7,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 0,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__cc5e94e0e90374a7d025"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 1,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__cc5e94e0e90374a7d025"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 2,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__cc5e94e0e90374a7d025"
+    },
+    {
+      "first_changed_token": 0,
+      "first_rejected_forced_position": 0,
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "rejected_token_id": 29,
+      "saved_forced_start": 0,
+      "segment_index": 3,
+      "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__cc5e94e0e90374a7d025"
+    }
+  ],
+  "interpretation": "For these exact cases the inserted prefix both changes the token stream at position zero and supplies a disallowed first forced token. The error terminates rank recovery. No later contextual-rank change is measured in those failed segments.",
+  "prefix_segment_instances": 27
+}

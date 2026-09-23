@@ -1,0 +1,1 @@
+{'covers': 25, 'segments': 135, 'by_arm': {'prefix_only': {'cases': 5, 'exact_recovery': 0}, 'outer_trim_only': {'cases': 5, 'exact_recovery': 1}, 'trailing_trim_only': {'cases': 5, 'exact_recovery': 1}, 'line_endings_only': {'cases': 5, 'exact_recovery': 2}, 'declared_wrapper_removal': {'cases': 5, 'exact_recovery': 1}}, 'population_rate_claim': False}

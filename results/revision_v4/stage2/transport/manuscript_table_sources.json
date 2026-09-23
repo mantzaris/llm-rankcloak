@@ -1,0 +1,77 @@
+[
+  {
+    "baseline_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__266b7d7213717580828c",
+    "case": "Llama failure",
+    "composite_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__bafa23d20d83c5a727fa",
+    "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__3d8e737071055655598d",
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "baseline_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__f20f4c9f1a4b0e7d50b1",
+    "case": "Mistral failure",
+    "composite_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__fbfcd0e90921910db94b",
+    "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__70422a061f8a57dfacd2",
+    "values": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ]
+  },
+  {
+    "baseline_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__1b4aac4ea25e84b66094",
+    "case": "Qwen failure",
+    "composite_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__0eed725a8fa3feb77901",
+    "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__cc5e94e0e90374a7d025",
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "baseline_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__149bd776fa35cb19834e",
+    "case": "Qwen success",
+    "composite_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__fc07be9f4877e138e1dc",
+    "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__dd9522ef99d2c56aaf0b",
+    "values": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "baseline_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__50e08a10f8d02bbcfb73",
+    "case": "Llama success",
+    "composite_work_id": "revision_v1_robustness_v2_payload_fidelity_v2__c0b4e8d6a4c77e94d95d",
+    "source_trial_id": "revision_v1_primary_v2_payload_fidelity_v2__fccf75a89a2b0cd9f2d9",
+    "values": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  }
+]

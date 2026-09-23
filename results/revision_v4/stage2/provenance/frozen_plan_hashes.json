@@ -1,0 +1,9 @@
+{
+  "configs/revision_v4/stage2_coherence.json": "8a4e10661d2cdd3f371bdea0d5359df22d6bc10d677aa8702dd6098008e2823d",
+  "configs/revision_v4/stage2_coherence_amendment1.json": "a4b0311fc31551729b407c3dd3da5026eab4b4830912eccdba3294bef6d06946",
+  "configs/revision_v4/stage2_semantic_encoder.json": "c8318f40f588db6604f3f0f352de668090c0c89ffbdfd5eefb13583f84446d8a",
+  "results/revision_v4/stage2/plans/coherence_study/freeze.json": "78df3c0d72d28b9105806725d653435bd8875b708be08e9dec70185b9025f4ad",
+  "results/revision_v4/stage2/plans/pilot_amendment1/freeze.json": "b8fe8aca6c9501688f05eebbdd0374649f76a38acc198e08823c32e67afd764c",
+  "results/revision_v4/stage2/plans/pilot_initial/freeze.json": "785b63c0954513da684aa570c3ceddc8d4d1534dbbabdd5550f6d64efdab0aee",
+  "results/revision_v4/stage2/transport/freeze.json": "9b0402629b6127021e50c4014a286f6ba725cd2fb8b9722e8684e9b7645922f3"
+}

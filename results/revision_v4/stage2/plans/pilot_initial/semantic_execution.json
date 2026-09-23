@@ -1,0 +1,19 @@
+{
+  "batch_fixture_max_absolute_difference": 5.960464477539063e-08,
+  "cached_requests_before": 0,
+  "contract_sha256": "d1f200c76cb49c6e005d9b43797b8d888e732224298acf696eae9f7035daa7cf",
+  "model_load_seconds": 1.8114878039996256,
+  "new_requests": 108,
+  "peak_allocated_bytes": 165697024,
+  "peak_reserved_bytes": 195035136,
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.20.3",
+    "torch": "2.5.1+cu124",
+    "transformers": "4.46.3"
+  },
+  "scoring_wall_seconds": 0.3511197150000953,
+  "status": "complete",
+  "token_count": 1852
+}

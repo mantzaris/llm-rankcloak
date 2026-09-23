@@ -1,0 +1,7 @@
+population,codec,pairs,positions,observed_rank_changes,greedy_token_changes,decoding_trials,supported_decoding_trials,exact_payload_recoveries,invalid_rank_trials,invalid_rank_positions,decode_errors
+ordinary_control,all,960,122220,13207,7834,0,0,0,0,0,0
+ordinary_control,ascii_b16,480,52320,5633,3316,0,0,0,0,0,0
+ordinary_control,ascii_b8,480,69900,7574,4518,0,0,0,0,0,0
+rankcloak,all,960,122220,56321,10822,960,960,0,766,4491,766
+rankcloak,ascii_b16,480,52320,28044,4923,480,480,0,295,904,295
+rankcloak,ascii_b8,480,69900,28277,5899,480,480,0,471,3587,471

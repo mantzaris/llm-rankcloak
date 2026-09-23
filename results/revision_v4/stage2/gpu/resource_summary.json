@@ -1,0 +1,154 @@
+{
+  "accounting_notes": [
+    "Every admitted job includes loading, hashing, fixtures and process shutdown in wall time.",
+    "The failed model-ID invocation and the refused concurrent invocation are conservatively charged.",
+    "LM token counters cover retained scoring requests, including prefills and evaluated final target tokens. They exclude numerical fixture calls.",
+    "The 26 missing transport replays retain a preflight upper count of 805 context/received tokens. Early rejection lowers actual work, which was not separately retained for those requests.",
+    "The 53 context-capacity checks retain actual evaluated-token counts. They add no logical cover arms.",
+    "Peak MiB values come from nvidia-smi process sampling. Semantic allocated/reserved-byte peaks are additionally retained in its execution records.",
+    "GPU kernel time is not substituted for cumulative job wall time. Idle CPU analysis and queue waits are excluded."
+  ],
+  "backend_shared_libraries_verified": {
+    "libggml-base.so": "d7fadcef23b3b97e6e313254c5656caaf96b92c6785060ff2db1677e134c8aa6",
+    "libggml-cpu.so": "19be8814e6190554e4c1d3f72123da3717413cefb3c347903285ed63dd2a980f",
+    "libggml-cuda.so": "89d5798bdf1bfd679d8a155f1ba02c40008d708b8cafba62f5f5e21a8d7b958d",
+    "libggml.so": "c908ca5f8ae463d5d5c6d4c380326390a84be3b899cb01ad41bc117b91a887b8",
+    "libllama.so": "ed7dbeb62742a4a2d42fb35f5c26f48139121c7faa7715673ab5c01bb603267f",
+    "libmtmd.so": "408f42232538e4bc9f4ae5273e2e94dbbeda4c963a62c693a9e80e709d9055d6"
+  },
+  "ceiling_seconds": 28800,
+  "gpu_job_wall_hours": 3.913386038129724,
+  "gpu_job_wall_seconds": 14088.189737267006,
+  "job_status_counts": {
+    "completed": 17,
+    "failed": 1,
+    "not_started_conservative_charge": 1
+  },
+  "ledger_sha256": "ea3feeeefdf7787179cf65080574511873a822e5b9c190d7e12f335b79eb7286",
+  "lm_evaluated_context_and_target_tokens": 641308,
+  "lm_new_unique_scoring_requests": 15023,
+  "model_work": [
+    {
+      "context_and_target_tokens": 2050,
+      "kind": "lm",
+      "model": "llama3_8b_instruct_q4_k_m",
+      "new_requests": 48,
+      "plan": "pilot_initial",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/pilot_initial/lm_execution_llama3_8b_instruct_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 2410,
+      "kind": "lm",
+      "model": "mistral_7b_instruct_v0_3_q4_k_m",
+      "new_requests": 48,
+      "plan": "pilot_initial",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/pilot_initial/lm_execution_mistral_7b_instruct_v0_3_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 2310,
+      "kind": "lm",
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "new_requests": 48,
+      "plan": "pilot_initial",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/pilot_initial/lm_execution_qwen2_5_7b_instruct_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 0,
+      "kind": "semantic",
+      "model": "all-MiniLM-L6-v2",
+      "new_requests": 108,
+      "plan": "pilot_initial",
+      "semantic_nonpadding_tokens": 1852,
+      "source": "results/revision_v4/stage2/plans/pilot_initial/semantic_execution.json"
+    },
+    {
+      "context_and_target_tokens": 1768,
+      "kind": "lm",
+      "model": "llama3_8b_instruct_q4_k_m",
+      "new_requests": 48,
+      "plan": "pilot_amendment1",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/pilot_amendment1/lm_execution_llama3_8b_instruct_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 2144,
+      "kind": "lm",
+      "model": "mistral_7b_instruct_v0_3_q4_k_m",
+      "new_requests": 48,
+      "plan": "pilot_amendment1",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/pilot_amendment1/lm_execution_mistral_7b_instruct_v0_3_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 2018,
+      "kind": "lm",
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "new_requests": 48,
+      "plan": "pilot_amendment1",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/pilot_amendment1/lm_execution_qwen2_5_7b_instruct_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 0,
+      "kind": "semantic",
+      "model": "all-MiniLM-L6-v2",
+      "new_requests": 107,
+      "plan": "pilot_amendment1",
+      "semantic_nonpadding_tokens": 1454,
+      "source": "results/revision_v4/stage2/plans/pilot_amendment1/semantic_execution.json"
+    },
+    {
+      "context_and_target_tokens": 148030,
+      "kind": "lm",
+      "model": "llama3_8b_instruct_q4_k_m",
+      "new_requests": 3857,
+      "plan": "coherence_study",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/coherence_study/lm_execution_llama3_8b_instruct_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 255009,
+      "kind": "lm",
+      "model": "mistral_7b_instruct_v0_3_q4_k_m",
+      "new_requests": 5500,
+      "plan": "coherence_study",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/coherence_study/lm_execution_mistral_7b_instruct_v0_3_q4_k_m.json"
+    },
+    {
+      "context_and_target_tokens": 225569,
+      "kind": "lm",
+      "model": "qwen2_5_7b_instruct_q4_k_m",
+      "new_requests": 5378,
+      "plan": "coherence_study",
+      "semantic_nonpadding_tokens": 0,
+      "source": "results/revision_v4/stage2/plans/coherence_study/lm_execution_qwen2_5_7b_instruct_q4_k_m.json"
+    }
+  ],
+  "peak_supervised_process_memory_mib": 4876,
+  "recorded_runtime_versions": {
+    "lm": {
+      "llama-cpp-python": "0.3.23",
+      "numpy": "2.2.6",
+      "nvidia-cublas-cu12": "12.4.5.8",
+      "nvidia-cuda-runtime-cu12": "12.4.127"
+    },
+    "semantic": {
+      "numpy": "2.2.6",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.20.3",
+      "torch": "2.5.1+cu124",
+      "transformers": "4.46.3"
+    }
+  },
+  "remaining_seconds": 14711.810262732994,
+  "semantic_new_unique_windows": 215,
+  "semantic_nonpadding_tokens": 3306,
+  "transport_missing_preflight_context_and_received_tokens": 805,
+  "transport_missing_segment_replays": 26,
+  "transport_recheck_evaluated_tokens": 1626,
+  "transport_reused_endpoint_capacity_checks": 53
+}

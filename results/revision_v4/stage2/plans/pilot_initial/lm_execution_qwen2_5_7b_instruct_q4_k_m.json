@@ -1,0 +1,16 @@
+{
+  "cached_requests_before": 0,
+  "contract_sha256": "53d9654bf7fc5ea4e408f2ba762ecd2289d42dcb7745f2b923ddc118cbb7f3d7",
+  "evaluated_context_and_target_tokens": 2310,
+  "load_and_fixture_seconds": 11.50902317299915,
+  "new_requests": 48,
+  "profile_path": "results/revision_v4/stage2/provenance/scorer_qwen2_5_7b_instruct_q4_k_m.json",
+  "runtime_versions": {
+    "llama-cpp-python": "0.3.23",
+    "numpy": "2.2.6",
+    "nvidia-cublas-cu12": "12.4.5.8",
+    "nvidia-cuda-runtime-cu12": "12.4.127"
+  },
+  "scoring_seconds": 49.47141621499941,
+  "status": "complete"
+}

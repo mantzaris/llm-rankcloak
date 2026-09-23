@@ -1,0 +1,80 @@
+{
+  "additional_cover_arms": 25,
+  "constituent_segments": 135,
+  "files": {
+    "historical_outcomes.jsonl": "775d9f000930c1830b43c201648dc1ac694e5c33feeea7b24d4a90c03e934908",
+    "requests.jsonl": "890ce883a083754dac294a86c044873f56a72fee7b4860a0400a461063e7e5ea",
+    "reused_replays.jsonl": "bc7fae998bf78d5fef5f1b5ffa10cf4464ce8dd8b134a55a758b025d7b27efcf",
+    "selected_covers.jsonl": "601e81d074483c664673af4f7fefe5d8b152f3b0f5297a7c9efc4f276b6e0acf"
+  },
+  "historical_reused_segment_requests": 53,
+  "inputs": {
+    "results/revision_v1/primary_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "b32654b99ef38567d97e77b9fbea8db5e792cf2c7e6b3097184b24d96c01ed00",
+    "results/revision_v1/primary_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "c733ef54bc1a51ed1702cb6332819c04b1f9e25bccbb07b9df67964592bfd7ba",
+    "results/revision_v1/primary_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "c677b7b745eeed50512f1a87ad3a2f1f17043836be53e7e95d696a4cec590e2a",
+    "results/revision_v1/robustness_v2/llama3_8b_instruct_q4_k_m/records.jsonl": "7fd88a04775237e56de11a96c56bc0accc8408530e948b37bcdea9c871cff5d3",
+    "results/revision_v1/robustness_v2/mistral_7b_instruct_v0_3_q4_k_m/records.jsonl": "4afbd421e8db3c87bb1a1f22dbbd8710abddd3913fbb02d8af08edc301c14080",
+    "results/revision_v1/robustness_v2/qwen2_5_7b_instruct_q4_k_m/records.jsonl": "ba4b6bce6faa60dca7d1ff227b795fdab9d5597a7069f749de119d853c153710"
+  },
+  "model_counts": {
+    "llama3_8b_instruct_q4_k_m": {
+      "context_and_received_tokens": 276,
+      "new_segment_replays": 9
+    },
+    "mistral_7b_instruct_v0_3_q4_k_m": {
+      "context_and_received_tokens": 135,
+      "new_segment_replays": 4
+    },
+    "qwen2_5_7b_instruct_q4_k_m": {
+      "context_and_received_tokens": 394,
+      "new_segment_replays": 13
+    }
+  },
+  "model_pins": {
+    "llama3_8b_instruct_q4_k_m": {
+      "download_command": "huggingface-cli download QuantFactory/Meta-Llama-3-8B-Instruct-GGUF Meta-Llama-3-8B-Instruct.Q4_K_M.gguf --revision a06c33ec89c1e3402009fb47f466a89127c6d223 --local-dir models/llama3_8b",
+      "expected_path": "models/llama3_8b/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "filename": "Meta-Llama-3-8B-Instruct.Q4_K_M.gguf",
+      "model_id": "llama3_8b_instruct_q4_k_m",
+      "quantization": "Q4_K_M",
+      "repo_id": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF",
+      "revision": "a06c33ec89c1e3402009fb47f466a89127c6d223",
+      "sha256": "86c8ea6c8b755687d0b723176fcd0b2411ef80533d23e2a5030f845d13ab2db7",
+      "size_bytes": 4920734272
+    },
+    "mistral_7b_instruct_v0_3_q4_k_m": {
+      "download_command": "huggingface-cli download bartowski/Mistral-7B-Instruct-v0.3-GGUF Mistral-7B-Instruct-v0.3-Q4_K_M.gguf --revision 61fd4167fff3ab01ee1cfe0da183fa27a944db48 --local-dir models/mistral_7b_instruct_v0_3",
+      "expected_path": "models/mistral_7b_instruct_v0_3/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "filename": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "quantization": "Q4_K_M",
+      "repo_id": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+      "revision": "61fd4167fff3ab01ee1cfe0da183fa27a944db48",
+      "sha256": "1270d22c0fbb3d092fb725d4d96c457b7b687a5f5a715abe1e818da303e562b6",
+      "size_bytes": 4372812000
+    },
+    "qwen2_5_7b_instruct_q4_k_m": {
+      "download_command": "huggingface-cli download bartowski/Qwen2.5-7B-Instruct-GGUF Qwen2.5-7B-Instruct-Q4_K_M.gguf --revision 8911e8a47f92bac19d6f5c64a2e2095bd2f7d031 --local-dir models/qwen2_5_7b_instruct",
+      "expected_path": "models/qwen2_5_7b_instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "model_id": "qwen2_5_7b_instruct_q4_k_m",
+      "quantization": "Q4_K_M",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "size_bytes": 4683074240
+    }
+  },
+  "seed": 20260922,
+  "selected_source_covers": 5,
+  "selection": "Lowest SHA256(seed|source_trial_id) in each model by executed unchanged-visible-text success stratum. Use an executed historical text-transform replay only when every observed segment exactly equals its source bytes. Break duplicate-source ties by work ID. The unmodified reference aliases saved-ID success and is retained but not relabeled as visible-text execution. No replacement for unavailable strata.",
+  "source_sha256": "3dcda24ee508423a9937197e6b0fcd89f824232046b83b74265fbfbcad57b489",
+  "unavailable_strata": [
+    {
+      "model_id": "mistral_7b_instruct_v0_3_q4_k_m",
+      "visible_text_success": true
+    }
+  ],
+  "unique_new_segment_replays": 26,
+  "wrapper_rule": "Remove exactly the declared > space prefix from every line after the retained composite operation. No payload consultation or offset search."
+}

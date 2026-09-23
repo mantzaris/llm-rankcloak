@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "target and context denominators",
+    "finite per-token likelihoods",
+    "mean equals retained token mean",
+    "embedding dimension and norm"
+  ],
+  "joined_units": {
+    "pilot_amendment1": 72,
+    "pilot_initial": 72
+  },
+  "status": "passed"
+}

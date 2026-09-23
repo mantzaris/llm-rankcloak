@@ -1,0 +1,60 @@
+{
+  "boundaries": 2750,
+  "payloads": 92,
+  "primary_effects": [
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 0.20655505697642101,
+      "ci_low": 0.10983911875527323,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus ordinary",
+      "effect": 0.15747839624885526,
+      "metric": "context_gain",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.3911966740182353,
+      "ci_low": 2.2705022244942965,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "actual minus shuffled",
+      "effect": 2.3265121008350307,
+      "metric": "context_gain",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    },
+    {
+      "bootstrap_draws": 2000,
+      "ci_high": 2.2215442831603665,
+      "ci_low": 2.1184947187031793,
+      "class_counts": {
+        "hmac_sha256_hex": 23,
+        "nonce_96_bit_hex": 23,
+        "sha256_hex": 23,
+        "token_128_bit_hex": 23
+      },
+      "contrast": "ordinary minus shuffled",
+      "effect": 2.1690337045861754,
+      "metric": "context_gain",
+      "model_id": "all",
+      "nonempty_bootstrap_draws": 2000,
+      "payload_clusters": 92
+    }
+  ],
+  "scoring_units": 8250,
+  "source_summary_sha256": "789391116ee727f5fb59c80e1454515a39f42c4ec1116525f08078b27c2db0ba",
+  "trials": 550
+}

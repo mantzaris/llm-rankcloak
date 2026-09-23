@@ -1,0 +1,109 @@
+{
+  "configuration": {
+    "backend": {
+      "context_capacity": 512,
+      "cublas": "12.4.5.8",
+      "cuda": "12.4.127",
+      "gpu_layers": -1,
+      "library_sha256": {
+        "libggml-base.so": "d7fadcef23b3b97e6e313254c5656caaf96b92c6785060ff2db1677e134c8aa6",
+        "libggml-cpu.so": "19be8814e6190554e4c1d3f72123da3717413cefb3c347903285ed63dd2a980f",
+        "libggml-cuda.so": "89d5798bdf1bfd679d8a155f1ba02c40008d708b8cafba62f5f5e21a8d7b958d",
+        "libggml.so": "c908ca5f8ae463d5d5c6d4c380326390a84be3b899cb01ad41bc117b91a887b8",
+        "libllama.so": "ed7dbeb62742a4a2d42fb35f5c26f48139121c7faa7715673ab5c01bb603267f",
+        "libmtmd.so": "408f42232538e4bc9f4ae5273e2e94dbbeda4c963a62c693a9e80e709d9055d6"
+      },
+      "n_batch": 1,
+      "n_ubatch": 1,
+      "numerical_environment": {
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_LAUNCH_BLOCKING": "1",
+        "GGML_CUDA_DISABLE_FUSION": "1",
+        "GGML_CUDA_DISABLE_GRAPHS": "1",
+        "GGML_CUDA_FORCE_CUBLAS_COMPUTE_32F": "1"
+      },
+      "package": "llama-cpp-python",
+      "version": "0.3.23"
+    },
+    "bos_eos_policy": {
+      "ordinary_sampling": "explicitly excludes exposed BOS EOS EOT",
+      "rank_choice_special_tokens": "only actual filter mask",
+      "strip_optional_leading_bos": true,
+      "tokenize_add_bos": true
+    },
+    "boundary_reset": {
+      "forced_start": 0,
+      "forced_stop": 8,
+      "reset": "declared original prompt per segment",
+      "segment_size_ranks": 8,
+      "span_rule": "saved offsets after full-text retokenization",
+      "topic_schedule": "deterministic_six_category_rotation"
+    },
+    "codec_framing": {
+      "metadata": {
+        "encoding": "raw_hex_nibbles",
+        "hex_character_length": 64
+      },
+      "name": "hex_nibble"
+    },
+    "filter": {
+      "mask_sha256": "6aed83392b00b157848cc36add151eaf3f11f44e8f987a8bf82f2951da3bbf3f",
+      "name": "safe_text_filter_v1",
+      "source_sha256": "8d09fdfd4670bead5d233cb9d7b4cb57ae465bf1decf37dd65b223c7d71808d8"
+    },
+    "gate": {
+      "enabled": false,
+      "threshold": null
+    },
+    "model": {
+      "gguf_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "repo_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031"
+    },
+    "ordering": {
+      "ranks": "one-indexed descending finite logits, ascending token ID ties",
+      "recovery": "greater-score plus lower-ID tie counting",
+      "selection": "full numpy lexsort",
+      "source_sha256": "c2687b1bb9edd6e7de928bf7fe3729d9f88de6b10cc99244302dc5ff35cbed40"
+    },
+    "prompt_rendering": {
+      "chat_template": null,
+      "context_token_ids": [
+        7985,
+        264,
+        2805,
+        6584,
+        2551,
+        19497,
+        7766,
+        264,
+        14021,
+        1882,
+        323,
+        41192,
+        17639,
+        311,
+        4828,
+        4755,
+        13,
+        5443,
+        4583,
+        11,
+        20628,
+        60701,
+        13
+      ],
+      "plain_prompt": "Write a short professional email clarifying a routine process and inviting colleagues to raise questions. Use complete, neutral prose."
+    },
+    "quantization": {
+      "format": "Q4_K_M"
+    },
+    "tokenizer": {
+      "gguf_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "identity": "embedded tokenizer in exact GGUF",
+      "implementation_source_sha256": "9f2199f0ced1ef2b121bf82fc47e4618cdffd950039657632def97a21eda4d11"
+    }
+  },
+  "configuration_sha256": "0448a6f7c1ac3e350127472936ca3e2cce732d44cfeabade3b6da38f71e491f1",
+  "schema_version": "rankcloak-decoder-configuration-v1"
+}

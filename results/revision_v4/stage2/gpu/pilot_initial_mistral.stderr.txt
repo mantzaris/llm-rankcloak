@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/meow/.pyenv/versions/3.10.13/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/meow/.pyenv/versions/3.10.13/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_v4_stage2_scoring.py", line 203, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_v4_stage2_scoring.py", line 201, in main
+    return run_semantic(plan) if a.kind=='semantic' else run_lm(plan,a.model_id)
+  File "/home/meow/Documents/repos/llm-rankcloak/rankcloak/revision_v4_stage2_scoring.py", line 172, in run_lm
+    artifact=next(a for a in contracts['lm']['models']['artifacts'] if a['model_id']==model_id)
+StopIteration

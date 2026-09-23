@@ -154,14 +154,6 @@
   (\bibinfo{publisher}{Association for Computational Linguistics},
   \bibinfo{address}{Bangkok, Thailand}, \bibinfo{year}{2024}).
 
-\bibitem{Cai2025EntropyGuidedWatermarking}
-\bibinfo{author}{Cai, S.}, \bibinfo{author}{Ding, L.} \& \bibinfo{author}{Tao,
-  D.}
-\newblock \bibinfo{journal}{\bibinfo{title}{Entropy-guided watermarking for
-  {LLMs}: A test-time framework for robust and traceable text generation}}.
-\newblock {\emph{\JournalTitle{arXiv preprint arXiv:2504.12108}}}
-  \doiprefix\url{10.48550/arXiv.2504.12108} (\bibinfo{year}{2025}).
-
 \bibitem{Wayner1992MimicFunctions}
 \bibinfo{author}{Wayner, P.}
 \newblock \bibinfo{journal}{\bibinfo{title}{Mimic functions}}.
@@ -430,5 +422,13 @@
 \newblock {\emph{\JournalTitle{The R Journal}}} \textbf{\bibinfo{volume}{9}},
   \bibinfo{pages}{378--400}, \doiprefix\url{10.32614/RJ-2017-066}
   (\bibinfo{year}{2017}).
+
+\bibitem{Reimers2019SentenceBERT}
+\bibinfo{author}{Reimers, N.} \& \bibinfo{author}{Gurevych, I.}
+\newblock \bibinfo{title}{Sentence-bert: Sentence embeddings using siamese
+  bert-networks}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of EMNLP-IJCNLP}},
+  \bibinfo{pages}{3982--3992}, \doiprefix\url{10.18653/v1/D19-1410}
+  (\bibinfo{year}{2019}).
 
 \end{thebibliography}

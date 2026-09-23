@@ -1,0 +1,1 @@
+llama3_8b_instruct_q4_k_m 25 / 48 20.82
