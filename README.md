@@ -418,3 +418,5 @@ Reserved code-and-data archive DOI: https://doi.org/10.5281/zenodo.21987450
 ## Sources
 
 The notebook and code use the Calgacus paper at `https://arxiv.org/pdf/2510.20075` and implementation ideas inspected from `https://github.com/mantzaris/LlmStenoExplore`. The prior repository is not vendored here.
+
+The current V4 editorial document workflow is described in [paperV4/DOCUMENT_BUILD.md](paperV4/DOCUMENT_BUILD.md). It preserves the completed scientific study and writes fresh build records outside historical evidence namespaces.

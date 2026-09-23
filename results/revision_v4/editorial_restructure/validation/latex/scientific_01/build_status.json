@@ -1,0 +1,33 @@
+[
+  {
+    "document": "supplementary4",
+    "elapsed_seconds": 3.988168213996687,
+    "pages": 49,
+    "pdf_sha256": "a84d67182b57ea3788eb518ebe152fb0de2a0b6d0cb8932267017c1255b3e1e9",
+    "source_sha256": "acbff4da92b751e38dfbb94e37013c547677d556d4ed1f1b7078be3dd27d2300",
+    "unresolved_references": false,
+    "warnings": [
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not",
+      "Package hyperref Warning: The anchor of a bookmark and its parent's must not"
+    ]
+  },
+  {
+    "document": "main4",
+    "elapsed_seconds": 3.26423780398909,
+    "pages": 23,
+    "pdf_sha256": "2ba7703ca80e3124fb663e41376a30afc46fe1d659ac2a349f0575e66371fb1a",
+    "source_sha256": "2727f4ed14b12c440d4cae8818f89c6c35aff6565aac5ddf1f2a540612cbebcf",
+    "unresolved_references": false,
+    "warnings": []
+  }
+]

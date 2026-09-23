@@ -59,3 +59,7 @@ results/**/*.tar.gz
 
 # Local V4 archive candidates. Tracked receipts name their source snapshot.
 release_artifacts/
+
+# Current supplementary navigation cache and editorial page-review renders
+paperV4/scientific_reports/*.toc
+results/revision_v4/editorial_restructure/validation/rendered/

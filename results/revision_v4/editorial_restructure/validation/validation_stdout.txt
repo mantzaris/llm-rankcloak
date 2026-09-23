@@ -1,0 +1,96 @@
+{
+  "status": "passed",
+  "baseline_commit": "10a76e51e629b1df22b31c6af1c903b9cda50501",
+  "historical_evidence_and_scientific_code_unchanged": true,
+  "equations_unchanged": 16,
+  "main_algorithms_unchanged": 2,
+  "tail_algorithm_relocated_unchanged": true,
+  "filter_rules_unchanged": true,
+  "main_figures_unchanged": 5,
+  "main_tables_unchanged": 3,
+  "supplementary_historical_table_blocks_unchanged": true,
+  "quoted_review_blocks": 13,
+  "complete_answers": 16,
+  "R1_4_words_excluding_locations": 236,
+  "before_word_counts": {
+    "methods": {
+      "Words in text": 5571,
+      "Words in headers": 48,
+      "Words outside text (captions, etc.)": 78
+    },
+    "body": {
+      "Words in text": 4720,
+      "Words in headers": 69,
+      "Words outside text (captions, etc.)": 625
+    },
+    "complete": {
+      "Words in text": 10428,
+      "Words in headers": 143,
+      "Words outside text (captions, etc.)": 703
+    },
+    "body_core": {
+      "Words in text": 4555,
+      "Words in headers": 65,
+      "Words outside text (captions, etc.)": 625
+    },
+    "limitations": {
+      "Words in text": 165,
+      "Words in headers": 4,
+      "Words outside text (captions, etc.)": 0
+    }
+  },
+  "after_word_counts": {
+    "methods": {
+      "Words in text": 4426,
+      "Words in headers": 48,
+      "Words outside text (captions, etc.)": 56
+    },
+    "body": {
+      "Words in text": 4361,
+      "Words in headers": 69,
+      "Words outside text (captions, etc.)": 625
+    },
+    "body_core": {
+      "Words in text": 4196,
+      "Words in headers": 65,
+      "Words outside text (captions, etc.)": 625
+    },
+    "limitations": {
+      "Words in text": 165,
+      "Words in headers": 4,
+      "Words outside text (captions, etc.)": 0
+    },
+    "complete": {
+      "Words in text": 8924,
+      "Words in headers": 143,
+      "Words outside text (captions, etc.)": 681
+    }
+  },
+  "word_convention": "TeXcount Words in text after expanding local inputs. Methods includes its subsections and pseudocode. Body comprises Introduction, Results, Discussion and Responsible use and limitations. Abstract, captions, headings, availability and references excluded from Methods/body. Mathematics counted separately.",
+  "results_begin_before": 13,
+  "results_begin_after": 11,
+  "documents": [
+    {
+      "pdf": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "3f7f6f6e8b5811eaf0c8c51c808d459bf80dc08e8a9b5b35896bd68c9afce35b"
+    },
+    {
+      "pdf": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 49,
+      "sha256": "4e93ffcdb5ec84fd403392f7f43f3f4bff8b1395a9113fdd587e91689833abd7"
+    },
+    {
+      "pdf": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "ca05a532c928e9bba655c99f688a295345e8fd4a9d921eba6ab742e5653dfc7b"
+    },
+    {
+      "pdf": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "90719818ec0c5c89e54ea4a03f7c1cba4c3b0c8b1927ccc6ef68467847ba76ac"
+    }
+  ],
+  "main_references": 49,
+  "additional_gpu_seconds": 0
+}

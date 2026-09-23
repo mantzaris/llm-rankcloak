@@ -1,0 +1,49 @@
+File: expanded complete
+Words in text: 8924
+Words in headers: 143
+Words outside text (captions, etc.): 681
+Number of headers: 37
+Number of floats/tables/figures: 8
+Number of math inlines: 197
+Number of math displayed: 16
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  3+14+0 (1/0/0/0) _top_
+  793+1+0 (1/0/0/0) Section: Introduction}\label{sec:introduction
+  221+1+0 (1/0/1/0) Section: Methods}\label{sec:methods
+  133+3+0 (1/0/9/3) Subsection: Basic rank definition}\label{sec:rank-method
+  351+3+0 (1/0/18/1) Subsection: Calgacus rank-transcoding baseline}\label{sec:calgacus-method
+  631+4+23 (1/0/56/6) Subsection: RankCloak bounded payload-codec methods}\label{sec:payload-method
+  25+5+0 (1/1/0/0) Subsection: Complete deterministic token filter specification}\label{sec:v4-filter
+  248+0+16 (0/0/0/0) Section
+  655+4+17 (1/0/59/3) Subsection: RankCloak segmented multi-cover method}\label{sec:encoding-method
+  620+5+0 (1/0/3/0) Subsection: Evaluation corpus, controls, and metrics}\label{sec:design-method}\label{sec:quality-method
+  472+5+0 (1/0/15/3) Subsection: Recovery, robustness, and capacity endpoints}\label{sec:replay-method}\label{sec:capacity-method}\label{sec:endpoint-method
+  507+7+0 (1/0/1/0) Subsection: Neural steganalysis, statistical analysis, and computational overhead}\label{sec:detector-method}\label{sec:statistics-method
+  328+3+0 (1/0/0/0) Subsection: Intact-message contextual acceptability}\label{sec:v4-contextual-method}\label{sec:v4-boundary-method
+  197+6+0 (1/0/0/0) Subsection: Decoder compatibility and bounded transport diagnostics}\label{sec:v4-compatibility
+  38+2+0 (1/0/0/0) Subsection: Revision assistance}\label{sec:revision-assistance
+  0+1+0 (1/0/0/0) Section: Results}\label{sec:results
+  244+5+0 (1/0/3/0) Subsection: Evaluation design and exact-copy recovery}\label{sec:results-recovery
+  347+7+181 (1/2/2/0) Subsection: Payload representation, rank pressure, and capacity tradeoff}\label{sec:results-capacity
+  183+5+111 (1/1/0/0) Subsection: Exact-copy replay and transmission fragility}\label{sec:results-robustness
+  121+5+0 (1/0/0/0) Subsection: Forced span versus full message}\label{sec:results-quality
+  357+6+0 (1/0/11/0) Subsection: Ablations, dynamic stopping, and prompt-topic effects}\label{sec:results-ablations
+  201+2+74 (1/1/3/0) Subsection: Neural steganalysis}\label{sec:results-detector
+  288+6+86 (1/1/2/0) Subsection: Human controls, entropy gating, and quantization}\label{sec:results-v3
+  232+5+173 (1/2/0/0) Subsection: Contextual acceptability of complete messages}\label{sec:v4-contextual-results}\label{sec:v4-results
+  115+4+0 (1/0/0/0) Subsection: Mechanisms of transmission failure}\label{sec:v4-transport-results
+  80+3+0 (1/0/0/0) Subsection: Strict-gate failure contexts}\label{sec:v4-entropy-results
+  115+3+0 (1/0/0/0) Subsection: Fixed-message cross-quantization decoding}\label{sec:v4-quant-results
+  376+4+0 (1/0/8/0) Subsection: Computational overhead and generalizability}\label{sec:results-overhead
+  436+1+0 (1/0/1/0) Section: Discussion}\label{sec:discussion
+  308+7+0 (1/0/5/0) Subsection: Configuration sensitivity, detection and a proposed fallback}\label{sec:v4-boundaries
+  165+4+0 (1/0/0/0) Section: Responsible use and limitations}\label{sec:limitations
+  72+2+0 (1/0/0/0) Section: Data Availability}\label{sec:data-code
+  28+2+0 (1/0/0/0) Section: Code Availability
+  1+1+0 (1/0/0/0) Section: Acknowledgements
+  15+2+0 (1/0/0/0) Section: Author contributions
+  1+1+0 (1/0/0/0) Section: Funding
+  11+2+0 (1/0/0/0) Section: Additional Information
+  6+2+0 (1/0/0/0) Subsection: Competing interests
+

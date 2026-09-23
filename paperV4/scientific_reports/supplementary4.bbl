@@ -57,4 +57,14 @@
   (\bibinfo{publisher}{Association for Computational Linguistics},
   \bibinfo{year}{2021}).
 
+\bibitem{Liu2023GEval}
+\bibinfo{author}{Liu, Y.} \emph{et~al.}
+\newblock \bibinfo{title}{{G}-eval: {NLG} evaluation using {GPT}-4 with better
+  human alignment}.
+\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 2023 Conference on
+  Empirical Methods in Natural Language Processing}},
+  \bibinfo{pages}{2511--2522}, \doiprefix\url{10.18653/v1/2023.emnlp-main.153}
+  (\bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2023}).
+
 \end{thebibliography}

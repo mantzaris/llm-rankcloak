@@ -1,0 +1,9 @@
+File: expanded limitations
+Words in text: 165
+Words in headers: 4
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+

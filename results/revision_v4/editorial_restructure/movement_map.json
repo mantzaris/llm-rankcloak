@@ -1,0 +1,50 @@
+[
+  {
+    "block": "Protocol bookkeeping and replay checks",
+    "former_location": "Main Methods opening and non-segmented procedure",
+    "destination": "S1, Replay modes and structured endpoints",
+    "replacement": "Main shared contract and S1 bridge"
+  },
+  {
+    "block": "Full fixed-tail pseudocode and stopping details",
+    "former_location": "Main segmented Methods, former Algorithm 3",
+    "destination": "S1, Segment records, lead-ins, and tail policies, Algorithm S1",
+    "replacement": "Main segmented stopping summary and explicit Algorithm S1 reference"
+  },
+  {
+    "block": "Complete historical work-unit reconciliation",
+    "former_location": "Main corpus Methods and recovery Results",
+    "destination": "Existing S2, Experimental matrices and reconciliation, Table S4",
+    "replacement": "Corpus Methods names S2 while retaining primary 14,400/6,480/7,920 denominators"
+  },
+  {
+    "block": "Normalization, duplicate threshold and low-FPR detail",
+    "former_location": "Main detector/statistical Methods",
+    "destination": "Existing S11 normalization audit and S12 threshold definition",
+    "replacement": "Main partition safeguards and S11/S12 references"
+  },
+  {
+    "block": "Contextual selection probabilities, full rubric, model settings and retry policy",
+    "former_location": "Main contextual Methods",
+    "destination": "S20, Selection and matched generation, Complete judging rubric, Judge settings and calibration",
+    "replacement": "Four main Methods paragraphs with S20 references"
+  },
+  {
+    "block": "Calibration breakdown, distributions, missing-score bounds and quoted disruptions",
+    "former_location": "Main contextual Results",
+    "destination": "S20, Estimation and complete results, Stops, lengths, reuse and missingness, Full-message examples",
+    "replacement": "Main estimates, 39 incomplete pairs and specific S20 bridge"
+  },
+  {
+    "block": "Conditional agreement formula and distribution-support arguments",
+    "former_location": "Main configuration/detection Discussion",
+    "destination": "S19, Compatibility and conditional recovery, Trace-informed detection and proposed fallback",
+    "replacement": "Main direct configuration/detection explanation and S19 references"
+  },
+  {
+    "block": "Duplicated history and limitations",
+    "former_location": "Main Discussion and historical S17 prose",
+    "destination": "Consolidated in place, preserving adverse results and qualifications",
+    "replacement": "Shorter tradeoff discussion and S17 subheadings"
+  }
+]

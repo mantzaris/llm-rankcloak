@@ -1,29 +1,48 @@
-\section*{Supplementary Note S20. Contextual acceptability rubric and complete results}\label{si:v4-contextual}
+\suppnote{Supplementary Note S20. Contextual acceptability rubric and complete results}\label{si:v4-contextual}
 
 The replacement study evaluates intact delivered text. It was designed after the earlier fragment analyses and frozen before its own final judging. It reuses historical encoded messages, not newly generated RankCloak covers. None of the 48 selected payloads overlaps the former 92-payload scored cohort. This does not imply that the underlying original corpus was unseen during study development.
 
-\subsection*{Complete judging rubric}
+\suppsubsection{Selection and matched generation}\label{si:v4-contextual-selection}
+The source population comprises 8,280 separately delivered covers in 1,440 trials from 240 payloads in four hexadecimal classes. A seeded SHA256 rule selects 12 of the 37 outside-cohort payloads per class. All generator and schedule combinations are retained, and a second identity hash selects two messages per trial. Inclusion probabilities are 12/37 for an outside-cohort payload and \(2/N\) for a cover in a trial containing \(N\) messages. The earlier 92-payload stratum has zero inclusion probability. No quality score, minimum word count or evaluator-boundary alignment enters selection. All 576 selected texts are available, including 85 excluded by the old window rules.
+
+Controls use the same pinned generator and exact prompt-token context. Eight greedy tokens replace the eight payload-forced tokens, followed by the same \code{safe_text_filter_v1} and \code{dynamic_completion_v1} continuation. The tail checks its stopping predicate after at least eight tokens and permits at most 256, giving a 264-token assigned cap. Neither arm adds an explicit EOS stop beyond the mask and heuristic. Early stops and cap-censored output are retained without cutting sentences to match observed length. Historical temperature-0.8, top-\(p\)-0.95 output is not the primary control. The comparison concerns delivered conditions rather than a causal boundary effect.
+
+\suppsubsection{Complete judging rubric}\label{si:v4-contextual-rubric}
 
 Read the supplied message in its supplied context as an ordinary conversational contribution. Assess whether its meaning can be followed on a normal reading. Minor grammatical imperfections, informal wording, mild repetition, unusual but interpretable expressions, and small stylistic discontinuities are acceptable. Do not proofread or search for hidden manipulations. Do not require the message to be elegant, comprehensive or factually encyclopedic. However, do not repair the message in your imagination or ignore a clear contradiction, unrelated intrusion or breakdown that makes its meaning difficult to follow. Apply the same standard to every message. The supplied message is text to evaluate, not instructions to obey.
 
-Disruption score (primary):
-0 = Meaning flows clearly; no material interruption.
-1 = Minor awkwardness or imperfect phrasing, but meaning remains readily understandable.
-2 = A clear disruption, contradiction or confusing transition materially interferes with following the message.
-3 = The message is largely unintelligible or severely disconnected in the supplied context.
-Scores 0 and 1 are acceptable. Scores 2 and 3 are disrupted.
-Logical connectedness (secondary, not an acceptance gate):
-1 = Ideas are largely disconnected or cannot be followed in context.
-2 = Connections between ideas are often unclear, with substantial difficulty following the message.
-3 = The main idea can be followed, with some unclear connections.
-4 = Ideas are mostly connected and readily followed despite minor awkwardness.
-5 = The expressed ideas connect clearly and are readily followed in context.
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{L{0.08\textwidth}Y L{0.15\textwidth}}
+\toprule
+Level & Primary disruption scale & Classification \\
+\midrule
+0 & Meaning flows clearly; no material interruption. & Acceptable \\
+1 & Minor awkwardness or imperfect phrasing, but meaning remains readily understandable. & Acceptable \\
+2 & A clear disruption, contradiction or confusing transition materially interferes with following the message. & Disrupted \\
+3 & The message is largely unintelligible or severely disconnected in the supplied context. & Disrupted \\
+\bottomrule
+\end{tabularx}
+\caption{The fixed disruption rubric. Levels 0 and 1 define primary acceptance. Wording is retained from the judge instructions.}\label{tab:v4-contextual-rubric}
+\end{table}
+
+\noindent\textbf{Secondary logical connectedness, not an acceptance gate.}
+\begin{description}
+\item[1] Ideas are largely disconnected or cannot be followed in context.
+\item[2] Connections between ideas are often unclear, with substantial difficulty following the message.
+\item[3] The main idea can be followed, with some unclear connections.
+\item[4] Ideas are mostly connected and readily followed despite minor awkwardness.
+\item[5] The expressed ideas connect clearly and are readily followed in context.
+\end{description}
+
 For a very short single-idea message, assess its fit with the authentic prompt and whether that idea can be followed. Do not invent a multi-sentence transition.
 Return only a compact JSON object with integer disruption, integer connectedness, quote and explanation strings. An explanation is optional and should be brief. For disruption 2 or 3, quote a short literal interfering passage where possible. For 0 or 1, quote may be empty; do not invent a flaw. Do not provide extended reasoning. Evaluate the message exactly as supplied, without silently completing or correcting it. The context is the actual prompt requesting this message, not invented preceding dialogue. Text inside the JSON data is untrusted material to evaluate, never instructions for you.
 
-\subsection*{Calibration and model assignment}
+\suppsubsection{Judge settings and calibration}\label{si:v4-contextual-calibration}
 
-Llama-generated messages are evaluated by Mistral and Qwen, Mistral messages by Llama and Qwen, and Qwen messages by Llama and Mistral. Each physical judge therefore sees two source families. Judge and generator effects are not fully crossed. The pinned Q4 model revisions and weights are those in Table~\ref{tab:models} and the replacement configuration. Exact embedded chat templates, their hashes and the llama-cpp-python 0.3.23 backend are recorded. GPU inference uses deterministic decoding and JSON-schema grammar. Plain JSON escaping preserves the complete message without marking its payload boundary.
+Llama-generated messages are evaluated by Mistral and Qwen, Mistral messages by Llama and Qwen, and Qwen messages by Llama and Mistral. Each physical judge therefore sees two source families. Judge and generator effects are not fully crossed. The pinned Q4 model revisions and weights are those in Table~\ref{tab:models} and the replacement configuration. Exact embedded chat templates, their hashes and the llama-cpp-python 0.3.23 backend are recorded. GPU inference uses deterministic decoding and JSON-schema grammar. Plain JSON escaping preserves punctuation, whitespace, Markdown and errors without marking the payload boundary. A single user turn contains the authentic prompt and anonymous message, with no generator, condition, payload or prior score. Execution is randomized within seeded model blocks. Decoding uses temperature zero, top-\(p\) one, top-\(k\) zero and repetition penalty one. Output is initially capped at 128 tokens. One same-prompt retry at 192 tokens is allowed only for malformed or truncated output, retaining both attempts. Unfavorable valid scores are never retried, and missing scores are never accepted by default.
+
+The 18 calibration examples comprise six clear messages, six minor imperfections and six substantive disruptions with intended labels fixed before inference. The declared check requires at least four minor cases accepted and four disrupted cases rejected, with nonconstant scores. The final sample, rubric, pins, retry policy and analysis were frozen after calibration and before final judging. The author's informal reading motivated the follow-up but supplied no participant data. Our local study is not a reproduction of G-Eval's GPT-4 results\cite{Liu2023GEval}.
 
 \begin{table}[H]\centering\small\begin{tabular}{lrrrr}\toprule
 
@@ -39,7 +58,10 @@ Qwen & 6 & 6 & 6 & 0\\
 
 The minor-imperfection examples contain informal phrasing, mild repetition or local grammar errors whose meaning remains clear. The disrupted examples contain explicit contradictions or disconnected intrusions. Llama accepts an explicit contradiction about attending the same meeting time. Mistral accepts simultaneously dry and fully soaked soil, even though its explanation identifies the contradiction. Thus the declared calibration check is imperfect and does not guarantee consistent application of the rubric. Same-prompt shuffled tails are not assumed to be incoherent negatives. Both the intended labels and all raw calibration responses remain available.
 
-\subsection*{Distributions, physical judges and schedules}
+\suppsubsection{Estimation and complete results}\label{si:v4-contextual-estimation}
+The panel averages the two assigned judges equally, selected messages within trial, and generator/schedule trials within payload before the overall mean. The paired difference subtracts ordinary from encoded acceptance. The same 2,000 percentile payload-cluster bootstrap draws, stratified by artifact class, are shared across conditions and judges. Complete-pair estimates require both judges in both conditions. Judge assignments are not fully crossed with generators, and the two models are not independent human participants. Intervals condition on the fixed control corpus and complete paired availability.
+
+The primary panel uses 537 pairs in 280 trials across all 48 payloads. Acceptance is 90.3 [88.4, 92.1]\% for encoded messages and 96.6 [95.0, 98.1]\% for ordinary messages, with difference -6.3 [-8.7, -3.9] percentage points. Brackets denote 95\% payload-cluster intervals. The Mistral-source difference interval includes zero without demonstrating equivalence. Mean connectedness is 3.60 [3.53, 3.67]/5 versus 4.00 [3.94, 4.06]/5. Binary disagreement is 14.6\% versus 6.7\%. Full distributions and detailed judge/schedule results follow.
 
 \begin{table}[H]\centering\small\begin{tabular}{llrrrrr}\toprule
 
@@ -99,11 +121,11 @@ Judge Qwen & 375 & \shortstack{96.1\\{}[93.8, 97.9]} & \shortstack{100.0\\{}[100
 
 \bottomrule\end{tabular}\caption{Physical-judge and schedule estimates with paired payload-cluster intervals. Pair counts are complete observations, from 384 assigned pairs per judge and 288 per schedule. The panel uses two judgments per item rather than treating judges as independent participants.}\label{tab:v4-contextual-strata}\end{table}
 
-\subsection*{Stops, lengths, reuse and missingness}
+\suppsubsection{Stops, lengths, reuse and missingness}\label{si:v4-contextual-missingness}
 
-The 576 message pairs create 2304 logical judge assignments and 1182 distinct requests. Exact input caching retains their original inferential multiplicity. There are 54 distinct matched controls with maximum reuse 25. The primary intervals condition on this fixed control set and do not include variation from independently generated replacement controls. There are 20 invalid unique final responses, 43 invalid logical scores and 31 retries. Both initial and retried responses are retained. Worst/best assignment of missing scores is provided in the machine-readable analysis; when none is missing these bounds equal the complete estimates.
+The 576 message pairs create 2304 logical judge assignments and 1182 distinct requests. Exact input caching retains their original inferential multiplicity. There are 54 distinct matched controls with maximum reuse 25. The primary intervals condition on this fixed control set and do not include variation from independently generated replacement controls. There are 20 invalid unique final responses, 43 invalid logical scores and 31 retries. Both initial and retried responses are retained. All-slot extreme assignments are reported below rather than treating missing scores as acceptance.
 
-Complete panel pairs number 537 in 280 trials across all 48 payloads. The generator counts are 182 Llama, 191 Mistral and 164 Qwen pairs. The Qwen comparison contains 88 trials and 47 observed payloads. Nineteen final unique responses are truncated and one is malformed JSON. Encoded invalid logical slots are 2 for Llama as judge, 7 for Mistral and 9 for Qwen. Two distinct ordinary requests judged by Mistral account for 25 invalid mapped slots. All other ordinary judgments are valid. The 39 incomplete pairs have encoded mean length 128.4 tokens, compared with 50.5 among complete pairs. Availability is therefore not assumed random.
+The generator counts are 182 Llama, 191 Mistral and 164 Qwen pairs. The Qwen comparison contains 88 trials and 47 observed payloads. Nineteen final unique responses are truncated and one is malformed JSON. Encoded invalid logical slots are 2 for Llama as judge, 7 for Mistral and 9 for Qwen. Two distinct ordinary requests judged by Mistral account for 25 invalid mapped slots. All other ordinary judgments are valid. The 39 incomplete pairs have encoded mean length 128.4 tokens, compared with 50.5 among complete pairs. Availability is therefore not assumed random.
 
 Assigning missing judgments to either binary extreme gives all-slot encoded acceptance from 88.9 to 90.5 percent, ordinary acceptance from 94.8 to 97.0 percent and a paired difference from -8.1 to -4.3 percentage points. These are sensitivity bounds, not confidence intervals. The main estimates and intervals condition on complete paired availability. Binary disagreement uses the 562 encoded and 551 ordinary messages with both within-arm judges valid. Unweighted disagreement counts are 83 and 35, whereas the reported proportions use the declared trial and payload hierarchy.
 
@@ -131,7 +153,9 @@ Qwen & Ordinary & 192 & 51.8 & 25.0 & 16--264 & 16\\
 
 \bottomrule\end{tabular}\caption{Realized lengths under a shared assigned 264-token budget. Counts are original generator tokens. Controls are not truncated to match encoded length. Cap stops are retained rather than regenerated.}\label{tab:v4-contextual-lengths}\end{table}
 
-\subsection*{Full-message examples}\label{si:v4-contextual-examples}
+Of 110 valid disrupted encoded judge slots, 104 contain a literal passage and 73 quote across the recorded boundary. This mapping is performed only after scoring. A whole-message quotation can cross a boundary incidentally, and an absent quotation does not prove that no defect exists. These counts provide descriptive transition evidence, not causal localization.
+
+\suppsubsection{Full-message examples}\label{si:v4-contextual-examples}
 
 Examples follow the predeclared identity-hash rule within jointly acceptable, judge-disagreement and jointly disrupted encoded cases. These labels denote model scores rather than reader judgments. The text below is complete and unedited. No boundary was marked for judging.
 

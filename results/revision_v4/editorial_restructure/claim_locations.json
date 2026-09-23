@@ -1,0 +1,173 @@
+{
+  "scope": "Editorial locations only. Scientific values and evidence ledgers are unchanged.",
+  "inherited_claim_ledgers": [
+    {
+      "path": "results/revision_v4/stage3/claim_evidence.json",
+      "sha256": "13b41f7ee410665d78abb8b50e18d97c9ee3ed87cd54a36555617d958be38b5f"
+    },
+    {
+      "path": "results/revision_v4/coherence_replacement/manuscript/claim_evidence.json",
+      "sha256": "9132298b5405793401bf734c8ede4deca58c0ba413719eac078f6eabe156ff1c"
+    }
+  ],
+  "claims": {
+    "configured_recovery": {
+      "sec:results-recovery": {
+        "document": "main4",
+        "page": 11,
+        "label": ""
+      },
+      "si:s3": {
+        "document": "supplementary4",
+        "page": 7,
+        "label": ""
+      }
+    },
+    "transport": {
+      "sec:results-robustness": {
+        "document": "main4",
+        "page": 13,
+        "label": ""
+      },
+      "sec:v4-transport-results": {
+        "document": "main4",
+        "page": 17,
+        "label": ""
+      },
+      "si:s4": {
+        "document": "supplementary4",
+        "page": 8,
+        "label": ""
+      },
+      "si:v4-transport": {
+        "document": "supplementary4",
+        "page": 41,
+        "label": ""
+      }
+    },
+    "filter": {
+      "sec:v4-filter": {
+        "document": "main4",
+        "page": 5,
+        "label": ""
+      },
+      "tab:v4-filter": {
+        "document": "main4",
+        "page": 5,
+        "label": "1"
+      }
+    },
+    "contextual_acceptability": {
+      "sec:v4-contextual-method": {
+        "document": "main4",
+        "page": 10,
+        "label": ""
+      },
+      "sec:v4-contextual-results": {
+        "document": "main4",
+        "page": 16,
+        "label": ""
+      },
+      "tab:v4-contextual": {
+        "document": "main4",
+        "page": 17,
+        "label": "3"
+      },
+      "fig:v4-contextual": {
+        "document": "main4",
+        "page": 17,
+        "label": "5"
+      },
+      "si:v4-contextual": {
+        "document": "supplementary4",
+        "page": 43,
+        "label": ""
+      },
+      "si:v4-contextual-missingness": {
+        "document": "supplementary4",
+        "page": 46,
+        "label": ""
+      }
+    },
+    "historical_coherence": {
+      "si:v4-coherence": {
+        "document": "supplementary4",
+        "page": 37,
+        "label": ""
+      },
+      "eq:v4-context-gain": {
+        "document": "supplementary4",
+        "page": 39,
+        "label": "1"
+      }
+    },
+    "configuration_and_complexity": {
+      "sec:v4-boundaries": {
+        "document": "main4",
+        "page": 19,
+        "label": ""
+      },
+      "si:v4-theory": {
+        "document": "supplementary4",
+        "page": 42,
+        "label": ""
+      },
+      "tab:v4-complexity": {
+        "document": "supplementary4",
+        "page": 43,
+        "label": "S35"
+      }
+    },
+    "entropy": {
+      "sec:v4-entropy-results": {
+        "document": "main4",
+        "page": 18,
+        "label": ""
+      },
+      "si:s13": {
+        "document": "supplementary4",
+        "page": 27,
+        "label": ""
+      }
+    },
+    "quantization": {
+      "sec:v4-quant-results": {
+        "document": "main4",
+        "page": 18,
+        "label": ""
+      },
+      "si:s14": {
+        "document": "supplementary4",
+        "page": 30,
+        "label": ""
+      },
+      "si:v4-fixed-quant": {
+        "document": "supplementary4",
+        "page": 42,
+        "label": ""
+      }
+    },
+    "tail_policy": {
+      "alg:segmented": {
+        "document": "main4",
+        "page": 7,
+        "label": "2"
+      },
+      "alg:tail": {
+        "document": "supplementary4",
+        "page": 4,
+        "label": "S1"
+      },
+      "si:s1": {
+        "document": "supplementary4",
+        "page": 3,
+        "label": ""
+      }
+    }
+  },
+  "tail_stopping_description_precision": {
+    "source": "rankcloak/revision_protocol.py",
+    "sha256": "3a0a13f47f6fb0c39691e33289b592c7f906bf651217e275a5944db4706856e0",
+    "change": "S1 now explicitly documents trailing-whitespace stripping before the suffix test. The listed double-newline branch is unreachable. No code, control output or scientific result changed."
+  }
+}

@@ -1,0 +1,24 @@
+File: expanded methods
+Words in text: 4426
+Words in headers: 48
+Words outside text (captions, etc.): 56
+Number of headers: 12
+Number of floats/tables/figures: 1
+Number of math inlines: 162
+Number of math displayed: 16
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  221+1+0 (1/0/1/0) Section: Methods}\label{sec:methods
+  133+3+0 (1/0/9/3) Subsection: Basic rank definition}\label{sec:rank-method
+  351+3+0 (1/0/18/1) Subsection: Calgacus rank-transcoding baseline}\label{sec:calgacus-method
+  631+4+23 (1/0/56/6) Subsection: RankCloak bounded payload-codec methods}\label{sec:payload-method
+  25+5+0 (1/1/0/0) Subsection: Complete deterministic token filter specification}\label{sec:v4-filter
+  248+0+16 (0/0/0/0) Section
+  655+4+17 (1/0/59/3) Subsection: RankCloak segmented multi-cover method}\label{sec:encoding-method
+  620+5+0 (1/0/3/0) Subsection: Evaluation corpus, controls, and metrics}\label{sec:design-method}\label{sec:quality-method
+  472+5+0 (1/0/15/3) Subsection: Recovery, robustness, and capacity endpoints}\label{sec:replay-method}\label{sec:capacity-method}\label{sec:endpoint-method
+  507+7+0 (1/0/1/0) Subsection: Neural steganalysis, statistical analysis, and computational overhead}\label{sec:detector-method}\label{sec:statistics-method
+  328+3+0 (1/0/0/0) Subsection: Intact-message contextual acceptability}\label{sec:v4-contextual-method}\label{sec:v4-boundary-method
+  197+6+0 (1/0/0/0) Subsection: Decoder compatibility and bounded transport diagnostics}\label{sec:v4-compatibility
+  38+2+0 (1/0/0/0) Subsection: Revision assistance}\label{sec:revision-assistance
+

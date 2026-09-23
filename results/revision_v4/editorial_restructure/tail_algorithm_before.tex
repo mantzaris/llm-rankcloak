@@ -1,0 +1,18 @@
+\begin{algorithm}[H]
+\caption{Greedy continuation policy used after each segmented forced span; the generated tail carries no payload ranks and is ignored by the decoder.}
+\label{alg:tail}
+\begin{algorithmic}[1]
+\Require Model \(M\); current context after the forced span; deterministic token filter \(F\).
+\Ensure Non-payload tail tokens.
+\State \(\mathrm{tail\_tokens} \gets [\,]\)
+\While{\(|\mathrm{tail\_tokens}| < 60\)}
+    \State choose the rank-1 token \(z\) under \(M.\NextLogits(\mathrm{context})\) among tokens allowed by \(F\)
+    \State append \(z\) to \(\mathrm{tail\_tokens}\)
+    \State append \(z\) to \(\mathrm{context}\)
+    \If{\(|\mathrm{tail\_tokens}| \geq 20\) and \(\Detokenize(\mathrm{tail\_tokens})\) ends at a sentence boundary}
+        \State \textbf{break}
+    \EndIf
+\EndWhile
+\State \Return \(\mathrm{tail\_tokens}\)
+\end{algorithmic}
+\end{algorithm}

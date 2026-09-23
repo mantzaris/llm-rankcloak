@@ -1,0 +1,22 @@
+Title:           RankCloak Conceals the Surface Form of Synthetic Cryptographic Artifacts in Language Model Generated Text
+Subject:         
+Keywords:        
+Author:          Alexander V. Mantzaris
+Creator:         LaTeX with hyperref
+Producer:        pdfTeX-1.40.25
+CreationDate:    Wed Sep 23 11:55:38 2026 EDT
+ModDate:         Wed Sep 23 11:55:38 2026 EDT
+Custom Metadata: yes
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           23
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       655531 bytes
+Optimized:       no
+PDF version:     1.5
