@@ -1,0 +1,10 @@
+{
+  "event": "The first post-reconstruction exact-membership check found one interpreter cache file. No packaged file was missing.",
+  "generated_files": [
+    {
+      "path": "scripts/__pycache__/audit_revision_v4_stage3.cpython-310.pyc",
+      "sha256": "95f9de8f61f9482fcfddc33f32c32db1dc908eeaaeee591ef218722643f1e431"
+    }
+  ],
+  "resolution": "Recorded and removed only this newly created .pyc file from the disposable extraction. All payload hashes and exact membership were then rechecked. Future execution may set PYTHONDONTWRITEBYTECODE=1. No source, data or archive bytes were changed."
+}

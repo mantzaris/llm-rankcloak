@@ -1,0 +1,108 @@
+{
+  "schema": "rankcloak.stage3.archive-verification.v1",
+  "status": "passed",
+  "verified_at_utc": "2026-09-23T04:28:33.423232+00:00",
+  "source_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "source_tree": "bcea80173eea5c98bcf588642f58e70edd42c573",
+  "policy_sha256": "3f8eca4e3c41656092d0b7832ef812beab6d78c1611543d1df17157be605b8d9",
+  "archive_path": "/home/meow/Documents/repos/llm-rankcloak/release_artifacts/v4/7f48ae2ef2fb/llm-rankcloak-v4-7f48ae2ef2fb.zip",
+  "archive_sha256": "1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625",
+  "archive_bytes": 367904213,
+  "payload_count": 8856,
+  "payload_bytes": 2019627199,
+  "candidate_version": "3.0.0-rc1",
+  "assembly_elapsed_seconds": 45.798803604004206,
+  "python": "3.10.13",
+  "zlib_runtime_version": "1.3",
+  "committed_payload_files": 8855,
+  "generated_payload_files": [
+    "ARCHIVE_SOURCE.json"
+  ],
+  "excluded_committed_paths": 31,
+  "manifest_json_sha256": "a0f45ecd26de211e3108e7ba739ace4251bb019a2ba1844e12af823a84a7665d",
+  "manifest_csv_sha256": "5224380ae240725a152efc44dce22934857706e863d59c7cec71f8938a8467aa",
+  "missing_files": 0,
+  "extra_files": 0,
+  "unsafe_paths": 0,
+  "hash_or_source_blob_mismatches": 0,
+  "required_licenses_present": true,
+  "csv_json_manifests_agree": true,
+  "independent_unzip_test": "No errors detected in compressed data of release_artifacts/v4/7f48ae2ef2fb/llm-rankcloak-v4-7f48ae2ef2fb.zip.",
+  "offline_reconstruction": {
+    "status": "passed",
+    "command": "python -m scripts.audit_revision_v4_stage3 --root . --output /tmp/rankcloak-v4-reconstructed-7f48ae2ef2fb",
+    "working_directory": "/tmp/rankcloak-v4-extracted-7f48ae2ef2fb",
+    "script_origin": "freshly extracted source snapshot, not the mutable checkout",
+    "input_files": 4592,
+    "effects_and_intervals": 48,
+    "outputs": [
+      {
+        "path": "results/revision_v4/stage3/audit/audit_summary.json",
+        "sha256": "62cf7ff805e4826d8f0094b796b631d956ad1d7fb9f194bac241653ab22a9503",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/boundary_counts.json",
+        "sha256": "d4d089109513e27228446aed9bde140da0c0c88cc913dd29cd0cd4c446f477fb",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/entropy.json",
+        "sha256": "ee99459f9ec97994c2238d4476b6b3d56d5b4fba8bb1d0a31a631ce7dab72759",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/examples.json",
+        "sha256": "fbe3a05184bd8da724e6275b46a19f2994a01def9f757773b49444a4bb1b467d",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/input_hashes.json",
+        "sha256": "9218330561b69f8199f1fec55903414351f91b1b8d236e4d0a471ab232cbc3e2",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/quantization.json",
+        "sha256": "e5128688c41b9e8c3e7551774b82d95363ddee150ad1cd0fc7e3c7027bf0f61f",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/reconstructed_effects.csv",
+        "sha256": "4fa76fc05bfaed0a91fc8f0825ce0f9812d398cb3bdb75ca5b29190dcd41ac61",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/reconstructed_effects.json",
+        "sha256": "3732015059e1215cdba053f38b873dfbff638449ff9d9b294bdf019018bb448c",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/recovery.json",
+        "sha256": "4f866d2ede63054ed01dbb803708e6d27cc091700dc1aadb2cc2be60b76c34b5",
+        "byte_identical_to_packaged": true
+      },
+      {
+        "path": "results/revision_v4/stage3/audit/transport.json",
+        "sha256": "eba5ccfcc20d0daeb3916f55f4978095e58106e78be83b641c3b8cf31674d438",
+        "byte_identical_to_packaged": true
+      }
+    ],
+    "model_downloads": 0,
+    "gpu_jobs": 0
+  },
+  "extracted_payload_unchanged_after_reconstruction": true,
+  "runtime_cache_note": "reconstruction_runtime_note.json",
+  "document_rebuild": "extracted_builds/verification.json",
+  "packaged_pdf_hashes_exact": true,
+  "rebuilt_pdf_text_layout_and_pages_equal": true,
+  "rebuilt_pdf_hash_limit": "Fresh PDF hashes differ because TeX timestamps/metadata are not fixed. All packaged PDF bytes were verified against the manifest.",
+  "readiness": {
+    "author_review_candidate": true,
+    "written_responses_complete": 16,
+    "R1_4_empirical_coverage": "partial",
+    "local_archive_candidate_verified": true,
+    "public_v4_deposit_coverage": false,
+    "journal_submission_ready": false
+  },
+  "administrative_handoff": "This receipt postdates the source snapshot and is excluded from the archive. It does not relabel the archive as containing a later handoff commit."
+}

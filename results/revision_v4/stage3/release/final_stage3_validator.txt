@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "protected_files_unchanged": 8396,
+  "exact_review_blocks": 13,
+  "written_responses": 16,
+  "R1_4_empirical_coverage": "partial",
+  "V4_published_archive_coverage": false,
+  "independent_effects": 48,
+  "independent_input_files": 4592,
+  "main_figures_and_tables": 8,
+  "abstract_words": 194,
+  "gpu_job_seconds": 0
+}

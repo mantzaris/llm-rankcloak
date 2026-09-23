@@ -47,7 +47,7 @@ Changed deliverable groups are the four V4 documents and inputs, REVIEW_RESPONSE
 
 New tools are scripts/audit_revision_v4_stage3.py, audit_revision_v4_stage3_linkage.py, audit_revision_v4_stage3_documents.py, build_revision_v4_stage3_documents.py, prepare_revision_v4_stage3_handoff.py, render_revision_v4_stage3_response.py, validate_revision_v4_stage3.py and rankcloak/revision_v4_archive.py. Focused tests reside in tests/test_revision_v4_stage3.py. All new provenance, claim/status ledgers, reconstructed tables, build/test logs and page review receipts reside under results/revision_v4/stage3.
 
-The final focused run passed 51 tests across Stage 3 and Stage 2 behavior. These include committed-source isolation, deterministic packaging, traversal/tampering rejection, exact quotation preservation, honest status separation, nested paired estimands, padding semantics, configuration mismatch, alignment, plan and checkpoint identities. The duplicate-member tampering test intentionally emits one standard-library warning. The strict Stage 3 validator passes the 8,396 protected-file invariants and binds review approval to the actual reviewed PDF hashes. No generation dependency was replaced. PDF review used installed Poppler and Pillow after the optional PyMuPDF import was unavailable.
+The final focused run passed 51 tests across Stage 3 and Stage 2 behavior. These include committed-source isolation, deterministic packaging, traversal/tampering rejection, exact quotation preservation, honest status separation, nested paired estimands, padding semantics, configuration mismatch, alignment, plan and checkpoint identities. The duplicate-member tampering test intentionally emits one standard-library warning. The strict Stage 3 validator passes the 8,396 protected-file invariants and binds the visual-inspection record to the actual reviewed PDF hashes. No generation dependency was replaced. PDF review used installed Poppler and Pillow after the optional PyMuPDF import was unavailable.
 
 ## Archive scope and source snapshot
 
@@ -57,10 +57,31 @@ The candidate intentionally includes historical and V4 manuscripts, exact review
 
 Assembly uses the committed source tree through git archive. Every payload path, size, SHA256 and source Git blob is listed in external JSON/CSV manifests. ARCHIVE_SOURCE.json records the source commit/tree inside the ZIP. The ZIP and its outer checksum are never embedded in their own payload. Fresh extraction checks exact membership, path safety, regular-file modes, all hashes, source correspondence and required licenses. Offline reconstruction and disposable manuscript builds provide separate content checks.
 
-This source-snapshot edition of the report precedes assembly by design. The administrative handoff adds the actual source SHA/tree, local ZIP path/checksum, inventory and independent verification receipt under results/revision_v4/stage3/release. That later commit must not be described as the archive's source. The generated ZIP remains outside Git in release_artifacts/v4.
+The archive source snapshot is **7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0**, with tree **bcea80173eea5c98bcf588642f58e70edd42c573**. Its worktree was clean at assembly. The snapshot includes the finalized scientific sources, evidence, tools and author-review PDF bytes. This administrative edition of the report and the verification records postdate that snapshot and are not inside its ZIP.
+
+The verified candidate is `/home/meow/Documents/repos/llm-rankcloak/release_artifacts/v4/7f48ae2ef2fb/llm-rankcloak-v4-7f48ae2ef2fb.zip`. Its SHA256 is **1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625**. It contains 8,856 payload files, comprising 8,855 committed files and one generated ARCHIVE_SOURCE.json, with 2,019,627,199 uncompressed bytes. The ZIP is 367,904,213 bytes. The explicit policy excludes 31 committed paths. Assembly took 45.799 seconds using Python 3.10.13 and zlib 1.3.
+
+The full JSON/CSV manifests, outer checksum and VERIFICATION_RECEIPT.json are tracked under results/revision_v4/stage3/release. The large ZIP is intentionally ignored by Git. Its local artifact directory also contains the original manifest/checksum companions and assembly output. The administrative handoff commit records these receipts and this report only. It does not relabel the archive as containing that later commit.
+
+Fresh extraction verified zero missing files, extra files, unsafe paths, checksum mismatches or source-blob mismatches. Required licenses are present and JSON/CSV manifests agree. The independent unzip implementation also found no errors. Offline reconstruction used the extracted script and 4,592 included input files without network, models or GPU. All ten generated scientific output files, including all 48 effects/intervals, are byte-identical to the packaged results. The first post-execution membership check detected one Python bytecode cache. That runtime file was recorded and removed from the disposable extraction. Every packaged file then passed a fresh checksum and exact-membership check. No archive, code or data bytes changed.
+
+The four manuscripts and the single-file journal source rebuilt using only inputs copied from the verified extraction. All final passes have no warnings or unresolved references. The four PDF text extractions and page counts exactly match the packaged documents. PDF binary hashes differ because TeX timestamps/metadata are not fixed. Packaged PDF bytes were nevertheless verified exactly. The full receipt distinguishes these checks.
+
+The final pushed handoff SHA is reported with the completion message and local push receipt. It cannot be embedded into its own committed report without creating a new commit identity. The source snapshot SHA above remains the archive identity.
 
 ## Readiness and remaining actions
 
-Author-review text and written responses are complete. Empirical satisfaction of R1.4 remains partial. Local archive verification is finalized in the postassembly receipt. Public V4 deposit coverage and journal submission are not complete. No external deposit, public release, editor contact or submission occurred.
+Author-review text and written responses are complete. Empirical satisfaction of R1.4 remains partial. Local archive verification is complete and passed. Public V4 deposit coverage and journal submission are not complete. No Zenodo publication, GitHub release, editor contact or journal submission occurred. Main-branch source and handoff commits use the established origin workflow. The completion message and local push receipt record the actual push result.
 
 The author must review the scientific scope and accept or revise the R1.4 interpretation, confirm identity/contact/assistance and public package scope, then approve publication of a verified new Zenodo version in a later authorized stage. After verifying the real new DOI and bytes, update citation/availability/response/cover statements, rebuild the documents and page references, and record document-only differences from the archived author-review snapshot. Changes to scientific code or evidence require a new source snapshot/package. Finish the journal portal upload using editable sources and separate figures. The concrete sequence is in paperV4/ACTIONS_BEFORE_SUBMISSION.md and release/v4/UPLOAD_CHECKLIST.md.
+
+
+| Readiness question | Final local status |
+| --- | --- |
+| Author-review package | Ready for the author, all 16 responses written |
+| Empirical coverage of R1.4 | Partial, author/editor judgment required |
+| Local archive candidate | Assembled and independently verified |
+| Public V4 deposit coverage | Not yet published, current DOI covers V3 |
+| Journal submission readiness | Not complete, author approval and verified DOI/document sequence remain |
+
+No scientific source, evidence or PDF changed after the archive source snapshot. The only post-snapshot changes are this administrative report and the release verification folder. There are no unrelated staged changes. The intended local residue is the ignored release-artifact directory and disposable verification copies under /tmp. The final tracked-worktree check is recorded in the local push receipt.

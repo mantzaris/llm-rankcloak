@@ -1,0 +1,23 @@
+{
+  "schema": "rankcloak.archive-source.v4.1",
+  "source_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "source_tree": "bcea80173eea5c98bcf588642f58e70edd42c573",
+  "policy_path": "release/v4/assembly_policy.json",
+  "policy_sha256": "3f8eca4e3c41656092d0b7832ef812beab6d78c1611543d1df17157be605b8d9",
+  "candidate_version": "3.0.0-rc1",
+  "published_doi": "10.5281/zenodo.22555497",
+  "v4_public_deposit": false,
+  "scope": "Committed files selected by the included assembly policy. Author-review snapshot, not a journal submission.",
+  "archive_filename": "llm-rankcloak-v4-7f48ae2ef2fb.zip",
+  "archive_sha256": "1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625",
+  "archive_bytes": 367904213,
+  "payload_count": 8856,
+  "payload_bytes": 2019627199,
+  "assembly_elapsed_seconds": 45.798803604004206,
+  "assembled_at_utc": "2026-09-23T04:23:25.611513+00:00",
+  "python": "3.10.13",
+  "zlib_compile_version": "1.3",
+  "zlib_runtime_version": "1.3",
+  "source_worktree_clean": true,
+  "archive_path": "/home/meow/Documents/repos/llm-rankcloak/release_artifacts/v4/7f48ae2ef2fb/llm-rankcloak-v4-7f48ae2ef2fb.zip"
+}

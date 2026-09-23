@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "source_commit": "7f48ae2ef2fb11201ffe7a5a14c1568a9811b4e0",
+  "source_tree": "bcea80173eea5c98bcf588642f58e70edd42c573",
+  "archive_sha256": "1aca84b5dd45208f14b93ff88cc4c18ac7af2c8c485468b5373a38ba1620b625",
+  "archive_bytes": 367904213,
+  "payload_count": 8856,
+  "missing_files": 0,
+  "extra_files": 0,
+  "unsafe_paths": 0,
+  "checksum_mismatches": 0,
+  "source_blob_mismatches": 0,
+  "required_files_present": true,
+  "extraction_path": "/tmp/rankcloak-v4-extracted-7f48ae2ef2fb",
+  "manifest_sha256": "a0f45ecd26de211e3108e7ba739ace4251bb019a2ba1844e12af823a84a7665d"
+}

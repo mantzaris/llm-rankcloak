@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "builds": [
+    {
+      "document": "paperV4/scientific_reports/main4.pdf",
+      "status": "passed",
+      "elapsed_seconds": 3.8086137780046556,
+      "warnings": [],
+      "page_count": 25,
+      "packaged_sha256": "af0fe06fda53ec6dbcda0584d9215c4af62fd5e167f7674d5e87aa9de38fddbf",
+      "rebuilt_sha256": "a468a72d7785e6e72179bf72fa676f6c8a1121495fa129a6284fa34f2a4a6251",
+      "pdf_text_and_layout_equal_to_packaged": true,
+      "source_inputs": "Copied exclusively from the freshly verified extraction. System TeX Live supplies packages."
+    },
+    {
+      "document": "paperV4/scientific_reports/supplementary4.pdf",
+      "status": "passed",
+      "elapsed_seconds": 4.177761963997909,
+      "warnings": [],
+      "page_count": 40,
+      "packaged_sha256": "0b04529c07511586b4050d7821e86fe70ad5766f96468db94d7a284ba98da57a",
+      "rebuilt_sha256": "4f9f2ba7e99b88f08b0eca631c858268835a0d191d826d86d3d532ac0ee4041d",
+      "pdf_text_and_layout_equal_to_packaged": true,
+      "source_inputs": "Copied exclusively from the freshly verified extraction. System TeX Live supplies packages."
+    },
+    {
+      "document": "paperV4/response/response_to_reviewers_v4.pdf",
+      "status": "passed",
+      "elapsed_seconds": 1.550234932001331,
+      "warnings": [],
+      "page_count": 8,
+      "packaged_sha256": "64e39fe4d93130c08723105032e5e8d3ae8a3b476d61b6973b9b6dca632fae8e",
+      "rebuilt_sha256": "c3fd0e236f524868aa46421876c707d47cae3fc8294f9ed078aef8d2297e8b40",
+      "pdf_text_and_layout_equal_to_packaged": true,
+      "source_inputs": "Copied exclusively from the freshly verified extraction. System TeX Live supplies packages."
+    },
+    {
+      "document": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "status": "passed",
+      "elapsed_seconds": 1.5061139630051912,
+      "warnings": [],
+      "page_count": 1,
+      "packaged_sha256": "8c14993086b4324c6347ba5bca0e070dd66deb9dddc3e2696143b1b3aaf12cf4",
+      "rebuilt_sha256": "b4fbe32159fc4ab7a63a0c70ca6d3ff3cf1e1ea602db0704a8e5bdc831ab411e",
+      "pdf_text_and_layout_equal_to_packaged": true,
+      "source_inputs": "Copied exclusively from the freshly verified extraction. System TeX Live supplies packages."
+    },
+    {
+      "document": "paperV4/scientific_reports/main4_submission.pdf",
+      "status": "passed",
+      "elapsed_seconds": 3.1822347930065007,
+      "warnings": [],
+      "page_count": 23,
+      "packaged_sha256": null,
+      "rebuilt_sha256": "b2ea374fc48e351f147ba27e62ef3ec20b9bdc8c741fda2d9d50249e3546aeb9",
+      "pdf_text_and_layout_equal_to_packaged": null,
+      "source_inputs": "Copied exclusively from the freshly verified extraction. System TeX Live supplies packages."
+    }
+  ],
+  "scope": "Four packaged author-review PDFs and the single-file journal source. Packaged bytes verified exactly. Rebuilt PDF hashes may differ due to TeX timestamps/metadata. Full extracted text and layout/page counts must agree for the four packaged PDFs.",
+  "disposable_build_root": "/tmp/rankcloak-v4-extracted-build-7f48ae2ef2fb"
+}
