@@ -1,0 +1,490 @@
+{
+  "schema": "rankcloak.editorial.exact_replacements.v1",
+  "baseline_commit": "303a2c4442992867fed0adeb4b12061cf001c1b7",
+  "authority": "Exact replacements M01-M22, S01-S24 and P01-P05 in the author instruction of 2026-09-26. OLD hashes verified without a terminal newline.",
+  "replacements": [
+    {
+      "id": "M01",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "779b76b9238c0e5fed86342ab7a444b66f2e15778ca2cde7dc67c07aa1e32f05",
+      "old": "This provides a peer-reviewed precedent for selective marking. RankCloak defines and evaluates its own payload gate. The watermarking precedent supplies no guarantee of arbitrary-payload recovery.",
+      "new": "RankCloak evaluates entropy-based selection for payload embedding, measuring its effects on recovery, rate and detectability separately from watermark detection.",
+      "reason": "Explain the extension from watermarking without repeated defensive language."
+    },
+    {
+      "id": "M02",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "04c67679e43233850453403dda230676286bd5598990e5bee9cdc1345cadef93",
+      "old": "Two local model judges assess  messages while allowing minor 'awkwardness'. Their scores provide automated assessments.",
+      "new": "Two local model judges assess each message in context, allowing minor awkwardness when its meaning remains understandable. Their scores measure automated acceptability; human perception was not assessed.",
+      "reason": "Make the automated endpoint intuitive."
+    },
+    {
+      "id": "M03",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "63f58af112512f17f2f0f421cb07fd7c322b90037452958f9fab1442bfee1585",
+      "old": "Exact recovery is possible only when the sender and receiver replay the same model, tokenizer, prompt, rank rule, and generated tokens.",
+      "new": "The exact-replay guarantee assumes that sender and receiver reproduce the same model, tokenizer, prompt, rank rule and generated token history.",
+      "reason": "State sufficient replay conditions."
+    },
+    {
+      "id": "M04",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "5a62ba063235eda3faac3025e86a0993ee56b26839850653731d100956f2637e",
+      "old": "Under exact replay with the same model, tokenizer, prompt configuration, and deterministic rank rule, the recovered rank satisfies \\(\\hat r_i=r_i\\). The receiver can then replay the payload side context and reconstruct the hidden text token as \\(\\hat e_i=\\operatorname{token}_{g_i}(\\hat r_i)\\). This is a 'same token length' arbitrary text baseline, one hidden text token determines one cover token. The construction shows that a rank sequence can be carried by generated text without directly emitting the hidden tokens. Direct application to cryptographic artifact strings (however can impose high rank pressure). Such strings are often poorly predicted by a language model, so their payload side tokens can occupy low probability, high rank positions, and selecting those same ranks under a cover prompt can degrade model likelihood and surface diagnostics even when recovery remains exact.",
+      "new": "Under exact replay with the same model, tokenizer, prompt configuration and deterministic rank rule, the recovered rank satisfies \\(\\hat r_i=r_i\\). The receiver then replays the payload context and reconstructs each hidden token as \\(\\hat e_i=\\operatorname{token}_{g_i}(\\hat r_i)\\). This baseline carries one hidden-text token per cover token. Cryptographic artifact strings can occupy high ranks because their tokens are poorly predicted in the payload context. Transferring those ranks to a cover context can reduce token likelihood even when recovery remains exact. This motivates the bounded artifact codecs introduced below, which make the tradeoff between rank magnitude and cover length explicit.",
+      "reason": "Repair the broken sentence and explain artifact-specific codecs."
+    },
+    {
+      "id": "M05",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "b232c75277356cdf60bb68409cb6ea916cbe890f120877124ca76099b196d283",
+      "old": "The segmented multi-cover method extends RankCloak from one cover sequence to several shorter public messages. Long sequences of forced ranks can accumulate topic drift, formatting artifacts, or low-probability continuations. Segmentation restarts the cover context for each chunk, allowing the effect of distributing the payload across several messages to be measured without assuring the degree those messages are human-natural. The method is also useful analytically because it separates the payload-bearing forced span from the rest of the public message.",
+      "new": "The segmented multi-cover method distributes one payload across several shorter public messages. Each segment restarts from a declared cover prompt, allowing the effects of context resets and forced-span length to be measured. The design also separates payload-bearing tokens from ordinary continuations, so payload efficiency and complete-message properties can be evaluated on their respective token spans.",
+      "reason": "Describe segmentation directly."
+    },
+    {
+      "id": "M06",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "1a4a3edca290b91d04f413450e507772ebc234255ce8476a48c37821df5ee44d",
+      "old": "A core component of this method is the forced span and tail separation. The payload is carried only by the forced span, while the tail is a greedy continuation whose effect on the complete public message is measured separately. This distinction prevents a misleading quality result, full-message diagnostics can change because of the non-payload tail even if the payload-bearing forced span remains low probability or exhibits surface artifacts. For that reason, the Results report forced span metrics and full message metrics separately.",
+      "new": "Separate forced-span and full-message measurements distinguish the properties of payload-bearing tokens from those of the complete delivered text. Appending a greedy tail changes full-message averages without changing the forced tokens or adding payload capacity. The Results therefore report both scopes.",
+      "reason": "State the measurement contribution."
+    },
+    {
+      "id": "M07",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "9594193042c9a49a97563eac19c29f92378dbde223046adb2f6b49b0d6b5d445",
+      "old": "Generation used Meta-Llama-3-8B-Instruct, Qwen2.5-7B-Instruct, and Mistral-7B-Instruct-v0.3, %in pinned Q4\\_K\\_M configurations,\nan approximately 4-bit quantized format, with their embedded GGUF tokenizers. Eighteen English templates span six prompt categories. Secondary Spanish and Simplified Chinese conditions evaluate saved-token recovery but do not establish multilingual human naturalness. The primary matrix contains 14,400 generated units, 6,480 RankCloak payload trials and 7,920 prompt, model, representation, and length-matched ordinary controls. Complete corpus construction, model and tokenizer identities and hashes, prompt schedules, and work-unit accounting appear in Supplementary Note S2.",
+      "new": "Generation used Meta-Llama-3-8B-Instruct, Qwen2.5-7B-Instruct and Mistral-7B-Instruct-v0.3, each in a pinned Q4\\_K\\_M configuration with its embedded GGUF tokenizer. Q4\\_K\\_M is an approximately 4-bit quantized format. Eighteen English templates span six prompt categories. Secondary Spanish and Simplified Chinese conditions evaluate saved-token recovery, with multilingual perceived naturalness left unmeasured. The primary matrix contains 14,400 generated units: 6,480 RankCloak payload trials and 7,920 prompt, model, representation and length-matched ordinary controls. Supplementary Note S2 gives corpus construction, model and tokenizer identities and hashes, prompt schedules and work-unit accounting.",
+      "reason": "Restore quantization identifier and repair sentence fragment."
+    },
+    {
+      "id": "M08",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "ba62e238898feb2e23f194a90d94b78f03fbe4bcc918dbcfbd6351621ab2587a",
+      "old": "The saved-token endpoint supplies the retained payload-bearing token sequence to the decoder under \\(K_{\\mathrm{common}}\\), thereby testing exact contextual rank reconstruction and codec inversion while tokenization fidelity and generation history are held fixed; retaining IDs does not make those inverse computations unnecessary or expose the payload serialization.",
+      "new": "The saved-token endpoint supplies the retained payload-bearing token sequence to the decoder under \\(K_{\\mathrm{common}}\\). Holding tokenization and generation history fixed isolates contextual rank reconstruction and codec inversion, with success assessed against the original serialized bytes.",
+      "reason": "Explain the saved-token endpoint."
+    },
+    {
+      "id": "M09",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "37b7a1c35bfa9433c09d20b9b0a3c361a18e3de1a64761d9328fe2bf04144fac",
+      "old": "These bounds concern model likelihood under identical filtered histories, they are not statements about grammar, meaning, human naturalness, security, or detectability.",
+      "new": "These bounds describe model surprisal under identical filtered histories; contextual acceptability and detectability are evaluated separately.",
+      "reason": "State the mathematical endpoint precisely."
+    },
+    {
+      "id": "M10",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "c21b9779d8334f30e61e65dbd854e5ffcc7f98faaf8eddf874fd370ef8292e38",
+      "old": "The recovery question was whether codec inversion remained exact after forcing the ranks into cover contexts, rather than whether emitted ranks could merely be read back from the same loop. Success was defined at the original serialization and digest, and every model and eligible protocol stratum reached that endpoint. The all success result therefore supports deterministic implementation fidelity across the evaluated prompt/model matrix. Its uncertainty is one sided in substance, the data bound the rate of error under this completed design but cannot show that an unobserved replay environment or transmission channel would also be error-free.",
+      "new": "Recovery was verified against the original serialization and digest after the payload ranks had been expressed in cover contexts. Every evaluated model and eligible protocol stratum reached this endpoint, demonstrating faithful contextual rank reconstruction and codec inversion across the tested matrix. The reported intervals describe these trial and group endpoints under saved-token replay; visible-text and transformed-text delivery are evaluated separately below.",
+      "reason": "Lead with demonstrated recovery under its configuration-specific scope."
+    },
+    {
+      "id": "M11",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "43ad3ff6d701ceb8ba9021abff0bbdeccc1cc636c7244e0968c431c22a05a191",
+      "old": "Non-payload greedy continuations contain no payload ranks and add no payload capacity. The higher full message average therefore reflects the inclusion of non payload greedy continuations and must not be interpreted as improved quality on the payload bearing forced span. Automated readability and surface diagnostics remain in Supplementary Fig. S2 and Note S5; they are not human evaluation.",
+      "new": "The paired gain quantifies how ordinary greedy continuations raise the average model likelihood of complete messages. The forced tokens remain unchanged and the added tokens carry no payload, keeping this gain separate from forced-span likelihood and payload capacity. Supplementary Fig. S2 and Note S5 report the complementary automated readability and surface diagnostics.",
+      "reason": "Explain forced-span and full-message interpretation once."
+    },
+    {
+      "id": "M12",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "24ce5a4ceb847c7083341b7e3753506cdb0d2b31c9b770a9356e62078fe0a888",
+      "old": "This adverse result is consistent with added context and boundary cost, the contrast does not prove a single failure mechanism.",
+      "new": "This contrast quantifies the likelihood and length costs of the tested lead-in, without isolating a single mechanism.",
+      "reason": "Describe observed costs without evaluative wording."
+    },
+    {
+      "id": "M13",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "18c5e7c8cf1147859afc5732f9083160428c2f7fb585f959cbca666ec56571aa",
+      "old": "A leadin precedes the forced span, consumes visible tokens, and changes the distribution used for every encoded rank; it therefore cannot be treated as a harmless stylistic prefix.",
+      "new": "A lead-in consumes visible tokens before the forced span and changes the context used to select every subsequent encoded rank.",
+      "reason": "Use a direct mechanism description."
+    },
+    {
+      "id": "M14",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "0f62af083ba3483de98b964c5aa052bcba7915400e17425c24f2b0fcc8621a8e",
+      "old": "These high rates reveal detector domain sensitivity and may reflect generic 'machine versus human' differences, the analysis is not a participant study, human naturalness rating, or evidence that readers cannot notice RankCloak covers.",
+      "new": "These rates show that detector thresholds transferred poorly to the human-authored corpus. General differences between human and model output may contribute to this secondary comparison; reader judgments were not collected.",
+      "reason": "Keep detector domain-sensitivity interpretation concise."
+    },
+    {
+      "id": "M15",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "50bcde64a6e406f1afe7356a4936903c2229a817d0457ee3ff865a4b60ea4473",
+      "old": "RankCloak provides a reproducible method for converting serialized cryptographic artifacts into language-model next-token ranks and realizing those ranks as cover text. Its representation choices expose a central tradeoff that direct subwords can be compact but leave rank pressure uncontrolled, whereas ASCII-byte and hex-nibble codecs bound the permitted rank by spending more forced positions. Segmentation redistributes those positions across contexts, and non-payload greedy continuations add non-payload length. The formal and empirical capacity relationships make these costs explicit rather than treating longer cover text as additional payload capacity.\n\nThe principal demonstrated transformation is that the recognizable surface representation of a synthetic cryptographic artifact can be absent from the generated cover while an authorized receiver reconstructs it under the supported shared configuration. In the saved-token condition, retaining the token stream isolates tokenization fidelity, but recovery still requires contextual rank reconstruction and codec inversion; ordinary visible-text transfer is the stricter and materially less reliable condition. Steganalysis addresses another endpoint: a detector can often flag the presence of encoding, weakening covert-channel stealth, without thereby observing the original artifact or recovering its serialization.\n\nThe intact-message follow-up measures a practical but explicitly automated endpoint. Under the lenient rubric, the panel accepts 90.3\\% of encoded messages compared with 96.6\\% of matched greedy controls. This quantifies acceptance despite minor awkwardness while retaining material disruptions and judge disagreements. It is neither a human reading rate nor evidence of indistinguishability. The comparison concerns complete delivered conditions, and length or content differences can contribute to the observed contrast.\n\nThe protocol comparisons explain part of the efficiency tradeoff. Larger segments reduce repeated tail overhead, while lead-ins change every subsequent forced-token history and worsened likelihood and length in the selected contrasts. A higher full-message likelihood can arise simply by adding greedy continuation tokens. It does not improve the forced span or increase its payload capacity.\n\nStrict pre-feature component deduplication found zero leakage under the declared exact and character-\\(n\\)-gram rules, yet matched, unseen-family, and exact-model-aware detectors remained strong. Validation-frozen low-FPR results show that high ranking performance does not ensure threshold calibration after family or quantization shift. The human-authored comparison is informative but secondary: its high false-positive rates expose control-domain sensitivity and may reflect general machine-versus-human cues.\n\nEntropy gating reduced text-only detectability at the cost of lower serialized-payload rates, longer covers and six strict-gate failures, while exact-model-aware detection remained strong. Quantization likewise preserved within-configuration saved-ID inversion without providing a statistically supported Q8 advantage in visible-text recovery. Together, the studies identify where configured artifact inversion succeeds and where transmission, efficiency and detection constrain its use. Historical conditional context gain adds evidence about local fixed-path compatibility, distinct from the primary intact-message acceptability endpoint.",
+      "new": "RankCloak makes the representation of cryptographic artifacts an explicit design choice in language-model information hiding. It combines exact serialization, contextual rank transfer and replay decoding with measurements of recovery, rate, text properties and detection. All 6,480 primary trials recovered the original bytes under the saved-token contract. This establishes a reproducible baseline for comparing how artifact representations influence generated cover text.\n\nThe codec comparison identifies a controllable efficiency tradeoff. Direct subword representations can be compact but have no fixed rank ceiling, whereas ASCII-byte and hex-nibble codecs bound rank magnitude by using more forced positions. Segmentation determines how those positions are distributed across contexts. Larger segments reduce repeated continuation overhead, while the tested lead-ins increased length and worsened likelihood. Separate forced-span and full-message measurements show how greedy continuations affect complete-message scores without changing payload-bearing tokens or increasing payload capacity.\n\nThe intact-message study extends evaluation from token-level diagnostics to automated contextual acceptability. Under a rubric accepting understandable text with minor awkwardness, the panel accepted 90.3\\% of encoded messages and 96.6\\% of matched greedy controls. The -6.3 percentage-point difference quantifies a remaining acceptability cost alongside the high acceptance level of encoded messages. These are model judgments of complete delivered conditions, with possible contributions from length and content differences; they do not establish human acceptance or indistinguishability. The historical likelihood analysis provides complementary evidence about local fixed-path compatibility.\n\nThe transport and detector studies distinguish recovery from stealth. Saved-token replay isolates the rank and codec operations, while visible-text replay exposes the consequences of retokenization and editing. Strong detection persisted after component deduplication and in held-family evaluations, providing a benchmark for recognizing encoding beyond visible artifact syntax. High ROC-AUC did not ensure stable low-FPR thresholds under distribution shift, and the human-authored controls exposed further domain sensitivity. Detecting encoding does not itself reconstruct the artifact, but it limits covert-channel stealth.\n\nEntropy gating provides another measurable design tradeoff: text-only detection decreased as covers became longer and serialized-payload rates fell. The six strict-gate completion failures and continued strong model-aware detection identify costs of the tested thresholds. Both quantizations retained exact saved-ID recovery within their own configurations, while the visible-text comparison showed no statistically supported Q8 advantage. Together, these results provide a reference for designing and evaluating artifact-carrying text with explicit recovery, efficiency, acceptability and detection endpoints.",
+      "reason": "Organize the contribution and experiment interpretations while retaining unfavorable outcomes."
+    },
+    {
+      "id": "M16",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "0ceb79c866960fde853b7d5bfb8ad848caed79c1ae2d8a576a3f80daa63c0c66",
+      "old": "RankCloak can encode sensitive looking artifacts, but it does not itself provide encryption, authentication, confidentiality or a cryptographic security proof. Protected payloads require an external cryptographic system and an explicit threat model. Perfect primary recovery was demonstrated under the preserved-token replay contract. Visible-text transmission and common transformations are fragile, and the tested perturbations do not establish broad edit robustness. Human-perceived naturalness, broad multilingual behavior, real-world deployment and performance across arbitrary future models or communication channels were not established. The contextual judges are small local instruction models, not human participants. Their generator assignments are not fully crossed, and reused greedy controls form a fixed reference set. The selected payloads exclude the earlier scored cohort. Acceptance under this rubric neither proves indistinguishability nor isolates a causal effect of an encoding boundary. The historical fragment assays and their unsuccessful semantic control checks are retained in Supplementary Note S17. Detector performance is limited to the evaluated corpus. Detailed boundaries appear in Supplementary Table S17 and Notes S16 through S20.",
+      "new": "RankCloak is a representation layer for cryptographic artifacts. Encryption and authentication must be supplied by an external cryptographic system under an explicit threat model; the carrier itself provides no confidentiality or cryptographic security guarantee. Exact recovery was demonstrated with preserved tokens and matching configurations. Visible-text and transformed-text results show that reliable edited-text transport remains an open problem. Detector findings apply to the evaluated corpus, and operational deployment, broad multilingual text quality and generalization to arbitrary models or channels remain untested.\n\nThe contextual study measures automated judgments from local instruction models. Human perception and indistinguishability were not measured. Judges and generators are not fully crossed, greedy controls are reused as a fixed reference set, and the selected payloads exclude the earlier scored cohort. The estimates condition on complete ratings; missingness sensitivity is reported in Supplementary Note S20. The comparison evaluates delivered messages without isolating a causal boundary effect. Supplementary Note S17 retains both unsuccessful semantic control checks and the complementary likelihood analysis; Table S17 and Notes S16 through S20 give the detailed scope of the evidence.",
+      "reason": "Organize limitations by security, transport and inference."
+    },
+    {
+      "id": "M17",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "5ccfc19b5fb2f7b00a2f7e623c57806e9da2d19cd14f12f96ed9a68dabfcf305",
+      "old": "\\input{v4_stage2_methods.tex}",
+      "new": "\\input{v4_stage2_methods.tex}\n\n\\subsection*{AI assistance}\\label{sec:revision-assistance}\nOpenAI Codex assisted with code development, analysis of retained data and validation. Codex and ChatGPT assisted with manuscript drafting. The author is responsible for reviewing these outputs and for the final analyses and text.",
+      "reason": "Explicitly restore substantive AI-use disclosure without claiming author review complete."
+    },
+    {
+      "id": "M18",
+      "path": "paperV4/scientific_reports/v4_contextual_results.tex",
+      "old_sha256": "d3358a3078842ef349034e04fbfd1f3092f8f62167554bfb32163d3c2b87d24d",
+      "old": "All three judges passed the constructed calibration check while retaining two missed contradictions across Llama and Mistral. Supplementary Note S20 reports the complete calibration without treating it as human validation.",
+      "new": "The intact-message study assessed whether encoded messages remained understandable in their authentic prompt contexts under the same rubric used for matched ordinary output. The rubric accepts minor awkwardness while retaining material disruptions as failures.",
+      "reason": "Open with the scientific question; retain calibration errors in M20."
+    },
+    {
+      "id": "M19",
+      "path": "paperV4/scientific_reports/v4_contextual_results.tex",
+      "old_sha256": "91444eacdce5dab5bcc548c6d467c0274cbdc7271250fadc4dc0bfb2d341d95f",
+      "old": "The two-judge panel applies the same lenient rubric to RankCloak and matched greedy ordinary output.",
+      "new": "The two-judge panel applies the same rubric to both conditions, accepting understandable text with minor awkwardness.",
+      "reason": "Describe the actual threshold."
+    },
+    {
+      "id": "M20",
+      "path": "paperV4/scientific_reports/v4_contextual_results.tex",
+      "old_sha256": "ed4d9a7fd70c56b45b49841f1983750ef9fda8ba553f2368c19ac6b46db3f6be",
+      "old": "Judges' literal disruption quotations and identity-selected full-message examples are reported in Supplementary Note S20, including unfavorable cases. Boundary mapping after scoring is descriptive, not causal localization. The earlier fragment pilots and limited fixed-path likelihood findings remain complementary evidence in Supplementary Note S17.",
+      "new": "All three judges passed the constructed calibration check, although Llama and Mistral each missed one contradiction. Supplementary Note S20 reports the calibration responses, literal disruption quotations and identity-selected examples spanning agreement, disagreement and disrupted cases. Boundary mapping after scoring describes where quoted disruptions occur without establishing causation. Supplementary Note S17 retains the earlier fragment pilots and complementary fixed-path likelihood results.",
+      "reason": "Retain calibration errors and unfavorable examples clearly."
+    },
+    {
+      "id": "M21",
+      "path": "paperV4/scientific_reports/v4_stage2_results.tex",
+      "old_sha256": "a21a2179ec93285374966662b338eabb04714c55cd0667a539efde20bea99f5f",
+      "old": "The 25 decomposed transport arms across five identity-selected covers required 26 missing segment replays and 53 context-capacity checks of reused historical inputs. All reused ranks and error outcomes agreed at the new allocation capacity. These 79 distinct segment inputs remain within the same 25 logical arms. Prefix-only insertion recovered none of the five covers. All 27 selected segment instances presented a prohibited first forced token and were rejected before rank recovery. They do not measure a downstream rank avalanche. Declared wrapper removal recovered one originally failing Mistral case but did not supply a general repair. The original 0/144 composite-Markdown endpoint remains unchanged. Byte, span, token and rank evidence is retained in Supplementary Note S18.",
+      "new": "Decomposing the composite transport operation into 25 arms across five identity-selected covers distinguished immediate token-filter rejection from later rank-recovery errors. Prefix insertion recovered none of the five covers: all 27 selected segment instances presented a prohibited first forced token and were rejected before rank recovery, so these cases do not measure a downstream rank avalanche. Removing the declared wrapper recovered one originally failing Mistral case, indicating a limited repair for that input. The original composite-Markdown result remains 0/144. Supplementary Note S18 gives the 79 executed segment-input checks, the agreement of reused inputs at the new context capacity, and the complete byte, span, token and rank diagnostics. This small diagnostic sample does not estimate a general repair rate.",
+      "reason": "Lead with the mechanism result and retain scope."
+    },
+    {
+      "id": "M22",
+      "path": "paperV4/scientific_reports/v4_stage2_theory.tex",
+      "old_sha256": "5f837e9307ed5ecfd15245b524c2a5ff606189017ad21a45dd8c806032daf00a",
+      "old": "Small configuration changes have no universal recovery rate. A tokenizer update may preserve a string's tokenization or split and merge tokens, changing saved span offsets and later conditioning. Weight or quantization changes can reorder candidates even on an identical received history. A gate disagreement changes which positions consume payload digits. The conditional rank-agreement argument in Supplementary Note S19 makes these dependencies explicit without assigning a recovery rate from a version label.",
+      "new": "Reliable replay requires compatible token boundaries, rank orderings and payload-position rules. A tokenizer update can split or merge tokens, shifting saved offsets and later conditioning; weight or quantization changes can reorder candidates even on an identical received history. Gate disagreement changes which positions consume payload digits. Supplementary Note S19 formalizes these dependencies through conditional rank agreement. Recovery under a changed configuration therefore requires direct verification rather than inference from a version label.",
+      "reason": "Frame compatibility as a concrete requirement."
+    },
+    {
+      "id": "S01",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "fea587eb828adb563bbe91bc2a6addfb4bd934a1e5e6c2cc622a17e1fe1d550a",
+      "old": "The main Algorithms 1 and 2 define the saved-token exact-copy condition. In the experiments, payload-bearing token IDs were retained in the generation records and supplied to the decoder to hold tokenization and history fixed; the decoder nevertheless recomputes contextual ranks and performs codec inversion. A token-preserving channel could transmit that exact stream, whereas detokenized-text replay renders the visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic; it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step, and cross-model replay uses a different declared model/tokenizer pair. Thus retaining IDs is neither irrelevant nor evidence that a separate secret copy of them must be transmitted for every message; it defines one evaluated recovery condition distinct from ordinary visible-text and transformed-text delivery.",
+      "new": "Main Algorithms 1 and 2 evaluate saved-token recovery. Retained payload-bearing token IDs hold tokenization and history fixed while the decoder recomputes contextual ranks and inverts the codec. A token-preserving channel could transmit this stream directly. Visible-text replay instead renders the message and reapplies the embedded tokenizer, stripping one automatically inserted BOS token when applicable before using the saved forced offsets. This diagnostic applies the declared offsets without searching alternative tokenizations or inferring boundaries from prose. Transformed-text replay adds one frozen perturbation, and cross-model replay uses a different declared model/tokenizer pair. These conditions separate rank and codec recovery from the additional requirements of ordinary text delivery.",
+      "reason": "Explain recovery conditions directly."
+    },
+    {
+      "id": "S02",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "0c24ce495733b3c627573209d6edace1a6af2644e6da95a3b8592283fc54c25d",
+      "old": "These measures are automated surface properties, not human ratings, evidence of human-perceived naturalness, or substitutes for a participant study; no participant was recruited and no rating was collected.",
+      "new": "These automated surface measures complement the contextual model judgments in Note S20; human perception was not evaluated.",
+      "reason": "Keep the human-evaluation distinction once."
+    },
+    {
+      "id": "S03",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "bdda8966fc1f50e240cc23a5a938d09d557b47b9a8b43f0bb4c3e4053dbba708",
+      "old": "The human-study status manifest records recruitment authorized = false, survey deployed = false, participants = 0, and ratings = 0. Planning materials are retained only to document a possible future design. They were not administered and are not reproduced here as a completed instrument. A model-name mismatch in those planning materials (Llama 3.1 versus the executed Llama 3 model) further prevents treating them as an approved executed protocol.",
+      "new": "No participants were recruited and no human ratings were collected. The contextual evaluation in Note S20 uses model judges. Unadministered planning materials are retained in the repository as study history and do not contribute to the reported results.",
+      "reason": "Remove internal planning flags while preserving no-human-study statement."
+    },
+    {
+      "id": "S04",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "408748325c64345fd999e6ba8e2d239e77df7c557100f580cffe8d4e0d9b634f",
+      "old": "Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.",
+      "new": "Lower Brier scores indicate lower mean squared error in predicted class probabilities. Higher values in the other panels indicate stronger detection of encoded text, limiting covert-channel stealth.",
+      "reason": "Distinguish detection from syntax concealment and define Brier endpoint."
+    },
+    {
+      "id": "S05",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "a6d4590040171e430f4dac20fcafdb7713f4edc2599f645e60027a08d501ef37",
+      "old": "Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.",
+      "new": "Higher ROC-AUC, balanced accuracy, precision and low-FPR sensitivity indicate stronger detection of encoded text; lower Brier score indicates lower mean squared probability-prediction error.",
+      "reason": "Describe Brier as probability-prediction error."
+    },
+    {
+      "id": "S06",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "1562638f0d1422e40a38463270e508f51f748821ebb0a66b56a13025486c3a0d",
+      "old": "The complete encoder decoder cascade proposition is not directly trace-evaluable from the saved record structure: none of the retained rows simultaneously carries every intermediate object required to replay the entire proof chain as one trace. The algebraic results are therefore conditional proofs and the retained-field checks are supporting empirical validation, not a complete end-to-end trace proof. They also do not validate human naturalness.",
+      "new": "The conditional proofs specify when rank transfer and codec inversion recover the payload. The retained-field checks test the algebraic identities and bounds supported by the saved records. No single retained row contains every intermediate object needed to verify the complete proof chain as one trace. This trace-coverage limitation is separate from the observed 6,480/6,480 primary byte-recovery results reported in the main manuscript.",
+      "reason": "Separate proof-trace coverage from empirical byte recovery."
+    },
+    {
+      "id": "S07",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "d101e591f752f679d28c16f2793ac93d1d7a793f576257bd22acf5e6104aa477",
+      "old": "This validation tests retained-field identities and differs from the empirical common-support frontier in Main Fig. 2; neither analysis is evidence of human-perceived naturalness.",
+      "new": "This validation tests retained-field identities; the empirical common-support frontier in Main Fig. 2 instead compares observed representation rates and automated text diagnostics.",
+      "reason": "State the mathematical-validation comparison directly."
+    },
+    {
+      "id": "S08",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "7841ca52ca4ca6df55ba1784c70bb118e5351955d25ee6457f68e20c9e822674",
+      "old": "\\suppnote{Supplementary Note S10: Worked examples and claim-boundary audit}\\label{si:s10}",
+      "new": "\\suppnote{Supplementary Note S10: Worked examples and scope of evidence}\\label{si:s10}",
+      "reason": "Use a scientific heading, preserving label."
+    },
+    {
+      "id": "S09",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "8c9744f4788b8113f01ce954703709d2d530a83b377cbcfaeedd058653513f05",
+      "old": "This example illustrates deterministic rank realization, not an assertion that the forced span is human-natural.",
+      "new": "This example illustrates deterministic rank realization and the separation of payload-bearing tokens from their continuation. Note S20 evaluates intact messages in context.",
+      "reason": "Describe example purpose without changing literal text."
+    },
+    {
+      "id": "S10",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "0e256ecbb6df305681267a475a4f3a0c7e46cf5bbef6fe9f3c3c0c8c968e7a40",
+      "old": "\\suppsubsection{Claim-boundary audit}\n\n\\begin{longtable}{L{0.25\\textwidth}L{0.31\\textwidth}L{0.35\\textwidth}}\n\\caption{\\label{tab:claim-boundaries}Claim boundaries applied.}\\\\\n\\toprule\nIssue & Supported statement & Prohibited or unresolved extension \\\\\n\\midrule\n\\endfirsthead\n\\toprule\nIssue & Supported statement & Prohibited or unresolved extension \\\\\n\\midrule\n\\endhead",
+      "new": "\\suppsubsection{Evidence and scope}\n\n\\begin{longtable}{L{0.25\\textwidth}L{0.31\\textwidth}L{0.35\\textwidth}}\n\\caption{\\label{tab:claim-boundaries}Findings and scope of inference.}\\\\\n\\toprule\nEvaluated aspect & Finding & Scope or untested extension \\\\\n\\midrule\n\\endfirsthead\n\\toprule\nEvaluated aspect & Finding & Scope or untested extension \\\\\n\\midrule\n\\endhead",
+      "reason": "Use scholarly labels in scope table."
+    },
+    {
+      "id": "S11",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "1a8b4aa23ad73dc04a3020ff22871135abf7356fae5ecb32f3a388ebdaad6a25",
+      "old": "Human evaluation & 504 computational stimuli have automated surface/model diagnostics & Human-perceived readability or naturalness; zero participants and ratings \\\\",
+      "new": "Text evaluation & Automated surface/model diagnostics on 504 stimuli; contextual model judgments on 537 complete pairs (Note S20) & Human-perceived readability and indistinguishability remain unmeasured \\\\",
+      "reason": "Update scope table with existing contextual model-judge endpoint."
+    },
+    {
+      "id": "S12",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "ebeb066f6df71cf97db252193f11f7294649c19fda788a721fa8a16ee5407228",
+      "old": "Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers; high AUC is adverse",
+      "new": "Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers, limiting stealth",
+      "reason": "Distinguish detection and concealment consistently."
+    },
+    {
+      "id": "S13",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "56a52894c3dfec9e2875a48b36d7fef353de0909c1432101734861a11402eb9e",
+      "old": "The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs, and no declared near-duplicate links to the primary corpus. Human labels never entered model fitting or threshold selection. The corpus is a bounded secondary computational control, not recruitment, a participant study, a user study, a human rating exercise, or proof of naturalness. Coverage is sparse or absent for several conversational, narrative, and professional templates, and detector performance can include generic machine-versus-human differences.",
+      "new": "The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs and no declared near-duplicate links to the primary corpus. Human-authored labels were not used for fitting or threshold selection. This secondary corpus evaluates detector transfer to human-written text without collecting reader judgments. Several conversational, narrative and professional templates have sparse or absent coverage, and performance may include general differences between human and model output.",
+      "reason": "Keep duplicate checks, coverage and domain confounding without repetition."
+    },
+    {
+      "id": "S14",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "d6c903757ae11e9ead0d637e120650d339f263a28837954186bb9a847ae61951",
+      "old": "Table~\\ref{tab:v3-detector-main} reports the adverse matched results and the range across the three genuine family holdouts.",
+      "new": "Table~\\ref{tab:v3-detector-main} reports matched performance and the range across the three held-family evaluations.",
+      "reason": "Use neutral wording for strong detector findings."
+    },
+    {
+      "id": "S15",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "861997e277c697b9642fb9e3f0e3246bf820fced32b537b1fd9a4373c7e9f36e",
+      "old": "Higher values are adverse for concealment.",
+      "new": "Higher values indicate stronger detection of encoded text and reduced covert-channel stealth.",
+      "reason": "Distinguish detection from surface-form concealment."
+    },
+    {
+      "id": "S16",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "7d50fe2e5f88d51271d7085a7f8bcfefe51c4eb9c5fd6addf25235ed8c052b19",
+      "old": "The two learned detectors adapt to the observed training distribution; the likelihood-based detector represents an attacker with exact model access. Their strength makes the negative detectability conclusion more credible within the evaluated corpus, but none is a comprehensive adversarial search over all classifiers, prompts, post-processing, models, or deployment distributions.",
+      "new": "The learned text-only detectors and the trace-informed likelihood detector provide complementary tests of encoding detectability. Their strong performance shows that removing recognizable artifact syntax does not remove statistical traces of encoding in this corpus. These results provide a reproducible detection benchmark; transfer to additional models, prompts and deployment distributions remains to be evaluated.",
+      "reason": "Explain detector benchmark value and limits."
+    },
+    {
+      "id": "S17",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "915e403dcf6c2ae05d79ef84e393280914fd64b4febf05d10c4ca8836a879ba3",
+      "old": "\\suppnote{Supplementary Note S15: provenance and remaining boundaries}\\label{si:s15}",
+      "new": "\\suppnote{Supplementary Note S15: Provenance and scope of the evaluation}\\label{si:s15}",
+      "reason": "Replace internal revision heading."
+    },
+    {
+      "id": "S18",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "487da76dade4a6152c4c6cbe67e4405328d5aac3cb4b59ac0d751067a8091d51",
+      "old": "\\caption{\\label{tab:v3-boundaries}Summary of evidence and remaining boundaries.}",
+      "new": "\\caption{\\label{tab:v3-boundaries}Summary of findings and scope.}",
+      "reason": "Use a concise table title."
+    },
+    {
+      "id": "S19",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "81f393a99ce70014fc6415353df5c5eb6ebd9263b0c7108c56a58596fcba20f1",
+      "old": "Failure surfaces and strong adverse detectability are documented",
+      "new": "Transmission failure modes and strong encoding detectability are documented",
+      "reason": "Report transmission and detection results neutrally."
+    },
+    {
+      "id": "S20",
+      "path": "paperV4/scientific_reports/v4_stage2_supplement.tex",
+      "old_sha256": "d14090fabe7e1e247bb107e7e99e3c9e894bf43e3884ed575df3a29ec65d848d",
+      "old": "These earlier assays are retained as methodological history and complementary local likelihood evidence. They are superseded as the primary coherence evaluation by the intact-message rubric study in Note S20. Short-fragment similarity and same-prompt substitutions did not establish a suitable measure of ordinary contextual acceptability. This measurement limitation does not prove that the old test was unfair or that actual messages were incoherent.",
+      "new": "The earlier fragment assays tested local likelihood and semantic-similarity measures at the transition from forced tokens to ordinary continuation. The semantic measure failed its control-separation criterion in both pilots, motivating the later intact-message evaluation in Note S20. Both pilot outcomes and the complementary likelihood findings are retained here. The control failures concern the suitability of the fragment assay and do not establish that RankCloak messages are incoherent.",
+      "reason": "Explain methodological transition transparently."
+    },
+    {
+      "id": "S21",
+      "path": "paperV4/scientific_reports/v4_stage2_supplement.tex",
+      "old_sha256": "32c9ec84d95339239aa9e3a6e0fb21dc88054310a15cab636e1fbe8ca335c044",
+      "old": "Both semantic intervals in Table~\\ref{tab:v4-pilot} cross zero, failing the prospective positive-lower-interval criterion. Context gain passed that specified control-separation check in both pilots. Short fragments and same-prompt overlap limit interpretation of the semantic assay, without identifying the cause of failed separation. No further model or layer search followed. These failures establish neither reader-perceived coherence nor universal incoherence of actual messages.",
+      "new": "Both semantic intervals in Table~\\ref{tab:v4-pilot} cross zero, failing the prospective positive-lower-interval criterion. Context gain passed the specified control-separation check in both pilots. The semantic assay therefore lacked the required evidence of discrimination between these ordinary and same-prompt shuffled controls. Short fragments and shared prompt content limit its interpretation, but the cause of failed separation was not isolated. No further model or layer search followed.",
+      "reason": "Interpret failed semantic calibration precisely."
+    },
+    {
+      "id": "S22",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old_sha256": "becb4031cc94dd20786b87aa33f1302975a7a72ba6ecc239944d021594c6db18",
+      "old": "The replacement study evaluates intact delivered text. It was designed after the earlier fragment analyses and frozen before its own final judging. It reuses historical encoded messages, not newly generated RankCloak covers. None of the 48 selected payloads overlaps the former 92-payload scored cohort. This does not imply that the underlying original corpus was unseen during study development.",
+      "new": "The intact-message study evaluates whether delivered text can be followed in its authentic prompt context. It was designed after the fragment analyses and frozen before final judging. The study reuses historical RankCloak messages, with all 48 selected payloads outside the earlier 92-payload scored cohort. This separation concerns the scored cohort; the original corpus was available during study development.",
+      "reason": "Describe study and development chronology plainly."
+    },
+    {
+      "id": "S23",
+      "path": "paperV4/scientific_reports/v4_contextual_supporting.tex",
+      "old_sha256": "2915b6a19797c4ecf7bb2759e24340d3521312100b6512c2e55e123df08565f7",
+      "old": "Non-payload greedy continuations contain no payload ranks and add no payload capacity, so the improved full-message average is not an improvement to the payload-bearing forced span.",
+      "new": "The paired comparison measures the contribution of greedy continuations to the complete-message average. The forced tokens remain unchanged, and the continuations carry no additional payload.",
+      "reason": "Explain the paired comparison without implying forced-span improvement."
+    },
+    {
+      "id": "S24",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old_sha256": "5d5f6435e9f1d49d076e5d3dd6cc10ab9c6f369ebc89b328cccd1078d3a33d57",
+      "old": "and zero failure records. Machine-readable tables",
+      "new": "and zero recorded execution exceptions. The six strict-gate payload-completion failures are retained scientific outcomes, distinct from execution exceptions. Machine-readable tables",
+      "reason": "Distinguish execution exception records from incomplete strict-gate payloads."
+    },
+    {
+      "id": "P01",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "d6fc297135891764d0cb01ff59f28464d9b8f2d4bf75be7425b608b4439c29f1",
+      "old": "Prompt-matched controls provide comparison text for automated diagnostics and detector training, they are not human-written naturalness baselines.",
+      "new": "Prompt-matched controls provide comparison text for automated diagnostics and detector training; they are not human-written naturalness baselines.",
+      "reason": "Repair comma splice."
+    },
+    {
+      "id": "P02",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "b85b051b6fe2659deca163326bb25c9db0802c928551fdb4e6caac858b5b2bf1",
+      "old": "A balanced 504-stimulus subset covers seven generation conditions and all 18 English templates, its surface measures include",
+      "new": "A balanced 504-stimulus subset covers seven generation conditions and all 18 English templates. Its surface measures include",
+      "reason": "Repair comma splice."
+    },
+    {
+      "id": "P03",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "9c1a258f3ff88a6337e0d4c0880f99da5836027d509518f0ffdc3c24a238e878",
+      "old": "Positive values mean that averaging in the non-payload continuation raises the full message model score, they do not imply a change in the payload-bearing span.",
+      "new": "Positive values mean that averaging in the non-payload continuation raises the full message model score; they do not imply a change in the payload-bearing span.",
+      "reason": "Repair comma splice."
+    },
+    {
+      "id": "P04",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "2b8ee990f772f24b2514b92fc77b6b4e4a33cfb75c01c59b48796c9d7a404b29",
+      "old": "They establish recovery for those retained prompts under the same saved-token contract, they do not establish multilingual naturalness or robustness to ordinary text transfer.",
+      "new": "They establish recovery for those retained prompts under the same saved-token contract; they do not establish multilingual naturalness or robustness to ordinary text transfer.",
+      "reason": "Repair comma splice."
+    },
+    {
+      "id": "P05",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old_sha256": "b66a0a9f5794660f6870815e9352ebc383c39973fe7e91f3c0019f4209c2a536",
+      "old": "It is not evidence of arbitrary truncation tolerance, removing a forced token or earlier context would change the decoded sequence.",
+      "new": "This result is limited to removal of ignored tail tokens; deleting payload-bearing tokens or earlier context can disrupt rank recovery.",
+      "reason": "Repair the sentence while preserving truncation scope."
+    }
+  ],
+  "additional_punctuation_repairs": [
+    {
+      "id": "A01",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "token sequence, it is not",
+      "new": "token sequence; it is not",
+      "old_sha256": "dc5c18400188ef33e8756c3ad8cbf2fcc2dbff77081241a6818e7d58ae4c2008",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A02",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "threshold selection, it is a corpus comparison",
+      "new": "threshold selection; it is a corpus comparison",
+      "old_sha256": "4d1d0bac5132c19d071af3e39b2cb05d6e06274012437cf0759f88d3d4f04d26",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A03",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "fitted mixed models were singular, no undeclared",
+      "new": "fitted mixed models were singular; no undeclared",
+      "old_sha256": "212a45fae53f8b4767c580d09b20f61750aacb999279416ef43d8bf2d4ac611d",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A04",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "\\([-0.134265, 0.007651]\\)), both intervals included zero.",
+      "new": "\\([-0.134265, 0.007651]\\)); both intervals included zero.",
+      "old_sha256": "e70464be0818748a5c108a1f0525bc6cebda0d5b34156eb4b33de27ed6b4c066",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A05",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "support empirical 0.1\\% reporting, at that target",
+      "new": "support empirical 0.1\\% reporting; at that target",
+      "old_sha256": "753db648d7a8c89a2a5d8944622800fab3c8880f698b692790068696186770f7",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A06",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "completed 114/120 payloads, its six maximum-budget",
+      "new": "completed 114/120 payloads; its six maximum-budget",
+      "old_sha256": "bc2f08765226e5e9a10e1cdbac3ddcc182196d16ceab83395d79a0a2e8ef2604",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A07",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "\\([-0.73,6.35]\\)), paired outcomes",
+      "new": "\\([-0.73,6.35]\\)); paired outcomes",
+      "old_sha256": "066075e7a69204700733161b59def768b386292ffa11f4ee0d125d8c76b50e9c",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A08",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "scope defined by the harness, CPU time",
+      "new": "scope defined by the harness; CPU time",
+      "old_sha256": "33956ba468d70af1455f9f7b6758e02a75bbcbac8c8d092d206e6a039fd27113",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    },
+    {
+      "id": "A09",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "306.25 MB peak allocated VRAM, DeBERTa-v3-base times",
+      "new": "306.25 MB peak allocated VRAM; DeBERTa-v3-base times",
+      "old_sha256": "cb8d52f93ebd86d4385c795928b2c6a891b51cb1d7b197b04ba73a81384c1520",
+      "reason": "Punctuation-only repair of an adjacent ordinary-prose comma splice. No words or numerical values changed."
+    }
+  ],
+  "conflicts": []
+}

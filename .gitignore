@@ -66,3 +66,6 @@ results/revision_v4/editorial_restructure/validation/rendered/
 
 # Presentation-only PDF review renders
 results/revision_v4/presentation_cleanup/validation/rendered/
+
+# Targeted publication-edit PDF review renders
+results/revision_v4/publication_edit/validation/rendered/

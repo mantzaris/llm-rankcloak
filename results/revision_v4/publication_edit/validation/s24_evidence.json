@@ -1,0 +1,24 @@
+{
+  "execution_exception_count": 0,
+  "retained_strict_gate_failures": 6,
+  "strict_completion_denominator": "114/120",
+  "sources": [
+    {
+      "path": "results/revision_v3/provenance/generation_analysis_validation.json",
+      "sha256": "638da55bfd1753f3f149503ceb255a8400881e643c6ce3d11247177af89bdf4f"
+    },
+    {
+      "path": "scripts/analyze_revision_v3_generation.py",
+      "sha256": "bbf249180f02145b207476d40725e3ca94dcd33e071c9ebded19a8c13051b42c"
+    },
+    {
+      "path": "rankcloak/revision_v3_generation.py",
+      "sha256": "675e964122d09176f3ca9be2ad11d6da7e4d06d418ff4286a8c2dc2fec29abe8"
+    },
+    {
+      "path": "results/revision_v4/source_tables/entropy_six_failures.csv",
+      "sha256": "3885b06db9409e30a9d421de021d508114445e0a5e5e6b1f3b731f22c950fbd3"
+    }
+  ],
+  "interpretation": "Exception-handler records and budget-exhausted payload outcomes are distinct; no generation rerun."
+}

@@ -106,7 +106,7 @@ For Algorithm~\ref{alg:tail}, the fixed-policy sentence boundary strips trailing
 
 The exact model revision, tokenizer, quantization and backend, prompt rendering, rank rule, filter, codec, span convention, and any segmentation, tail, or lead-in policy form a predeclared sender--receiver protocol configuration. Choosing this configuration is comparable to agreeing on a codec implementation and does not necessarily require renegotiation for each payload. A prompt phrase can be shared contextual information, but RankCloak does not define it as a cryptographic key.
 
-The main Algorithms 1 and 2 define the saved-token exact-copy condition. In the experiments, payload-bearing token IDs were retained in the generation records and supplied to the decoder to hold tokenization and history fixed; the decoder nevertheless recomputes contextual ranks and performs codec inversion. A token-preserving channel could transmit that exact stream, whereas detokenized-text replay renders the visible message, invokes the embedded tokenizer again after stripping one automatically inserted BOS token when applicable, and applies the saved forced offsets. This boundary rule is a diagnostic; it does not search for alternate tokenizations or infer a payload span from prose. Transformed-text replay applies one frozen perturbation before this step, and cross-model replay uses a different declared model/tokenizer pair. Thus retaining IDs is neither irrelevant nor evidence that a separate secret copy of them must be transmitted for every message; it defines one evaluated recovery condition distinct from ordinary visible-text and transformed-text delivery.
+Main Algorithms 1 and 2 evaluate saved-token recovery. Retained payload-bearing token IDs hold tokenization and history fixed while the decoder recomputes contextual ranks and inverts the codec. A token-preserving channel could transmit this stream directly. Visible-text replay instead renders the message and reapplies the embedded tokenizer, stripping one automatically inserted BOS token when applicable before using the saved forced offsets. This diagnostic applies the declared offsets without searching alternative tokenizations or inferring boundaries from prose. Transformed-text replay adds one frozen perturbation, and cross-model replay uses a different declared model/tokenizer pair. These conditions separate rank and codec recovery from the additional requirements of ordinary text delivery.
 
 Before generation, each representation validates payload syntax, byte length, codec applicability and source digest. Records retain requested ranks, configuration and prompt identities, exact token IDs and codec metadata. For every mode, the record distinguishes exact forced-rank replay, exact representation recovery, and exact serialized-payload recovery. The primary endpoint requires the last of these, including byte length and SHA-256 identity. Failures retain the first segment and forced position where available, expected and observed token IDs and ranks, the context digest, and boundary offsets. Payload group and model by payload group endpoints require all constituent trials to pass. Non-payload greedy continuations never enter any recovery endpoint.
 
@@ -333,7 +333,7 @@ The computational stimulus design selected 504 rows balanced over seven conditio
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/automated_readability.pdf}
-\caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload greedy continuations. These measures are automated surface properties, not human ratings, evidence of human-perceived naturalness, or substitutes for a participant study; no participant was recruited and no rating was collected.}
+\caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload greedy continuations. These automated surface measures complement the contextual model judgments in Note S20; human perception was not evaluated.}
 \end{figure}
 
 \begin{table}[H]
@@ -354,7 +354,7 @@ Source-model quality supplied 45 protocol/model contrasts; 42 had Holm-adjusted 
 
 The empirical capacity and quality frontier shown in Main Fig. 2 contains 4,320 trials restricted to the four payload classes on the common hexadecimal support. Three models and six protocols form 18 model and protocol cells; separate forced-span and full-message views yield 36 plotted cells. For every cell, mean token count is reported on the horizontal axis, mean source model token log probability is reported on the vertical axis, and point area represents mean automated surface-flag burden. Intervals use 2,000 payload-bootstrap resamples. Non-hexadecimal payload classes are excluded by the common-support restriction, and no lead-in condition exists in the complete primary matrix.
 Forced-span metrics average only payload-bearing token positions. Full-message metrics additionally include greedy tail positions and can therefore improve as the tail becomes longer even if the forced span is unchanged. Both are reported to avoid treating tail likelihood as evidence about the embedded positions.
-The human-study status manifest records recruitment authorized = false, survey deployed = false, participants = 0, and ratings = 0. Planning materials are retained only to document a possible future design. They were not administered and are not reproduced here as a completed instrument. A model-name mismatch in those planning materials (Llama 3.1 versus the executed Llama 3 model) further prevents treating them as an approved executed protocol.
+No participants were recruited and no human ratings were collected. The contextual evaluation in Note S20 uses model judges. Unadministered planning materials are retained in the repository as study history and do not contribute to the reported results.
 
 
 \suppnote{Supplementary Note S6: Ablations and topic effects}\label{si:s6}
@@ -456,7 +456,7 @@ For this auxiliary benchmark, the reported endpoints were ROC-AUC and balanced a
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/neural_detector_performance.pdf}
-\caption{\label{fig:detector-full}\textbf{Neural-detector evaluation.} The six panels report the auxiliary benchmark endpoints and supplementary exploratory metrics. The primary strictly deduplicated estimates are reported in Supplementary Note S12. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores are better; high values in the other panels indicate stronger distinguishability and therefore weaker concealment.}
+\caption{\label{fig:detector-full}\textbf{Neural-detector evaluation.} The six panels report the auxiliary benchmark endpoints and supplementary exploratory metrics. The primary strictly deduplicated estimates are reported in Supplementary Note S12. Matched error bars are payload-group bootstrap 95\% confidence intervals. Held-out regime bars span the minimum and maximum across prespecified splits and are not confidence intervals. Lower Brier scores indicate lower mean squared error in predicted class probabilities. Higher values in the other panels indicate stronger detection of encoded text, limiting covert-channel stealth.}
 \end{figure}
 
 \begin{table}[H]
@@ -478,7 +478,7 @@ DeBERTa-v3-base & Brier score & 0.007895 & [0.004432, 0.011787] & Supplementary 
 DeBERTa-v3-base & TPR at FPR \(\leq1\%\) & 0.993434 & [0.988724, 0.998387] & Supplementary exploratory \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:detector-matched} Auxiliary matched detector endpoints. The primary strictly deduplicated estimates are reported in Supplementary Note S12.   Higher ROC-AUC, balanced accuracy, precision, and low-FPR sensitivity are adverse for concealment; lower Brier score indicates better detector calibration.}
+\caption{\label{tab:detector-matched} Auxiliary matched detector endpoints. The primary strictly deduplicated estimates are reported in Supplementary Note S12.   Higher ROC-AUC, balanced accuracy, precision and low-FPR sensitivity indicate stronger detection of encoded text; lower Brier score indicates lower mean squared probability-prediction error.}
 \end{table}
 
 \begin{table}[H]
@@ -546,14 +546,14 @@ The upper rank-\(B\) endpoint is evaluated only when its probability was retaine
 
 The validation inventory contained 17,424 eligible retained records. Of these, 7,008 had all fields required for complete capacity, rate, and supported quality-bound checks. Across evaluable traces there were zero forced-position-count violations, zero rank/rate-bound violations, and zero supported quality-bound violations. The nine aggregate cells in the theoretical capacity panel of Supplementary Fig. S6 lay exactly on the identity between theoretical and observed forced positions. There were 2,976 positive cover-length residuals, attributable to non-payload greedy continuations or other counted cover extension.
 
-The complete encoder decoder cascade proposition is not directly trace-evaluable from the saved record structure: none of the retained rows simultaneously carries every intermediate object required to replay the entire proof chain as one trace. The algebraic results are therefore conditional proofs and the retained-field checks are supporting empirical validation, not a complete end-to-end trace proof. They also do not validate human naturalness.
+The conditional proofs specify when rank transfer and codec inversion recover the payload. The retained-field checks test the algebraic identities and bounds supported by the saved records. No single retained row contains every intermediate object needed to verify the complete proof chain as one trace. This trace-coverage limitation is separate from the observed 6,480/6,480 primary byte-recovery results reported in the main manuscript.
 
 This theoretical validation asks whether the retained fields satisfy the declared fixed-radix identities, rate bounds, and supported same-context likelihood bound. It is distinct from the empirical capacity and quality frontier in Main Fig. 2, which compares observed representation rates and automated model/surface diagnostics on common payload support.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/capacity_tail_validation.pdf}
-\caption{\label{fig:capacity-validation}\textbf{Theoretical capacity and tail validation.} Fixed-radix payload length and effective full-message rate are checked against their declared algebraic bounds, while the cover-length residual isolates tokens beyond the forced payload positions. Across 17,424 retained records, 7,008 were evaluable for the complete plotted capacity and supported quality-bound checks; no forced-position, rate-bound, or evaluated quality-bound violation occurred. Positive residuals in 2,976 records represent non-payload greedy continuations or other cover overhead. This validation tests retained-field identities and differs from the empirical common-support frontier in Main Fig. 2; neither analysis is evidence of human-perceived naturalness.}
+\caption{\label{fig:capacity-validation}\textbf{Theoretical capacity and tail validation.} Fixed-radix payload length and effective full-message rate are checked against their declared algebraic bounds, while the cover-length residual isolates tokens beyond the forced payload positions. Across 17,424 retained records, 7,008 were evaluable for the complete plotted capacity and supported quality-bound checks; no forced-position, rate-bound, or evaluated quality-bound violation occurred. Positive residuals in 2,976 records represent non-payload greedy continuations or other cover overhead. This validation tests retained-field identities; the empirical common-support frontier in Main Fig. 2 instead compares observed representation rates and automated text diagnostics.}
 \end{figure}
 
 \begin{table}[H]
@@ -634,7 +634,7 @@ DeBERTa-v3-base & 1,536.660910 & 1,425.063414 & 6,380,851,200 bytes & One fixed 
 \caption{\label{tab:detector-cost}Representative detector cost. CPU time, repeat warm-up measurements, and cross-device benchmarks were unavailable.}
 \end{table}
 
-\suppnote{Supplementary Note S10: Worked examples and claim-boundary audit}\label{si:s10}
+\suppnote{Supplementary Note S10: Worked examples and scope of evidence}\label{si:s10}
 
 \suppsubsection{Representative retained examples}
 
@@ -651,7 +651,7 @@ The subsequent visible text
 \begin{quote}
 \ttfamily a friendly message to a friend about making relaxed plans for the weekend.
 \end{quote}
-was a non-payload greedy continuation. It carried no payload rank and was ignored by the decoder. Saved-token replay reproduced all nibble ranks and the serialized digest exactly. This example illustrates deterministic rank realization, not an assertion that the forced span is human-natural.
+was a non-payload greedy continuation. It carried no payload rank and was ignored by the decoder. Saved-token replay reproduced all nibble ranks and the serialized digest exactly. This example illustrates deterministic rank realization and the separation of payload-bearing tokens from their continuation. Note S20 evaluates intact messages in context.
 
 \paragraph{Visible-text retokenization failure.}
 In a retained ablation trial, detokenization followed by tokenizer reapplication first diverged in segment 6, forced position 5, expected token ID 11,623 at rank 8 became observed token ID 53,992 at replay rank 2. The visible string alone therefore did not preserve the token boundary needed by the saved-token contract.
@@ -659,23 +659,23 @@ In a retained ablation trial, detokenization followed by tokenizer reapplication
 \paragraph{Transformation failure.}
 For the SHA-256 example above, straight-to-smart quote conversion failed at segment 1, position 1: expected token ID 1 at rank 9, while the transformed replay observed token ID 2,118 at rank 155. The first-divergence record localizes the mismatch but does not prove that a single changed glyph alone caused every later error.
 
-\suppsubsection{Claim-boundary audit}
+\suppsubsection{Evidence and scope}
 
 \begin{longtable}{L{0.25\textwidth}L{0.31\textwidth}L{0.35\textwidth}}
-\caption{\label{tab:claim-boundaries}Claim boundaries applied.}\\
+\caption{\label{tab:claim-boundaries}Findings and scope of inference.}\\
 \toprule
-Issue & Supported statement & Prohibited or unresolved extension \\
+Evaluated aspect & Finding & Scope or untested extension \\
 \midrule
 \endfirsthead
 \toprule
-Issue & Supported statement & Prohibited or unresolved extension \\
+Evaluated aspect & Finding & Scope or untested extension \\
 \midrule
 \endhead
 Exact-copy recovery & 6,480/6,480 primary serialized payloads recovered from saved token IDs under matched replay & Ordinary visible-text reliability, cross-model robustness \\
 Transmission & Controlled frozen perturbations reveal severe fragility; tail-only truncation preserves recovery when only ignored tokens are removed & Broad edit robustness or general mitigation \\
-Human evaluation & 504 computational stimuli have automated surface/model diagnostics & Human-perceived readability or naturalness; zero participants and ratings \\
+Text evaluation & Automated surface/model diagnostics on 504 stimuli; contextual model judgments on 537 complete pairs (Note S20) & Human-perceived readability and indistinguishability remain unmeasured \\
 Deployment & No operational channel or deployment traffic was tested & Practical covert communication or real-world validation \\
-Detectability & Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers; high AUC is adverse & Undetectability or resistance to future detectors \\
+Detectability & Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers, limiting stealth & Undetectability or resistance to future detectors \\
 Multilingual scope & Exact-copy recovery in 288/288 Spanish and 288/288 Simplified Chinese secondary trials & Broad multilingual naturalness or cross-language generalization \\
 Unavailable work & 432 predeclared combinations lacked compatible retained outputs & Calling unavailable combinations experimental failures \\
 Model replay & Retained outputs are bound to model/configuration manifests & Replay with unverified weights or a different numerical configuration \\
@@ -717,7 +717,7 @@ Audited cross-partition links & 0 & Zero for payload, pair, normalized text, com
 
 The secondary controls came from Databricks Dolly 15k v1.0 (under CC BY-SA 3.0). Deterministic screening retained responses without automatic quality, personally identifiable information, or unsafe-content flags. The same exact and near-duplicate rules were applied within the human-authored candidates and against the primary corpus. Hungarian assignment matched candidates to RankCloak test texts within available prompt templates using relative word-count plus weighted character-count difference; relative word-count differences above 0.35 were rejected.
 
-The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs, and no declared near-duplicate links to the primary corpus. Human labels never entered model fitting or threshold selection. The corpus is a bounded secondary computational control, not recruitment, a participant study, a user study, a human rating exercise, or proof of naturalness. Coverage is sparse or absent for several conversational, narrative, and professional templates, and detector performance can include generic machine-versus-human differences.
+The pipeline selected 250 texts spanning 16 of 18 templates. It found no normalized exact duplicates, no within-human near-duplicate pairs and no declared near-duplicate links to the primary corpus. Human-authored labels were not used for fitting or threshold selection. This secondary corpus evaluates detector transfer to human-written text without collecting reader judgments. Several conversational, narrative and professional templates have sparse or absent coverage, and performance may include general differences between human and model output.
 
 \begin{table}[H]
 \centering
@@ -741,7 +741,7 @@ Empirical 0.1\% FPR & Unavailable & Only 250 human negatives; at least 1,000 req
 
 The text-only attackers use the fixed TextCNN architecture and pinned \path{microsoft/deberta-v3-base}. Their architectures and hyperparameters were not tuned on test data. They are data-adaptive black-box attackers because they are fitted specifically to distinguish RankCloak from matched ordinary-model output. The model-aware logistic attacker instead receives saved token log probabilities from the exact generation model and uses summary surprisal features. Its L2 regularization value was chosen from 0.01, 0.1, 1, and 10 by validation ROC-AUC. Rank-only fields were excluded because ordinary-control ranks were not stored.
 
-Matched fitting used 9,904 training and 2,952 validation observations; the test had 1,491 positives and 1,491 negatives. For each leave-one-family-out fit, the target family was absent from both training and validation, and evaluation used only its 497 positive and 497 negative observations in held test components. Table~\ref{tab:v3-detector-main} reports the adverse matched results and the range across the three genuine family holdouts.
+Matched fitting used 9,904 training and 2,952 validation observations; the test had 1,491 positives and 1,491 negatives. For each leave-one-family-out fit, the target family was absent from both training and validation, and evaluation used only its 497 positive and 497 negative observations in held test components. Table~\ref{tab:v3-detector-main} reports matched performance and the range across the three held-family evaluations.
 
 \begin{table}[H]
 \centering
@@ -756,7 +756,7 @@ DeBERTa-v3-base & 0.9994 [0.9984, 1.0000] & 0.9948 & [0.9972, 1.0000] \\
 Model-aware surprisal & 0.999995 [0.999970, 1.000000] & 0.999460 & [0.999943, 1.000000] \\
 \bottomrule
 \end{tabularx}
-\caption{\label{tab:v3-detector-main}\textbf{Detection on strictly deduplicated components.} The matched test has 1,491 observations per class. Ranges summarize three distinct held-family tests and are not pooled confidence intervals. Higher values are adverse for concealment.}
+\caption{\label{tab:v3-detector-main}\textbf{Detection on strictly deduplicated components.} The matched test has 1,491 observations per class. Ranges summarize three distinct held-family tests and are not pooled confidence intervals. Higher values indicate stronger detection of encoded text and reduced covert-channel stealth.}
 \end{table}
 
 ROC-AUC used tie-aware empirical ranks. The normalized 0--1\% partial AUC was the exact empirical false-positive-budget step envelope divided by 0.01; no score or ROC vertex was interpolated. At target \(\alpha\), the validation threshold maximized TPR subject to no more than \(\lfloor\alpha n_{\rm neg}\rfloor\) false positives, with conservative tie breaking. The threshold was then frozen for test. A target was reported only if validation and test both contained at least \(1/\alpha\) negatives. Confidence intervals used 2,000 percentile bootstrap resamples of complete deduplication clusters.
@@ -794,7 +794,7 @@ Against the human-authored secondary controls, TextCNN ROC-AUC was 0.7537 (95\% 
 \caption{\label{fig:v3-human-controls}\textbf{Secondary human-authored control evaluation.} Human-authored labels were not used for fitting or threshold selection. The comparison may include general machine-versus-human signal and is not a human evaluation.}
 \end{figure}
 
-The two learned detectors adapt to the observed training distribution; the likelihood-based detector represents an attacker with exact model access. Their strength makes the negative detectability conclusion more credible within the evaluated corpus, but none is a comprehensive adversarial search over all classifiers, prompts, post-processing, models, or deployment distributions.
+The learned text-only detectors and the trace-informed likelihood detector provide complementary tests of encoding detectability. Their strong performance shows that removing recognizable artifact syntax does not remove statistical traces of encoding in this corpus. These results provide a reproducible detection benchmark; transfer to additional models, prompts and deployment distributions remains to be evaluated.
 
 \suppnote{Supplementary Note S13: Entropy-gated payload embedding}\label{si:s13}
 
@@ -954,12 +954,12 @@ Model-aware & Pooled & 1.0000 & 1.0000 & 0.9948/0.0000 & 0/384 \\
 
 The analysis isolates two quantizations of one model under one inference backend. It does not generalize to other Qwen revisions, architectures, bit widths, quantizers, backends, or hardware. In particular, the data do not justify stating that Q8 is generally more recoverable than Q4.
 
-\suppnote{Supplementary Note S15: provenance and remaining boundaries}\label{si:s15}
+\suppnote{Supplementary Note S15: Provenance and scope of the evaluation}\label{si:s15}
 
-The run manifest binds the detector inputs, model-backed generations, artifact hashes, backend, model and tokenizer identities, partitions, and validation status. The final validation report records \path{status: pass}, exact artifact-manifest path and checksum validation for 5,833 entries, 24 fit-metadata files, 24 prediction files, strict leakage-audit success, conditional entropy-capacity validation, and paired quantization-recovery source validation. The generation-analysis validation records 18/18 calibration traces, 720/720 entropy generations, 1,920/1,920 Q4 replays, 960/960 Q4 visible-recovery records, 1,920/1,920 Q8 generations, and zero failure records. Machine-readable tables and full provenance are retained and the reported results are drawn from those validated outputs rather than rerunning generation.
+The run manifest binds the detector inputs, model-backed generations, artifact hashes, backend, model and tokenizer identities, partitions, and validation status. The final validation report records \path{status: pass}, exact artifact-manifest path and checksum validation for 5,833 entries, 24 fit-metadata files, 24 prediction files, strict leakage-audit success, conditional entropy-capacity validation, and paired quantization-recovery source validation. The generation-analysis validation records 18/18 calibration traces, 720/720 entropy generations, 1,920/1,920 Q4 replays, 960/960 Q4 visible-recovery records, 1,920/1,920 Q8 generations, and zero recorded execution exceptions. The six strict-gate payload-completion failures are retained scientific outcomes, distinct from execution exceptions. Machine-readable tables and full provenance are retained and the reported results are drawn from those validated outputs rather than rerunning generation.
 
 \begin{longtable}{L{0.23\textwidth}L{0.32\textwidth}L{0.36\textwidth}}
-\caption{\label{tab:v3-boundaries}Summary of evidence and remaining boundaries.}\\
+\caption{\label{tab:v3-boundaries}Summary of findings and scope.}\\
 \toprule
 Issue & Evidence & Boundary that remains \\
 \midrule
@@ -978,7 +978,7 @@ Low-FPR reporting & Exact counts and validation-frozen thresholds; matched 0.1\%
 Entropy gating & 120 attempts per gate and complete diagnostics for all six strict failures & Serialized-payload rate is conditional on completion. Two templates and 768 calibration positions/model. Exact-model AUC remains 0.9904 \\
 Quantization & Paired within-quantization recovery, detector transfer and 0/960 fixed-message Q4-to-Q8 payload recovery & One pinned Qwen and one backend. No general Q8 advantage or reverse-direction payload result \\
 Naturalness & Intact-message contextual rubric, supporting likelihood diagnostics and human-authored controls & Automated acceptance permits minor awkwardness. No participants or human ratings. Historical fragment assays remain in Note S17 \\
-Deployment/security & Failure surfaces and strong adverse detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
+Deployment/security & Transmission failure modes and strong encoding detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
 \bottomrule
 \end{longtable}
 

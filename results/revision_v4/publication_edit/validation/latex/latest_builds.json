@@ -1,0 +1,65 @@
+{
+  "correspondence": {
+    "logs": "results/revision_v4/publication_edit/validation/latex/correspondence_01",
+    "records": [
+      {
+        "document": "response_to_reviewers_v4",
+        "elapsed_seconds": 1.66021488502156,
+        "pages": 8,
+        "pdf_sha256": "0ebd41feb0cee734d0f234862a56d4e1a8f4679321f1c63cd8cd43611a8ba5ac",
+        "source_sha256": "2ca7206f102e16161b8d45419f16c9b650192332300ba27cbd9d04e22e93d4c3",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "cover_letter_v4",
+        "elapsed_seconds": 1.46376249298919,
+        "pages": 1,
+        "pdf_sha256": "e098a72adb9621ee81d38b3dae6106984182f2f8003d39cad0841d30ffa6bf66",
+        "source_sha256": "f0a5cae4320510427a4ce90db5c67532c150b34bac839b5889dd8f642f0069ca",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "scientific": {
+    "logs": "results/revision_v4/publication_edit/validation/latex/scientific_01",
+    "records": [
+      {
+        "document": "supplementary4",
+        "elapsed_seconds": 4.045493020035792,
+        "pages": 48,
+        "pdf_sha256": "96f1e50162bc18aad8ef7480afb90bb9c6ad2fcfe6a4bb82fab7544e8f716219",
+        "source_sha256": "c383d42a02f3d63c909836385cba247f447b3d8774674924c0284eb4d0b9323e",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "main4",
+        "elapsed_seconds": 3.27025279100053,
+        "pages": 23,
+        "pdf_sha256": "17b05593e25a78cfc858814dd6b3580e1cef5772251c7800c46049c00c82ce4b",
+        "source_sha256": "a7be9df04b0342cb42f96c6fc78f13f5ed563e4e7c18895308d09b735b9fad54",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "submission": {
+    "logs": "results/revision_v4/publication_edit/validation/latex/submission_01",
+    "records": [
+      {
+        "clean_dependency_build": true,
+        "document": "main4_submission",
+        "elapsed_seconds": 3.0032139819813892,
+        "pages": 21,
+        "pdf_sha256": "591d87656421396b129f842896fdab8f9e8f0f0f7e851af2263f81f8703f6aa7",
+        "routine_pdf_retained": false,
+        "source_sha256": "db0093039c14489e90a6d35b1bbc0cec354bdd8cab243b2b9c6c5ae4f9e87e14",
+        "unresolved_references": false,
+        "verified_input_paths": 183,
+        "warnings": []
+      }
+    ]
+  }
+}
