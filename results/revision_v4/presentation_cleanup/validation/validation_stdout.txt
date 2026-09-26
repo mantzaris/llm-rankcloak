@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "baseline_commit": "479535cca709e624540cd95c0a23bf05f0d28123",
+  "historical_evidence_and_scientific_code_unchanged": true,
+  "scientific_prose_unchanged": true,
+  "standard_declarations_unchanged": true,
+  "equations_unchanged": 16,
+  "main_algorithms_unchanged": 2,
+  "supplementary_tail_algorithm_unchanged": true,
+  "filter_rules_unchanged": true,
+  "main_figures_unchanged": 5,
+  "main_tables_unchanged": 3,
+  "supplementary_historical_table_blocks_unchanged": true,
+  "quoted_review_blocks": 13,
+  "complete_answers": 16,
+  "R1_4_words_excluding_locations": 236,
+  "banners_removed": true,
+  "printed_contents_removed": true,
+  "reading_guide_removed": true,
+  "response_render_repeat": {
+    "first_sha256": "ce59deb127b747df0a986ff32e48798a5fcfc11c9742f9e1a2860434fdf883c1",
+    "second_sha256": "ce59deb127b747df0a986ff32e48798a5fcfc11c9742f9e1a2860434fdf883c1",
+    "identical": true,
+    "removed_edition_suffix_absent": true,
+    "rule": "An ordinary render compares its input and output. A second render must be unchanged."
+  },
+  "results_begin_before": 11,
+  "results_begin_after": 11,
+  "documents": [
+    {
+      "pdf": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "6912041757b93625b9d0b17886c8e5ada4d29198a087bab5393b4bff6382a19d"
+    },
+    {
+      "pdf": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 48,
+      "sha256": "7efc96363c409f5634cc9af40c858eb450704b85d09948bb9cd6dd5af6a177d1"
+    },
+    {
+      "pdf": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "394b65b861006841371afbcb24135c8c3ae54fbfbc82d46a3da68891632cfa0f"
+    },
+    {
+      "pdf": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "bf2e0d19750f24928ed7138ffc7f317c83a1e2da7271e5fbc27b9b1bacaa1e3e"
+    }
+  ],
+  "main_references": 49,
+  "additional_gpu_seconds": 0
+}

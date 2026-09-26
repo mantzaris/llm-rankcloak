@@ -8,7 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from PIL import Image,ImageDraw
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'results/revision_v4/editorial_restructure'
+OUT=ROOT/'results/revision_v4/presentation_cleanup'
 from rankcloak.revision_v4_stage2_common import read_json,atomic_json,file_hash
 
 DOCS=['paperV4/scientific_reports/main4.pdf','paperV4/scientific_reports/supplementary4.pdf',

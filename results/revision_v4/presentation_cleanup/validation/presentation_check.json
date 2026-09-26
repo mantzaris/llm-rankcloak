@@ -1,0 +1,590 @@
+{
+  "status": "passed",
+  "baseline_commit": "479535cca709e624540cd95c0a23bf05f0d28123",
+  "historical_evidence_and_scientific_code_unchanged": true,
+  "scientific_prose_unchanged": true,
+  "standard_declarations_unchanged": true,
+  "equations_unchanged": 16,
+  "main_algorithms_unchanged": 2,
+  "supplementary_tail_algorithm_unchanged": true,
+  "filter_rules_unchanged": true,
+  "main_figures_unchanged": 5,
+  "main_tables_unchanged": 3,
+  "supplementary_historical_table_blocks_unchanged": true,
+  "quoted_review_blocks": 13,
+  "complete_answers": 16,
+  "R1_4_words_excluding_locations": 236,
+  "banners_removed": true,
+  "printed_contents_removed": true,
+  "reading_guide_removed": true,
+  "response_render_repeat": {
+    "first_sha256": "ce59deb127b747df0a986ff32e48798a5fcfc11c9742f9e1a2860434fdf883c1",
+    "second_sha256": "ce59deb127b747df0a986ff32e48798a5fcfc11c9742f9e1a2860434fdf883c1",
+    "identical": true,
+    "removed_edition_suffix_absent": true,
+    "rule": "An ordinary render compares its input and output. A second render must be unchanged."
+  },
+  "results_begin_before": 11,
+  "results_begin_after": 11,
+  "documents": [
+    {
+      "pdf": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "6912041757b93625b9d0b17886c8e5ada4d29198a087bab5393b4bff6382a19d"
+    },
+    {
+      "pdf": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 48,
+      "sha256": "7efc96363c409f5634cc9af40c858eb450704b85d09948bb9cd6dd5af6a177d1"
+    },
+    {
+      "pdf": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "394b65b861006841371afbcb24135c8c3ae54fbfbc82d46a3da68891632cfa0f"
+    },
+    {
+      "pdf": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "bf2e0d19750f24928ed7138ffc7f317c83a1e2da7271e5fbc27b9b1bacaa1e3e"
+    }
+  ],
+  "navigation": [
+    {
+      "title": "Supplementary Note S1: Extended RankCloak methods",
+      "level": 1,
+      "destination": "section*.1",
+      "page": 1,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Direct-subword framing and bounded-codec metadata",
+      "level": 2,
+      "destination": "section*.2",
+      "page": 1,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Candidate masks and deterministic ordering",
+      "level": 2,
+      "destination": "section*.3",
+      "page": 1,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Segment records, lead-ins, and tail policies",
+      "level": 2,
+      "destination": "section*.4",
+      "page": 2,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Replay modes and structured endpoints",
+      "level": 2,
+      "destination": "section*.5",
+      "page": 2,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S2: Corpus, models, prompts, and work-unit accounting",
+      "level": 1,
+      "destination": "section*.6",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Deterministic cryptographic corpus",
+      "level": 2,
+      "destination": "section*.7",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Pinned model and tokenizer identities",
+      "level": 2,
+      "destination": "section*.9",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "English prompt identities",
+      "level": 2,
+      "destination": "section*.11",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Experimental matrices and reconciliation",
+      "level": 2,
+      "destination": "section*.12",
+      "page": 5,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S3: Detailed recovery and multilingual results",
+      "level": 1,
+      "destination": "section*.14",
+      "page": 5,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S4: Robustness and failure analysis",
+      "level": 1,
+      "destination": "section*.17",
+      "page": 7,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S5: Automated readability and model-based quality",
+      "level": 1,
+      "destination": "section*.20",
+      "page": 9,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S6: Ablations and topic effects",
+      "level": 1,
+      "destination": "section*.23",
+      "page": 10,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Locked ablation extraction",
+      "level": 2,
+      "destination": "section*.24",
+      "page": 10,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Prompt-topic contrasts",
+      "level": 2,
+      "destination": "section*.27",
+      "page": 12,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S7: neural steganalysis and leakage sensitivity",
+      "level": 1,
+      "destination": "section*.29",
+      "page": 14,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Corpus, architectures, and splits",
+      "level": 2,
+      "destination": "section*.30",
+      "page": 14,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Leakage, exclusion sensitivity, repeatability, and cost",
+      "level": 2,
+      "destination": "section*.34",
+      "page": 16,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S8: Capacity and quality theory",
+      "level": 1,
+      "destination": "section*.35",
+      "page": 16,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Finite code space and exact inversion",
+      "level": 2,
+      "destination": "section*.36",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Segmentation and overhead decomposition",
+      "level": 2,
+      "destination": "section*.37",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Conditional likelihood gap",
+      "level": 2,
+      "destination": "section*.38",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Empirical checks and trace boundary",
+      "level": 2,
+      "destination": "section*.39",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S9: Computational overhead",
+      "level": 1,
+      "destination": "section*.42",
+      "page": 18,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S10: Worked examples and claim-boundary audit",
+      "level": 1,
+      "destination": "section*.46",
+      "page": 20,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Representative retained examples",
+      "level": 2,
+      "destination": "section*.47",
+      "page": 20,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Claim-boundary audit",
+      "level": 2,
+      "destination": "section*.48",
+      "page": 21,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S11: Strict detector splits and human-authored secondary controls",
+      "level": 1,
+      "destination": "section*.49",
+      "page": 22,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Normalization, deduplication, and partition audit",
+      "level": 2,
+      "destination": "section*.50",
+      "page": 22,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Human-authored control selection and scope",
+      "level": 2,
+      "destination": "section*.52",
+      "page": 22,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S12: Deduplicated, unseen-family, model-aware, and low-FPR detection",
+      "level": 1,
+      "destination": "section*.54",
+      "page": 23,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S13: Entropy-gated payload embedding",
+      "level": 1,
+      "destination": "section*.59",
+      "page": 26,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Calibration and replay-consistent gate",
+      "level": 2,
+      "destination": "section*.60",
+      "page": 26,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S14: Matched Q4 and Q8 quantization analysis",
+      "level": 1,
+      "destination": "section*.66",
+      "page": 29,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Pairing and recovery",
+      "level": 2,
+      "destination": "section*.67",
+      "page": 29,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Cross-quantization detector transfer",
+      "level": 2,
+      "destination": "section*.71",
+      "page": 31,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S15: provenance and remaining boundaries",
+      "level": 1,
+      "destination": "section*.74",
+      "page": 32,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S16. Strict-gate failure diagnostics",
+      "level": 1,
+      "destination": "section*.75",
+      "page": 33,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Matched trajectories and exact local windows",
+      "level": 2,
+      "destination": "section*.78",
+      "page": 35,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S17. Historical fragment assays and local conditional compatibility",
+      "level": 1,
+      "destination": "section*.80",
+      "page": 36,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Windows, selection and exclusions",
+      "level": 2,
+      "destination": "section*.81",
+      "page": 36,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Two control-only pilots",
+      "level": 2,
+      "destination": "section*.83",
+      "page": 37,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Fixed-path conditional compatibility",
+      "level": 2,
+      "destination": "section*.85",
+      "page": 38,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Predeclared illustrative boundaries",
+      "level": 2,
+      "destination": "section*.89",
+      "page": 39,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S18. Transport decomposition and fixed-message decoding",
+      "level": 1,
+      "destination": "section*.90",
+      "page": 40,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Directional cross-quantization endpoint",
+      "level": 2,
+      "destination": "section*.92",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S19. Configuration, rank margins and computational cost",
+      "level": 1,
+      "destination": "section*.93",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Compatibility and conditional recovery",
+      "level": 2,
+      "destination": "section*.94",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Quantization margin and received-token history",
+      "level": 2,
+      "destination": "section*.95",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Trace-informed detection and proposed fallback",
+      "level": 2,
+      "destination": "section*.96",
+      "page": 42,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Model work and coding operations",
+      "level": 2,
+      "destination": "section*.97",
+      "page": 42,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S20. Contextual acceptability rubric and complete results",
+      "level": 1,
+      "destination": "section*.99",
+      "page": 42,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Selection and matched generation",
+      "level": 2,
+      "destination": "section*.100",
+      "page": 43,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Complete judging rubric",
+      "level": 2,
+      "destination": "section*.101",
+      "page": 43,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Judge settings and calibration",
+      "level": 2,
+      "destination": "section*.103",
+      "page": 44,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Estimation and complete results",
+      "level": 2,
+      "destination": "section*.105",
+      "page": 44,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Stops, lengths, reuse and missingness",
+      "level": 2,
+      "destination": "section*.108",
+      "page": 45,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Full-message examples",
+      "level": 2,
+      "destination": "section*.110",
+      "page": 46,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S21. Supporting source-likelihood comparison",
+      "level": 1,
+      "destination": "section*.111",
+      "page": 47,
+      "heading_at_destination": true
+    },
+    {
+      "title": "References",
+      "level": 1,
+      "destination": "section*.113",
+      "page": 48,
+      "heading_at_destination": true
+    }
+  ],
+  "numerical_claim_checks": [
+    {
+      "quantity": "encoded",
+      "formatted": "90.3 [88.4, 92.1]",
+      "source": "results/revision_v4/coherence_replacement/analysis/summary.json",
+      "source_sha256": "c5b4a210d93525a133877bde6f8bf07c65c35a0b975f3186840abf5e60573f0c"
+    },
+    {
+      "quantity": "ordinary",
+      "formatted": "96.6 [95.0, 98.1]",
+      "source": "results/revision_v4/coherence_replacement/analysis/summary.json",
+      "source_sha256": "c5b4a210d93525a133877bde6f8bf07c65c35a0b975f3186840abf5e60573f0c"
+    },
+    {
+      "quantity": "difference",
+      "formatted": "-6.3 [-8.7, -3.9]",
+      "source": "results/revision_v4/coherence_replacement/analysis/summary.json",
+      "source_sha256": "c5b4a210d93525a133877bde6f8bf07c65c35a0b975f3186840abf5e60573f0c"
+    }
+  ],
+  "main_references": 49,
+  "additional_gpu_seconds": 0,
+  "clean_submission_build": {
+    "logs": "results/revision_v4/presentation_cleanup/validation/latex/submission_01",
+    "records": [
+      {
+        "clean_dependency_build": true,
+        "document": "main4_submission",
+        "elapsed_seconds": 3.042612613993697,
+        "pages": 21,
+        "pdf_sha256": "0b46a35bdbe398a4ad97ba04775bccf021882b523c7c2c192832fc8439cd6cb9",
+        "routine_pdf_retained": false,
+        "source_sha256": "76832c6512d8df91f1fde8a582ebd5e93b2d163ece29d9e9a30a28fc18d3c045",
+        "unresolved_references": false,
+        "verified_input_paths": 183,
+        "warnings": []
+      }
+    ]
+  },
+  "source_changes": [
+    ".gitignore",
+    "paperV4/ACTIONS_BEFORE_SUBMISSION.md",
+    "paperV4/DOCUMENT_BUILD.md",
+    "paperV4/REVIEW_RESPONSE_MATRIX.md",
+    "paperV4/cover_letter/cover_letter_v4.pdf",
+    "paperV4/cover_letter/cover_letter_v4.tex",
+    "paperV4/response/editorial_answers.json",
+    "paperV4/response/response_to_reviewers_v4.pdf",
+    "paperV4/response/response_to_reviewers_v4.tex",
+    "paperV4/scientific_reports/main4.pdf",
+    "paperV4/scientific_reports/main4.tex",
+    "paperV4/scientific_reports/main4_submission.tex",
+    "paperV4/scientific_reports/supplementary4.pdf",
+    "paperV4/scientific_reports/supplementary4.tex",
+    "results/revision_v4/presentation_cleanup/baseline.json",
+    "results/revision_v4/presentation_cleanup/response_status.json",
+    "results/revision_v4/presentation_cleanup/validation/cover_letter_v4_text.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/build_status.json",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/cover_letter_v4_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/cover_letter_v4_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/cover_letter_v4_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/cover_letter_v4_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/response_to_reviewers_v4_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/response_to_reviewers_v4_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/response_to_reviewers_v4_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_01/response_to_reviewers_v4_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/build_status.json",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/cover_letter_v4_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/cover_letter_v4_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/cover_letter_v4_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/cover_letter_v4_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/response_to_reviewers_v4_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/response_to_reviewers_v4_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/response_to_reviewers_v4_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02/response_to_reviewers_v4_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/latest_builds.json",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/build_status.json",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/main4_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/main4_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/main4_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/main4_pass4.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/main4_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/supplementary4_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/supplementary4_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/supplementary4_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/supplementary4_pass4.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/scientific_01/supplementary4_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/submission_01/build_status.json",
+    "results/revision_v4/presentation_cleanup/validation/latex/submission_01/main4_submission_pass1.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/submission_01/main4_submission_pass2.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/submission_01/main4_submission_pass3.txt",
+    "results/revision_v4/presentation_cleanup/validation/latex/submission_01/main4_submission_pdfinfo.txt",
+    "results/revision_v4/presentation_cleanup/validation/locations.json",
+    "results/revision_v4/presentation_cleanup/validation/main4_text.txt",
+    "results/revision_v4/presentation_cleanup/validation/pdf_review.json",
+    "results/revision_v4/presentation_cleanup/validation/presentation_check.json",
+    "results/revision_v4/presentation_cleanup/validation/response_render_1.txt",
+    "results/revision_v4/presentation_cleanup/validation/response_render_2.txt",
+    "results/revision_v4/presentation_cleanup/validation/response_render_repeat.json",
+    "results/revision_v4/presentation_cleanup/validation/response_to_reviewers_v4_text.txt",
+    "results/revision_v4/presentation_cleanup/validation/supplement_destinations.txt",
+    "results/revision_v4/presentation_cleanup/validation/supplement_outline.txt",
+    "results/revision_v4/presentation_cleanup/validation/supplementary4_text.txt",
+    "results/revision_v4/presentation_cleanup/validation/validation_stdout.txt",
+    "revision_docs/REVISION_V4_PRESENTATION_CLEANUP_REPORT.md",
+    "scripts/build_revision_v4_editorial_documents.py",
+    "scripts/render_revision_v4_editorial_response.py",
+    "scripts/review_revision_v4_editorial_pdfs.py",
+    "scripts/validate_revision_v4_editorial_documents.py"
+  ]
+}

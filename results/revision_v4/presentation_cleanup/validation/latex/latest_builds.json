@@ -1,0 +1,65 @@
+{
+  "correspondence": {
+    "logs": "results/revision_v4/presentation_cleanup/validation/latex/correspondence_02",
+    "records": [
+      {
+        "document": "response_to_reviewers_v4",
+        "elapsed_seconds": 1.8173168689827435,
+        "pages": 8,
+        "pdf_sha256": "394b65b861006841371afbcb24135c8c3ae54fbfbc82d46a3da68891632cfa0f",
+        "source_sha256": "ce59deb127b747df0a986ff32e48798a5fcfc11c9742f9e1a2860434fdf883c1",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "cover_letter_v4",
+        "elapsed_seconds": 1.468664985965006,
+        "pages": 1,
+        "pdf_sha256": "bf2e0d19750f24928ed7138ffc7f317c83a1e2da7271e5fbc27b9b1bacaa1e3e",
+        "source_sha256": "f0a5cae4320510427a4ce90db5c67532c150b34bac839b5889dd8f642f0069ca",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "scientific": {
+    "logs": "results/revision_v4/presentation_cleanup/validation/latex/scientific_01",
+    "records": [
+      {
+        "document": "supplementary4",
+        "elapsed_seconds": 4.480538845004048,
+        "pages": 48,
+        "pdf_sha256": "7efc96363c409f5634cc9af40c858eb450704b85d09948bb9cd6dd5af6a177d1",
+        "source_sha256": "b4b74620f64d086169738838096fc955a6a0607a5f48b881a1b513427fd51271",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "main4",
+        "elapsed_seconds": 3.292212410015054,
+        "pages": 23,
+        "pdf_sha256": "6912041757b93625b9d0b17886c8e5ada4d29198a087bab5393b4bff6382a19d",
+        "source_sha256": "c65c5b10ab4c7eb86a79e7b768588cad2dfdca90050ca7ca0e0513dd0f7d4a49",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "submission": {
+    "logs": "results/revision_v4/presentation_cleanup/validation/latex/submission_01",
+    "records": [
+      {
+        "clean_dependency_build": true,
+        "document": "main4_submission",
+        "elapsed_seconds": 3.042612613993697,
+        "pages": 21,
+        "pdf_sha256": "0b46a35bdbe398a4ad97ba04775bccf021882b523c7c2c192832fc8439cd6cb9",
+        "routine_pdf_retained": false,
+        "source_sha256": "76832c6512d8df91f1fde8a582ebd5e93b2d163ece29d9e9a30a28fc18d3c045",
+        "unresolved_references": false,
+        "verified_input_paths": 183,
+        "warnings": []
+      }
+    ]
+  }
+}

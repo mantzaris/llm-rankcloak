@@ -9,7 +9,7 @@ import subprocess
 import tempfile
 import time
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'results/revision_v4/editorial_restructure'
+OUT = ROOT / 'results/revision_v4/presentation_cleanup'
 from rankcloak.revision_v4_stage2_common import atomic_json, file_hash, read_json
 from scripts.build_revision_v4_stage4_bundle import manuscript_source, dependency_check, DEPENDENCIES
 
@@ -45,7 +45,7 @@ def main():
     previous=sorted(parent.glob(args.phase+'_*'));logs=parent/(args.phase+'_'+str(len(previous)+1).zfill(2));logs.mkdir()
     paper=ROOT/'paperV4/scientific_reports'
     if args.phase=='submission':
-        source='% Editorial author-review edition. Generated from current main4 inputs.\n'+manuscript_source(paper)
+        source='% Generated from current main4 inputs with embedded bibliography and editable tables.\n'+manuscript_source(paper)
         (paper/'main4_submission.tex').write_text(source)
         if re.search(r'\\(?:input|includegraphics|bibliography)\{',source):
             raise ValueError('Editable source retains external content')

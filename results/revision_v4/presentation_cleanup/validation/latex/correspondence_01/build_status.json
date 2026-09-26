@@ -1,0 +1,22 @@
+[
+  {
+    "document": "response_to_reviewers_v4",
+    "elapsed_seconds": 1.6313643669709563,
+    "pages": 8,
+    "pdf_sha256": "2cdaad3abb080ebdb21cbc40d74c895434853dafb202f7bb544e422ec7f7fd18",
+    "source_sha256": "952a07922392c9a5e7c5a1dbd1aa14540405b0ea905891ebc1f3bd1f69612601",
+    "unresolved_references": false,
+    "warnings": [
+      "Overfull \\hbox (27.47322pt too wide) in paragraph at lines 70--71"
+    ]
+  },
+  {
+    "document": "cover_letter_v4",
+    "elapsed_seconds": 1.5564468019874766,
+    "pages": 1,
+    "pdf_sha256": "6e927c55f0c5370a3579261f0e3e11d3c119477a41f2effc9efd2c0ec80c62af",
+    "source_sha256": "f0a5cae4320510427a4ce90db5c67532c150b34bac839b5889dd8f642f0069ca",
+    "unresolved_references": false,
+    "warnings": []
+  }
+]

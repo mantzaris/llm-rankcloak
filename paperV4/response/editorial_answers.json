@@ -7,7 +7,7 @@
       "direct_answer": "We have revised the claims to distinguish surface-form concealment, exact configured recovery, visible-text transport, detectability and reader-perceived naturalness. Adverse and inconclusive outcomes remain visible.",
       "editor_judgment": "unknown",
       "empirical_coverage": "supported_requested_analysis",
-      "evidence_change": "The V4 text corrects the historical raw and limited unmodified references to saved-token recovery, documents the unfiltered sampled-skip entropy experiment, and separates the directional fixed-message quantization endpoint from free generation. The final numerical check links statements to retained tables. The new contextual follow-up uses matched greedy controls and reports automated rubric acceptance separately from human perception. All earlier fragment outcomes remain in the supplement.",
+      "evidence_change": "The V4 text corrects the historical raw and limited unmodified references to saved-token recovery, documents the unfiltered sampled-skip entropy experiment, and separates the directional fixed-message quantization endpoint from free generation. The new contextual follow-up uses matched greedy controls and reports automated rubric acceptance separately from human perception. All earlier fragment outcomes remain in the supplement.",
       "evidence_paths": [
         "results/revision_v4/stage2/quantization/summary.csv",
         "results/revision_v4/stage2/transport/cover_summary.csv",
@@ -34,10 +34,10 @@
     },
     {
       "author_decision": "current_followup_for_author_review",
-      "direct_answer": "The published version 2.0.0, DOI 10.5281/zenodo.22555497, covers V3. It does not cover this V4 revision. The current code and retained data are in the repository. We do not represent the earlier local candidate as including the new contextual study.",
+      "direct_answer": "The code and retained data for this V4 revision are available at https://github.com/mantzaris/llm-rankcloak. Published version 2.0.0, DOI 10.5281/zenodo.22555497, covers V3 only.",
       "editor_judgment": "unknown",
       "empirical_coverage": "not_applicable",
-      "evidence_change": "The earlier verified local archive remains unchanged and predates this follow-up. The revised availability statement explicitly identifies the new evidence as outside that candidate. An updated committed snapshot must be assembled, verified and published as a new version under concept DOI 10.5281/zenodo.21987449 before its actual verified version DOI can be placed in the submission documents. This is an outstanding deposit action, not a completed publication.",
+      "evidence_change": "The availability statements distinguish repository access to V4 from the published V3 archive. A new version under concept DOI 10.5281/zenodo.21987449 covering the current V4 code and evidence remains outstanding.",
       "evidence_paths": [
         "results/revision_v4/provenance/archive_v2_coverage.json",
         "revision_docs/REVISION_V4_STAGE3_REPORT.md",
@@ -45,7 +45,7 @@
       ],
       "external_action": "prepare_verify_publish_current_scientific_snapshot_then_update_doi",
       "id": "archive",
-      "location_text": "Main Data Availability and Code Availability. The accompanying author checklist states the deposit and final-document sequence.",
+      "location_text": "Main Data Availability and Code Availability.",
       "manuscript_anchors": [
         "sec:data-code"
       ],
@@ -54,10 +54,10 @@
     },
     {
       "author_decision": "current_followup_for_author_review",
-      "direct_answer": "The revision retains the theoretical and implementation analyses and limits the contribution to artifact-specific surface-form concealment and configured inversion. A new intact-message study now supplies the primary automated contextual evidence. The distinction between completed written responses, automated evidence and unmeasured human perception remains explicit.",
+      "direct_answer": "The revision retains the theoretical and implementation analyses and limits the contribution to artifact-specific surface-form concealment and configured inversion. A new intact-message study now supplies the primary automated contextual evidence. Automated contextual evidence remains distinct from unmeasured human perception.",
       "editor_judgment": "unknown",
       "empirical_coverage": "automated_contextual_evidence_supplied_human_perception_unmeasured",
-      "evidence_change": "The new study applies the same lenient, fixed rubric to complete encoded messages and matched greedy ordinary controls. It uses authentic prompts, blinded cross-family judges, a separate constructed calibration set and a frozen 48-payload sample. Among 537 complete message pairs in 280 trials, the equally weighted panel accepts 90.3 [88.4, 92.1]% of encoded messages and 96.6 [95.0, 98.1]% of matched ordinary messages. The paired difference is -6.3 [-8.7, -3.9] percentage points. Brackets give 95% class-stratified payload-cluster intervals. Mean logical connectedness is 3.60/5 for encoded text and 4.00/5 for ordinary text. Binary judge disagreement is 14.6% and 6.7%, respectively. The previous fragment assays are retained as supplementary methodological history, with their failed semantic control checks and limited local likelihood findings. Historical recovery, transport, entropy, quantization and detector results are unchanged. No reader validation, confidentiality or indistinguishability is claimed. The new study requires updated archive coverage before submission.",
+      "evidence_change": "The new study applies the same lenient, fixed rubric to complete encoded messages and matched greedy ordinary controls. It uses authentic prompts, blinded cross-family judges, a separate constructed calibration set and a frozen 48-payload sample. Among 537 complete message pairs in 280 trials, the equally weighted panel accepts 90.3 [88.4, 92.1]% of encoded messages and 96.6 [95.0, 98.1]% of matched ordinary messages. The paired difference is -6.3 [-8.7, -3.9] percentage points. Brackets give 95% class-stratified payload-cluster intervals. Mean logical connectedness is 3.60/5 for encoded text and 4.00/5 for ordinary text. Binary judge disagreement is 14.6% and 6.7%, respectively. The previous fragment assays are retained as supplementary methodological history, with their failed semantic control checks and limited local likelihood findings. Historical recovery, transport, entropy, quantization and detector results are unchanged. No reader validation, confidentiality or indistinguishability is claimed.",
       "evidence_paths": [
         "configs/revision_v4/coherence_replacement.json",
         "results/revision_v4/coherence_replacement/plans/final_sample/freeze.json",

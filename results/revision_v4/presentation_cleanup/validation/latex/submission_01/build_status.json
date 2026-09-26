@@ -1,0 +1,14 @@
+[
+  {
+    "clean_dependency_build": true,
+    "document": "main4_submission",
+    "elapsed_seconds": 3.042612613993697,
+    "pages": 21,
+    "pdf_sha256": "0b46a35bdbe398a4ad97ba04775bccf021882b523c7c2c192832fc8439cd6cb9",
+    "routine_pdf_retained": false,
+    "source_sha256": "76832c6512d8df91f1fde8a582ebd5e93b2d163ece29d9e9a30a28fc18d3c045",
+    "unresolved_references": false,
+    "verified_input_paths": 183,
+    "warnings": []
+  }
+]

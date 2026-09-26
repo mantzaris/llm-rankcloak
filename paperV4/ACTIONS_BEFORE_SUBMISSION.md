@@ -10,3 +10,5 @@ The coherence evaluation has been reopened by the author. The current candidate 
 All sixteen written answers remain accounted for and all thirteen original review blocks are preserved. The current response ledger separates written completion, the newly supplied automated contextual evidence, the absence of direct human measurements and outstanding public archive coverage.
 
 This follow-up performs no publication, journal submission, editor contact or GitHub release. It preserves the author identity and assistance disclosure.
+
+The presentation cleanup removes internal-review banners and printed supplementary navigation. It does not confer author approval or complete any deposit or submission action. The local candidate history, future assembly and DOI-update sequence remain in items 2–3 above, rather than in the paper or correspondence. Current response status is recorded in `results/revision_v4/presentation_cleanup/response_status.json`.
