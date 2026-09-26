@@ -9,7 +9,7 @@ import subprocess
 import tempfile
 import time
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'results/revision_v4/disclosure_edit'
+OUT = ROOT / 'results/revision_v4/punctuation_edit'
 from rankcloak.revision_v4_stage2_common import atomic_json, file_hash, read_json
 from scripts.build_revision_v4_stage4_bundle import manuscript_source, dependency_check, DEPENDENCIES
 

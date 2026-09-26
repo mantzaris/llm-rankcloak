@@ -2,7 +2,7 @@
 
 All sixteen written responses are complete for author review. R1.4 supplies automated intact-message contextual evidence under the fixed lenient rubric. Human perception remains unmeasured, and the editor determines its adequacy. Historical fragment assays remain in Supplementary Note S17.
 
-The current evidence is outside the earlier local archive candidate and published V3 deposit. Archive coverage remains a separate submission action. All thirteen exact review blocks and the original requests are unchanged. Current ledger: `results/revision_v4/disclosure_edit/response_status.json`.
+The current evidence is outside the earlier local archive candidate and published V3 deposit. Archive coverage remains a separate submission action. All thirteen exact review blocks and the original requests are unchanged. Current ledger: `results/revision_v4/punctuation_edit/response_status.json`.
 
 | Point | Written response | Evidence coverage | External action | Locations |
 | --- | --- | --- | --- | --- |

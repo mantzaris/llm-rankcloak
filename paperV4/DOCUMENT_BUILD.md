@@ -1,6 +1,6 @@
 # Current V4 editorial document workflow
 
-Edit the current TeX sources and `response/editorial_answers.json`. Scientific scores, tables, figures, frozen plans and earlier stage receipts are retained unchanged. Current build and validation records go to `results/revision_v4/disclosure_edit/`.
+Edit the current TeX sources and `response/editorial_answers.json`. Scientific scores, tables, figures, frozen plans and earlier stage receipts are retained unchanged. Current build and validation records go to `results/revision_v4/punctuation_edit/`.
 
 From the repository root with the existing analysis environment and local LaTeX toolchain
 
@@ -10,7 +10,7 @@ From the repository root with the existing analysis environment and local LaTeX 
 .venv/bin/python -m scripts.render_revision_v4_editorial_response
 .venv/bin/python -m scripts.build_revision_v4_editorial_documents --phase correspondence
 .venv/bin/python -m scripts.build_revision_v4_editorial_documents --phase submission
-.venv/bin/python -m scripts.validate_revision_v4_disclosure_edit
+.venv/bin/python -m scripts.validate_revision_v4_punctuation_edit
 .venv/bin/python -m scripts.review_revision_v4_editorial_pdfs
 ```
 
@@ -18,4 +18,4 @@ The scientific phase resolves supplementary sidebar bookmarks first, then builds
 
 The historical Stage 1–4 and contextual-study renderers remain available to reproduce their archived workflows. Running them on the current manuscript would restore superseded prose or write into earlier evidence namespaces. Use the editorial commands above for current documents. Any further text edit requires new builds and a fresh visual review of changed pages. PDF timestamps need not be identical across builds.
 
-The earlier editorial, presentation-cleanup and publication-edit records and validators remain unchanged. The current author instruction removes the assistance disclosure so the author can supply replacement wording. The current validator checks only that authorized removal and regenerated locations against commit `91cf154102652d15a40920349dd91c27d436d039`, preserving scientific text, the abstract, numerical evidence, review quotations and answer text. Run the response renderer twice before the correspondence build to check reproducibility. The current manuscript TeX and its included files remain authoritative; the builder never restores historical prose.
+The earlier editorial, presentation-cleanup, publication-edit and disclosure-edit records and validators remain unchanged. The current pass reduces unnecessary punctuation and compound phrases in ordinary prose against commit `dec80d2daff76d2fd3463950951b6012a04d6057`. Its explicit edit ledger preserves mathematical notation, numerical values, the abstract, filter rules, judging rubric, literal examples and original reviewer quotations. It does not restore the removed assistance disclosure. Run the response renderer twice before the correspondence build to check reproducibility. The current manuscript TeX and its included files remain authoritative; the builder never restores historical prose.

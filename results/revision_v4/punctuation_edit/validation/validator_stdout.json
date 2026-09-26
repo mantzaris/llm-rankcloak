@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "baseline_commit": "dec80d2daff76d2fd3463950951b6012a04d6057",
+  "edited_source_paragraphs": 113,
+  "edited_answer_fields": 14,
+  "punctuation_removed": {
+    ";": 84,
+    ":": 24,
+    "-": 96,
+    "\u2013": 0,
+    "\u2014": 0
+  },
+  "abstract_and_formatting_unchanged": true,
+  "all_numeric_values_and_order_unchanged": true,
+  "equations_algorithms_table_bodies_and_filter_unchanged": true,
+  "rubric_and_literal_examples_unchanged": true,
+  "prior_evidence_and_experiment_code_unchanged": true,
+  "availability_and_submission_status_unchanged": true,
+  "assistance_disclosure_remains_removed": true,
+  "quoted_review_blocks": 13,
+  "complete_answers": 16,
+  "compiled_labels_checked": 147,
+  "response_render_stable": true,
+  "documents": [
+    {
+      "path": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "42052f8aac78b07c166f7d3c9c9a2c2ea41fb1f85375905b0443b341260ac95e"
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 48,
+      "sha256": "ce25dd1dad6819f34aa592e1d3fe3a29135c2eba796f1b30b648de1215b4873e"
+    },
+    {
+      "path": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "3ce507c5ddf4bcc6fbb72918932d66369260a51b81c454ec651fae196a1f66a0"
+    },
+    {
+      "path": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "31a16d6ebb4e5a1ccec8ffa646a418d7b4be907daa280f2c14a7fba6d098088d"
+    }
+  ],
+  "editable_source_sha256": "9c1ddcfe16ca19b5a8920aea9aa5738ae0de8702b7da48fda6109a98899ebaf0",
+  "visual_review": {
+    "status": "passed",
+    "visually_reviewed_pages": 70,
+    "automatic_pages": 80
+  },
+  "gpu_seconds": 0
+}

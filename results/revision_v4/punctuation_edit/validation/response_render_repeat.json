@@ -1,0 +1,7 @@
+{
+  "first_sha256": "16150348bfaf4a134226934cd12fe8b7e26e3923e381ac63fcec7de69e16cc0d",
+  "second_sha256": "16150348bfaf4a134226934cd12fe8b7e26e3923e381ac63fcec7de69e16cc0d",
+  "identical": true,
+  "removed_edition_suffix_absent": true,
+  "rule": "An ordinary render compares its input and output. A second render must be unchanged."
+}

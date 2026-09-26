@@ -4,17 +4,17 @@ The measured-cost admission selected 92 of 240 payloads, with 23 per class, pres
 
 \input{supplementary_tables/v4_coherence_models.tex}
 
-The ordinary arm uses 411 donor payloads across 2398 source identities. Maximum donor-payload reuse is 18 and maximum source-identity reuse is 2.
+The ordinary arm uses 411 donor payloads across 2398 source identities. Maximum reuse of donor payloads is 18 and maximum reuse of source identities is 2.
 
-The shuffled arm uses 240 donor payloads across 2354 source identities. Maximum donor-payload reuse is 32 and maximum source-identity reuse is 4.
+The shuffled arm uses 240 donor payloads across 2354 source identities. Maximum reuse of donor payloads is 32 and maximum reuse of source identities is 4.
 
-For actual minus ordinary, deleting each reference donor payload in turn gives point estimates from 0.1504 to 0.1643. This is a donor-influence diagnostic, not a population interval incorporating two-way donor sampling.
+For actual minus ordinary, deleting each reference donor payload in turn gives point estimates from 0.1504 to 0.1643. This is a diagnostic of donor influence, not a population interval incorporating two-way donor sampling.
 
-For actual minus shuffled, deleting each reference donor payload in turn gives point estimates from 2.3210 to 2.3363. This is a donor-influence diagnostic, not a population interval incorporating two-way donor sampling.
+For actual minus shuffled, deleting each reference donor payload in turn gives point estimates from 2.3210 to 2.3363. This is a diagnostic of donor influence, not a population interval incorporating two-way donor sampling.
 
 All scored windows have eight generator tokens on the left and eight to sixteen on the right. These short contexts limit interpretation beyond local transitions.
 
-Standalone tail tokenization differed from the retained joint-tail path in 3057 units. The conditional and reference passes nevertheless scored the same IDs and denominator for each comparison. All exact source mappings and per-model effects remain in the joined tables.
+Standalone tail tokenization differed from the retained joint tail path in 3057 units. The conditional and reference passes nevertheless scored the same IDs and denominator for each comparison. All exact source mappings and per-model effects remain in the joined tables.
 
 \suppsubsection{Predeclared illustrative boundaries}
 
@@ -62,4 +62,4 @@ Left source bytes are [0, 31). Right source bytes are [31, 52).
 
 \end{minipage}\par\medskip
 
-The highest context-gain example contains the word-internal join \code{over[BOUNDARY]much} and retains malformed wording. The labels refer only to the predeclared metric ordering. They are not ratings of grammaticality or meaning.
+The highest context-gain example contains the join within a word \code{over[BOUNDARY]much} and retains malformed wording. The labels refer only to the predeclared metric ordering. They are not ratings of grammaticality or meaning.

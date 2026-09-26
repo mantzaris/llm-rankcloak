@@ -1,0 +1,494 @@
+{
+  "status": "passed",
+  "baseline_commit": "dec80d2daff76d2fd3463950951b6012a04d6057",
+  "edited_source_paragraphs": 113,
+  "edited_answer_fields": 14,
+  "punctuation_removed": {
+    ";": 84,
+    ":": 24,
+    "-": 96,
+    "\u2013": 0,
+    "\u2014": 0
+  },
+  "abstract_and_formatting_unchanged": true,
+  "all_numeric_values_and_order_unchanged": true,
+  "equations_algorithms_table_bodies_and_filter_unchanged": true,
+  "rubric_and_literal_examples_unchanged": true,
+  "prior_evidence_and_experiment_code_unchanged": true,
+  "availability_and_submission_status_unchanged": true,
+  "assistance_disclosure_remains_removed": true,
+  "quoted_review_blocks": 13,
+  "complete_answers": 16,
+  "compiled_labels_checked": 147,
+  "bookmarks": [
+    {
+      "title": "Supplementary Note S1: Extended RankCloak methods",
+      "level": 1,
+      "destination": "section*.1",
+      "page": 1,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Direct-subword framing and bounded-codec metadata",
+      "level": 2,
+      "destination": "section*.2",
+      "page": 1,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Candidate masks and deterministic ordering",
+      "level": 2,
+      "destination": "section*.3",
+      "page": 1,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Segment records, lead-ins, and tail policies",
+      "level": 2,
+      "destination": "section*.4",
+      "page": 2,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Replay modes and structured endpoints",
+      "level": 2,
+      "destination": "section*.5",
+      "page": 2,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S2: Corpus, models, prompts, and work-unit accounting",
+      "level": 1,
+      "destination": "section*.6",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Deterministic cryptographic corpus",
+      "level": 2,
+      "destination": "section*.7",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Pinned model and tokenizer identities",
+      "level": 2,
+      "destination": "section*.9",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "English prompt identities",
+      "level": 2,
+      "destination": "section*.11",
+      "page": 3,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Experimental matrices and reconciliation",
+      "level": 2,
+      "destination": "section*.12",
+      "page": 5,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S3: Detailed recovery and multilingual results",
+      "level": 1,
+      "destination": "section*.14",
+      "page": 5,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S4: Robustness and failure analysis",
+      "level": 1,
+      "destination": "section*.17",
+      "page": 7,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S5: Automated readability and model-based quality",
+      "level": 1,
+      "destination": "section*.20",
+      "page": 9,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S6: Ablations and topic effects",
+      "level": 1,
+      "destination": "section*.23",
+      "page": 10,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Locked ablation extraction",
+      "level": 2,
+      "destination": "section*.24",
+      "page": 10,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Prompt-topic contrasts",
+      "level": 2,
+      "destination": "section*.27",
+      "page": 12,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S7: neural steganalysis and leakage sensitivity",
+      "level": 1,
+      "destination": "section*.29",
+      "page": 14,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Corpus, architectures, and splits",
+      "level": 2,
+      "destination": "section*.30",
+      "page": 14,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Leakage, exclusion sensitivity, repeatability, and cost",
+      "level": 2,
+      "destination": "section*.34",
+      "page": 16,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S8: Capacity and quality theory",
+      "level": 1,
+      "destination": "section*.35",
+      "page": 16,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Finite code space and exact inversion",
+      "level": 2,
+      "destination": "section*.36",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Segmentation and overhead decomposition",
+      "level": 2,
+      "destination": "section*.37",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Conditional likelihood gap",
+      "level": 2,
+      "destination": "section*.38",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Empirical checks and trace boundary",
+      "level": 2,
+      "destination": "section*.39",
+      "page": 17,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S9: Computational overhead",
+      "level": 1,
+      "destination": "section*.42",
+      "page": 18,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S10: Worked examples and scope of evidence",
+      "level": 1,
+      "destination": "section*.46",
+      "page": 20,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Representative retained examples",
+      "level": 2,
+      "destination": "section*.47",
+      "page": 20,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Evidence and scope",
+      "level": 2,
+      "destination": "section*.48",
+      "page": 21,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S11: Strict detector splits and human-authored secondary controls",
+      "level": 1,
+      "destination": "section*.49",
+      "page": 22,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Normalization, deduplication, and partition audit",
+      "level": 2,
+      "destination": "section*.50",
+      "page": 22,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Human-authored control selection and scope",
+      "level": 2,
+      "destination": "section*.52",
+      "page": 22,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S12: Deduplicated, unseen-family, model-aware, and low-FPR detection",
+      "level": 1,
+      "destination": "section*.54",
+      "page": 23,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S13: Entropy-gated payload embedding",
+      "level": 1,
+      "destination": "section*.59",
+      "page": 26,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Calibration and replay-consistent gate",
+      "level": 2,
+      "destination": "section*.60",
+      "page": 26,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S14: Matched Q4 and Q8 quantization analysis",
+      "level": 1,
+      "destination": "section*.66",
+      "page": 29,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Pairing and recovery",
+      "level": 2,
+      "destination": "section*.67",
+      "page": 29,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Cross-quantization detector transfer",
+      "level": 2,
+      "destination": "section*.71",
+      "page": 31,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S15: Provenance and scope of the evaluation",
+      "level": 1,
+      "destination": "section*.74",
+      "page": 32,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S16. Strict-gate failure diagnostics",
+      "level": 1,
+      "destination": "section*.75",
+      "page": 33,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Matched trajectories and exact local windows",
+      "level": 2,
+      "destination": "section*.78",
+      "page": 35,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S17. Historical fragment assays and local conditional compatibility",
+      "level": 1,
+      "destination": "section*.80",
+      "page": 36,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Windows, selection and exclusions",
+      "level": 2,
+      "destination": "section*.81",
+      "page": 36,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Two control-only pilots",
+      "level": 2,
+      "destination": "section*.83",
+      "page": 37,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Fixed-path conditional compatibility",
+      "level": 2,
+      "destination": "section*.85",
+      "page": 38,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Predeclared illustrative boundaries",
+      "level": 2,
+      "destination": "section*.89",
+      "page": 39,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S18. Transport decomposition and fixed-message decoding",
+      "level": 1,
+      "destination": "section*.90",
+      "page": 40,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Directional cross-quantization endpoint",
+      "level": 2,
+      "destination": "section*.92",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S19. Configuration, rank margins and computational cost",
+      "level": 1,
+      "destination": "section*.93",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Compatibility and conditional recovery",
+      "level": 2,
+      "destination": "section*.94",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Quantization margin and received-token history",
+      "level": 2,
+      "destination": "section*.95",
+      "page": 41,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Trace-informed detection and proposed fallback",
+      "level": 2,
+      "destination": "section*.96",
+      "page": 42,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Model work and coding operations",
+      "level": 2,
+      "destination": "section*.97",
+      "page": 42,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S20. Contextual acceptability rubric and complete results",
+      "level": 1,
+      "destination": "section*.99",
+      "page": 42,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Selection and matched generation",
+      "level": 2,
+      "destination": "section*.100",
+      "page": 43,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Complete judging rubric",
+      "level": 2,
+      "destination": "section*.101",
+      "page": 43,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Judge settings and calibration",
+      "level": 2,
+      "destination": "section*.103",
+      "page": 44,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Estimation and complete results",
+      "level": 2,
+      "destination": "section*.105",
+      "page": 44,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Stops, lengths, reuse and missingness",
+      "level": 2,
+      "destination": "section*.108",
+      "page": 45,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Full-message examples",
+      "level": 2,
+      "destination": "section*.110",
+      "page": 46,
+      "heading_at_destination": true
+    },
+    {
+      "title": "Supplementary Note S21. Supporting source-likelihood comparison",
+      "level": 1,
+      "destination": "section*.111",
+      "page": 47,
+      "heading_at_destination": true
+    },
+    {
+      "title": "References",
+      "level": 1,
+      "destination": "section*.113",
+      "page": 48,
+      "heading_at_destination": true
+    }
+  ],
+  "response_render_stable": true,
+  "documents": [
+    {
+      "path": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "42052f8aac78b07c166f7d3c9c9a2c2ea41fb1f85375905b0443b341260ac95e"
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 48,
+      "sha256": "ce25dd1dad6819f34aa592e1d3fe3a29135c2eba796f1b30b648de1215b4873e"
+    },
+    {
+      "path": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "3ce507c5ddf4bcc6fbb72918932d66369260a51b81c454ec651fae196a1f66a0"
+    },
+    {
+      "path": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "31a16d6ebb4e5a1ccec8ffa646a418d7b4be907daa280f2c14a7fba6d098088d"
+    }
+  ],
+  "editable_source_sha256": "9c1ddcfe16ca19b5a8920aea9aa5738ae0de8702b7da48fda6109a98899ebaf0",
+  "clean_dependency_build": {
+    "clean_dependency_build": true,
+    "document": "main4_submission",
+    "elapsed_seconds": 3.0430007329559885,
+    "pages": 21,
+    "pdf_sha256": "00edbb5d9da145f96d01c27a7e2b784d24c24b4b5d454010129b50036b82d1ba",
+    "routine_pdf_retained": false,
+    "source_sha256": "9c1ddcfe16ca19b5a8920aea9aa5738ae0de8702b7da48fda6109a98899ebaf0",
+    "unresolved_references": false,
+    "verified_input_paths": 183,
+    "warnings": []
+  },
+  "visual_review": {
+    "status": "passed",
+    "visually_reviewed_pages": 70,
+    "automatic_pages": 80
+  },
+  "gpu_seconds": 0
+}
