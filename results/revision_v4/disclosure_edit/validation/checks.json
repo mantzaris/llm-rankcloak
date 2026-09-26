@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "baseline_commit": "91cf154102652d15a40920349dd91c27d436d039",
+  "change": "Disclosure heading and paragraph removed at author request; no replacement wording inserted.",
+  "all_other_manuscript_and_supplement_text_unchanged": true,
+  "abstract_and_scientific_evidence_unchanged": true,
+  "historical_disclosure_records_unchanged": true,
+  "quotes_preserved": 13,
+  "substantive_answers_preserved": 16,
+  "remaining_compiled_labels": 147,
+  "response_render_stable": true,
+  "documents": [
+    {
+      "path": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "5f96165f65c14e0d05c7eb0f6c8f2547e7dd958466c4231d5d2c3d78fdf617dd"
+    },
+    {
+      "path": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 48,
+      "sha256": "c5e3b5fff4b44906bd06b6d34af2b01ab33466de46ffff985255ba50d6e51dcf"
+    },
+    {
+      "path": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "cfec0a051970c6d716164d56902445b8a62776a8f4669b4c39097623a5e220fa"
+    },
+    {
+      "path": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "8de17118dda62240ec3b7a5e36c8ea7ac95e34a3859609d9f6cf65744c1815c9"
+    }
+  ],
+  "editable_source_sha256": "f7ead39b4838501999ec9e040902c5ffd8cb0dfb335e2dd84d3e3bf83dc20ef2",
+  "clean_dependency_build": {
+    "clean_dependency_build": true,
+    "document": "main4_submission",
+    "elapsed_seconds": 3.073629309015814,
+    "pages": 21,
+    "pdf_sha256": "3c867c60173046b57717aac329b27766e550a1f3a634bc4a213890fde466f293",
+    "routine_pdf_retained": false,
+    "source_sha256": "f7ead39b4838501999ec9e040902c5ffd8cb0dfb335e2dd84d3e3bf83dc20ef2",
+    "unresolved_references": false,
+    "verified_input_paths": 183,
+    "warnings": []
+  },
+  "additional_gpu_seconds": 0,
+  "author_will_supply_replacement_disclosure": true
+}

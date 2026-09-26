@@ -1,0 +1,65 @@
+{
+  "correspondence": {
+    "logs": "results/revision_v4/disclosure_edit/validation/latex/correspondence_01",
+    "records": [
+      {
+        "document": "response_to_reviewers_v4",
+        "elapsed_seconds": 1.8453622139641084,
+        "pages": 8,
+        "pdf_sha256": "cfec0a051970c6d716164d56902445b8a62776a8f4669b4c39097623a5e220fa",
+        "source_sha256": "2ca7206f102e16161b8d45419f16c9b650192332300ba27cbd9d04e22e93d4c3",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "cover_letter_v4",
+        "elapsed_seconds": 1.5704633219866082,
+        "pages": 1,
+        "pdf_sha256": "8de17118dda62240ec3b7a5e36c8ea7ac95e34a3859609d9f6cf65744c1815c9",
+        "source_sha256": "f0a5cae4320510427a4ce90db5c67532c150b34bac839b5889dd8f642f0069ca",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "scientific": {
+    "logs": "results/revision_v4/disclosure_edit/validation/latex/scientific_01",
+    "records": [
+      {
+        "document": "supplementary4",
+        "elapsed_seconds": 4.775658080994617,
+        "pages": 48,
+        "pdf_sha256": "c5e3b5fff4b44906bd06b6d34af2b01ab33466de46ffff985255ba50d6e51dcf",
+        "source_sha256": "c383d42a02f3d63c909836385cba247f447b3d8774674924c0284eb4d0b9323e",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "main4",
+        "elapsed_seconds": 3.9258002629503608,
+        "pages": 23,
+        "pdf_sha256": "5f96165f65c14e0d05c7eb0f6c8f2547e7dd958466c4231d5d2c3d78fdf617dd",
+        "source_sha256": "49773ffdad75373ffba5ff7c93c16148e5c2a33303b670496aa59f8d901575a1",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "submission": {
+    "logs": "results/revision_v4/disclosure_edit/validation/latex/submission_01",
+    "records": [
+      {
+        "clean_dependency_build": true,
+        "document": "main4_submission",
+        "elapsed_seconds": 3.073629309015814,
+        "pages": 21,
+        "pdf_sha256": "3c867c60173046b57717aac329b27766e550a1f3a634bc4a213890fde466f293",
+        "routine_pdf_retained": false,
+        "source_sha256": "f7ead39b4838501999ec9e040902c5ffd8cb0dfb335e2dd84d3e3bf83dc20ef2",
+        "unresolved_references": false,
+        "verified_input_paths": 183,
+        "warnings": []
+      }
+    ]
+  }
+}

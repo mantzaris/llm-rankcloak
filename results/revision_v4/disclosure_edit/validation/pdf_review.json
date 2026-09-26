@@ -1,0 +1,87 @@
+{
+  "baseline_commit": "91cf154102652d15a40920349dd91c27d436d039",
+  "documents": [
+    {
+      "all_page_automatic_issues": [],
+      "baseline_pages": 23,
+      "contact_sheets": [
+        "results/revision_v4/disclosure_edit/validation/rendered/main4_contact_01.jpg",
+        "results/revision_v4/disclosure_edit/validation/rendered/main4_contact_02.jpg",
+        "results/revision_v4/disclosure_edit/validation/rendered/main4_contact_03.jpg",
+        "results/revision_v4/disclosure_edit/validation/rendered/main4_contact_04.jpg"
+      ],
+      "document": "paperV4/scientific_reports/main4.pdf",
+      "pages": 23,
+      "sha256": "5f96165f65c14e0d05c7eb0f6c8f2547e7dd958466c4231d5d2c3d78fdf617dd",
+      "text_or_geometry_changed_pages": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "visual_inspection": "passed actual rendered-page inspection",
+      "visually_reviewed_pages": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "findings": "No clipping, overlap, broken figures or accidental blank pages observed."
+    },
+    {
+      "all_page_automatic_issues": [],
+      "baseline_pages": 48,
+      "contact_sheets": [],
+      "document": "paperV4/scientific_reports/supplementary4.pdf",
+      "pages": 48,
+      "sha256": "c5e3b5fff4b44906bd06b6d34af2b01ab33466de46ffff985255ba50d6e51dcf",
+      "text_or_geometry_changed_pages": [],
+      "visual_inspection": "unchanged text and geometry; automatic checks passed",
+      "visually_reviewed_pages": []
+    },
+    {
+      "all_page_automatic_issues": [],
+      "baseline_pages": 8,
+      "contact_sheets": [],
+      "document": "paperV4/response/response_to_reviewers_v4.pdf",
+      "pages": 8,
+      "sha256": "cfec0a051970c6d716164d56902445b8a62776a8f4669b4c39097623a5e220fa",
+      "text_or_geometry_changed_pages": [],
+      "visual_inspection": "unchanged text and geometry; automatic checks passed",
+      "visually_reviewed_pages": []
+    },
+    {
+      "all_page_automatic_issues": [],
+      "baseline_pages": 1,
+      "contact_sheets": [],
+      "document": "paperV4/cover_letter/cover_letter_v4.pdf",
+      "pages": 1,
+      "sha256": "8de17118dda62240ec3b7a5e36c8ea7ac95e34a3859609d9f6cf65744c1815c9",
+      "text_or_geometry_changed_pages": [],
+      "visual_inspection": "unchanged text and geometry; automatic checks passed",
+      "visually_reviewed_pages": []
+    }
+  ],
+  "rule": "Every current page is checked for text and page bounds. Contact sheets cover every page whose text or word geometry differs from the baseline, plus new pages. Visual inspection is recorded separately after viewing.",
+  "visual_review_complete": true,
+  "visually_reviewed_page_count": 13,
+  "automatic_page_count": 80
+}

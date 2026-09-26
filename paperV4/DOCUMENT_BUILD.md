@@ -1,6 +1,6 @@
 # Current V4 editorial document workflow
 
-Edit the current TeX sources and `response/editorial_answers.json`. Scientific scores, tables, figures, frozen plans and earlier stage receipts are retained unchanged. Current build and validation records go to `results/revision_v4/publication_edit/`.
+Edit the current TeX sources and `response/editorial_answers.json`. Scientific scores, tables, figures, frozen plans and earlier stage receipts are retained unchanged. Current build and validation records go to `results/revision_v4/disclosure_edit/`.
 
 From the repository root with the existing analysis environment and local LaTeX toolchain
 
@@ -10,7 +10,7 @@ From the repository root with the existing analysis environment and local LaTeX 
 .venv/bin/python -m scripts.render_revision_v4_editorial_response
 .venv/bin/python -m scripts.build_revision_v4_editorial_documents --phase correspondence
 .venv/bin/python -m scripts.build_revision_v4_editorial_documents --phase submission
-.venv/bin/python -m scripts.validate_revision_v4_publication_edit
+.venv/bin/python -m scripts.validate_revision_v4_disclosure_edit
 .venv/bin/python -m scripts.review_revision_v4_editorial_pdfs
 ```
 
@@ -18,4 +18,4 @@ The scientific phase resolves supplementary sidebar bookmarks first, then builds
 
 The historical Stage 1–4 and contextual-study renderers remain available to reproduce their archived workflows. Running them on the current manuscript would restore superseded prose or write into earlier evidence namespaces. Use the editorial commands above for current documents. Any further text edit requires new builds and a fresh visual review of changed pages. PDF timestamps need not be identical across builds.
 
-The earlier editorial and presentation-cleanup records remain unchanged. Their historical validator is preserved. The current validator applies the explicit OLD/NEW replacement allowlist to commit `303a2c4442992867fed0adeb4b12061cf001c1b7`, then requires exact source agreement and preservation of the abstract, mathematical definitions, algorithms, numerical evidence, literal examples, review quotations and answer text. It also checks the absence of removed decorations. Sidebar bookmarks do not require printed contents. Run the response renderer a second time to check reproducibility before the correspondence build. The manuscript TeX and its included files are authoritative; the builder only compiles them and regenerates the editable submission source with its embedded bibliography. It never restores historical manuscript prose.
+The earlier editorial, presentation-cleanup and publication-edit records and validators remain unchanged. The current author instruction removes the assistance disclosure so the author can supply replacement wording. The current validator checks only that authorized removal and regenerated locations against commit `91cf154102652d15a40920349dd91c27d436d039`, preserving scientific text, the abstract, numerical evidence, review quotations and answer text. Run the response renderer twice before the correspondence build to check reproducibility. The current manuscript TeX and its included files remain authoritative; the builder never restores historical prose.

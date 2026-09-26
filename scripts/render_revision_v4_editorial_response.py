@@ -10,7 +10,7 @@ import re
 from scripts.prepare_revision_v4_stage1 import escape
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'results/revision_v4/publication_edit'
+OUT = ROOT / 'results/revision_v4/disclosure_edit'
 
 
 def render_text(text):
@@ -69,7 +69,7 @@ def main():
     (OUT/'validation/locations.json').write_text(json.dumps(locations,indent=2)+'\n')
     matrix = ['# V4 response and evidence status','',
         'All sixteen written responses are complete for author review. R1.4 supplies automated intact-message contextual evidence under the fixed lenient rubric. Human perception remains unmeasured, and the editor determines its adequacy. Historical fragment assays remain in Supplementary Note S17.','',
-        'The current evidence is outside the earlier local archive candidate and published V3 deposit. Archive coverage remains a separate submission action. All thirteen exact review blocks and the original requests are unchanged. Current ledger: `results/revision_v4/publication_edit/response_status.json`.','',
+        'The current evidence is outside the earlier local archive candidate and published V3 deposit. Archive coverage remains a separate submission action. All thirteen exact review blocks and the original requests are unchanged. Current ledger: `results/revision_v4/disclosure_edit/response_status.json`.','',
         '| Point | Written response | Evidence coverage | External action | Locations |',
         '| --- | --- | --- | --- | --- |']
     for row in rows:
