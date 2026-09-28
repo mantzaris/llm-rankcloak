@@ -1,0 +1,65 @@
+{
+  "correspondence": {
+    "logs": "results/revision_v4/abstract_coherence_edit/validation/latex/correspondence_01",
+    "records": [
+      {
+        "document": "response_to_reviewers_v4",
+        "elapsed_seconds": 1.6530524560366757,
+        "pages": 8,
+        "pdf_sha256": "3a6b8dc3f4d36032039b868e931f1eead2ba7e2520320e1eec7a52bb98425856",
+        "source_sha256": "021a2fc8e8a173412f16dac2b33fbbefb25999a3bc6abc1c02c7a1cfe682267d",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "cover_letter_v4",
+        "elapsed_seconds": 1.4504576009931043,
+        "pages": 1,
+        "pdf_sha256": "48d7fbd4b5ba22336c520f26de1b66d72453acc0ed51bfc2ee3904e1189aa007",
+        "source_sha256": "be66d919800b2ad4ba2990f0e841f794f92fe60a733fa86b72e84888aef76fe5",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "scientific": {
+    "logs": "results/revision_v4/abstract_coherence_edit/validation/latex/scientific_01",
+    "records": [
+      {
+        "document": "supplementary4",
+        "elapsed_seconds": 4.028408087033313,
+        "pages": 48,
+        "pdf_sha256": "3cad673e2cd926e41a1bd47e163e83d50b9073c6493f6aad112f074274a03f44",
+        "source_sha256": "03eadbe56f5436e035de51ac5dfd92a7529e6ae4390ca8c85997b94844bf93e3",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "main4",
+        "elapsed_seconds": 3.3635835089953616,
+        "pages": 23,
+        "pdf_sha256": "c8f349fd65294026e9b61f33aa702f2f444f6ea42c03bfaddd8de25b8a76d3cf",
+        "source_sha256": "42281b8950f2fdf6a129fbcf7601b53bdc32e02b36498dc9ab0f42ab04c2fead",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "submission": {
+    "logs": "results/revision_v4/abstract_coherence_edit/validation/latex/submission_01",
+    "records": [
+      {
+        "clean_dependency_build": true,
+        "document": "main4_submission",
+        "elapsed_seconds": 2.9678562059998512,
+        "pages": 21,
+        "pdf_sha256": "2759f9f054c093037ac338530210a16a2be4be775d0b68ff00a600c3ed3babdb",
+        "routine_pdf_retained": false,
+        "source_sha256": "cedf985954c4650102505f671869ecf4c7d2739bcf4a2bf0956361984fb7a239",
+        "unresolved_references": false,
+        "verified_input_paths": 183,
+        "warnings": []
+      }
+    ]
+  }
+}

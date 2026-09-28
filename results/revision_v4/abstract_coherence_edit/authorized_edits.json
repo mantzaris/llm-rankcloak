@@ -1,0 +1,209 @@
+{
+  "baseline_commit": "c614f754faf3bb1a89d79689ca88342078759c15",
+  "initial_author_adjustments": [
+    {
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "Human perception was not measured. ",
+      "new": ""
+    }
+  ],
+  "source_edits": [
+    {
+      "id": "1",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "\nCryptographic artifacts such as hashes, nonces and ciphertexts are readily recognizable in their usual textual forms. RankCloak conceals this syntax by mapping serialized artifacts to language-model token ranks and expressing them as generated cover text. Its bounded codecs and segmented generation provide a reproducible framework for studying recovery, efficiency and contextual acceptability. Across 480 deterministic artifacts from eight classes, three model families and 18 English prompts, all 6,480 primary trials recovered the original bytes under preserved token sequences and shared configurations. In a contextual evaluation with blinded model judges, 537 of 576 message pairs had complete ratings. Automated acceptance reached 90.3\\% for RankCloak and 96.6\\% for matched greedy ordinary output under a rubric allowing minor awkwardness. Entropy gating reduced selected detection signals, with tradeoffs in payload rate and completion. Visible-text retokenization recovered 88 of 144 covers, while transformations and configuration mismatches exposed transport sensitivity. Steganalysis remained effective, and surface concealment does not imply undetectability or confidentiality. These results establish artifact specific concealment and configured recovery, with quantified efficiency, acceptability and transport tradeoffs that inform the design of language-model-based information hiding.\n",
+      "new": "\nCryptographic artifacts such as hashes, nonces, identifiers, and ciphertexts are conspicuous when transmitted in their usual textual forms. RankCloak conceals this recognizable form by encoding each synthetic artifact through language model token choices, producing cover text that does not directly display the artifact. We evaluated 480 public deterministic artifacts from eight classes with three open source model families and 18 English prompt templates. The decoder recovered every artifact across 6,480 primary trials when the original token sequence and shared generation configuration were preserved. Recovery from rendered cover text succeeded in 61.1 percent of the tested robustness sample, whereas the tested blockquote and trimming operation, paraphrasing, and decoding with another model failed. Stronger detection tests separated duplicate and near-duplicate material before training, withheld model families, included human written comparisons, and used probabilities from the generating model. Under these tests, encoded covers were often detectable. Restricting embedding to positions with several plausible next words reduced some detection signals but also reduced capacity and increased cover length. Detecting a possible encoding does not itself display or reconstruct the concealed artifact. RankCloak demonstrates concealment and recovery specifically for cryptographic artifacts under a shared configuration while exposing detectability and transmission limitations, but it does not establish the concealment of arbitrary natural-language messages.\n",
+      "old_sha256": "10ae6ef03731d6248a6fd36a490e33c39d3c90827e58e6f5a867eed9aab6c513"
+    },
+    {
+      "id": "2",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "Two local model judges assess each message in context, allowing minor awkwardness when its meaning remains understandable. Their scores measure automated acceptability. Human perception was not assessed.",
+      "new": "Two blinded model judges assess each message in context using a common rubric for coherence and acceptability, allowing minor awkwardness when its meaning remains understandable.",
+      "old_sha256": "398ff2ca5b2910b64db8c0c850b3c31b8a74124b13eec448c12ecfa3b36211df"
+    },
+    {
+      "id": "3",
+      "path": "paperV4/scientific_reports/v4_contextual_methods.tex",
+      "old": "Structured model evaluation motivates an explicit rubric\\cite{Liu2023GEval}, but does not replace direct human assessment\\cite{VanDerLee2019BestPractices}.",
+      "new": "Structured model evaluation provides a reproducible approach to assessing generated text through explicit quality criteria\\cite{Liu2023GEval}. Here, blinded model judges apply a common rubric to evaluate contextual coherence and acceptability.",
+      "old_sha256": "e24ad7997f792246553fb3a817fdf0b1cba7c9a2aaa39e4277d1adb8ec032ddb"
+    },
+    {
+      "id": "4",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "The intact-message study extends evaluation from diagnostics at token level to automated contextual acceptability. Under a rubric accepting understandable text with minor awkwardness, the panel accepted 90.3\\% of encoded messages and 96.6\\% of matched greedy controls. The -6.3 percentage-point difference quantifies a remaining acceptability cost alongside the high acceptance level of encoded messages. These are model judgments of complete delivered conditions, with possible contributions from length and content differences. They do not establish human acceptance or indistinguishability. The historical likelihood analysis provides complementary evidence about local fixed-path compatibility.",
+      "new": "The intact-message study extends token-level diagnostics with an automated evaluation of contextual coherence and acceptability. Under a common rubric accepting understandable text with minor awkwardness, the blinded panel accepted 90.3\\% of encoded messages and 96.6\\% of matched greedy controls. Most encoded messages were therefore judged understandable in their supplied contexts, while the paired difference of -6.3 percentage points quantifies the remaining difference from ordinary output. The comparison evaluates complete delivered messages, including their length and content differences. The historical likelihood analysis provides complementary evidence about local fixed-path compatibility.",
+      "old_sha256": "705c8378c95c496db86d1f31b92df9abfb106862caf79e0e093e239bfed91a94"
+    },
+    {
+      "id": "5",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "The contextual study measures automated judgments from local instruction models. Human perception and indistinguishability were not measured.",
+      "new": "The contextual study evaluates coherence and acceptability through blinded judgments from local instruction models. Its outcomes are model-based ratings; no participant ratings were collected.",
+      "old_sha256": "1849933b7c2fbba1df69b48879eb2d3d5581753e3699694d87475f041de0cbd5"
+    },
+    {
+      "id": "6A",
+      "path": "paperV4/scientific_reports/v4_contextual_results.tex",
+      "old": "These are automated judgments, not human acceptance or detection rates.",
+      "new": "Acceptance denotes an automated judgment of contextual understandability under the stated rubric.",
+      "old_sha256": "c280e41246ee233f50b2e42df3261f206cb7d51826db4c539d52fdb93dc91760"
+    },
+    {
+      "id": "6B",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "These automated diagnostics are not human-perceived judgments",
+      "new": "These automated diagnostics characterize model likelihood and surface properties",
+      "old_sha256": "b7ec7b8bacc6c9a4d56b4138684f2ee59046420747ed83be0875a470db1e603d"
+    },
+    {
+      "id": "6C",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "Likelihood and surface flags are automated diagnostics, not human judgments",
+      "new": "Likelihood and surface flags summarize model-based and surface properties of the generated text",
+      "old_sha256": "c4e0b461fe296a45251f6de3e2e14eb1a668c42cd514145ed304a5edb207c347"
+    },
+    {
+      "id": "6D",
+      "path": "paperV4/scientific_reports/main4.tex",
+      "old": "Source-model and 'held out evaluator' likelihoods are reported as model diagnostics, not participant ratings.",
+      "new": "Source-model and held-out evaluator likelihoods provide complementary model-based diagnostics.",
+      "old_sha256": "b0b85404013d710b4a27f8e4aab94101a4fefa1acf631bff8f9cdfe43e36dabe"
+    },
+    {
+      "id": "7A",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old": " Human perception was not evaluated.",
+      "new": "",
+      "old_sha256": "09ac42d39063f38b6e5c3aea7ae9b11a5a78e2ff57997f54f5ce64f75b445bd6"
+    },
+    {
+      "id": "7B",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old": "No participants were recruited and no human ratings were collected. The contextual evaluation in Note S20 uses model judges. Unadministered planning materials are retained in the repository as study history and do not contribute to the reported results.",
+      "new": "Automated readability diagnostics and the contextual model judgments in Note S20 provide complementary assessments of generated text. Unadministered planning materials are retained in the repository as study history and do not contribute to the reported results.",
+      "old_sha256": "1423a0a77bd74af85d2a8b9b203c608b9540a82d8b9d152d112d87ee015b628d"
+    },
+    {
+      "id": "7C",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old": "Human-perceived readability and indistinguishability remain unmeasured",
+      "new": "Estimates apply to the specified automated measures and contextual judging rubric",
+      "old_sha256": "1939772fe467a1edc84d56c0fcf830ef1e2cf507f66fe05cd73d81035a37170a"
+    },
+    {
+      "id": "7D",
+      "path": "paperV4/scientific_reports/supplementary4.tex",
+      "old": "Automated acceptance permits minor awkwardness. No participants or human ratings. Historical fragment assays remain in Note S17",
+      "new": "Acceptance follows the stated contextual rubric and permits minor awkwardness. Historical fragment assays remain in Note S17",
+      "old_sha256": "8067d41b6a941c5a7926cb450f7f6118a392cfb172afcff6255d30eabbad3720"
+    },
+    {
+      "id": "7E",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": "The original corpus was available during study development.",
+      "new": "The original corpus was available during study development. All reported ratings were produced by model judges; no participant ratings were collected.",
+      "old_sha256": "47ca015579b77748056e3afc8e7c577363780b2eac8d910344c7db4d49e27e9f"
+    },
+    {
+      "id": "7F",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": "The author's informal reading motivated the follow-up but supplied no participant data.",
+      "new": "The author's informal reading motivated the follow-up, and the reported outcomes come from the frozen automated evaluation.",
+      "old_sha256": "796b323548af80ae980b81c27c65e488c2930ba9f67775ec63d4e35e5cec02cf"
+    },
+    {
+      "id": "7G",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": "Our local study is not a reproduction of G-Eval's GPT-4 results\\cite{Liu2023GEval}.",
+      "new": "G-Eval provides methodological context for structured model evaluation\\cite{Liu2023GEval}; the present study uses the local models, rubric and calibration procedure specified here.",
+      "old_sha256": "0804d48366c21eafaa8abdc038580f6ba2f5d7bd14c643261244bc6b5f47001c"
+    },
+    {
+      "id": "7H",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": " These examples are not participant validation.",
+      "new": "",
+      "old_sha256": "051ae706469b6bf963d61109769b6f605267f2dfd70546e93d4d46be989637ba"
+    },
+    {
+      "id": "7I",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": "Judge assignments are not fully crossed with generators, and the two models are not independent human participants.",
+      "new": "Judge assignments are not fully crossed with generators. The two assigned model ratings are combined within each item before aggregation.",
+      "old_sha256": "81b4ead737f769f6f5ac9f582b1add0afc67f51acedad09bd39d4a0454e83f9f"
+    },
+    {
+      "id": "8-table-label",
+      "path": "paperV4/scientific_reports/supplementary_tables/v4_contextual.tex",
+      "old": "These are automated ratings, not human reading outcomes.",
+      "new": "Ratings summarize automated contextual acceptability under the stated rubric.",
+      "old_sha256": "c6422fbeeeef73238edbcd871fee2387724410af8c1149bee7d5e335848bfd5f"
+    },
+    {
+      "id": "8-strata-caption",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": "The panel uses two judgments per item rather than treating judges as independent participants.",
+      "new": "The panel combines the two assigned model ratings within each item before aggregation.",
+      "old_sha256": "17472bd7ea92d36a7c95a424557f428f4777086eb8dc4e46146ea96cf8362fe3"
+    },
+    {
+      "id": "8-example-label",
+      "path": "paperV4/scientific_reports/v4_contextual_supplement.tex",
+      "old": "These labels denote model scores rather than reader judgments.",
+      "new": "These labels denote the assigned model scores.",
+      "old_sha256": "2b85f47bfa262371ebcae0a84a33fc28d5a2b213e75a7ac8318ea6466bc687b1"
+    },
+    {
+      "id": "8-response-introduction",
+      "path": "paperV4/response/response_to_reviewers_v4.tex",
+      "old": "A new intact-message study supplies automated contextual evidence for Reviewer 1 comment 4. Human perception remains unmeasured.",
+      "new": "The completed intact-message study supplies automated contextual evidence addressing Reviewer 1 comment 4.",
+      "old_sha256": "e08942aceb30b78e40195acd5f9065a2abd81be04a764c2568c6b2868707690a"
+    },
+    {
+      "id": "8-cover",
+      "path": "paperV4/cover_letter/cover_letter_v4.tex",
+      "old": "Direct human perception remains unmeasured. The editor can assess whether this automated evidence meets Reviewer 1 comment 4.",
+      "new": "This completed automated evaluation provides evidence addressing Reviewer 1 comment 4.",
+      "old_sha256": "0fe8b2ff875af64d485b604cf72c067949fe050681f610329b56aa7d3eafc6d7"
+    }
+  ],
+  "answer_edits": [
+    {
+      "id": "editor_accuracy",
+      "field": "evidence_change",
+      "old": "The V4 text corrects the historical raw and limited unmodified references to saved-token recovery, documents the entropy experiment with no filter and sampled skips, and separates the directional fixed-message quantization endpoint from free generation. The new contextual follow-up uses matched greedy controls and reports automated rubric acceptance separately from human perception. All earlier fragment outcomes remain in the supplement.",
+      "new": "The V4 text corrects the historical raw and limited unmodified references to saved-token recovery, documents the entropy experiment with no filter and sampled skips, and separates the directional fixed-message quantization endpoint from free generation. The new contextual follow-up uses matched greedy controls and reports contextual coherence and acceptability under the common automated rubric. All earlier fragment outcomes remain in the supplement."
+    },
+    {
+      "id": "editor_technical",
+      "field": "direct_answer",
+      "old": "The revision retains the theoretical and implementation analyses and limits the contribution to artifact-specific concealment of surface form and configured inversion. A new study of intact messages now supplies the primary automated contextual evidence. Automated contextual evidence remains distinct from unmeasured human perception.",
+      "new": "The revision retains the theoretical and implementation analyses and limits the contribution to artifact-specific concealment of surface form and configured inversion. The completed study of intact messages supplies substantive automated evidence on contextual coherence and acceptability."
+    },
+    {
+      "id": "editor_technical",
+      "field": "evidence_change",
+      "old": "The new study applies the same lenient, fixed rubric to complete encoded messages and matched greedy ordinary controls. It uses authentic prompts, blinded judges from other model families, a separate constructed calibration set and a frozen 48-payload sample. Among 537 complete message pairs in 280 trials, the equally weighted panel accepts 90.3 [88.4, 92.1]% of encoded messages and 96.6 [95.0, 98.1]% of matched ordinary messages. The paired difference is -6.3 [-8.7, -3.9] percentage points. Brackets give 95% payload-cluster intervals stratified by class. Mean logical connectedness is 3.60/5 for encoded text and 4.00/5 for ordinary text. Binary judge disagreement is 14.6% and 6.7%, respectively. The previous fragment assays are retained as supplementary methodological history, with their failed semantic control checks and limited local likelihood findings. Historical recovery, transport, entropy, quantization and detector results are unchanged. No reader validation, confidentiality or indistinguishability is claimed.",
+      "new": "The new study applies the same lenient, fixed rubric to complete encoded messages and matched greedy ordinary controls. It uses authentic prompts, blinded judges from other model families, a separate constructed calibration set and a frozen 48-payload sample. Among 537 complete message pairs in 280 trials, the equally weighted panel accepts 90.3 [88.4, 92.1]% of encoded messages and 96.6 [95.0, 98.1]% of matched ordinary messages. The paired difference is -6.3 [-8.7, -3.9] percentage points. Brackets give 95% payload-cluster intervals stratified by class. Mean logical connectedness is 3.60/5 for encoded text and 4.00/5 for ordinary text. Binary judge disagreement is 14.6% and 6.7%, respectively. The previous fragment assays are retained as supplementary methodological history, with their failed semantic control checks and limited local likelihood findings. Historical recovery, transport, entropy, quantization and detector results are unchanged. These automated findings do not establish confidentiality or indistinguishability."
+    },
+    {
+      "id": "R1.4",
+      "field": "evidence_change",
+      "old": "A seeded selection covers 48 payloads across four hexadecimal classes, three generators and two schedules, giving 576 messages outside the earlier scored cohort. Each is paired with ordinary output from the same generator and prompt using matched filtering, greedy continuation, budget and stopping rules. Among 537 complete pairs, panel acceptance is 90.3% for RankCloak and 96.6% for ordinary output. The paired difference is -6.3 percentage points with a 95% payload-cluster interval of [-8.7, -3.9]. Mean logical connectedness is 3.60/5 versus 4.00/5.\n\nMessages are averaged within trials and payloads, with intervals conditional on the fixed reused controls. Supplementary Note S20 reports calibration mistakes, the 39 incomplete pairs, missing-score sensitivity, subgroup results, disagreement and exact unfavorable examples. Judges and generators are not fully crossed, and the comparison does not isolate a causal boundary effect. This provides automated evidence of contextual acceptability, not measured human perception or indistinguishability. The earlier fragment pilots and limited likelihood evidence remain in S17. The editor can assess whether this evidence meets the requested validation.",
+      "new": "A seeded selection covers 48 payloads across four hexadecimal classes, three generators and two schedules, giving 576 messages outside the earlier scored cohort. Each is paired with ordinary output from the same generator and prompt using matched filtering, greedy continuation, budget and stopping rules. Among 537 complete pairs, panel acceptance is 90.3% for RankCloak and 96.6% for ordinary output. The paired difference is -6.3 percentage points with a 95% payload-cluster interval of [-8.7, -3.9]. Mean logical connectedness is 3.60/5 versus 4.00/5.\n\nMessages are averaged within trials and payloads, with intervals conditional on the fixed reused controls. Supplementary Note S20 reports calibration mistakes, the 39 incomplete pairs, missing-score sensitivity, subgroup results, disagreement and exact unfavorable examples. Judges and generators are not fully crossed, and the comparison does not isolate a causal boundary effect. This completed study provides automated evidence of contextual coherence and acceptability under the stated rubric. The earlier fragment pilots and limited likelihood evidence remain in S17. The editor can assess whether this evidence meets the requested validation."
+    },
+    {
+      "id": "R1.4",
+      "field": "evidence_change",
+      "old": "A seeded selection covers 48 payloads across four hexadecimal classes, three generators and two schedules, giving 576 messages outside the earlier scored cohort. Each is paired with ordinary output from the same generator and prompt using matched filtering, greedy continuation, budget and stopping rules. Among 537 complete pairs, panel acceptance is 90.3% for RankCloak and 96.6% for ordinary output. The paired difference is -6.3 percentage points with a 95% payload-cluster interval of [-8.7, -3.9]. Mean logical connectedness is 3.60/5 versus 4.00/5.\n\nMessages are averaged within trials and payloads, with intervals conditional on the fixed reused controls. Supplementary Note S20 reports calibration mistakes, the 39 incomplete pairs, missing-score sensitivity, subgroup results, disagreement and exact unfavorable examples. Judges and generators are not fully crossed, and the comparison does not isolate a causal boundary effect. This completed study provides automated evidence of contextual coherence and acceptability under the stated rubric. The earlier fragment pilots and limited likelihood evidence remain in S17. The editor can assess whether this evidence meets the requested validation.",
+      "new": "A seeded selection covers 48 payloads across four hexadecimal classes, three generators and two schedules, giving 576 messages outside the earlier scored cohort. Each is paired with ordinary output from the same generator and prompt using matched filtering, greedy continuation, budget and stopping rules. Among 537 complete pairs, panel acceptance is 90.3% for RankCloak and 96.6% for ordinary output. The paired difference is -6.3 percentage points with a 95% payload-cluster interval of [-8.7, -3.9]. Mean logical connectedness is 3.60/5 versus 4.00/5.\n\nMessages are averaged within trials and payloads, with intervals conditional on the fixed reused controls. Supplementary Note S20 reports calibration mistakes, the 39 incomplete pairs, missing-score sensitivity, subgroup results, disagreement and exact unfavorable examples. Judges and generators are not fully crossed, and the comparison does not isolate a causal boundary effect. This completed study provides automated evidence of contextual coherence and acceptability under the stated rubric. The earlier fragment pilots and limited likelihood evidence remain in S17. The automated findings address the requested stronger coherence evaluation."
+    }
+  ],
+  "abstract_transport_old": "Recovery from rendered cover text succeeded in 61.1 percent of the tested robustness sample, whereas Markdown transfer, paraphrasing, and decoding with another model failed.",
+  "abstract_transport_new": "Recovery from rendered cover text succeeded in 61.1 percent of the tested robustness sample, whereas the tested blockquote and trimming operation, paraphrasing, and decoding with another model failed.",
+  "removed_citation": "VanDerLee2019BestPractices",
+  "scope": "Specified prose and corresponding local method labels only. No scientific analysis or model execution."
+}

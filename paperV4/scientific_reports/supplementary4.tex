@@ -333,7 +333,7 @@ The computational stimulus design selected 504 rows balanced over seven conditio
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/automated_readability.pdf}
-\caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload greedy continuations. These automated surface measures complement the contextual model judgments in Note S20. Human perception was not evaluated.}
+\caption{\label{fig:readability-full}\textbf{Automated readability diagnostics.} Flesch Reading Ease and related surface diagnostics are summarized over 504 balanced computational stimuli, with uncertainty resampled over prompt templates. Segmented full messages include payload-bearing forced spans and non-payload greedy continuations. These automated surface measures complement the contextual model judgments in Note S20.}
 \end{figure}
 
 \begin{table}[H]
@@ -354,7 +354,7 @@ Source model quality supplied 45 protocol/model contrasts. Of these, 42 had Holm
 
 The empirical capacity and quality frontier shown in Main Fig. 2 contains 4,320 trials restricted to the four payload classes on the common hexadecimal support. Three models and six protocols form 18 model and protocol cells. Separate views of forced spans and full messages yield 36 plotted cells. For every cell, mean token count is reported on the horizontal axis, mean source model token log probability is reported on the vertical axis, and point area represents mean automated surface-flag burden. Intervals use 2,000 payload-bootstrap resamples. Non-hexadecimal payload classes are excluded by the common-support restriction, and no lead-in condition exists in the complete primary matrix.
 Forced-span metrics average only payload-bearing token positions. Full-message metrics additionally include greedy tail positions and can therefore improve as the tail becomes longer even if the forced span is unchanged. Both are reported to avoid treating tail likelihood as evidence about the embedded positions.
-No participants were recruited and no human ratings were collected. The contextual evaluation in Note S20 uses model judges. Unadministered planning materials are retained in the repository as study history and do not contribute to the reported results.
+Automated readability diagnostics and the contextual model judgments in Note S20 provide complementary assessments of generated text. Unadministered planning materials are retained in the repository as study history and do not contribute to the reported results.
 
 
 \suppnote{Supplementary Note S6: Ablations and topic effects}\label{si:s6}
@@ -673,7 +673,7 @@ Evaluated aspect & Finding & Scope or untested extension \\
 \endhead
 Exact-copy recovery & 6,480/6,480 primary serialized payloads recovered from saved token IDs under matched replay & Ordinary visible-text reliability, cross-model robustness \\
 Transmission & Controlled frozen perturbations reveal severe fragility; tail-only truncation preserves recovery when only ignored tokens are removed & Broad edit robustness or general mitigation \\
-Text evaluation & Automated surface/model diagnostics on 504 stimuli; contextual model judgments on 537 complete pairs (Note S20) & Human-perceived readability and indistinguishability remain unmeasured \\
+Text evaluation & Automated surface/model diagnostics on 504 stimuli; contextual model judgments on 537 complete pairs (Note S20) & Estimates apply to the specified automated measures and contextual judging rubric \\
 Deployment & No operational channel or deployment traffic was tested & Practical covert communication or real-world validation \\
 Detectability & Two data-adaptive text-only detectors and an exact-model-aware attacker strongly distinguish evaluated covers, limiting stealth & Undetectability or resistance to future detectors \\
 Multilingual scope & Exact-copy recovery in 288/288 Spanish and 288/288 Simplified Chinese secondary trials & Broad multilingual naturalness or cross-language generalization \\
@@ -977,7 +977,7 @@ Adaptive detection & Two data-adaptive text-only detectors and an exact-model-aw
 Low-FPR reporting & Exact counts and validation-frozen thresholds; matched 0.1\% estimates where supported & Human, family, entropy, and quantization tests have fewer than 1,000 negatives and no empirical 0.1\% resolution \\
 Entropy gating & 120 attempts per gate and complete diagnostics for all six strict failures & Serialized-payload rate is conditional on completion. Two templates and 768 calibration positions/model. Exact-model AUC remains 0.9904 \\
 Quantization & Paired within-quantization recovery, detector transfer and 0/960 fixed-message Q4-to-Q8 payload recovery & One pinned Qwen and one backend. No general Q8 advantage or reverse-direction payload result \\
-Naturalness & Intact-message contextual rubric, supporting likelihood diagnostics and human-authored controls & Automated acceptance permits minor awkwardness. No participants or human ratings. Historical fragment assays remain in Note S17 \\
+Naturalness & Intact-message contextual rubric, supporting likelihood diagnostics and human-authored controls & Acceptance follows the stated contextual rubric and permits minor awkwardness. Historical fragment assays remain in Note S17 \\
 Deployment/security & Transmission failure modes and strong encoding detectability are documented & No real-world deployment, robust channel, secrecy proof, cryptographic protection, or undetectability \\
 \bottomrule
 \end{longtable}

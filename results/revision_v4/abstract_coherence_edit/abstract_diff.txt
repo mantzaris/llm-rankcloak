@@ -1,0 +1,5 @@
+--- V3 abstract (one sentence per display line)
++++ V4 abstract (one sentence per display line)
+@@ -5 +5 @@
+-Recovery from rendered cover text succeeded in 61.1 percent of the tested robustness sample, whereas Markdown transfer, paraphrasing, and decoding with another model failed.
++Recovery from rendered cover text succeeded in 61.1 percent of the tested robustness sample, whereas the tested blockquote and trimming operation, paraphrasing, and decoding with another model failed.

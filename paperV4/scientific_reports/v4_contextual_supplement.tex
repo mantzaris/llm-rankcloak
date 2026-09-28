@@ -1,6 +1,6 @@
 \suppnote{Supplementary Note S20. Contextual acceptability rubric and complete results}\label{si:v4-contextual}
 
-The intact-message study evaluates whether delivered text can be followed in its authentic prompt context. It was designed after the fragment analyses and frozen before final judging. The study reuses historical RankCloak messages, with all 48 selected payloads outside the earlier 92-payload scored cohort. This separation concerns the scored cohort. The original corpus was available during study development.
+The intact-message study evaluates whether delivered text can be followed in its authentic prompt context. It was designed after the fragment analyses and frozen before final judging. The study reuses historical RankCloak messages, with all 48 selected payloads outside the earlier 92-payload scored cohort. This separation concerns the scored cohort. The original corpus was available during study development. All reported ratings were produced by model judges; no participant ratings were collected.
 
 \suppsubsection{Selection and matched generation}\label{si:v4-contextual-selection}
 The source population comprises 8,280 separately delivered covers in 1,440 trials from 240 payloads in four hexadecimal classes. A seeded SHA256 rule selects 12 of the 37 outside-cohort payloads per class. All generator and schedule combinations are retained, and a second identity hash selects two messages per trial. Inclusion probabilities are 12/37 for an outside-cohort payload and \(2/N\) for a cover in a trial containing \(N\) messages. The earlier 92-payload stratum has zero inclusion probability. No quality score, minimum word count or evaluator-boundary alignment enters selection. All 576 selected texts are available, including 85 excluded by the old window rules.
@@ -42,7 +42,7 @@ Return only a compact JSON object with integer disruption, integer connectedness
 
 Llama-generated messages are evaluated by Mistral and Qwen, Mistral messages by Llama and Qwen, and Qwen messages by Llama and Mistral. Each physical judge therefore sees two source families. Judge and generator effects are not fully crossed. The pinned Q4 model revisions and weights are those in Table~\ref{tab:models} and the replacement configuration. Exact embedded chat templates, their hashes and the llama-cpp-python 0.3.23 backend are recorded. GPU inference uses deterministic decoding and JSON-schema grammar. Plain JSON escaping preserves punctuation, whitespace, Markdown and errors without marking the payload boundary. A single user turn contains the authentic prompt and anonymous message, with no generator, condition, payload or prior score. Execution is randomized within seeded model blocks. Decoding uses temperature zero, top-\(p\) one, top-\(k\) zero and repetition penalty one. Output is initially capped at 128 tokens. One same-prompt retry at 192 tokens is allowed only for malformed or truncated output, retaining both attempts. Unfavorable valid scores are never retried, and missing scores are never accepted by default.
 
-The 18 calibration examples comprise six clear messages, six minor imperfections and six substantive disruptions with intended labels fixed before inference. The declared check requires at least four minor cases accepted and four disrupted cases rejected, with nonconstant scores. The final sample, rubric, pins, retry policy and analysis were frozen after calibration and before final judging. The author's informal reading motivated the follow-up but supplied no participant data. Our local study is not a reproduction of G-Eval's GPT-4 results\cite{Liu2023GEval}.
+The 18 calibration examples comprise six clear messages, six minor imperfections and six substantive disruptions with intended labels fixed before inference. The declared check requires at least four minor cases accepted and four disrupted cases rejected, with nonconstant scores. The final sample, rubric, pins, retry policy and analysis were frozen after calibration and before final judging. The author's informal reading motivated the follow-up, and the reported outcomes come from the frozen automated evaluation. G-Eval provides methodological context for structured model evaluation\cite{Liu2023GEval}; the present study uses the local models, rubric and calibration procedure specified here.
 
 \begin{table}[H]\centering\small\begin{tabular}{lrrrr}\toprule
 
@@ -54,12 +54,12 @@ Mistral & 6 & 6 & 5 & 0\\
 
 Qwen & 6 & 6 & 6 & 0\\
 
-\bottomrule\end{tabular}\caption{Fixed constructed calibration. Intended labels were declared before inference. Each model met the basic check, without a rubric amendment. These examples are not participant validation.}\label{tab:v4-contextual-calibration}\end{table}
+\bottomrule\end{tabular}\caption{Fixed constructed calibration. Intended labels were declared before inference. Each model met the basic check, without a rubric amendment.}\label{tab:v4-contextual-calibration}\end{table}
 
 The examples with minor imperfections contain informal phrasing, mild repetition or local grammar errors whose meaning remains clear. The disrupted examples contain explicit contradictions or disconnected intrusions. Llama accepts an explicit contradiction about attending the same meeting time. Mistral accepts simultaneously dry and fully soaked soil, even though its explanation identifies the contradiction. Thus the declared calibration check is imperfect and does not guarantee consistent application of the rubric. Same-prompt shuffled tails are not assumed to be incoherent negatives. Both the intended labels and all raw calibration responses remain available.
 
 \suppsubsection{Estimation and complete results}\label{si:v4-contextual-estimation}
-The panel averages the two assigned judges equally, selected messages within trial, and generator/schedule trials within payload before the overall mean. The paired difference subtracts ordinary from encoded acceptance. The same 2,000 percentile payload-cluster bootstrap draws, stratified by artifact class, are shared across conditions and judges. Complete-pair estimates require both judges in both conditions. Judge assignments are not fully crossed with generators, and the two models are not independent human participants. Intervals condition on the fixed control corpus and complete paired availability.
+The panel averages the two assigned judges equally, selected messages within trial, and generator/schedule trials within payload before the overall mean. The paired difference subtracts ordinary from encoded acceptance. The same 2,000 percentile payload-cluster bootstrap draws, stratified by artifact class, are shared across conditions and judges. Complete-pair estimates require both judges in both conditions. Judge assignments are not fully crossed with generators. The two assigned model ratings are combined within each item before aggregation. Intervals condition on the fixed control corpus and complete paired availability.
 
 The primary panel uses 537 pairs in 280 trials across all 48 payloads. Acceptance is 90.3 [88.4, 92.1]\% for encoded messages and 96.6 [95.0, 98.1]\% for ordinary messages, with difference -6.3 [-8.7, -3.9] percentage points. Brackets denote 95\% payload-cluster intervals. The Mistral-source difference interval includes zero without demonstrating equivalence. Mean connectedness is 3.60 [3.53, 3.67]/5 versus 4.00 [3.94, 4.06]/5. Binary disagreement is 14.6\% versus 6.7\%. Full distributions and detailed judge/schedule results follow.
 
@@ -119,7 +119,7 @@ Judge Mistral & 352 & \shortstack{92.5\\{}[89.8, 95.0]} & \shortstack{100.0\\{}[
 
 Judge Qwen & 375 & \shortstack{96.1\\{}[93.8, 97.9]} & \shortstack{100.0\\{}[100.0, 100.0]} & \shortstack{-3.9\\{}[-6.2, -2.1]}\\
 
-\bottomrule\end{tabular}\caption{Physical-judge and schedule estimates with paired payload-cluster intervals. Pair counts are complete observations, from 384 assigned pairs per judge and 288 per schedule. The panel uses two judgments per item rather than treating judges as independent participants.}\label{tab:v4-contextual-strata}\end{table}
+\bottomrule\end{tabular}\caption{Physical-judge and schedule estimates with paired payload-cluster intervals. Pair counts are complete observations, from 384 assigned pairs per judge and 288 per schedule. The panel combines the two assigned model ratings within each item before aggregation.}\label{tab:v4-contextual-strata}\end{table}
 
 \suppsubsection{Stops, lengths, reuse and missingness}\label{si:v4-contextual-missingness}
 
@@ -157,7 +157,7 @@ Of 110 valid disrupted encoded judge slots, 104 contain a literal passage and 73
 
 \suppsubsection{Full-message examples}\label{si:v4-contextual-examples}
 
-Examples follow the predeclared identity-hash rule within jointly acceptable, judge-disagreement and jointly disrupted encoded cases. These labels denote model scores rather than reader judgments. The text below is complete and unedited. No boundary was marked for judging.
+Examples follow the predeclared identity-hash rule within jointly acceptable, judge-disagreement and jointly disrupted encoded cases. These labels denote the assigned model scores. The text below is complete and unedited. No boundary was marked for judging.
 
 \paragraph{Acceptable}
 

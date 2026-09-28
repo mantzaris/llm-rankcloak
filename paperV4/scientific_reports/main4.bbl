@@ -433,15 +433,4 @@
   (\bibinfo{publisher}{Association for Computational Linguistics},
   \bibinfo{year}{2023}).
 
-\bibitem{VanDerLee2019BestPractices}
-\bibinfo{author}{van~der Lee, C.}, \bibinfo{author}{Gatt, A.},
-  \bibinfo{author}{van Miltenburg, E.}, \bibinfo{author}{Wubben, S.} \&
-  \bibinfo{author}{Krahmer, E.}
-\newblock \bibinfo{title}{Best practices for the human evaluation of
-  automatically generated text}.
-\newblock In \emph{\bibinfo{booktitle}{Proceedings of the 12th International
-  Conference on Natural Language Generation}}, \bibinfo{pages}{355--368},
-  \doiprefix\url{10.18653/v1/W19-8643} (\bibinfo{publisher}{Association for
-  Computational Linguistics}, \bibinfo{year}{2019}).
-
 \end{thebibliography}
