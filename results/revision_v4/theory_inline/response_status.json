@@ -1,6 +1,5 @@
 {
-  "schema": "rankcloak.editorial.answers.v1",
-  "source_ledger": "results/revision_v4/coherence_replacement/response_status.json",
+  "schema": "rankcloak.response.presentation.v1",
   "response_sets": [
     {
       "author_decision": "current_followup_for_author_review",
@@ -30,7 +29,40 @@
         "sec:results"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-results": {
+          "document": "main4",
+          "page": 16,
+          "label": ""
+        },
+        "sec:v4-boundaries": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        },
+        "si:v4-contextual": {
+          "document": "supplementary4",
+          "page": 42,
+          "label": ""
+        },
+        "sec:discussion": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "sec:results": {
+          "document": "main4",
+          "page": 11,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Abstract, main Results under Contextual acceptability of complete messages, Discussion, and Supplementary Notes S16 through S20. Accompanying documents, main4.pdf pages 11, 16, 19 and supplementary4.pdf pages 41, 42."
     },
     {
       "author_decision": "current_followup_for_author_review",
@@ -50,7 +82,15 @@
         "sec:data-code"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:data-code": {
+          "document": "main4",
+          "page": 20,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Data Availability and Code Availability. Accompanying documents, main4.pdf pages 20."
     },
     {
       "author_decision": "current_followup_for_author_review",
@@ -77,7 +117,40 @@
         "si:v4-coherence"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-contextual-method": {
+          "document": "main4",
+          "page": 10,
+          "label": ""
+        },
+        "sec:v4-contextual-results": {
+          "document": "main4",
+          "page": 16,
+          "label": ""
+        },
+        "sec:limitations": {
+          "document": "main4",
+          "page": 20,
+          "label": ""
+        },
+        "si:v4-contextual": {
+          "document": "supplementary4",
+          "page": 42,
+          "label": ""
+        },
+        "sec:discussion": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "si:v4-coherence": {
+          "document": "supplementary4",
+          "page": 36,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Abstract, contextual Methods and Results, Discussion and limitations, Supplementary Notes S17 and S20, and the answer to Reviewer 1 comment 4. Accompanying documents, main4.pdf pages 10, 16, 19, 20 and supplementary4.pdf pages 36, 42."
     },
     {
       "author_decision": "approved",
@@ -94,7 +167,9 @@
       "location_text": "This response, Reviewer 2 acknowledgment. No manuscript change is needed for this acknowledgment.",
       "manuscript_anchors": [],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {},
+      "rendered_location_text": "This response, Reviewer 2 acknowledgment. No manuscript change is needed for this acknowledgment."
     },
     {
       "author_decision": "current_followup_for_author_review",
@@ -119,7 +194,40 @@
         "si:v4-transport"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-boundaries": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "sec:limitations": {
+          "document": "main4",
+          "page": 20,
+          "label": ""
+        },
+        "si:v4-coherence": {
+          "document": "supplementary4",
+          "page": 36,
+          "label": ""
+        },
+        "si:v4-contextual": {
+          "document": "supplementary4",
+          "page": 42,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        },
+        "si:v4-transport": {
+          "document": "supplementary4",
+          "page": 40,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Abstract, main Results under Configuration sensitivity, detection and a proposed fallback, limitations, and Supplementary Notes S17 through S20. Accompanying documents, main4.pdf pages 19, 20 and supplementary4.pdf pages 36, 40, 41, 42."
     },
     {
       "author_decision": "approved",
@@ -136,7 +244,9 @@
       "location_text": "All review-comment blocks in this response. The original requests file and exact-block ledger remain unchanged.",
       "manuscript_anchors": [],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {},
+      "rendered_location_text": "All review-comment blocks in this response. The original requests file and exact-block ledger remain unchanged."
     },
     {
       "author_decision": "approved",
@@ -160,7 +270,30 @@
         "tab:v4-transport"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-compatibility": {
+          "document": "main4",
+          "page": 10,
+          "label": ""
+        },
+        "sec:v4-transport-results": {
+          "document": "main4",
+          "page": 18,
+          "label": ""
+        },
+        "si:v4-transport": {
+          "document": "supplementary4",
+          "page": 40,
+          "label": ""
+        },
+        "tab:v4-transport": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": "S34"
+        }
+      },
+      "rendered_location_text": "Main Methods under Decoder compatibility and bounded transport diagnostics, Results under Mechanisms of transmission failure, and Supplementary Note S18 with its illustrative recovery table. Accompanying documents, main4.pdf pages 10, 18 and supplementary4.pdf pages 40, 41."
     },
     {
       "author_decision": "approved",
@@ -183,7 +316,25 @@
         "si:v4-theory"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-compatibility": {
+          "document": "main4",
+          "page": 10,
+          "label": ""
+        },
+        "sec:v4-boundaries": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Methods under Decoder compatibility and bounded transport diagnostics, main Results under Configuration sensitivity, detection and a proposed fallback, and Supplementary Note S19. Accompanying documents, main4.pdf pages 10, 19 and supplementary4.pdf pages 41."
     },
     {
       "author_decision": "approved",
@@ -202,7 +353,20 @@
         "si:v4-theory"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-boundaries": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Results under Configuration sensitivity, detection and a proposed fallback, and Supplementary Note S19. Accompanying documents, main4.pdf pages 19 and supplementary4.pdf pages 41."
     },
     {
       "author_decision": "current_followup_for_author_review",
@@ -232,7 +396,55 @@
         "si:v4-coherence"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-contextual-method": {
+          "document": "main4",
+          "page": 10,
+          "label": ""
+        },
+        "sec:v4-contextual-results": {
+          "document": "main4",
+          "page": 16,
+          "label": ""
+        },
+        "tab:v4-contextual": {
+          "document": "main4",
+          "page": 17,
+          "label": "3"
+        },
+        "fig:v4-contextual": {
+          "document": "main4",
+          "page": 17,
+          "label": "5"
+        },
+        "si:v4-contextual": {
+          "document": "supplementary4",
+          "page": 42,
+          "label": ""
+        },
+        "si:v4-contextual-calibration": {
+          "document": "supplementary4",
+          "page": 44,
+          "label": ""
+        },
+        "si:v4-contextual-missingness": {
+          "document": "supplementary4",
+          "page": 45,
+          "label": ""
+        },
+        "si:v4-contextual-examples": {
+          "document": "supplementary4",
+          "page": 46,
+          "label": ""
+        },
+        "si:v4-coherence": {
+          "document": "supplementary4",
+          "page": 36,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Methods, Intact-message contextual acceptability, and Results, Contextual acceptability of complete messages, with Table 3 and Figure 5. Supplementary Note S20, Selection and matched generation, Complete judging rubric, Judge settings and calibration, Estimation and complete results, Stops, lengths, reuse and missingness, and Full-message examples. Note S17 retains the historical assays. Accompanying documents, main4.pdf pages 10, 16, 17 and supplementary4.pdf pages 36, 42, 44, 45, 46."
     },
     {
       "author_decision": "approved",
@@ -254,7 +466,30 @@
         "si:v4-theory"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:detector-method": {
+          "document": "main4",
+          "page": 9,
+          "label": ""
+        },
+        "sec:v4-boundaries": {
+          "document": "main4",
+          "page": 19,
+          "label": ""
+        },
+        "si:s12": {
+          "document": "supplementary4",
+          "page": 23,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Neural steganalysis, statistical analysis, and computational overhead, Configuration sensitivity, detection and a proposed fallback, and Supplementary Notes S12 and S19. Accompanying documents, main4.pdf pages 9, 19 and supplementary4.pdf pages 23, 41."
     },
     {
       "author_decision": "approved",
@@ -279,7 +514,30 @@
         "tab:v4-entropy-runs"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-entropy-results": {
+          "document": "main4",
+          "page": 18,
+          "label": ""
+        },
+        "si:s13": {
+          "document": "supplementary4",
+          "page": 26,
+          "label": ""
+        },
+        "si:v4-stage1": {
+          "document": "supplementary4",
+          "page": 33,
+          "label": ""
+        },
+        "tab:v4-entropy-runs": {
+          "document": "supplementary4",
+          "page": 35,
+          "label": "S29"
+        }
+      },
+      "rendered_location_text": "Main Results under Strict-gate failure contexts and Supplementary Notes S13 and S16, including the six-case table, trajectory figure and exact local windows. Accompanying documents, main4.pdf pages 18 and supplementary4.pdf pages 26, 33, 35."
     },
     {
       "author_decision": "approved",
@@ -300,7 +558,25 @@
         "tab:v4-complexity"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:results-overhead": {
+          "document": "main4",
+          "page": 18,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        },
+        "tab:v4-complexity": {
+          "document": "supplementary4",
+          "page": 42,
+          "label": "S35"
+        }
+      },
+      "rendered_location_text": "Main Computational overhead and generalizability and Supplementary Note S19, implementation-specific operation-count table. Accompanying documents, main4.pdf pages 18 and supplementary4.pdf pages 41, 42."
     },
     {
       "author_decision": "approved",
@@ -320,7 +596,20 @@
         "si:s13"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:introduction": {
+          "document": "main4",
+          "page": 1,
+          "label": ""
+        },
+        "si:s13": {
+          "document": "supplementary4",
+          "page": 26,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Introduction, Supplementary Note S13 and the V4 bibliography. Accompanying documents, main4.pdf pages 1 and supplementary4.pdf pages 26."
     },
     {
       "author_decision": "approved",
@@ -342,7 +631,20 @@
         "tab:v4-filter"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-filter": {
+          "document": "main4",
+          "page": 5,
+          "label": ""
+        },
+        "tab:v4-filter": {
+          "document": "main4",
+          "page": 5,
+          "label": "1"
+        }
+      },
+      "rendered_location_text": "Main Methods under Complete deterministic token filter specification and its complete rule table. Accompanying documents, main4.pdf pages 5."
     },
     {
       "author_decision": "approved",
@@ -364,7 +666,35 @@
         "si:v4-theory"
       ],
       "public_deposit": "current_followup_not_covered",
-      "written_response": "complete"
+      "written_response": "complete",
+      "compiled_locations": {
+        "sec:v4-quant-results": {
+          "document": "main4",
+          "page": 18,
+          "label": ""
+        },
+        "si:s14": {
+          "document": "supplementary4",
+          "page": 29,
+          "label": ""
+        },
+        "si:v4-fixed-quant": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        },
+        "si:v4-theory": {
+          "document": "supplementary4",
+          "page": 41,
+          "label": ""
+        }
+      },
+      "rendered_location_text": "Main Results under Fixed-message cross-quantization decoding and Supplementary Notes S14, S18 under Directional cross-quantization endpoint, and S19. Accompanying documents, main4.pdf pages 18 and supplementary4.pdf pages 29, 41."
     }
-  ]
+  ],
+  "written_complete": 16,
+  "empirical_R1_4": "automated_contextual_evidence_supplied_human_perception_unmeasured",
+  "public_current_study_coverage": false,
+  "historical_evidence_unchanged": true,
+  "journal_submission_performed": false
 }

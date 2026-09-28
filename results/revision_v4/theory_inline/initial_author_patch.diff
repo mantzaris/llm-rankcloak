@@ -1,0 +1,37 @@
+diff --git a/paperV4/scientific_reports/main4.tex b/paperV4/scientific_reports/main4.tex
+index eeef6d0..c349d72 100644
+--- a/paperV4/scientific_reports/main4.tex
++++ b/paperV4/scientific_reports/main4.tex
+@@ -498,7 +498,7 @@ On the fixed CUDA benchmark, representative TextCNN wall/training times were 91.
+ 
+ \section*{Discussion}\label{sec:discussion}
+ 
+-RankCloak makes the representation of cryptographic artifacts an explicit design choice in language-model information hiding. It combines exact serialization, contextual rank transfer and replay decoding with measurements of recovery, rate, text properties and detection. All 6,480 primary trials recovered the original bytes under the saved-token contract. This establishes a reproducible baseline for comparing how artifact representations influence generated cover text.
++RankCloak makes the representation of cryptographic artifacts an explicit design choice in language model information hiding. It combines exact serialization, contextual rank transfer and replay decoding with measurements of recovery, rate, text properties and detection. All 6,480 primary trials recovered the original bytes under the saved-token contract. This establishes a reproducible baseline for comparing how artifact representations influence generated cover text.
+ 
+ The codec comparison identifies a controllable efficiency tradeoff. Direct subword representations can be compact but have no fixed rank ceiling, whereas ASCII-byte and hex-nibble codecs bound rank magnitude by using more forced positions. Segmentation determines how those positions are distributed across contexts. Larger segments reduce repeated continuation overhead, while the tested lead-ins increased length and worsened likelihood. Separate measurements of forced spans and full messages show how greedy continuations affect complete-message scores without changing payload-bearing tokens or increasing payload capacity.
+ 
+@@ -512,19 +512,18 @@ Entropy gating provides another measurable design tradeoff. Text-only detection
+ 
+ \section*{Responsible use and limitations}\label{sec:limitations}
+ 
+-RankCloak is a representation layer for cryptographic artifacts. Encryption and authentication must be supplied by an external cryptographic system under an explicit threat model. The carrier itself provides no confidentiality or cryptographic security guarantee. Exact recovery was demonstrated with preserved tokens and matching configurations. Visible-text and transformed-text results show that reliable edited-text transport remains an open problem. Detector findings apply to the evaluated corpus, and operational deployment, broad multilingual text quality and generalization to arbitrary models or channels remain untested.
+-
+-The contextual study evaluates coherence and acceptability through blinded judgments from local instruction models. Its outcomes are model-based ratings; no participant ratings were collected. Judges and generators are not fully crossed, greedy controls are reused as a fixed reference set, and the selected payloads exclude the earlier scored cohort. The estimates condition on complete ratings. Missingness sensitivity is reported in Supplementary Note S20. The comparison evaluates delivered messages without isolating a causal boundary effect. Supplementary Note S17 retains both unsuccessful semantic control checks and the complementary likelihood analysis. Table S17 and Notes S16 through S20 give the detailed scope of the evidence.
++The carrier itself provides no confidentiality or cryptographic security guarantee. Exact recovery was demonstrated with preserved tokens and matching configurations. Visible text and transformed text results show that reliable edited text transport remains an open problem. 
++The contextual study evaluates coherence and acceptability through blinded judgments from local instruction models. Its outcomes are model-based ratings and missingness sensitivity is reported in Supplementary Note S20. The comparison evaluates delivered messages without isolating a causal boundary effect. Supplementary Note S17 retains both unsuccessful semantic control checks and the complementary likelihood analysis. Table S17 and Notes S16 through S20 give the detailed scope of the evidence.
+ 
+ 
+ 
+ 
+ \section*{Data Availability}\label{sec:data-code}
+ 
+-The retained computational data, including the V4 contextual acceptability study, are available at \url{https://github.com/mantzaris/llm-rankcloak}. Published version 2.0.0, DOI \url{https://doi.org/10.5281/zenodo.22555497}, covers V3 only and does not include the V4 evidence.
++The retained computational data, are available at \url{https://github.com/mantzaris/llm-rankcloak}. Published DOI \url{https://doi.org/10.5281/zenodo.22555497}.
+ 
+ \section*{Code Availability}
+-The custom generation, replay and analysis code is available in the same repository. The archive concept DOI is \url{https://doi.org/10.5281/zenodo.21987449}. A DOI-assigned deposit covering the current V4 code and data remains outstanding.
++The custom generation, replay and analysis code is available in the same repository. The archive concept DOI is \url{https://doi.org/10.5281/zenodo.21987449}. 
+ 
+ \bibliography{references}
+ 

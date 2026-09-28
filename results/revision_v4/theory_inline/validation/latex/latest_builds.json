@@ -1,0 +1,65 @@
+{
+  "correspondence": {
+    "logs": "results/revision_v4/theory_inline/validation/latex/correspondence_02",
+    "records": [
+      {
+        "document": "response_to_reviewers_v4",
+        "elapsed_seconds": 1.6535841349978,
+        "pages": 8,
+        "pdf_sha256": "c61a94cf9cd9e9d562bf9454d7f027c32ee2216c02222d3211b5e45db4937c88",
+        "source_sha256": "bca4f152691382362d5c8f120a8549cac72817dada18eec5ed185357aa64abca",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "cover_letter_v4",
+        "elapsed_seconds": 1.4664644859731197,
+        "pages": 1,
+        "pdf_sha256": "eb89f3da7c6e35801a87172f8bdb5f2171870fb4a3751049897804630f65edfd",
+        "source_sha256": "be66d919800b2ad4ba2990f0e841f794f92fe60a733fa86b72e84888aef76fe5",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "scientific": {
+    "logs": "results/revision_v4/theory_inline/validation/latex/scientific_01",
+    "records": [
+      {
+        "document": "supplementary4",
+        "elapsed_seconds": 4.343110066023655,
+        "pages": 48,
+        "pdf_sha256": "e30f512d700deb4093a1b1894444e28b48fb48f5cc0a06446ce9273d9214588d",
+        "source_sha256": "03eadbe56f5436e035de51ac5dfd92a7529e6ae4390ca8c85997b94844bf93e3",
+        "unresolved_references": false,
+        "warnings": []
+      },
+      {
+        "document": "main4",
+        "elapsed_seconds": 3.1917921759886667,
+        "pages": 23,
+        "pdf_sha256": "31da45048e46d8c0cd54eee0af2c3ed12c1d80b9bb1b91ad017be3b7468a0b4a",
+        "source_sha256": "dd5d2c3db866e2fd2dcea7504ee3a6b86333a1e72d59216e4ccb708e6f8f2919",
+        "unresolved_references": false,
+        "warnings": []
+      }
+    ]
+  },
+  "submission": {
+    "logs": "results/revision_v4/theory_inline/validation/latex/submission_01",
+    "records": [
+      {
+        "clean_dependency_build": true,
+        "document": "main4_submission",
+        "elapsed_seconds": 3.0107656070031226,
+        "pages": 21,
+        "pdf_sha256": "b45d6683512212cedd399f4d1d57ebf97bcac7893491c81558cb38e0d85d0bb3",
+        "routine_pdf_retained": false,
+        "source_sha256": "b31ac9965a4ade28a111654fd8f8275993049d491ab76b2efad30b44f78fa0de",
+        "unresolved_references": false,
+        "verified_input_paths": 183,
+        "warnings": []
+      }
+    ]
+  }
+}

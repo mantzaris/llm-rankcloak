@@ -1,6 +1,6 @@
 # Current V4 editorial document workflow
 
-Edit the current TeX sources and `response/editorial_answers.json`. Scientific scores, tables, figures, frozen plans and earlier stage receipts are retained unchanged. Current build and validation records go to `results/revision_v4/abstract_coherence_edit/`.
+Edit the current TeX sources and `response/editorial_answers.json`. Scientific scores, tables, figures, frozen plans and earlier stage receipts are retained unchanged. Current build and validation records go to `results/revision_v4/theory_inline/`.
 
 From the repository root with the existing analysis environment and local LaTeX toolchain
 
@@ -10,7 +10,7 @@ From the repository root with the existing analysis environment and local LaTeX 
 .venv/bin/python -m scripts.render_revision_v4_editorial_response
 .venv/bin/python -m scripts.build_revision_v4_editorial_documents --phase correspondence
 .venv/bin/python -m scripts.build_revision_v4_editorial_documents --phase submission
-.venv/bin/python -m scripts.validate_revision_v4_abstract_coherence_edit
+.venv/bin/python -m scripts.validate_revision_v4_theory_inline
 .venv/bin/python -m scripts.review_revision_v4_editorial_pdfs
 ```
 
@@ -18,4 +18,4 @@ The scientific phase resolves supplementary sidebar bookmarks first, then builds
 
 The historical Stage 1–4 and contextual-study renderers remain available to reproduce their archived workflows. Running them on the current manuscript would restore superseded prose or write into earlier evidence namespaces. Use the editorial commands above for current documents. Any further text edit requires new builds and a fresh visual review of changed pages. PDF timestamps need not be identical across builds.
 
-Earlier editorial, presentation-cleanup, publication-edit, disclosure-edit and punctuation-edit records and validators remain unchanged. The current pass restores the V3 abstract with the specified transport correction and applies the authorized contextual-evaluation wording changes against commit `c614f754faf3bb1a89d79689ca88342078759c15`. The initial author edit removed the abstract's human-perception sentence; the expressly requested restoration preserves that intent. The current preservation check records the limited prose exceptions while retaining numerical findings, equations, rubric, examples, evidence and reviewer quotations. It does not restore the removed assistance disclosure. Run the response renderer twice before the correspondence build to check reproducibility. Current manuscript TeX and its included files remain authoritative; the builder never restores historical prose.
+Earlier document receipts and validators remain unchanged. The current pass inlines the configuration-sensitivity theory verbatim into `main4.tex` immediately before Discussion. Responsible use and limitations is a subsection of Discussion, the final scientific section. Newer author wording is preserved. The current check verifies this structural relocation against the initial manuscript, unchanged theory content and response answers, exact quotations, resolved locations and clean builds. The retained external theory file is historical and is no longer a manuscript dependency. Current manuscript TeX and its included files remain authoritative.

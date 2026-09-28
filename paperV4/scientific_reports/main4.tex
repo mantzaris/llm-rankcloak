@@ -496,9 +496,16 @@ On the fixed CUDA benchmark, representative TextCNN wall/training times were 91.
 
 \input{v4_stage2_complexity.tex}
 
+\subsection*{Configuration sensitivity, detection and a proposed fallback}\label{sec:v4-boundaries}
+Reliable replay requires compatible token boundaries, rank orderings and payload-position rules. A tokenizer update can split or merge tokens, shifting saved offsets and later conditioning. Weight or quantization changes can reorder candidates even on an identical received history. Gate disagreement changes which positions consume payload digits. Supplementary Note S19 formalizes these dependencies through conditional rank agreement. Recovery under a changed configuration therefore requires direct verification rather than inference from a version label.
+
+The evaluated model-aware detector is trace informed. It consumes summaries of retained untempered full-vocabulary token log probabilities. Reproducing those features requires the exact model and numerical backend, original token IDs, prompts, boundaries and reset schedule. Scoring only visible text after retokenization is a distinct, unvalidated access condition. The ordinary sampler instead uses temperature 0.8 and top-\(p\) 0.95. Payload-induced rank choices need not follow that sampler, and bounded ranks do not enforce distribution matching. These plausible detection mechanisms are not causal attributions. Supplementary Note S19 states the support conditions for distribution comparisons. AUC is not a KL estimate. An observer possessing the complete receiver configuration may also decode the payload. Surface-form concealment establishes neither confidentiality nor indistinguishability against this attacker.
+
+A possible future fallback would identify a supported configuration, frame independently decodable blocks with explicit resets and integrity checks, apply bounded outer error or erasure correction, and request retransmission when repair fails. For minimum distance \(d\), a conventional code requires \(2e+s<d\) for unique correction of \(e\) errors and \(s\) located erasures under its channel assumptions. Reliable boundaries and a correct decoder codebook remain prerequisites. ECC cannot repair an arbitrary wrong model codebook or persistent synchronization loss, and retransmitting under the same unresolved mismatch does not solve it. Metadata, redundancy, checks and retries consume length and compute and may add detector cues. This proposal is not implemented and supplies no new recovery result. Supplementary Note S19 provides the conditional arguments and operation counts.
+
 \section*{Discussion}\label{sec:discussion}
 
-RankCloak makes the representation of cryptographic artifacts an explicit design choice in language-model information hiding. It combines exact serialization, contextual rank transfer and replay decoding with measurements of recovery, rate, text properties and detection. All 6,480 primary trials recovered the original bytes under the saved-token contract. This establishes a reproducible baseline for comparing how artifact representations influence generated cover text.
+RankCloak makes the representation of cryptographic artifacts an explicit design choice in language model information hiding. It combines exact serialization, contextual rank transfer and replay decoding with measurements of recovery, rate, text properties and detection. All 6,480 primary trials recovered the original bytes under the saved-token contract. This establishes a reproducible baseline for comparing how artifact representations influence generated cover text.
 
 The codec comparison identifies a controllable efficiency tradeoff. Direct subword representations can be compact but have no fixed rank ceiling, whereas ASCII-byte and hex-nibble codecs bound rank magnitude by using more forced positions. Segmentation determines how those positions are distributed across contexts. Larger segments reduce repeated continuation overhead, while the tested lead-ins increased length and worsened likelihood. Separate measurements of forced spans and full messages show how greedy continuations affect complete-message scores without changing payload-bearing tokens or increasing payload capacity.
 
@@ -508,23 +515,20 @@ The transport and detector studies distinguish recovery from stealth. Saved-toke
 
 Entropy gating provides another measurable design tradeoff. Text-only detection decreased as covers became longer and serialized-payload rates fell. The six strict-gate completion failures and continued strong model-aware detection identify costs of the tested thresholds. Both quantizations retained exact saved-ID recovery within their own configurations, while the visible-text comparison showed no statistically supported Q8 advantage. Together, these results provide a reference for designing and evaluating artifact-carrying text with explicit recovery, efficiency, acceptability and detection endpoints.
 
-\input{v4_stage2_theory.tex}
+\subsection*{Responsible use and limitations}\label{sec:limitations}
 
-\section*{Responsible use and limitations}\label{sec:limitations}
-
-RankCloak is a representation layer for cryptographic artifacts. Encryption and authentication must be supplied by an external cryptographic system under an explicit threat model. The carrier itself provides no confidentiality or cryptographic security guarantee. Exact recovery was demonstrated with preserved tokens and matching configurations. Visible-text and transformed-text results show that reliable edited-text transport remains an open problem. Detector findings apply to the evaluated corpus, and operational deployment, broad multilingual text quality and generalization to arbitrary models or channels remain untested.
-
-The contextual study evaluates coherence and acceptability through blinded judgments from local instruction models. Its outcomes are model-based ratings; no participant ratings were collected. Judges and generators are not fully crossed, greedy controls are reused as a fixed reference set, and the selected payloads exclude the earlier scored cohort. The estimates condition on complete ratings. Missingness sensitivity is reported in Supplementary Note S20. The comparison evaluates delivered messages without isolating a causal boundary effect. Supplementary Note S17 retains both unsuccessful semantic control checks and the complementary likelihood analysis. Table S17 and Notes S16 through S20 give the detailed scope of the evidence.
+The carrier itself provides no confidentiality or cryptographic security guarantee. Exact recovery was demonstrated with preserved tokens and matching configurations. Visible text and transformed text results show that reliable edited text transport remains an open problem. 
+The contextual study evaluates coherence and acceptability through blinded judgments from local instruction models. Its outcomes are model-based ratings and missingness sensitivity is reported in Supplementary Note S20. The comparison evaluates delivered messages without isolating a causal boundary effect. Supplementary Note S17 retains both unsuccessful semantic control checks and the complementary likelihood analysis. Table S17 and Notes S16 through S20 give the detailed scope of the evidence.
 
 
 
 
 \section*{Data Availability}\label{sec:data-code}
 
-The retained computational data, including the V4 contextual acceptability study, are available at \url{https://github.com/mantzaris/llm-rankcloak}. Published version 2.0.0, DOI \url{https://doi.org/10.5281/zenodo.22555497}, covers V3 only and does not include the V4 evidence.
+The retained computational data, are available at \url{https://github.com/mantzaris/llm-rankcloak}. Published DOI \url{https://doi.org/10.5281/zenodo.22555497}.
 
 \section*{Code Availability}
-The custom generation, replay and analysis code is available in the same repository. The archive concept DOI is \url{https://doi.org/10.5281/zenodo.21987449}. A DOI-assigned deposit covering the current V4 code and data remains outstanding.
+The custom generation, replay and analysis code is available in the same repository. The archive concept DOI is \url{https://doi.org/10.5281/zenodo.21987449}. 
 
 \bibliography{references}
 
